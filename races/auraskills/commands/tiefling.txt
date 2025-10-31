@@ -1,0 +1,18 @@
+sk modifier remove <nick> race_strength
+sk modifier remove <nick> race_speed
+sk modifier remove <nick> race_health
+sk modifier remove <nick> race_wisdom
+sk modifier remove <nick> race_regen
+sk modifier remove <nick> race_luck
+
+# Tiefling (CHA +2, INT +1)
+sk modifier add <nick> race_luck luck 2
+sk modifier add <nick> race_wisdom wisdom 1
+
+# Tags de efeitos
+tag <nick> remove race_darkvision
+tag <nick> remove resist_fire
+tag <nick> remove resist_all
+tag <nick> remove water_breath
+tag <nick> add race_darkvision
+tag <nick> add resist_fire

@@ -1,0 +1,140 @@
+# Cole tudo abaixo no CONSOLE do servidor (janela do Paper)
+# Cria grupos por raça/sub-raça e marca com permissoes race.id.*
+
+# Grupo base (opcional): usado para marcar quem ja escolheu
+lp creategroup race_selected
+lp group race_selected setdisplayname "Raça: Selecionada"
+lp group race_selected setweight 5
+
+# Dwarf / Anão
+lp creategroup race_dwarf
+lp group race_dwarf setdisplayname "Raça: Anão"
+lp group race_dwarf meta setprefix "&8[&6Anão&8] "
+lp group race_dwarf setweight 10
+lp group race_dwarf permission set race.id.dwarf true
+lp group race_dwarf parent add race_selected
+
+lp creategroup race_dwarf_hill
+lp group race_dwarf_hill setdisplayname "Sub‑raça: Anão da Colina"
+lp group race_dwarf_hill setweight 11
+lp group race_dwarf_hill permission set race.id.dwarf.hill true
+lp group race_dwarf_hill parent add race_dwarf
+
+lp creategroup race_dwarf_mountain
+lp group race_dwarf_mountain setdisplayname "Sub‑raça: Anão da Montanha"
+lp group race_dwarf_mountain setweight 11
+lp group race_dwarf_mountain permission set race.id.dwarf.mountain true
+lp group race_dwarf_mountain parent add race_dwarf
+
+# Elf / Elfo
+lp creategroup race_elf
+lp group race_elf setdisplayname "Raça: Elfo"
+lp group race_elf meta setprefix "&8[&aElfo&8] "
+lp group race_elf setweight 10
+lp group race_elf permission set race.id.elf true
+lp group race_elf parent add race_selected
+
+lp creategroup race_elf_high
+lp group race_elf_high setdisplayname "Sub‑raça: Alto Elfo"
+lp group race_elf_high setweight 11
+lp group race_elf_high permission set race.id.elf.high true
+lp group race_elf_high parent add race_elf
+
+lp creategroup race_elf_wood
+lp group race_elf_wood setdisplayname "Sub‑raça: Elfo da Floresta"
+lp group race_elf_wood setweight 11
+lp group race_elf_wood permission set race.id.elf.wood true
+lp group race_elf_wood parent add race_elf
+
+# Halfling
+lp creategroup race_halfling
+lp group race_halfling setdisplayname "Raça: Halfling"
+lp group race_halfling meta setprefix "&8[&eHalfling&8] "
+lp group race_halfling setweight 10
+lp group race_halfling permission set race.id.halfling true
+lp group race_halfling parent add race_selected
+
+lp creategroup race_halfling_lightfoot
+lp group race_halfling_lightfoot setdisplayname "Sub‑raça: Pés‑Leves"
+lp group race_halfling_lightfoot setweight 11
+lp group race_halfling_lightfoot permission set race.id.halfling.lightfoot true
+lp group race_halfling_lightfoot parent add race_halfling
+
+lp creategroup race_halfling_stout
+lp group race_halfling_stout setdisplayname "Sub‑raça: Robusto"
+lp group race_halfling_stout setweight 11
+lp group race_halfling_stout permission set race.id.halfling.stout true
+lp group race_halfling_stout parent add race_halfling
+
+# Human / Humano
+lp creategroup race_human
+lp group race_human setdisplayname "Raça: Humano"
+lp group race_human meta setprefix "&8[&fHumano&8] "
+lp group race_human setweight 10
+lp group race_human permission set race.id.human true
+lp group race_human parent add race_selected
+
+# Dragonborn / Draconato
+lp creategroup race_dragonborn
+lp group race_dragonborn setdisplayname "Raça: Draconato"
+lp group race_dragonborn meta setprefix "&8[&cDraconato&8] "
+lp group race_dragonborn setweight 10
+lp group race_dragonborn permission set race.id.dragonborn true
+lp group race_dragonborn parent add race_selected
+
+# Gnome / Gnomo
+lp creategroup race_gnome
+lp group race_gnome setdisplayname "Raça: Gnomo"
+lp group race_gnome meta setprefix "&8[&bGnomo&8] "
+lp group race_gnome setweight 10
+lp group race_gnome permission set race.id.gnome true
+lp group race_gnome parent add race_selected
+
+lp creategroup race_gnome_forest
+lp group race_gnome_forest setdisplayname "Sub‑raça: Gnomo da Floresta"
+lp group race_gnome_forest setweight 11
+lp group race_gnome_forest permission set race.id.gnome.forest true
+lp group race_gnome_forest parent add race_gnome
+
+lp creategroup race_gnome_rock
+lp group race_gnome_rock setdisplayname "Sub‑raça: Gnomo das Rochas"
+lp group race_gnome_rock setweight 11
+lp group race_gnome_rock permission set race.id.gnome.rock true
+lp group race_gnome_rock parent add race_gnome
+
+# Half‑Elf / Meio‑Elfo
+lp creategroup race_half_elf
+lp group race_half_elf setdisplayname "Raça: Meio‑Elfo"
+lp group race_half_elf meta setprefix "&8[&dMeio‑Elfo&8] "
+lp group race_half_elf setweight 10
+lp group race_half_elf permission set race.id.half_elf true
+lp group race_half_elf parent add race_selected
+
+# Half‑Orc / Meio‑Orc
+lp creategroup race_half_orc
+lp group race_half_orc setdisplayname "Raça: Meio‑Orc"
+lp group race_half_orc meta setprefix "&8[&2Meio‑Orc&8] "
+lp group race_half_orc setweight 10
+lp group race_half_orc permission set race.id.half_orc true
+lp group race_half_orc parent add race_selected
+
+# Tiefling
+lp creategroup race_tiefling
+lp group race_tiefling setdisplayname "Raça: Tiefling"
+lp group race_tiefling meta setprefix "&8[&5Tiefling&8] "
+lp group race_tiefling setweight 10
+lp group race_tiefling permission set race.id.tiefling true
+lp group race_tiefling parent add race_selected
+
+# Track opcional para organizacao (nao obriga uso)
+lp createtrack race
+lp track race append race_dwarf
+lp track race append race_elf
+lp track race append race_halfling
+lp track race append race_human
+lp track race append race_dragonborn
+lp track race append race_gnome
+lp track race append race_half_elf
+lp track race append race_half_orc
+lp track race append race_tiefling
+

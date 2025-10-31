@@ -1,0 +1,16 @@
+sk modifier remove <nick> race_strength
+sk modifier remove <nick> race_speed
+sk modifier remove <nick> race_health
+sk modifier remove <nick> race_wisdom
+sk modifier remove <nick> race_regen
+sk modifier remove <nick> race_luck
+
+# Draconato (STR +2, CHA +1)
+sk modifier add <nick> race_strength strength 2
+sk modifier add <nick> race_luck luck 1
+
+# Tags de efeitos (sem padrão; escolha abaixo uma ancestralidade e execute o arquivo específico)
+tag <nick> remove race_darkvision
+tag <nick> remove resist_fire
+tag <nick> remove resist_all
+tag <nick> remove water_breath

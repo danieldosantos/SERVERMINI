@@ -1,0 +1,156 @@
+# Estruturas de raças D&D 5e (mecânicas em alto nível, sem textos descritivos)
+# Observação legal: este arquivo lista apenas fatos mecânicos (valores, bônus,
+# nomes de traços e idiomas). Não inclui textos do livro. Para descrições, use
+# referências externas licenciadas (ex.: SRD 5.1) ou forneça seu próprio texto.
+
+schema: 1
+abilities: [STR, DEX, CON, INT, WIS, CHA]
+speed_unit: feet
+darkvision_unit: feet
+
+races:
+  dwarf:
+    name: Anão
+    ability_bonuses: { CON: 2 }
+    speed: 25
+    darkvision: 60
+    languages: [Comum, Anão]
+    traits:
+      - Resiliência Anã
+      - Treinamento de Combate Anão
+      - Proficiência com Ferramentas (1 escolha)
+      - Conhecimento de Pedra
+    subraces:
+      hill_dwarf:
+        name: Anão da Colina
+        ability_bonuses: { WIS: 1 }
+        traits:
+          - Robustez Anã (+1 PV por nível)
+      mountain_dwarf:
+        name: Anão da Montanha
+        ability_bonuses: { STR: 2 }
+        traits:
+          - Treinamento com Armaduras (Leve e Média)
+
+  elf:
+    name: Elfo
+    ability_bonuses: { DEX: 2 }
+    speed: 30
+    darkvision: 60
+    languages: [Comum, Élfico]
+    traits:
+      - Sentidos Aguçados (Percepção)
+      - Ancestral Feérico
+      - Transe
+    subraces:
+      high_elf:
+        name: Alto Elfo
+        ability_bonuses: { INT: 1 }
+        traits:
+          - Treinamento com Armas Élficas
+          - Truque (lista de mago)
+          - Idioma Adicional (1)
+      wood_elf:
+        name: Elfo da Floresta
+        ability_bonuses: { WIS: 1 }
+        speed: 35
+        traits:
+          - Passo Ligeiro
+          - Máscara da Natureza
+
+  halfling:
+    name: Halfling
+    ability_bonuses: { DEX: 2 }
+    speed: 25
+    languages: [Comum, Halfling]
+    traits:
+      - Sortudo
+      - Corajoso
+      - Agilidade Halfling
+    subraces:
+      lightfoot:
+        name: Pés‑Leves
+        ability_bonuses: { CHA: 1 }
+        traits:
+          - Naturalmente Furtivo
+      stout:
+        name: Robusto
+        ability_bonuses: { CON: 1 }
+        traits:
+          - Robustez dos Robustos (vs. veneno)
+
+  human:
+    name: Humano
+    ability_bonuses_all: 1  # +1 em todos os atributos
+    speed: 30
+    languages: [Comum, Outro]
+
+  dragonborn:
+    name: Draconato
+    ability_bonuses: { STR: 2, CHA: 1 }
+    speed: 30
+    languages: [Comum, Dracônico]
+    traits:
+      - Ancestralidade Dracônica (escolha de tipo)
+      - Sopro de Dragão
+      - Resistência ao Dano (conforme ancestralidade)
+
+  gnome:
+    name: Gnomo
+    ability_bonuses: { INT: 2 }
+    speed: 25
+    darkvision: 60
+    languages: [Comum, Gnômico]
+    traits:
+      - Astúcia Gnômica
+    subraces:
+      forest_gnome:
+        name: Gnomo da Floresta
+        ability_bonuses: { DEX: 1 }
+        traits:
+          - Ilusionista Nato (truque)
+          - Falar com Pequenos Animais
+      rock_gnome:
+        name: Gnomo das Rochas
+        ability_bonuses: { CON: 1 }
+        traits:
+          - Saber de Artífice
+          - Engenhoqueiro
+
+  half_elf:
+    name: Meio‑Elfo
+    ability_bonuses: { CHA: 2 }
+    ability_flex_points: 2  # distribua em dois atributos diferentes (+1 cada)
+    speed: 30
+    darkvision: 60
+    languages: [Comum, Élfico, Outro]
+    traits:
+      - Ancestral Feérico
+      - Versatilidade em Perícias (2)
+
+  half_orc:
+    name: Meio‑Orc
+    ability_bonuses: { STR: 2, CON: 1 }
+    speed: 30
+    darkvision: 60
+    languages: [Comum, Orc]
+    traits:
+      - Ameaçador (Intimidação)
+      - Perseverança Implacável
+      - Ataques Selvagens
+
+  tiefling:
+    name: Tiefling
+    ability_bonuses: { CHA: 2, INT: 1 }
+    speed: 30
+    darkvision: 60
+    languages: [Comum, Infernal]
+    traits:
+      - Resistência Infernal (fogo)
+      - Legado Infernal (truques/magias)
+
+# Integração sugerida (ProSkillAPI/LuckPerms)
+# - Mapear ability_bonuses para atributos STR/DEX/CON/INT/WIS/CHA.
+# - Salvar escolha do jogador (LuckPerms: grupo "race_<id>"), evitando múltiplas escolhas.
+# - Conceder traços passivos via ProSkillAPI (buffs) ou MythicMobs (skills/passivas), conforme suporte.
+# - Velocidade e visão no escuro podem exigir plugin customizado ou hooks (ProMCCore/ProSkillAPI).

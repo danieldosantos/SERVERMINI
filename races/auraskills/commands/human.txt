@@ -1,0 +1,18 @@
+sk modifier remove <nick> race_strength
+sk modifier remove <nick> race_speed
+sk modifier remove <nick> race_health
+sk modifier remove <nick> race_wisdom
+sk modifier remove <nick> race_regen
+sk modifier remove <nick> race_luck
+
+# Humano (+1 geral simplificado)
+sk modifier add <nick> race_strength strength 1
+sk modifier add <nick> race_speed speed 1
+sk modifier add <nick> race_health health 1
+sk modifier add <nick> race_wisdom wisdom 1
+
+# Tags de efeitos (Humanos sem darkvision)
+tag <nick> remove race_darkvision
+tag <nick> remove resist_fire
+tag <nick> remove resist_all
+tag <nick> remove water_breath

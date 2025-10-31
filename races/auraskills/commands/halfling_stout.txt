@@ -1,0 +1,16 @@
+sk modifier remove <nick> race_strength
+sk modifier remove <nick> race_speed
+sk modifier remove <nick> race_health
+sk modifier remove <nick> race_wisdom
+sk modifier remove <nick> race_regen
+sk modifier remove <nick> race_luck
+
+# Halfling Robusto (DEX +2, CON +1)
+sk modifier add <nick> race_speed speed 2
+sk modifier add <nick> race_health health 1
+
+# Tags de efeitos
+tag <nick> remove race_darkvision
+tag <nick> remove resist_fire
+tag <nick> remove resist_all
+tag <nick> remove water_breath

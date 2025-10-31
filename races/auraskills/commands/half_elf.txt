@@ -1,0 +1,19 @@
+sk modifier remove <nick> race_strength
+sk modifier remove <nick> race_speed
+sk modifier remove <nick> race_health
+sk modifier remove <nick> race_wisdom
+sk modifier remove <nick> race_regen
+sk modifier remove <nick> race_luck
+
+# Meio‑Elfo (CHA +2 e +1 em dois atributos à escolha)
+sk modifier add <nick> race_luck luck 2
+# TODO: escolha dois entre strength/speed/health/wisdom/regeneration; exemplo:
+# sk modifier add <nick> race_strength strength 1
+# sk modifier add <nick> race_speed speed 1
+
+# Tags de efeitos
+tag <nick> remove race_darkvision
+tag <nick> remove resist_fire
+tag <nick> remove resist_all
+tag <nick> remove water_breath
+tag <nick> add race_darkvision

@@ -1,0 +1,97 @@
+# ============================================
+# IGNORAR MUNDOS GERADOS
+# ============================================
+world/
+world_nether/
+world_the_end/
+
+# ============================================
+# IGNORAR BACKUPS E CACHE
+# ============================================
+backup-config/
+backup-worlds-*/
+backup-config-before-*/
+_tmp_*/
+cache/
+logs/
+libraries/
+versions/
+
+# ============================================
+# IGNORAR ARQUIVOS TEMPORÁRIOS / AUTOMÁTICOS
+# ============================================
+*.log
+*.log.gz
+*.tmp
+*.bak
+*.old
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+
+# ============================================
+# IGNORAR CONFIGURAÇÕES DE EXECUÇÃO E SESSÕES
+# ============================================
+eula.txt
+server.properties
+usercache.json
+banned-ips.json
+banned-players.json
+ops.json
+whitelist.json
+permissions.yml
+help.yml
+commands.yml
+bukkit.yml
+spigot.yml
+paper*.jar
+*.ps1
+*.bat
+*.cmd
+
+# ============================================
+# IGNORAR CONFIGURAÇÕES DE PLUGINS E BACKUPS
+# ============================================
+Luckperms Config/
+plugins/**
+!plugins/*.yml       # manter YAMLs principais de plugins (caso queira versionar configs)
+!plugins/README.md
+!plugins/*.json
+
+# ============================================
+# IGNORAR CONFIGURAÇÕES DE JOGADORES
+# ============================================
+playerdata/
+advancements/
+stats/
+
+# ============================================
+# IGNORAR CONFIGS LOCAIS DO VSCODE E GIT
+# ============================================
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
+
+# ============================================
+# IGNORAR ARQUIVOS DE SISTEMA E BACKUP DE CONFIG
+# ============================================
+*_backup*
+*backup*.jar
+*.backup
+*.bak
+*.orig
+*.rej
+
+# ============================================
+# IGNORAR HISTÓRICO E ARQUIVOS INTERNOS
+# ============================================
+version_history.json
+console_history
+_show_tick.txt
+_start_show.txt
+_start_show.txt
+README.md

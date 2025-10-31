@@ -1,0 +1,40 @@
+# Exemplos para aplicar/remover raca de um jogador (console do servidor)
+
+# Definir raca (sobrescreve outras racas se existirem)
+lp user <nick> parent set race_dwarf
+lp user <nick> parent set race_dwarf_hill
+lp user <nick> parent set race_dwarf_mountain
+lp user <nick> parent set race_elf
+lp user <nick> parent set race_elf_high
+lp user <nick> parent set race_elf_wood
+lp user <nick> parent set race_halfling
+lp user <nick> parent set race_halfling_lightfoot
+lp user <nick> parent set race_halfling_stout
+lp user <nick> parent set race_human
+lp user <nick> parent set race_dragonborn
+lp user <nick> parent set race_gnome
+lp user <nick> parent set race_gnome_forest
+lp user <nick> parent set race_gnome_rock
+lp user <nick> parent set race_half_elf
+lp user <nick> parent set race_half_orc
+lp user <nick> parent set race_tiefling
+
+# Remover raca explicitamente (caso prefira limpar antes)
+lp user <nick> parent remove race_dwarf
+lp user <nick> parent remove race_dwarf_hill
+lp user <nick> parent remove race_dwarf_mountain
+lp user <nick> parent remove race_elf
+lp user <nick> parent remove race_elf_high
+lp user <nick> parent remove race_elf_wood
+lp user <nick> parent remove race_halfling
+lp user <nick> parent remove race_halfling_lightfoot
+lp user <nick> parent remove race_halfling_stout
+lp user <nick> parent remove race_human
+lp user <nick> parent remove race_dragonborn
+lp user <nick> parent remove race_gnome
+lp user <nick> parent remove race_gnome_forest
+lp user <nick> parent remove race_gnome_rock
+lp user <nick> parent remove race_half_elf
+lp user <nick> parent remove race_half_orc
+lp user <nick> parent remove race_tiefling
+
