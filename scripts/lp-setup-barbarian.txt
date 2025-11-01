@@ -1,0 +1,30 @@
+lp creategroup class_barbarian
+lp group class_barbarian setdisplayname "Classe: Bárbaro"
+lp group class_barbarian meta setprefix "&8[&cBárbaro&8] "
+lp group class_barbarian setweight 50
+
+lp creategroup class_barbarian_berserker
+lp group class_barbarian_berserker setdisplayname "Caminho: Berserker"
+lp group class_barbarian_berserker setweight 51
+
+lp creategroup class_barbarian_totem_bear
+lp group class_barbarian_totem_bear setdisplayname "Caminho: Totem (Urso)"
+lp group class_barbarian_totem_bear setweight 51
+
+lp creategroup class_barbarian_totem_eagle
+lp group class_barbarian_totem_eagle setdisplayname "Caminho: Totem (Águia)"
+lp group class_barbarian_totem_eagle setweight 51
+
+lp creategroup class_barbarian_totem_wolf
+lp group class_barbarian_totem_wolf setdisplayname "Caminho: Totem (Lobo)"
+lp group class_barbarian_totem_wolf setweight 51
+
+lp createtrack class
+lp track class append class_barbarian
+
+lp createtrack barbarian_path
+lp track barbarian_path append class_barbarian_berserker
+lp track barbarian_path append class_barbarian_totem_bear
+lp track barbarian_path append class_barbarian_totem_eagle
+lp track barbarian_path append class_barbarian_totem_wolf
+

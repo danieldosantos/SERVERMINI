@@ -1,0 +1,174 @@
+# Intervalo do agendador (ticks). 40 = 2s
+schedulePeriodTicks: 20
+
+# Se true, o plugin vai remover automaticamente tags que ele gerencia
+# quando não forem desejadas pelos grupos atuais do jogador.
+enforceGroupTags: true
+
+# Efeitos e traços mapeados
+apply:
+  # Escala por tag (tamanho do jogador). Requer Attribute.GENERIC_SCALE (Paper 1.20.5+)
+  # 1.0 = tamanho padrão, 0.5 = metade do tamanho
+  scaleTags:
+    size_half: 0.5      # Anões (opcional, desativado nas raças para seguir PHB)
+    size_small: 0.45    # Gnomos (opcional)
+
+  attributeModifiers:
+    # MOVEMENT_SPEED: valor absoluto (ex.: +0.02)
+    speedTags:
+      trait_speed_woodelf: 0.02
+    # MAX_HEALTH: pontos de vida (1.0 = meia barra)
+    maxHealthTags:
+      trait_hp_hilldwarf: 2.0
+
+  traits:
+    poisonResistanceTags: [trait_poison_resist]
+    relentless:
+      tag: trait_relentless
+      cooldownTicks: 6000
+
+  abilities:
+    # Se definido, usa modificadores do PHB (floor((pontuacao-10)/2))
+    perMod:
+      STR:
+        GENERIC_ATTACK_DAMAGE: 0.65
+      DEX:
+        GENERIC_MOVEMENT_SPEED: 0.0045
+        GENERIC_ATTACK_SPEED: 0.07
+      CON:
+        GENERIC_MAX_HEALTH: 1.2
+      INT:
+        GENERIC_LUCK: 0.25
+      WIS:
+        GENERIC_KNOCKBACK_RESISTANCE: 0.06
+      CHA:
+        GENERIC_LUCK: 0.15
+    perPoint:
+      # STR: aumenta dano de ataque
+      STR:
+        GENERIC_ATTACK_DAMAGE: 0.05
+      # DEX: velocidade de movimento e velocidade de ataque
+      DEX:
+        GENERIC_MOVEMENT_SPEED: 0.001
+        GENERIC_ATTACK_SPEED: 0.01
+      # CON: vida máxima (+1.0 = meio coração)
+      CON:
+        GENERIC_MAX_HEALTH: 0.2
+      # INT: sorte (afeta saques/loots)
+      INT:
+        GENERIC_LUCK: 0.03
+      # WIS: resistência a knockback
+      WIS:
+        GENERIC_KNOCKBACK_RESISTANCE: 0.01
+      # CHA: pequena sorte extra
+      CHA:
+        GENERIC_LUCK: 0.02
+
+  # Efeitos simples por tag
+  tags:
+    race_darkvision:
+      night_vision:
+        durationTicks: 300
+        amplifier: 0
+        ambient: true
+        particles: false
+        icon: false
+    resist_fire:
+      fire_resistance:
+        durationTicks: 300
+        amplifier: 0
+        ambient: true
+        particles: false
+        icon: false
+    resist_all:
+      resistance:
+        durationTicks: 160
+        amplifier: 0
+        ambient: true
+        particles: false
+        icon: false
+    water_breath:
+      water_breathing:
+        durationTicks: 300
+        amplifier: 0
+        ambient: true
+        particles: false
+        icon: false
+
+  # Grupos do LuckPerms (usa permissões group.<nome>)
+  groups:
+    race_elf: [race_darkvision]
+    race_elf_high: [race_darkvision]
+    race_elf_wood: [race_darkvision, trait_speed_woodelf]
+    race_dwarf: [race_darkvision, trait_poison_resist]
+    race_dwarf_hill: [race_darkvision, trait_poison_resist, trait_hp_hilldwarf]
+    race_dwarf_mountain: [race_darkvision]
+    race_gnome: [race_darkvision]
+    race_gnome_forest: [race_darkvision]
+    race_gnome_rock: [race_darkvision]
+    race_halfling: []
+    race_halfling_lightfoot: []
+    race_halfling_stout: [trait_poison_resist]
+    race_half_elf: [race_darkvision]
+    race_half_orc: [race_darkvision, trait_relentless]
+    race_tiefling: [race_darkvision, resist_fire]
+    race_dragonborn: []
+    race_dragonborn_fire: [resist_fire]
+
+  # Classes (LuckPerms), primeira classe: Bárbaro
+  classes:
+    barbarian:
+      enabled: true
+      group: class_barbarian
+      fastMovement:
+        speed: 0.03   # +0.03 movement speed (~+15%) se não usar armadura pesada
+      unarmoredDefense:
+        armorPerDexMod: 1.0   # +ARMOR por modificador de DEX
+        armorPerConMod: 1.0   # +ARMOR por modificador de CON
+        maxArmorBonus: 8.0    # teto do bônus de AC (ARMOR)
+      rage:
+        attackBonus: 3.0        # dano adicional enquanto em fúria
+        damageReduction: 0.25   # redução de dano físico recebido (0.25 = 25%)
+        durationTicks: 2400     # 120s
+        cooldownTicks: 3600     # 180s
+      reckless:
+        attackBonus: 2.0        # bônus de dano enquanto ativo
+        vulnerability: 0.20     # aumenta dano recebido de ataques/projéteis
+        durationTicks: 400      # 20s
+        cooldownTicks: 900      # 45s
+      dangerSense:
+        explosionReduction: 0.25   # redução adicional em explosões quando não cego
+        fireReduction: 0.15        # redução adicional em fogo/lava quando não cego
+      paths:
+        berserker:
+          group: class_barbarian_berserker
+          rageAttackBonus: 1.0
+          attackSpeedBonus: 0.10
+        totem_bear:
+          group: class_barbarian_totem_bear
+          rageExtraDamageReduction: 0.15
+        totem_eagle:
+          group: class_barbarian_totem_eagle
+          fastMovementExtra: 0.02
+        totem_wolf:
+          group: class_barbarian_totem_wolf
+          knockbackResistBonus: 0.05
+      ui:
+        actionbar: true         # mostra contadores na actionbar
+        showCooldown: true      # mostra recarga quando não estiver ativo
+        bossbar: true           # mostra bossbar de tempo restante
+      abilities:
+        recommendedOrder: [STR, CON, DEX, WIS, CHA, INT]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: STR
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 8
+            points: 2
+          - level: 12
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2

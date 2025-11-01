@@ -1,0 +1,11 @@
+lp user <nick> parent set class_barbarian
+lp user <nick> parent add class_barbarian_berserker
+
+# Alternativas de caminho (use apenas uma):
+# lp user <nick> parent add class_barbarian_totem_bear
+# lp user <nick> parent add class_barbarian_totem_eagle
+# lp user <nick> parent add class_barbarian_totem_wolf
+
+# Verificar
+lp user <nick> info
+

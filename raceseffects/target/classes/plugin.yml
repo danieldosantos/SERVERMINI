@@ -1,0 +1,36 @@
+name: RacesEffects
+main: dev.server.races.raceseffects.RacesEffectsPlugin
+version: 0.1.0
+api-version: "1.20"
+authors: ["daniel","codex"]
+description: Aplica/remover efeitos por tags e grupos do LuckPerms periodicamente.
+commands:
+  raceseffects:
+    description: Comandos do RacesEffects
+    usage: /<command> reload | debug <hp|ud> | reset [player]
+    permission: raceseffects.admin
+  abilities:
+    description: Distribuir pontos de atributos (STR, DEX, CON, INT, WIS, CHA)
+    usage: |-
+      /<command>           # mostra status e instruções
+      /<command> set <attr> <valor>
+      /<command> add <attr> <delta>
+      /<command> reset
+    permission: raceseffects.abilities
+  rage:
+    description: Ativa/Desativa a fúria do Bárbaro
+    usage: /<command> [on|off|toggle]
+    permission: raceseffects.rage
+  reckless:
+    description: Ataque temerário (curta duração)
+    usage: /<command> [on|off|toggle]
+    permission: raceseffects.reckless
+permissions:
+  raceseffects.admin:
+    default: op
+  raceseffects.abilities:
+    default: true
+  raceseffects.rage:
+    default: true
+  raceseffects.reckless:
+    default: true
