@@ -3,7 +3,7 @@ schedulePeriodTicks: 20
 
 # Se true, o plugin vai remover automaticamente tags que ele gerencia
 # quando não forem desejadas pelos grupos atuais do jogador.
-enforceGroupTags: true
+enforceGroupTags: false
 
 # Efeitos e traços mapeados
 apply:
