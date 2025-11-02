@@ -25,6 +25,14 @@ commands:
     description: Ataque temerário (curta duração)
     usage: /<command> [on|off|toggle]
     permission: raceseffects.reckless
+  inspire:
+    description: Concede Inspiração a um aliado (Bardo)
+    usage: /<command> <jogador>
+    permission: raceseffects.inspire
+  song:
+    description: Ativa/Desativa a Canção de Descanso (Bardo)
+    usage: /<command> [on|off|toggle]
+    permission: raceseffects.song
 permissions:
   raceseffects.admin:
     default: op
@@ -34,3 +42,8 @@ permissions:
     default: true
   raceseffects.reckless:
     default: true
+  raceseffects.inspire:
+    default: true
+  raceseffects.song:
+    default: true
+

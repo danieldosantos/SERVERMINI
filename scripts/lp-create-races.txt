@@ -1,0 +1,67 @@
+# Criação dos grupos de RAÇAS no LuckPerms
+# Copie e cole no console do servidor (uma linha por vez).
+
+# Elfos
+lp creategroup race_elf
+lp group race_elf setdisplayname "Raça: Elfo"
+lp creategroup race_elf_high
+lp group race_elf_high setdisplayname "Raça: Alto Elfo"
+lp creategroup race_elf_wood
+lp group race_elf_wood setdisplayname "Raça: Elfo da Floresta"
+lp creategroup race_elf_drow
+lp group race_elf_drow setdisplayname "Raça: Drow"
+
+# Anões
+lp creategroup race_dwarf
+lp group race_dwarf setdisplayname "Raça: Anão"
+lp creategroup race_dwarf_hill
+lp group race_dwarf_hill setdisplayname "Raça: Anão da Colina"
+lp creategroup race_dwarf_mountain
+lp group race_dwarf_mountain setdisplayname "Raça: Anão da Montanha"
+
+# Gnomos
+lp creategroup race_gnome
+lp group race_gnome setdisplayname "Raça: Gnomo"
+lp creategroup race_gnome_forest
+lp group race_gnome_forest setdisplayname "Raça: Gnomo da Floresta"
+lp creategroup race_gnome_rock
+lp group race_gnome_rock setdisplayname "Raça: Gnomo das Rochas"
+
+# Halflings
+lp creategroup race_halfling
+lp group race_halfling setdisplayname "Raça: Halfling"
+lp creategroup race_halfling_lightfoot
+lp group race_halfling_lightfoot setdisplayname "Raça: Halfling (Lightfoot)"
+lp creategroup race_halfling_stout
+lp group race_halfling_stout setdisplayname "Raça: Halfling (Stout)"
+
+# Humanos
+lp creategroup race_human
+lp group race_human setdisplayname "Raça: Humano"
+
+# Híbridos
+lp creategroup race_half_elf
+lp group race_half_elf setdisplayname "Raça: Meio‑Elfo"
+lp creategroup race_half_orc
+lp group race_half_orc setdisplayname "Raça: Meio‑Orc"
+
+# Tiefling
+lp creategroup race_tiefling
+lp group race_tiefling setdisplayname "Raça: Tiefling"
+
+# Draconatos
+lp creategroup race_dragonborn
+lp group race_dragonborn setdisplayname "Raça: Dragonborn (Base)"
+lp creategroup race_dragonborn_fire
+lp group race_dragonborn_fire setdisplayname "Raça: Dragonborn (Fogo)"
+lp creategroup race_dragonborn_cold
+lp group race_dragonborn_cold setdisplayname "Raça: Dragonborn (Frio)"
+lp creategroup race_dragonborn_lightning
+lp group race_dragonborn_lightning setdisplayname "Raça: Dragonborn (Raio)"
+lp creategroup race_dragonborn_acid
+lp group race_dragonborn_acid setdisplayname "Raça: Dragonborn (Ácido)"
+lp creategroup race_dragonborn_poison
+lp group race_dragonborn_poison setdisplayname "Raça: Dragonborn (Veneno)"
+
+# Dica: após criar os grupos, aplique as permissões dos aliases usando
+# o arquivo scripts/aliases-perms-racas.txt

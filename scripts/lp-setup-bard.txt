@@ -1,0 +1,10 @@
+lp creategroup class_bard
+lp group class_bard setdisplayname "Classe: Bardo"
+lp group class_bard setweight 50
+
+# Colleges
+lp creategroup class_bard_valor
+lp group class_bard_valor setdisplayname "Colégio: Valor"
+
+lp creategroup class_bard_lore
+lp group class_bard_lore setdisplayname "Colégio: Lore"

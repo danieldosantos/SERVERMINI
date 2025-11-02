@@ -1,0 +1,40 @@
+lp group race_elf_drow permission set minecraft.command.execute true
+lp group race_elf_drow permission set minecraft.command.effect true
+lp group race_elf_drow permission set minecraft.command.selector true
+
+lp group race_dragonborn_fire permission set minecraft.command.execute true
+lp group race_dragonborn_fire permission set minecraft.command.summon true
+lp group race_dragonborn_fire permission set minecraft.command.effect true
+lp group race_dragonborn_fire permission set minecraft.command.selector true
+
+lp group race_dragonborn_cold permission set minecraft.command.execute true
+lp group race_dragonborn_cold permission set minecraft.command.summon true
+lp group race_dragonborn_cold permission set minecraft.command.effect true
+lp group race_dragonborn_cold permission set minecraft.command.selector true
+
+lp group race_dragonborn_lightning permission set minecraft.command.execute true
+lp group race_dragonborn_lightning permission set minecraft.command.summon true
+lp group race_dragonborn_lightning permission set minecraft.command.effect true
+lp group race_dragonborn_lightning permission set minecraft.command.selector true
+
+lp group race_dragonborn_acid permission set minecraft.command.execute true
+lp group race_dragonborn_acid permission set minecraft.command.summon true
+lp group race_dragonborn_acid permission set minecraft.command.effect true
+lp group race_dragonborn_acid permission set minecraft.command.selector true
+
+lp group race_dragonborn_poison permission set minecraft.command.execute true
+lp group race_dragonborn_poison permission set minecraft.command.summon true
+lp group race_dragonborn_poison permission set minecraft.command.effect true
+lp group race_dragonborn_poison permission set minecraft.command.selector true
+
+lp group race_half_orc permission set minecraft.command.execute true
+lp group race_half_orc permission set minecraft.command.effect true
+lp group race_half_orc permission set minecraft.command.selector true
+
+lp group race_tiefling permission set minecraft.command.execute true
+lp group race_tiefling permission set minecraft.command.summon true
+lp group race_tiefling permission set minecraft.command.effect true
+lp group race_tiefling permission set minecraft.command.playsound true
+lp group race_tiefling permission set minecraft.command.selector true
+
+lp group race_human permission set raceseffects.abilities true

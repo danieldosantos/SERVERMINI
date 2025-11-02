@@ -1,0 +1,30 @@
+## Permissões de classes (LuckPerms) — copiar/colar no console
+
+# Bárbaro: /rage e /reckless (+ /abilities)
+lp group class_barbarian permission set raceseffects.rage true
+lp group class_barbarian permission set raceseffects.reckless true
+lp group class_barbarian permission set raceseffects.abilities true
+
+# Bardo: /inspire e /song (+ /abilities)
+lp group class_bard permission set raceseffects.inspire true
+lp group class_bard permission set raceseffects.song true
+lp group class_bard permission set raceseffects.abilities true
+
+# (Opcional) Fazer os colégios herdarem do grupo base do Bardo
+lp group class_bard_valor parent add class_bard
+lp group class_bard_lore parent add class_bard
+
+# Bruxo: aliases /eldritch e /hex (usa comandos vanilla)
+# Requer execute/effect/playsound/selector para o grupo da classe
+lp group class_warlock permission set minecraft.command.execute true
+lp group class_warlock permission set minecraft.command.effect true
+lp group class_warlock permission set minecraft.command.playsound true
+lp group class_warlock permission set minecraft.command.selector true
+lp group class_warlock permission set raceseffects.abilities true
+
+# (Opcional) Fazer os patronos herdarem do grupo base do Bruxo
+lp group class_warlock_archfey parent add class_warlock
+lp group class_warlock_fiend parent add class_warlock
+lp group class_warlock_oldone parent add class_warlock
+
+## Fim

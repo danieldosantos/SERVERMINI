@@ -1,4 +1,4 @@
-﻿package dev.server.races.raceseffects;
+package dev.server.races.raceseffects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -93,6 +93,42 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
     // Ability init + level-ups tracking (per player)
     private final NamespacedKey KEY_INIT_CLASS = new NamespacedKey(this, "abl_init_class");
     private final NamespacedKey KEY_LEVEL_CLAIM = new NamespacedKey(this, "abl_level_claim");
+
+    // Bard class (Bardo)
+    private static class BardConf {
+        boolean enabled = true;
+        String group = "class_bard";
+        // Inspiration (buff em alvo)
+        double inspireAttackSpeed = 0.10;
+        double inspireMoveSpeed = 0.02;
+        double inspireDamage = 0.0;
+        int inspireDuration = 900;   // 45s
+        int inspireCooldown = 1200;  // 60s
+        // Song of Rest (aura simples de regen)
+        int songAmplifier = 0;       // Regen I
+        double songRadius = 12.0;
+        int songDuration = 600;      // 30s
+        int songCooldown = 1200;     // 60s
+        // Colleges (subclasses)
+        String valorGroup = "class_bard_valor";
+        double valorInspireDamageBonus = 1.0;
+        String loreGroup = "class_bard_lore";
+        int loreInspireExtraDuration = 200;
+        double loreSongRadiusExtra = 4.0;
+        // UI
+        boolean uiActionbar = true;
+        boolean uiShowCooldown = true;
+        boolean uiBossbar = false;
+    }
+    private final BardConf bardConf = new BardConf();
+    private static final UUID BARD_INSPIRE_AS_UUID = UUID.fromString("0c9b8f9e-2f24-4f6b-b6a3-6a1b5f30bb00");
+    private static final UUID BARD_INSPIRE_MS_UUID = UUID.fromString("4e6f0e5f-d2f8-4b88-9a4f-9f0d0d2b0a10");
+    private static final UUID BARD_INSPIRE_DMG_UUID = UUID.fromString("9b1f6f6e-0e3b-4a3e-94a4-2f1d9e3c7c11");
+    private final Map<UUID, Integer> inspireUntil = new HashMap<>();          // alvo -> tick fim
+    private final Map<UUID, Double> inspireExtraDmg = new HashMap<>();        // alvo -> bonus dmg
+    private final Map<UUID, Integer> inspireCooldownUntil = new HashMap<>();  // fonte -> tick fim CD
+    private final Map<UUID, Integer> songUntil = new HashMap<>();             // bardo -> tick fim
+    private final Map<UUID, Integer> songCooldownUntil = new HashMap<>();     // bardo -> tick fim CD
 
     @Override
     public void onEnable() {
@@ -297,7 +333,7 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
             }
 
             // Aplicar efeitos por tags atuais (somente se houver raAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§a ou classe)
-            boolean allowRaceEffects = !hardNoRaceMode && (hasAnyRaceGroup(p) || isBarbarian(p));
+            boolean allowRaceEffects = !hardNoRaceMode && (hasAnyRaceGroup(p) || isBarbarian(p) || isBard(p));
             if (allowRaceEffects) {
                 for (String tag : p.getScoreboardTags()) {
                     Map<String, EffectSpec> specs = tagEffects.get(tag);
@@ -322,25 +358,32 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
 
             // Aplicar modificadores de atributos (velocidade, vida)
             applyAttributeModifiers(p);
+            // Classe: Bardo (passivos iniciais)
+            applyBardPassives(p);
 
             // Classe: BAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡rbaro (passivos)
             applyBarbarianPassives(p);
 
             // UI (actionbar) - nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o mostra CD de recarga ao vivo quando desativado em config
             sendBarbarianUI2(p);
+            sendBardUI2(p);
 
             // AutodistribuiAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§AÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o inicial + level-ups
             autoAssignClassStart(p);
             autoApplyLevelUps(p);
 
             // Bloqueio de efeitos de raAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§a quando nAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o houver classe/raAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§a
+            autoAssignByConfig(p, "bard");
+            autoApplyLevelUpsByConfig(p, "bard");
+            autoAssignByConfig(p, "warlock");
+            autoApplyLevelUpsByConfig(p, "warlock");
             enforceNoRaceEffects(p);
         }
     }
 
     private void enforceNoRaceEffects(Player p) {
         boolean hasRace = hasAnyRaceGroup(p);
-        boolean hasClass = isBarbarian(p);
+        boolean hasClass = isBarbarian(p) || isBard(p);
         if (hasRace || hasClass) return;
         try {
             if (p.hasPotionEffect(PotionEffectType.NIGHT_VISION)) {
@@ -420,6 +463,11 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
     private boolean isBarbarian(Player p) {
         if (!barbConf.enabled) return false;
         return p.hasPermission("group." + barbConf.group);
+    }
+
+    private boolean isBard(Player p) {
+        if (!bardConf.enabled) return false;
+        return p.hasPermission("group." + bardConf.group);
     }
 
     private boolean isWearingAnyArmor(Player p) {
@@ -660,7 +708,58 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                         p.setHealth(desiredBase);
                     }
                 }
+                // Garante que os corações reflitam o max health real (desabilita HealthScale de outros plugins)
+                try {
+                    java.lang.reflect.Method isScaled = p.getClass().getMethod("isHealthScaled");
+                    boolean scaled = (Boolean) isScaled.invoke(p);
+                    if (scaled) {
+                        java.lang.reflect.Method setScaled = p.getClass().getMethod("setHealthScaled", boolean.class);
+                        setScaled.invoke(p, false);
+                    }
+                } catch (Throwable ignoreScale) { }
             } catch (Throwable ignored) {}
+        }
+
+        // Bard class config
+        ConfigurationSection bard = getConfig().getConfigurationSection("apply.classes.bard");
+        if (bard != null) {
+            bardConf.enabled = bard.getBoolean("enabled", true);
+            bardConf.group = bard.getString("group", bardConf.group);
+            ConfigurationSection insp = bard.getConfigurationSection("inspiration");
+            if (insp != null) {
+                bardConf.inspireAttackSpeed = insp.getDouble("attackSpeedBonus", bardConf.inspireAttackSpeed);
+                bardConf.inspireMoveSpeed = insp.getDouble("moveSpeedBonus", bardConf.inspireMoveSpeed);
+                bardConf.inspireDamage = insp.getDouble("damageBonus", bardConf.inspireDamage);
+                bardConf.inspireDuration = insp.getInt("durationTicks", bardConf.inspireDuration);
+                bardConf.inspireCooldown = insp.getInt("cooldownTicks", bardConf.inspireCooldown);
+            }
+            ConfigurationSection song = bard.getConfigurationSection("song");
+            if (song != null) {
+                bardConf.songAmplifier = song.getInt("regenAmplifier", bardConf.songAmplifier);
+                bardConf.songRadius = song.getDouble("radius", bardConf.songRadius);
+                bardConf.songDuration = song.getInt("durationTicks", bardConf.songDuration);
+                bardConf.songCooldown = song.getInt("cooldownTicks", bardConf.songCooldown);
+            }
+            ConfigurationSection colleges = bard.getConfigurationSection("colleges");
+            if (colleges != null) {
+                ConfigurationSection valor = colleges.getConfigurationSection("valor");
+                if (valor != null) {
+                    bardConf.valorGroup = valor.getString("group", bardConf.valorGroup);
+                    bardConf.valorInspireDamageBonus = valor.getDouble("inspireDamageBonus", bardConf.valorInspireDamageBonus);
+                }
+                ConfigurationSection lore = colleges.getConfigurationSection("lore");
+                if (lore != null) {
+                    bardConf.loreGroup = lore.getString("group", bardConf.loreGroup);
+                    bardConf.loreInspireExtraDuration = lore.getInt("inspireExtraDurationTicks", bardConf.loreInspireExtraDuration);
+                    bardConf.loreSongRadiusExtra = lore.getDouble("songRadiusExtra", bardConf.loreSongRadiusExtra);
+                }
+            }
+            ConfigurationSection ui = bard.getConfigurationSection("ui");
+            if (ui != null) {
+                bardConf.uiActionbar = ui.getBoolean("actionbar", bardConf.uiActionbar);
+                bardConf.uiShowCooldown = ui.getBoolean("showCooldown", bardConf.uiShowCooldown);
+                bardConf.uiBossbar = ui.getBoolean("bossbar", bardConf.uiBossbar);
+            }
         }
 
         // Abilities-based modifiers
@@ -751,46 +850,127 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
         return (int) Math.floor((score - 10) / 2.0);
     }
 
-    // Efeito sonoro ao ativar Furia, dependendo do caminho do Barbaro
-        private void playRageSound(Player p) {
-    Sound s = null; float vol = 1.0f; float pitch = 1.0f;
-    String primary = getLuckPermsPrimaryGroup(p);
-    if (primary != null) {
-        if ("class_barbarian_totem_bear".equalsIgnoreCase(primary)) {
-            s = Sound.ENTITY_POLAR_BEAR_WARNING; vol = 1.0f; pitch = 0.9f;
-        } else if ("class_barbarian_totem_eagle".equalsIgnoreCase(primary)) {
-            s = Sound.ENTITY_PHANTOM_AMBIENT; vol = 0.9f; pitch = 1.2f;
-        } else if ("class_barbarian_totem_wolf".equalsIgnoreCase(primary)) {
-            s = Sound.ENTITY_WOLF_HOWL; vol = 1.0f; pitch = 1.0f;
-        } else if ("class_barbarian_berserker".equalsIgnoreCase(primary)) {
-            s = Sound.ENTITY_PLAYER_HURT; vol = 1.0f; pitch = 0.8f;
+    // Efeito sonoro ao ativar Fúria, dependendo do caminho do Bárbaro
+    private void playRageSound(Player p) {
+        Sound s = null; float vol = 1.0f; float pitch = 1.0f;
+        String primary = getLuckPermsPrimaryGroup(p);
+        if (primary != null) {
+            if ("class_barbarian_totem_bear".equalsIgnoreCase(primary)) {
+                s = Sound.ENTITY_POLAR_BEAR_WARNING; vol = 1.0f; pitch = 0.9f;
+            } else if ("class_barbarian_totem_eagle".equalsIgnoreCase(primary)) {
+                s = Sound.ENTITY_PHANTOM_AMBIENT; vol = 0.9f; pitch = 1.2f;
+            } else if ("class_barbarian_totem_wolf".equalsIgnoreCase(primary)) {
+                s = Sound.ENTITY_WOLF_HOWL; vol = 1.0f; pitch = 1.0f;
+            } else if ("class_barbarian_berserker".equalsIgnoreCase(primary)) {
+                s = Sound.ENTITY_PILLAGER_CELEBRATE; vol = 1.5f; pitch = 1.0f;
+            }
         }
-    }
-    if (s == null) {
-        if (p.hasPermission("group.class_barbarian_totem_bear")) {
-            s = Sound.ENTITY_POLAR_BEAR_WARNING; vol = 1.0f; pitch = 0.9f;
-        } else if (p.hasPermission("group.class_barbarian_totem_eagle")) {
-            s = Sound.ENTITY_PHANTOM_AMBIENT; vol = 0.9f; pitch = 1.2f;
-        } else if (p.hasPermission("group.class_barbarian_totem_wolf")) {
-            s = Sound.ENTITY_WOLF_HOWL; vol = 1.0f; pitch = 1.0f;
-        } else if (p.hasPermission("group.class_barbarian_berserker")) {
-            s = Sound.ENTITY_PLAYER_HURT; vol = 1.0f; pitch = 0.8f;
+        if (s == null) {
+            if (p.hasPermission("group.class_barbarian_totem_bear")) {
+                s = Sound.ENTITY_POLAR_BEAR_WARNING; vol = 1.0f; pitch = 0.9f;
+            } else if (p.hasPermission("group.class_barbarian_totem_eagle")) {
+                s = Sound.ENTITY_PHANTOM_AMBIENT; vol = 0.9f; pitch = 1.2f;
+            } else if (p.hasPermission("group.class_barbarian_totem_wolf")) {
+                s = Sound.ENTITY_WOLF_HOWL; vol = 1.0f; pitch = 1.0f;
+            } else if (p.hasPermission("group.class_barbarian_berserker")) {
+                s = Sound.ENTITY_PILLAGER_CELEBRATE; vol = 1.5f; pitch = 1.0f;
+            }
         }
-    }
-    if (s != null) {
-        p.getWorld().playSound(p.getLocation(), s, vol, pitch);
-    }
-} else if (p.hasPermission("group.class_barbarian_totem_eagle")) {
-            s = Sound.ENTITY_PHANTOM_AMBIENT; vol = 0.9f; pitch = 1.2f;
-        } else if (p.hasPermission("group.class_barbarian_totem_wolf")) {
-            s = Sound.ENTITY_WOLF_HOWL; vol = 1.0f; pitch = 1.0f;
-        } else if (p.hasPermission("group.class_barbarian_berserker")) {
-            s = Sound.ENTITY_PLAYER_HURT; vol = 1.0f; pitch = 0.8f;
+        // Fallback: qualquer Bárbaro sem subclasse detectada -> use o grito do Pillager
+        if (s == null && isBarbarian(p)) {
+            s = Sound.ENTITY_PILLAGER_CELEBRATE; vol = 1.5f; pitch = 1.0f;
         }
         if (s != null) {
-            p.getWorld().playSound(p.getLocation(), s, vol, pitch);
+            // Toca diretamente para o jogador para garantir audibilidade
+            p.playSound(p.getLocation(), s, vol, pitch);
         }
-    }private void applyScaleFromTags(Player p) {
+    }
+
+    private boolean isSinging(Player p) {
+        Integer until = songUntil.get(p.getUniqueId());
+        if (until == null) return false;
+        return Bukkit.getCurrentTick() < until;
+    }
+
+    private boolean isInspired(Player p) {
+        Integer until = inspireUntil.get(p.getUniqueId());
+        if (until == null) return false;
+        return Bukkit.getCurrentTick() < until;
+    }
+
+    private void applyBardPassives(Player p) {
+        // Clear if not Bard
+        if (!isBard(p)) {
+            setOrUpdateModifier(getAttributeInstance(p, "GENERIC_ATTACK_SPEED"), BARD_INSPIRE_AS_UUID, "RacesEffects-Bard-InspireAS", 0.0, AttributeModifier.Operation.ADD_NUMBER);
+            setOrUpdateModifier(getAttributeInstance(p, "GENERIC_MOVEMENT_SPEED"), BARD_INSPIRE_MS_UUID, "RacesEffects-Bard-InspireMS", 0.0, AttributeModifier.Operation.ADD_NUMBER);
+            setOrUpdateModifier(getAttributeInstance(p, "GENERIC_ATTACK_DAMAGE"), BARD_INSPIRE_DMG_UUID, "RacesEffects-Bard-InspireDMG", 0.0, AttributeModifier.Operation.ADD_NUMBER);
+            return;
+        }
+
+        // Apply Inspiration bonuses if this player is a target
+        double as = 0.0, ms = 0.0, dmg = 0.0;
+        if (isInspired(p)) {
+            as = bardConf.inspireAttackSpeed;
+            ms = bardConf.inspireMoveSpeed;
+            dmg = bardConf.inspireDamage + inspireExtraDmg.getOrDefault(p.getUniqueId(), 0.0);
+        }
+        setOrUpdateModifier(getAttributeInstance(p, "GENERIC_ATTACK_SPEED"), BARD_INSPIRE_AS_UUID, "RacesEffects-Bard-InspireAS", as, AttributeModifier.Operation.ADD_NUMBER);
+        setOrUpdateModifier(getAttributeInstance(p, "GENERIC_MOVEMENT_SPEED"), BARD_INSPIRE_MS_UUID, "RacesEffects-Bard-InspireMS", ms, AttributeModifier.Operation.ADD_NUMBER);
+        setOrUpdateModifier(getAttributeInstance(p, "GENERIC_ATTACK_DAMAGE"), BARD_INSPIRE_DMG_UUID, "RacesEffects-Bard-InspireDMG", dmg, AttributeModifier.Operation.ADD_NUMBER);
+
+        // Song of Rest: simple regen aura while active
+        if (isSinging(p)) {
+            double radius = bardConf.songRadius;
+            if (p.hasPermission("group." + bardConf.loreGroup)) radius += bardConf.loreSongRadiusExtra;
+            int dur = 60; // reapply every tick pass
+            try {
+                PotionEffect regen = new PotionEffect(PotionEffectType.REGENERATION, dur, Math.max(0, bardConf.songAmplifier), true, false, false);
+                p.addPotionEffect(regen);
+                for (Player q : Bukkit.getOnlinePlayers()) {
+                    if (q == p) continue;
+                    if (!q.getWorld().equals(p.getWorld())) continue;
+                    if (q.getLocation().distanceSquared(p.getLocation()) <= radius * radius) {
+                        q.addPotionEffect(regen);
+                    }
+                }
+            } catch (Throwable ignored) {}
+        }
+    }
+
+    private void sendBardUI2(Player p) {
+        if (!isBard(p) || !bardConf.uiActionbar) return;
+        int now = Bukkit.getCurrentTick();
+        Component msg = Component.empty();
+        boolean any = false;
+
+        Integer sUntil = songUntil.get(p.getUniqueId());
+        if (sUntil != null && now < sUntil) {
+            int secs = Math.max(0, (sUntil - now) / 20);
+            msg = msg.append(Component.text("Canção ", NamedTextColor.LIGHT_PURPLE))
+                     .append(Component.text(secs + "s", NamedTextColor.WHITE));
+            any = true;
+        } else if (bardConf.uiShowCooldown) {
+            int scd = songCooldownUntil.getOrDefault(p.getUniqueId(), 0);
+            if (now < scd) {
+                int secs = Math.max(0, (scd - now) / 20);
+                msg = msg.append(Component.text("Canção CD ", NamedTextColor.GRAY))
+                         .append(Component.text(secs + "s", NamedTextColor.WHITE));
+                any = true;
+            }
+        }
+
+        int icd = inspireCooldownUntil.getOrDefault(p.getUniqueId(), 0);
+        if (now < icd && bardConf.uiShowCooldown) {
+            if (any) msg = msg.append(Component.text("  "));
+            int secs = Math.max(0, (icd - now) / 20);
+            msg = msg.append(Component.text("Inspiração CD ", NamedTextColor.GRAY))
+                     .append(Component.text(secs + "s", NamedTextColor.WHITE));
+            any = true;
+        }
+
+        if (any) p.sendActionBar(msg);
+    }
+    private void applyScaleFromTags(Player p) {
         if (scaleTags.isEmpty()) return;
         double targetScale = 1.0;
         boolean found = false;
@@ -999,6 +1179,11 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
             try {
                 target.getPersistentDataContainer().remove(KEY_INIT_CLASS);
                 target.getPersistentDataContainer().remove(KEY_LEVEL_CLAIM);
+                // também remover chaves por classe
+                target.getPersistentDataContainer().remove(nskInitFor("bard"));
+                target.getPersistentDataContainer().remove(nskLevelClaimFor("bard"));
+                target.getPersistentDataContainer().remove(nskInitFor("warlock"));
+                target.getPersistentDataContainer().remove(nskLevelClaimFor("warlock"));
             } catch (Throwable ignored) {}
             // Remove tags gerenciadas
             for (String t : new java.util.HashSet<>(target.getScoreboardTags())) {
@@ -1013,6 +1198,48 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
             if (bar != null) target.hideBossBar(bar);
             sender.sendMessage("Reset concluAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â­do para " + target.getName() + ". Reatribua raAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§a/classe pelo LuckPerms se desejar.");
             target.sendMessage("Seu perfil foi resetado. Relogue se necessAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡rio.");
+            return true;
+        }
+        if (cmd.equals("inspire")) {
+            if (!(sender instanceof Player)) { sender.sendMessage("Somente in-game."); return true; }
+            Player src = (Player) sender;
+            if (!src.hasPermission("raceseffects.inspire")) { src.sendMessage("Sem permissao."); return true; }
+            if (!isBard(src)) { src.sendMessage("Apenas bardos podem usar inspiração."); return true; }
+            if (args.length < 1) { src.sendMessage("Uso: /"+label+" <jogador>"); return true; }
+            int now = Bukkit.getCurrentTick();
+            int cd = inspireCooldownUntil.getOrDefault(src.getUniqueId(), 0);
+            if (now < cd) { src.sendMessage("Inspiração em recarga."); return true; }
+            Player tgt = Bukkit.getPlayerExact(args[0]);
+            if (tgt == null) { src.sendMessage("Jogador offline ou não encontrado."); return true; }
+            int dur = bardConf.inspireDuration;
+            if (src.hasPermission("group." + bardConf.loreGroup)) dur += Math.max(0, bardConf.loreInspireExtraDuration);
+            double extraDmg = 0.0;
+            if (src.hasPermission("group." + bardConf.valorGroup)) extraDmg += bardConf.valorInspireDamageBonus;
+            if (bardConf.inspireDamage > 0.0) extraDmg += 0.0; // base já aplicado via atributo abaixo
+            inspireUntil.put(tgt.getUniqueId(), now + dur);
+            inspireCooldownUntil.put(src.getUniqueId(), now + bardConf.inspireCooldown);
+            if (extraDmg > 0.0) inspireExtraDmg.put(tgt.getUniqueId(), extraDmg); else inspireExtraDmg.remove(tgt.getUniqueId());
+            src.sendMessage("Você inspira " + tgt.getName() + " por " + (dur/20) + "s.");
+            tgt.sendMessage("Você recebeu Inspiração de " + src.getName() + "!");
+            return true;
+        }
+        if (cmd.equals("song")) {
+            if (!(sender instanceof Player)) { sender.sendMessage("Somente in-game."); return true; }
+            Player p3 = (Player) sender;
+            if (!p3.hasPermission("raceseffects.song")) { p3.sendMessage("Sem permissao."); return true; }
+            if (!isBard(p3)) { p3.sendMessage("Apenas bardos podem usar canção."); return true; }
+            String sub = args.length > 0 ? args[0].toLowerCase(java.util.Locale.ROOT) : "toggle";
+            boolean wantOn = sub.equals("on") || sub.equals("start") || (sub.equals("toggle") && !isSinging(p3));
+            if (wantOn) {
+                int now = Bukkit.getCurrentTick();
+                int cd = songCooldownUntil.getOrDefault(p3.getUniqueId(), 0);
+                if (now < cd) { p3.sendMessage("Canção em recarga."); return true; }
+                songUntil.put(p3.getUniqueId(), now + bardConf.songDuration);
+                songCooldownUntil.put(p3.getUniqueId(), now + bardConf.songCooldown);
+                p3.sendMessage("Canção ativa por " + (bardConf.songDuration/20) + "s.");
+            } else {
+                songUntil.remove(p3.getUniqueId()); p3.sendMessage("Canção encerrada.");
+            }
             return true;
         }
         if (cmd.equals("abilities")) {
@@ -1168,26 +1395,98 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
         p.getPersistentDataContainer().set(nsk("abl_"+attr), org.bukkit.persistence.PersistentDataType.INTEGER, value);
     }
 
-}
+    private NamespacedKey nskInitFor(String cls){ return new NamespacedKey(this, "abl_init_"+cls); }
+    private NamespacedKey nskLevelClaimFor(String cls){ return new NamespacedKey(this, "abl_level_claim_"+cls); }
 
-private String getLuckPermsPrimaryGroup(Player p) {
-    try {
-        Class<?> lpProvider = Class.forName("net.luckperms.api.LuckPermsProvider");
-        java.lang.reflect.Method get = lpProvider.getMethod("get");
-        Object api = get.invoke(null);
-        Class<?> luckPermsClass = Class.forName("net.luckperms.api.LuckPerms");
-        java.lang.reflect.Method getUserManager = luckPermsClass.getMethod("getUserManager");
-        Object userManager = getUserManager.invoke(api);
-        Class<?> userManagerClass = Class.forName("net.luckperms.api.model.user.UserManager");
-        java.util.UUID uuid = p.getUniqueId();
-        java.lang.reflect.Method getUser = userManagerClass.getMethod("getUser", java.util.UUID.class);
-        Object user = getUser.invoke(userManager, uuid);
-        if (user == null) return null;
-        Class<?> userClass = Class.forName("net.luckperms.api.model.user.User");
-        java.lang.reflect.Method getPrimaryGroup = userClass.getMethod("getPrimaryGroup");
-        Object pg = getPrimaryGroup.invoke(user);
-        return pg == null ? null : pg.toString();
-    } catch (Throwable t) {
-        return null;
+    private boolean hasClassByConfig(Player p, String cls){
+        ConfigurationSection sec = getConfig().getConfigurationSection("apply.classes."+cls);
+        if (sec == null) return false;
+        if (!sec.getBoolean("enabled", true)) return false;
+        String group = sec.getString("group", "class_"+cls);
+        return p.hasPermission("group."+group);
     }
+
+    private void autoAssignByConfig(Player p, String cls){
+        try {
+            if (!hasClassByConfig(p, cls)) return;
+            org.bukkit.persistence.PersistentDataContainer pdc = p.getPersistentDataContainer();
+            NamespacedKey k = nskInitFor(cls);
+            if (pdc.has(k, org.bukkit.persistence.PersistentDataType.INTEGER)) return;
+            ConfigurationSection abil = getConfig().getConfigurationSection("apply.classes."+cls+".abilities");
+            if (abil == null) return;
+            java.util.List<String> order = abil.getStringList("recommendedOrder");
+            java.util.List<Integer> start = (java.util.List<Integer>)(java.util.List<?>) abil.getIntegerList("startArray");
+            String raceBonusTarget = abil.getString("raceBonusTarget", "STR").toUpperCase(java.util.Locale.ROOT);
+            if (order.size() != 6 || start.size() != 6) return;
+            for (int i=0;i<6;i++) {
+                String attr = order.get(i).toUpperCase(java.util.Locale.ROOT);
+                int val = Math.min(20, Math.max(0, start.get(i)));
+                setAbilityRaw(p, attr, val);
+            }
+            int cur = getAbility(p, raceBonusTarget);
+            setAbilityRaw(p, raceBonusTarget, Math.min(20, cur + 3));
+            pdc.set(k, org.bukkit.persistence.PersistentDataType.INTEGER, 1);
+            p.sendMessage("Classe "+cls+": distribuição inicial aplicada.");
+        } catch (Throwable ignored) { }
+    }
+
+    private void autoApplyLevelUpsByConfig(Player p, String cls){
+        try {
+            if (!hasClassByConfig(p, cls)) return;
+            ConfigurationSection abil = getConfig().getConfigurationSection("apply.classes."+cls+".abilities");
+            if (abil == null) return;
+            java.util.List<String> order = abil.getStringList("recommendedOrder");
+            java.util.List<java.util.Map<?,?>> levels = abil.getMapList("levelUps");
+            if (order == null || order.isEmpty() || levels == null || levels.isEmpty()) return;
+            org.bukkit.persistence.PersistentDataContainer pdc = p.getPersistentDataContainer();
+            NamespacedKey k = nskLevelClaimFor(cls);
+            String claimed = pdc.getOrDefault(k, org.bukkit.persistence.PersistentDataType.STRING, "");
+            java.util.Set<String> claimedSet = new java.util.HashSet<>(java.util.Arrays.asList(claimed.isEmpty()? new String[]{} : claimed.split(",")));
+            int pl = p.getLevel(); boolean changed = false;
+            for (java.util.Map<?,?> m : levels) {
+                Object lvlObj = m.containsKey("level") ? m.get("level") : 0;
+                Object ptsObj = m.containsKey("points") ? m.get("points") : 0;
+                int lvl = (lvlObj instanceof Number) ? ((Number)lvlObj).intValue() : 0;
+                int pts = (ptsObj instanceof Number) ? ((Number)ptsObj).intValue() : 0;
+                if (pl >= lvl && !claimedSet.contains(String.valueOf(lvl)) && pts > 0) {
+                    int remaining = pts;
+                    outer: while (remaining > 0) {
+                        for (String a : order) {
+                            String attr = a.toUpperCase(java.util.Locale.ROOT);
+                            int cur = getAbility(p, attr);
+                            if (cur < 20) { setAbilityRaw(p, attr, cur+1); remaining--; changed = true; if (remaining==0) break outer; }
+                        }
+                        break;
+                    }
+                    claimedSet.add(String.valueOf(lvl));
+                }
+            }
+            if (changed) {
+                pdc.set(k, org.bukkit.persistence.PersistentDataType.STRING, String.join(",", claimedSet));
+                p.sendMessage("Atributos melhorados por nível ("+cls+").");
+            }
+        } catch (Throwable ignored) { }
+    }
+    private String getLuckPermsPrimaryGroup(Player p) {
+        try {
+            Class<?> lpProvider = Class.forName("net.luckperms.api.LuckPermsProvider");
+            java.lang.reflect.Method get = lpProvider.getMethod("get");
+            Object api = get.invoke(null);
+            Class<?> luckPermsClass = Class.forName("net.luckperms.api.LuckPerms");
+            java.lang.reflect.Method getUserManager = luckPermsClass.getMethod("getUserManager");
+            Object userManager = getUserManager.invoke(api);
+            Class<?> userManagerClass = Class.forName("net.luckperms.api.model.user.UserManager");
+            java.util.UUID uuid = p.getUniqueId();
+            java.lang.reflect.Method getUser = userManagerClass.getMethod("getUser", java.util.UUID.class);
+            Object user = getUser.invoke(userManager, uuid);
+            if (user == null) return null;
+            Class<?> userClass = Class.forName("net.luckperms.api.model.user.User");
+            java.lang.reflect.Method getPrimaryGroup = userClass.getMethod("getPrimaryGroup");
+            Object pg = getPrimaryGroup.invoke(user);
+            return pg == null ? null : pg.toString();
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
 }

@@ -172,3 +172,44 @@ apply:
             points: 2
           - level: 19
             points: 2
+    bard:
+      enabled: true
+      group: class_bard
+      inspiration:
+        attackSpeedBonus: 0.10    # bônus de velocidade de ataque no alvo
+        moveSpeedBonus: 0.02      # bônus de movimento no alvo
+        damageBonus: 0.0          # bônus de dano no alvo (geral)
+        durationTicks: 900        # 45s
+        cooldownTicks: 1200       # 60s
+      song:
+        regenAmplifier: 0         # Regeneração I (0)
+        radius: 12.0              # raio da canção
+        durationTicks: 600        # 30s ativos
+        cooldownTicks: 1200       # 60s de recarga
+      colleges:
+        valor:
+          group: class_bard_valor
+          inspireDamageBonus: 1.0
+        lore:
+          group: class_bard_lore
+          inspireExtraDurationTicks: 200
+          songRadiusExtra: 4.0
+      ui:
+        actionbar: true
+        showCooldown: true
+        bossbar: false
+      abilities:
+        recommendedOrder: [CHA, DEX, CON, WIS, INT, STR]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: CHA
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 8
+            points: 2
+          - level: 12
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2
