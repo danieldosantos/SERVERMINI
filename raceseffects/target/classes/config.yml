@@ -26,6 +26,25 @@ apply:
     relentless:
       tag: trait_relentless
       cooldownTicks: 6000
+    # Passiva do Alto Elfo: ao receber dano, tem chance de aplicar
+    # um efeito aleatório (espinhos, veneno, náusea) no atacante, ou não ativar nada.
+    # A opção 'none' deve ter a maior probabilidade por padrão.
+    highElfRetaliate:
+      tag: trait_highelf_retaliate
+      cooldownTicks: 60          # 3s entre ativações
+      chance:
+        none: 0.55               # 55%
+        thorns: 0.15             # 15%
+        poison: 0.20             # 20%
+        nausea: 0.10             # 10%
+      thorns:
+        damage: 2.0              # dano de retorno (1 coração = 2.0)
+      poison:
+        durationTicks: 100       # 5s
+        amplifier: 0             # Veneno I
+      nausea:
+        durationTicks: 100       # 5s
+        amplifier: 0             # Náusea I
 
   abilities:
     # Se definido, usa modificadores do PHB (floor((pontuacao-10)/2))
@@ -98,7 +117,7 @@ apply:
   # Grupos do LuckPerms (usa permissões group.<nome>)
   groups:
     race_elf: [race_darkvision]
-    race_elf_high: [race_darkvision]
+    race_elf_high: [race_darkvision, trait_highelf_retaliate]
     race_elf_wood: [race_darkvision, trait_speed_woodelf]
     race_dwarf: [race_darkvision, trait_poison_resist]
     race_dwarf_hill: [race_darkvision, trait_poison_resist, trait_hp_hilldwarf]

@@ -10,7 +10,7 @@ Resumo rápido (comandos prontos)
 - Adicionar raça (sem sobrescrever outros grupos):
 
 ```
-lp user Daniel3 parent add race_half_elf
+lp user Daniel5 parent add race_half_orc
 ```
 
 - Garantir classe e patrono (usar `add` para não sobrescrever):

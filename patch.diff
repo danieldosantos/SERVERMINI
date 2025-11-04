@@ -1,0 +1,158 @@
+*** Begin Patch
+*** Update File: plugins/Skript/scripts/class_items_new_fixed.sk
+@@
+-on right click:
+-    if player's tool is not air:
+-        set {_it} to player's tool
+-        set {_n} to display name of {_it}
+-
+-        # Barbaro - Furia (bonus por 120s, cd 180s)
+-        if {_n} is {name.barbarian_rage}:
+-            cancel event
+-            if {cd.%uuid of player%.rage} is set:
+-                if difference between now and {cd.%uuid of player%.rage} < 180 seconds:
+-                    send "&cFuria em recarga." to player
+-                    stop
+-            set {cd.%uuid of player%.rage} to now
+-            apply strength 1 to player for 120 seconds
+-            apply damage resistance 0 to player for 120 seconds
+-            if player has permission "group.class_barbarian_berserker":
+-                play sound "entity.player.hurt" to player
+-            set {status.%uuid of player%.rage} to true
+-            if player has permission "group.class_barbarian_totem_bear":
+-                play sound "entity.polar_bear.warning" to player
+-            else if player has permission "group.class_barbarian_totem_eagle":
+-                play sound "entity.phantom.swoop" to player
+-            else if player has permission "group.class_barbarian_totem_wolf":
+-                play sound "entity.wolf.howl" to player
+-            execute console command "tag %name of player% add barbarian_rage"
+-            send "&aVoce entrou em Furia!" to player
+-            wait 120 seconds
+-            execute console command "tag %name of player% remove barbarian_rage"
+-            delete {status.%uuid of player%.rage}
+-            stop
+-
+-        # Barbaro - Talisma Temerario (cd 30s)
+-        if {_n} is {name.barbarian_reckless}:
+-            cancel event
+-            if {cd.%uuid of player%.reckless} is set:
+-                if difference between now and {cd.%uuid of player%.reckless} < 30 seconds:
+-                    send "&cAtaque Temerario em recarga." to player
+-                    stop
+-            set {cd.%uuid of player%.reckless} to now
+-            set {status.%uuid of player%.reckless} to true
+-            apply strength 1 to player for 10 seconds
+-            send "&6Ataque Temerario ativado por 10s." to player
+-            wait 10 seconds
+-            delete {status.%uuid of player%.reckless}
+-            send "&eAtaque Temerario terminou." to player
+-            stop
+-
+-        # Meio-Orc - Berserk (cd 5min)
+-        if {_n} is {name.half_orc_berserk}:
+-            cancel event
+-            if {cd.%uuid of player%.half_orc_berserk} is set:
+-                if difference between now and {cd.%uuid of player%.half_orc_berserk} < 5 minutes:
+-                    send "&cBerserk em recarga (5 minutos)." to player
+-                    stop
+-            set {cd.%uuid of player%.half_orc_berserk} to now
+-            apply strength 1 to player for 10 seconds
+-            apply damage resistance 1 to player for 10 seconds
+-            send "&6Berserk ativado por 10s!" to player
+-            wait 10 seconds
+-            apply slowness 1 to player for 5 seconds
+-            send "&eEsgotamento: Lentidao por 5s." to player
+-            stop
++on right click:
++    if player's tool is not air:
++        set {_it} to player's tool
++        set {_n} to display name of {_it}
++
++        # Barbaro - Furia (bonus por 120s, cd 180s)
++        if {_n} is {name.barbarian_rage}:
++            cancel event
++            if {cd.%uuid of player%.rage} is set:
++                if difference between now and {cd.%uuid of player%.rage} < 180 seconds:
++                    send "&cFuria em recarga." to player
++                    stop
++            set {cd.%uuid of player%.rage} to now
++            apply strength 1 to player for 120 seconds
++            apply damage resistance 0 to player for 120 seconds
++            if player has permission "group.class_barbarian_berserker":
++                play sound "entity.player.hurt" to player
++            set {status.%uuid of player%.rage} to true
++            if player has permission "group.class_barbarian_totem_bear":
++                play sound "entity.polar_bear.warning" to player
++            else if player has permission "group.class_barbarian_totem_eagle":
++                play sound "entity.phantom.swoop" to player
++            else if player has permission "group.class_barbarian_totem_wolf":
++                play sound "entity.wolf.howl" to player
++            execute console command "tag %name of player% add barbarian_rage"
++            send "&aVoce entrou em Furia!" to player
++            wait 120 seconds
++            execute console command "tag %name of player% remove barbarian_rage"
++            delete {status.%uuid of player%.rage}
++            stop
++
++        else if {_n} is {name.barbarian_reckless}:
++            cancel event
++            if {cd.%uuid of player%.reckless} is set:
++                if difference between now and {cd.%uuid of player%.reckless} < 30 seconds:
++                    send "&cAtaque Temerario em recarga." to player
++                    stop
++            set {cd.%uuid of player%.reckless} to now
++            set {status.%uuid of player%.reckless} to true
++            apply strength 1 to player for 10 seconds
++            send "&6Ataque Temerario ativado por 10s." to player
++            wait 10 seconds
++            delete {status.%uuid of player%.reckless}
++            send "&eAtaque Temerario terminou." to player
++            stop
++
++        else if {_n} is {name.half_orc_berserk}:
++            cancel event
++            if {cd.%uuid of player%.half_orc_berserk} is set:
++                if difference between now and {cd.%uuid of player%.half_orc_berserk} < 5 minutes:
++                    send "&cBerserk em recarga (5 minutos)." to player
++                    stop
++            set {cd.%uuid of player%.half_orc_berserk} to now
++            apply strength 1 to player for 10 seconds
++            apply damage resistance 1 to player for 10 seconds
++            send "&6Berserk ativado por 10s!" to player
++            wait 10 seconds
++            apply slowness 1 to player for 5 seconds
++            send "&eEsgotamento: Lentidao por 5s." to player
++            stop
++
++        else if {_n} is colored {@halfelf_feather}:
++            cancel event
++            if {cd.%uuid of player%.halfelf_feather} is set:
++                if difference between now and {cd.%uuid of player%.halfelf_feather} < 3 minutes:
++                    send "&cPena em recarga. Aguarde 3 minutos." to player
++                    stop
++            set {cd.%uuid of player%.halfelf_feather} to now
++            apply slow falling 1 to player for 7 seconds
++            send "&bQueda Lenta ativada por 7s." to player
++            stop
+@@
+-command /checkitems:
+-    trigger:
+-        giveClassItems(player)
+-        send "&aVerificando seus itens de classe/ra??a..." to sender
++command /checkitems:
++    permission: op
++    trigger:
++        giveClassItems(player)
++        send "&aVerificando seus itens de classe/raca..." to player
+@@
+-command /forcecheckitems <player>:
++command /forcegiveitems <player>:
+     permission: op
+     permission message: &cApenas OPs podem usar este comando.
+     trigger:
+         giveClassItems(arg-1)
+         send "&aVerificando itens de &e%name of arg-1%&a..." to sender
+@@
+-                send "&6ResistGncia Implacovel ativada! (&730min de recarga&)" to victim
++                send "&6Resistencia Implacavel ativada! (&730min de recarga&)" to victim
+*** End Patch

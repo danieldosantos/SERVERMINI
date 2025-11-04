@@ -15,6 +15,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -53,6 +55,18 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
     private String relentlessTag = null;
     private int relentlessCooldownTicks = 20 * 60 * 5; // 5 min
     private final Map<UUID, Integer> relentlessCooldown = new HashMap<>();
+
+    // High Elf retaliate passive
+    private static class HighElfRetaliateConf {
+        String tag = null;
+        int cooldown = 60; // ticks
+        double pNone = 0.55, pThorns = 0.15, pPoison = 0.20, pNausea = 0.10;
+        double thornsDamage = 2.0;
+        int poisonDur = 100, poisonAmp = 0;
+        int nauseaDur = 100, nauseaAmp = 0;
+    }
+    private final HighElfRetaliateConf highConf = new HighElfRetaliateConf();
+    private final Map<UUID, Integer> highCooldownUntil = new HashMap<>();
 
     // Barbarian class
     private static class BarbarianConf {
@@ -221,6 +235,33 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
         relentlessTag = getConfig().getString("apply.traits.relentless.tag", null);
         relentlessCooldownTicks = Math.max(20, getConfig().getInt("apply.traits.relentless.cooldownTicks", 20 * 60 * 5));
         if (relentlessTag != null && !relentlessTag.isEmpty()) managedTags.add(relentlessTag);
+
+        // High Elf retaliate config
+        ConfigurationSection he = getConfig().getConfigurationSection("apply.traits.highElfRetaliate");
+        if (he != null) {
+            highConf.tag = he.getString("tag", highConf.tag);
+            highConf.cooldown = Math.max(0, he.getInt("cooldownTicks", highConf.cooldown));
+            ConfigurationSection ch = he.getConfigurationSection("chance");
+            if (ch != null) {
+                highConf.pNone = ch.getDouble("none", highConf.pNone);
+                highConf.pThorns = ch.getDouble("thorns", highConf.pThorns);
+                highConf.pPoison = ch.getDouble("poison", highConf.pPoison);
+                highConf.pNausea = ch.getDouble("nausea", highConf.pNausea);
+            }
+            ConfigurationSection th = he.getConfigurationSection("thorns");
+            if (th != null) highConf.thornsDamage = th.getDouble("damage", highConf.thornsDamage);
+            ConfigurationSection po = he.getConfigurationSection("poison");
+            if (po != null) {
+                highConf.poisonDur = po.getInt("durationTicks", highConf.poisonDur);
+                highConf.poisonAmp = po.getInt("amplifier", highConf.poisonAmp);
+            }
+            ConfigurationSection na = he.getConfigurationSection("nausea");
+            if (na != null) {
+                highConf.nauseaDur = na.getInt("durationTicks", highConf.nauseaDur);
+                highConf.nauseaAmp = na.getInt("amplifier", highConf.nauseaAmp);
+            }
+            if (highConf.tag != null && !highConf.tag.isEmpty()) managedTags.add(highConf.tag);
+        }
 
         // Abilities mapping (per point coefficients)
         abilityPerPoint.clear();
@@ -1033,6 +1074,51 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
     public void onDamage(EntityDamageEvent e) {
         if (!(e.getEntity() instanceof Player)) return;
         Player p = (Player) e.getEntity();
+
+        // High Elf retaliate passive (random effect on attacker or none)
+        if (highConf.tag != null && p.getScoreboardTags().contains(highConf.tag)) {
+            int now = Bukkit.getCurrentTick();
+            int next = highCooldownUntil.getOrDefault(p.getUniqueId(), 0);
+            if (now >= next) {
+                LivingEntity attacker = null;
+                if (e instanceof EntityDamageByEntityEvent) {
+                    Object dam = ((EntityDamageByEntityEvent) e).getDamager();
+                    if (dam instanceof LivingEntity) {
+                        attacker = (LivingEntity) dam;
+                    } else if (dam instanceof Projectile) {
+                        Object src = ((Projectile) dam).getShooter();
+                        if (src instanceof LivingEntity) attacker = (LivingEntity) src;
+                    }
+                }
+
+                double x = Math.random();
+                double acc = highConf.pNone;
+                boolean triggered = false;
+
+                if (x < acc) {
+                    // none
+                } else if (x < (acc += highConf.pThorns)) {
+                    if (attacker != null && highConf.thornsDamage > 0.0) {
+                        attacker.damage(Math.max(0.0, highConf.thornsDamage), p);
+                        triggered = true;
+                    }
+                } else if (x < (acc += highConf.pPoison)) {
+                    if (attacker != null) {
+                        attacker.addPotionEffect(new PotionEffect(PotionEffectType.POISON, Math.max(1, highConf.poisonDur), Math.max(0, highConf.poisonAmp), true, true, true));
+                        triggered = true;
+                    }
+                } else {
+                    if (attacker != null) {
+                        attacker.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Math.max(1, highConf.nauseaDur), Math.max(0, highConf.nauseaAmp), true, true, true));
+                        triggered = true;
+                    }
+                }
+
+                if (triggered) {
+                    highCooldownUntil.put(p.getUniqueId(), now + highConf.cooldown);
+                }
+            }
+        }
 
         // Poison resistance (halve poison damage)
         if (e.getCause() == EntityDamageEvent.DamageCause.POISON) {

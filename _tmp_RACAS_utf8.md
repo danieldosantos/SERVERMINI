@@ -13,7 +13,7 @@ Notas gerais
   - Efeitos: Darkvision
   - LuckPerms: `lp user <nick> parent set race_elf`
 - Alto Elfo (race_elf_high)
-  - Efeitos: Darkvision + Retaliação passiva (Espinhos, Veneno, Náusea ou Nada; Nada é mais provável)
+  - Efeitos: Darkvision + bonus situacional
   - LuckPerms: `lp user <nick> parent set race_elf_high`
 - Elfo da Floresta (race_elf_wood)
   - Efeitos: Darkvision + Velocidade +0.02 (atributo)

@@ -38,10 +38,10 @@ Como criar os grupos (LuckPerms)
     - `lp group class_barbarian_totem_wolf setdisplayname "Caminho: Totem (Lobo)"`
 
 Como atribuir ao jogador
-- Classe: `lp user <nick> parent set class_barbarian`
+- Classe: `lp user Tiefling parent add class_barbarian`
 - Caminho (um deles):
   - `lp user <nick> parent add class_barbarian_berserker`
-  - ou `lp user <nick> parent add class_barbarian_totem_bear`
+  - ou `lp user Tiefling parent add class_barbarian_totem_bear`
   - ou `lp user <nick> parent add class_barbarian_totem_eagle`
   - ou `lp user <nick> parent add class_barbarian_totem_wolf`
 - Verificar: `lp user <nick> info`
@@ -62,7 +62,7 @@ Detalhe dos Caminhos Primitivos (valores exatos)
   - Redução de dano extra durante a Fúria: +15% (0.15). Ex.: com base 25% da Fúria, totaliza ~40%.
   - Som ao iniciar Fúria: aviso/rugido de urso polar.
 - Totem da Águia — grupo `class_barbarian_totem_eagle`
-  - Velocidade adicional (sem armadura): +0.02 em `generic.movement_speed` (soma ao Movimento Rápido base +0.03 ⇒ total +0.05).
+  - q
   - Som ao iniciar Fúria: grito de phantom (aproximação de ave).
 - Totem do Lobo — grupo `class_barbarian_totem_wolf`
   - Resistência a empurrão/knockback: +0.05 em `generic.knockback_resistance` enquanto a classe estiver ativa.
