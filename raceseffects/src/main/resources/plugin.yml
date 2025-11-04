@@ -9,6 +9,10 @@ commands:
     description: Comandos do RacesEffects
     usage: /<command> reload | debug <hp|ud> | reset [player]
     permission: raceseffects.admin
+  raceitem:
+    description: Entrega item de raça
+    usage: /<command> give <player> <highelf|halfelf|halforc|tiefling|human>
+    permission: raceseffects.admin
   abilities:
     description: Distribuir pontos de atributos (STR, DEX, CON, INT, WIS, CHA)
     usage: |-
@@ -46,4 +50,3 @@ permissions:
     default: true
   raceseffects.song:
     default: true
-

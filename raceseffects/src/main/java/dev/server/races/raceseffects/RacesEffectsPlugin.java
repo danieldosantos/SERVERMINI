@@ -13,14 +13,20 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.persistence.PersistentDataType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -104,6 +110,8 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
     private final Map<UUID, Integer> recklessUntil = new HashMap<>();
     private final Map<UUID, Integer> recklessCooldownUntil = new HashMap<>();
     private final Map<UUID, BossBar> barbBoss = new HashMap<>();
+    // Dynamic permissions (to emulate LuckPerms group.* for item-applied races)
+    private final Map<UUID, PermissionAttachment> permAttach = new HashMap<>();
     // Ability init + level-ups tracking (per player)
     private final NamespacedKey KEY_INIT_CLASS = new NamespacedKey(this, "abl_init_class");
     private final NamespacedKey KEY_LEVEL_CLAIM = new NamespacedKey(this, "abl_level_claim");
@@ -155,6 +163,11 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         if (taskId != -1) Bukkit.getScheduler().cancelTask(taskId);
+        // cleanup permission attachments
+        for (PermissionAttachment a : new ArrayList<>(permAttach.values())) {
+            try { a.remove(); } catch (Throwable ignored) {}
+        }
+        permAttach.clear();
     }
 
     private void reloadAll() {
@@ -338,8 +351,25 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, this::tickApply, 20L, periodTicks);
     }
 
-    private void tickApply() {
+private void tickApply() {
         for (Player p : Bukkit.getOnlinePlayers()) {
+            // Ensure dynamic group permissions from tags (Tiefling, Human)
+            try {
+                PermissionAttachment att = permAttach.get(p.getUniqueId());
+                if (p.getScoreboardTags().contains("perm_group_race_tiefling") && !p.hasPermission("group.race_tiefling")) {
+                    if (att == null) { att = p.addAttachment(this); permAttach.put(p.getUniqueId(), att); }
+                    att.setPermission("group.race_tiefling", true);
+                } else if (!p.getScoreboardTags().contains("perm_group_race_tiefling") && p.hasPermission("group.race_tiefling")) {
+                    if (att != null) att.unsetPermission("group.race_tiefling");
+                }
+                if (p.getScoreboardTags().contains("perm_group_race_human") && !p.hasPermission("group.race_human")) {
+                    if (att == null) { att = p.addAttachment(this); permAttach.put(p.getUniqueId(), att); }
+                    att.setPermission("group.race_human", true);
+                    att.setPermission("raceseffects.abilities", true);
+                } else if (!p.getScoreboardTags().contains("perm_group_race_human") && (p.hasPermission("group.race_human") || p.hasPermission("raceseffects.abilities"))) {
+                    if (att != null) { att.unsetPermission("group.race_human"); att.unsetPermission("raceseffects.abilities"); }
+                }
+            } catch (Throwable ignored) {}
             if (hardNoRaceMode) {
                 // Purga global: remove tags e efeitos de raAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§a para todos
                 for (String t : new java.util.HashSet<>(p.getScoreboardTags())) {
@@ -1199,6 +1229,90 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
         }
     }
 
+    @EventHandler(ignoreCancelled = true)
+    public void onInteract(org.bukkit.event.player.PlayerInteractEvent e) {
+        ItemStack it = e.getItem();
+        if (it == null) return;
+        org.bukkit.inventory.meta.ItemMeta meta = it.getItemMeta();
+        if (meta == null) return;
+        try {
+            String kind = meta.getPersistentDataContainer().get(nsk("race_item"), org.bukkit.persistence.PersistentDataType.STRING);
+            if (kind == null) return;
+            if (kind.equalsIgnoreCase("elf_high")) {
+                Player p = e.getPlayer();
+                p.addScoreboardTag("race_darkvision");
+                if (highConf.tag != null && !highConf.tag.isEmpty()) p.addScoreboardTag(highConf.tag);
+                it.setAmount(Math.max(0, it.getAmount() - 1));
+                p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 0.7f, 1.25f);
+                p.sendMessage("Raça aplicada: Alto Elfo. (Darkvision + retaliação passiva)");
+                e.setCancelled(true);
+            } else if (kind.equalsIgnoreCase("half_elf")) {
+                Player p = e.getPlayer();
+                // Tags de raça (dolphins_grace permanente via config + tick)
+                p.addScoreboardTag("race_darkvision");
+                p.addScoreboardTag("race_dolphins_grace");
+                // Entregar item 'Pena do Meio-Elfo' para Queda Lenta sob demanda
+                ItemStack feather = makeHalfElfFeather();
+                java.util.Map<Integer, ItemStack> left = p.getInventory().addItem(feather);
+                if (!left.isEmpty()) {
+                    for (ItemStack rem : left.values()) p.getWorld().dropItemNaturally(p.getLocation(), rem);
+                }
+                it.setAmount(Math.max(0, it.getAmount() - 1));
+                p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 0.7f, 1.0f);
+                p.sendMessage("Raça aplicada: Meio-Elfo. (Darkvision permanente + Graça Marinha permanente)\nVocê recebeu a §ePena do Meio-Elfo§r (Queda Lenta ao usar).");
+                e.setCancelled(true);
+            } else if (kind.equalsIgnoreCase("half_orc")) {
+                Player p = e.getPlayer();
+                // Tags de raça: Darkvision + Relentless Endurance
+                p.addScoreboardTag("race_darkvision");
+                if (relentlessTag != null && !relentlessTag.isEmpty()) p.addScoreboardTag(relentlessTag);
+                it.setAmount(Math.max(0, it.getAmount() - 1));
+                p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 0.7f, 1.1f);
+                p.sendMessage("Raça aplicada: Meio-Orc. (Darkvision + Relentless Endurance)");
+                e.setCancelled(true);
+            } else if (kind.equalsIgnoreCase("halfelf_feather")) {
+                Player p = e.getPlayer();
+                // Aplicar Queda Lenta por 7s sem cooldown
+                try { p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 140, 0, true, true, true)); } catch (Throwable ignored) {}
+                p.playSound(p.getLocation(), Sound.ENTITY_PHANTOM_FLAP, 0.8f, 1.6f);
+                p.sendMessage("§bQueda Lenta aplicada por 7s.");
+                e.setCancelled(true);
+            } else if (kind.equalsIgnoreCase("tiefling")) {
+                Player p = e.getPlayer();
+                // Marcar para grupo virtual e aplicar tags imediatas
+                p.addScoreboardTag("perm_group_race_tiefling");
+                // Tags gerenciadas pelo plugin via group permission, mas já aplicamos agora também
+                p.addScoreboardTag("race_darkvision");
+                p.addScoreboardTag("resist_fire");
+                // Conceder permissão dinâmica group.race_tiefling (para Skript de velocidade no Nether)
+                try {
+                    PermissionAttachment att = permAttach.get(p.getUniqueId());
+                    if (att == null) { att = p.addAttachment(this); permAttach.put(p.getUniqueId(), att); }
+                    att.setPermission("group.race_tiefling", true);
+                } catch (Throwable ignored) {}
+                it.setAmount(Math.max(0, it.getAmount() - 1));
+                p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 0.7f, 1.15f);
+                p.sendMessage("Raça aplicada: Tiefling. (Darkvision + Resistência ao Fogo + Velocidade II no Nether)");
+                e.setCancelled(true);
+            } else if (kind.equalsIgnoreCase("human")) {
+                Player p = e.getPlayer();
+                // Marcar para grupo virtual e conceder permissões dinâmicas relevantes
+                p.addScoreboardTag("perm_group_race_human");
+                try {
+                    PermissionAttachment att = permAttach.get(p.getUniqueId());
+                    if (att == null) { att = p.addAttachment(this); permAttach.put(p.getUniqueId(), att); }
+                    att.setPermission("group.race_human", true);
+                    att.setPermission("raceseffects.abilities", true); // acesso ao /abilities para distribuir pontos
+                } catch (Throwable ignored) {}
+                // Consome item e feedback
+                it.setAmount(Math.max(0, it.getAmount() - 1));
+                p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 0.7f, 1.05f);
+                p.sendMessage("Raça aplicada: Humano. (/abilities habilitado; regeneração condicional conforme configuração do servidor)");
+                e.setCancelled(true);
+            }
+        } catch (Throwable ignored) {}
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String cmd = command.getName().toLowerCase(java.util.Locale.ROOT);
@@ -1208,6 +1322,66 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                 reloadAll(); sender.sendMessage("RacesEffects recarregado."); return true;
             }
             sender.sendMessage("Uso: /" + label + " reload | debug <hp|ud>");
+            return true;
+        }
+
+        if (cmd.equals("raceitem")) {
+            if (args.length >= 1 && args[0].equalsIgnoreCase("give")) {
+                if (!sender.hasPermission("raceseffects.admin")) { sender.sendMessage("Sem permissao."); return true; }
+                if (args.length < 3) { sender.sendMessage("Uso: /"+label+" give <player> <highelf|halfelf|halforc|tiefling>"); return true; }
+                Player tgt = Bukkit.getPlayerExact(args[1]);
+                if (tgt == null) { sender.sendMessage("Jogador offline ou não encontrado."); return true; }
+                String which = args[2].toLowerCase(java.util.Locale.ROOT);
+                if (which.equals("highelf") || which.equals("elf_high") || which.equals("alto")) {
+                    ItemStack token = makeHighElfToken();
+                    java.util.Map<Integer, ItemStack> left = tgt.getInventory().addItem(token);
+                    if (!left.isEmpty()) {
+                        for (ItemStack rem : left.values()) tgt.getWorld().dropItemNaturally(tgt.getLocation(), rem);
+                    }
+                    sender.sendMessage("Item de raça (Alto Elfo) entregue a "+tgt.getName()+".");
+                    tgt.sendMessage("Você recebeu o item de raça: Alto Elfo. Clique para aplicar.");
+                    return true;
+                } else if (which.equals("halfelf") || which.equals("half_elf") || which.equals("meioelfo") || which.equals("meio-elfo")) {
+                    ItemStack token = makeHalfElfToken();
+                    java.util.Map<Integer, ItemStack> left = tgt.getInventory().addItem(token);
+                    if (!left.isEmpty()) {
+                        for (ItemStack rem : left.values()) tgt.getWorld().dropItemNaturally(tgt.getLocation(), rem);
+                    }
+                    sender.sendMessage("Item de raça (Meio-Elfo) entregue a "+tgt.getName()+".");
+                    tgt.sendMessage("Você recebeu o item de raça: Meio-Elfo. Clique para aplicar.");
+                    return true;
+                } else if (which.equals("halforc") || which.equals("half_orc") || which.equals("meioorc") || which.equals("meio-orc")) {
+                    ItemStack token = makeHalfOrcToken();
+                    java.util.Map<Integer, ItemStack> left = tgt.getInventory().addItem(token);
+                    if (!left.isEmpty()) {
+                        for (ItemStack rem : left.values()) tgt.getWorld().dropItemNaturally(tgt.getLocation(), rem);
+                    }
+                    sender.sendMessage("Item de raça (Meio-Orc) entregue a "+tgt.getName()+".");
+                    tgt.sendMessage("Você recebeu o item de raça: Meio-Orc. Clique para aplicar.");
+                    return true;
+                } else if (which.equals("tiefling")) {
+                    ItemStack token = makeTieflingToken();
+                    java.util.Map<Integer, ItemStack> left = tgt.getInventory().addItem(token);
+                    if (!left.isEmpty()) {
+                        for (ItemStack rem : left.values()) tgt.getWorld().dropItemNaturally(tgt.getLocation(), rem);
+                    }
+                    sender.sendMessage("Item de raça (Tiefling) entregue a "+tgt.getName()+".");
+                    tgt.sendMessage("Você recebeu o item de raça: Tiefling. Clique para aplicar.");
+                    return true;
+                } else if (which.equals("human") || which.equals("humano")) {
+                    ItemStack token = makeHumanToken();
+                    java.util.Map<Integer, ItemStack> left = tgt.getInventory().addItem(token);
+                    if (!left.isEmpty()) {
+                        for (ItemStack rem : left.values()) tgt.getWorld().dropItemNaturally(tgt.getLocation(), rem);
+                    }
+                    sender.sendMessage("Item de raça (Humano) entregue a "+tgt.getName()+".");
+                    tgt.sendMessage("Você recebeu o item de raça: Humano. Clique para aplicar.");
+                    return true;
+                }
+                sender.sendMessage("Tipo desconhecido. Use: highelf | halfelf | halforc | tiefling");
+                return true;
+            }
+            sender.sendMessage("Uso: /"+label+" give <player> <highelf|halfelf|halforc|tiefling|human>");
             return true;
         }
 
@@ -1420,6 +1594,110 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
             boolean ic = s.getBoolean("icon", false);
             return new EffectSpec(d, a, amb, par, ic);
         }
+    }
+
+    private ItemStack makeHighElfToken() {
+        ItemStack it = new ItemStack(org.bukkit.Material.BOOK, 1);
+        try {
+            org.bukkit.inventory.meta.ItemMeta m = it.getItemMeta();
+            if (m != null) {
+                m.setDisplayName("§b§lRaça: Alto Elfo");
+                java.util.List<String> lore = new java.util.ArrayList<>();
+                lore.add("§7Clique para aplicar a raça.");
+                lore.add("§8Retaliação: Espinhos/Veneno/Náusea/Nada");
+                m.setLore(lore);
+                m.getPersistentDataContainer().set(nsk("race_item"), org.bukkit.persistence.PersistentDataType.STRING, "elf_high");
+                it.setItemMeta(m);
+            }
+        } catch (Throwable ignored) {}
+        return it;
+    }
+
+    private ItemStack makeHalfElfToken() {
+        ItemStack it = new ItemStack(org.bukkit.Material.BOOK, 1);
+        try {
+            org.bukkit.inventory.meta.ItemMeta m = it.getItemMeta();
+            if (m != null) {
+                m.setDisplayName("§d§lRaça: Meio-Elfo");
+                java.util.List<String> lore = new java.util.ArrayList<>();
+                lore.add("§7Clique para aplicar a raça.");
+                lore.add("§8Darkvision + Graça Marinha permanentes");
+                lore.add("§8Recebe uma pena para Queda Lenta");
+                m.setLore(lore);
+                m.getPersistentDataContainer().set(nsk("race_item"), org.bukkit.persistence.PersistentDataType.STRING, "half_elf");
+                it.setItemMeta(m);
+            }
+        } catch (Throwable ignored) {}
+        return it;
+    }
+
+    private ItemStack makeHalfElfFeather() {
+        ItemStack it = new ItemStack(org.bukkit.Material.FEATHER, 1);
+        try {
+            org.bukkit.inventory.meta.ItemMeta m = it.getItemMeta();
+            if (m != null) {
+                m.setDisplayName("§e§lPena do Meio-Elfo");
+                java.util.List<String> lore = new java.util.ArrayList<>();
+                lore.add("§7Use para ganhar Queda Lenta por alguns segundos.");
+                m.setLore(lore);
+                m.getPersistentDataContainer().set(nsk("race_item"), org.bukkit.persistence.PersistentDataType.STRING, "halfelf_feather");
+                it.setItemMeta(m);
+            }
+        } catch (Throwable ignored) {}
+        return it;
+    }
+
+    private ItemStack makeHalfOrcToken() {
+        ItemStack it = new ItemStack(org.bukkit.Material.BOOK, 1);
+        try {
+            org.bukkit.inventory.meta.ItemMeta m = it.getItemMeta();
+            if (m != null) {
+                m.setDisplayName("§2§lRaça: Meio-Orc");
+                java.util.List<String> lore = new java.util.ArrayList<>();
+                lore.add("§7Clique para aplicar a raça.");
+                lore.add("§8Darkvision + Relentless Endurance (com cooldown)");
+                m.setLore(lore);
+                m.getPersistentDataContainer().set(nsk("race_item"), org.bukkit.persistence.PersistentDataType.STRING, "half_orc");
+                it.setItemMeta(m);
+            }
+        } catch (Throwable ignored) {}
+        return it;
+    }
+
+    private ItemStack makeTieflingToken() {
+        ItemStack it = new ItemStack(org.bukkit.Material.BOOK, 1);
+        try {
+            org.bukkit.inventory.meta.ItemMeta m = it.getItemMeta();
+            if (m != null) {
+                m.setDisplayName("§5§lRaça: Tiefling");
+                java.util.List<String> lore = new java.util.ArrayList<>();
+                lore.add("§7Clique para aplicar a raça.");
+                lore.add("§8Darkvision + Resistência ao Fogo");
+                lore.add("§8Velocidade II no Nether (enquanto lá)");
+                m.setLore(lore);
+                m.getPersistentDataContainer().set(nsk("race_item"), org.bukkit.persistence.PersistentDataType.STRING, "tiefling");
+                it.setItemMeta(m);
+            }
+        } catch (Throwable ignored) {}
+        return it;
+    }
+
+    private ItemStack makeHumanToken() {
+        ItemStack it = new ItemStack(org.bukkit.Material.BOOK, 1);
+        try {
+            org.bukkit.inventory.meta.ItemMeta m = it.getItemMeta();
+            if (m != null) {
+                m.setDisplayName("§f§lRaça: Humano");
+                java.util.List<String> lore = new java.util.ArrayList<>();
+                lore.add("§7Clique para aplicar a raça.");
+                lore.add("§8Regeneração condicional (servidor)");
+                lore.add("§8/abilities habilitado para distribuição de pontos");
+                m.setLore(lore);
+                m.getPersistentDataContainer().set(nsk("race_item"), org.bukkit.persistence.PersistentDataType.STRING, "human");
+                it.setItemMeta(m);
+            }
+        } catch (Throwable ignored) {}
+        return it;
     }
 
     private void showAbilitiesStatus(Player p) {

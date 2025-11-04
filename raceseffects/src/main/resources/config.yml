@@ -33,10 +33,10 @@ apply:
       tag: trait_highelf_retaliate
       cooldownTicks: 60          # 3s entre ativações
       chance:
-        none: 0.55               # 55%
-        thorns: 0.15             # 15%
-        poison: 0.20             # 20%
-        nausea: 0.10             # 10%
+        none: 0.35               # 35%
+        thorns: 0.25             # 25%
+        poison: 0.25             # 25%
+        nausea: 0.15             # 15%
       thorns:
         damage: 2.0              # dano de retorno (1 coração = 2.0)
       poison:
@@ -92,6 +92,13 @@ apply:
         ambient: true
         particles: false
         icon: false
+    race_dolphins_grace:
+      dolphins_grace:
+        durationTicks: 300
+        amplifier: 0
+        ambient: true
+        particles: false
+        icon: false
     resist_fire:
       fire_resistance:
         durationTicks: 300
@@ -128,7 +135,7 @@ apply:
     race_halfling: []
     race_halfling_lightfoot: []
     race_halfling_stout: [trait_poison_resist]
-    race_half_elf: [race_darkvision]
+    race_half_elf: [race_darkvision, race_dolphins_grace]
     race_half_orc: [race_darkvision, trait_relentless]
     race_tiefling: [race_darkvision, resist_fire]
     race_dragonborn: []
