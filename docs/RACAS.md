@@ -1,4 +1,4 @@
-﻿# Racas (Cheat-Sheet Completo)
+# Racas (Cheat-Sheet Completo)
 
 Depois de editar YAML: `/raceseffects reload`
 Para ler `commands.yml` (aliases), reinicie o servidor.
@@ -88,12 +88,12 @@ Notas gerais
 
 ## Meio-Elfo
 - Meio-Elfo (race_half_elf)
-  - Efeitos: Darkvision + Queda Lenta (curta) + Graca marinha (curta)
+  - Efeitos: Darkvision + Queda Lenta + Graca marinha
   - LuckPerms: `lp user <nick> parent set race_half_elf`
 
 ## Meio-Orc
 - Meio-Orc (race_half_orc)
-  - Efeitos: Relentless Endurance (com cooldown)
+  - Efeitos: Darkvision + Relentless Endurance (com cooldown)
   - LuckPerms: `lp user <nick> parent set race_half_orc`
 
 ## Tiefling
