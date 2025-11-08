@@ -2,6 +2,10 @@
 
 Após editar o YAML: `/raceseffects reload`
 
+## Comandos essenciais
+- Livro da classe: `/classitem give <jogador> warlock`
+- Aplicar classe via LuckPerms: `lp user <nick> parent add class_warlock`
+
 Comandos in‑game do Bruxo (placeholders via alias)
 - Hex: `/hex <jogador>`
   - Fraqueza (Weakness I) por 45s no alvo.

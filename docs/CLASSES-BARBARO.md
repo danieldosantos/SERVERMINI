@@ -1,5 +1,10 @@
 ﻿# Classe: Bárbaro (RacesEffects)
 Após editar o YAML: `/raceseffects reload`
+
+## Comandos essenciais
+- Livro da classe: `/classitem give <jogador> barbarian`
+- Aplicar classe via LuckPerms: `lp user <nick> parent add class_barbarian`
+
 Comandos in-game do Bárbaro
 - Fúria: `/rage on|off|toggle`
 - Ataque Temerário: `/reckless on|off|toggle`
