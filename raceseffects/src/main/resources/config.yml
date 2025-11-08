@@ -19,7 +19,7 @@ apply:
       trait_speed_woodelf: 0.02
     # MAX_HEALTH: pontos de vida (1.0 = meia barra)
     maxHealthTags:
-      trait_hp_hilldwarf: 2.0
+      trait_hp_hilldwarf: 6.0
 
   traits:
     poisonResistanceTags: [trait_poison_resist]
@@ -113,6 +113,13 @@ apply:
         ambient: true
         particles: false
         icon: false
+    trait_strength_mountain:
+      strength:
+        durationTicks: 300
+        amplifier: 0
+        ambient: true
+        particles: false
+        icon: false
     water_breath:
       water_breathing:
         durationTicks: 300
@@ -128,7 +135,8 @@ apply:
     race_elf_wood: [race_darkvision, trait_speed_woodelf]
     race_dwarf: [race_darkvision, trait_poison_resist]
     race_dwarf_hill: [race_darkvision, trait_poison_resist, trait_hp_hilldwarf]
-    race_dwarf_mountain: [race_darkvision]
+    race_dwarf_mountain: [race_darkvision, trait_poison_resist, trait_strength_mountain]
+    race_dwarf_deep: [race_darkvision, trait_poison_resist]
     race_gnome: [race_darkvision]
     race_gnome_forest: [race_darkvision]
     race_gnome_rock: [race_darkvision]

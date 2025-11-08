@@ -26,14 +26,17 @@ Notas gerais
 
 ## Anaos
 - Anao (race_dwarf)
-  - Efeitos: Resistencia a veneno (-50% poison)
+  - Efeitos: Darkvision Resistencia a veneno (-50% poison)
   - LuckPerms: `lp user <nick> parent set race_dwarf`
 - Anao da Colina (race_dwarf_hill)
-  - Efeitos: +2.0 MAX_HEALTH (+1 coracao)
+  - Efeitos: +2.0 MAX_HEALTH (+1 coracao) Darkvision
   - LuckPerms: `lp user <nick> parent set race_dwarf_hill`
 - Anao da Montanha (race_dwarf_mountain)
-  - Efeitos: Forca I
+  - Efeitos: Forca I Darkvision
   - LuckPerms: `lp user <nick> parent set race_dwarf_mountain`
+- Anao das Profundezas  (race_dwarf_mountain)
+  - Efeitos: Darkvision e habilidade de causar cegueira em mobs ou jogadores que causar dano no anão das pronfundezas achance deve ser 45%
+  - LuckPerms: `lp user <nick> parent set 
 
 ## Gnomos
 - Gnomo (race_gnome)
