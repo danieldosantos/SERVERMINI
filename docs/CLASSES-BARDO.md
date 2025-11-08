@@ -2,6 +2,10 @@
 
 Após editar o YAML: `/raceseffects reload`
 
+## Comandos essenciais
+- Livro da classe: `/classitem give <jogador> bard`
+- Aplicar classe via LuckPerms: `lp user <nick> parent add class_bard`
+
 Comandos in‑game do Bardo
 - Inspiração: `/inspire <jogador>`
 - Canção de Descanso: `/song on|off|toggle`
