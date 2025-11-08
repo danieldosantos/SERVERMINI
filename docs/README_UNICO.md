@@ -19,10 +19,6 @@ Tipos suportados (aliases entre crases):
 - Meio‑Orc: `halforc` | `half_orc` | `meioorc` | `meio-orc`
 - Tiefling: `tiefling`
 - Humano: `human` | `humano`
-- Anao (base): `dwarf` | `anao`
-- Anao da Colina: `dwarf_hill` | `anao_colina`
-- Anao da Montanha: `dwarf_mountain` | `anao_montanha`
- - Anao das Profundezas: `dwarf_deep` | `anao_profundezas`
 - Dragonborn (Draconato): `dragonborn_fire` | `dragonborn_cold` | `dragonborn_lightning` | `dragonborn_acid` | `dragonborn_poison`
 
 Ao clicar o livro:
@@ -40,7 +36,6 @@ Ao clicar o livro:
 - Aplicar: `/raceitem give <jogador> elfwood`
 - Efeitos: `race_darkvision` (+ ajustes no RacesEffects se desejar).
 - Habilidades:
-  - Camuflagem periódica: invisibilidade ao ficar parado ~30s ao lado de tronco com folhas.
   - Broche da Floresta (botão direito): invisibilidade 10s, recarga 3min.
   - Proteção contra alvo: mobs não adquirem alvo enquanto a invisibilidade estiver ativa.
 - Item (MythicMobs): `ElfWoodBrooch`.
@@ -71,25 +66,6 @@ Ao clicar o livro:
 - Aplicar: `/raceitem give <jogador> human`
 - Efeitos: habilita `/abilities` e ajustes de regeneração conforme configuração.
 - Item (MM): `HumanMedal`.
-
-### Anaos
-- Anao (base)
-  - Aplicar: `/raceitem give <jogador> dwarf` (aliases: `anao`)
-  - Efeitos: `race_darkvision` + `trait_poison_resist`
-  - Item (MM): `DwarfRacialPick` — IRON_PICKAXE com Eficiencia I e Fortuna I
-- Anao da Colina
-  - Aplicar: `/raceitem give <jogador> dwarf_hill` (aliases: `anao_colina`)
-  - Efeitos: herda efeitos do Anao base + `trait_hp_hilldwarf` (+6.0 Vida Max via RacesEffects)
-  - Item (MM): `DwarfRacialPick`
-- Anao da Montanha
-  - Aplicar: `/raceitem give <jogador> dwarf_mountain` (aliases: `anao_montanha`)
-  - Efeitos: herda efeitos do Anao base (`race_darkvision` + `trait_poison_resist`)
-  - Item (MM): `DwarfRacialPick`
- - Anao das Profundezas
-  - Aplicar: `/raceitem give <jogador> dwarf_deep` (aliases: `anao_profundezas`)
-  - Efeitos: herda efeitos do Anao base; 45% de chance de aplicar Cegueira no atacante (mobs/jogadores) ao sofrer dano
-  - Implementação: via Skript `dwarf_deep_blind.sk` (usa permissão `group.race_dwarf_deep`)
-  - Item (MM): `DwarfRacialPick`
 
 ### Dragonborn (Draconato)
 - Aplicar por subtipo: `dragonborn_fire|cold|lightning|acid|poison`
