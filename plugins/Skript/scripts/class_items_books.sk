@@ -1,7 +1,7 @@
 # Normaliza aliases dos livros de classe/subclasse para os identificadores canônicos.
 function classAliasCanonical(raw: text) :: text:
   set {_t} to {_raw}
-  set {_t} to lowercase of {_t}
+  set {_t} to lowercase {_t}
   replace all " " with "" in {_t}
   replace all "-" with "" in {_t}
   if {_t} is "barbaro":
