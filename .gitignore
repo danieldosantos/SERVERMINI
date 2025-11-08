@@ -57,8 +57,9 @@ paper*.jar
 Luckperms Config/
 plugins/**
 !plugins/*.yml       # manter YAMLs principais de plugins (caso queira versionar configs)
-!plugins/README.md
 !plugins/*.json
+!plugins/**/*.sk     # versionar scripts do Skript quando necessario
+!plugins/README.md
 
 # ============================================
 # IGNORAR CONFIGURAÇÕES DE JOGADORES

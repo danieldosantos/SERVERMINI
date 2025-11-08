@@ -438,7 +438,13 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Furia, Defesa sem Armadura, Caminhos Totemicos"
                         )),
-                        java.util.Arrays.asList("barbaro", "barbarian"),
+                        java.util.Arrays.asList(
+                                "barbaro", "barbarian",
+                                "berserker",
+                                "totem_bear", "urso",
+                                "totem_eagle", "aguia",
+                                "totem_wolf", "lobo"
+                        ),
                         "class_barbarian", false);
             case "bard":
                 return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
@@ -447,7 +453,11 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Inspiracao, Cancoes e Colegias"
                         )),
-                        java.util.Arrays.asList("bard", "bardo"),
+                        java.util.Arrays.asList(
+                                "bard", "bardo",
+                                "lore", "saber",
+                                "valor"
+                        ),
                         "class_bard", false);
             case "cleric":
                 return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
@@ -456,7 +466,12 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Palavra Curativa, Divindade Canalizada"
                         )),
-                        java.util.Arrays.asList("cleric", "clerigo", "clerico"),
+                        java.util.Arrays.asList(
+                                "cleric", "clerigo", "clerico",
+                                "life", "vida",
+                                "light", "luz",
+                                "war", "guerra"
+                        ),
                         "class_cleric", false);
             case "druid":
                 return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
@@ -465,7 +480,12 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Forma Selvagem e Terreno Druidico"
                         )),
-                        java.util.Arrays.asList("druid", "druida"),
+                        java.util.Arrays.asList(
+                                "druid", "druida",
+                                "land", "terra",
+                                "moon", "lua",
+                                "spores", "esporos"
+                        ),
                         "class_druid", false);
             case "fighter":
                 return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
@@ -474,7 +494,12 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Surto de Acao, Estilos de Combate"
                         )),
-                        java.util.Arrays.asList("fighter", "guerreiro"),
+                        java.util.Arrays.asList(
+                                "fighter", "guerreiro",
+                                "champion", "campeao",
+                                "battlemaster", "mestrearmas",
+                                "eldritch", "arcano"
+                        ),
                         "class_fighter", false);
             case "monk":
                 return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
@@ -483,7 +508,12 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Tecnicas de Ki e Artes Marciais"
                         )),
-                        java.util.Arrays.asList("monk", "monge"),
+                        java.util.Arrays.asList(
+                                "monk", "monge",
+                                "openhand", "maosabertas",
+                                "shadow", "sombra",
+                                "elements", "elementos"
+                        ),
                         "class_monk", false);
             case "paladin":
                 return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
@@ -492,7 +522,12 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Imposicao das Maos e Juramentos"
                         )),
-                        java.util.Arrays.asList("paladin", "paladino"),
+                        java.util.Arrays.asList(
+                                "paladin", "paladino",
+                                "devotion", "devocao",
+                                "ancients", "ancioes",
+                                "vengeance", "vinganca"
+                        ),
                         "class_paladin", false);
             case "ranger":
                 return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
@@ -501,7 +536,12 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Favores do Explorador e Companheiros"
                         )),
-                        java.util.Arrays.asList("ranger", "patrulheiro"),
+                        java.util.Arrays.asList(
+                                "ranger", "patrulheiro",
+                                "hunter", "cacador",
+                                "beast", "bestas",
+                                "gloom", "trevas"
+                        ),
                         "class_ranger", false);
             case "rogue":
                 return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
@@ -510,7 +550,12 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Ataque Furtivo e Pericias"
                         )),
-                        java.util.Arrays.asList("rogue", "ladino"),
+                        java.util.Arrays.asList(
+                                "rogue", "ladino",
+                                "thief", "ladrao",
+                                "assassin", "assassino",
+                                "arcane", "arcano"
+                        ),
                         "class_rogue", false);
             case "sorcerer":
                 return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
@@ -519,7 +564,12 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Pontos de Feitico e Metamagia"
                         )),
-                        java.util.Arrays.asList("sorcerer", "feiticeiro"),
+                        java.util.Arrays.asList(
+                                "sorcerer", "feiticeiro",
+                                "draconic", "draconica",
+                                "wild", "selvagem",
+                                "storm", "tempestade"
+                        ),
                         "class_sorcerer", false);
             case "warlock":
                 return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
@@ -528,7 +578,12 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Patronos, Maldição e Invocacoes"
                         )),
-                        java.util.Arrays.asList("warlock", "bruxo"),
+                        java.util.Arrays.asList(
+                                "warlock", "bruxo",
+                                "archfey", "arquifada",
+                                "fiend", "diabolico",
+                                "oldone", "ancestral"
+                        ),
                         "class_warlock", false);
             case "wizard":
                 return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
@@ -537,7 +592,12 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                                 "§7Clique para aplicar a classe.",
                                 "§8Livro de Magias e Arcano"
                         )),
-                        java.util.Arrays.asList("wizard", "mago"),
+                        java.util.Arrays.asList(
+                                "wizard", "mago",
+                                "evocation", "evocacao",
+                                "abjuration", "abjuracao",
+                                "divination", "adivinhacao"
+                        ),
                         "class_wizard", false);
             default:
                 String pretty = lower.substring(0, 1).toUpperCase(java.util.Locale.ROOT) + lower.substring(1);
