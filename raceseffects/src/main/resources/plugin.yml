@@ -13,6 +13,10 @@ commands:
     description: Entrega item de raça
     usage: /<command> give <player> <highelf|halfelf|halforc|tiefling|human>
     permission: raceseffects.admin
+  classitem:
+    description: Entrega tomos de classe configurados
+    usage: /<command> give <player> <classe>
+    permission: raceseffects.admin
   abilities:
     description: Distribuir pontos de atributos (STR, DEX, CON, INT, WIS, CHA)
     usage: |-

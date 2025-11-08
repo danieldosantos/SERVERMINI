@@ -44,6 +44,13 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
     private final Set<String> managedTags = new HashSet<>();
     private boolean enforceGroupTags = true;
     private boolean hardNoRaceMode = false;
+    private final Map<String, ClassTokenSpec> classTokenSpecs = new HashMap<>();
+    private final Map<String, String> classAliases = new HashMap<>();
+    private final Set<String> classPermissionTags = new HashSet<>();
+    private static final List<String> KNOWN_CLASSES = java.util.Arrays.asList(
+            "barbarian", "bard", "cleric", "druid", "fighter", "monk",
+            "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"
+    );
     // Abilities (PHB-like): 72 pontos + 3 da raAAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§a, cap 20
     private static final List<String> ABILITIES = Arrays.asList("STR","DEX","CON","INT","WIS","CHA");
     private static final int ABILITY_BASE_POOL = 72;
@@ -117,6 +124,34 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
         private ClassEntry(String group, boolean enabled) {
             this.group = group;
             this.enabled = enabled;
+        }
+    }
+
+    private static final class ClassTokenSpec {
+        final String key;
+        final org.bukkit.Material material;
+        final String displayName;
+        final List<String> lore;
+        final List<String> aliases;
+        String group;
+        boolean enabled;
+
+        private ClassTokenSpec(String key, org.bukkit.Material material, String displayName, List<String> lore, List<String> aliases, String group, boolean enabled) {
+            this.key = key;
+            this.material = material;
+            this.displayName = displayName;
+            this.lore = lore;
+            this.aliases = aliases;
+            this.group = group;
+            this.enabled = enabled;
+        }
+
+        private String permissionTag() {
+            return "perm_group_class_" + key;
+        }
+
+        private String permissionNode() {
+            return "group." + group;
         }
     }
     private final Map<String, ClassEntry> classEntries = new HashMap<>();
@@ -361,11 +396,165 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
             }
         }
 
+        rebuildClassTokenSpecs();
+
         if (taskId != -1) Bukkit.getScheduler().cancelTask(taskId);
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, this::tickApply, 20L, periodTicks);
     }
 
-private void tickApply() {
+    private void rebuildClassTokenSpecs() {
+        classTokenSpecs.clear();
+        classAliases.clear();
+        classPermissionTags.clear();
+
+        java.util.Set<String> keys = new java.util.LinkedHashSet<>(KNOWN_CLASSES);
+        keys.addAll(classEntries.keySet());
+        for (String key : keys) {
+            String lower = key.toLowerCase(java.util.Locale.ROOT);
+            ClassTokenSpec spec = defaultClassTokenSpec(lower);
+            ClassEntry entry = classEntries.get(lower);
+            if (entry != null) {
+                spec.group = entry.group;
+                spec.enabled = entry.enabled;
+            }
+            classTokenSpecs.put(lower, spec);
+            classPermissionTags.add(spec.permissionTag());
+            registerClassAlias(spec.key, spec.key);
+            if (spec.aliases != null) {
+                for (String alias : spec.aliases) {
+                    registerClassAlias(spec.key, alias);
+                }
+            }
+        }
+    }
+
+    private ClassTokenSpec defaultClassTokenSpec(String key) {
+        String lower = key.toLowerCase(java.util.Locale.ROOT);
+        switch (lower) {
+            case "barbarian":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§6§lClasse: Barbaro",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Furia, Defesa sem Armadura, Caminhos Totemicos"
+                        )),
+                        java.util.Arrays.asList("barbaro", "barbarian"),
+                        "class_barbarian", false);
+            case "bard":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§d§lClasse: Bardo",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Inspiracao, Cancoes e Colegias"
+                        )),
+                        java.util.Arrays.asList("bard", "bardo"),
+                        "class_bard", false);
+            case "cleric":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§f§lClasse: Clerigo",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Palavra Curativa, Divindade Canalizada"
+                        )),
+                        java.util.Arrays.asList("cleric", "clerigo", "clerico"),
+                        "class_cleric", false);
+            case "druid":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§2§lClasse: Druida",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Forma Selvagem e Terreno Druidico"
+                        )),
+                        java.util.Arrays.asList("druid", "druida"),
+                        "class_druid", false);
+            case "fighter":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§6§lClasse: Guerreiro",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Surto de Acao, Estilos de Combate"
+                        )),
+                        java.util.Arrays.asList("fighter", "guerreiro"),
+                        "class_fighter", false);
+            case "monk":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§e§lClasse: Monge",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Tecnicas de Ki e Artes Marciais"
+                        )),
+                        java.util.Arrays.asList("monk", "monge"),
+                        "class_monk", false);
+            case "paladin":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§b§lClasse: Paladino",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Imposicao das Maos e Juramentos"
+                        )),
+                        java.util.Arrays.asList("paladin", "paladino"),
+                        "class_paladin", false);
+            case "ranger":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§a§lClasse: Patrulheiro",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Favores do Explorador e Companheiros"
+                        )),
+                        java.util.Arrays.asList("ranger", "patrulheiro"),
+                        "class_ranger", false);
+            case "rogue":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§7§lClasse: Ladino",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Ataque Furtivo e Pericias"
+                        )),
+                        java.util.Arrays.asList("rogue", "ladino"),
+                        "class_rogue", false);
+            case "sorcerer":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§5§lClasse: Feiticeiro",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Pontos de Feitico e Metamagia"
+                        )),
+                        java.util.Arrays.asList("sorcerer", "feiticeiro"),
+                        "class_sorcerer", false);
+            case "warlock":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§5§lClasse: Bruxo",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Patronos, Maldição e Invocacoes"
+                        )),
+                        java.util.Arrays.asList("warlock", "bruxo"),
+                        "class_warlock", false);
+            case "wizard":
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§9§lClasse: Mago",
+                        new java.util.ArrayList<>(java.util.Arrays.asList(
+                                "§7Clique para aplicar a classe.",
+                                "§8Livro de Magias e Arcano"
+                        )),
+                        java.util.Arrays.asList("wizard", "mago"),
+                        "class_wizard", false);
+            default:
+                String pretty = lower.substring(0, 1).toUpperCase(java.util.Locale.ROOT) + lower.substring(1);
+                return new ClassTokenSpec(lower, org.bukkit.Material.WRITABLE_BOOK,
+                        "§b§lClasse: " + pretty,
+                        new java.util.ArrayList<>(java.util.Collections.singletonList("§7Clique para aplicar a classe.")),
+                        java.util.Collections.singletonList(lower),
+                        "class_" + lower, false);
+        }
+    }
+
+    private void registerClassAlias(String canonical, String alias) {
+        if (alias == null || alias.isEmpty()) return;
+        classAliases.put(alias.toLowerCase(java.util.Locale.ROOT), canonical);
+    }
+
+    private void tickApply() {
         for (Player p : Bukkit.getOnlinePlayers()) {
             // Ensure dynamic group permissions from tags (Tiefling, Human)
             try {
@@ -382,6 +571,21 @@ private void tickApply() {
                     att.setPermission("raceseffects.abilities", true);
                 } else if (!p.getScoreboardTags().contains("perm_group_race_human") && (p.hasPermission("group.race_human") || p.hasPermission("raceseffects.abilities"))) {
                     if (att != null) { att.unsetPermission("group.race_human"); att.unsetPermission("raceseffects.abilities"); }
+                }
+                for (ClassTokenSpec spec : classTokenSpecs.values()) {
+                    String tag = spec.permissionTag();
+                    String perm = spec.permissionNode();
+                    boolean hasTag = p.getScoreboardTags().contains(tag);
+                    if (hasTag && spec.enabled) {
+                        if (!p.hasPermission(perm)) {
+                            if (att == null) { att = p.addAttachment(this); permAttach.put(p.getUniqueId(), att); }
+                            att.setPermission(perm, true);
+                        }
+                    } else {
+                        if (att != null) {
+                            try { att.unsetPermission(perm); } catch (Throwable ignoredUnset) {}
+                        }
+                    }
                 }
             } catch (Throwable ignored) {}
             if (hardNoRaceMode) {
@@ -1282,6 +1486,15 @@ private void tickApply() {
         org.bukkit.inventory.meta.ItemMeta meta = it.getItemMeta();
         if (meta == null) return;
         try {
+            String classKey = meta.getPersistentDataContainer().get(nsk("class_item"), org.bukkit.persistence.PersistentDataType.STRING);
+            if (classKey != null) {
+                if (handleClassItemUse(e.getPlayer(), it, classKey)) {
+                    e.setCancelled(true);
+                }
+                return;
+            }
+        } catch (Throwable ignored) {}
+        try {
             String kind = meta.getPersistentDataContainer().get(nsk("race_item"), org.bukkit.persistence.PersistentDataType.STRING);
             if (kind == null) return;
             if (kind.equalsIgnoreCase("elf_high")) {
@@ -1368,6 +1581,39 @@ private void tickApply() {
                 reloadAll(); sender.sendMessage("RacesEffects recarregado."); return true;
             }
             sender.sendMessage("Uso: /" + label + " reload | debug <hp|ud>");
+            return true;
+        }
+
+        if (cmd.equals("classitem")) {
+            if (args.length >= 1 && args[0].equalsIgnoreCase("give")) {
+                if (!sender.hasPermission("raceseffects.admin")) { sender.sendMessage("Sem permissao."); return true; }
+                if (args.length < 3) { sender.sendMessage("Uso: /"+label+" give <player> <classe>"); return true; }
+                Player tgt = Bukkit.getPlayerExact(args[1]);
+                if (tgt == null) { sender.sendMessage("Jogador offline ou não encontrado."); return true; }
+                String resolved = resolveClassKey(args[2]);
+                if (resolved == null) {
+                    sender.sendMessage("Classe desconhecida. Disponíveis: " + String.join(", ", new java.util.TreeSet<>(classTokenSpecs.keySet())));
+                    return true;
+                }
+                ClassTokenSpec spec = classTokenSpecs.get(resolved);
+                if (spec == null) {
+                    sender.sendMessage("Classe desconhecida: " + resolved + ".");
+                    return true;
+                }
+                if (!spec.enabled) {
+                    sender.sendMessage("Classe " + resolved + " está desativada na configuração.");
+                    return true;
+                }
+                ItemStack token = makeClassToken(spec);
+                java.util.Map<Integer, ItemStack> left = tgt.getInventory().addItem(token);
+                if (!left.isEmpty()) {
+                    for (ItemStack rem : left.values()) tgt.getWorld().dropItemNaturally(tgt.getLocation(), rem);
+                }
+                sender.sendMessage("Item de classe (" + resolved + ") entregue a " + tgt.getName() + ".");
+                tgt.sendMessage("Você recebeu o tomo da classe: " + resolved + ". Clique para aplicar.");
+                return true;
+            }
+            sender.sendMessage("Uso: /"+label+" give <player> <classe>");
             return true;
         }
 
@@ -1896,6 +2142,107 @@ private void tickApply() {
             }
         } catch (Throwable ignored) { }
     }
+
+    private boolean handleClassItemUse(Player p, ItemStack it, String classKey) {
+        String resolved = resolveClassKey(classKey);
+        if (resolved == null) {
+            p.sendMessage("Classe desconhecida.");
+            return true;
+        }
+        ClassTokenSpec spec = classTokenSpecs.get(resolved);
+        if (spec == null) {
+            p.sendMessage("Classe desconhecida.");
+            return true;
+        }
+        if (!spec.enabled) {
+            p.sendMessage("Essa classe está desativada no momento.");
+            return true;
+        }
+        for (ClassTokenSpec other : classTokenSpecs.values()) {
+            if (other == null) continue;
+            if (!other.key.equals(spec.key)) {
+                String tag = other.permissionTag();
+                if (p.getScoreboardTags().contains(tag)) {
+                    p.removeScoreboardTag(tag);
+                }
+                revokeClassPermission(p, other);
+            }
+        }
+        p.addScoreboardTag(spec.permissionTag());
+        grantClassPermission(p, spec);
+        try { p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 0.7f, 1.05f); } catch (Throwable ignored) {}
+        autoAssignByConfig(p, resolved);
+        autoApplyLevelUpsByConfig(p, resolved);
+        if ("barbarian".equals(resolved)) {
+            autoAssignClassStart(p);
+            autoApplyLevelUps(p);
+        }
+        it.setAmount(Math.max(0, it.getAmount() - 1));
+        p.sendMessage("Classe aplicada: " + prettyClassName(resolved) + ".");
+        return true;
+    }
+
+    private void grantClassPermission(Player p, ClassTokenSpec spec) {
+        if (spec == null) return;
+        String perm = spec.permissionNode();
+        if (perm == null || perm.isEmpty()) return;
+        if (p.hasPermission(perm)) return;
+        PermissionAttachment att = permAttach.get(p.getUniqueId());
+        if (att == null) { att = p.addAttachment(this); permAttach.put(p.getUniqueId(), att); }
+        att.setPermission(perm, true);
+    }
+
+    private void revokeClassPermission(Player p, ClassTokenSpec spec) {
+        if (spec == null) return;
+        String perm = spec.permissionNode();
+        if (perm == null || perm.isEmpty()) return;
+        PermissionAttachment att = permAttach.get(p.getUniqueId());
+        if (att != null) {
+            try { att.unsetPermission(perm); } catch (Throwable ignored) {}
+        }
+    }
+
+    private ItemStack makeClassToken(ClassTokenSpec spec) {
+        ItemStack token = new ItemStack(spec.material == null ? org.bukkit.Material.WRITABLE_BOOK : spec.material, 1);
+        try {
+            org.bukkit.inventory.meta.ItemMeta m = token.getItemMeta();
+            if (m != null) {
+                m.setDisplayName(spec.displayName);
+                if (spec.lore != null) m.setLore(new java.util.ArrayList<>(spec.lore));
+                m.getPersistentDataContainer().set(nsk("class_item"), org.bukkit.persistence.PersistentDataType.STRING, spec.key);
+                token.setItemMeta(m);
+            }
+        } catch (Throwable ignored) {}
+        return token;
+    }
+
+    private String resolveClassKey(String input) {
+        if (input == null) return null;
+        String lower = input.toLowerCase(java.util.Locale.ROOT);
+        if (classTokenSpecs.containsKey(lower)) return lower;
+        return classAliases.get(lower);
+    }
+
+    private String prettyClassName(String key) {
+        if (key == null || key.isEmpty()) return key;
+        switch (key.toLowerCase(java.util.Locale.ROOT)) {
+            case "barbarian": return "Barbaro";
+            case "bard": return "Bardo";
+            case "cleric": return "Clerigo";
+            case "druid": return "Druida";
+            case "fighter": return "Guerreiro";
+            case "monk": return "Monge";
+            case "paladin": return "Paladino";
+            case "ranger": return "Patrulheiro";
+            case "rogue": return "Ladino";
+            case "sorcerer": return "Feiticeiro";
+            case "warlock": return "Bruxo";
+            case "wizard": return "Mago";
+            default:
+                return key.substring(0, 1).toUpperCase(java.util.Locale.ROOT) + key.substring(1);
+        }
+    }
+
     private String getLuckPermsPrimaryGroup(Player p) {
         try {
             Class<?> lpProvider = Class.forName("net.luckperms.api.LuckPermsProvider");
