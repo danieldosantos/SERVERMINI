@@ -56,6 +56,10 @@ paper*.jar
 # ============================================
 Luckperms Config/
 plugins/**
+!plugins/            # permitir rastrear subpastas específicas
+!plugins/Skript/
+!plugins/Skript/scripts/
+!plugins/Skript/scripts/**
 !plugins/*.yml       # manter YAMLs principais de plugins (caso queira versionar configs)
 !plugins/*.json
 !plugins/**/*.sk     # versionar scripts do Skript quando necessario
