@@ -110,6 +110,17 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
     private final Map<UUID, Integer> recklessUntil = new HashMap<>();
     private final Map<UUID, Integer> recklessCooldownUntil = new HashMap<>();
     private final Map<UUID, BossBar> barbBoss = new HashMap<>();
+    private static final class ClassEntry {
+        final String group;
+        final boolean enabled;
+
+        private ClassEntry(String group, boolean enabled) {
+            this.group = group;
+            this.enabled = enabled;
+        }
+    }
+    private final Map<String, ClassEntry> classEntries = new HashMap<>();
+    private final Set<String> autoAbilityClasses = new HashSet<>();
     // Dynamic permissions (to emulate LuckPerms group.* for item-applied races)
     private final Map<UUID, PermissionAttachment> permAttach = new HashMap<>();
     // Ability init + level-ups tracking (per player)
@@ -212,6 +223,8 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
 
         // Carregar grupos -> tags (LuckPerms registra permissao group.<nome>)
         groupToTags.clear();
+        classEntries.clear();
+        autoAbilityClasses.clear();
         ConfigurationSection groupsSec = getConfig().getConfigurationSection("apply.groups");
         if (groupsSec != null) {
             for (String group : groupsSec.getKeys(false)) {
@@ -331,6 +344,7 @@ public final class RacesEffectsPlugin extends JavaPlugin implements Listener {
                 barbConf.uiCooldownOnInventoryOpen = ui.getBoolean("showCooldownOnInventoryOpen", barbConf.uiCooldownOnInventoryOpen);
             }
         }
+        classEntries.put("barbarian", new ClassEntry(barbConf.group, barbConf.enabled));
 
         // Abilities mapping (per D&D modifier coefficients)
         abilityPerMod.clear();
@@ -404,7 +418,7 @@ private void tickApply() {
             }
 
             // Aplicar efeitos por tags atuais (somente se houver raAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§a ou classe)
-            boolean allowRaceEffects = !hardNoRaceMode && (hasAnyRaceGroup(p) || isBarbarian(p) || isBard(p));
+            boolean allowRaceEffects = !hardNoRaceMode && (hasAnyRaceGroup(p) || hasAnyConfiguredClass(p));
             if (allowRaceEffects) {
                 for (String tag : p.getScoreboardTags()) {
                     Map<String, EffectSpec> specs = tagEffects.get(tag);
@@ -444,17 +458,17 @@ private void tickApply() {
             autoApplyLevelUps(p);
 
             // Bloqueio de efeitos de raAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§a quando nAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o houver classe/raAÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§a
-            autoAssignByConfig(p, "bard");
-            autoApplyLevelUpsByConfig(p, "bard");
-            autoAssignByConfig(p, "warlock");
-            autoApplyLevelUpsByConfig(p, "warlock");
+            for (String cls : autoAbilityClasses) {
+                autoAssignByConfig(p, cls);
+                autoApplyLevelUpsByConfig(p, cls);
+            }
             enforceNoRaceEffects(p);
         }
     }
 
     private void enforceNoRaceEffects(Player p) {
         boolean hasRace = hasAnyRaceGroup(p);
-        boolean hasClass = isBarbarian(p) || isBard(p);
+        boolean hasClass = hasAnyConfiguredClass(p);
         if (hasRace || hasClass) return;
         try {
             if (p.hasPotionEffect(PotionEffectType.NIGHT_VISION)) {
@@ -830,6 +844,38 @@ private void tickApply() {
                 bardConf.uiActionbar = ui.getBoolean("actionbar", bardConf.uiActionbar);
                 bardConf.uiShowCooldown = ui.getBoolean("showCooldown", bardConf.uiShowCooldown);
                 bardConf.uiBossbar = ui.getBoolean("bossbar", bardConf.uiBossbar);
+            }
+        }
+        classEntries.put("bard", new ClassEntry(bardConf.group, bardConf.enabled));
+        if (bardConf.enabled) {
+            ConfigurationSection bardAbl = getConfig().getConfigurationSection("apply.classes.bard.abilities");
+            if (bardAbl != null) {
+                List<String> order = bardAbl.getStringList("recommendedOrder");
+                List<Integer> start = (List<Integer>) (List<?>) bardAbl.getIntegerList("startArray");
+                if (order.size() == 6 && start.size() == 6) {
+                    autoAbilityClasses.add("bard");
+                }
+            }
+        }
+
+        ConfigurationSection classesRoot = getConfig().getConfigurationSection("apply.classes");
+        if (classesRoot != null) {
+            for (String key : classesRoot.getKeys(false)) {
+                String lower = key.toLowerCase(Locale.ROOT);
+                if ("barbarian".equals(lower) || "bard".equals(lower)) continue;
+                ConfigurationSection sub = classesRoot.getConfigurationSection(key);
+                if (sub == null) continue;
+                boolean enabled = sub.getBoolean("enabled", true);
+                String group = sub.getString("group", "class_" + lower);
+                classEntries.put(lower, new ClassEntry(group, enabled));
+                if (!enabled) continue;
+                ConfigurationSection abil = sub.getConfigurationSection("abilities");
+                if (abil == null) continue;
+                List<String> order = abil.getStringList("recommendedOrder");
+                List<Integer> start = (List<Integer>) (List<?>) abil.getIntegerList("startArray");
+                if (order.size() == 6 && start.size() == 6) {
+                    autoAbilityClasses.add(lower);
+                }
             }
         }
 
@@ -1724,6 +1770,19 @@ private void tickApply() {
         return false;
     }
 
+    private boolean hasAnyConfiguredClass(Player p) {
+        if (barbConf.enabled && isBarbarian(p)) return true;
+        if (bardConf.enabled && isBard(p)) return true;
+        for (Map.Entry<String, ClassEntry> entry : classEntries.entrySet()) {
+            String name = entry.getKey();
+            if ("barbarian".equals(name) || "bard".equals(name)) continue;
+            ClassEntry ce = entry.getValue();
+            if (!ce.enabled) continue;
+            if (p.hasPermission("group." + ce.group)) return true;
+        }
+        return false;
+    }
+
     private void resetAbilities(Player p) {
         for (String a : ABILITIES) setAbilityRaw(p, a, 0);
     }
@@ -1763,11 +1822,17 @@ private void tickApply() {
     private NamespacedKey nskLevelClaimFor(String cls){ return new NamespacedKey(this, "abl_level_claim_"+cls); }
 
     private boolean hasClassByConfig(Player p, String cls){
-        ConfigurationSection sec = getConfig().getConfigurationSection("apply.classes."+cls);
-        if (sec == null) return false;
-        if (!sec.getBoolean("enabled", true)) return false;
-        String group = sec.getString("group", "class_"+cls);
-        return p.hasPermission("group."+group);
+        if (cls == null) return false;
+        String lower = cls.toLowerCase(java.util.Locale.ROOT);
+        if ("barbarian".equals(lower)) {
+            return barbConf.enabled && isBarbarian(p);
+        }
+        if ("bard".equals(lower)) {
+            return bardConf.enabled && isBard(p);
+        }
+        ClassEntry entry = classEntries.get(lower);
+        if (entry == null || !entry.enabled) return false;
+        return p.hasPermission("group." + entry.group);
     }
 
     private void autoAssignByConfig(Player p, String cls){

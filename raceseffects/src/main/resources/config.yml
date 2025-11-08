@@ -247,3 +247,461 @@ apply:
             points: 2
           - level: 19
             points: 2
+    warlock:
+      enabled: true
+      group: class_warlock
+      hex:
+        cooldownTicks: 900           # 45s
+        durationTicks: 900           # 45s ativos
+        weaknessAmplifier: 0         # Weakness I
+        glowTicks: 100               # 5s de destaque
+        range: 25.0                  # alcance máximo do alvo
+      eldritch:
+        projectiles: 3               # janela de 3 disparos
+        windowTicks: 200             # 10s para usar os disparos
+        cooldownTicks: 100           # 5s de recarga entre janelas
+        damage: 5.0                  # dano base por projétil
+        range: 28.0                  # alcance máximo
+        knockback: 0.35              # empurrão adicional
+      patrons:
+        archfey:
+          group: class_warlock_archfey
+          buffEffect: speed
+          buffAmplifier: 0
+          buffDurationTicks: 200     # 10s
+        fiend:
+          group: class_warlock_fiend
+          buffEffect: strength
+          buffAmplifier: 0
+          buffDurationTicks: 200
+        old_one:
+          group: class_warlock_oldone
+          buffEffect: resistance
+          buffAmplifier: 0
+          buffDurationTicks: 200
+      focus:
+        primary: EldritchWand
+        secondary: HexTalisman
+      abilities:
+        recommendedOrder: [CHA, CON, DEX, WIS, INT, STR]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: CHA
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 8
+            points: 2
+          - level: 12
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2
+    cleric:
+      enabled: true
+      group: class_cleric
+      channelDivinity:
+        healRadius: 10.0
+        healAmount: 8.0
+        banishDurationTicks: 200
+        cooldownTicks: 2400
+      healingWord:
+        healAmount: 6.0
+        cooldownTicks: 600
+        range: 16.0
+        targetCooldownTicks: 600
+      aura:
+        durationTicks: 1200          # 60s (<=60% uptime)
+        cooldownTicks: 1200
+        radius: 8.0
+        resistanceBonus: 0.10
+      domains:
+        life:
+          group: class_cleric_life
+          healingBonusPercent: 0.15
+        light:
+          group: class_cleric_light
+          radiantBurstDamage: 4.0
+        war:
+          group: class_cleric_war
+          smiteBonusDamage: 2.0
+      focus:
+        primary: SacredSymbol
+        secondary: PrayerBook
+      abilities:
+        recommendedOrder: [WIS, CON, CHA, STR, INT, DEX]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: WIS
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 8
+            points: 2
+          - level: 12
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2
+    druid:
+      enabled: true
+      group: class_druid
+      wildShape:
+        durationTicks: 1200          # 60s ativos
+        cooldownTicks: 3600          # 180s de recarga
+        healthBonus: 8.0
+        armorBonus: 4.0
+        speedBonus: 0.03
+        damageBonus: 2.0
+      terrain:
+        entangle:
+          radius: 6.0
+          durationTicks: 200
+          cooldownTicks: 900
+        fog:
+          radius: 8.0
+          durationTicks: 160
+          cooldownTicks: 1200
+      circles:
+        land:
+          group: class_druid_land
+          terrainCooldownReductionTicks: 200
+        moon:
+          group: class_druid_moon
+          wildShapeExtraHealth: 4.0
+        spores:
+          group: class_druid_spores
+          haloDamage: 2.0
+      focus:
+        primary: DruidicStaff
+        secondary: MoonstoneTotem
+      abilities:
+        recommendedOrder: [WIS, CON, DEX, INT, CHA, STR]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: WIS
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 8
+            points: 2
+          - level: 12
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2
+    fighter:
+      enabled: true
+      group: class_fighter
+      actionSurge:
+        durationTicks: 200
+        cooldownTicks: 2400
+        attackSpeedBonus: 0.15
+        damageBonus: 2.0
+      secondWind:
+        flatHeal: 6.0
+        healPercent: 0.25
+        cooldownTicks: 3600
+      maneuvers:
+        cooldownTicks: 600
+        damageBonus: 1.0
+        knockbackBonus: 0.25
+      archetypes:
+        champion:
+          group: class_fighter_champion
+          critRangeBonus: 1
+        battlemaster:
+          group: class_fighter_battlemaster
+          maneuversExtraDamage: 1.0
+        eldritch:
+          group: class_fighter_eldritch
+          arcaneBurstDamage: 3.0
+      focus:
+        primary: BattleManual
+      abilities:
+        recommendedOrder: [STR, CON, DEX, WIS, CHA, INT]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: STR
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 6
+            points: 2
+          - level: 8
+            points: 2
+          - level: 12
+            points: 2
+          - level: 14
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2
+    monk:
+      enabled: true
+      group: class_monk
+      ki:
+        basePoints: 4
+        regenIntervalTicks: 600
+        regenAmount: 1
+      flurry:
+        cost: 1
+        durationTicks: 60
+        extraAttacks: 2
+        cooldownTicks: 80
+      stepOfTheWind:
+        cost: 1
+        speedBonus: 0.04
+        jumpBonus: 1.0
+        durationTicks: 100
+      handsOfHealing:
+        cost: 2
+        healAmount: 6.0
+        cooldownTicks: 200
+      traditions:
+        openHand:
+          group: class_monk_openhand
+          flurryKnockback: 0.4
+        shadow:
+          group: class_monk_shadow
+          stepInvisibilityDurationTicks: 100
+        elements:
+          group: class_monk_elements
+          elementalStrikeDamage: 3.0
+      focus:
+        primary: KiBracelet
+      abilities:
+        recommendedOrder: [DEX, WIS, CON, STR, CHA, INT]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: DEX
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 8
+            points: 2
+          - level: 10
+            points: 2
+          - level: 12
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2
+    paladin:
+      enabled: true
+      group: class_paladin
+      smite:
+        cooldownTicks: 900
+        bonusDamage: 4.0
+        durationTicks: 100
+      layOnHands:
+        charges: 5
+        healPerCharge: 6.0
+        rechargeTicks: 7200
+      aura:
+        durationTicks: 600
+        cooldownTicks: 1800
+        radius: 8.0
+        resistanceBonus: 0.15
+      oaths:
+        devotion:
+          group: class_paladin_devotion
+          smiteRadiantBonus: 2.0
+        ancients:
+          group: class_paladin_ancients
+          auraRegeneration: 1
+        vengeance:
+          group: class_paladin_vengeance
+          hasteDurationTicks: 120
+      focus:
+        primary: SacredBlade
+        secondary: OathEmblem
+      abilities:
+        recommendedOrder: [STR, CHA, CON, WIS, DEX, INT]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: STR
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 8
+            points: 2
+          - level: 12
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2
+    ranger:
+      enabled: true
+      group: class_ranger
+      huntersMark:
+        durationTicks: 1200
+        cooldownTicks: 1200
+        damageBonus: 2.0
+        range: 30.0
+      companion:
+        cooldownTicks: 600
+        durationTicks: 1800
+        maxHealth: 30.0
+        damage: 6.0
+      traps:
+        cooldownTicks: 1800
+        durationTicks: 200
+        slowAmplifier: 1
+        radius: 4.0
+      conclaves:
+        hunter:
+          group: class_ranger_hunter
+          markExtraDamage: 1.0
+        beast:
+          group: class_ranger_beast
+          companionBonusHealth: 6.0
+        gloomstalker:
+          group: class_ranger_gloom
+          openingStrikeBonus: 3.0
+      focus:
+        primary: RangerBow
+        secondary: TrapKit
+      abilities:
+        recommendedOrder: [DEX, WIS, CON, STR, INT, CHA]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: DEX
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 8
+            points: 2
+          - level: 12
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2
+    rogue:
+      enabled: true
+      group: class_rogue
+      sneakAttack:
+        cooldownTicks: 120
+        damageMultiplier: 2.0
+        maxTargetPercent: 0.50
+      shadowStep:
+        cooldownTicks: 900
+        range: 18.0
+        slowDurationTicks: 60
+      thievesTools:
+        cooldownTicks: 300
+        durationTicks: 1200
+      archetypes:
+        thief:
+          group: class_rogue_thief
+          toolsCooldownReductionTicks: 120
+        assassin:
+          group: class_rogue_assassin
+          sneakMultiplierBonus: 1.0
+        arcane:
+          group: class_rogue_arcane
+          spellSlotBonus: 1
+      focus:
+        primary: RogueDagger
+        secondary: ThievesKit
+      abilities:
+        recommendedOrder: [DEX, CHA, CON, WIS, INT, STR]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: DEX
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 8
+            points: 2
+          - level: 12
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2
+    sorcerer:
+      enabled: true
+      group: class_sorcerer
+      sorceryPoints:
+        basePoints: 3
+        regenIntervalTicks: 600
+        regenAmount: 1
+      metamagic:
+        quickenCost: 2
+        twinCost: 2
+        heightenCost: 3
+        cooldownTicks: 200
+      spellcasting:
+        baseDamagePercent: 1.05
+        aoeRadius: 5.0
+        ultimateCooldownTicks: 3600
+      origins:
+        draconic:
+          group: class_sorcerer_draconic
+          elementalResistanceTag: resist_elemental
+        wild:
+          group: class_sorcerer_wild
+          surgeChance: 0.15
+        storm:
+          group: class_sorcerer_storm
+          flightDurationTicks: 80
+      focus:
+        primary: ArcaneCrystal
+        secondary: MetamagicTome
+      abilities:
+        recommendedOrder: [CHA, CON, DEX, INT, WIS, STR]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: CHA
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 8
+            points: 2
+          - level: 12
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2
+    wizard:
+      enabled: true
+      group: class_wizard
+      spellbook:
+        preparedSpells: 6
+        extraPreparedPerTier: 1
+        swapCooldownTicks: 1200
+      controlSpells:
+        wallCooldownTicks: 1800
+        blinkCooldownTicks: 900
+        durationTicks: 200
+      arcaneRecovery:
+        cooldownTicks: 7200
+        slotLevelRestored: 3
+      schools:
+        evocation:
+          group: class_wizard_evocation
+          damageBonusPercent: 0.10
+        abjuration:
+          group: class_wizard_abjuration
+          wardShieldValue: 6.0
+        divination:
+          group: class_wizard_divination
+          portentDice: 2
+      focus:
+        primary: WizardStaff
+        secondary: Spellbook
+      abilities:
+        recommendedOrder: [INT, CON, DEX, WIS, CHA, STR]
+        startArray: [15, 14, 13, 12, 10, 8]
+        raceBonusTarget: INT
+        levelUps:
+          - level: 4
+            points: 2
+          - level: 8
+            points: 2
+          - level: 12
+            points: 2
+          - level: 16
+            points: 2
+          - level: 19
+            points: 2
