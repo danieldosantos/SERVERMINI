@@ -1,68 +1,68 @@
-# Comandos de Raça (Itens de Aplicação)
+﻿# Comandos de RaÃ§a (Itens de AplicaÃ§Ã£o)
 
-Este guia lista os comandos de admin para entregar itens que aplicam raças aos jogadores. Requer permissão `raceseffects.admin`.
+Este guia lista os comandos de admin para entregar itens que aplicam raÃ§as aos jogadores. Requer permissÃ£o `raceseffects.admin`.
 
 - Sintaxe geral
   - `/raceitem give <jogador> <tipo>`
   - Pode ser executado no console do servidor (com ou sem barra)
     - Ex.: `raceitem give Steve highelf`
     - Ex.: `/raceitem give Steve tiefling`
-  - Se o comando não aparecer, recarregue o Skript: `skript reload race_items.sk`
+  - Se o comando nÃ£o aparecer, recarregue o Skript: `skript reload race_items.sk`
 
-- Tipos disponíveis
+- Tipos disponÃ­veis
   - Alto Elfo: `highelf` | `elf_high` | `alto`
-    - Aplica: `race_darkvision` + retaliação passiva (Espinhos/Veneno/Náusea/Nada)
+    - Aplica: `race_darkvision` + retaliaÃ§Ã£o passiva (Espinhos/Veneno/NÃ¡usea/Nada)
     - Comando: `/raceitem give <jogador> highelf`
-  - Meio‑Elfo: `halfelf` | `half_elf` | `meioelfo` | `meio-elfo`
-    - Aplica: `race_darkvision` + `race_dolphins_grace` (Graça Marinha permanente)
-    - Entrega: `Pena do Meio‑Elfo` (usa para ganhar Queda Lenta por ~7s)
+  - Meioâ€‘Elfo: `halfelf` | `half_elf` | `meioelfo` | `meio-elfo`
+    - Aplica: `race_darkvision` + `race_dolphins_grace` (GraÃ§a Marinha permanente)
+    - Entrega: `Pena do Meioâ€‘Elfo` (usa para ganhar Queda Lenta por ~7s)
     - Comando: `/raceitem give <jogador> halfelf`
   - Elfo da Floresta: `elfwood` | `elf_wood` | `floresta`
     - Aplica: `race_darkvision` (efeitos adicionais/velocidade conforme RacesEffects)
-    - Habilidade: camuflagem nas florestas (invisibilidade ao ficar parado ~30s ao lado de tronco com folhas; renova enquanto nas condições)
+    - Habilidade: camuflagem nas florestas (invisibilidade ao ficar parado ~30s ao lado de tronco com folhas; renova enquanto nas condiÃ§Ãµes)
     - Entrega: `Broche da Floresta` (MythicMobs: `ElfWoodBrooch`)
     - Comando: `/raceitem give <jogador> elfwood`
   - Drow: `drow` | `elf_drow` | `darkelf`
     - Aplica: `race_darkvision`
-    - Maldição: Fraqueza I durante o dia sob céu aberto (não ativa por tochas/fogueiras)
+    - MaldiÃ§Ã£o: Fraqueza I durante o dia sob cÃ©u aberto (nÃ£o ativa por tochas/fogueiras)
     - Entrega: `Teia de Drow` (MythicMobs: `DrowWeb`)
-    - Uso do item: botão direito → teleporte aleatório (raio ~7); 3 cargas; recarga total 4 minutos
+    - Uso do item: botÃ£o direito â†’ teleporte aleatÃ³rio (raio ~7); 3 cargas; recarga total 4 minutos
     - Comando: `/raceitem give <jogador> drow`
-  - Meio‑Orc: `halforc` | `half_orc` | `meioorc` | `meio-orc`
+  - Meioâ€‘Orc: `halforc` | `half_orc` | `meioorc` | `meio-orc`
     - Aplica: `race_darkvision` + `trait_relentless` (Relentless Endurance com cooldown)
     - Comando: `/raceitem give <jogador> halforc`
   - Tiefling: `tiefling`
     - Aplica: `race_darkvision` + `resist_fire`
-    - Ativa: permissão virtual `group.race_tiefling` (Velocidade II no Nether via Skript)
+    - Ativa: permissÃ£o virtual `group.race_tiefling` (Velocidade II no Nether via Skript)
     - Comando: `/raceitem give <jogador> tiefling`
   - Humano: `human` | `humano`
-    - Aplica: permissões `group.race_human` + `raceseffects.abilities` (habilita `/abilities`); efeitos de regeneração conforme configuração/servidor
+    - Aplica: permissÃµes `group.race_human` + `raceseffects.abilities` (habilita `/abilities`); efeitos de regeneraÃ§Ã£o conforme configuraÃ§Ã£o/servidor
     - Comando: `/raceitem give <jogador> human`
 
-- Observações
-  - Os itens são consumidos ao usar e aplicam as tags/efeitos imediatamente.
-  - Caso use a versão em Skript (sem novo JAR), basta recarregar: `skript reload race_items.sk` e `skript reload tiefling_soulspeed.sk`.
-  - Para que efeitos passivos funcionem conforme grupos, use `/raceseffects reload` após editar YAML.
-  - Para remover estados antigos (tags), use `/raceseffects reset <player>` antes de aplicar uma nova raça, se necessário.
-  - Elfo da Floresta: o broche é reentregado no respawn; se o inventário estiver cheio, vai para o Ender Chest. Comandos de suporte: `/checkitems`, `/fixelfwood`.
+- ObservaÃ§Ãµes
+  - Os itens sÃ£o consumidos ao usar e aplicam as tags/efeitos imediatamente.
+  - Caso use a versÃ£o em Skript (sem novo JAR), basta recarregar: `skript reload race_items.sk` e `skript reload tiefling_soulspeed.sk`.
+  - Para que efeitos passivos funcionem conforme grupos, use `/raceseffects reload` apÃ³s editar YAML.
+  - Para remover estados antigos (tags), use `/raceseffects reset <player>` antes de aplicar uma nova raÃ§a, se necessÃ¡rio.
+  - Elfo da Floresta: o broche Ã© reentregado no respawn; se o inventÃ¡rio estiver cheio, vai para o Ender Chest. Comandos de suporte: `/checkitems`, `/fixelfwood`.
 
 ## Elfo da Floresta
 
 - Comando: `/raceitem give <jogador> elfwood` (aliases: `elf_wood`, `floresta`)
 - Aplica: `race_darkvision` (demais efeitos conforme RacesEffects)
-- Habilidade: camuflagem nas florestas (invisibilidade ao ficar parado ~30s ao lado de tronco com folhas; renova enquanto nas condições)
+- Habilidade: camuflagem nas florestas (invisibilidade ao ficar parado ~30s ao lado de tronco com folhas; renova enquanto nas condiÃ§Ãµes)
 - Item entregue: `Broche da Floresta` (MythicMobs: `ElfWoodBrooch`)
-- Observação: reentrega automática no respawn; se o inventário estiver cheio, o item vai para o Ender Chest. Comandos de suporte: `/checkitems`, `/fixelfwood`.
+- ObservaÃ§Ã£o: reentrega automÃ¡tica no respawn; se o inventÃ¡rio estiver cheio, o item vai para o Ender Chest. Comandos de suporte: `/checkitems`, `/fixelfwood`.
 
 ## Drow
 
 - Comando: `/raceitem give <jogador> drow` (aliases: `elf_drow`, `darkelf`)
 - Aplica: `race_darkvision`
-- Maldição: Fraqueza I durante o dia sob céu aberto (não conta luz de tochas/fogueiras)
+- MaldiÃ§Ã£o: Fraqueza I durante o dia sob cÃ©u aberto (nÃ£o conta luz de tochas/fogueiras)
 - Item entregue: `Teia de Drow` (MythicMobs: `DrowWeb`)
-- Uso do item: botão direito ativa teleporte aleatório para posição vazia próxima (raio ~7). O item possui 3 cargas e, ao esgotar, entra em recarga total de 4 minutos para recuperar todas as cargas.
+- Uso do item: botÃ£o direito ativa teleporte aleatÃ³rio para posiÃ§Ã£o vazia prÃ³xima (raio ~7). O item possui 3 cargas e, ao esgotar, entra em recarga total de 4 minutos para recuperar todas as cargas.
 - LuckPerms: `lp user <nick> parent set race_elf_drow`
-- Observação: o item é protegido (não pode ser colocado/droppado) e é reentregado no respawn se ausente.
+- ObservaÃ§Ã£o: o item Ã© protegido (nÃ£o pode ser colocado/droppado) e Ã© reentregado no respawn se ausente.
 
 ## Anaos
 
@@ -77,7 +77,7 @@ Este guia lista os comandos de admin para entregar itens que aplicam raças aos 
   - Anao da Montanha: efeitos do Anao base (herda `race_darkvision` + `trait_poison_resist`).
 
 - Itens entregues
-  - Todos os anoes recebem: `Picareta Anao &8(Racial)` — MythicMobs `DwarfRacialPick` (IRON_PICKAXE com Eficiencia I e Fortuna I; indestrutivel).
+  - Todos os anoes recebem: `Picareta Anao &8(Racial)` â€” MythicMobs `DwarfRacialPick` (IRON_PICKAXE com Eficiencia I e Fortuna I; indestrutivel).
 
 - LuckPerms
   - Base: `lp user <nick> parent set race_dwarf`
@@ -85,9 +85,48 @@ Este guia lista os comandos de admin para entregar itens que aplicam raças aos 
   - Montanha: `lp user <nick> parent set race_dwarf_mountain`
   - Profundezas: `lp user <nick> parent set race_dwarf_deep`
 
+## Gnomos
+
+- Comandos:
+  - Base: `/raceitem give <jogador> gnome` (aliases: `gnomo`)
+  - Floresta: `/raceitem give <jogador> gnome_forest` (aliases: `gnomo_floresta`)
+  - Rochas: `/raceitem give <jogador> gnome_rock` (aliases: `gnomo_rochas`)
+
+- Efeitos aplicados
+  - Gnomo (base): `race_darkvision`.
+  - Gnomo da Floresta: Velocidade III quando abaixo de 50% da Vida Maxima e 35% de chance de Invisibilidade por 10s ao sofrer dano.
+  - Gnomo das Rochas: Forca II e Repulsao II aplicadas ao causar dano em mobs ou jogadores.
+
+- Item entregue
+  - Engrenagem Gnomica â€” MythicMobs `GnomeCog`.
+  - Gera poções aleatórias: 1 por uso; 5 cargas; recarga de 7 minutos após zerar.
+
+- LuckPerms
+  - Base: `lp user <nick> parent set race_gnome`
+  - Floresta: `lp user <nick> parent set race_gnome_forest`
+  - Rochas: `lp user <nick> parent set race_gnome_rock`
+
+## Halflings
+
+- Comandos:
+  - Pés‑Leves`)
+  - Robusto: `/raceitem give <jogador> halfling_stout` (aliases: `stout`, `robusto`)
+
+- Efeitos aplicados
+  - Lightfoot (Pés‑Leves): Supersalto e Sorte II.
+  - Stout (Robusto): Pressa I e Sorte II.
+
+- Item entregue (ambos)
+  - Trombeta Halfling — MythicMobs `HalflingHorn`.
+  - Uso: paralisa até 5 alvos próximos
+
+- LuckPerms
+  - Pés‑Leves: `lp user <nick> parent set race_halfling_lightfoot`
+  - Robusto: `lp user <nick> parent set race_halfling_stout`
+
 ## Dragonborn (Draconato)
 
-- O Dragonborn é aplicado via `/raceitem give <jogador> <tipo>` (um item por subtipo). Ao clicar no livro recebido, o subtipo é aplicado e os itens/tags são entregues automaticamente.
+- O Dragonborn Ã© aplicado via `/raceitem give <jogador> <tipo>` (um item por subtipo). Ao clicar no livro recebido, o subtipo Ã© aplicado e os itens/tags sÃ£o entregues automaticamente.
 
 - Tipos aceitos no comando:
   - `dragonborn_fire`
@@ -103,15 +142,18 @@ Este guia lista os comandos de admin para entregar itens que aplicam raças aos 
   - `raceitem give Steve dragonborn_acid`
   - `raceitem give Steve dragonborn_poison`
 
-- O que o livro faz ao clicar (padrão do servidor):
+- O que o livro faz ao clicar (padrÃ£o do servidor):
   - Define o grupo LuckPerms correspondente (`race_dragonborn_*`).
-  - Reforça itens e tags via rotina interna (equivalente a `forcegiveitems <nick>`):
+  - ReforÃ§a itens e tags via rotina interna (equivalente a `forcegiveitems <nick>`):
     - Tags de imunidade: `db_fire`, `db_cold`, `db_lightning`, `db_acid`, `db_poison`.
-    - Entrega o item de “Sopro …” do subtipo (ativa com clique; recarga 10s).
+    - Entrega o item de â€œSopro â€¦â€ do subtipo (ativa com clique; recarga 10s).
 
 - Resumo dos sopros
-  - Fire: cone de chamas à frente; ignora entidades com `db_fire`.
-  - Cold: área 5x5 com Slowness; `db_cold` imune (e imune a congelamento em neve fofa).
-  - Lightning: linha com 7 relâmpagos; o subtipo é imune ao dano de raio próximo ao impacto.
+  - Fire: cone de chamas Ã  frente; ignora entidades com `db_fire`.
+  - Cold: Ã¡rea 5x5 com Slowness; `db_cold` imune (e imune a congelamento em neve fofa).
+  - Lightning: linha com 7 relÃ¢mpagos; o subtipo Ã© imune ao dano de raio prÃ³ximo ao impacto.
   - Acid: chuva 5x5 por ~6s, 1 de dano/seg (Ruptura simulada); `db_acid` imune.
-  - Poison: área com Poison; `db_poison` imune.
+  - Poison: Ã¡rea com Poison; `db_poison` imune.
+
+
+
