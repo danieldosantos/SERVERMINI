@@ -17,6 +17,7 @@ Este guia lista os comandos de admin para entregar itens que aplicam raças aos 
     - Aplica: `race_darkvision` + `race_dolphins_grace` (Graça Marinha permanente)
     - Entrega: `Pena do Meio‑Elfo` (usa para ganhar Queda Lenta por ~7s)
     - Comando: `/raceitem give <jogador> halfelf`
+    
   - Meio‑Orc: `halforc` | `half_orc` | `meioorc` | `meio-orc`
     - Aplica: `race_darkvision` + `trait_relentless` (Relentless Endurance com cooldown)
     - Comando: `/raceitem give <jogador> halforc`
@@ -34,14 +35,6 @@ Este guia lista os comandos de admin para entregar itens que aplicam raças aos 
   - Caso use a versão em Skript (sem novo JAR), basta recarregar: `skript reload race_items.sk` e `skript reload tiefling_soulspeed.sk`.
   - Para que efeitos passivos funcionem conforme grupos, use `/raceseffects reload` após editar YAML.
   - Para remover estados antigos (tags), use `/raceseffects reset <player>` antes de aplicar uma nova raça, se necessário.
-
-## Elfo da Floresta
-
-- Comando: `/raceitem give <jogador> elfwood` (aliases: `elf_wood`, `floresta`)
-- Aplica: `race_darkvision` (demais efeitos/velocidade conforme configuracao em `RacesEffects`)
-- Habilidade: camuflagem nas florestas (invisibilidade ao ficar parado ~30s ao lado de tronco com folhas; dura ~6s e renova enquanto nas condicoes)
-- Item entregue: `Broche da Floresta` (MythicMobs: `ElfWoodBrooch`)
-- Observacao: o item e reentregado no respawn; se o inventario estiver cheio, vai para o Ender Chest. Comandos de suporte: `/checkitems`, `/fixelfwood`.
 
 ## Dragonborn (Draconato)
 
