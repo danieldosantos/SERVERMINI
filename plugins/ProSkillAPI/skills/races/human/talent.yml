@@ -1,0 +1,89 @@
+# ProSkillAPI - Talentos da Subraça Humano Variante
+skills:
+  Human_Talent_Activate:
+    display: "&dTalento Variável"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Aciona o talento selecionado (Perito Pragmático, Robustez Prática ou Iniciativa Afiada).
+      O Skript define {metadata:human_talent_choice} e redireciona para a skill correspondente.
+    tiers:
+      T1: { cooldown: 0 }
+      T2: { cooldown: 0 }
+      T3: { cooldown: 0 }
+      T4: { cooldown: 0 }
+    cost:
+      resource: none
+      amount: 0
+    effects:
+      - target: self
+        type: script_hook
+        id: RacesEffects~HumanTalentDispatch
+  Human_Talent_Perito:
+    display: "&aPerito Pragmático"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Amplia alcance e precisão de projéteis por 8 segundos.
+      Ajuda classes de ataque à distância sem quebrar limites de crítico.
+    tiers:
+      T1: { cooldown: 75, duration: 8, range_bonus: 0.15, accuracy_bonus: 0.05 }
+      T2: { cooldown: 70, duration: 8, range_bonus: 0.16, accuracy_bonus: 0.06 }
+      T3: { cooldown: 65, duration: 8, range_bonus: 0.17, accuracy_bonus: 0.06 }
+      T4: { cooldown: 60, duration: 8, range_bonus: 0.18, accuracy_bonus: 0.07 }
+    effects:
+      - target: self
+        type: status
+        id: human_talent_perito
+        duration: { tier: duration }
+        modifiers:
+          projectile_range: { tier: range_bonus }
+          accuracy: { tier: accuracy_bonus }
+      - target: self
+        type: placeholder_update
+        keys:
+          - racial_cd_main
+  Human_Talent_Robustez:
+    display: "&6Robustez Prática"
+    type: ACTIVE
+    skill_class: racial
+    description: "Cria escudo de 120 pontos por 6s (escala leve por tier) com DR compartilhada com efeitos de classe."
+    tiers:
+      T1: { cooldown: 90, shield_amount: 120, duration: 6 }
+      T2: { cooldown: 85, shield_amount: 135, duration: 6 }
+      T3: { cooldown: 80, shield_amount: 150, duration: 6 }
+      T4: { cooldown: 75, shield_amount: 165, duration: 6 }
+    effects:
+      - target: self
+        type: shield
+        scaling: flat
+        value: { tier: shield_amount }
+        diminishing: shielding
+      - target: self
+        type: status
+        id: human_talent_robustez
+        duration: { tier: duration }
+  Human_Talent_Iniciativa:
+    display: "&bIniciativa Afiada"
+    type: ACTIVE
+    skill_class: racial
+    description: "Impulso de mobilidade: +0.04 velocidade e resistência a empurrões por 4s."
+    tiers:
+      T1: { cooldown: 75, duration: 4, speed_bonus: 0.04, knockback_resist: 0.75 }
+      T2: { cooldown: 70, duration: 4, speed_bonus: 0.04, knockback_resist: 0.80 }
+      T3: { cooldown: 65, duration: 4, speed_bonus: 0.04, knockback_resist: 0.85 }
+      T4: { cooldown: 60, duration: 4, speed_bonus: 0.04, knockback_resist: 0.90 }
+    effects:
+      - target: self
+        type: status
+        id: human_talent_iniciativa
+        duration: { tier: duration }
+        modifiers:
+          speed_flat: { tier: speed_bonus }
+          knockback_resist: { tier: knockback_resist }
+      - target: self
+        type: particles
+        effect: mythicmobs:HumanTalentTrail
+    notes: |
+      • Velocidade extra soma com Renome sem ultrapassar +0.05 (cap global).
+      • Resistência a empurrão reduz crowd control repetitivo em PvP.

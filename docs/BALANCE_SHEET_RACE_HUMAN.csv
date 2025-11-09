@@ -1,0 +1,14 @@
+Raça,Subraça,Traço,Tipo,Custo,Duração,CD,Área,Bônus/Redução,Notas PvP,Tier,Observações DR
+Humano,Base,Adaptabilidade - Tática,Ativável,0,12s,90s,Self,-10% CD habilidades não-ultimates,DR com classes de suporte,T1-T4,Marca `cooldown` para DR cumulativa
+Humano,Base,Adaptabilidade - Disciplinada,Ativável,0,10s,90s,Self,+8% mitigação global,Respeitar cap 45%,T1-T4,`diminishing_returns: mitigation`
+Humano,Base,Adaptabilidade - Oportunista,Ativável,0,8s,90s,Self,+10% crítico / +8% penetração,Limitar ao cap de crítico,T1-T4,Aplica categoria ofensiva compartilhada
+Humano,Base,Ambição Comunal,Passivo,0,18s,45s,Região vila,+5% XP profissões,N/A,T1-T4,Expira ao entrar em combate
+Humano,Base,Versatilidade (skill),Ativo,0,Instantâneo,120/115/110/105s,Self,Fadiga -5% dano 6s,Sem efeito em combate,T1-T4,Checagem de combate via Skript
+Humano,Base,Renome (skill),Ativo,0,8s,75/75/70/65s,Raio 6,+8% velocidade / +10-12% resistência a empurrão,Aplicar redução em PvP prolongado,T1-T4,Velocidade soma com cap +0.05
+Humano,Padrão,Versado,Passivo,0,Permanente,N/A,Self,+1 Vitalidade / +1 Perícia,N/A,T1-T4,Ajustar atributos leves apenas
+Humano,Padrão,Produtividade,Passivo,0,12s,20s,Self,+5% regen de recurso fora de combate,N/A,T1-T4,Uptime ≤60%
+Humano,Padrão,Esforço Coordenado,Ativo,0,8/8/8/9s,90/90/85/80s,Aliado 10 blocos,-10~12% CD habilidades menores,Buff prioriza alvo marcado,T1-T4,Compartilha flag `cooldown_minor`
+Humano,Variante,Aptidão Seletiva,Passivo,0,Permanente,N/A,Self,+1 atributo leve escolhido,N/A,T1-T4,Reset apenas staff
+Humano,Variante,Talento - Perito Pragmático,Ativável,0,8s,75/70/65/60s,Self,+15~18% alcance projétil / +5~7% precisão,Redução parcial em arenas,T1-T4,Sem alterar crítico máximo
+Humano,Variante,Talento - Robustez Prática,Ativável,0,6s,90/85/80/75s,Self,Escudo 120~165 pts,Mitigação contra burst,T1-T4,`diminishing_returns: shielding`
+Humano,Variante,Talento - Iniciativa Afiada,Ativável,0,4s,75/70/65/60s,Self,+0.04 vel. / 60~90% anti knockback,Evitar stack com montarias,T1-T4,Cap de velocidade +0.05 monitorado

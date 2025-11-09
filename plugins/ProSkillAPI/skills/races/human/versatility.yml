@@ -1,0 +1,89 @@
+# ProSkillAPI - Núcleo de Versatilidade Humana
+skills:
+  Human_Versatility_Switch:
+    display: "&fVersatilidade"
+    type: UTILITY
+    skill_class: racial
+    description: |
+      Alterna o perfil ativo da Adaptabilidade Humana (Tática, Disciplinada ou Oportunista).
+      Só pode ser usado fora de combate. Ao trocar, aplica Fadiga de Versatilidade (-5% dano por 6s).
+      Envia atualização de metadata para HUD ({metadata:human_profile}) e sincroniza com RacesEffects.
+    tiers:
+      T1: { cooldown: 120, fatigue_duration: 6 }
+      T2: { cooldown: 115, fatigue_duration: 6 }
+      T3: { cooldown: 110, fatigue_duration: 6 }
+      T4: { cooldown: 105, fatigue_duration: 6 }
+    cost:
+      resource: none
+      amount: 0
+    conditions:
+      - type: combat_state
+        state: out_of_combat
+      - type: metadata_flag
+        key: human_profile_locked
+        allowed: false
+    effects:
+      - target: self
+        type: script_hook
+        id: RacesEffects~HumanProfileCycle
+        args:
+          cycle: true
+      - target: self
+        type: status
+        id: human_swap_fatigue
+        duration: { tier: fatigue_duration }
+        modifiers:
+          damage_multiplier: -0.05
+      - target: self
+        type: placeholder_update
+        keys:
+          - human_profile
+    notes: |
+      • Cooldown mínimo respeita requisito ≥45s (configurado em 105–120s por tier).
+      • Script hook chama integração via Skript para aplicar perfil específico.
+      • Fadiga impede abuso com combos de burst imediato.
+  Human_Profile_Tatica:
+    display: "&bPerfil: Tática"
+    type: UTILITY
+    skill_class: racial
+    description: "Aplica o perfil Tática, liberando redução de cooldown controlada pelo RacesEffects."
+    tiers:
+      T1: { duration: 12 }
+      T2: { duration: 12 }
+      T3: { duration: 12 }
+      T4: { duration: 12 }
+    effects:
+      - target: self
+        type: raceseffects_trigger
+        trait: adaptabilidade_humana
+        profile: tatica
+  Human_Profile_Disciplinada:
+    display: "&aPerfil: Disciplinada"
+    type: UTILITY
+    skill_class: racial
+    description: "Ativa mitigação temporária do perfil Disciplinada respeitando DR."
+    tiers:
+      T1: { duration: 10 }
+      T2: { duration: 10 }
+      T3: { duration: 10 }
+      T4: { duration: 10 }
+    effects:
+      - target: self
+        type: raceseffects_trigger
+        trait: adaptabilidade_humana
+        profile: disciplinada
+  Human_Profile_Oportunista:
+    display: "&6Perfil: Oportunista"
+    type: UTILITY
+    skill_class: racial
+    description: "Ativa bônus de crítico/penetração do perfil Oportunista respeitando caps globais."
+    tiers:
+      T1: { duration: 8 }
+      T2: { duration: 8 }
+      T3: { duration: 8 }
+      T4: { duration: 8 }
+    effects:
+      - target: self
+        type: raceseffects_trigger
+        trait: adaptabilidade_humana
+        profile: oportunista

@@ -27,6 +27,13 @@ command /racial:
       if player has permission "lp.race_gnomo.rock":
         send "&7[Gnomo da Rocha] /baluarte, /gadget e /cupula protegem o grupo (ult 210s)."
       set {_sent} to true
+    if player has permission "lp.race_human":
+      send "&f[Humano] /versatilidade alterna perfis (120s) e /renome concede buff em área (75s)."
+      if player has permission "lp.race_human.standard":
+        send "&7[Humano Padrão] /racial mostra perfil ativo e /esforco_coordenado auxilia aliados."
+      if player has permission "lp.race_human.variant":
+        send "&d[Humano Variante] /talento abre escolhas e shift+token ativa o talento."
+      set {_sent} to true
     if function "halflingRacialHelp" is defined:
       if halflingRacialHelp(player):
         set {_sent} to true
@@ -107,17 +114,40 @@ command /salto_galho:
     else:
       send "&cSomente elfos da floresta."
 
-command /investida_coord:
+command /versatilidade:
   trigger:
-    if player has permission "lp.race_humano":
-      execute console command "{@skillcmd} %player% InvestidaCoordenada"
+    if player has permission "lp.race_human":
+      if human_can_swap(player) is false:
+        send "&cAguarde sair de combate para trocar de perfil."
+        stop
+      if human_profile_on_cooldown(player):
+        set {_cd} to human_profile_cooldown(player)
+        set {_cd} to round({_cd})
+        send "&eVersatilidade em recarga: %{_cd}%s restantes."
+        stop
+      set {_next} to human_next_profile(player)
+      human_apply_profile(player, {_next})
     else:
       send "&cSomente humanos."
 
-command /talento_variavel:
+command /renome:
   trigger:
-    if player has permission "lp.race_humano.variante":
-      execute console command "{@skillcmd} %player% TalentoVariavel"
+    if player has permission "lp.race_human":
+      execute console command "{@skillcmd} %player% Human_Renown_Shout"
+    else:
+      send "&cSomente humanos."
+
+command /esforco_coordenado:
+  trigger:
+    if player has permission "lp.race_human.standard":
+      execute console command "{@skillcmd} %player% Human_Coordinated_Effort"
+    else:
+      send "&cApenas humanos padrão."
+
+command /talento [<text>]:
+  trigger:
+    if player has permission "lp.race_human.variant":
+      human_handle_talent(player, arg-1)
     else:
       send "&cSomente humanos variantes."
 
@@ -188,10 +218,19 @@ function give_race_kit(p: player, raceKey: text):
   else if {_racekey} is "halfling_robusto" or {_racekey} is "halfling_stout":
     add "HalflingLuckyCoin" to {_kit::*}
     add "StoutStoneCharm" to {_kit::*}
-  else if {_racekey} is "humano":
-    add "HumanBannerSigil" to {_kit::*}
-  else if {_racekey} is "humano_variante":
-    add "HumanVariantMedal" to {_kit::*}
+  else if {_racekey} is "humano" or {_racekey} is "human":
+    add "VersatilityCharm" to {_kit::*}
+    add "HumanBanner" to {_kit::*}
+    add "HumanMedal" to {_kit::*}
+  else if {_racekey} is "humano_padrao" or {_racekey} is "human_standard":
+    add "VersatilityCharm" to {_kit::*}
+    add "HumanBanner" to {_kit::*}
+    add "HumanMedal" to {_kit::*}
+  else if {_racekey} is "humano_variante" or {_racekey} is "human_variant":
+    add "VersatilityCharm" to {_kit::*}
+    add "HumanBanner" to {_kit::*}
+    add "TalentToken" to {_kit::*}
+    add "HumanSignet" to {_kit::*}
   else if {_racekey} is "meio_elfo":
     add "HalfElfHarmonyOrb" to {_kit::*}
   else if {_racekey} is "meio_orc":
@@ -204,6 +243,9 @@ function give_race_kit(p: player, raceKey: text):
     loop {_kit::*}:
       give {_p} mythicitem:%loop-value%
     execute console command "raceseffects reset %uuid of {_p}%"
+    if {_racekey} starts with "humano" or {_racekey} starts with "human":
+      if function "human_sync_metadata" is defined:
+        human_sync_metadata({_p})
     send "&aKit racial entregue e cooldowns resetados." to {_p}
   else:
     send "&cRaça desconhecida." to {_p}
@@ -272,3 +314,179 @@ on move:
       delete {racial.combat.%player%}
       execute console command "raceseffects charges %player% regen"
       send action bar "&aCargas raciais regeneradas." to player
+# ---------------------------------------
+# Utilidades específicas dos Humanos
+# ---------------------------------------
+
+function human_can_swap(p: player) :: boolean:
+  if {racial.combat.%{_p}%} is set:
+    return false
+  if {human.profile.lock.%{_p}%} is true:
+    return false
+  return true
+
+function human_profile_on_cooldown(p: player) :: boolean:
+  if {human.profile.last.%{_p}%} is not set:
+    return false
+  set {_elapsed} to difference between now and {human.profile.last.%{_p}%}
+  set {_req} to human_profile_required(p)
+  if {_elapsed} >= {_req}:
+    return false
+  return true
+
+function human_profile_cooldown(p: player) :: number:
+  if {human.profile.last.%{_p}%} is not set:
+    return 0
+  set {_elapsed} to difference between now and {human.profile.last.%{_p}%}
+  set {_req} to human_profile_required(p)
+  set {_remain} to {_req} - {_elapsed}
+  if {_remain} < 0:
+    set {_remain} to 0
+  return {_remain}
+
+function human_profile_required(p: player) :: number:
+  if {human.profile.req.%{_p}%} is set:
+    return {human.profile.req.%{_p}%}
+  set {_base} to 120
+  if {skillapi.tier.%{_p}%} is "T4":
+    set {_base} to 105
+  else if {skillapi.tier.%{_p}%} is "T3":
+    set {_base} to 110
+  else if {skillapi.tier.%{_p}%} is "T2":
+    set {_base} to 115
+  set {human.profile.req.%{_p}%} to {_base}
+  return {_base}
+
+function human_next_profile(p: player) :: text:
+  set {_current} to {human.profile.%{_p}%}
+  if {_current} is not set or {_current} is "oportunista":
+    return "tatica"
+  else if {_current} is "tatica":
+    return "disciplinada"
+  else if {_current} is "disciplinada":
+    return "oportunista"
+  return "tatica"
+
+function human_apply_profile(p: player, profile: text):
+  set {_profile} to lowercase of {_profile}
+  set {human.profile.%{_p}%} to {_profile}
+  set {human.profile.last.%{_p}%} to now
+  delete {human.profile.req.%{_p}%}
+  execute console command "{@skillcmd} %{_p}% Human_Versatility_Switch"
+  if {_profile} is "tatica":
+    execute console command "{@skillcmd} %{_p}% Human_Profile_Tatica"
+    set {_label} to "&bTática"
+  else if {_profile} is "disciplinada":
+    execute console command "{@skillcmd} %{_p}% Human_Profile_Disciplinada"
+    set {_label} to "&aDisciplinada"
+  else:
+    execute console command "{@skillcmd} %{_p}% Human_Profile_Oportunista"
+    set {_label} to "&6Oportunista"
+  human_sync_metadata({_p})
+  send action bar "&fPerfil ativo: %{_label}%" to {_p}
+
+function human_sync_metadata(p: player):
+  if {human.profile.%{_p}%} is set:
+    set {_profile} to {human.profile.%{_p}%}
+    if {_profile} is "tatica":
+      set {_label} to "Tática"
+    else if {_profile} is "disciplinada":
+      set {_label} to "Disciplinada"
+    else:
+      set {_label} to "Oportunista"
+    execute console command "raceseffects metadata %uuid of {_p}% human_profile %{_label}%"
+  if {human.talent.%{_p}%} is set:
+    set {_talent} to {human.talent.%{_p}%}
+    if {_talent} is "perito":
+      set {_talent_label} to "Perito Pragmático"
+    else if {_talent} is "robustez":
+      set {_talent_label} to "Robustez Prática"
+    else:
+      set {_talent_label} to "Iniciativa Afiada"
+    execute console command "raceseffects metadata %uuid of {_p}% human_talent_choice %{_talent_label}%"
+  else:
+    execute console command "raceseffects metadata %uuid of {_p}% human_talent_choice Nenhum"
+
+function human_handle_talent(p: player, arg: text):
+  set {_mode} to "auto"
+  if arg is set:
+    set {_opt} to lowercase of arg
+    if {_opt} is "reset" or {_opt} is "limpar":
+      if {_p} has permission "skript.command.talento.reset":
+        delete {human.talent.%{_p}%}
+        human_sync_metadata({_p})
+        send "&aTalento humano limpo. Selecione novamente com /talento." to {_p}
+      else:
+        send "&cSomente staff pode resetar talentos." to {_p}
+      stop
+    else if {_opt} is "ativar":
+      set {_mode} to "activate"
+  if {human.talent.%{_p}%} is not set:
+    if {_mode} is "activate":
+      send "&cEscolha um talento primeiro com /talento." to {_p}
+      stop
+    if {racial.combat.%{_p}%} is set:
+      send "&cSaia de combate para escolher um talento." to {_p}
+      stop
+    human_open_talent_gui({_p})
+  else:
+    set {_choice} to {human.talent.%{_p}%}
+    execute console command "{@skillcmd} %{_p}% Human_Talent_Activate"
+    if {_choice} is "perito":
+      set {_label} to "Perito Pragmático"
+      execute console command "{@skillcmd} %{_p}% Human_Talent_Perito"
+    else if {_choice} is "robustez":
+      set {_label} to "Robustez Prática"
+      execute console command "{@skillcmd} %{_p}% Human_Talent_Robustez"
+    else:
+      set {_label} to "Iniciativa Afiada"
+      execute console command "{@skillcmd} %{_p}% Human_Talent_Iniciativa"
+    send action bar "&dTalento ativo: %{_label}%" to {_p}
+
+function human_open_talent_gui(p: player):
+  open virtual chest inventory with size 9 named "&dTalentos Humanos" to {_p}
+  format slot 2 of {_p}'s current inventory with enchanted book named "&aPerito Pragmático" with lore "&7+15% alcance/precisão de projéteis." to close then run human_select_talent({_p}, "perito")
+  format slot 4 of {_p}'s current inventory with shield named "&6Robustez Prática" with lore "&7Escudo leve de 120 pontos (6s)." to close then run human_select_talent({_p}, "robustez")
+  format slot 6 of {_p}'s current inventory with feather named "&bIniciativa Afiada" with lore "&7Sprint curto + anti empurrão." to close then run human_select_talent({_p}, "iniciativa")
+  send "&dSelecione um talento humano variante." to {_p}
+
+function human_select_talent(p: player, choice: text):
+  set {_choice} to lowercase of choice
+  if {human.talent.%{_p}%} is set:
+    send "&cTalento já escolhido. Contate staff para resetar." to {_p}
+    close {_p}'s current inventory
+    stop
+  if {_choice} is "perito":
+    set {_label} to "Perito Pragmático"
+  else if {_choice} is "robustez":
+    set {_label} to "Robustez Prática"
+  else:
+    set {_label} to "Iniciativa Afiada"
+  set {human.talent.%{_p}%} to {_choice}
+  close {_p}'s current inventory
+  human_sync_metadata({_p})
+  send "&aTalento %{_label}% definido! Use /talento para ativá-lo." to {_p}
+
+on inventory click:
+  if name of event-inventory is "&dTalentos Humanos":
+    cancel event
+
+on right click:
+  set {_item} to player's tool
+  if {_item} is not set:
+    stop
+  set {_lore::*} to lore of {_item}
+  if {_lore::*} is not set:
+    stop
+  if {_lore::1} contains "Versatilidade" or "adaptabilidade":
+    execute player command "versatilidade"
+    cancel event
+  else if {_lore::1} contains "Renome" or "buff em área":
+    execute player command "renome"
+    cancel event
+  else if {_lore::1} contains "talento" or "Talento":
+    if player is sneaking:
+      execute player command "talento ativar"
+    else:
+      execute player command "talento"
+    cancel event
