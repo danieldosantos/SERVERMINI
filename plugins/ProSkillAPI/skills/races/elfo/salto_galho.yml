@@ -1,0 +1,24 @@
+# ProSkillAPI - Salto de Galho
+skills:
+  SaltoGalho:
+    display: "&aSalto de Galho"
+    type: ACTIVE
+    skill_class: racial
+    description: "Impulsiona 6 blocos na direção visada e aplica queda lenta por 3s."
+    tiers:
+      T1: { cooldown: 45, distance: 6, slowfall: 3 }
+      T2: { cooldown: 45, distance: 6, slowfall: 3 }
+      T3: { cooldown: 45, distance: 6, slowfall: 3.5 }
+      T4: { cooldown: 45, distance: 7, slowfall: 3.5 }
+    cost:
+      resource: stamina
+      amount: 12
+    effects:
+      - target: self
+        type: leap
+        distance: { tier: distance }
+      - target: self
+        type: status
+        id: slow_fall
+        duration: { tier: slowfall }
+    notes: "Velocidade máxima continua limitada a +0.05; usa queda lenta para controle vertical."

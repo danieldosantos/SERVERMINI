@@ -4,6 +4,19 @@
 options:
   skillcmd: psa cast
 
+command /racial:
+  trigger:
+    if player has permission "lp.race_elfo":
+      send "&a[Racial Élfica] /fae_passos para deslocar-se 5 blocos (CD 45s)."
+      if player has permission "lp.race_elfo.alto":
+        send "&d[Alto Elfo] /truque_arcano <seta|barreira|piscar> para selecionar e usar o truque."
+      if player has permission "lp.race_elfo.drow":
+        send "&5[Drow] /luzes_feericas e /passo_umbratico disponíveis. Evite luz solar direta!"
+      if player has permission "lp.race_elfo.floresta":
+        send "&a[Elfo da Floresta] /marca_bosque e /salto_galho prontos para emboscar." 
+    else:
+      send "&7Nenhum traço elfo encontrado."
+
 command /sopro_draco:
   trigger:
     if player has permission "lp.race_draconato":
@@ -11,19 +24,44 @@ command /sopro_draco:
     else:
       send "&cRequer sangue dracônico."
 
-command /truque_arcano:
+command /fae_passos:
+  trigger:
+    if player has permission "lp.race_elfo":
+      execute console command "{@skillcmd} %player% FaePassos"
+    else:
+      send "&cSomente elfos."
+
+command /truque_arcano [<text>]:
   trigger:
     if player has permission "lp.race_elfo.alto":
-      execute console command "{@skillcmd} %player% TruqueArcano"
+      if arg-1 is set:
+        set {_choice} to lowercase of arg-1
+        if {_choice} is "seta" or "seta_arcana":
+          set {race.truque_arcano.%player%} to "seta"
+          send "&dTruque configurado para Seta Arcana."
+          stop
+        else if {_choice} is "barreira" or "barreira_cintilante":
+          set {race.truque_arcano.%player%} to "barreira"
+          send "&dTruque configurado para Barreira Cintilante."
+          stop
+        else if {_choice} is "piscar" or "piscar_breve":
+          set {race.truque_arcano.%player%} to "piscar"
+          send "&dTruque configurado para Piscar Breve."
+          stop
+        else:
+          send "&cOpção inválida. Use seta, barreira ou piscar."
+          stop
+      set {_mode} to {race.truque_arcano.%player%}
+      if {_mode} is not set:
+        set {_mode} to "seta"
+      if {_mode} is "barreira":
+        execute console command "{@skillcmd} %player% TruqueArcanoBarreira"
+      else if {_mode} is "piscar":
+        execute console command "{@skillcmd} %player% TruqueArcanoPiscar"
+      else:
+        execute console command "{@skillcmd} %player% TruqueArcanoSeta"
     else:
       send "&cSomente altos elfos."
-
-command /passos_faes:
-  trigger:
-    if player has permission "lp.race_elfo.floresta":
-      execute console command "{@skillcmd} %player% PassosFaes"
-    else:
-      send "&cSomente elfos da floresta."
 
 command /luzes_feericas:
   trigger:
@@ -32,12 +70,26 @@ command /luzes_feericas:
     else:
       send "&cSomente drows."
 
-command /manto_sombras:
+command /passo_umbratico:
   trigger:
     if player has permission "lp.race_elfo.drow":
-      execute console command "{@skillcmd} %player% MantoSombras"
+      execute console command "{@skillcmd} %player% PassoUmbratico"
     else:
       send "&cSomente drows."
+
+command /marca_bosque:
+  trigger:
+    if player has permission "lp.race_elfo.floresta":
+      execute console command "{@skillcmd} %player% MarcaBosque"
+    else:
+      send "&cSomente elfos da floresta."
+
+command /salto_galho:
+  trigger:
+    if player has permission "lp.race_elfo.floresta":
+      execute console command "{@skillcmd} %player% SaltoGalho"
+    else:
+      send "&cSomente elfos da floresta."
 
 command /canto_cativante:
   trigger:
@@ -117,10 +169,12 @@ function give_race_kit(p: player, raceKey: text):
     add "MountainBastionCharm" to {_kit::*}
   else if {_raceKey} is "draconato":
     add "DraconicCharm" to {_kit::*}
+  else if {_raceKey} is "elfo":
+    add "ElvenMoonbrooch" to {_kit::*}
   else if {_raceKey} is "elfo_alto":
-    add "HighElfFoci" to {_kit::*}
+    add "HighElfCrystal" to {_kit::*}
   else if {_raceKey} is "elfo_floresta":
-    add "ForestElfQuiver" to {_kit::*}
+    add "ForestLeafCharm" to {_kit::*}
   else if {_raceKey} is "elfo_drow":
     add "DrowMoonbrooch" to {_kit::*}
   else if {_raceKey} is "gnomo_floresta":
@@ -159,6 +213,9 @@ command /kit_racial_anao_montanha:
 command /kit_racial_draconato:
   trigger:
     give_race_kit(player, "draconato")
+command /kit_racial_elfo:
+  trigger:
+    give_race_kit(player, "elfo")
 command /kit_racial_elfo_alto:
   trigger:
     give_race_kit(player, "elfo_alto")

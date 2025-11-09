@@ -1,0 +1,59 @@
+# Raça Base: Elfo
+race_id: elfo_base
+name: "Elfo"
+identity: "Ancestrais feéricos de reflexos rápidos e sentidos aguçados."
+luckperms:
+  required: "race_elfo"
+  inherit: null
+tags:
+  - elf
+placeholders:
+  racial_cd_main: "{cooldown:skill_fae_passos}"
+  racial_buff_graca: "{status:graca_elfica}"
+passives:
+  graca_elfica:
+    name: "Graça Élfica"
+    type: speed_boost
+    trigger: out_of_combat
+    duration: 12
+    cooldown: 30
+    uptime_cap: 0.4
+    speed_bonus: 0.015
+    notes: "Escala de +0.01 (T1) até +0.02 (T4) via curva de tier interna, respeitando cap global +0.05."
+    description: "Ao sair de combate ganha velocidade feérica por 12s (CD interno 30s)."
+  sentidos_aguçados:
+    name: "Sentidos Aguçados"
+    type: detection
+    trigger: awareness_ping
+    duration: 18
+    cooldown: 30
+    uptime_cap: 0.6
+    range_multiplier: 0.05
+    description: "+5% de alcance de detecção de inimigos; ativa apenas fora de stealth aliado."
+  transe:
+    name: "Transe"
+    type: regen_boost
+    trigger: out_of_combat
+    duration: 10
+    cooldown: 45
+    uptime_cap: 0.4
+    health_regen_percent: 0.02
+    description: "Meditando fora de combate regenera 2% da vida máxima por segundo (leve, não empilha)."
+actives:
+  fae_passos:
+    name: "Fae Passos"
+    skill: FaePassos
+    cooldown: 45
+    charges: 1
+    description: "Dash de 5 blocos e redução de empurrões por 2s."
+resistances: {}
+synergy_notes:
+  - "Combina com classes ágeis que alternam entre combate e descanso para manter mobilidade controlada."
+  - "Sentidos Aguçados serve de HUD para detectar aproximações em guerras de facção sem ultrapassar 60% uptime."
+tests:
+  pve:
+    - "Executar dungeon com janelas de descanso: validar Graça ativa ≤40% do tempo e regen fora de combate."
+    - "Caçada noturna verificando alcance aumentado em mobs furtivos."
+  pvp:
+    - "Arena 1v1 alternando burst e kite garantindo velocidade efetiva ≤+0.05."
+    - "Escaramuça de cerco usando /fae_passos para reposicionar sem abusar de knockback."

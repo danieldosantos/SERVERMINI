@@ -1,0 +1,29 @@
+# ProSkillAPI - Luzes Feéricas dos Drow
+skills:
+  LuzesFeericas:
+    display: "&5Luzes Feéricas"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Emanam clarões feéricos em 7 blocos, revelando inimigos, removendo furtividade
+      e aplicando marca que reduz evasão. Duração 8 segundos.
+    tiers:
+      T1: { cooldown: 75, radius: 7, duration: 8, evasion_reduction: 0.08 }
+      T2: { cooldown: 75, radius: 7, duration: 8, evasion_reduction: 0.09 }
+      T3: { cooldown: 75, radius: 7, duration: 9, evasion_reduction: 0.1 }
+      T4: { cooldown: 75, radius: 8, duration: 9, evasion_reduction: 0.1 }
+    cost:
+      resource: mana
+      amount: 22
+    effects:
+      - target: enemies_radius
+        radius: { tier: radius }
+        type: reveal
+        duration: { tier: duration }
+      - target: enemies_radius
+        radius: { tier: radius }
+        type: debuff
+        id: evasion
+        value: { tier: evasion_reduction }
+        duration: { tier: duration }
+    notes: "A redução de evasão respeita limite global para evitar lock infinito."
