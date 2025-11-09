@@ -1,0 +1,42 @@
+name: Protecao Sagrada
+type: active
+max-level: 4
+requires:
+  class: cleric
+description:
+  - "Ergue um escudo sagrado que absorve dano moderado."
+  - "Escala 120/150/190/240 pontos por tier."
+  - "Cooldown entre 60 e 75 segundos conforme investimentos."
+icon: SHIELD
+mana:
+  base: 45
+  scale: 15
+cooldown:
+  base: 75
+  scale: -5
+  minimum: 60
+range:
+  base: 10
+  scale: 1
+custom:
+  shield:
+    tier1: 120
+    tier2: 150
+    tier3: 190
+    tier4: 240
+  duration: 12
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        indicator: shield
+      - type: absorb
+        amount: "%custom.shield%"
+        duration: "%custom.duration%"
+      - type: message
+        targets: target
+        text: "&b[Clérigo] Você está sob Proteção Sagrada por %custom.duration%s!"
+messages:
+  cast: "&b[Clérigo] %target% recebe um escudo de %custom.shield% pontos."

@@ -1,0 +1,40 @@
+name: Estilhaco Consagrado
+type: active
+max-level: 4
+requires:
+  subclass: cleric_war
+description:
+  - "Arremessa estilhaço radiante causando 150% de dano."
+  - "Aplica vulnerabilidade de 10% por 8s no alvo atingido."
+icon: SPECTRAL_ARROW
+mana:
+  base: 45
+  scale: 12
+cooldown:
+  base: 60
+  scale: -4
+  minimum: 48
+range:
+  base: 18
+  scale: 2
+custom:
+  damage-multiplier: 1.50
+  vulnerability: 0.10
+  duration: 8
+components:
+  cast:
+    sequence:
+      - type: projectile
+        speed: 1.4
+        range: "%range%"
+        hit:
+          - type: damage
+            modifier: "%custom.damage-multiplier%"
+            element: holy
+          - type: debuff
+            key: vulnerabilidade_radiant
+            stat: damage-taken
+            value: "%custom.vulnerability%"
+            duration: "%custom.duration%"
+messages:
+  cast: "&c[Domínio da Guerra] Estilhaço Consagrado lançado!"

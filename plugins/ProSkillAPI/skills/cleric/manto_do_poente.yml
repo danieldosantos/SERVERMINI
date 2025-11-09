@@ -1,0 +1,39 @@
+name: Manto do Poente
+type: active
+max-level: 4
+requires:
+  subclass: cleric_twilight
+description:
+  - "Concede visão noturna e reduz dano a distância em 25% por 12s."
+  - "Ideal para avanços noturnos sem ultrapassar caps de mitigação."
+icon: PURPLE_DYE
+mana:
+  base: 35
+  scale: 9
+cooldown:
+  base: 60
+  scale: -4
+  minimum: 48
+custom:
+  duration: 12
+  ranged-reduction: 0.25
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: 6
+        targets: allies
+      - type: buff
+        key: manto_visao
+        stat: night-vision
+        duration: "%custom.duration%"
+      - type: buff
+        key: manto_reducao
+        stat: ranged-damage-reduction
+        value: "%custom.ranged-reduction%"
+        duration: "%custom.duration%"
+        diminishing-cap: 0.45
+      - type: message
+        text: "&5[Domínio do Crepúsculo] Manto do Poente envolve você."
+messages:
+  cast: "&5[Domínio do Crepúsculo] Manto do Poente ativo por 12s."

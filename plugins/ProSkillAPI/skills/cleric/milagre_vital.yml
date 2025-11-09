@@ -1,0 +1,44 @@
+name: Milagre Vital
+type: ultimate
+max-level: 4
+requires:
+  subclass: cleric_life
+description:
+  - "Ressuscita um aliado caído com 60% da vida e invulnerável por 4s."
+  - "Ativa bloqueio em arenas PvP via script externo."
+icon: RESPAWN_ANCHOR
+mana:
+  base: 80
+  scale: 20
+cooldown:
+  base: 240
+  scale: 0
+resource:
+  divinity:
+    cost: 1
+    minimum: 1
+range:
+  base: 8
+  scale: 2
+custom:
+  revive-health: 0.60
+  invul-duration: 4
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        filter: fallen-allies
+      - type: revive
+        health: "%custom.revive-health%"
+      - type: buff
+        key: milagre_vital_invul
+        stat: invulnerability
+        duration: "%custom.invul-duration%"
+      - type: message
+        targets: target
+        text: "&a[Domínio da Vida] Você foi ressuscitado pelo Milagre Vital!"
+messages:
+  cast: "&a[Domínio da Vida] %target% retorna à vida com 60% de HP!"
+  fail-target: "&cNecessário um aliado derrotado dentro do alcance."

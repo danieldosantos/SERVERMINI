@@ -1,0 +1,40 @@
+name: Marcha do Zelote
+type: active
+max-level: 4
+requires:
+  subclass: cleric_war
+description:
+  - "+0,04 velocidade de movimento e resistência a empurrões por 8s."
+  - "Mantém limites de controle ao não remover fraquezas raciais."
+icon: IRON_BOOTS
+mana:
+  base: 35
+  scale: 8
+cooldown:
+  base: 75
+  scale: -5
+  minimum: 60
+custom:
+  duration: 8
+  speed: 0.04
+  knockback: 0.40
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: 8
+        targets: allies
+      - type: buff
+        key: marcha_velocidade
+        stat: movement-speed
+        value: "%custom.speed%"
+        duration: "%custom.duration%"
+      - type: buff
+        key: marcha_knock
+        stat: knockback-resist
+        value: "%custom.knockback%"
+        duration: "%custom.duration%"
+      - type: message
+        text: "&c[Domínio da Guerra] Marcha do Zelote acelera os aliados!"
+messages:
+  cast: "&c[Domínio da Guerra] Marcha do Zelote ativa por 8s."

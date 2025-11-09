@@ -1,0 +1,35 @@
+name: Refugio Noturno
+type: active
+max-level: 4
+requires:
+  subclass: cleric_twilight
+description:
+  - "Cria um domo de 6 blocos que bloqueia projéteis por 8s."
+  - "Consumível via Canalizar Divindade para resposta instantânea."
+icon: AMETHYST_SHARD
+mana:
+  base: 55
+  scale: 14
+cooldown:
+  base: 90
+  scale: -5
+  minimum: 75
+custom:
+  radius: 6
+  duration: 8
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%custom.radius%"
+        targets: allies
+        indicator: dome
+      - type: barrier
+        shape: dome
+        radius: "%custom.radius%"
+        duration: "%custom.duration%"
+        block-projectiles: true
+      - type: message
+        text: "&5[Domínio do Crepúsculo] Refúgio Noturno ergueu-se!"
+messages:
+  cast: "&5[Domínio do Crepúsculo] Domo protetor ativo por 8s."

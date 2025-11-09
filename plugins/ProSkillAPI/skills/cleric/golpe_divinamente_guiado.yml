@@ -1,0 +1,46 @@
+name: Golpe Divinamente Guiado
+type: active
+max-level: 4
+requires:
+  subclass: cleric_war
+description:
+  - "Bênção ofensiva para o próximo ataque de um aliado."
+  - "+30% dano e penetração de armadura, dura até 12s ou até atacar."
+icon: ENCHANTED_BOOK
+mana:
+  base: 40
+  scale: 10
+cooldown:
+  base: 45
+  scale: -3
+  minimum: 36
+range:
+  base: 12
+  scale: 2
+custom:
+  duration: 12
+  damage-bonus: 0.30
+  armor-pen: 0.30
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        filter: allies
+      - type: buff
+        key: golpe_guiado
+        triggers: next-hit
+        stat: damage
+        value: "%custom.damage-bonus%"
+        duration: "%custom.duration%"
+      - type: buff
+        key: golpe_guiado_pen
+        triggers: next-hit
+        stat: armor-penetration
+        value: "%custom.armor-pen%"
+        duration: "%custom.duration%"
+      - type: message
+        text: "&c[Domínio da Guerra] Seu próximo ataque será guiado pelo divino!"
+messages:
+  cast: "&c[Domínio da Guerra] %target% recebe Golpe Divinamente Guiado."

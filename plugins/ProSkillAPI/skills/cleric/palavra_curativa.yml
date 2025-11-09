@@ -1,0 +1,48 @@
+name: Palavra Curativa
+type: active
+max-level: 4
+requires:
+  class: cleric
+description:
+  - "Cura alvo aliado e remove um efeito debilitante leve."
+  - "CD individual por alvo: 30s."
+  - "Custo de mana escala por tier."
+icon: GHAST_TEAR
+mana:
+  base: 35
+  scale: 10
+cooldown:
+  base: 30
+  scale: -2
+  minimum: 20
+range:
+  base: 12
+  scale: 1
+custom:
+  target-filter: allies
+  per-target-cooldown: 30
+  cleanse-level: 1
+  heal:
+    tier1: 14
+    tier2: 26
+    tier3: 42
+    tier4: 64
+  debuff-types:
+    - poison
+    - slow
+    - burn
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        indicator: particles
+      - type: heal
+        value: "%custom.heal%"
+        scaling: max-health
+      - type: cleanse
+        level: 1
+messages:
+  cast: "&a[Clérigo] Palavra Curativa restaura %custom.heal%% da vida de %target%."
+  fail: "&cVocê precisa mirar em um aliado a até %range% blocos."

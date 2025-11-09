@@ -1,0 +1,20 @@
+Skill,Tipo,Custo (Mana/Charge),Duração,CD (s),Dano/Redução/Cura,Área,Notas PvP,Tier
+Palavra Curativa,Ativa,35-65 mana,Instantâneo,30 alvo,18-64% HP alvo,Alvo único,Aplica cleanse leve,T1-T4
+Protecao Sagrada,Ativa,45-90 mana,12s,75-60,Escudo 120-240,Alvo único,Não acumula com barreiras mágicas,T1-T4
+Aura de Fe,Ativa,55-100 mana,12s,105-90,Mitigação 10-15%,6-9 blocos,Uptime 13% garante <=60%,T2-T4
+Canalizar Divindade,Recurso,20-35 mana + 1 carga,Instantâneo,120,Dispara efeito de domínio,Self,Travado por charges,T2-T4
+Fonte Restauradora,Ativa,50-86 mana,Instantâneo,45-36,Cura 18% + cleanse lvl2,Alvo único,Usar CD interno para PvP,T2-T4
+Escudo de Fe,Ativa,55-95 mana,8s,60-48,Escudo 150 +15% DR,6-9 blocos,Diminishing cap 45%,T2-T4
+Toque Purificador,Ativa,40-70 mana,Instantâneo,75-60,Cura 5% + remove venenos,5 blocos,Limpa venenos/doenças,T2-T4
+Bencao Abundante,Ativa,65-110 mana,12s,105-90,+20% cura recebida,6 blocos,Cap em 60% healing,T3-T4
+Milagre Vital,Ultimate,80-120 mana +1 charge,4s invuln,240,Ressurreição 60% HP,8-10 blocos,Bloqueado em arenas,T4
+Golpe Divinamente Guiado,Ativa,40-70 mana,Até acerto/12s,45-36,+30% dano/penetração,Alvo único,Sem stack com outros next-hit,T2-T4
+Estilhaco Consagrado,Ativa,45-80 mana,8s debuff,60-48,150% dano +10% vuln,Projétil linha,Vulnerabilidade limitada,T2-T4
+Estandarte Sagrado,Ativa,60-100 mana,10s,90-75,+10% dano +10% DR,6 blocos,Respeita cap 45%,T3-T4
+Marcha do Zelote,Ativa,35-63 mana,8s,75-60,+0.04 speed +40% KB,8 blocos,Não remove slow raciais,T2-T4
+Coroa do Campeao,Ultimate,70-110 mana,12s,210,+50% dano radiante +5% cura,8 blocos,Recurso sem overheal,T4
+Manto do Poente,Ativa,35-71 mana,12s,60-48,-25% dano distância,6 blocos,Combina com resist até 45%,T2-T4
+Raio Crepuscular,Ativa,45-81 mana,6s slow,50-40,140% dano +40% slow,Projétil alvo único,Slow respeita imunidades,T2-T4
+Refugio Noturno,Ativa,55-94 mana,8s,90-75,Barreira projétil,Raio 6,Não bloqueia melee,T3-T4
+Bruma Reconfortante,Ativa,70-118 mana,6s,120-100,Cura 5%/s (30%),6 blocos,Remove medo/confusão,T3-T4
+Eclipse Sagrado,Ultimate,80-130 mana,15s,240,-visão inimiga 70% +20% cura,8 blocos,Visão reduzida mas não cega,T4

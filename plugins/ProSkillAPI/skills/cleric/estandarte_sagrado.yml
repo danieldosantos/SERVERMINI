@@ -1,0 +1,43 @@
+name: Estandarte Sagrado
+type: active
+max-level: 4
+requires:
+  subclass: cleric_war
+description:
+  - "Ergue um estandarte que fortalece aliados próximos."
+  - "+10% dano causado e +10% mitigação por 10s." 
+icon: BANNER
+mana:
+  base: 60
+  scale: 15
+cooldown:
+  base: 90
+  scale: -5
+  minimum: 75
+custom:
+  radius: 6
+  duration: 10
+  damage-bonus: 0.10
+  mitigation: 0.10
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%custom.radius%"
+        indicator: beacon
+        targets: allies
+      - type: buff
+        key: estandarte_dano
+        stat: damage
+        value: "%custom.damage-bonus%"
+        duration: "%custom.duration%"
+      - type: buff
+        key: estandarte_mitigacao
+        stat: damage-reduction
+        value: "%custom.mitigation%"
+        duration: "%custom.duration%"
+        diminishing-cap: 0.45
+      - type: message
+        text: "&c[Domínio da Guerra] Estandarte Sagrado ergueu-se!"
+messages:
+  cast: "&c[Domínio da Guerra] Aliados fortalecidos por 10s."
