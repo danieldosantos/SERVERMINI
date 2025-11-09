@@ -1,0 +1,250 @@
+# Cleric War Domain skills
+T1:
+  Golpe_Divinamente_Guiado:
+    display: "Golpe Divinamente Guiado"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 20
+    cooldown: 45
+    target:
+      range: 12
+      filter: ally
+    effects:
+      buff:
+        stat: dano_proximo_ataque
+        amount: 0.30
+        penetration: 0.30
+        consume_on_hit: true
+    tags: [buff]
+  Estilhaco_Consagrado:
+    display: "Estilhaço Consagrado"
+    type: active
+    trigger: projectile
+    cost:
+      mana: 25
+    cooldown: 60
+    projectile:
+      speed: 1.2
+      max_distance: 18
+    effects:
+      damage:
+        amount: "1.5*spellpower"
+        type: radiante
+      debuff:
+        stat: vulnerabilidade
+        amount: 0.10
+        duration: 8
+    tags: [dano]
+  Marcha_do_Zelote:
+    display: "Marcha do Zelote"
+    type: active
+    trigger: self
+    cost:
+      mana: 20
+    cooldown: 60
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      buff_allies:
+        speed: 0.04
+        knockback_resistance: 1.0
+    tags: [buff]
+  Estandarte_Sagrado_Preparar:
+    display: "Estandarte Sagrado (Preparação)"
+    type: active
+    trigger: self
+    cost:
+      mana: 20
+    cooldown: 45
+    effects:
+      add_charge:
+        key: estandarte
+        max: 1
+    tags: [preparacao]
+T2:
+  Estandarte_Sagrado_Ativar:
+    display: "Estandarte Sagrado (Ativar)"
+    type: active
+    trigger: ground
+    cost:
+      mana: 30
+    cooldown: 90
+    requires_charge: estandarte
+    area:
+      radius: 6
+      duration: 10
+    effects:
+      buff_allies:
+        damage: 0.10
+        mitigation: 0.10
+    tags: [aura]
+  Uncao_do_Guerreiro:
+    display: "Unção do Guerreiro"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 25
+    cooldown: 75
+    target:
+      range: 12
+    effects:
+      buff:
+        stat: velocidade_ataque
+        amount: 0.15
+        lifesteal: 0.10
+        duration: 8
+    tags: [buff]
+  Martelo_Retumbante:
+    display: "Martelo Retumbante"
+    type: active
+    trigger: cone
+    cost:
+      mana: 30
+    cooldown: 75
+    cone:
+      length: 5
+      angle: 60
+    effects:
+      damage:
+        amount: "1.4*spellpower"
+        type: radiante
+      stun:
+        duration: 1.5
+        diminishing: true
+    tags: [controle]
+  Clarim_de_Avanco:
+    display: "Clarim de Avanço"
+    type: active
+    trigger: self
+    cost:
+      mana: 25
+    cooldown: 75
+    area:
+      radius: 6
+    effects:
+      pull_allies:
+        distance: 2
+      shield:
+        amount: 100
+        duration: 6
+    tags: [mobilidade]
+T3:
+  Baluarte_de_Aco_e_Fe:
+    display: "Baluarte de Aço e Fé"
+    type: active
+    trigger: ground
+    cost:
+      mana: 40
+    cooldown: 120
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      projectile_damage_reduction: 0.25
+      magic_reflect: 0.15
+    tags: [aura]
+  Investida_Consagrada:
+    display: "Investida Consagrada"
+    type: active
+    trigger: dash
+    cost:
+      mana: 35
+    cooldown: 75
+    dash:
+      distance: 6
+      path_width: 1.5
+    effects:
+      damage:
+        amount: "1.5*spellpower"
+        type: radiante
+    tags: [mobilidade, dano]
+  Bencao_do_Campeao:
+    display: "Benção do Campeão"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 35
+    cooldown: 90
+    target:
+      range: 12
+    effects:
+      buff:
+        penetration: 0.20
+        crit: 0.15
+        duration: 10
+    tags: [buff]
+  Coro_do_Estandarte:
+    display: "Coro do Estandarte"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 105
+    requires_active: estandarte
+    duration: 10
+    effects:
+      cooldown_reduction:
+        type: allies
+        amount: 0.12
+    tags: [suporte]
+T4:
+  Coroa_do_Campeao:
+    display: "Coroa do Campeão"
+    type: ultimate
+    trigger: self
+    cost:
+      mana: 50
+    cooldown: 210
+    duration: 12
+    effects:
+      aura:
+        radius: 8
+        bonus_damage_radiant: 0.50
+        lifesteal: 0.05
+    tags: [ultimate]
+  Juizo_de_Guerra:
+    display: "Juízo de Guerra"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 45
+    cooldown: 210
+    target:
+      range: 12
+    effects:
+      damage:
+        amount: "2.4*spellpower"
+        type: radiante
+      execute_threshold: 0.25
+      pvp_policy: servidor
+    tags: [dano]
+  Linha_Inquebravel:
+    display: "Linha Inquebrável"
+    type: active
+    trigger: self
+    cost:
+      mana: 45
+    cooldown: 120
+    area:
+      radius: 8
+      duration: 10
+    effects:
+      front_mitigation: 0.20
+      speed_penalty: 0.10
+    tags: [defesa]
+  Hino_de_Vitoria:
+    display: "Hino de Vitória"
+    type: active
+    trigger: self
+    cost:
+      mana: 40
+    cooldown: 105
+    duration: 12
+    effects:
+      on_kill:
+        mana_restore: 20
+        radius: 6
+        icd: 3
+    tags: [suporte]

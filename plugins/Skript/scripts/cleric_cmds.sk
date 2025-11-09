@@ -1,125 +1,69 @@
-# Glue de comandos do Clérigo - integra ProSkillAPI, MythicMobs e PlaceholderAPI
 options:
-  channel-cooldown: 120 seconds
-  aura-radius: 6
+  cleric-class: class_cleric
+  domain-life: class_cleric.life
+  domain-war: class_cleric.war
+  domain-twilight: class_cleric.twilight
 
-on load:
-  broadcast "&6[Skript] Comandos do Clérigo carregados."
+function clericUpdateHud(p: player):
+  set {_player} to {_p}
+  set {_uuid} to uuid of {_player}
+  set {_charges} to placeholder "%player_placeholderapi_channeled_charges%" with player {_player}
+  set {_cooldowns} to placeholder "%player_placeholderapi_skill_cds%" with player {_player}
+  set {_auras} to placeholder "%player_placeholderapi_active_auras%" with player {_player}
+  make console execute command "scoreboard players set %{_uuid}% cleric_cargas %{_charges}%"
+  make console execute command "scoreboard players set %{_uuid}% cleric_cds %{_cooldowns}%"
+  make console execute command "scoreboard players set %{_uuid}% cleric_auras %{_auras}%"
 
-function clericCast(p: player, ability: text):
-  set {_name} to name of p
-  if ability is "palavra":
-    execute console command "skillapi cast %{_name}% Palavra Curativa"
-  else if ability is "escudo":
-    execute console command "skillapi cast %{_name}% Protecao Sagrada"
-  else if ability is "aura":
-    execute console command "skillapi cast %{_name}% Aura de Fe"
-  else if ability is "bencao":
-    execute console command "skillapi cast %{_name}% Bencao Abundante"
-  else if ability is "purificar":
-    execute console command "skillapi cast %{_name}% Toque Purificador"
-  else if ability is "milagre":
-    if {cleric.pvp.lock.%{_name}%} is true:
-      send "&cNão é possível usar Milagre Vital em arenas PvP." to p
-    else:
-      execute console command "skillapi cast %{_name}% Milagre Vital"
-      set {cleric.resurrection.cd.%{_name}%} to now
-  else if ability is "golpe":
-    execute console command "skillapi cast %{_name}% Golpe Divinamente Guiado"
-  else if ability is "estilhaco":
-    execute console command "skillapi cast %{_name}% Estilhaco Consagrado"
-  else if ability is "estandarte":
-    execute console command "skillapi cast %{_name}% Estandarte Sagrado"
-  else if ability is "marcha":
-    execute console command "skillapi cast %{_name}% Marcha do Zelote"
-  else if ability is "coroa":
-    execute console command "skillapi cast %{_name}% Coroa do Campeao"
-  else if ability is "manto":
-    execute console command "skillapi cast %{_name}% Manto do Poente"
-  else if ability is "raio":
-    execute console command "skillapi cast %{_name}% Raio Crepuscular"
-  else if ability is "refugio":
-    execute console command "skillapi cast %{_name}% Refugio Noturno"
-  else if ability is "bruma":
-    execute console command "skillapi cast %{_name}% Bruma Reconfortante"
-  else if ability is "eclipse":
-    execute console command "skillapi cast %{_name}% Eclipse Sagrado"
-  else:
-    send "&cHabilidade desconhecida." to p
-
-command /cleric_cast <text>:
-  permission: class_cleric
-  permission message: "&cVocê não é um Clérigo."
+command /palavra [<text>]:
+  permission: {@cleric-class}
   trigger:
-    clericCast(player, arg 1)
+    make console execute command "psa cast Palavra_Curativa %player%"
 
-command /cura:
-  permission: class_cleric
+command /canalizar:
+  permission: {@cleric-class}
   trigger:
-    clericCast(player, "palavra")
+    make console execute command "psa channel %player%"
 
-command /escudo:
-  permission: class_cleric
+command /dominio_vida:
+  permission: {@domain-life}
   trigger:
-    clericCast(player, "escudo")
+    send "&aHabilidades do Domínio da Vida ativas." to player
 
-command /aura:
-  permission: class_cleric
+command /dominio_guerra:
+  permission: {@domain-war}
   trigger:
-    clericCast(player, "aura")
+    send "&cHabilidades do Domínio da Guerra ativas." to player
 
-command /canalizar [<text>]:
-  permission: class_cleric
+command /dominio_crepusculo:
+  permission: {@domain-twilight}
   trigger:
-    set {_charges} to placeholderapi "%skillapi_resource_divinity%" with player
-    if {_charges} parsed as number <= 0:
-      send "&cSem cargas de Canalizar Divindade." to player
-      stop
-    if {cleric.channel.last.%player%} is set:
-      if difference between now and {cleric.channel.last.%player%} < {@channel-cooldown}:
-        set {_remaining} to {@channel-cooldown} - (difference between now and {cleric.channel.last.%player%})
-        send "&eCanalizar Divindade disponível em %{_remaining}% segundos." to player
-        stop
-    if arg is set:
-      set {_name} to name of player
-      execute console command "skillapi cast %{_name}% Canalizar Divindade"
-      wait 2 ticks
-      clericCast(player, arg)
-      set {cleric.channel.last.%player%} to now
-    else:
-      send "&6Use /canalizar <efeito> (vida|guerra|crepusculo) para gastar uma carga." to player
-      send "&7Exemplos: /canalizar bencao, /canalizar golpe, /canalizar refugio." to player
+    send "&5Habilidades do Domínio do Crepúsculo ativas." to player
 
 command /kit_clerigo:
-  permission: class_cleric
+  permission: {@cleric-class}
   trigger:
     clear player's inventory
-    set {_name} to name of player
-    execute console command "cmi give %{_name}% LifeHolySymbol"
-    execute console command "cmi give %{_name}% LifeGuardianMace"
-    execute console command "cmi give %{_name}% WarSacredHammer"
-    execute console command "cmi give %{_name}% TwilightLantern"
-    send "&6Kit de testes do Clérigo entregue." to player
+    give player mythic item "Cleric_T1_Symbol"
+    give player mythic item "Cleric_T1_Lanterna_Twilight" if player has permission {@domain-twilight}
+    give player mythic item "Cleric_T2_Turbilo_Life" if player has permission {@domain-life}
+    give player mythic item "Cleric_T2_Maza_War" if player has permission {@domain-war}
+    give player mythic item "Cleric_T3_Cetro_Comum"
+    give player mythic item "Cleric_T3_Emblema_Twilight" if player has permission {@domain-twilight}
+    give player mythic item "Cleric_T4_Relic_Life" if player has permission {@domain-life}
+    give player mythic item "Cleric_T4_Estandarte_Supremo" if player has permission {@domain-war}
+    give player mythic item "Cleric_T4_Lanterna_Crepuscular" if player has permission {@domain-twilight}
+    apply regeneration 1 to player for 3 seconds
+    run clericUpdateHud(player)
 
-# Atualiza HUD via PlaceholderAPI
-every 5 seconds:
-  loop all players:
-    if loop-player has permission "class_cleric":
-      set {_mana} to placeholderapi "%skillapi_mana%" with loop-player
-      set {_charges} to placeholderapi "%skillapi_resource_divinity%" with loop-player
-      set {_cooldown} to placeholderapi "%skillapi_cooldown_protecao_sagrada%" with loop-player
-      if {_mana} is "":
-        set {_mana} to "--"
-      if {_charges} is "":
-        set {_charges} to "0"
-      if {_cooldown} is "":
-        set {_cooldown} to "0"
-      send action bar "&6Mana: %{_mana}% &f| &bCargas: %{_charges}% &f| &dCD Escudo: %{_cooldown}%s" to loop-player
+on right click:
+  if player has permission {@cleric-class}:
+    run clericUpdateHud(player)
 
-# Utilitário de testes para bloquear Milagre Vital em arenas PvP
-on region enter:
-  if "%region%" contains "arena":
-    set {cleric.pvp.lock.%player%} to true
-on region leave:
-  if "%region%" contains "arena":
-    delete {cleric.pvp.lock.%player%}
+on left click:
+  if player has permission {@cleric-class}:
+    run clericUpdateHud(player)
+
+on script load:
+  make console execute command "scoreboard objectives add cleric_cargas dummy"
+  make console execute command "scoreboard objectives add cleric_cds dummy"
+  make console execute command "scoreboard objectives add cleric_auras dummy"

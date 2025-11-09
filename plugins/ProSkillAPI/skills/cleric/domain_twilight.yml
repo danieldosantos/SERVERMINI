@@ -1,0 +1,244 @@
+# Cleric Twilight Domain skills
+T1:
+  Manto_do_Poente:
+    display: "Manto do Poente"
+    type: active
+    trigger: self
+    cost:
+      mana: 20
+    cooldown: 60
+    area:
+      radius: 6
+      duration: 10
+    effects:
+      vision: noite
+      ranged_damage_reduction: 0.25
+    tags: [defesa]
+  Raio_Crepuscular:
+    display: "Raio Crepuscular"
+    type: active
+    trigger: beam
+    cost:
+      mana: 25
+    cooldown: 50
+    beam:
+      length: 16
+      width: 1
+    effects:
+      damage:
+        amount: "1.4*spellpower"
+        type: radiante
+      slow:
+        amount: 0.40
+        duration: 3
+        diminishing: true
+    tags: [dano, controle]
+  Bruma_Reconfortante:
+    display: "Bruma Reconfortante"
+    type: active
+    trigger: ground
+    cost:
+      mana: 25
+    cooldown: 60
+    area:
+      radius: 5
+      duration: 5
+    effects:
+      heal_over_time:
+        amount_per_second: "0.04*target.max_health"
+      cleanse:
+        types: [mentais_leves]
+    tags: [cura]
+  Sino_da_Vigilia:
+    display: "Sino da Vigília"
+    type: active
+    trigger: self
+    cost:
+      mana: 20
+    cooldown: 60
+    area:
+      radius: 10
+      duration: 6
+    effects:
+      reveal: furtividade
+    tags: [detectar]
+T2:
+  Refugio_Noturno:
+    display: "Refúgio Noturno"
+    type: active
+    trigger: ground
+    cost:
+      mana: 30
+    cooldown: 90
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      projectile_block: true
+    tags: [defesa]
+  Laco_da_Penumbra:
+    display: "Laço da Penumbra"
+    type: active
+    trigger: ground
+    cost:
+      mana: 30
+    cooldown: 75
+    area:
+      radius: 5
+      duration: 2
+    effects:
+      root:
+        duration: 2
+        diminishing: true
+    tags: [controle]
+  Ritual_do_Ocaso:
+    display: "Ritual do Ocaso"
+    type: active
+    trigger: ground
+    cost:
+      mana: 30
+    cooldown: 90
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      debuff:
+        stat: dano_emitido
+        amount: -0.15
+    tags: [debuff]
+  Veu_dos_Astros:
+    display: "Véu dos Astros"
+    type: active
+    trigger: self
+    cost:
+      mana: 25
+    cooldown: 75
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      buff_allies:
+        dodge: 0.15
+        speed: 0.02
+    tags: [buff]
+T3:
+  Lanterna_do_Crepusculo:
+    display: "Lanterna do Crepúsculo"
+    type: active
+    trigger: ground
+    cost:
+      mana: 35
+    cooldown: 105
+    area:
+      radius: 6
+      duration: 10
+    effects:
+      heal_over_time:
+        amount_per_second: "0.03*target.max_health"
+      cleanse:
+        interval: 3
+        max: 1
+    tags: [cura]
+  Eclipse_Parcial:
+    display: "Eclipse Parcial"
+    type: active
+    trigger: ground
+    cost:
+      mana: 35
+    cooldown: 90
+    area:
+      radius: 8
+      duration: 6
+    effects:
+      debuff:
+        stat: precisao
+        amount: -0.10
+      reveal: true
+    tags: [controle]
+  Passos_Noturnos:
+    display: "Passos Noturnos"
+    type: active
+    trigger: blink
+    cost:
+      mana: 30
+    cooldown: 75
+    blink:
+      distance: 8
+      facing: true
+    effects:
+      stealth:
+        duration: 2
+    tags: [mobilidade]
+  Limiar_do_Anoitecer:
+    display: "Limiar do Anoitecer"
+    type: active
+    trigger: ground
+    cost:
+      mana: 35
+    cooldown: 90
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      buff_allies:
+        mitigation: 0.10
+    tags: [defesa]
+T4:
+  Eclipse_Sagrado:
+    display: "Eclipse Sagrado"
+    type: ultimate
+    trigger: self
+    cost:
+      mana: 50
+    cooldown: 240
+    duration: 12
+    effects:
+      local_night: true
+      ally_buff:
+        cura_recebida: 0.20
+    tags: [ultimate]
+  Circulo_Estelar:
+    display: "Círculo Estelar"
+    type: active
+    trigger: ground
+    cost:
+      mana: 45
+    cooldown: 120
+    area:
+      radius: 8
+      duration: 6
+    effects:
+      star_strikes:
+        count: 4
+        damage: "1.0*spellpower"
+        type: radiante
+    tags: [dano]
+  Ampulheta_Vespertina:
+    display: "Ampulheta Vespertina"
+    type: active
+    trigger: self
+    cost:
+      mana: 45
+    cooldown: 120
+    duration: 10
+    effects:
+      cooldown_reduction:
+        type: allies
+        amount: 0.15
+        cap_with_greater: true
+    tags: [suporte]
+  Sussurro_do_Poente:
+    display: "Sussurro do Poente"
+    type: active
+    trigger: ground
+    cost:
+      mana: 40
+    cooldown: 105
+    area:
+      radius: 8
+      duration: 8
+    effects:
+      fear:
+        duration: 2
+        diminishing: true
+    tags: [controle]

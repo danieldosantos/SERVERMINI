@@ -1,0 +1,240 @@
+# Cleric Life Domain skills
+T1:
+  Fonte_Restauradora:
+    display: "Fonte Restauradora"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 25
+    cooldown: 45
+    target:
+      range: 16
+    effects:
+      heal:
+        amount: "0.18*target.max_health"
+      cleanse:
+        max_stacks: 1
+        priority: any
+    tags: [cura]
+  Escudo_de_Fe:
+    display: "Escudo de Fé"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 25
+    cooldown: 60
+    target:
+      range: 14
+    effects:
+      shield:
+        amount: 150
+        duration: 8
+      mitigation:
+        amount: 0.15
+        duration: 8
+    tags: [escudo]
+  Toque_Purificador:
+    display: "Toque Purificador"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 20
+    cooldown: 60
+    target:
+      range: 12
+    effects:
+      cleanse:
+        types: [veneno, enfermidade]
+        max_stacks: 2
+    tags: [limpeza]
+  Bencao_de_Vida:
+    display: "Bênção de Vida"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 20
+    cooldown: 60
+    target:
+      range: 12
+    effects:
+      buff:
+        stat: cura_recebida
+        amount: 0.15
+        duration: 10
+    tags: [buff]
+T2:
+  Halo_Reconfortante:
+    display: "Halo Reconfortante"
+    type: active
+    trigger: ground
+    cost:
+      mana: 30
+    cooldown: 90
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      heal_over_time:
+        amount_per_second: "0.04*target.max_health"
+        tick: 1
+    tags: [aura, cura]
+  Graca_Abundante:
+    display: "Graça Abundante"
+    type: active
+    trigger: chain
+    cost:
+      mana: 30
+    cooldown: 75
+    chain:
+      jumps: 3
+      range: 8
+    effects:
+      heal:
+        amount: "0.12*target.max_health"
+    tags: [cura]
+  Vigilia_Sagrada:
+    display: "Vigília Sagrada"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 90
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      dot_reduction: 0.25
+    tags: [mitigacao]
+  Renovar:
+    display: "Renovar"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 25
+    cooldown: 60
+    target:
+      range: 16
+    effects:
+      heal_over_time:
+        amount_total: "0.18*target.max_health"
+        duration: 6
+    tags: [cura]
+T3:
+  Luz_Revivificante:
+    display: "Luz Revivificante"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 40
+    cooldown: 210
+    target:
+      range: 6
+      filter: ally_downed
+    effects:
+      resurrect:
+        health: 0.40
+        restrictions: [no_ranked_arenas]
+    tags: [ressurreicao]
+  Coro_de_Esperanca:
+    display: "Coro de Esperança"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 90
+    duration: 10
+    effects:
+      buff:
+        stat: cura_emitida
+        amount: 0.20
+    tags: [buff]
+  Manto_de_Misericordia:
+    display: "Manto de Misericórdia"
+    type: active
+    trigger: self
+    cost:
+      mana: 40
+    cooldown: 120
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      redirect_damage:
+        percent: 0.25
+        cap: server_cap
+        convert_to_heal: true
+    tags: [mitigacao, cura]
+  Restauracao_Acelerada:
+    display: "Restauração Acelerada"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 35
+    cooldown: 105
+    target:
+      range: 14
+    effects:
+      cleanse:
+        light: 2
+        heavy: 1
+    tags: [limpeza]
+T4:
+  Milagre_Vital:
+    display: "Milagre Vital"
+    type: ultimate
+    trigger: targeted
+    cost:
+      mana: 50
+    cooldown: 240
+    target:
+      range: 6
+      filter: ally_downed
+    effects:
+      resurrect:
+        health: 0.60
+        invulnerability: 4
+    tags: [ultimate, ressurreicao]
+  Santuario_Vivo:
+    display: "Santuário Vivo"
+    type: active
+    trigger: self
+    cost:
+      mana: 45
+    cooldown: 120
+    area:
+      radius: 8
+      duration: 12
+    effects:
+      buff_allies:
+        cura_recebida: 0.20
+        mitigacao: 0.10
+    tags: [aura]
+  Bencao_Transbordante:
+    display: "Benção Transbordante"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 40
+    cooldown: 105
+    target:
+      range: 16
+    effects:
+      heal_over_time:
+        amount_per_second: "0.10*target.max_health"
+        duration: 6
+      overflow_shield:
+        max: 200
+    tags: [cura]
+  Graca_Serena:
+    display: "Graça Serena"
+    type: active
+    trigger: self
+    cost:
+      mana: 40
+    cooldown: 120
+    duration: 10
+    effects:
+      cooldown_reduction:
+        type: healing_skills
+        amount: 0.20
+    tags: [buff]
