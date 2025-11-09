@@ -1,0 +1,54 @@
+# Skill: Resiliência Inabalável
+name: fighter_champion_unyielding_resilience
+display: "§aResiliência Inabalável"
+icon: TOTEM_OF_UNDYING
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+description:
+  - "§720% mitigação de dano e cura 6% em 8s."
+  - "§7Sinergiza com raças resistentes aplicando retornos decrescentes."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      ResistanceCap:
+        type: condition
+        data:
+          placeholder: "%raceseffects_physical_resist%"
+          compare: "<0.35"
+        children:
+          ApplyMitigation:
+            type: mechanic
+            data:
+              potion: DAMAGE_RESISTANCE
+              seconds-base: 8
+              seconds-scale: 0
+              amplifier-base: 0
+              amplifier-scale: 0
+      Diminishing:
+        type: mechanic
+        data:
+          command: "skript run fighter_resist_diminish %caster%"
+          silent: true
+      RegenLoop:
+        type: target
+        data:
+          shape: self
+          duration-base: 8
+          repeat: 20
+        children:
+          HealTick:
+            type: mechanic
+            data:
+              heal-percent-base: 0.0075
+              heal-percent-scale: 0
+      Message:
+        type: mechanic
+        data:
+          message: "§aVocê endurece contra a batalha!"
+          targets: self

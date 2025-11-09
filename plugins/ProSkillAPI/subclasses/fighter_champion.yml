@@ -1,0 +1,47 @@
+# Subclasse Campeão do Guerreiro
+name: Fighter_Champion
+display: "§6Campeão"
+description:
+  - "§7Aprimora golpes críticos e durabilidade sustentada."
+  - "§6Períodos de burst curtos sem ultrapassar 60% de uptime."
+options:
+  needs-permission: true
+  parent: Fighter
+  focus: dps
+  cooldown-profile:
+    burst-window: 45
+    sustain-window: 90
+skills:
+  tier1:
+    active:
+      - fighter_champion_superior_strike
+      - fighter_champion_unyielding_resilience
+    passive:
+      - fighter_martial_training
+  tier2:
+    active:
+      - fighter_champion_superior_strike
+      - fighter_champion_unyielding_resilience
+      - fighter_champion_gladiator_challenge
+    passive:
+      - fighter_martial_training
+  tier3:
+    active:
+      - fighter_champion_superior_strike
+      - fighter_champion_unyielding_resilience
+      - fighter_champion_gladiator_challenge
+      - fighter_champion_coliseum_leap
+    passive:
+      - fighter_martial_training
+  tier4:
+    active:
+      - fighter_champion_superior_strike
+      - fighter_champion_unyielding_resilience
+      - fighter_champion_gladiator_challenge
+      - fighter_champion_coliseum_leap
+      - fighter_champion_unforgettable_triumph
+    passive:
+      - fighter_martial_training
+notes:
+  - "Desafio do Gladiador força foco por 6s, respeitando caps de mitigação."
+  - "Triunfo Inesquecível é ultimate compartilhando CD 210s (janelado <60%)."

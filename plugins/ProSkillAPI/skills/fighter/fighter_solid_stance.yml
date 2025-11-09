@@ -1,0 +1,41 @@
+# Passiva: Postura Sólida
+name: fighter_solid_stance
+display: "§7Postura Sólida"
+icon: SHIELD
+type: Passive
+max-level: 1
+description:
+  - "§7Após bloquear um golpe, reduz dano físico recebido em 18% por 6s."
+  - "§8Tempo interno de 12s (uptime máx 50%)."
+components:
+  BlockedHit:
+    type: trigger
+    data:
+      group: enemy
+      cooldown: 12
+    children:
+      CheckBlocking:
+        type: condition
+        data:
+          placeholder: "%skills_blocking_state%"
+          compare: "==1"
+        children:
+          ApplyMitigation:
+            type: mechanic
+            data:
+              potion: DAMAGE_RESISTANCE
+              seconds-base: 6
+              seconds-scale: 0
+              amplifier-base: 0
+              amplifier-scale: 0
+              indicator: "§7Postura Sólida"
+          KnockbackStable:
+            type: mechanic
+            data:
+              command: "skript run fighter_knockback_buffer %caster%"
+              silent: true
+          Message:
+            type: mechanic
+            data:
+              message: "§7Você adota uma postura sólida."
+              targets: self

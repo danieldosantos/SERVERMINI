@@ -1,0 +1,46 @@
+# Skill: Teleporte Tático
+name: fighter_eldritchknight_tactical_teleport
+display: "§bTeleporte Tático"
+icon: ENDER_PEARL
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+description:
+  - "§7Teleporta 8 blocos na direção mirada e causa 80% de dano em área 3."
+  - "§8Consome canalização arcana; respeita limites de controle."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Teleport:
+        type: mechanic
+        data:
+          command: "skript run fighter_blink %caster% 8"
+          silent: true
+      Explosion:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 3
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 0.8
+              damage-scale: 0
+          Visual:
+            type: mechanic
+            data:
+              effect: ENCHANTMENT_TABLE
+              amount-base: 30
+              radius-base: 3
+      Message:
+        type: mechanic
+        data:
+          message: "§bVocê se move pelo campo com magia."
+          targets: self

@@ -1,0 +1,48 @@
+# Skill: Golpe Superior
+name: fighter_champion_superior_strike
+display: "§6Golpe Superior"
+icon: DIAMOND_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  range-base: 5
+  range-scale: 0
+description:
+  - "§7160% de dano corpo a corpo com +25% chance de crítico neste golpe."
+  - "§7Respeita limite PvP: não executa alvos acima de 30% HP."
+components:
+  Cast:
+    type: trigger
+    children:
+      TargetEnemy:
+        type: target
+        data:
+          shape: cone
+          range-base: 5
+          angle: 45
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 1.6
+              damage-scale: 0
+              indicator: "§6Golpe Superior"
+          CritBoost:
+            type: mechanic
+            data:
+              command: "skript run fighter_force_crit %caster%"
+              silent: true
+          ExecuteCheck:
+            type: condition
+            data:
+              placeholder: "%skills_target_health_ratio%"
+              compare: ">0.3"
+              fail-message: "§cExecução apenas abaixo de 30% de vida."
+      Message:
+        type: mechanic
+        data:
+          message: "§6Você desfere um Golpe Superior!"
+          targets: self

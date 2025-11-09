@@ -1,0 +1,42 @@
+# Skill: Lâmina Arcana
+name: fighter_eldritchknight_arcane_blade
+display: "§bLâmina Arcana"
+icon: ENCHANTED_BOOK
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 6
+description:
+  - "§7120% de dano + elemento escolhido (fogo, gelo, raio)."
+  - "§8Elemento definido via comando /eld_elemento (Skript)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 6
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 1.2
+              damage-scale: 0
+          ElementProc:
+            type: mechanic
+            data:
+              command: "skript run fighter_elemental_hit %caster% %target%"
+              silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§bSua lâmina brilha com energia arcana!"
+          targets: self

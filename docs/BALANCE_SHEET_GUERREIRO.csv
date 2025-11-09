@@ -1,0 +1,20 @@
+Skill,Tipo,Custo (Mana/—),Duração,CD,Dano/Redução,Área,Notas PvP,Tier
+Surto de Ação,Ativa,—,6s,120s,"+15% vel ataque","Self","Não reseta ultimates",T1
+Segundo Fôlego,Ativa,—,6s,180s,"12% + 8% cura","Self","Cura <=25% do dano causado",T1
+Treinamento Marcial,Passiva,—,4s,ICD 8s,"Penetração 12%","Alvo único","Skript aplica fraqueza leve",T1
+Postura Sólida,Passiva,—,6s,ICD 12s,"-18% dano","Self","Ativa com bloqueio registrado",T1
+Golpe Superior,Ativa,—,Instantâneo,45s,"160% dano","Cone 5b","Execução somente <30% HP",T2
+Resiliência Inabalável,Ativa,—,8s,75s,"-20% dano + cura 6%","Self","Respeita cap 45% resistência",T2
+Desafio do Gladiador,Ativa,—,6s,90s,"Provocação","Raio 6b","Sem efeito em imunidades",T3
+Salto do Coliseu,Ativa,—,2s,60s,"Imobiliza","Raio 2b","Controla sem stack infinito",T3
+Triunfo Inesquecível,Ultimate,—,15s,210s,"+40% crit +25% vel","Self","Uptime <50%",T4
+Golpe Desarmante,Ativa,—,6s,45s,"-40% dano alvo","Único","Remove arma via Skript",T2
+Manobra Precisa,Ativa,—,Até 8s,40s,"+35% penetração","Self","Buff some se não usado",T2
+Postura Defensiva,Ativa,—,10s,75s,"-30% dano","Self","Checa caps raciais",T3
+Comando Tático,Ativa,—,8s,90s,"-15% CD +0.02 vel","Raio 8b","Vel máx +0.05",T3
+Giro da Vitória,Ultimate,—,Instantâneo,210s,"200% dano + vuln 15%","Raio 5b","Sem burst letal instantâneo",T4
+Lâmina Arcana,Ativa,20 mana,Instantâneo,45s,"120% dano elemental","Único","Elemento via /eld_elemento",T2
+Escudo Arcano,Ativa,—,8s,60s,"Absorve 150 mágico","Self","Exaustão se exceder cap",T2
+Teleporte Tático,Ativa,—,Instantâneo,75s,"80% dano","Raio 3b","Mobilidade sem atravessar barreiras",T3
+Baluarte de Energia,Ativa,—,10s,90s,"-25% dano elemental","Raio 8b","Retornos decrescentes com raças",T3
+Tempestade da Lâmina,Ultimate,—,5s,210s,"5x 70% dano","Único + proj","Dano distribuído evita one-shot",T4

@@ -1,0 +1,42 @@
+# Skill: Salto do Coliseu
+name: fighter_champion_coliseum_leap
+display: "§6Salto do Coliseu"
+icon: FEATHER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§7Avança 6 blocos e imobiliza inimigos tocados por 2s."
+  - "§8Utiliza Skript para movimentação suave e respeita limites de controle."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      LeapCommand:
+        type: mechanic
+        data:
+          command: "skript run fighter_leap %caster% 6"
+          silent: true
+      Impact:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 2
+          group: enemy
+        children:
+          Root:
+            type: mechanic
+            data:
+              potion: SLOW
+              seconds-base: 2
+              amplifier-base: 10
+              indicator: "§6Imobilizado"
+      Message:
+        type: mechanic
+        data:
+          message: "§6Você salta no Coliseu e prende os adversários!"
+          targets: self

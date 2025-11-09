@@ -1,0 +1,50 @@
+# Skill: Comando Tático
+name: fighter_battlemaster_tactical_command
+display: "§cComando Tático"
+icon: RED_BANNER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+  - "§7Aliados em 8 blocos recebem -15% CD e +0.02 velocidade por 8s."
+  - "§8Não excede limite global de velocidade (+0.05)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Allies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          group: ally
+        children:
+          ReduceCooldown:
+            type: mechanic
+            data:
+              command: "skript run fighter_command %caster% %target%"
+              silent: true
+          SpeedBuff:
+            type: mechanic
+            data:
+              potion: SPEED
+              seconds-base: 8
+              amplifier-base: 0
+      Visual:
+        type: mechanic
+        data:
+          effect: NOTE
+          amount-base: 20
+          radius-base: 2
+          target: caster
+      Message:
+        type: mechanic
+        data:
+          message: "§cVocê emite um comando tático!"
+          targets: self

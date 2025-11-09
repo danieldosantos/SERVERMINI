@@ -1,0 +1,50 @@
+# Ultimate: Tempestade da Lâmina
+name: fighter_eldritchknight_blade_storm
+display: "§bTempestade da Lâmina"
+icon: TRIDENT
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+  range-base: 6
+  range-scale: 0
+description:
+  - "§75 cortes consecutivos (70% cada) + projéteis mágicos."
+  - "§8Projéteis seguem alvos diferentes para evitar burst letal instantâneo."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 6
+          group: enemy
+          duration-base: 5
+          repeat: 10
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 0.7
+              damage-scale: 0
+          Projectile:
+            type: mechanic
+            data:
+              command: "skript run fighter_arcane_projectile %caster% %target%"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: SWEEP_ATTACK
+          amount-base: 50
+          radius-base: 4
+          target: caster
+      Message:
+        type: mechanic
+        data:
+          message: "§bTempestade da Lâmina desencadeada!"
+          targets: self

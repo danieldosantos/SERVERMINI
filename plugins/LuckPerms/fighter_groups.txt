@@ -1,0 +1,40 @@
+# LuckPerms configuração de grupos para classe Guerreiro
+lp creategroup class_fighter
+lp group class_fighter setdisplayname "Guerreiro"
+lp group class_fighter meta add prefix "&e[Guerreiro]&f "
+lp group class_fighter permission set class.fighter true
+lp group class_fighter permission set skillapi.class.fighter true
+lp group class_fighter permission set mythicmobs.item.fighter true
+lp group class_fighter permission set skript.command.surto true
+lp group class_fighter permission set skript.command.folego true
+lp group class_fighter permission set skript.command.postura true
+lp group class_fighter permission set command.kit_guerreiro true
+
+lp creategroup class_fighter.champion
+lp group class_fighter.champion parent add class_fighter
+lp group class_fighter.champion setdisplayname "Guerreiro - Campeão"
+lp group class_fighter.champion meta add prefix "&6[Campeão]&f "
+lp group class_fighter.champion permission set skillapi.subclass.fighter_champion true
+lp group class_fighter.champion permission set mythicmobs.item.champion true
+lp group class_fighter.champion permission set skript.command.champ_golpe true
+lp group class_fighter.champion permission set skript.command.champ_triuno true
+
+lp creategroup class_fighter.battlemaster
+lp group class_fighter.battlemaster parent add class_fighter
+lp group class_fighter.battlemaster setdisplayname "Guerreiro - Mestre de Batalha"
+lp group class_fighter.battlemaster meta add prefix "&c[Battlemaster]&f "
+lp group class_fighter.battlemaster permission set skillapi.subclass.fighter_battlemaster true
+lp group class_fighter.battlemaster permission set mythicmobs.item.battlemaster true
+lp group class_fighter.battlemaster permission set skript.command.manobra true
+lp group class_fighter.battlemaster permission set skript.command.battle_comando true
+lp group class_fighter.battlemaster permission set skript.command.battle_giro true
+
+lp creategroup class_fighter.eldritchknight
+lp group class_fighter.eldritchknight parent add class_fighter
+lp group class_fighter.eldritchknight setdisplayname "Guerreiro - Cavaleiro Élfico"
+lp group class_fighter.eldritchknight meta add prefix "&b[Eldritch]&f "
+lp group class_fighter.eldritchknight permission set skillapi.subclass.fighter_eldritchknight true
+lp group class_fighter.eldritchknight permission set mythicmobs.item.eldritchknight true
+lp group class_fighter.eldritchknight permission set skript.command.eld_escudo true
+lp group class_fighter.eldritchknight permission set skript.command.eld_tempestade true
+lp group class_fighter.eldritchknight permission set skript.command.eld_elemento true

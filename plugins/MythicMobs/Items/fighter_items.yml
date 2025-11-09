@@ -1,0 +1,226 @@
+# Itens focais para Guerreiro e arquétipos
+items:
+  FighterActionMedal:
+    Id: NETHER_STAR
+    Display: '&eMedalha do Surto'
+    Lore:
+      - '&7Ativa §eSurto de Ação§7 (reset CDs menores).'
+      - '&8Requer grupo: class_fighter'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_fighter'
+      skill: 'fighter_action_surge'
+    Skills:
+      - skill{s=fighter_action_surge} @self ~onUse
+  FighterSecondWindBrooch:
+    Id: GHAST_TEAR
+    Display: '&aBroche do Segundo Fôlego'
+    Lore:
+      - '&7Canaliza §aSegundo Fôlego§7 (cura escalonada).'
+      - '&8Requer grupo: class_fighter'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_fighter'
+      skill: 'fighter_second_wind'
+    Skills:
+      - skill{s=fighter_second_wind} @self ~onUse
+  ChampionGreatsword:
+    Id: NETHERITE_SWORD
+    Display: '&6Lâmina do Coliseu'
+    Lore:
+      - '&7160% dano + chance crítica extra.'
+      - '&8Grupo: class_fighter.champion'
+    Options:
+      Unbreakable: true
+      Damage: 8
+    PersistentData:
+      classlock: 'class_fighter.champion'
+      skill: 'fighter_champion_superior_strike'
+    Skills:
+      - skill{s=fighter_champion_superior_strike} @target ~onLeftClick
+  ChampionShield:
+    Id: SHIELD
+    Display: '&aEscudo do Triunfo'
+    Lore:
+      - '&720% mitigação + cura ao longo do tempo.'
+      - '&8Grupo: class_fighter.champion'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.champion'
+      skill: 'fighter_champion_unyielding_resilience'
+    Skills:
+      - skill{s=fighter_champion_unyielding_resilience} @self ~onRightClick
+  ChampionStandard:
+    Id: RED_BANNER
+    Display: '&eEstandarte do Gladiador'
+    Lore:
+      - '&7Provoca inimigos em 6 blocos.'
+      - '&8Grupo: class_fighter.champion'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.champion'
+      skill: 'fighter_champion_gladiator_challenge'
+    Skills:
+      - skill{s=fighter_champion_gladiator_challenge} @self ~onUse
+  ChampionBoots:
+    Id: NETHERITE_BOOTS
+    Display: '&6Grevas do Coliseu'
+    Lore:
+      - '&7Salto frontal de 6 blocos.'
+      - '&8Grupo: class_fighter.champion'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.champion'
+      skill: 'fighter_champion_coliseum_leap'
+    Skills:
+      - skill{s=fighter_champion_coliseum_leap} @self ~onSneakRightClick
+  ChampionCrown:
+    Id: GOLDEN_HELMET
+    Display: '&6Coroa do Triunfo'
+    Lore:
+      - '&7Ultimate: Triunfo Inesquecível.'
+      - '&8Grupo: class_fighter.champion'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.champion'
+      skill: 'fighter_champion_unforgettable_triumph'
+    Skills:
+      - skill{s=fighter_champion_unforgettable_triumph} @self ~onSneakLeftClick
+  BattlemasterWhip:
+    Id: STRING
+    Display: '&cChicote Desarmante'
+    Lore:
+      - '&7Remove arma e reduz dano do alvo.'
+      - '&8Grupo: class_fighter.battlemaster'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.battlemaster'
+      skill: 'fighter_battlemaster_disarming_strike'
+    Skills:
+      - skill{s=fighter_battlemaster_disarming_strike} @target ~onLeftClick
+  BattlemasterManual:
+    Id: BOOK
+    Display: '&cManual de Manobras'
+    Lore:
+      - '&7Concede Manobra Precisa (penetração extra).'
+      - '&8Grupo: class_fighter.battlemaster'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.battlemaster'
+      skill: 'fighter_battlemaster_precise_maneuver'
+    Skills:
+      - skill{s=fighter_battlemaster_precise_maneuver} @self ~onRightClick
+  BattlemasterShield:
+    Id: SHIELD
+    Display: '&cEscudo Estratégico'
+    Lore:
+      - '&7Postura Defensiva (-30% dano).'
+      - '&8Grupo: class_fighter.battlemaster'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.battlemaster'
+      skill: 'fighter_battlemaster_defensive_posture'
+    Skills:
+      - skill{s=fighter_battlemaster_defensive_posture} @self ~onUse
+  BattlemasterBanner:
+    Id: WHITE_BANNER
+    Display: '&cEstandarte de Comando'
+    Lore:
+      - '&7Reduz CDs aliados e aumenta velocidade.'
+      - '&8Grupo: class_fighter.battlemaster'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.battlemaster'
+      skill: 'fighter_battlemaster_tactical_command'
+    Skills:
+      - skill{s=fighter_battlemaster_tactical_command} @self ~onRightClick
+  BattlemasterHalberd:
+    Id: IRON_AXE
+    Display: '&cAlabarda da Vitória'
+    Lore:
+      - '&7Ultimate Giro da Vitória.'
+      - '&8Grupo: class_fighter.battlemaster'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.battlemaster'
+      skill: 'fighter_battlemaster_victory_spin'
+    Skills:
+      - skill{s=fighter_battlemaster_victory_spin} @target ~onSneakLeftClick
+  EldritchKnightBlade:
+    Id: DIAMOND_SWORD
+    Display: '&bLâmina Arcana'
+    Lore:
+      - '&7120% dano elemental escolhido.'
+      - '&8Grupo: class_fighter.eldritchknight'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.eldritchknight'
+      skill: 'fighter_eldritchknight_arcane_blade'
+    Skills:
+      - skill{s=fighter_eldritchknight_arcane_blade} @target ~onLeftClick
+  EldritchKnightFocus:
+    Id: AMETHYST_SHARD
+    Display: '&bFoco Arcano'
+    Lore:
+      - '&7Levanta Escudo Arcano (absorção).'
+      - '&8Grupo: class_fighter.eldritchknight'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.eldritchknight'
+      skill: 'fighter_eldritchknight_arcane_shield'
+    Skills:
+      - skill{s=fighter_eldritchknight_arcane_shield} @self ~onUse
+  EldritchKnightRune:
+    Id: ENDER_PEARL
+    Display: '&bRuna de Dobra'
+    Lore:
+      - '&7Teleporte Tático de 8 blocos.'
+      - '&8Grupo: class_fighter.eldritchknight'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.eldritchknight'
+      skill: 'fighter_eldritchknight_tactical_teleport'
+    Skills:
+      - skill{s=fighter_eldritchknight_tactical_teleport} @self ~onRightClick
+  EldritchKnightSigil:
+    Id: LAPIS_LAZULI
+    Display: '&bSigilo de Baluarte'
+    Lore:
+      - '&7Reduz dano elemental aliado. '
+      - '&8Grupo: class_fighter.eldritchknight'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.eldritchknight'
+      skill: 'fighter_eldritchknight_energy_bulwark'
+    Skills:
+      - skill{s=fighter_eldritchknight_energy_bulwark} @self ~onUse
+  EldritchKnightCodex:
+    Id: WRITABLE_BOOK
+    Display: '&bCódice Tempestuoso'
+    Lore:
+      - '&7Ultimate Tempestade da Lâmina.'
+      - '&8Grupo: class_fighter.eldritchknight'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_fighter.eldritchknight'
+      skill: 'fighter_eldritchknight_blade_storm'
+    Skills:
+      - skill{s=fighter_eldritchknight_blade_storm} @target ~onSneakLeftClick

@@ -1,0 +1,259 @@
+# Skript - Comandos e integrações para a classe Guerreiro
+options:
+  prefix: &e[Guerreiro]&f
+
+on load:
+  broadcast "&7Skript fighter_cmds.sk carregado." to console
+
+command /kit_guerreiro:
+  permission: group.class_fighter
+  trigger:
+    clear player's inventory
+    execute console command "mm items give FighterActionMedal 1 %player%"
+    execute console command "mm items give FighterSecondWindBrooch 1 %player%"
+    execute console command "mm items give ChampionGreatsword 1 %player%"
+    execute console command "mm items give ChampionShield 1 %player%"
+    execute console command "mm items give BattlemasterWhip 1 %player%"
+    execute console command "mm items give BattlemasterManual 1 %player%"
+    execute console command "mm items give EldritchKnightBlade 1 %player%"
+    execute console command "mm items give EldritchKnightFocus 1 %player%"
+    execute console command "scoreboard objectives add fighter_action_surge_cd dummy" if scoreboard objective "fighter_action_surge_cd" does not exist
+    execute console command "scoreboard objectives add fighter_second_wind_cd dummy" if scoreboard objective "fighter_second_wind_cd" does not exist
+    execute console command "scoreboard objectives add fighter_major_cd dummy" if scoreboard objective "fighter_major_cd" does not exist
+    execute console command "scoreboard objectives add fighter_ooc dummy" if scoreboard objective "fighter_ooc" does not exist
+    execute console command "scoreboard players set %player% fighter_ooc 1"
+    send "{@prefix} &7Kit de testes entregue. Placeholders atualizados."
+
+command /surto:
+  permission: group.class_fighter
+  trigger:
+    execute console command "skillapi cast fighter_action_surge %player%"
+
+command /folego:
+  permission: group.class_fighter
+  trigger:
+    execute console command "skillapi cast fighter_second_wind %player%"
+
+command /postura:
+  permission: group.class_fighter
+  trigger:
+    execute console command "placeholderapi refresh %player% skills_blocking_state"
+    send "{@prefix} &7Estado de bloqueio sincronizado."
+
+command /manobra:
+  aliases: /manobra_precisa
+  permission: group.class_fighter.battlemaster
+  trigger:
+    execute console command "skillapi cast fighter_battlemaster_precise_maneuver %player%"
+
+command /champ_golpe:
+  permission: group.class_fighter.champion
+  trigger:
+    execute console command "skillapi cast fighter_champion_superior_strike %player%"
+
+command /champ_triuno:
+  permission: group.class_fighter.champion
+  trigger:
+    execute console command "skillapi cast fighter_champion_unforgettable_triumph %player%"
+
+command /battle_comando:
+  permission: group.class_fighter.battlemaster
+  trigger:
+    execute console command "skillapi cast fighter_battlemaster_tactical_command %player%"
+
+command /battle_giro:
+  permission: group.class_fighter.battlemaster
+  trigger:
+    execute console command "skillapi cast fighter_battlemaster_victory_spin %player%"
+
+command /eld_escudo:
+  permission: group.class_fighter.eldritchknight
+  trigger:
+    execute console command "skillapi cast fighter_eldritchknight_arcane_shield %player%"
+
+command /eld_tempestade:
+  permission: group.class_fighter.eldritchknight
+  trigger:
+    execute console command "skillapi cast fighter_eldritchknight_blade_storm %player%"
+
+command /eld_elemento <text>:
+  permission: group.class_fighter.eldritchknight
+  trigger:
+    set {_element} to arg-1 parsed as text
+    if {_element} is not "fogo" and {_element} is not "gelo" and {_element} is not "raio":
+      send "{@prefix} &cOpções: fogo, gelo ou raio."
+      stop
+    set {fighter.element.%player%} to {_element}
+    send "{@prefix} &7Elemento definido para %{fighter.element.%player%}%."
+
+command /fighter_ooc <text>:
+  permission: op
+  trigger:
+    if arg-1 = "on":
+      execute console command "scoreboard players set %player% fighter_ooc 1"
+      send "{@prefix} &7Fora de combate forçado."
+    else if arg-1 = "off":
+      execute console command "scoreboard players set %player% fighter_ooc 0"
+      send "{@prefix} &7Estado normalizado."
+
+# Bindings para itens MythicMobs
+on leftclick with nether star:
+  if name of player's tool is "&eMedalha do Surto":
+    if player has permission "group.class_fighter":
+      execute console command "skillapi cast fighter_action_surge %player%"
+    else:
+      send "{@prefix} &cApenas Guerreiros podem usar isso."
+
+on rightclick with ghast tear:
+  if name of player's tool is "&aBroche do Segundo Fôlego":
+    if player has permission "group.class_fighter":
+      execute console command "skillapi cast fighter_second_wind %player%"
+
+on leftclick with netherite sword:
+  if name of player's tool is "&6Lâmina do Coliseu":
+    if player has permission "group.class_fighter.champion":
+      execute console command "skillapi cast fighter_champion_superior_strike %player%"
+
+on rightclick with shield:
+  if name of player's tool is "&aEscudo do Triunfo":
+    if player has permission "group.class_fighter.champion":
+      execute console command "skillapi cast fighter_champion_unyielding_resilience %player%"
+
+on rightclick with red banner:
+  if name of player's tool is "&eEstandarte do Gladiador":
+    if player has permission "group.class_fighter.champion":
+      execute console command "skillapi cast fighter_champion_gladiator_challenge %player%"
+
+on sneak right click with netherite boots:
+  if name of player's tool is "&6Grevas do Coliseu":
+    if player has permission "group.class_fighter.champion":
+      execute console command "skillapi cast fighter_champion_coliseum_leap %player%"
+
+on sneak left click with golden helmet:
+  if name of player's tool is "&6Coroa do Triunfo":
+    if player has permission "group.class_fighter.champion":
+      execute console command "skillapi cast fighter_champion_unforgettable_triumph %player%"
+
+on leftclick with string:
+  if name of player's tool is "&cChicote Desarmante":
+    if player has permission "group.class_fighter.battlemaster":
+      execute console command "skillapi cast fighter_battlemaster_disarming_strike %player%"
+
+on rightclick with book:
+  if name of player's tool is "&cManual de Manobras":
+    if player has permission "group.class_fighter.battlemaster":
+      execute console command "skillapi cast fighter_battlemaster_precise_maneuver %player%"
+
+on rightclick with white banner:
+  if name of player's tool is "&cEstandarte de Comando":
+    if player has permission "group.class_fighter.battlemaster":
+      execute console command "skillapi cast fighter_battlemaster_tactical_command %player%"
+
+on sneak left click with iron axe:
+  if name of player's tool is "&cAlabarda da Vitória":
+    if player has permission "group.class_fighter.battlemaster":
+      execute console command "skillapi cast fighter_battlemaster_victory_spin %player%"
+
+on leftclick with diamond sword:
+  if name of player's tool is "&bLâmina Arcana":
+    if player has permission "group.class_fighter.eldritchknight":
+      execute console command "skillapi cast fighter_eldritchknight_arcane_blade %player%"
+
+on rightclick with amethyst shard:
+  if name of player's tool is "&bFoco Arcano":
+    if player has permission "group.class_fighter.eldritchknight":
+      execute console command "skillapi cast fighter_eldritchknight_arcane_shield %player%"
+
+on rightclick with ender pearl:
+  if name of player's tool is "&bRuna de Dobra":
+    if player has permission "group.class_fighter.eldritchknight":
+      execute console command "skillapi cast fighter_eldritchknight_tactical_teleport %player%"
+
+on rightclick with lapis lazuli:
+  if name of player's tool is "&bSigilo de Baluarte":
+    if player has permission "group.class_fighter.eldritchknight":
+      execute console command "skillapi cast fighter_eldritchknight_energy_bulwark %player%"
+
+on sneak left click with writable book:
+  if name of player's tool is "&bCódice Tempestuoso":
+    if player has permission "group.class_fighter.eldritchknight":
+      execute console command "skillapi cast fighter_eldritchknight_blade_storm %player%"
+
+# Funções utilitárias chamadas pelas skills via "skript run"
+function fighter_speed_cap(p: player):
+  if {fighter.speedboost.%p%} is not set:
+    set {fighter.speedboost.%p%} to 0.0
+  if player's walk speed > 0.25:
+    set player's walk speed to 0.25
+
+function fighter_penetration(p: player, t: entity):
+  if t is set:
+    apply weakness 1 to {t} for 4 seconds
+    send "{@prefix} &7Penetração aplicada." to p
+
+function fighter_knockback_buffer(p: player):
+  apply resistance 1 to p for 2 seconds
+
+function fighter_force_crit(p: player):
+  set {fighter.forcecrit.%p%} to now + 6 seconds
+
+function fighter_resist_diminish(p: player):
+  set {fighter.res_diminish.%p%} to now + 10 seconds
+
+function fighter_resistance_exhaust(p: player):
+  if {fighter.res_diminish.%p%} is set:
+    apply slowness 1 to p for 2 seconds
+
+function fighter_taunt(c: player, t: entity):
+  if t is set:
+    make t target c for 6 seconds
+
+function fighter_leap(p: player, dist: number):
+  push p forward dist parsed as number
+
+function fighter_disarm(c: player, t: entity, seconds: number):
+  if t is a player:
+    strip t of held item
+    wait seconds parsed as number seconds
+    restore t's held item
+
+function fighter_precise(p: player, seconds: number):
+  set {fighter.precise.%p%} to now + seconds parsed as number seconds
+
+function fighter_command(c: player, t: player):
+  if t is set:
+    execute console command "skillapi cooldown %t% -15"
+    add 0.02 to {fighter.speedbonus.%t%}
+    if {fighter.speedbonus.%t%} > 0.05:
+      set {fighter.speedbonus.%t%} to 0.05
+
+function fighter_vulnerability(c: player, t: entity, seconds: number, amount: number):
+  if t is set:
+    apply glowing to t for seconds parsed as number seconds
+
+function fighter_elemental_hit(c: player, t: entity):
+  set {_element} to {fighter.element.%c%}
+  if {_element} is not set:
+    set {_element} to "fogo"
+  if {_element} is "fogo":
+    ignite t for 3 seconds
+  else if {_element} is "gelo":
+    apply slowness 2 to t for 3 seconds
+  else if {_element} is "raio":
+    strike lightning effect at t
+
+function fighter_arcane_shield(p: player, value: number, seconds: number):
+  apply absorption value parsed as number to p for seconds parsed as number seconds
+
+function fighter_blink(p: player, dist: number):
+  teleport p 0, 0, dist parsed as number relative
+
+function fighter_elemental_bulwark(t: player, amount: number, seconds: number):
+  apply resistance 1 to t for seconds parsed as number seconds
+
+function fighter_arcane_projectile(c: player, t: entity):
+  launch snowball from c at t
+
+function fighter_crit_window(p: player, amount: number, seconds: number):
+  set {fighter.critbonus.%p%} to now + seconds parsed as number seconds
+
