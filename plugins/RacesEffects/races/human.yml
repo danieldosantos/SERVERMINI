@@ -1,0 +1,224 @@
+# Raça Base + Subraças: Humanos (D&D 5e adaptado)
+# Este arquivo reúne a configuração do núcleo humano e as duas subraças
+# implementadas (Padrão e Variante). Comentários descrevem gatilhos, limites e
+# como a integração com outros plugins deve ocorrer.
+---
+race_id: human_base
+name: "Humano"
+identity: "Sobreviventes adaptáveis que moldam sua tática conforme a necessidade do grupo."
+luckperms:
+  required: "race_human"
+  inherit: null
+# Tag usada pelo RacesEffects para vincular buffs globais.
+tags:
+  - human
+placeholders:
+  racial_cd_main: "{cooldown:skill_human_versatility_switch}"
+  racial_uptime: "{uptime:status_human_adaptability}"
+  racial_charges: "{charges:skill_human_versatility_switch}"
+  talent_choice: "{metadata:human_talent_choice}"
+# HUD específico reforçando o acompanhamento das escolhas.
+hud:
+  scoreboard:
+    title: "&f&lHUMANO"
+    lines:
+      - "&6Perfil:&f {metadata:human_profile}"
+      - "&eCD Perfil:&f {cooldown:skill_human_versatility_switch}"
+      - "&aRenome:&f {cooldown:skill_human_renown_shout}"
+      - "&7Talento:&f {metadata:human_talent_choice}"
+  actionbar:
+    enabled: true
+    template_active: "&fPerfil &e{metadata:human_profile}&f ativo por &a{trait_duration}s"
+    template_expire: "&c{trait_name}&f recarrega em &e{trait_cooldown}s"
+passives:
+  adaptabilidade_humana:
+    name: "Adaptabilidade Humana"
+    type: selectable_buff
+    trigger: manual_activation
+    # Cada perfil é acionado por uma skill do ProSkillAPI. O tempo/cooldown aqui
+    # serve como referência para o RacesEffects validar uptime e bloqueios de
+    # reaplicação.
+    profiles:
+      tatica:
+        display: "Perfil Tática"
+        duration: 12
+        cooldown: 90
+        uptime_cap: 0.6
+        effects:
+          cooldown_reduction:
+            amount: 0.1
+            applies_to: non_ultimate
+        diminishing_returns: cooldown
+        notes: "-10% de recarga em habilidades não-ultimates. Aplica DR caso classe/itens já reduzam cooldown."
+      disciplinada:
+        display: "Perfil Disciplinada"
+        duration: 10
+        cooldown: 90
+        uptime_cap: 0.6
+        effects:
+          mitigation_percent: 0.08
+        diminishing_returns: mitigation
+        notes: "+8% mitigação (respeita limite global de 45% considerando classe/itens)."
+      oportunista:
+        display: "Perfil Oportunista"
+        duration: 8
+        cooldown: 90
+        uptime_cap: 0.6
+        effects:
+          crit_chance: 0.1
+          armor_penetration: 0.08
+        diminishing_returns: offensive
+        notes: "+10% crítico e +8% penetração; caps de crítico globais aplicados via engine."
+    description: "Escolha 1 perfil de adaptabilidade para ativar manualmente. Trocas exigem Versatilidade e checagem de fora de combate."
+  ambicao_comunal:
+    name: "Ambição Comunal"
+    type: region_bonus
+    trigger: region_village_or_guild
+    duration: 18
+    cooldown: 45
+    uptime_cap: 0.6
+    effects:
+      profession_xp_multiplier: 0.05
+    notes: "+5% XP em profissões/serviços quando em aldeias ou postos da guilda. Não afeta combate."
+    description: "O bônus social ativa apenas em áreas com flag de vila/guilda e expira se entrar em combate."
+actives:
+  versatilidade:
+    name: "Versatilidade"
+    skill: Human_Versatility_Switch
+    cooldown: 120
+    charges: 1
+    description: "Alterna o perfil ativo (Tática/Disciplinada/Oportunista) fora de combate, aplicando fadiga de troca."
+  renome:
+    name: "Renome"
+    skill: Human_Renown_Shout
+    cooldown: 75
+    charges: 1
+    description: "Alia a equipe sob um estandarte: +8% velocidade e +10% resistência a empurrões por 8s em 6 blocos."
+resistances:
+  general:
+    base: 0.0
+    max: 0.3
+    diminishing: linear
+    notes: "Os humanos não possuem resistência elementar natural; limites mantidos para evitar combos excessivos."
+synergy_notes:
+  - "Reduções de cooldown extras aplicam DR com classes de suporte (Bardo, Artífice) para respeitar caps."
+  - "Perfil Oportunista consulta limite global de crítico configurado no servidor antes de aplicar bônus."
+  - "Ambição Comunal ignora cenários PvP para evitar farm indevido."
+---
+# Subraça: Humano Padrão
+race_id: human_standard
+name: "Humano Padrão"
+identity: "Generalistas que priorizam consistência, reforçando o grupo com disciplina."
+luckperms:
+  required: "race_human.standard"
+  inherit: "race_human"
+tags:
+  - human
+placeholders:
+  racial_cd_main: "{cooldown:skill_human_coordinated_effort}"
+passives:
+  versado:
+    name: "Versado"
+    type: attribute_bonus
+    trigger: passive
+    attributes:
+      # Bônus leves divididos em dois eixos definidos pelo servidor.
+      vitality: 1
+      expertise: 1
+    notes: "Aplicar sobre atributos leves, respeitando caps globais de classe/itens."
+  produtividade:
+    name: "Produtividade"
+    type: resource_regen
+    trigger: out_of_combat
+    duration: 12
+    cooldown: 20
+    uptime_cap: 0.6
+    regen_multiplier: 0.05
+    notes: "+5% regeneração de recurso de classe enquanto estiver fora de combate; verificação a cada 5s."
+actives:
+  esforco_coordenado:
+    name: "Esforço Coordenado"
+    skill: Human_Coordinated_Effort
+    cooldown: 90
+    charges: 1
+    description: "Marca um aliado a 10 blocos reduzindo em 10% as recargas menores por 8s. Não acumula com Perfil Tática."
+resistances:
+  general:
+    base: 0.0
+    max: 0.3
+    notes: "Sem ajustes adicionais; depende do perfil escolhido."
+synergy_notes:
+  - "Ao aplicar Esforço Coordenado, o RacesEffects bloqueia Adaptabilidade Tática se ativo para evitar dupla aplicação."
+  - "Uptime monitorado pelo HUD usando {racial_uptime}."
+---
+# Subraça: Humano Variante
+race_id: human_variant
+name: "Humano Variante"
+identity: "Escolhem um talento especializado e afinam um atributo, mantendo a tradição de versatilidade única."
+luckperms:
+  required: "race_human.variant"
+  inherit: "race_human"
+tags:
+  - human
+placeholders:
+  racial_cd_main: "{cooldown:skill_human_talent_activate}"
+  talent_choice: "{metadata:human_talent_choice}"
+passives:
+  aptidao_seletiva:
+    name: "Aptidão Seletiva"
+    type: attribute_choice
+    trigger: manual_staff
+    attributes:
+      selectable:
+        - { key: "vitality", bonus: 1 }
+        - { key: "precision", bonus: 1 }
+        - { key: "focus", bonus: 1 }
+    notes: "Escolha única via GUI (/talento). Alterações apenas por staff com reset de metadado."
+  talento_pacote:
+    name: "Talento"
+    type: talent_bundle
+    trigger: manual_activation
+    options:
+      perito_pragmatico:
+        display: "Perito Pragmático"
+        duration: 8
+        cooldown: 75
+        uptime_cap: 0.6
+        effects:
+          projectile_range: 0.15
+          precision_bonus: 0.05
+        notes: "+15% alcance/precisão de projéteis. Em PvP aplica DR com talentos similares."
+      robustez_pratica:
+        display: "Robustez Prática"
+        duration: 6
+        cooldown: 90
+        uptime_cap: 0.6
+        effects:
+          shield_points: 120
+        diminishing_returns: shielding
+        notes: "Gera escudo de 120 pontos com DR se classe já fornecer escudos frequentes."
+      iniciativa_afiada:
+        display: "Iniciativa Afiada"
+        duration: 4
+        cooldown: 75
+        uptime_cap: 0.6
+        effects:
+          speed_bonus: 0.04
+          knockback_resist: 0.6
+        notes: "Sprint curto (+0.04 vel.) e remove empurrões iniciais. Respeita cap global de velocidade (+0.05)."
+    description: "O jogador escolhe um talento e só pode alternar fora de combate com reset autorizado pela staff."
+actives:
+  talento_ativacao:
+    name: "Talento (Ativação)"
+    skill: Human_Talent_Activate
+    cooldown: 0
+    charges: 0
+    description: "Dispara o efeito do talento selecionado. Cooldowns/durações controlados por ProSkillAPI + este pacote."
+resistances:
+  general:
+    base: 0.0
+    max: 0.3
+    notes: "Sem resistência adicional; talentos respeitam limites globais."
+synergy_notes:
+  - "Talento selecionado aparece em {talent_choice}; Skript bloqueia trocas durante combate."
+  - "Robustez Prática consulta DR de escudos para coexistir com classes defensivas."

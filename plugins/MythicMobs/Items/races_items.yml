@@ -128,24 +128,74 @@ items:
     NBT:
       race-lock: 'race_halfling.stout'
       skill: 'Halfling_ForteComoPedra'
-  HumanBannerSigil:
-    Id: PAPER
-    Display: '&fEstandarte Coordenado'
+  VersatilityCharm:
+    Id: PRISMARINE_CRYSTALS
+    Display: '&fAmuleto da Versatilidade'
     Lore:
-      - '&fSinaliza a hora de avançar.'
-      - '&eClique:&f Investida Coordenada.'
+      - '&7Canaliza a adaptabilidade humana.'
+      - '&eClique direito:&f alterna perfis (Tática/Disciplinada/Oportunista).'
+      - '&8Uso restrito a Humanos.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
     NBT:
-      race-lock: 'race_humano'
-      skill: 'InvestidaCoordenada'
-  HumanVariantMedal:
-    Id: GOLD_NUGGET
-    Display: '&eMedalhão de Talento'
+      race-lock: 'race_human'
+      lp_required: 'race_human'
+      skill: 'Human_Versatility_Switch'
+  HumanBanner:
+    Id: WHITE_BANNER
+    Display: '&fEstandarte de Renome'
     Lore:
-      - '&eRepresenta talento escolhido.'
-      - '&eClique:&f ativa Talento Variável.'
+      - '&7Marca a liderança humana no campo.'
+      - '&eClique direito:&f ativa Renome (buff em área).'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    Enchantments:
+      - UNBREAKING:1
     NBT:
-      race-lock: 'race_humano.variante'
-      skill: 'TalentoVariavel'
+      race-lock: 'race_human'
+      lp_required: 'race_human'
+      skill: 'Human_Renown_Shout'
+  TalentToken:
+    Id: NETHER_STAR
+    Display: '&dToken de Talento'
+    Lore:
+      - '&dEscolha ou ative o talento da variante.'
+      - '&eClique direito:&f abre /talento.'
+      - '&eShift+Clique:&f ativa o talento selecionado.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    NBT:
+      race-lock: 'race_human.variant'
+      lp_required: 'race_human.variant'
+      skill: 'Human_Talent_Activate'
+  HumanMedal:
+    Id: IRON_NUGGET
+    Display: '&7Medalha do Cidadão'
+    Lore:
+      - '&7Símbolo de disciplina humana.'
+      - '&eClique direito:&f ativa Esforço Coordenado.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_human.standard'
+      lp_required: 'race_human.standard'
+      skill: 'Human_Coordinated_Effort'
+  HumanSignet:
+    Id: GOLDEN_CARROT
+    Display: '&6Sinete de Versatilidade'
+    Lore:
+      - '&6Marca quem domina talentos únicos.'
+      - '&eClique direito:&f acessa /versatilidade.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    NBT:
+      race-lock: 'race_human.variant'
+      lp_required: 'race_human.variant'
+      command: '/versatilidade'
   HalfElfHarmonyOrb:
     Id: HEART_OF_THE_SEA
     Display: '&dOrbe da Harmonia'

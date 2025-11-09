@@ -1,0 +1,39 @@
+# ProSkillAPI - Renome Humano
+skills:
+  Human_Renown_Shout:
+    display: "&fRenome"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Ergue o Estandarte Humano inspirando aliados em 6 blocos.
+      Concede +8% velocidade de movimento e +10% resistência a empurrões por 8 segundos.
+      Ideal para engajamentos táticos; respeita cap global de velocidade (+0.05).
+    tiers:
+      T1: { cooldown: 75, duration: 8, speed_bonus: 0.08, knockback_resist: 0.10 }
+      T2: { cooldown: 75, duration: 8, speed_bonus: 0.08, knockback_resist: 0.10 }
+      T3: { cooldown: 70, duration: 8, speed_bonus: 0.08, knockback_resist: 0.12 }
+      T4: { cooldown: 65, duration: 8, speed_bonus: 0.08, knockback_resist: 0.12 }
+    cost:
+      resource: none
+      amount: 0
+    effects:
+      - target: allies_radius
+        radius: 6
+        max_targets: 6
+        type: status
+        id: human_renown_haste
+        duration: { tier: duration }
+        modifiers:
+          speed_percent: { tier: speed_bonus }
+          knockback_resist: { tier: knockback_resist }
+      - target: self
+        type: particles
+        effect: mythicmobs:HumanRenownBanner
+      - target: self
+        type: placeholder_update
+        keys:
+          - racial_cd_main
+    notes: |
+      • Uptime efetivo ≈ 8/75s (10.6%), dentro do limite desejado.
+      • Controle via MythicMobs gera partículas simples e som temático.
+      • Nenhum custo de recurso para facilitar suporte em PvP/PvE.

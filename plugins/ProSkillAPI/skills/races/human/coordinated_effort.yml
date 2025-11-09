@@ -1,0 +1,35 @@
+# ProSkillAPI - Esforço Coordenado (Humano Padrão)
+skills:
+  Human_Coordinated_Effort:
+    display: "&eEsforço Coordenado"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Marca um aliado dentro de 10 blocos reduzindo em 10% as recargas de habilidades menores por 8s.
+      Compartilha DR com Adaptabilidade Tática para evitar stacks excessivos de redução de cooldown.
+    tiers:
+      T1: { cooldown: 90, duration: 8, cd_reduction: 0.10 }
+      T2: { cooldown: 90, duration: 8, cd_reduction: 0.11 }
+      T3: { cooldown: 85, duration: 8, cd_reduction: 0.12 }
+      T4: { cooldown: 80, duration: 9, cd_reduction: 0.12 }
+    cost:
+      resource: none
+      amount: 0
+    effects:
+      - target: ally_single
+        range: 10
+        type: status
+        id: human_coordinated_effort
+        duration: { tier: duration }
+        modifiers:
+          cooldown_reduction_minor: { tier: cd_reduction }
+        flags:
+          apply_dr_tag: cooldown_minor
+      - target: ally_single
+        range: 10
+        type: particles
+        effect: mythicmobs:HumanCoordinatedLink
+    notes: |
+      • Escolhe automaticamente o aliado focado; se nenhum, aplica no próprio usuário.
+      • Redução só afeta habilidades classificadas como "menores" no SkillAPI.
+      • Cooldown ≥80s garante uptime máximo 11.25%.
