@@ -1,0 +1,32 @@
+# Skill ativa: Véu Probabilístico
+name: sorcerer_wild_veil
+display: "§dVéu Probabilístico"
+icon: PURPLE_STAINED_GLASS
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 105
+  mana-cost-base: 30
+description:
+  - "§d30% de chance de negar dano recebido por 8s (cap de mitigação 45% respeitado)."
+  - "§7Integra RacesEffects para evitar imortalidade com resistências raciais."
+  - "§7Skript controla chance e feedback visual."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      BuffAvoid:
+        type: mechanic
+        data:
+          key: wild_veil
+          type: attribute
+          modifier: damage-avoid
+          value-base: 0.3
+          seconds-base: 8
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_wild_veil %caster%"
+          silent: true

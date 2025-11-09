@@ -1,0 +1,47 @@
+# Skill ativa: Blink Arcano
+name: sorcerer_arcane_blink
+display: "§dBlink Arcano"
+icon: CHORUS_FRUIT_POPPED
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 26
+  mana-cost-scale: 0
+  range-base: 8
+  range-scale: 0
+description:
+  - "§dTeleporta até 8 blocos na direção do olhar."
+  - "§7Concede 1s de antistun/antigrab ao chegar e consome metamagia se ativa."
+  - "§7Skript aplica estado fora de combate após 6s sem dano para regenerar SP."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      MetamagicHook:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_metamagic_consume %caster% sorcerer_arcane_blink"
+          silent: true
+      Teleport:
+        type: mechanic
+        data:
+          range-base: 8
+          range-scale: 0
+          through-wall: false
+      Cleanse:
+        type: mechanic
+        data:
+          type: stun
+          duration-base: 1
+          duration-scale: 0
+      Buff:
+        type: mechanic
+        data:
+          key: antistun
+          type: status
+          duration-base: 1
+          duration-scale: 0

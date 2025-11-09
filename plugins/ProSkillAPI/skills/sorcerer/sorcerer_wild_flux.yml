@@ -1,0 +1,32 @@
+# Skill ativa: Fluxo Instável
+name: sorcerer_wild_flux
+display: "§dFluxo Instável"
+icon: TOTEM_OF_UNDYING
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  mana-cost-base: 30
+description:
+  - "§dReduz em 20% os cooldowns por 10s, com 12% de chance de penalidade leve."
+  - "§7Penalidade definida via Skript (ex.: lentidão curta ou -10% dano)."
+  - "§7Respeita limites de redução (mínimo 50% do CD base)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      BuffCD:
+        type: mechanic
+        data:
+          key: wild_flux
+          type: attribute
+          modifier: cooldown-reduction
+          value-base: 0.2
+          seconds-base: 10
+      SkriptRandom:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_wild_flux %caster%"
+          silent: true

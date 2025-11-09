@@ -1,0 +1,40 @@
+# Skill ativa: Escamas Manifestas
+name: sorcerer_draconic_scales
+display: "§4Escamas Manifestas"
+icon: TURTLE_HELMET
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  mana-cost-base: 24
+description:
+  - "§4Garante +20% mitigação total e +15% resistência elemental por 10s."
+  - "§7Aplica diminishing com resistências raciais via Skript/RacesEffects."
+  - "§7Não ultrapassa o limite global de 45% de resistência."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      SkriptCheck:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_draconic_scales %caster%"
+          silent: true
+      BuffMitigation:
+        type: mechanic
+        data:
+          key: draconic_scales
+          type: attribute
+          modifier: damage-reduction
+          value-base: 0.2
+          seconds-base: 10
+      BuffElement:
+        type: mechanic
+        data:
+          key: draconic_resist
+          type: attribute
+          modifier: elemental-resist
+          value-base: 0.15
+          seconds-base: 10

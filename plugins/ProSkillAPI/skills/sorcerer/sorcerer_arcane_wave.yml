@@ -1,0 +1,62 @@
+# Skill ativa: Onda Arcana
+name: sorcerer_arcane_wave
+display: "§5Onda Arcana"
+icon: HEART_OF_THE_SEA
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 32
+  mana-cost-scale: 0
+  range-base: 6
+  range-scale: 0
+  damage-base: 1.4
+  damage-scale: 0
+  sorcery-points-cost: 0
+description:
+  - "§5Explosão em área de 4-6 blocos que causa 140% de dano arcano."
+  - "§7Aplica empurrão leve e comunica cooldown maior ao HUD."
+  - "§7Metamagias respeitam mínimo de 50% do cooldown base."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      MetamagicHook:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_metamagic_consume %caster% sorcerer_arcane_wave"
+          silent: true
+      Indicator:
+        type: mechanic
+        data:
+          effect: DRAGON_BREATH
+          amount-base: 30
+          amount-scale: 0
+          radius-base: 3
+          radius-scale: 0
+          target: self
+      AreaDamage:
+        type: mechanic
+        data:
+          shape: sphere
+          radius-base: 5
+          radius-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.4
+              value-scale: 0
+              classifier: skill
+              element: arcane
+          Knockback:
+            type: mechanic
+            data:
+              speed-base: 0.65
+              speed-scale: 0
+              direction: caster
+              type: velocity

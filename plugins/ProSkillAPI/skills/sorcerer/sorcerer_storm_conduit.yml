@@ -1,0 +1,31 @@
+# Skill ativa: Condutor Vivo
+name: sorcerer_storm_conduit
+display: "§bCondutor Vivo"
+icon: LIGHTNING_ROD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 105
+  mana-cost-base: 28
+  duration-base: 10
+description:
+  - "§bPor 10s converte dano elétrico recebido em 20 de mana por acerto."
+  - "§7Não concede imunidade; apenas reembolso, respeitando caps de mitigação."
+  - "§7Skript registra mana retornada e HUD."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          key: storm_conduit
+          type: status
+          seconds-base: 10
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_storm_conduit %caster%"
+          silent: true

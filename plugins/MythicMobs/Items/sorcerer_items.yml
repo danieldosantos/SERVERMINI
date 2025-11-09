@@ -1,0 +1,221 @@
+# Itens focais do Feiticeiro
+items:
+  ArcaneFocus:
+    Id: AMETHYST_CLUSTER
+    Display: '&5Foco Arcano do Feiticeiro'
+    Lore:
+      - '&7Clique direito: §5Raio Arcano§7.'
+      - '&8Requer permissão: class_sorcerer.'
+      - '&7Atualiza HUD de Pontos de Feitiçaria.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer'
+      psapi-skill: 'sorcerer_arcane_bolt'
+  ArcaneWaveCrystal:
+    Id: ECHO_SHARD
+    Display: '&5Cristal da Onda Arcana'
+    Lore:
+      - '&7Clique direito: §5Onda Arcana§7.'
+      - '&8Alcance ajustado por metamagias.'
+      - '&7Somente membros class_sorcerer.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer'
+      psapi-skill: 'sorcerer_arcane_wave'
+  ArcaneBlinkCharm:
+    Id: ENDER_EYE
+    Display: '&5Talismã do Blink Arcano'
+    Lore:
+      - '&7Clique direito: §dBlink Arcano§7.'
+      - '&8Aplica janela antistun de 1s.'
+      - '&7Bloqueado para class_sorcerer.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer'
+      psapi-skill: 'sorcerer_arcane_blink'
+
+  DraconicFocus:
+    Id: BLAZE_ROD
+    Display: '&cFoco Dracônico'
+    Lore:
+      - '&7Clique direito: §4Sopro Dracônico§7.'
+      - '&8Respeita resistências raciais (RacesEffects).'
+      - '&7Requer class_sorcerer.draconic.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.draconic'
+      psapi-skill: 'sorcerer_draconic_breath'
+  DraconicScaleCharm:
+    Id: SHIELD
+    Display: '&cPingente de Escamas'
+    Lore:
+      - '&7Ativa §4Escamas Manifestas§7 (10s).'
+      - '&8Diminui ganhos extras com resistências raciais.'
+      - '&7Permissão: class_sorcerer.draconic.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.draconic'
+      psapi-skill: 'sorcerer_draconic_scales'
+  DraconicWingTalisman:
+    Id: FEATHER
+    Display: '&cTalismã de Asas Etéreas'
+    Lore:
+      - '&7Clique direito: §4Asas Etéreas§7.'
+      - '&8Limite de velocidade +0.05 já aplicado.'
+      - '&7Requer class_sorcerer.draconic.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.draconic'
+      psapi-skill: 'sorcerer_draconic_wings'
+  DraconicHeartGem:
+    Id: NETHERITE_SCRAP
+    Display: '&cNúcleo Dracônico'
+    Lore:
+      - '&7Ativa §4Coração Elemental§7.'
+      - '&8Ultimate alterna dano elemental.'
+      - '&7Permissão: class_sorcerer.draconic.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.draconic'
+      psapi-skill: 'sorcerer_draconic_heart'
+  DraconicCrown:
+    Id: GOLDEN_HELMET
+    Display: '&cCoroa do Avatar Dracônico'
+    Lore:
+      - '&7Ultimate: §4Avatar Dracônico§7 (15s).'
+      - '&8Cooldown 240s.'
+      - '&7Permissão: class_sorcerer.draconic.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.draconic'
+      psapi-skill: 'sorcerer_draconic_avatar'
+
+  WildMagicOrb:
+    Id: ENDER_EYE
+    Display: '&dOrbe do Caos'
+    Lore:
+      - '&7Clique direito: §dSurto Caótico§7.'
+      - '&8Efeito visual muda a cada disparo.'
+      - '&7Permissão: class_sorcerer.wild.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.wild'
+      psapi-skill: 'sorcerer_wild_surge'
+  WildMagicRod:
+    Id: BONE
+    Display: '&dCajado do Fluxo Instável'
+    Lore:
+      - '&7Ativa §dFluxo Instável§7.'
+      - '&8Chance de penalidade controlada.'
+      - '&7Permissão: class_sorcerer.wild.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.wild'
+      psapi-skill: 'sorcerer_wild_flux'
+  WildMagicHourglass:
+    Id: CLOCK
+    Display: '&dAmpulheta Quântica'
+    Lore:
+      - '&7Clique direito: §dReversão Quântica§7.'
+      - '&8Não remove debuffs críticos além do previsto.'
+      - '&7Permissão: class_sorcerer.wild.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.wild'
+      psapi-skill: 'sorcerer_wild_reversion'
+  WildMagicCape:
+    Id: PURPLE_BANNER
+    Display: '&dCapa Probabilística'
+    Lore:
+      - '&7Ativa §dVéu Probabilístico§7.'
+      - '&8Mitigação não ultrapassa 45%.'
+      - '&7Permissão: class_sorcerer.wild.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.wild'
+      psapi-skill: 'sorcerer_wild_veil'
+  WildMagicNexus:
+    Id: NETHER_STAR
+    Display: '&dNexus Caótico'
+    Lore:
+      - '&7Ultimate: §dTempestade Caótica§7.'
+      - '&8Cooldown 240s, efeitos randômicos.'
+      - '&7Permissão: class_sorcerer.wild.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.wild'
+      psapi-skill: 'sorcerer_wild_tempest'
+
+  StormSorceryFocus:
+    Id: PRISMARINE_SHARD
+    Display: '&bFoco da Tempestade'
+    Lore:
+      - '&7Clique direito: §bDescarga Tempestuosa§7.'
+      - '&8Empurra e enraíza por 2s.'
+      - '&7Permissão: class_sorcerer.storm.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.storm'
+      psapi-skill: 'sorcerer_storm_discharge'
+  StormSorceryCharm:
+    Id: PHANTOM_MEMBRANE
+    Display: '&bCharm da Rajada'
+    Lore:
+      - '&7Ativa §bPulso Eólico§7.'
+      - '&8Inclui voo rápido 4s.'
+      - '&7Permissão: class_sorcerer.storm.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.storm'
+      psapi-skill: 'sorcerer_storm_gale'
+  StormSorceryOrb:
+    Id: LAPIS_BLOCK
+    Display: '&bOrbe de Nuvem de Trovões'
+    Lore:
+      - '&7Cria §bNuvem de Trovões§7.'
+      - '&8Controle de zona 6 blocos.'
+      - '&7Permissão: class_sorcerer.storm.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.storm'
+      psapi-skill: 'sorcerer_storm_cloud'
+  StormSorceryStaff:
+    Id: HEART_OF_THE_SEA
+    Display: '&bCajado do Condutor Vivo'
+    Lore:
+      - '&7Ativa §bCondutor Vivo§7 (mana por dano).'
+      - '&8Feedback via HUD.'
+      - '&7Permissão: class_sorcerer.storm.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.storm'
+      psapi-skill: 'sorcerer_storm_conduit'
+  StormSorceryCrown:
+    Id: DIAMOND_HELMET
+    Display: '&bCoroa do Olho da Tempestade'
+    Lore:
+      - '&7Ultimate: §bOlho da Tempestade§7.'
+      - '&8Cooldown 240s, aumenta velocidade.'
+      - '&7Permissão: class_sorcerer.storm.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_sorcerer.storm'
+      psapi-skill: 'sorcerer_storm_eye'

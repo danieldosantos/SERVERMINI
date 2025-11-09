@@ -1,0 +1,38 @@
+# Skill ativa: Asas Etéreas
+name: sorcerer_draconic_wings
+display: "§4Asas Etéreas"
+icon: ELYTRA
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  mana-cost-base: 28
+description:
+  - "§4Ganha voo planar e +0.05 de velocidade por 8s."
+  - "§7Skript garante limite de velocidade global e remove quedas."
+  - "§7Integra PlaceholderAPI para mostrar duração no HUD."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      BuffFlight:
+        type: mechanic
+        data:
+          key: draconic_wings
+          type: attribute
+          modifier: walk-speed
+          value-base: 0.05
+          seconds-base: 8
+      Levitation:
+        type: mechanic
+        data:
+          potion: slow_falling
+          level-base: 1
+          seconds-base: 8
+      SkriptMsg:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_wings_enable %caster%"
+          silent: true

@@ -1,0 +1,50 @@
+# Skill ativa: Pulso Eólico
+name: sorcerer_storm_gale
+display: "§bPulso Eólico"
+icon: FEATHER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  mana-cost-base: 24
+description:
+  - "§bEmpurra inimigos em 5 blocos e concede voo rápido por 4s."
+  - "§7Velocidade extra não ultrapassa cap global."
+  - "§7Skript informa HUD e aplica deslocamento seguro."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      AreaKnock:
+        type: mechanic
+        data:
+          shape: sphere
+          radius-base: 5
+          group: enemy
+        children:
+          Knockback:
+            type: mechanic
+            data:
+              speed-base: 1.0
+              type: velocity
+      BuffSpeed:
+        type: mechanic
+        data:
+          key: storm_gale
+          type: attribute
+          modifier: walk-speed
+          value-base: 0.04
+          seconds-base: 4
+      Levitation:
+        type: mechanic
+        data:
+          potion: slow_falling
+          level-base: 1
+          seconds-base: 4
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_storm_gale %caster%"
+          silent: true

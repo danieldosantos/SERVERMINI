@@ -1,0 +1,58 @@
+# LuckPerms comandos para classe Feiticeiro
+lp creategroup class_sorcerer
+lp creategroup class_sorcerer.draconic
+lp creategroup class_sorcerer.wild
+lp creategroup class_sorcerer.storm
+
+# Heranças
+lp group class_sorcerer.draconic parent add class_sorcerer
+lp group class_sorcerer.wild parent add class_sorcerer
+lp group class_sorcerer.storm parent add class_sorcerer
+
+# Permissões base
+lp group class_sorcerer permission set skillapi.class.sorcerer true
+lp group class_sorcerer permission set skillapi.skill.sorcerer_arcane_bolt true
+lp group class_sorcerer permission set skillapi.skill.sorcerer_arcane_wave true
+lp group class_sorcerer permission set skillapi.skill.sorcerer_arcane_blink true
+lp group class_sorcerer permission set skillapi.skill.sorcerer_metamagic_rapida true
+lp group class_sorcerer permission set skillapi.skill.sorcerer_metamagic_alcance true
+lp group class_sorcerer permission set skillapi.skill.sorcerer_metamagic_potenciada true
+lp group class_sorcerer permission set skillapi.skill.sorcerer_sorcery_recovery true
+lp group class_sorcerer permission set skillapi.skill.sorcerer_instinctive_focus true
+lp group class_sorcerer permission set command.metamagia true
+lp group class_sorcerer permission set command.kit_feiticeiro true
+lp group class_sorcerer permission set command.arcane_blink true
+
+# Permissões Dracônica
+lp group class_sorcerer.draconic permission set skillapi.skill.sorcerer_draconic_breath true
+lp group class_sorcerer.draconic permission set skillapi.skill.sorcerer_draconic_scales true
+lp group class_sorcerer.draconic permission set skillapi.skill.sorcerer_draconic_wings true
+lp group class_sorcerer.draconic permission set skillapi.skill.sorcerer_draconic_heart true
+lp group class_sorcerer.draconic permission set skillapi.skill.sorcerer_draconic_avatar true
+lp group class_sorcerer.draconic permission set skillapi.skill.sorcerer_metamagic_conversao_elemental true
+lp group class_sorcerer.draconic permission set command.sopro_draconico true
+lp group class_sorcerer.draconic permission set command.escamas_draconicas true
+
+# Permissões Magia Selvagem
+lp group class_sorcerer.wild permission set skillapi.skill.sorcerer_wild_surge true
+lp group class_sorcerer.wild permission set skillapi.skill.sorcerer_wild_flux true
+lp group class_sorcerer.wild permission set skillapi.skill.sorcerer_wild_reversion true
+lp group class_sorcerer.wild permission set skillapi.skill.sorcerer_wild_veil true
+lp group class_sorcerer.wild permission set skillapi.skill.sorcerer_wild_tempest true
+lp group class_sorcerer.wild permission set skillapi.skill.sorcerer_metamagic_dado_do_caos true
+lp group class_sorcerer.wild permission set command.surto_caotico true
+lp group class_sorcerer.wild permission set command.tempestade_caotica true
+
+# Permissões Magia da Tempestade
+lp group class_sorcerer.storm permission set skillapi.skill.sorcerer_storm_discharge true
+lp group class_sorcerer.storm permission set skillapi.skill.sorcerer_storm_gale true
+lp group class_sorcerer.storm permission set skillapi.skill.sorcerer_storm_cloud true
+lp group class_sorcerer.storm permission set skillapi.skill.sorcerer_storm_conduit true
+lp group class_sorcerer.storm permission set skillapi.skill.sorcerer_storm_eye true
+lp group class_sorcerer.storm permission set skillapi.skill.sorcerer_metamagic_canal_eletrico true
+lp group class_sorcerer.storm permission set command.descarga_tempestuosa true
+lp group class_sorcerer.storm permission set command.tempestade_olho true
+
+# Admin auxiliar
+lp group class_admin permission set command.give_sp true
+lp group class_admin permission set command.set_origin true

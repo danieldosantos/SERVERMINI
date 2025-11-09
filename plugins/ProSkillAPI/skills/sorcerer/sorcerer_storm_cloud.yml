@@ -1,0 +1,40 @@
+# Skill ativa: Nuvem de Trovões
+name: sorcerer_storm_cloud
+display: "§bNuvem de Trovões"
+icon: BLUE_CANDLE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  mana-cost-base: 34
+  duration-base: 8
+description:
+  - "§bCria campo de 6 blocos causando 60% de dano elétrico por segundo por 8s."
+  - "§7Serve como controle de zona sem exceder uptime de 60%."
+  - "§7Sinergiza com Canal Elétrico adicionando rastros."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Field:
+        type: mechanic
+        data:
+          shape: sphere
+          radius-base: 6
+          duration-base: 8
+          period: 1
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 0.6
+              classifier: skill
+              element: lightning
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_storm_cloud %caster%"
+          silent: true

@@ -1,0 +1,36 @@
+# Passiva: Recuperação de Feitiçaria
+name: sorcerer_sorcery_recovery
+display: "§aRecuperação de Feitiçaria"
+icon: PHANTOM_MEMBRANE
+type: Passive
+max-level: 1
+description:
+  - "§aRegenera 1 Ponto de Feitiçaria a cada 12s fora de combate (Skript valida flag)."
+  - "§7Não acumula acima do limite por tier definido na classe."
+  - "§7Atualiza HUD do PlaceholderAPI quando recurso muda."
+components:
+  Passive:
+    type: trigger
+    children:
+      CombatCheck:
+        type: condition
+        data:
+          combat: false
+        children:
+          Delay:
+            type: mechanic
+            data:
+              delay-base: 12
+              delay-scale: 0
+            children:
+              ResourceGain:
+                type: mechanic
+                data:
+                  key: sorcery_points
+                  amount-base: 1
+                  amount-scale: 0
+              UpdateHUD:
+                type: mechanic
+                data:
+                  command: "skript run sorcerer_sp_refresh %caster%"
+                  silent: true

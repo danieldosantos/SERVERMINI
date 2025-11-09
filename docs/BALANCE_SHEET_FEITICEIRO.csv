@@ -1,0 +1,27 @@
+Skill,Tipo,Custo(SP/Mana),Duração,CD,Dano/Redução,Área,Notas PvP,Tier
+Raio Arcano,Ativa,"0 SP / 14 mana","Instante",5s,"110% dano arcano","Projétil 1 alvo","Permite metamagias básicas",T1
+Onda Arcana,Ativa,"0 SP / 32 mana","Instante",45s,"140% dano arcano","Esfera 5 blocos","Empurra levemente, não stacka com knockback racial",T1
+Blink Arcano,Ativa,"0 SP / 26 mana","Teleporte",45s,"Antistun 1s","Linha 8 blocos","Não atravessa paredes sólidas",T1
+Recuperação de Feitiçaria,Passiva,"-","Tick 12s",-,"+1 SP","HUD","Somente fora de combate",T1
+Foco Instintivo,Passiva,"-","6s",9s,"+4% penetração","Self","Uptime <60%",T1
+Metamagia Rápida,Metamagia,"1 SP","Próxima skill",30s,"Cast instantâneo","-","CD mínimo 50% base",T2
+Metamagia Alcance,Metamagia,"1 SP","Próxima skill",30s,"+50% alcance","-","Afeta raio/cone/linha",T2
+Metamagia Potencializada,Metamagia,"2 SP","Próxima skill",30s,"+15% dano final","-","Não excede caps de burst",T3
+Sopro Dracônico,Ativa,"0 SP / 20 mana","Instante",45s,"160% dano elemental","Cone 6 blocos","Aplica diminishing com resistências",T2
+Escamas Manifestas,Ativa,"0 SP / 24 mana","10s",75s,"20% mitigação / 15% resistência","Self","Cap total 45%",T2
+Asas Etéreas,Ativa,"0 SP / 28 mana","8s",90s,"+0.05 velocidade","Self","Planar e slow falling",T3
+Coração Elemental,Ativa,"0 SP / 32 mana","12s",105s,"+20% dano elemental","Self","Sinergia com Conversão Elemental",T3
+Avatar Dracônico,Ultimate,"0 SP / 45 mana","15s",240s,"80% dps elemental","Aura 6 blocos","Exige alvo <30% HP para finalização",T4
+Metamagia Conversão,Metamagia,"1 SP","Próxima skill",30s,"Troca elemento","-","Compartilha lockout com outras metas",T3
+Surto Caótico,Ativa,"0 SP / 22 mana","Instante",45s,"150% dano elemental","Projétil","Elemento randômico controlado",T2
+Fluxo Instável,Ativa,"0 SP / 30 mana","10s",90s,"-20% CD global","Self","12% chance de penalidade leve",T3
+Reversão Quântica,Ativa,"0 SP / 26 mana","Instante",75s,"Remove/transforma 1-2 debuffs","Self","Não limpa punições severas",T3
+Véu Probabilístico,Ativa,"0 SP / 30 mana","8s",105s,"30% chance negar dano","Self","Mitigação total ≤45%",T3
+Tempestade Caótica,Ultimate,"0 SP / 44 mana","12s",240s,"70% dps elemental","Zona 8 blocos","Efeitos randômicos controlados",T4
+Metamagia Dado do Caos,Metamagia,"1 SP","Próxima skill",30s,"+10% dano + chance bônus","-","Feedback aleatório limitado",T3
+Descarga Tempestuosa,Ativa,"0 SP / 24 mana","Instante",45s,"140% dano elétrico","Linha 20 blocos","Raiz 2s",T2
+Pulso Eólico,Ativa,"0 SP / 24 mana","4s",60s,"Knockback + velocidade","Esfera 5 blocos","Velocidade final ≤0.05",T2
+Nuvem de Trovões,Ativa,"0 SP / 34 mana","8s",90s,"60% dps elétrico","Esfera 6 blocos","Controle de zona",T3
+Condutor Vivo,Ativa,"0 SP / 28 mana","10s",105s,"+20 mana por acerto elétrico","Self","Não concede imunidade",T3
+Olho da Tempestade,Ultimate,"0 SP / 46 mana","12s",240s,"100% dano elétrico/seg","Aura 7 blocos","+0.02 velocidade, PV alvo >30% seguro",T4
+Metamagia Canal Elétrico,Metamagia,"1 SP","Próxima skill",30s,"Rastro elétrico 4s","Linha/Campo","Sinergiza com Descarga/Nuvem",T3

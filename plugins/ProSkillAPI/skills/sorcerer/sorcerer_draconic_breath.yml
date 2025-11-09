@@ -1,0 +1,45 @@
+# Skill ativa: Sopro Dracônico
+name: sorcerer_draconic_breath
+display: "§4Sopro Dracônico"
+icon: DRAGON_BREATH
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  mana-cost-base: 20
+  range-base: 6
+  damage-base: 1.6
+description:
+  - "§4Expele um cone de 6 blocos causando 160% de dano elemental escolhido."
+  - "§7Elemento sincroniza com Skript/metamagia Conversão Elemental."
+  - "§7Checa resistências raciais e aplica retornos decrescentes."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      SkriptElement:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_draconic_element %caster%"
+          silent: true
+      Cone:
+        type: mechanic
+        data:
+          range-base: 6
+          amount-base: 24
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.6
+              classifier: skill
+              element: elemental
+          Particle:
+            type: mechanic
+            data:
+              effect: FLAME
+              amount-base: 40
+              radius-base: 2
