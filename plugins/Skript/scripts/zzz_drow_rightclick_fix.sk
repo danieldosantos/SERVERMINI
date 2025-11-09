@@ -2,7 +2,7 @@
 # e impedir colocacao do bloco caso o nome do item varie levemente.
 
 on right click:
-  if player's tool is not air:
+  if player's tool != air:
     set {_n} to display name of player's tool
     # Caso 1: nome exatamente igual ao configurado
     if {_n} is colored {@drow_web}:

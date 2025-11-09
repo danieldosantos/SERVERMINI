@@ -2,7 +2,7 @@
 
 # Anti-drop e sem queda na morte
 on drop:
-    if event-item is not air:
+    if event-item != air:
         set {_n} to display name of event-item
         if {_n} is in {bound_names::*}:
             cancel event
@@ -13,7 +13,7 @@ on drop:
 
 on death of player:
     loop drops:
-        if loop-value is not air:
+        if loop-value != air:
             set {_n} to display name of loop-value
             if {_n} is in {bound_names::*}:
                 remove loop-value from drops
@@ -22,7 +22,7 @@ on death of player:
 
 # Bloquear mover/guardar em baus e dropar via GUI
 on inventory click:
-    if event-item is not air:
+    if event-item != air:
         set {_n} to display name of event-item
         if {_n} is in {bound_names::*}:
             if event-inventory is not player's inventory:
@@ -41,7 +41,7 @@ on inventory click:
 
 # Bloquear arrastar itens vinculados para outras GUIs
 on inventory drag:
-    if event-item is not air:
+    if event-item != air:
         set {_n} to display name of event-item
         if {_n} is in {bound_names::*}:
             cancel event
@@ -52,7 +52,7 @@ on inventory drag:
 on craft:
     set {_blocked} to false
     loop all items in event-inventory:
-        if loop-item is not air:
+        if loop-item != air:
             set {_dn} to display name of loop-item
             if {_dn} is in {bound_names::*}:
                 set {_blocked} to true
@@ -66,7 +66,7 @@ on craft:
 
 # Impedir espalhar/colocar itens vinculados no mundo (ex.: redstone)
 on right click:
-    if player's tool is not air:
+    if player's tool != air:
         set {_n} to display name of player's tool
         if {_n} is in {bound_names::*}:
             cancel event
@@ -74,7 +74,7 @@ on right click:
             cancel event
 
 on block place:
-    if event-item is not air:
+    if event-item != air:
         set {_n} to display name of event-item
         if {_n} is in {bound_names::*}:
             cancel event
