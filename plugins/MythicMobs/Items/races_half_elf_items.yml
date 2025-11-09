@@ -1,0 +1,56 @@
+# Itens raciais focais dos meio-elfos e suas heranças.
+items:
+  HalfElfFeather:
+    Id: FEATHER
+    Display: '&dPena do Meio-Elfo &8(Racial)'
+    Lore:
+      - '&7Pluma leve que simboliza diplomacia versátil.'
+      - '&eClique direito:&f ativa Tato Social.'
+      - '&8Limite de uso: grupo race_half_elf.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    Enchantments:
+      - DURABILITY:5
+    NBT:
+      race-lock: 'race_half_elf'
+      skill: 'HalfElf_TatoSocial'
+  HighLoreSigil:
+    Id: AMETHYST_SHARD
+    Display: '&dSigilo do Sábio Meio-Elfo'
+    Lore:
+      - '&7Canaliza truques herdados de ancestrais altos elfos.'
+      - '&eClique direito:&f lança o Truque Arcano selecionado.'
+      - '&8Limite de uso: race_half_elf.high.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    NBT:
+      race-lock: 'race_half_elf.high'
+      skill: 'HalfElf_TruqueArcano'
+  DrowMoonbrooch:
+    Id: ENDER_PEARL
+    Display: '&5Broche Lunar Meio-Drow'
+    Lore:
+      - '&5Pinga luzes púrpuras que denunciam inimigos.'
+      - '&eClique direito:&f ativa Luzes Feéricas.'
+      - '&8Limite de uso: race_half_elf.drow.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    NBT:
+      race-lock: 'race_half_elf.drow'
+      skill: 'HalfElf_LuzesFeericas'
+  GroveCharm:
+    Id: MOSS_BLOCK
+    Display: '&2Amuleto do Bosque Meio-Elfo'
+    Lore:
+      - '&2Folhagem viva que responde a quem honra a floresta.'
+      - '&eClique direito:&f ativa Camuflagem Silvestre.'
+      - '&8Limite de uso: race_half_elf.wood.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    NBT:
+      race-lock: 'race_half_elf.wood'
+      skill: 'HalfElf_CamuflagemSilvestre'

@@ -1,0 +1,271 @@
+# Raça: Meio-Elfo (versatilidade padrão)
+race_id: half_elf
+name: "Meio-Elfo"
+identity: "Adaptáveis e carismáticos, equilibram traços humanos e élficos sem especialização extrema."
+luckperms:
+  required: "race_half_elf"
+  inherit: null
+placeholders:
+  racial_cd_main: "{cooldown:skill_halfelf_tato_social}"
+  racial_uptime: "{uptime:versatilidade_meio_elfica}"
+  racial_resist_mental: "{status:descendencia_mista_resist}"
+  racial_charges: "{charges:skill_halfelf_tato_social}"
+passives:
+  versatilidade_meio_elfica:
+    name: "Versatilidade Meio-Élfica"
+    type: selectable_bundle
+    trigger: manual_config
+    selection_count: 2
+    cooldown: 5
+    uptime_cap: 0.6
+    options:
+      diplomata_nato:
+        display: "Diplomata Nato"
+        duration: 10
+        cooldown: 90
+        effects:
+          support_cooldown_shave: 0.1
+        notes: "Ativa -10% em habilidades de suporte/buff por 10s. Reseta fora de combate via /meioelfo_modo."
+      instinto_agil:
+        display: "Instinto Ágil"
+        duration: 8
+        cooldown: 30
+        effects:
+          speed_bonus: 0.02
+        notes: "Aplica +0.02 velocidade após esquivar/sofrer projétil (CD interno 30s; uptime ≤60%)."
+      calma_focada:
+        display: "Calma Focada"
+        duration: 6
+        cooldown: 45
+        effects:
+          cc_resistance: 0.1
+        notes: "+10% resistência a controle ao ser desacelerado. Compartilha DR com fontes similares."
+      desc_mista_trigger:
+        display: "Descendência Mista"
+        duration: 6
+        cooldown: 45
+        effects:
+          charm_fear_resist: 0.12
+        notes: "Reforça reação a encanto/medo com DR progressiva (cap em 35%)."
+    description: "Jogador escolhe 2 mini-bônus. Alternar requer estar fora de combate e item racial."
+  descendencia_mista_core:
+    name: "Descendência Mista"
+    type: reactive_resistance
+    trigger: charm_or_fear
+    duration: 6
+    cooldown: 45
+    uptime_cap: 0.6
+    effects:
+      charm_resistance: 0.12
+      fear_resistance: 0.12
+    diminishing_returns: mental
+    description: "Quando alvo de encanto/medo, ativa 12% de resistência adicional por 6s."
+actives:
+  tato_social:
+    name: "Tato Social"
+    skill: HalfElf_TatoSocial
+    cooldown: 90
+    charges: 1
+    description: "Marca 1 aliado a 6 blocos por 12s concedendo +5% cura recebida e -5% dano recebido."
+resistances:
+  mental:
+    base: 0.1
+    max: 0.35
+    notes: "Base leve a encanto/medo acumulando com Descendência Mista via DR."
+biome_affinity:
+  preferred:
+    - plains
+    - forests
+  notes: "Sem penalidades por luz; variações aplicam regras específicas."
+synergy_notes:
+  - "Bônus sociais não aumentam dano direto e respeitam caps de mitigação ao combinar com classes Bardo/Paladino."
+  - "Velocidade extra somada com Patrulheiro/Monge permanece ≤ +0.05 via limitador global."
+tests:
+  pve:
+    - "Chefe de cerco: validar suporte ao tanque com Tato Social e rotação de mini-bônus (uptime ≤60%)."
+    - "Eventos de exploração: alternar Instinto Ágil/Calma Focada e confirmar que stacks respeitam limites."
+  pvp:
+    - "Duelo 1v1 contra guerreiro: buff defensivo de Tato Social não excede mitigação total 45%."
+    - "Partida de objetivos 4v4: bônus sociais oferecem suporte sem aumentar DPS direto."
+---
+# Sub-raça: Meio-Elfo (Herança Alto Elfo)
+race_id: half_elf_high
+name: "Meio-Elfo (Herança Alto Elfo)"
+identity: "Curiosos arcanos que mantêm laços humanos enquanto dominam um truque ancestral."
+luckperms:
+  required: "race_half_elf.high"
+  inherit: "race_half_elf"
+placeholders:
+  racial_cd_main: "{cooldown:skill_halfelf_truque_arcano}"
+  racial_resist_fae: "{status:astucia_arcana}"
+  racial_charges: "{charges:skill_halfelf_truque_arcano}"
+passives:
+  astucia_arcana:
+    name: "Astúcia Arcana"
+    type: timed_attribute
+    trigger: wield_focus
+    duration: 8
+    cooldown: 24
+    uptime_cap: 0.33
+    attributes:
+      magic_efficiency: 0.05
+    description: "+5% eficiência em skills mágicas enquanto manipula foco arcano (aplica DR com talentos de classe)."
+  estudo_rapido:
+    name: "Estudo Rápido"
+    type: cantrip_slot
+    trigger: out_of_combat
+    duration: 0
+    cooldown: 60
+    uptime_cap: 0.6
+    options:
+      - "Faísca Hipnótica"
+      - "Luz Reveladora"
+      - "Mão Prestidigitadora"
+    description: "Mantém 1 truque racial preparado. Alterações somente fora de combate via /truque_arcano."
+actives:
+  truque_arcano:
+    name: "Truque Arcano"
+    skill: HalfElf_TruqueArcano
+    cooldown: 55
+    charges: 1
+    description: "Executa o truque selecionado (controle, luz ou utilidade). CDs ajustados entre 45–60s conforme tier."
+synergy_notes:
+  - "Com Mago/Feiticeiro/Bruxo, bônus de eficiência entra em DR após 15% para respeitar caps de recarga."
+  - "Truques evitam dano acima de habilidades leves e não contornam fraquezas de mana."
+tests:
+  pve:
+    - "Masmorra arcana: medir dano/controle do truque escolhido e confirmar custo de mana leve."
+    - "Simulação de utility check: Mão Prestidigitadora não substitui magias de classe."
+  pvp:
+    - "Arena 2v2: Faísca Hipnótica revela furtivos mas mantém counters ativos via DR."
+    - "Duelo mago vs meio-elfo alto: ver se bônus de eficiência não ultrapassa 15% combinado."
+---
+# Sub-raça: Meio-Elfo (Herança Drow)
+race_id: half_elf_drow
+name: "Meio-Elfo (Herança Drow)"
+identity: "Nascidos entre sombras, equilibram magia sutil com vulnerabilidade à luz intensa."
+luckperms:
+  required: "race_half_elf.drow"
+  inherit: "race_half_elf"
+placeholders:
+  racial_cd_main: "{cooldown:skill_halfelf_luzes_feericas}"
+  racial_uptime: "{uptime:afinidade_umbrica}"
+passives:
+  visao_no_escuro_superior:
+    name: "Visão no Escuro Superior"
+    type: vision
+    trigger: passive
+    range: 28
+    description: "Permite enxergar 28 blocos no escuro (HUD ajusta contraste automaticamente)."
+  sensibilidade_luz:
+    name: "Sensibilidade à Luz"
+    type: conditional_debuff
+    trigger: daylight
+    duration: 0
+    cooldown: 0
+    penalties:
+      accuracy: -0.05
+      speed: -0.01
+    conditions:
+      skylight_min: 14
+      direct_sun: true
+    description: "Sob luz solar direta aplica -5% precisão e -0.01 velocidade. Não afeta interiores/subsolo/noite."
+  afinidade_umbrica:
+    name: "Afinidade Umbrática"
+    type: stealth_extension
+    trigger: enter_shadow
+    duration: 6
+    cooldown: 18
+    uptime_cap: 0.33
+    bonus:
+      stealth_duration: 0.1
+    description: "+10% duração em furtividade/camuflagem. DR aplicado com bônus de classe."
+actives:
+  luzes_feericas:
+    name: "Luzes Feéricas"
+    skill: HalfElf_LuzesFeericas
+    cooldown: 75
+    charges: 1
+    description: "Revela inimigos em 6 blocos por 6s, aplicando marca leve."
+  passo_sombrio:
+    name: "Passo Sombrio"
+    skill: HalfElf_PassoSombrio
+    cooldown: 90
+    charges: 1
+    description: "Teleporta 6–8 blocos entre sombras, disponível a partir do Tier 3."
+weaknesses:
+  - "Sob luz solar direta o debuff permanece ativo até 5s após sair da área iluminada."
+synergy_notes:
+  - "Com Ladino/Monge da Sombra, Afinidade Umbrática aplica DR exponencial após +20% cumulativo, evitando furtividade permanente."
+  - "Penalidade de luz garante contrajogo em arenas iluminadas."
+tests:
+  pve:
+    - "Missão subterrânea: garantir visão ampliada não interfere na dificuldade de encontros."
+    - "Evento outdoor diurno: medir impacto da penalidade e ajustar rotações de Passo Sombrio."
+  pvp:
+    - "Arena iluminada vs subterrâneo para validar diferença de desempenho e balanceamento."
+    - "Combate em equipe com Ladino: checar se DR impede invisibilidade ilimitada."
+---
+# Sub-raça: Meio-Elfo (Herança Elfo da Floresta)
+race_id: half_elf_wood
+name: "Meio-Elfo (Herança Elfo da Floresta)"
+identity: "Agéis e atentos, utilizam sentidos ampliados e camuflagem em ambientes naturais."
+luckperms:
+  required: "race_half_elf.wood"
+  inherit: "race_half_elf"
+placeholders:
+  racial_cd_main: "{cooldown:skill_halfelf_camuflagem_silvestre}"
+  racial_uptime: "{uptime:passo_silvestre}"
+passives:
+  passo_silvestre:
+    name: "Passo Silvestre"
+    type: biome_speed_boost
+    trigger: enter_forest
+    duration: 8
+    cooldown: 30
+    uptime_cap: 0.6
+    biomes:
+      - forest
+      - birch_forest
+      - dark_forest
+      - taiga
+    effects:
+      speed_bonus: 0.02
+    description: "Ao entrar em biomas de floresta concede +0.02 velocidade por 8s (CD interno 30s)."
+  sentidos_aguçados:
+    name: "Sentidos Aguçados"
+    type: detection_radius
+    trigger: passive
+    radius_bonus: 0.1
+    hud_placeholder: "{status:sentidos_aguçados}"
+    description: "+10% alcance de detecção de inimigos vivos em HUD/alertas."
+actives:
+  camuflagem_silvestre:
+    name: "Camuflagem Silvestre"
+    skill: HalfElf_CamuflagemSilvestre
+    cooldown: 90
+    charges: 1
+    description: "Aplica camuflagem (não invisibilidade) por 10s em floresta; quebra ao atacar."
+  flecha_do_bosque:
+    name: "Flecha do Bosque"
+    skill: HalfElf_FlechaBosque
+    cooldown: 60
+    charges: 1
+    description: "Projétil leve (120%) que marca o alvo por 6s, com DR compartilhada para buffs de projéteis."
+biome_affinity:
+  preferred:
+    - forest
+    - birch_forest
+    - dark_forest
+    - taiga
+  notes: "Camuflagem só dispara se 60% dos blocos próximos forem naturais/florestais."
+synergy_notes:
+  - "Com Patrulheiro, alcance de detecção soma via DR após +20% cumulativo."
+  - "Velocidade extra respeita cap global (+0.05) ao combinar com habilidades de classe."
+tests:
+  pve:
+    - "Perseguição em floresta: medir vantagem de mobilidade sem ultrapassar 60% uptime."
+    - "Emboscada cooperativa com Patrulheiro: confirmar marcação da Flecha mantém TTK equilibrado."
+  pvp:
+    - "Duelos em arena aberta vs arena florestal, avaliando ganho de camuflagem."
+    - "Skirmish 5v5: garantir que camuflagem é interrompida corretamente ao atacar."

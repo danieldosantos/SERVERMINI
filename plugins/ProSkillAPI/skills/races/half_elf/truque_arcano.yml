@@ -1,0 +1,103 @@
+# ProSkillAPI - Truque racial dos meio-elfos de herança alta
+skills:
+  HalfElf_TruqueArcano:
+    display: "&dTruque Arcano"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Executa o truque selecionado via /truque_arcano. O metadado
+      {meta:halfelf_cantrip} determina qual efeito será disparado.
+      Caso não haja seleção, utiliza Faísca Hipnótica como padrão.
+    tiers:
+      T1: { cooldown: 55 }
+      T2: { cooldown: 55 }
+      T3: { cooldown: 50 }
+      T4: { cooldown: 45 }
+    cost:
+      resource: mana
+      amount: 14
+    effects:
+      - target: self
+        type: trigger_skill
+        meta_key: halfelf_cantrip
+        fallback: HalfElf_TruqueFaisca
+    notes: "O Skript garante sincronização do metadado e bloqueia uso fora de combate ao alternar."
+  HalfElf_TruqueFaisca:
+    display: "&dFaísca Hipnótica"
+    type: ACTIVE
+    skill_class: racial
+    description: "Projétil arcano leve (110–130%) que aplica lentidão curta e revela furtivos ao impacto."
+    tiers:
+      T1: { cooldown: 55, damage_multiplier: 1.1, slow: 0.2, slow_duration: 3, reveal: 3, range: 16 }
+      T2: { cooldown: 55, damage_multiplier: 1.15, slow: 0.25, slow_duration: 3, reveal: 3, range: 17 }
+      T3: { cooldown: 50, damage_multiplier: 1.2, slow: 0.25, slow_duration: 4, reveal: 4, range: 18 }
+      T4: { cooldown: 45, damage_multiplier: 1.25, slow: 0.3, slow_duration: 4, reveal: 4, range: 18 }
+    cost:
+      resource: mana
+      amount: 12
+    effects:
+      - target: enemy_single
+        type: projectile
+        range: { tier: range }
+        damage_multiplier: { tier: damage_multiplier }
+        element: arcane
+      - target: enemy_single
+        type: debuff
+        id: slow
+        value: { tier: slow }
+        duration: { tier: slow_duration }
+      - target: enemy_single
+        type: reveal
+        duration: { tier: reveal }
+    notes: "Dano escala como habilidade leve. Reveal interrompe furtividade sem negar habilidades de classe."
+  HalfElf_TruqueLuz:
+    display: "&eLuz Reveladora"
+    type: ACTIVE
+    skill_class: racial
+    description: "Explosão de luz suave em 6 blocos, removendo camuflagem e concedendo visão compartilhada por 6s."
+    tiers:
+      T1: { cooldown: 60, radius: 6, duration: 6, accuracy_bonus: 0.05 }
+      T2: { cooldown: 60, radius: 6, duration: 6, accuracy_bonus: 0.06 }
+      T3: { cooldown: 55, radius: 6, duration: 7, accuracy_bonus: 0.06 }
+      T4: { cooldown: 50, radius: 7, duration: 7, accuracy_bonus: 0.07 }
+    cost:
+      resource: mana
+      amount: 10
+    effects:
+      - target: enemies_radius
+        radius: { tier: radius }
+        type: reveal
+        duration: { tier: duration }
+      - target: allies_radius
+        radius: { tier: radius }
+        type: status
+        id: accuracy
+        duration: { tier: duration }
+        value: { tier: accuracy_bonus }
+    notes: "Bônus de acerto utiliza DR para manter precisão total abaixo de 20%."
+  HalfElf_TruqueMao:
+    display: "&bMão Prestidigitadora"
+    type: ACTIVE
+    skill_class: racial
+    description: "Conjura mão espectral utilitária: puxa alavancas, coleta itens leves e aplica empurrão suave."
+    tiers:
+      T1: { cooldown: 45, push: 0.4, duration: 8, range: 10 }
+      T2: { cooldown: 45, push: 0.45, duration: 8, range: 11 }
+      T3: { cooldown: 45, push: 0.5, duration: 10, range: 12 }
+      T4: { cooldown: 45, push: 0.5, duration: 10, range: 13 }
+    cost:
+      resource: mana
+      amount: 8
+    effects:
+      - target: interactable_block
+        range: { tier: range }
+        type: remote_interact
+      - target: enemy_single
+        range: { tier: range }
+        type: push
+        power: { tier: push }
+      - target: location
+        type: particle
+        id: arcane_hand
+        duration: { tier: duration }
+    notes: "Não substitui magias de classe: tempo de conjuração igual ao Tier garante janela de resposta."

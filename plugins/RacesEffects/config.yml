@@ -9,6 +9,7 @@ hud:
       - "&eRaça:&f {race_active}"
       - "&eUptime:&f {racial_uptime}"
       - "&eResist. Mental:&f {racial_resist_mental}"
+      - "&eResist. Foco:&f {racial_resist_fae}"
       - "&eEscudo:&f {racial_shield}"
       - "&eCargas:&f {racial_charges}"
       - "&eCD Principal:&f {racial_cd_main}"
@@ -26,6 +27,7 @@ placeholders:
   racial_cd_main: "Nenhum"
   racial_uptime: "0%"
   racial_resist_mental: "0%"
+  racial_resist_fae: "0%"
   racial_shield: "0"
   racial_charges: "0"
 biome_affinity_check_interval: 10
@@ -37,6 +39,25 @@ tags:
   gnome: "race_gnomo"
   halfling: "race_halfling"
   human: "race_human"
-  halfelf: "race_meioelfo"
+  halfelf: "race_half_elf"
   halforc: "race_meioorc"
   tiefling: "race_tiefling"
+# Mapeia grupos do LuckPerms para arquivos/variantes do RacesEffects.
+# Evita duplicação ao centralizar configuração das heranças Meio-Elfo.
+luckperms_groups:
+  race_half_elf:
+    file: "half_elf"
+    display: "Meio-Elfo (Versatilidade)"
+    variants:
+      base:
+        group: "race_half_elf"
+        description: "Config padrão escolhido ao aplicar a raça."
+      high:
+        group: "race_half_elf.high"
+        description: "Herança Alto Elfo (truques arcanos)."
+      drow:
+        group: "race_half_elf.drow"
+        description: "Herança Drow (penumbra)."
+      wood:
+        group: "race_half_elf.wood"
+        description: "Herança Elfo da Floresta (mobilidade natural)."

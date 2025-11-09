@@ -1,0 +1,54 @@
+# ProSkillAPI - Habilidades da herança Drow dos meio-elfos
+skills:
+  HalfElf_LuzesFeericas:
+    display: "&5Luzes Feéricas"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Libera chamas feéricas que revelam inimigos em 6 blocos e aplicam marca
+      que reduz evasão em 6s. Não ignora furtividade superior protegida por DR.
+    tiers:
+      T1: { cooldown: 75, radius: 6, duration: 6, evasion_reduction: 0.07 }
+      T2: { cooldown: 75, radius: 6, duration: 6, evasion_reduction: 0.08 }
+      T3: { cooldown: 75, radius: 6, duration: 7, evasion_reduction: 0.09 }
+      T4: { cooldown: 75, radius: 7, duration: 7, evasion_reduction: 0.1 }
+    cost:
+      resource: mana
+      amount: 18
+    effects:
+      - target: enemies_radius
+        radius: { tier: radius }
+        type: reveal
+        duration: { tier: duration }
+      - target: enemies_radius
+        radius: { tier: radius }
+        type: debuff
+        id: evasion
+        value: { tier: evasion_reduction }
+        duration: { tier: duration }
+    notes: "Redução entra em DR caso evasão total exceda 25%."
+  HalfElf_PassoSombrio:
+    display: "&8Passo Sombrio"
+    type: ACTIVE
+    skill_class: racial
+    description: "Salto curto entre sombras, concede resistência a projéteis por 2s após o teleporte."
+    tiers:
+      T1: { cooldown: 90, distance: 6, projectile_resist: 0.08 }
+      T2: { cooldown: 90, distance: 6, projectile_resist: 0.1 }
+      T3: { cooldown: 90, distance: 7, projectile_resist: 0.12 }
+      T4: { cooldown: 90, distance: 8, projectile_resist: 0.12 }
+    cost:
+      resource: stamina
+      amount: 12
+    requirements:
+      light_level_max: 7
+    effects:
+      - target: self
+        type: teleport
+        distance: { tier: distance }
+      - target: self
+        type: status
+        id: projectile_resistance
+        value: { tier: projectile_resist }
+        duration: 2
+    notes: "Bloqueado acima de nível de luz 7 para reforçar restrição temática."

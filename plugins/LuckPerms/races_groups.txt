@@ -18,7 +18,10 @@ lp creategroup race_halfling.stout
 lp creategroup race_human
 lp creategroup race_human.standard
 lp creategroup race_human.variant
-lp creategroup race_meioelfo
+lp creategroup race_half_elf
+lp creategroup race_half_elf.high
+lp creategroup race_half_elf.drow
+lp creategroup race_half_elf.wood
 lp creategroup race_meioorc
 lp creategroup race_tiefling
 
@@ -34,6 +37,9 @@ lp group race_halfling.lightfoot parent add race_halfling
 lp group race_halfling.stout parent add race_halfling
 lp group race_human.standard parent add race_human
 lp group race_human.variant parent add race_human
+lp group race_half_elf.high parent add race_half_elf
+lp group race_half_elf.drow parent add race_half_elf
+lp group race_half_elf.wood parent add race_half_elf
 
 # Permissões para habilidades (SkillAPI) e itens (MythicMobs)
 # Anões
@@ -96,8 +102,14 @@ lp group race_human.variant permission set mythicmobs.item.TalentToken true
 lp group race_human.variant permission set mythicmobs.item.HumanSignet true
 
 # Meio-Elfo
-lp group race_meioelfo permission set psa.skill.HarmoniaHibrida true
-lp group race_meioelfo permission set mythicmobs.item.HalfElfHarmonyOrb true
+lp group race_half_elf permission set psa.skill.HalfElf_TatoSocial true
+lp group race_half_elf permission set mythicmobs.item.HalfElfFeather true
+lp group race_half_elf.high permission set psa.skill.HalfElf_TruqueArcano true
+lp group race_half_elf.high permission set mythicmobs.item.HighLoreSigil true
+lp group race_half_elf.drow permission set psa.skill.HalfElf_LuzesFeericas true
+lp group race_half_elf.drow permission set psa.skill.HalfElf_PassoSombrio true
+lp group race_half_elf.wood permission set psa.skill.HalfElf_CamuflagemSilvestre true
+lp group race_half_elf.wood permission set psa.skill.HalfElf_FlechaBosque true
 
 # Meio-Orc
 lp group race_meioorc permission set psa.skill.TenacidadeImplacavel true
@@ -140,7 +152,12 @@ lp group race_human.standard permission set skript.command.esforco_coordenado tr
 lp group race_human.standard permission set skript.command.kit_racial_humano true
 lp group race_human.variant permission set skript.command.talento true
 lp group race_human.variant permission set skript.command.kit_racial_humano_variante true
-lp group race_meioelfo permission set skript.command.harmonia_hibrida true
+lp group race_half_elf permission set skript.command.meioelfo_modo true
+lp group race_half_elf permission set skript.command.kit_racial_halfelf true
+lp group race_half_elf.high permission set skript.command.truque_arcano true
+lp group race_half_elf.drow permission set skript.command.fae_lights true
+lp group race_half_elf.drow permission set skript.command.shadow_step true
+lp group race_half_elf.wood permission set skript.command.camuflagem_silvestre true
 lp group race_meioorc permission set skript.command.tenacidade_implacavel true
 lp group race_tiefling permission set skript.command.toque_igneo true
 lp group race_tiefling permission set skript.command.lamina_das_chamas true

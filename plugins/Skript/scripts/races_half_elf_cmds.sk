@@ -1,0 +1,229 @@
+# races_half_elf_cmds.sk — Integração completa da raça Meio-Elfo e heranças.
+# Responsável por ligar MythicMobs ↔ ProSkillAPI ↔ RacesEffects, além de
+# comandos utilitários e kits de QA.
+
+options:
+  skillcmd: psa cast
+  race_bundle_cmd: raceeffects bundle
+  race_meta_cmd: raceeffects metadata
+  base_group: "race_half_elf"
+  high_group: "race_half_elf.high"
+  drow_group: "race_half_elf.drow"
+  wood_group: "race_half_elf.wood"
+  feather_name: "&dPena do Meio-Elfo &8(Racial)"
+  sigil_name: "&dSigilo do Sábio Meio-Elfo"
+  brooch_name: "&5Broche Lunar Meio-Drow"
+  charm_name: "&2Amuleto do Bosque Meio-Elfo"
+
+function halfElfHasGroup(p: player, group: text) :: boolean:
+  set {_perm1} to "group.%{_group}%"
+  set {_perm2} to "lp.%{_group}%"
+  if {_p} has permission {_perm1}:
+    return true
+  if {_p} has permission {_perm2}:
+    return true
+  return false
+
+function halfElfSyncModes(p: player):
+  set {_uuid} to uuid of {_p}
+  delete {_clean::*}
+  set {_idx} to 0
+  loop {halfelf.modes::%{_uuid}%::*}:
+    add loop-value to {_clean::*}
+  if size of {_clean::*} > 2:
+    set {_clean::*} to {_clean::1} and {_clean::2}
+  execute console command "{@race_bundle_cmd} %player% half_elf versatilidade_meio_elfica clear"
+  loop {_clean::*}:
+    execute console command "{@race_bundle_cmd} %player% half_elf versatilidade_meio_elfica %loop-value%"
+  set {halfelf.modes::%{_uuid}%::*} to {_clean::*}
+
+function halfElfCastSkill(p: player, skill: text, label: text):
+  execute console command "{@skillcmd} %player% %skill%"
+  send action bar "&dRaça: Meio-Elfo &7→ &f%{_label}%" to {_p}
+
+function halfElfCurrentCantrip(p: player) :: text:
+  return {halfelf.cantrip::%uuid of {_p}%}
+
+function halfElfSetCantrip(p: player, cantrip: text):
+  set {_uuid} to uuid of {_p}
+  set {halfelf.cantrip::%{_uuid}%} to {_cantrip}
+  execute console command "{@race_meta_cmd} %player% halfelf_cantrip %{_cantrip}%"
+
+command /meioelfo_modo [<text>] [<text>]:
+  description: "Seleciona os mini-bônus da versatilidade meio-élfica."
+  permission: race.halfelf
+  trigger:
+    if player is not online:
+      stop
+    if halfElfHasGroup(player, {@base_group}) is false:
+      send "&cVocê precisa ser um meio-elfo para usar este comando." to player
+      stop
+    set {_action} to arg-1
+    if {_action} is not set:
+      send "&dVersatilidade atual:&f %{halfelf.modes::%uuid of player%::*}%" to player
+      send "&7Use &f/meioelfo_modo escolher <diplomata|instinto|calma|descendencia>&7." to player
+      stop
+    if {_action} is "listar":
+      send "&dVersatilidade atual:&f %{halfelf.modes::%uuid of player%::*}%" to player
+      stop
+    if {_action} is "escolher":
+      set {_choice} to arg-2
+      if {_choice} is not set:
+        send "&cInforme a opção desejada (diplomata, instinto, calma, descendencia)." to player
+        stop
+      if {_choice} is "diplomata":
+        set {_mode} to "diplomata_nato"
+      else if {_choice} is "instinto":
+        set {_mode} to "instinto_agil"
+      else if {_choice} is "calma":
+        set {_mode} to "calma_focada"
+      else if {_choice} is "descendencia":
+        set {_mode} to "desc_mista_trigger"
+      else:
+        send "&cOpção inválida." to player
+        stop
+      if {_mode} is set:
+        set {_uuid} to uuid of player
+        if {_mode} is in {halfelf.modes::%{_uuid}%::*}:
+          remove {_mode} from {halfelf.modes::%{_uuid}%::*}
+          send "&7Modo &f%arg-2% &7removido." to player
+        else:
+          if size of {halfelf.modes::%{_uuid}%::*} >= 2:
+            set {_old} to {halfelf.modes::%{_uuid}%::1}
+            delete {halfelf.modes::%{_uuid}%::1}
+            remove {_old} from {halfelf.modes::%{_uuid}%::*}
+          add {_mode} to {halfelf.modes::%{_uuid}%::*}
+          send "&aModo &f%arg-2% &aadicionado." to player
+        halfElfSyncModes(player)
+      stop
+    send "&cSintaxe: /meioelfo_modo escolher <opção>." to player
+
+command /truque_arcano [<text>] [<text>]:
+  description: "Seleciona ou lança o truque arcano da herança alto elfo."
+  permission: race.halfelf.high
+  trigger:
+    if halfElfHasGroup(player, {@high_group}) is false:
+      send "&cSomente meio-elfos de herança alta podem usar truques." to player
+      stop
+    if arg-1 is "select" or arg-1 is "selecionar":
+      set {_option} to arg-2
+      if {_option} is not set:
+        send "&7Opções: &dFaisca&7, &eLuz&7, &bMao." to player
+        stop
+      set {_opt} to lowercase {_option}
+      if {_opt} is "faisca":
+        halfElfSetCantrip(player, "HalfElf_TruqueFaisca")
+        send "&aTruque definido: Faísca Hipnótica." to player
+      else if {_opt} is "luz":
+        halfElfSetCantrip(player, "HalfElf_TruqueLuz")
+        send "&aTruque definido: Luz Reveladora." to player
+      else if {_opt} is "mao":
+        halfElfSetCantrip(player, "HalfElf_TruqueMao")
+        send "&aTruque definido: Mão Prestidigitadora." to player
+      else:
+        send "&cOpção inválida. Use faisca/luz/mao." to player
+      stop
+    if arg-1 is set:
+      send "&7Use &f/truque_arcano selecionar <opção>&7 para trocar o truque." to player
+      stop
+    set {_current} to halfElfCurrentCantrip(player)
+    if {_current} is not set:
+      set {_current} to "HalfElf_TruqueFaisca"
+    halfElfCastSkill(player, {_current}, "Truque Arcano")
+
+command /racial [<text>]:
+  description: "Atalho para habilidades raciais registradas."
+  permission: race.core
+  trigger:
+    if arg-1 is not set:
+      send "&dComandos raciais disponíveis:&f tato_social, truque_arcano, fae_lights, shadow_step, camuflagem." to player
+      stop
+    set {_key} to lowercase arg-1
+    if {_key} is "tato_social":
+      if halfElfHasGroup(player, {@base_group}) is true:
+        halfElfCastSkill(player, "HalfElf_TatoSocial", "Tato Social")
+      else:
+        send "&cApenas meio-elfos padrão podem usar Tato Social." to player
+    else if {_key} is "truque_arcano":
+      execute player command "/truque_arcano"
+    else if {_key} is "fae_lights":
+      execute player command "/fae_lights"
+    else if {_key} is "shadow_step" or {_key} is "passo_faerico":
+      execute player command "/shadow_step"
+    else if {_key} is "camuflagem":
+      execute player command "/camuflagem_silvestre"
+    else:
+      send "&cOpção desconhecida." to player
+
+command /fae_lights:
+  description: "Ativa Luzes Feéricas (herança drow)."
+  permission: race.halfelf.drow
+  trigger:
+    if halfElfHasGroup(player, {@drow_group}) is false:
+      send "&cSomente meio-elfos drow podem usar Luzes Feéricas." to player
+      stop
+    halfElfCastSkill(player, "HalfElf_LuzesFeericas", "Luzes Feéricas")
+
+command /shadow_step:
+  aliases: passo_faerico
+  description: "Teleporta entre sombras (herança drow)."
+  permission: race.halfelf.drow
+  trigger:
+    if halfElfHasGroup(player, {@drow_group}) is false:
+      send "&cSomente meio-elfos drow podem usar Passo Sombrio." to player
+      stop
+    halfElfCastSkill(player, "HalfElf_PassoSombrio", "Passo Sombrio")
+
+command /camuflagem_silvestre:
+  description: "Ativa camuflagem em biomas naturais (herança elfo da floresta)."
+  permission: race.halfelf.wood
+  trigger:
+    if halfElfHasGroup(player, {@wood_group}) is false:
+      send "&cSomente meio-elfos da floresta podem usar esta habilidade." to player
+      stop
+    halfElfCastSkill(player, "HalfElf_CamuflagemSilvestre", "Camuflagem Silvestre")
+
+command /kit_racial_halfelf:
+  description: "Entrega kit de QA para testes da raça Meio-Elfo."
+  permission: race.halfelf.kit
+  trigger:
+    if halfElfHasGroup(player, {@base_group}) is false:
+      send "&cSomente meio-elfos podem receber este kit." to player
+      stop
+    execute console command "kit halfelf_racial %player%"
+    execute console command "cmi kit halfelf_racial %player%"
+    send "&aKit de QA enviado. Confira seu inventário." to player
+
+# Hooks de clique em itens focais MythicMobs
+on right click:
+  if name of player's tool is {@feather_name}:
+    cancel event
+    if halfElfHasGroup(player, {@base_group}) is true:
+      halfElfCastSkill(player, "HalfElf_TatoSocial", "Tato Social")
+    else:
+      send "&cA pena reconhece apenas meio-elfos." to player
+  if name of player's tool is {@sigil_name}:
+    cancel event
+    if halfElfHasGroup(player, {@high_group}) is true:
+      execute player command "/truque_arcano"
+    else:
+      send "&cO sigilo vibra e recusa o usuário." to player
+  if name of player's tool is {@brooch_name}:
+    cancel event
+    if halfElfHasGroup(player, {@drow_group}) is true:
+      halfElfCastSkill(player, "HalfElf_LuzesFeericas", "Luzes Feéricas")
+    else:
+      send "&cO broche apaga sem sangue drow." to player
+  if name of player's tool is {@charm_name}:
+    cancel event
+    if halfElfHasGroup(player, {@wood_group}) is true:
+      halfElfCastSkill(player, "HalfElf_CamuflagemSilvestre", "Camuflagem Silvestre")
+    else:
+      send "&cO amuleto permanece inerte." to player
+
+# Regeneração de cargas fora de combate (placeholder para integração futura)
+every 20 seconds:
+  loop all players:
+    if loop-player is online:
+      if {combat.tag::%uuid of loop-player%} is not set:
+        execute console command "{@race_meta_cmd} %loop-player% racial_uptime refresh"
