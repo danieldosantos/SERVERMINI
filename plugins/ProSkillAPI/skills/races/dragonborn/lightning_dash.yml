@@ -1,0 +1,37 @@
+# ProSkillAPI - Habilidade ativa da linhagem tempestuosa
+skills:
+  Dragonstorm_Dash:
+    display: "&9Estalo Dracônico"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Avança 6 blocos deixando um arco elétrico que causa dano moderado e atordoa levemente.
+      Respeita caps globais de velocidade (+0.05) e controle (<4s).
+    tiers:
+      T1: { cooldown: 65, dash_distance: 6, shock_damage: 0.35, stun_duration: 1.0 }
+      T2: { cooldown: 65, dash_distance: 6, shock_damage: 0.40, stun_duration: 1.2 }
+      T3: { cooldown: 65, dash_distance: 6, shock_damage: 0.45, stun_duration: 1.4 }
+      T4: { cooldown: 65, dash_distance: 6, shock_damage: 0.50, stun_duration: 1.5 }
+    effects:
+      - target: self
+        type: dash
+        distance: { tier: dash_distance }
+        speed_cap: 0.05
+      - target: area
+        radius: 3
+        type: damage
+        scaling: percent
+        value: { tier: shock_damage }
+        element: lightning
+      - target: area
+        radius: 3
+        type: status
+        id: stun
+        duration: { tier: stun_duration }
+        diminishing: control
+      - target: self
+        type: trigger
+        id: MythicMobs~DragonstormArc
+    notes: |
+      • Tempo de recarga fixo em 65s assegura janelas defensivas para oponentes.
+      • Stun combinado com outras fontes não deve ultrapassar 4s totais. 

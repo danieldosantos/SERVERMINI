@@ -75,6 +75,18 @@ command /racial [<text>]:
       set {_key} to lowercase arg-1
       if {_key} is "fortitude_anao":
         dwarfCastFortitude(player)
+      else if {_key} is "sopro_draco":
+        dragonbornCastBreath(player)
+      else if {_key} is "foco_draco_fogo":
+        dragonbornCastLineage(player, "race_dragonborn.fire", "Dragonfire_Blade", "Lâmina Ígnea")
+      else if {_key} is "foco_draco_gelo":
+        dragonbornCastLineage(player, "race_dragonborn.ice", "Dragonice_Freeze", "Congelamento Breve")
+      else if {_key} is "foco_draco_acido":
+        dragonbornCastLineage(player, "race_dragonborn.acid", "Dragonacid_Focus", "Erosão Concentrada")
+      else if {_key} is "foco_draco_raio":
+        dragonbornCastLineage(player, "race_dragonborn.lightning", "Dragonstorm_Dash", "Estalo Dracônico")
+      else if {_key} is "foco_draco_veneno":
+        dragonbornCastLineage(player, "race_dragonborn.poison", "Dragonpoison_Cloud", "Bruma Ácida")
       else if {_key} is "postura_pedra":
         dwarfCastStonePosture(player)
       else if {_key} is "crescer_duergar":
@@ -84,7 +96,7 @@ command /racial [<text>]:
       else:
         execute console command "{@skillcmd} %player% %arg-1%"
     else:
-      send "&6Raciais disponíveis:&f fortitude_anao, postura_pedra, crescer_duergar, invis_duergar, sopro_draco, truque_arcano, passos_faes, luzes_feericas, manto_sombras, canto_cativante, engenho_gnomesco, passos_silenciosos, fortalecer_familia, investida_coord, talento_variavel, harmonia_hibrida, tenacidade_implacavel, toque_igneo, lamina_das_chamas"
+      send "&6Raciais disponíveis:&f fortitude_anao, postura_pedra, crescer_duergar, invis_duergar, sopro_draco, foco_draco_fogo, foco_draco_gelo, foco_draco_acido, foco_draco_raio, foco_draco_veneno, truque_arcano, passos_faes, luzes_feericas, manto_sombras, canto_cativante, engenho_gnomesco, passos_silenciosos, fortalecer_familia, investida_coord, talento_variavel, harmonia_hibrida, tenacidade_implacavel, toque_igneo, lamina_das_chamas"
       send "&7Use /racial <nome> para disparar via SkillAPI."
 
 command /fortitude_anao:

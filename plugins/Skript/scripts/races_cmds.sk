@@ -4,6 +4,10 @@
 options:
   skillcmd: psa cast
 
+# ---------------------------------------
+# Comandos de ajuda e atalhos raciais
+# ---------------------------------------
+
 command /racial:
   trigger:
     if player has permission "lp.race_elfo":
@@ -13,7 +17,7 @@ command /racial:
       if player has permission "lp.race_elfo.drow":
         send "&5[Drow] /luzes_feericas e /passo_umbratico disponíveis. Evite luz solar direta!"
       if player has permission "lp.race_elfo.floresta":
-        send "&a[Elfo da Floresta] /marca_bosque e /salto_galho prontos para emboscar." 
+        send "&a[Elfo da Floresta] /marca_bosque e /salto_galho prontos para emboscar."
     else:
       send "&7Nenhum traço elfo encontrado."
 
@@ -161,41 +165,51 @@ command /lamina_das_chamas:
     else:
       send "&cSomente tieflings."
 
+# ---------------------------------------
+# Função para entregar kits raciais (QA)
+# ---------------------------------------
+
 function give_race_kit(p: player, raceKey: text):
+  # Normaliza parâmetros
+  set {_p} to {_p} # garante referência ao parâmetro player
+  set {_racekey} to lowercase of {_racekey}
+
   delete {_kit::*}
-  if {_raceKey} is "anao_colina":
+
+  if {_racekey} is "anao_colina":
     add "DwarvenFortitudeStone" to {_kit::*}
-  else if {_raceKey} is "anao_montanha":
+  else if {_racekey} is "anao_montanha":
     add "MountainBastionCharm" to {_kit::*}
-  else if {_raceKey} is "draconato":
+  else if {_racekey} is "draconato":
     add "DraconicCharm" to {_kit::*}
-  else if {_raceKey} is "elfo":
+  else if {_racekey} is "elfo":
     add "ElvenMoonbrooch" to {_kit::*}
-  else if {_raceKey} is "elfo_alto":
+  else if {_racekey} is "elfo_alto":
     add "HighElfCrystal" to {_kit::*}
-  else if {_raceKey} is "elfo_floresta":
+  else if {_racekey} is "elfo_floresta":
     add "ForestLeafCharm" to {_kit::*}
-  else if {_raceKey} is "elfo_drow":
+  else if {_racekey} is "elfo_drow":
     add "DrowMoonbrooch" to {_kit::*}
-  else if {_raceKey} is "gnomo_floresta":
+  else if {_racekey} is "gnomo_floresta":
     add "GnomeWhistle" to {_kit::*}
-  else if {_raceKey} is "gnomo_rocha":
+  else if {_racekey} is "gnomo_rocha":
     add "GnomeGyroCore" to {_kit::*}
-  else if {_raceKey} is "halfling_pesleves":
+  else if {_racekey} is "halfling_pesleves":
     add "HalflingLuckyCoin" to {_kit::*}
-  else if {_raceKey} is "halfling_robusto":
+  else if {_racekey} is "halfling_robusto":
     add "HalflingHearthLadle" to {_kit::*}
-  else if {_raceKey} is "humano":
+  else if {_racekey} is "humano":
     add "HumanBannerSigil" to {_kit::*}
-  else if {_raceKey} is "humano_variante":
+  else if {_racekey} is "humano_variante":
     add "HumanVariantMedal" to {_kit::*}
-  else if {_raceKey} is "meio_elfo":
+  else if {_racekey} is "meio_elfo":
     add "HalfElfHarmonyOrb" to {_kit::*}
-  else if {_raceKey} is "meio_orc":
+  else if {_racekey} is "meio_orc":
     add "HalfOrcBattleBrand" to {_kit::*}
-  else if {_raceKey} is "tiefling":
+  else if {_racekey} is "tiefling":
     add "TieflingHellbrand" to {_kit::*}
     add "TieflingSparkGlove" to {_kit::*}
+
   if {_kit::*} is set:
     loop {_kit::*}:
       give {_p} mythicitem:%loop-value%
@@ -204,6 +218,7 @@ function give_race_kit(p: player, raceKey: text):
   else:
     send "&cRaça desconhecida." to {_p}
 
+# Atalhos de QA para kits
 command /kit_racial_anao_colina:
   trigger:
     give_race_kit(player, "anao_colina")
@@ -253,11 +268,15 @@ command /kit_racial_tiefling:
   trigger:
     give_race_kit(player, "tiefling")
 
+# ---------------------------------------
+# Gestão simples de combate/cargas
+# ---------------------------------------
+
 on damage:
   if attacker is a player:
     set {racial.combat.%attacker%} to now
 
-on any move:
+on move:
   if {racial.combat.%player%} is set:
     if difference between now and {racial.combat.%player%} > 15 seconds:
       delete {racial.combat.%player%}

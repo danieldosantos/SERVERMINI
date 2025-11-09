@@ -1,0 +1,58 @@
+# Subrace: Dragonborn Poison
+race_id: dragonborn_poison
+name: "Draconato Venenoso"
+identity: "Serpentes dracônicas que dominam neblinas tóxicas e venenos persistentes."
+luckperms:
+  required: "race_dragonborn.poison"
+  inherit: "race_dragonborn"
+tags:
+  - dragonborn
+placeholders:
+  racial_cd_main: "{cooldown:skill_dragonpoison_cloud}"
+passives:
+  nevoa_toxica:
+    name: "Névoa Tóxica"
+    type: debuff
+    trigger: breath_hit
+    duration: 4
+    cooldown: 0
+    uptime_cap: 0.25
+    effects:
+      poison_level: 1
+    description: "Alvos atingidos pelo sopro recebem veneno leve por 4s (respeita limites de dano por tempo)."
+  detox_escamoso:
+    name: "Detox Escamoso"
+    type: timed_attribute
+    trigger: poison_damage_taken
+    duration: 6
+    cooldown: 24
+    uptime_cap: 0.45
+    attributes:
+      mitigation_poison: 0.2
+    diminishing_returns: poison
+    description: "Absorve 20% de dano de veneno recebido por 6s com DR compartilhado."
+actives:
+  bruma_acida:
+    name: "Bruma Ácida"
+    skill: Dragonpoison_Cloud
+    cooldown: 75
+    charges: 1
+    description: "Cria nuvem de 6 blocos/6s aplicando veneno leve."
+resistances:
+  poison:
+    base: 0.12
+    max: 0.45
+    diminishing: quadratic
+    notes: "Mitigação soma-se à base respeitando DR. Fraqueza a radiação solar em desertos."
+weaknesses:
+  - "Recebe +12% de dano radiante/em luz solar direta quando Detox Escamoso está desativado."
+synergy_notes:
+  - "Bruma Ácida controla área de choke points e mantém uptime do veneno baixo (<25%)."
+  - "Detox evita ultrapassar 45% de mitigação total com equipamentos."
+tests:
+  pve:
+    - "Zonas pantanosas: validar duração da nuvem (6s) e aplicação moderada de veneno."
+    - "Checar que Detox não ultrapassa uptime de 45% em ciclos de dano."
+  pvp:
+    - "Arena captura ponto: usar Bruma para zonear sem colidir com caps de controle."
+    - "Duelo vs paladino (dano radiante) destacando fraqueza ao sol."

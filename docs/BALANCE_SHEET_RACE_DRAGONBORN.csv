@@ -1,0 +1,7 @@
+Linhagem,Resistência Base,Passivo Principal,Uptime Passivo,Ativo,Rotações/CD,Dano/Efeito,Ponto Fraco,Observações
+Base,10% DR elemental (max 45%),Escamas Sintonizadas (15% por 8s),≤57%,Sopro Dracônico,55s / 1 carga,120-180% + DOT,Sem cargas → +10% dano oposto,Hud mostra cargas e resistência
+Fogo,12% DR fogo,Sangue Ígneo (+6% dano),≤50%,Lâmina Ígnea,60s,Queimadura 4s / arma imbuída,+10% dano gelo em CD,Sinergia com DOTs de fogo
+Gelo,12% DR gelo,Gélido (-15% velocidade 3s),≤30%,Congelamento Breve,75s,Root 2s + slow 2s,+8% dano fogo sem Carapaça,Controle total ≤4s
+Ácido,12% DR ácido,Corrosão (-5% defesa x2),≤100% (stack 2),Erosão Concentrada,60s,Marca 10s + DOT ácido,+10% dano raio sem Vapores,Mitigação reduzida total ≤18%
+Relâmpago,12% DR raio,Frenesi Elétrico (+5% carga),≤33% (CD 15s),Estalo Dracônico,65s,Dash 6 blocos + stun 1-1.5s,+10% dano ácido sem Frenesi,Velocidade extra cap +0.05
+Veneno,12% DR veneno,Névoa Tóxica (veneno 4s),≤25%,Bruma Ácida,75s,Nuvem 6s/6 blocos,+12% dano radiante ao sol,Área ativa ≈8%

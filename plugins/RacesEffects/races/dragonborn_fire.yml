@@ -1,0 +1,52 @@
+# Subrace: Dragonborn Fire
+race_id: dragonborn_fire
+name: "Draconato Ígneo"
+identity: "Portadores de chamas ancestrais que incineram inimigos enfraquecidos."
+luckperms:
+  required: "race_dragonborn.fire"
+  inherit: "race_dragonborn"
+tags:
+  - dragonborn
+placeholders:
+  racial_cd_main: "{cooldown:skill_dragonfire_blade}"
+passives:
+  sangue_igneo:
+    name: "Sangue Ígneo"
+    type: damage_bonus
+    trigger: enemy_burning
+    duration: 5
+    cooldown: 10
+    uptime_cap: 0.5
+    bonus_percent: 0.06
+    description: "Causa +6% de dano contra inimigos que estejam queimando. Não ultrapassa caps globais."
+  calor_latente:
+    name: "Calor Latente"
+    type: biome_affinity
+    trigger: passive
+    bonus_biomes:
+      nether_wastes: "Recebe 15% menos dano de fogo ambiental, mas sofre +10% de dano de gelo."
+actives:
+  lamina_igneia:
+    name: "Lâmina Ígnea Dracônica"
+    skill: Dragonfire_Blade
+    cooldown: 60
+    charges: 1
+    description: "Imbuí arma com chamas por 4s. Ataques aplicam queimadura leve; respeita limite de controle de 4s."
+resistances:
+  fire:
+    base: 0.12
+    max: 0.45
+    diminishing: quadratic
+    notes: "Somada à base draconata respeitando DR. Vulnerável a gelo (+10% recebido quando sem escudo)."
+weaknesses:
+  - "Recebe +10% de dano de gelo enquanto a habilidade Lâmina Ígnea estiver em recarga."
+synergy_notes:
+  - "Aprimora builds que mantêm queimadura constante e capitalizam no bônus de Sangue Ígneo."
+  - "Evitar acúmulo excessivo de mitigação de fogo para não quebrar cap de 45%."
+tests:
+  pve:
+    - "Chefe vulcânico: monitorar dano adicional contra alvos queimando (≤6%)."
+    - "Simular emboscada em bioma gélido confirmando fraqueza ativa."
+  pvp:
+    - "Arena 1v1: alternar Sopro + Lâmina Ígnea confirmando aplicação de queimadura em até 4s."
+    - "Duelo vs mago de gelo avaliando vulnerabilidade quando em recarga."

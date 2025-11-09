@@ -1,0 +1,79 @@
+# Race: Dragonborn (Base)
+race_id: dragonborn_base
+name: "Draconato"
+identity: "Herdeiros orgulhosos de dragões ancestrais, guiados por disciplina marcial e sopros elementais."
+luckperms:
+  required: "race_dragonborn"
+  inherit: null
+tags:
+  - dragonborn
+placeholders:
+  breath_cd: "{cooldown:skill_dragonborn_breath}"
+  breath_charges: "{resource:breath_charge}"
+  resistance_timer: "{status:draconic_resistance}"
+hud:
+  scoreboard:
+    title: "&cDRACONATO"
+    lines:
+      - "&6Sopro:&f {cooldown:skill_dragonborn_breath}"
+      - "&bCargas:&f {resource:breath_charge}/1"
+      - "&eResistência:&f {status:draconic_resistance}"
+passives:
+  ascendencia_draconica:
+    name: "Ascendência Dracônica"
+    type: marker
+    trigger: passive
+    description: "Ativa marcador de elemento ao ingressar em subgrupo da linhagem. Usado por habilidades e HUD."
+  presenca_draconica:
+    name: "Presença Dracônica"
+    type: aura
+    trigger: in_combat
+    duration: 6
+    cooldown: 18
+    uptime_cap: 0.33
+    effects:
+      voice_range_bonus: 0.05
+      particles: dragon_aura
+    description: "Amplia o alcance de voz em 5% e gera partículas sutis em combate."
+  resistencia_elemental_leve:
+    name: "Escamas Sintonizadas"
+    type: timed_attribute
+    trigger: damage_elemental_match
+    duration: 8
+    cooldown: 14
+    uptime_cap: 0.57
+    attributes:
+      mitigation_elemental: 0.15
+    diminishing_returns: elemental
+    description: "Quando sofre dano do elemento da linhagem, ativa mitigação de 15% por 8s. Respeita DR global (≤45%)."
+actives:
+  sopro_draconico:
+    name: "Sopro Dracônico"
+    skill: Dragonborn_Breath
+    cooldown: 55
+    charges: 1
+    description: "Cone de 6 blocos com dano 120–180% escalado pelo tier e consumindo 1 carga de sopro."
+resistances:
+  elemental:
+    base: 0.1
+    max: 0.45
+    diminishing: quadratic
+    notes: "Escamas concedem 10% DR elemental base. Acúmulo com classes/itens entra em DR quadrática após 30%."
+biome_affinity:
+  preferred:
+    - mountains
+    - windswept_hills
+  penalties:
+    frozen_ocean: "Mobilidade reduzida em 5% sem equipamento térmico."
+weaknesses:
+  - "O elemento oposto à linhagem causa +10% de dano se o draconato estiver sem cargas de sopro."
+synergy_notes:
+  - "Planejar rotações entre sopro e habilidades de classe para manter uptime da resistência abaixo de 60%."
+  - "Itens focais via MythicMobs utilizam marcador ascendência para aplicar partícula correta."
+tests:
+  pve:
+    - "Dungeon elemental T2: monitorar uptime de Escamas Sintonizadas (≤57%) e mitigação total ≤45%."
+    - "Chefe multi-fase T3: executar 3 sopros em 3 minutos com recarga de cargas fora de combate."
+  pvp:
+    - "Arena 3v3: verificar que ausência de carga ativa aumenta dano recebido do oposto em 10%."
+    - "Duelo prolongado: confirmar que cooldown de 55s impede spam de sopro (máx. 1 uso/minuto)."

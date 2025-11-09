@@ -1,0 +1,57 @@
+# Subrace: Dragonborn Ice
+race_id: dragonborn_ice
+name: "Draconato Gélido"
+identity: "Escamas de inverno que controlam o campo de batalha com frio cortante."
+luckperms:
+  required: "race_dragonborn.ice"
+  inherit: "race_dragonborn"
+tags:
+  - dragonborn
+placeholders:
+  racial_cd_main: "{cooldown:skill_dragonice_freeze}"
+passives:
+  gelido:
+    name: "Gélido"
+    type: debuff
+    trigger: breath_hit
+    duration: 3
+    cooldown: 0
+    uptime_cap: 0.3
+    effects:
+      slow_percent: 0.15
+    description: "Inimigos atingidos pelo sopro perdem 15% de velocidade por até 3s (DR de controle aplicado)."
+  carapaça_invernal:
+    name: "Carapaça Invernal"
+    type: timed_attribute
+    trigger: enter_snow_biome
+    duration: 12
+    cooldown: 45
+    uptime_cap: 0.4
+    attributes:
+      mitigation_projectile: 0.08
+    description: "Em biomas frios concede 8% DR contra projéteis por 12s."
+actives:
+  congelamento_breve:
+    name: "Congelamento Breve"
+    skill: Dragonice_Freeze
+    cooldown: 75
+    charges: 1
+    description: "Prende um alvo por 2s aplicando root com imunidade decrescente."
+resistances:
+  ice:
+    base: 0.12
+    max: 0.45
+    diminishing: quadratic
+    notes: "Inclui DR decrescente e vulnerabilidade situacional a fogo quando Carapaça está inativa."
+weaknesses:
+  - "Recebe +8% de dano de fogo se Carapaça Invernal não estiver ativa."
+synergy_notes:
+  - "Excelente para controle de área com sopros alternados e Congelamento Breve em janelas críticas."
+  - "Garantir respeito ao limite de 4s de controle combinando root + lentidão."
+tests:
+  pve:
+    - "Simular boss de rajada confirmando root em 2s e imunidade subsequente."
+    - "Checar uptime de Carapaça ≤40% em ciclos de combate."
+  pvp:
+    - "Arena 2v2: usar Congelamento Breve em inimigo móvel e validar contadores de imunidade."
+    - "Duelo contra pirotécnico: monitorar vulnerabilidade quando sem Carapaça."

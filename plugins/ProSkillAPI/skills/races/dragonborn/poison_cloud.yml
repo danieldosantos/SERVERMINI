@@ -1,0 +1,34 @@
+# ProSkillAPI - Habilidade ativa da linhagem venenosa
+skills:
+  Dragonpoison_Cloud:
+    display: "&aBruma Ácida"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Invoca nuvem tóxica estacionária de 6 blocos que dura 6s.
+      A nuvem aplica veneno leve e revela inimigos ocultos em seu interior.
+    tiers:
+      T1: { cooldown: 75, duration: 6, poison_damage: 0.16 }
+      T2: { cooldown: 75, duration: 6, poison_damage: 0.18 }
+      T3: { cooldown: 75, duration: 6, poison_damage: 0.20 }
+      T4: { cooldown: 75, duration: 6, poison_damage: 0.22 }
+    effects:
+      - target: ground
+        range: 12
+        type: area_field
+        radius: 3
+        duration: { tier: duration }
+        tick_interval: 1
+        apply:
+          - type: status
+            id: poison
+            duration: 2
+            potency: { tier: poison_damage }
+          - type: reveal
+            duration: 1
+      - target: self
+        type: trigger
+        id: MythicMobs~DragonpoisonMist
+    notes: |
+      • A área permanece fixa e respeita uptime ≤60% (6s a cada 75s ≈ 8%).
+      • Efeitos de veneno seguem DR compartilhado com Detox Escamoso e outros itens. 

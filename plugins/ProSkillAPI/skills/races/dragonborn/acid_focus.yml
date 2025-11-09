@@ -1,0 +1,34 @@
+# ProSkillAPI - Habilidade ativa da linhagem ácida
+skills:
+  Dragonacid_Focus:
+    display: "&2Erosão Concentrada"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Marca um alvo por 10s aumentando a eficácia da passiva Corrosão.
+      Enquanto marcada, a vítima sofre +5% de redução de armadura adicional e recebe dano ácido prolongado.
+    tiers:
+      T1: { cooldown: 60, mark_duration: 10, armor_extra: 0.05, dot_damage: 0.15 }
+      T2: { cooldown: 60, mark_duration: 10, armor_extra: 0.06, dot_damage: 0.18 }
+      T3: { cooldown: 60, mark_duration: 10, armor_extra: 0.07, dot_damage: 0.21 }
+      T4: { cooldown: 60, mark_duration: 10, armor_extra: 0.08, dot_damage: 0.24 }
+    effects:
+      - target: single
+        range: 15
+        type: status
+        id: armor_shred
+        duration: { tier: mark_duration }
+        potency: { tier: armor_extra }
+        stacks_max: 1
+      - target: single
+        range: 15
+        type: status
+        id: acid_dot
+        duration: 6
+        potency: { tier: dot_damage }
+      - target: self
+        type: trigger
+        id: MythicMobs~DragonacidMark
+    notes: |
+      • Marca renova as pilhas existentes de Corrosão e respeita cap total de 45% de mitigação reduzida.
+      • Cooldown de 60s impede uso contínuo em PvP.
