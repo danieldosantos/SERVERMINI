@@ -1,0 +1,70 @@
+# Itens raciais dos gnomos e sub-raças.
+items:
+  GnomeTinkerTools:
+    Id: STONECUTTER
+    Display: '&dFerramentas Gnomescas'
+    Lore:
+      - '&7Kit de ajuste rápido para engenhos portáteis.'
+      - '&eClique direito:&f ativa &6Engenho Rápido&f.'
+      - '&8Requer raça: Gnomo.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    NBT:
+      race-lock: 'race_gnome'
+      skill: 'EngenhoRapido'
+      racial_item: 'gnome_tinker'
+  ForestGnomeCharm:
+    Id: FLOWER_BANNER_PATTERN
+    Display: '&aAmuleto da Clareira'
+    Lore:
+      - '&aSussurros que ecoam entre folhas.'
+      - '&eClique direito:&f &aSussurro Amigo da Floresta&f.'
+      - '&8Requer raça: Gnomo da Floresta.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_gnome.forest'
+      skill: 'SussurroAmigoDaFloresta'
+      racial_item: 'gnome_forest_charm'
+  LeafstepBoots:
+    Id: LEATHER_BOOTS
+    Display: '&2Botas Passo-de-Folha'
+    Lore:
+      - '&7O couro range como folhas secas prontas para saltar.'
+      - '&eClique direito:&f &2Salto de Galho&f.'
+      - '&8Requer raça: Gnomo da Floresta.'
+    Options:
+      Unbreakable: true
+      Color: 34,120,34
+    NBT:
+      race-lock: 'race_gnome.forest'
+      skill: 'SaltoDeGalho'
+      racial_item: 'gnome_leafstep'
+  RockGnomeWrench:
+    Id: IRON_HOE
+    Display: '&7Chave de Engenho Rochedo'
+    Lore:
+      - '&7Ferramenta reforçada para blindagens improvisadas.'
+      - '&eClique direito:&f &7Baluarte Improvisado&f.'
+      - '&8Requer raça: Gnomo da Rocha.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    NBT:
+      race-lock: 'race_gnome.rock'
+      skill: 'BaluarteImprovisado'
+      racial_item: 'gnome_rock_wrench'
+  StaticGadgetKit:
+    Id: REDSTONE_LAMP
+    Display: '&9Kit de Gadget Estático'
+    Lore:
+      - '&9Matriz anti-projéteis pronta para ser armada.'
+      - '&eClique direito:&f &9Gadget Estático&f.'
+      - '&8Requer raça: Gnomo da Rocha.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_gnome.rock'
+      skill: 'GadgetEstatico'
+      racial_item: 'gnome_static_kit'

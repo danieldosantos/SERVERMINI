@@ -1,0 +1,29 @@
+# ProSkillAPI: Salto de Galho
+skills:
+  SaltoDeGalho:
+    display: "&2Salto de Galho"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Dispara um mini-dash entre folhas/vinhas próximas, garantindo queda lenta ao final.
+    tiers:
+      T1: { cooldown: 60, dash_distance: 5, slow_fall: 2 }
+      T2: { cooldown: 60, dash_distance: 5, slow_fall: 2.5 }
+      T3: { cooldown: 55, dash_distance: 6, slow_fall: 3 }
+      T4: { cooldown: 55, dash_distance: 6, slow_fall: 3 }
+    cost:
+      resource: stamina
+      amount: 10
+    effects:
+      - target: self
+        type: dash
+        distance: { tier: dash_distance }
+        conditions:
+          require_blocks:
+            - leaves
+            - vines
+      - target: self
+        type: status
+        id: slow_fall
+        duration: { tier: slow_fall }
+    notes: "Dash respeita verificação de blocos; sem folhas/vinhas gera erro temático ao jogador."

@@ -1,0 +1,163 @@
+# races_gnome_cmds.sk — Integração completa para gnomos (base, floresta, rocha).
+options:
+  skillcmd: psa cast
+  tinker_name: "&dFerramentas Gnomescas"
+  forest_charm_name: "&aAmuleto da Clareira"
+  leaf_boots_name: "&2Botas Passo-de-Folha"
+  rock_wrench_name: "&7Chave de Engenho Rochedo"
+  static_kit_name: "&9Kit de Gadget Estático"
+
+function gnomeHasPerm(p: player, group: text) :: boolean:
+  set {_perm1} to "group.%{_group}%"
+  set {_perm2} to "lp.%{_group}%"
+  if {_p} has permission {_perm1}:
+    return true
+  if {_p} has permission {_perm2}:
+    return true
+  return false
+
+function gnomeRequire(p: player, group: text, fail: text) :: boolean:
+  if gnomeHasPerm({_p}, {_group}) is false:
+    send {_fail} to {_p}
+    return false
+  return true
+
+function gnomeAction(p: player, label: text):
+  send action bar "&dTraço Gnomesco:&f %{_label}%" to {_p}
+
+command /engenho:
+  description: "Ativa Engenho Rápido (Gnomo)."
+  trigger:
+    if gnomeRequire(player, "race_gnome", "&cSomente gnomos." ):
+      execute console command "{@skillcmd} %player% EngenhoRapido"
+      gnomeAction(player, "Engenho Rápido")
+
+command /intuicao:
+  description: "Ativa Intuição Arcana (Gnomo)."
+  trigger:
+    if gnomeRequire(player, "race_gnome", "&cSomente gnomos."):
+      execute console command "{@skillcmd} %player% IntuicaoArcana"
+      gnomeAction(player, "Intuição Arcana")
+
+command /sussurro:
+  description: "Charm natural dos gnomos da floresta."
+  trigger:
+    if gnomeRequire(player, "race_gnome.forest", "&cSomente gnomos da floresta."):
+      execute console command "{@skillcmd} %player% SussurroAmigoDaFloresta"
+      gnomeAction(player, "Sussurro da Floresta")
+
+command /salto_folhas:
+  description: "Dash entre folhas para gnomos da floresta."
+  trigger:
+    if gnomeRequire(player, "race_gnome.forest", "&cSomente gnomos da floresta."):
+      execute console command "{@skillcmd} %player% SaltoDeGalho"
+      gnomeAction(player, "Salto de Galho")
+
+command /silvestre:
+  description: "Ultimate Círculo Silvestre (Gnomo da Floresta)."
+  trigger:
+    if gnomeRequire(player, "race_gnome.forest", "&cSomente gnomos da floresta."):
+      execute console command "{@skillcmd} %player% CirculoSilvestre"
+      gnomeAction(player, "Círculo Silvestre")
+
+command /baluarte:
+  description: "Escudo Baluarte Improvisado (Gnomo da Rocha)."
+  trigger:
+    if gnomeRequire(player, "race_gnome.rock", "&cSomente gnomos da rocha."):
+      execute console command "{@skillcmd} %player% BaluarteImprovisado"
+      gnomeAction(player, "Baluarte Improvisado")
+
+command /gadget:
+  description: "Ativa Gadget Estático (Gnomo da Rocha)."
+  trigger:
+    if gnomeRequire(player, "race_gnome.rock", "&cSomente gnomos da rocha."):
+      execute console command "{@skillcmd} %player% GadgetEstatico"
+      gnomeAction(player, "Gadget Estático")
+
+command /cupula:
+  description: "Ultimate Cúpula de Engenho (Gnomo da Rocha)."
+  trigger:
+    if gnomeRequire(player, "race_gnome.rock", "&cSomente gnomos da rocha."):
+      execute console command "{@skillcmd} %player% CupulaDeEngenho"
+      gnomeAction(player, "Cúpula de Engenho")
+
+command /kit_racial_gnomo [<text>] [<text>]:
+  permission: op
+  description: "Entrega kit racial base (e sub-raças opcionais)."
+  trigger:
+    set {_target} to player
+    set {_mode} to "base"
+    if sender is console:
+      if arg-1 is not set:
+        send "&cUso: /kit_racial_gnomo <jogador> [modo]" to sender
+        stop
+      set {_target} to arg-1 parsed as player
+      if {_target} is not set:
+        send "&cJogador inválido." to sender
+        stop
+      if arg-2 is set:
+        set {_mode} to lowercase arg-2
+    else:
+      if arg-1 is set:
+        set {_maybe} to arg-1 parsed as player
+        if {_maybe} is set:
+          set {_target} to {_maybe}
+          if arg-2 is set:
+            set {_mode} to lowercase arg-2
+        else:
+          set {_mode} to lowercase arg-1
+    if {_mode} is not set or {_mode} is "":
+      set {_mode} to "base"
+    set {_name} to name of {_target}
+    if {_mode} is "base" or {_mode} is "all":
+      execute console command "mm items give %{_name}% GnomeTinkerTools 1"
+    if {_mode} is "forest" or {_mode} is "floresta" or {_mode} is "all":
+      execute console command "mm items give %{_name}% ForestGnomeCharm 1"
+      execute console command "mm items give %{_name}% LeafstepBoots 1"
+    if {_mode} is "rock" or {_mode} is "rocha" or {_mode} is "all":
+      execute console command "mm items give %{_name}% RockGnomeWrench 1"
+      execute console command "mm items give %{_name}% StaticGadgetKit 1"
+    execute console command "raceseffects reset %{_name}%"
+    send "&aKit racial de gnomo entregue (%{_mode}%)." to {_target}
+
+on right click:
+  if player's tool is not air:
+    set {_item} to player's tool
+    set {_display} to display name of {_item}
+    if {_display} is colored {@tinker_name}:
+      cancel event
+      if gnomeRequire(player, "race_gnome", "&cSomente gnomos."):
+        execute console command "{@skillcmd} %player% EngenhoRapido"
+        gnomeAction(player, "Engenho Rápido")
+    else if {_display} is colored {@forest_charm_name}:
+      cancel event
+      if gnomeRequire(player, "race_gnome.forest", "&cSomente gnomos da floresta."):
+        execute console command "{@skillcmd} %player% SussurroAmigoDaFloresta"
+        gnomeAction(player, "Sussurro da Floresta")
+    else if {_display} is colored {@leaf_boots_name}:
+      cancel event
+      if gnomeRequire(player, "race_gnome.forest", "&cSomente gnomos da floresta."):
+        execute console command "{@skillcmd} %player% SaltoDeGalho"
+        gnomeAction(player, "Salto de Galho")
+    else if {_display} is colored {@rock_wrench_name}:
+      cancel event
+      if gnomeRequire(player, "race_gnome.rock", "&cSomente gnomos da rocha."):
+        execute console command "{@skillcmd} %player% BaluarteImprovisado"
+        gnomeAction(player, "Baluarte Improvisado")
+    else if {_display} is colored {@static_kit_name}:
+      cancel event
+      if gnomeRequire(player, "race_gnome.rock", "&cSomente gnomos da rocha."):
+        execute console command "{@skillcmd} %player% GadgetEstatico"
+        gnomeAction(player, "Gadget Estático")
+
+# Controle simples de combate para regenerar cargas após 15s fora de combate.
+on damage:
+  if attacker is a player:
+    set {gnome.combat.%attacker%} to now
+
+on move:
+  if {gnome.combat.%player%} is set:
+    if difference between now and {gnome.combat.%player%} > 15 seconds:
+      delete {gnome.combat.%player%}
+      execute console command "raceseffects charges %player% regen"
+      send action bar "&aCargas gnomescas recarregadas." to player

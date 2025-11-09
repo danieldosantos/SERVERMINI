@@ -1,0 +1,29 @@
+# ProSkillAPI: Sussurro Amigo da Floresta
+skills:
+  SussurroAmigoDaFloresta:
+    display: "&aSussurro Amigo da Floresta"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Emite canto sutil que acalma criaturas naturais. Apenas PvE.
+      Charm leve de 6s que desarma agressividade sem afetar jogadores.
+    tiers:
+      T1: { cooldown: 75, radius: 6, duration: 6, max_targets: 4 }
+      T2: { cooldown: 75, radius: 6, duration: 6, max_targets: 5 }
+      T3: { cooldown: 70, radius: 7, duration: 6, max_targets: 6 }
+      T4: { cooldown: 70, radius: 7, duration: 7, max_targets: 6 }
+    cost:
+      resource: focus
+      amount: 15
+    effects:
+      - target: pve_area
+        radius: { tier: radius }
+        type: charm
+        duration: { tier: duration }
+        max_targets: { tier: max_targets }
+        tags:
+          allowed_types:
+            - animal
+            - beast
+        pvp_modifier: 0
+    notes: "Reaplicar antes do fim não estende duração (diminishing interno)."

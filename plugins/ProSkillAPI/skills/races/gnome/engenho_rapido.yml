@@ -1,0 +1,29 @@
+# ProSkillAPI: Engenho Rápido (racial base)
+skills:
+  EngenhoRapido:
+    display: "&6Engenho Rápido"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Monta ferramentas improvisadas que turbinam focos e engenhocas por 10s.
+      Reduz recargas de itens raciais em 10% e adiciona indicador HUD.
+    tiers:
+      T1: { cooldown: 75, duration: 8, cd_reduction: 0.10 }
+      T2: { cooldown: 75, duration: 9, cd_reduction: 0.10 }
+      T3: { cooldown: 75, duration: 10, cd_reduction: 0.12 }
+      T4: { cooldown: 75, duration: 10, cd_reduction: 0.12 }
+    cost:
+      resource: gnome_racial_charge
+      amount: 1
+    effects:
+      - target: self
+        type: status
+        id: gnome_tinker_boost
+        duration: { tier: duration }
+        modifiers:
+          cooldown_multiplier_items: { tier: cd_reduction }
+      - target: self
+        type: placeholder
+        id: racial_cd_main
+        value: "{cooldown:skill_engenho_rapido}"
+    notes: "Compartilha DR com bônus de recarga de classes (aplicar caps no RacesEffects)."

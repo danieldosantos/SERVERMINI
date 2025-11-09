@@ -1,0 +1,27 @@
+# ProSkillAPI: Baluarte Improvisado
+skills:
+  BaluarteImprovisado:
+    display: "&7Baluarte Improvisado"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Reconfigura sucata arcana num escudo temporário de 6s.
+    tiers:
+      T1: { cooldown: 90, duration: 6, shield_amount: 120 }
+      T2: { cooldown: 90, duration: 6, shield_amount: 140 }
+      T3: { cooldown: 90, duration: 6, shield_amount: 160 }
+      T4: { cooldown: 90, duration: 6, shield_amount: 180 }
+    cost:
+      resource: gnome_racial_charge
+      amount: 1
+    effects:
+      - target: self
+        type: shield
+        value: { tier: shield_amount }
+        duration: { tier: duration }
+        refresh_behavior: replace
+      - target: self
+        type: placeholder
+        id: racial_shield
+        value: "{status:gnome_shield}"
+    notes: "Quando ativo substitui escudos menores. Compartilha categoria com escudos de classe (DR após 45%)."

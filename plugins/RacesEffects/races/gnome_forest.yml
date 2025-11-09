@@ -1,0 +1,78 @@
+# Sub-raça: Gnomo da Floresta
+# Identidade: afinidade natural, esperteza e laços com criaturas.
+race_id: gnome_forest
+name: "Gnomo da Floresta"
+identity: "Guardas brincalhões das clareiras, mesclam truques druidas e agilidade furtiva."
+luckperms:
+  required: "race_gnome.forest"
+  inherit: "race_gnome"
+placeholders:
+  racial_cd_main: "{cooldown:skill_circulo_silvestre}"
+  racial_uptime: "{status:passos_silvestres}"
+  racial_resist_mental: "{status:astucia_gnomesca|dr}%"
+  racial_shield: "{status:gnome_shield}"
+  racial_charges: "{resource:gnome_racial_charge}"
+passives:
+  passos_silvestres:
+    name: "Passos Silvestres"
+    type: speed_boost
+    trigger: focus_activation
+    duration: 10
+    cooldown: 30
+    uptime_cap: 0.33
+    speed_bonus: 0.02
+    conditions:
+      biome_tag: forest
+    description: "Ativa +0.02 velocidade ao canalizar foco em biomas de floresta (10s de duração, CD 30s)."
+  camuflagem_natural:
+    name: "Camuflagem Natural"
+    type: stealth_modifier
+    trigger: environment_match
+    duration: 8
+    cooldown: 16
+    uptime_cap: 0.5
+    stealth_bonus: 0.15
+    conditions:
+      block_nearby:
+        - leaves
+        - vines
+        - tall_grass
+    description: "Reduz detecção em 15% quando próximo de folhas/vinhas. Consome metade do uptime em ambientes mistos."
+actives:
+  sussurro_amigo_da_floresta:
+    name: "Sussurro Amigo da Floresta"
+    skill: SussurroAmigoDaFloresta
+    cooldown: 75
+    charges: 1
+    description: "Encanta criaturas naturais PvE em 6 blocos por 6s; não afeta jogadores ou bosses."
+  salto_de_galho:
+    name: "Salto de Galho"
+    skill: SaltoDeGalho
+    cooldown: 60
+    charges: 2
+    description: "Dash curto de até 5 blocos entre folhas/vinhas, concede queda lenta de 2s."
+  circulo_silvestre:
+    name: "Círculo Silvestre"
+    skill: CirculoSilvestre
+    cooldown: 210
+    charges: 1
+    description: "Ultimate: cria zona de 7 blocos por 10s (-10% precisão inimiga, +10% velocidade aliada)."
+biome_affinity:
+  preferred:
+    - forest
+    - birch_forest
+    - taiga
+  bonuses:
+    grove: "Camuflagem Natural tem +2s de duração."
+weaknesses:
+  - "Fora de biomas florestais, Passos Silvestres não pode ser ativado."
+synergy_notes:
+  - "Com Ranger/Ladino aplicar DR nos bônus de velocidade para não exceder +0.05 global."
+  - "Camuflagem empilha com invisibilidade de sombras, porém entra em DR após 25% de redução."
+tests:
+  pve:
+    - "Floresta densa: acionar Passos Silvestres em rotações de 30s (uptime ≤33%)."
+    - "Horda de animais: usar Sussurro para controlar 6 mobs sem afetar PvP."
+  pvp:
+    - "Duelo em mapa com vegetação: monitorar redução de detecção e evitar velocidade acima do cap."
+    - "Captura de ponto: Círculo Silvestre mantém bônus de movimento por 10s a cada 210s."

@@ -1,0 +1,69 @@
+# Sub-raça: Gnomo da Rocha
+# Identidade: inventores resilientes com engenhos protetivos.
+race_id: gnome_rock
+name: "Gnomo da Rocha"
+identity: "Artífices tenazes que moldam escudos mecânicos contra perigos corrosivos."
+luckperms:
+  required: "race_gnome.rock"
+  inherit: "race_gnome"
+placeholders:
+  racial_cd_main: "{cooldown:skill_cupula_de_engenho}"
+  racial_uptime: "{status:engenho_gnomesco}"
+  racial_resist_mental: "{status:astucia_gnomesca|dr}%"
+  racial_shield: "{status:gnome_shield}"
+  racial_charges: "{resource:gnome_racial_charge}"
+passives:
+  engenho_gnomesco:
+    name: "Engenho Gnomesco"
+    type: shield_on_combat
+    trigger: combat_start
+    duration: 6
+    cooldown: 45
+    uptime_cap: 0.4
+    shield_amounts:
+      T1: 60
+      T2: 75
+      T3: 90
+      T4: 100
+    description: "Ao entrar em combate gera escudo de 60-100 pontos por 6s (ICD 45s). Substitui escudos existentes ao reativar."
+  resiliencia_toxinas:
+    name: "Resiliência a Toxinas"
+    type: damage_reduction
+    trigger: damage_poison_acid
+    duration: 8
+    cooldown: 24
+    uptime_cap: 0.33
+    reduction: 0.15
+    diminishing_returns: poison
+    description: "Reduz dano de veneno/ácido em 15% por 8s. Compartilha DR com classes/itens similares."
+actives:
+  baluarte_improvisado:
+    name: "Baluarte Improvisado"
+    skill: BaluarteImprovisado
+    cooldown: 90
+    charges: 1
+    description: "Escudo pessoal de 120-180 pontos por 6s; substitui escudos menores para evitar stacking infinito."
+  gadget_estatico:
+    name: "Gadget Estático"
+    skill: GadgetEstatico
+    cooldown: 75
+    charges: 1
+    description: "Totem estático reduzindo projéteis em 30% num raio de 6 blocos por 8s (CD 75s)."
+  cupula_de_engenho:
+    name: "Cúpula de Engenho"
+    skill: CupulaDeEngenho
+    cooldown: 210
+    charges: 1
+    description: "Ultimate: domo de 6 blocos por 8s bloqueando 1 projétil pesado por aliado e -15% dano recebido (respeita cap 45%)."
+weaknesses:
+  - "Engenho Gnomesco não ativa se um escudo de classe acima de 120 pts estiver ativo (evita sobreposição)."
+synergy_notes:
+  - "Com Artífice/Paladino, aplicar DR no total de mitigação para não exceder 45%."
+  - "Gadget Estático compartilha categoria de redução com barreiras mágicas; uso simultâneo diminui eficácia em 50% após primeira sobreposição."
+tests:
+  pve:
+    - "Corredor de arqueiros: Gadget Estático absorve 30% dos projéteis por 8s, monitorar CD 75s."
+    - "Chefe ácido/veneno: Resiliência ativa ≤33% do tempo e respeita DR."
+  pvp:
+    - "Duelo vs arqueiro/mago: Baluarte substitui escudos antigos sem acumular."
+    - "Defesa de ponto contra spam de projéteis: Cúpula bloqueia 1 projétil pesado por aliado e expira em 8s."

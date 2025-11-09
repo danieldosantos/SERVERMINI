@@ -1,0 +1,33 @@
+# ProSkillAPI: Círculo Silvestre (Ultimate)
+skills:
+  CirculoSilvestre:
+    display: "&a&lCírculo Silvestre"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Consagra a clareira com espíritos amigáveis por 10s.
+      Inimigos sofrem -10% precisão e aliados ganham +10% velocidade em raio de 7 blocos.
+    tiers:
+      T1: { cooldown: 210, radius: 7, duration: 10, enemy_accuracy_penalty: 0.10, ally_speed_bonus: 0.10 }
+      T2: { cooldown: 210, radius: 7, duration: 10, enemy_accuracy_penalty: 0.10, ally_speed_bonus: 0.11 }
+      T3: { cooldown: 210, radius: 7, duration: 10, enemy_accuracy_penalty: 0.11, ally_speed_bonus: 0.12 }
+      T4: { cooldown: 200, radius: 7, duration: 10, enemy_accuracy_penalty: 0.12, ally_speed_bonus: 0.12 }
+    cost:
+      resource: focus
+      amount: 30
+    requirements:
+      biome_tag: forest
+    effects:
+      - target: area
+        radius: { tier: radius }
+        type: zone
+        duration: { tier: duration }
+        modifiers:
+          enemy_accuracy: -{ tier: enemy_accuracy_penalty }
+          ally_speed: { tier: ally_speed_bonus }
+        particles: forest_circle
+      - target: self
+        type: placeholder
+        id: racial_cd_main
+        value: "{cooldown:skill_circulo_silvestre}"
+    notes: "Ultimate situacional requer bioma floresta. Respeita cap global de +0.05 velocidade (aplicar DR)."
