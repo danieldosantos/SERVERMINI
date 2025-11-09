@@ -1,0 +1,275 @@
+# Círculo da Tempestade - foco em vento e trovão
+tags:
+  circle: tempestade
+T1:
+  Rajada_de_Vento:
+    display: "§bRajada de Vento"
+    type: active
+    trigger: cone
+    cost:
+      mana: 20
+    cooldown: 45
+    cone:
+      range: 5
+      angle: 65
+    effects:
+      knockback:
+        strength: 0.8
+      projectile_dampen:
+        amount: 0.20
+        duration: 4
+    tags: [controle, utilidade]
+    notes: "Empurra e reduz dano de projéteis em 20% por 4s."
+  Relampago_Curto:
+    display: "§bRelâmpago Curto"
+    type: active
+    trigger: projectile
+    cost:
+      mana: 20
+    cooldown: 45
+    projectile:
+      speed: 1.4
+      max_distance: 20
+      hitbox: 0.6
+    effects:
+      damage:
+        amount: "1.3*spellpower"
+        type: eletrico
+      slow:
+        amount: 0.10
+        duration: 4
+    tags: [dano, controle]
+    notes: "Aplica lentidão leve por 4s."
+  Vento_Agil:
+    display: "§bVento Ágil"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 20
+    cooldown: 60
+    duration: 8
+    target:
+      range: 12
+      filter: ally
+    effects:
+      speed:
+        amount: 0.03
+    tags: [buff, mobilidade]
+    notes: "Buff de velocidade sem exceder cap global."
+  Trovao_Menor:
+    display: "§bTrovão Menor"
+    type: active
+    trigger: ground
+    cost:
+      mana: 25
+    cooldown: 60
+    area:
+      radius: 3
+    effects:
+      damage:
+        amount: "1.2*spellpower"
+        type: eletrico
+      stun:
+        duration: 0.5
+        diminishing: true
+    tags: [dano, controle]
+    notes: "Atordoamento curto respeitando DR."
+T2:
+  Turibulo_Tempestuoso:
+    display: "§bTuríbulo Tempestuoso"
+    type: active
+    trigger: totem
+    cost:
+      mana: 30
+    cooldown: 90
+    area:
+      radius: 8
+      duration: 10
+    effects:
+      speed:
+        amount: 0.12
+    tags: [aura, suporte]
+    notes: "Totem concede +12% velocidade aliados em 8 blocos."
+  Estalo_Trovejante:
+    display: "§bEstalo Trovejante"
+    type: active
+    trigger: cone
+    cost:
+      mana: 30
+    cooldown: 75
+    cone:
+      range: 5
+      angle: 60
+    effects:
+      damage:
+        amount: "1.5*spellpower"
+        type: eletrico
+      knockback:
+        strength: 1
+    tags: [dano, controle]
+    notes: "Conelike lança alvos 1 bloco para trás."
+  Caminho_do_Furacao:
+    display: "§bCaminho do Furacão"
+    type: active
+    trigger: dash
+    cost:
+      mana: 25
+    cooldown: 60
+    dash:
+      distance: 8
+      projectile_immunity: 1
+    tags: [mobilidade]
+    notes: "Dash 8 blocos com imunidade a projéteis 1s."
+  Impulso_das_Correntes:
+    display: "§bImpulso das Correntes"
+    type: active
+    trigger: self
+    cost:
+      mana: 25
+    cooldown: 75
+    duration: 8
+    effects:
+      attack_speed:
+        amount: 0.15
+    tags: [buff, ofensivo]
+    notes: "+15% velocidade de ataque por 8s."
+T3:
+  Olho_da_Tempestade:
+    display: "§bOlho da Tempestade"
+    type: active
+    trigger: aura
+    cost:
+      mana: 40
+    cooldown: 120
+    duration: 8
+    area:
+      radius: 6
+    effects:
+      projectile_reduction:
+        amount: 0.25
+      reveal:
+        duration: 2
+    tags: [aura, defesa]
+    notes: "Domo reduz dano de projéteis 25% e revela inimigos."
+  Ciclone_Medio:
+    display: "§bCiclone Médio"
+    type: active
+    trigger: ground
+    cost:
+      mana: 35
+    cooldown: 90
+    area:
+      radius: 6
+    effects:
+      pull:
+        strength: 1
+      damage:
+        amount: "1.5*spellpower"
+        type: vento
+    tags: [dano, controle]
+    notes: "Puxa levemente inimigos antes de causar dano."
+  Carga_Estatica:
+    display: "§bCarga Estática"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 75
+    duration: 6
+    effects:
+      empower_next_hit:
+        amount: "1.8*spellpower"
+        slow:
+          amount: 0.35
+          duration: 2
+          diminishing: true
+    tags: [buff, burst]
+    notes: "Próximo ataque causa +180% e aplica lentidão forte 2s."
+  Correntes_Ascendentes:
+    display: "§bCorrentes Ascendentes"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 90
+    duration: 10
+    effects:
+      jump_bonus: 1
+      speed:
+        amount: 0.03
+    tags: [mobilidade]
+    notes: "Concede salto duplo e +0.03 velocidade por 10s."
+T4:
+  Furia_da_Tempestade:
+    display: "§bFúria da Tempestade"
+    type: active
+    trigger: aura
+    cost:
+      mana: 50
+    cooldown: 240
+    duration: 12
+    area:
+      radius: 8
+    effects:
+      storm_tick:
+        amount: "0.8*spellpower"
+        interval: 2
+        type: eletrico
+    tags: [ult, area]
+    notes: "Ult: chuva elétrica causa 80%/2s por 12s (PvP 6 hits máx)."
+  Trovao_Supremo:
+    display: "§bTrovão Supremo"
+    type: active
+    trigger: projectile
+    cost:
+      mana: 45
+    cooldown: 120
+    projectile:
+      speed: 1.3
+      max_distance: 22
+      hitbox: 0.7
+    effects:
+      damage:
+        amount: "2.0*spellpower"
+        type: eletrico
+      root:
+        duration: 2
+        diminishing: true
+    tags: [burst, controle]
+    notes: "Raio 200% e enraiza 2s com DR."
+  Furacao_Vivo:
+    display: "§bFuracão Vivo"
+    type: active
+    trigger: aura
+    cost:
+      mana: 45
+    cooldown: 120
+    duration: 6
+    area:
+      radius: 6
+    effects:
+      displace:
+        strength: 0.6
+      accuracy_debuff:
+        amount: -0.15
+        duration: 6
+    tags: [controle, debuff]
+    notes: "Empurra continuamente e reduz precisão inimiga."
+  Tempestade_Interior:
+    display: "§bTempestade Interior"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 40
+    cooldown: 105
+    duration: 12
+    target:
+      range: 12
+      filter: ally
+    effects:
+      speed:
+        amount: 0.15
+      mitigation:
+        amount: 0.10
+    tags: [buff, suporte]
+    notes: "+15% velocidade e +10% mitigação por 12s (uptime ≤60%)."

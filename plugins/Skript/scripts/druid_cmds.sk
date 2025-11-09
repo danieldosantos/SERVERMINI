@@ -1,204 +1,191 @@
-# Comandos e integrações do Druida (SkillAPI + MythicMobs + PlaceholderAPI)
+# Skript - Comandos e integrações da classe Druida
+options:
+  prefix: &2[Druida]&f
+  cooldown_ooc: 12 # segundos para considerar fora de combate
 
 on load:
-  broadcast "&2[Skript] Comandos do Druida carregados."
-
-function druidCast(p: player, ability: text):
-  set {_name} to name of p
-  if ability is "forma":
-    execute console command "skillapi cast %{_name}% Forma Selvagem"
-  else if ability is "vinculo":
-    execute console command "skillapi cast %{_name}% Vínculo Natural"
-  else if ability is "terreno":
-    execute console command "skillapi cast %{_name}% Conjuração de Terreno"
-  else if ability is "pilares":
-    execute console command "skillapi cast %{_name}% Pilares de Pedra"
-  else if ability is "aura":
-    execute console command "skillapi cast %{_name}% Aura do Bosque"
-  else if ability is "solo":
-    execute console command "skillapi cast %{_name}% Solo Entrópico"
-  else if ability is "vinhas":
-    execute console command "skillapi cast %{_name}% Chicote de Vinhas"
-  else if ability is "coracao":
-    execute console command "skillapi cast %{_name}% Coração do Mundo"
-  else if ability is "urso":
-    execute console command "skillapi cast %{_name}% Forma Ursina Primordial"
-  else if ability is "felina":
-    execute console command "skillapi cast %{_name}% Forma Felina"
-  else if ability is "rugido":
-    execute console command "skillapi cast %{_name}% Rugido Lunar"
-  else if ability is "reversao":
-    execute console command "skillapi cast %{_name}% Reversão Natural"
-  else if ability is "avatar":
-    execute console command "skillapi cast %{_name}% Avatar da Lua"
-  else if ability is "lobo":
-    execute console command "skillapi cast %{_name}% Chamado do Lobo Espiritual"
-  else if ability is "escudo":
-    execute console command "skillapi cast %{_name}% Escudo Ancestral"
-  else if ability is "harmonia":
-    execute console command "skillapi cast %{_name}% Vínculo Harmonioso"
-  else if ability is "chuva":
-    execute console command "skillapi cast %{_name}% Chuva Revigorante"
-  else if ability is "conclave":
-    execute console command "skillapi cast %{_name}% Conclave Primal"
-  else:
-    send "&c[Druida] Habilidade desconhecida." to p
-
-command /forma:
-  aliases: /wildshape
-  permission: class_druid
-  trigger:
-    druidCast(player, "forma")
-
-command /terra_pilares:
-  permission: class_druid.land
-  trigger:
-    druidCast(player, "pilares")
-
-command /terra_aura:
-  permission: class_druid.land
-  trigger:
-    druidCast(player, "aura")
-
-command /terra_solo:
-  permission: class_druid.land
-  trigger:
-    druidCast(player, "solo")
-
-command /terra_vinhas:
-  permission: class_druid.land
-  trigger:
-    druidCast(player, "vinhas")
-
-command /terra_coracao:
-  permission: class_druid.land
-  trigger:
-    druidCast(player, "coracao")
-
-command /lua_urso:
-  permission: class_druid.moon
-  trigger:
-    druidCast(player, "urso")
-
-command /lua_felina:
-  permission: class_druid.moon
-  trigger:
-    druidCast(player, "felina")
-
-command /lua_rugido:
-  permission: class_druid.moon
-  trigger:
-    druidCast(player, "rugido")
-
-command /lua_reversao:
-  permission: class_druid.moon
-  trigger:
-    druidCast(player, "reversao")
-
-command /lua_avatar:
-  permission: class_druid.moon
-  trigger:
-    druidCast(player, "avatar")
-
-command /pastor_lobo:
-  permission: class_druid.shepherd
-  trigger:
-    druidCast(player, "lobo")
-
-command /pastor_escudo:
-  permission: class_druid.shepherd
-  trigger:
-    druidCast(player, "escudo")
-
-command /pastor_vinculo:
-  permission: class_druid.shepherd
-  trigger:
-    druidCast(player, "harmonia")
-
-command /pastor_chuva:
-  permission: class_druid.shepherd
-  trigger:
-    druidCast(player, "chuva")
-
-command /pastor_conclave:
-  permission: class_druid.shepherd
-  trigger:
-    druidCast(player, "conclave")
+  broadcast "&7Skript druid_cmds.sk carregado." to console
+  execute console command "scoreboard objectives add druid_ooc dummy" 
+  execute console command "scoreboard objectives add druid_charges dummy"
+  execute console command "scoreboard objectives add druid_charges_max dummy"
 
 command /kit_druida:
-  permission: class_druid
+  permission: group.class_druid
   trigger:
     clear player's inventory
-    execute console command "cmi give %player% DruidicFocusStone"
-    execute console command "cmi give %player% DruidicEssenceStaff"
-    if player has permission "class_druid.land":
-      execute console command "cmi give %player% LandStoneStaff"
-      execute console command "cmi give %player% LandEmeraldCharm"
-      execute console command "cmi give %player% LandTotem"
-    if player has permission "class_druid.moon":
-      execute console command "cmi give %player% MoonTotem"
-      execute console command "cmi give %player% MoonClawRing"
-      execute console command "cmi give %player% MoonCelestialOrb"
-    if player has permission "class_druid.shepherd":
-      execute console command "cmi give %player% ShepherdTotem"
-      execute console command "cmi give %player% ShepherdCharm"
-      execute console command "cmi give %player% ShepherdCircleStone"
-    send "&2[Druida] Kit de testes entregue." to player
+    give player mangrove roots named "&2Cajado do Bosque" with lore "&7Click -> habilidades comuns" and "&8Grupo: class_druid"
+    give player acacia hanging sign named "&dTotem da Lua" with lore "&7Click -> Forma Selvagem" and "&8Grupo: class_druid.lua"
+    give player conduit named "&bFetiche da Tempestade" with lore "&7Click -> rajadas" and "&8Grupo: class_druid.tempestade"
+    give player azalea named "&2Glifo de Raiz Viva" with lore "&7Drop -> habilidades da terra" and "&8Grupo: class_druid.terra"
+    execute console command "scoreboard players set %player% druid_charges 2"
+    execute console command "scoreboard players set %player% druid_charges_max 2"
+    execute console command "scoreboard players set %player% druid_ooc 1"
+    send "{@prefix} &7Kit de QA configurado."
 
-# Funções utilitárias chamadas pelas skills
-function druidTerrain(p: player, radius: number, duration: number):
-  set {_center} to location of p
-  set {_r} to radius
-  set {_loops} to duration
-  loop {_loops} times:
-    if p is offline:
-      stop
-    if p has permission "class_druid.land":
-      loop living entities in radius {_r} around {_center}:
-        if loop-entity is not p:
-          if loop-entity is not on same team as p:
-            push loop-entity upwards by 0
-            apply slowness 2 to loop-entity for 2 seconds
-            apply mining fatigue 1 to loop-entity for 2 seconds
-    else if p has permission "class_druid.moon":
-      loop players in radius {_r} around {_center}:
-        if loop-player is p:
-          if loop-number mod 2 = 0:
-            apply invisibility 1 to loop-player for 1 seconds
-        else if loop-player is not on same team as p:
-          apply weakness 1 to loop-player for 2 seconds
-    else if p has permission "class_druid.shepherd":
-      loop players in radius {_r} around {_center}:
-        if loop-player is on same team as p:
-          apply regeneration 1 to loop-player for 2 seconds
-        else:
-          apply slowness 1 to loop-player for 2 seconds
-    wait 1 second
+command /natureza [<text>]:
+  aliases: /nature
+  permission: group.class_druid
+  trigger:
+    if arg-1 is not set:
+      send "{@prefix} &7Use: &a/natureza <toque|lianas|semente|espinhos|circulo|crescimento|chamado|sussurros>"
+    else:
+      set {_cmd} to arg-1 parsed as text
+      switch {_cmd}:
+        case "toque":
+          execute console command "skillapi cast Toque_da_Vida_Verde %player%"
+        case "lianas":
+          execute console command "skillapi cast Lianas_Prendentes %player%"
+        case "semente":
+          execute console command "skillapi cast Semente_Revigorante %player%"
+        case "espinhos":
+          execute console command "skillapi cast Espinhos_Naturais %player%"
+        case "circulo":
+          execute console command "skillapi cast Circulo_de_Cura %player%"
+        case "crescimento":
+          execute console command "skillapi cast Crescimento_Incontrolado %player%"
+        case "chamado":
+          execute console command "skillapi cast Chamado_da_Floresta %player%"
+        case "sussurros":
+          execute console command "skillapi cast Sussurros_Antigos %player%"
+        default:
+          send "{@prefix} &cAlias desconhecido."
 
-function druidShieldResolve(p: player, radius: number, duration: number):
-  set {_r} to radius
-  set {_d} to duration
-  wait {_d} seconds
-  loop players in radius {_r} around p:
-    if loop-player is on same team as p:
-      heal loop-player by 30
-      send "&e[Escudo] Energia ancestral o cura." to loop-player
+command /totem [<text>]:
+  permission: group.class_druid.lua
+  trigger:
+    if arg-1 is not set:
+      send "{@prefix} &7Use: &a/totem <forma|avancada|apex|avatar|rugido>"
+    else:
+      switch arg-1:
+        case "forma":
+          execute console command "skillapi cast Forma_Selvagem %player%"
+        case "avancada":
+          execute console command "skillapi cast Forma_Selvagem_Avancada %player%"
+        case "apex":
+          execute console command "skillapi cast Forma_Selvagem_Apex %player%"
+        case "avatar":
+          execute console command "skillapi cast Avatar_Lunar %player%"
+        case "rugido":
+          execute console command "skillapi cast Rugido_Primevo %player%"
+        default:
+          send "{@prefix} &cAlias desconhecido."
 
-function druidAvatarMoon(p: player, duration: number):
-  set {druid.avatar.%uuid of p%} to now + duration seconds
-  send "&d[Avatar] Formas consomem menos energia durante este período." to p
+command /wildshape:
+  permission: group.class_druid.lua
+  trigger:
+    execute console command "skillapi cast Forma_Selvagem %player%"
 
-# Atualização de HUD PlaceholderAPI a cada 5s
+command /circulo_terra [<text>]:
+  permission: group.class_druid.terra
+  trigger:
+    if arg-1 is not set:
+      send "{@prefix} &7Use: &a/circulo_terra <escudo|chao|parede|trono>"
+    else:
+      switch arg-1:
+        case "escudo":
+          execute console command "skillapi cast Escudo_de_Pedra %player%"
+        case "chao":
+          execute console command "skillapi cast Chao_Grudento %player%"
+        case "parede":
+          execute console command "skillapi cast Parede_de_Terra %player%"
+        case "trono":
+          execute console command "skillapi cast Trono_de_Basalto %player%"
+        default:
+          send "{@prefix} &cAlias desconhecido."
+
+command /circulo_lua [<text>]:
+  permission: group.class_druid.lua
+  trigger:
+    if arg-1 is not set:
+      send "{@prefix} &7Use: &a/circulo_lua <presas|frenesi|mordida|garras|pele>"
+    else:
+      switch arg-1:
+        case "presas":
+          execute console command "skillapi cast Presas_da_Lua %player%"
+        case "frenesi":
+          execute console command "skillapi cast Frenesi_Lunar %player%"
+        case "mordida":
+          execute console command "skillapi cast Mordida_Destrutiva %player%"
+        case "garras":
+          execute console command "skillapi cast Garras_Estelares %player%"
+        case "pele":
+          execute console command "skillapi cast Pele_do_Grande_Urso %player%"
+        default:
+          send "{@prefix} &cAlias desconhecido."
+
+command /circulo_tempestade [<text>]:
+  permission: group.class_druid.tempestade
+  trigger:
+    if arg-1 is not set:
+      send "{@prefix} &7Use: &a/circulo_tempestade <rajada|turibulo|olho|furia|trovao>"
+    else:
+      switch arg-1:
+        case "rajada":
+          execute console command "skillapi cast Rajada_de_Vento %player%"
+        case "turibulo":
+          execute console command "skillapi cast Turibulo_Tempestuoso %player%"
+        case "olho":
+          execute console command "skillapi cast Olho_da_Tempestade %player%"
+        case "furia":
+          execute console command "skillapi cast Furia_da_Tempestade %player%"
+        case "trovao":
+          execute console command "skillapi cast Trovao_Supremo %player%"
+        default:
+          send "{@prefix} &cAlias desconhecido."
+
+# Gestão de combate e recarga de charges de Forma Selvagem
+on damage:
+  if victim is a player:
+    if victim has permission "group.class_druid":
+      set {druid_last_combat::%victim%} to now
+  if attacker is a player:
+    if attacker has permission "group.class_druid":
+      set {druid_last_combat::%attacker%} to now
+
 every 5 seconds:
   loop all players:
-    if loop-player has permission "class_druid":
-      set {_time} to placeholderapi "%skills_wildshape_time%" with loop-player
-      set {_charges} to placeholderapi "%skills_wildshape_charges%" with loop-player
-      set {_cd} to placeholderapi "%skills_druid_longest_cd%" with loop-player
-      if {_time} is "":
-        set {_time} to "0"
-      if {_charges} is "":
-        set {_charges} to "0"
-      if {_cd} is "":
-        set {_cd} to "0"
-      send action bar "&bForma: %{_time}%s &f| &aCargas: %{_charges}% &f| &6Maior CD: %{_cd}%s" to loop-player
+    if loop-player has permission "group.class_druid":
+      set {_last} to {druid_last_combat::%loop-player%}
+      if {_last} is not set:
+        set {_diff} to {@cooldown_ooc}+1
+      else:
+        set {_diff} to difference between now and {_last}
+      if {_diff} >= {@cooldown_ooc} seconds:
+        execute console command "scoreboard players set %loop-player% druid_ooc 1"
+      else:
+        execute console command "scoreboard players set %loop-player% druid_ooc 0"
+      set {_skillLevel} to placeholderapi "%skillapi_skilllevel_Forma_Selvagem%" with loop-player
+      if {_skillLevel} is not set:
+        set {_skillLevel} to "0"
+      set {_lvl} to {_skillLevel} parsed as number
+      set {_maxCharges} to 0
+      if {_lvl} >= 4:
+        set {_maxCharges} to 5
+      else if {_lvl} = 3:
+        set {_maxCharges} to 4
+      else if {_lvl} = 2:
+        set {_maxCharges} to 3
+      else if {_lvl} = 1:
+        set {_maxCharges} to 2
+      else:
+        set {_maxCharges} to 0
+      execute console command "scoreboard players set %loop-player% druid_charges_max %{_maxCharges}%"
+      set {_current} to score of loop-player in druid_charges
+      if {_current} < {_maxCharges} and score of loop-player in druid_ooc = 1:
+        execute console command "scoreboard players add %loop-player% druid_charges 1"
+        wait 1 tick
+        set {_new} to score of loop-player in druid_charges
+        send "{@prefix} &7Charge de Forma Selvagem regenerada (&a%{_new}%&7/&a%{_maxCharges}%&7)." to loop-player
+    else:
+      delete {druid_last_combat::%loop-player%}
+
+every 1 second:
+  loop all players:
+    if loop-player has permission "group.class_druid":
+      set {_charges} to score of loop-player in druid_charges
+      set {_max} to score of loop-player in druid_charges_max
+      set {_ooc} to score of loop-player in druid_ooc
+      set {_status} to "&cEm combate"
+      if {_ooc} = 1:
+        set {_status} to "&aFora de combate"
+      set action bar of loop-player to "&2Wild Shape&f: &a%{_charges}%&7/&a%{_max}% &8| %{_status}%"

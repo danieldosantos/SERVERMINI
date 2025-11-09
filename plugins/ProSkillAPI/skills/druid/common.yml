@@ -1,0 +1,271 @@
+# Skills comuns do Druida válidas para todos os círculos
+T1:
+  Toque_da_Vida_Verde:
+    display: "§aToque da Vida Verde"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 20
+    cooldown: 45
+    target:
+      range: 12
+      filter: ally
+    effects:
+      heal:
+        amount: "0.14*target.max_health"
+        type: natureza
+    tags: [cura, suporte]
+    notes: "Cura instantânea respeitando limite de 25% por golpe."
+  Lianas_Prendentes:
+    display: "§2Lianas Prendentes"
+    type: active
+    trigger: cone
+    cost:
+      mana: 25
+    cooldown: 60
+    cone:
+      range: 5
+      angle: 55
+    effects:
+      root:
+        duration: 2
+        diminishing: true
+        immunity: 12
+    tags: [controle, natureza]
+    notes: "Enraizamento 2s com imunidade decrescente."
+  Semente_Revigorante:
+    display: "§aSemente Revigorante"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 20
+    cooldown: 45
+    target:
+      range: 12
+      filter: ally
+    effects:
+      hot:
+        amount: "0.02*target.max_health"
+        duration: 6
+        interval: 1
+    tags: [cura, hot]
+    notes: "Cura total 12% em 6s."
+  Espinhos_Naturais:
+    display: "§2Espinhos Naturais"
+    type: active
+    trigger: ally_buff
+    cost:
+      mana: 25
+    cooldown: 60
+    target:
+      range: 12
+      filter: ally
+    effects:
+      damage_buff:
+        amount: 0.20
+        hits: 1
+      bleed:
+        duration: 4
+        amount: "0.04*target.attack_damage"
+    tags: [buff, dano]
+    notes: "Próximo ataque aliado causa +20% e aplica sangramento 4s."
+T2:
+  Circulo_de_Cura:
+    display: "§aCírculo de Cura"
+    type: active
+    trigger: ground
+    cost:
+      mana: 30
+    cooldown: 75
+    area:
+      radius: 6
+      duration: 6
+    effects:
+      hot:
+        amount: "0.04*target.max_health"
+        interval: 1
+        duration: 6
+    tags: [cura, area]
+    notes: "Cura 4% por segundo durante 6s."
+  Veu_do_Bosque:
+    display: "§2Véu do Bosque"
+    type: active
+    trigger: aura
+    cost:
+      mana: 25
+    cooldown: 60
+    duration: 8
+    area:
+      radius: 8
+    effects:
+      speed:
+        amount: 0.03
+      dodge:
+        amount: 0.10
+    tags: [buff, mobilidade]
+    notes: "+0.03 velocidade (respeita cap +0.05) e +10% esquiva."
+  Vinhas_Acoitantes:
+    display: "§2Vinhas Açoitantes"
+    type: active
+    trigger: cone
+    cost:
+      mana: 30
+    cooldown: 75
+    cone:
+      range: 6
+      angle: 50
+    effects:
+      pull:
+        strength: 1
+      damage:
+        amount: "1.3*spellpower"
+        type: natureza
+    tags: [dano, controle]
+    notes: "Puxa levemente e causa 130% dano natureza."
+  Caminho_Selvagem:
+    display: "§aCaminho Selvagem"
+    type: active
+    trigger: blink
+    cost:
+      mana: 25
+    cooldown: 60
+    blink:
+      distance: 8
+      particles: natureza
+    tags: [mobilidade]
+    notes: "Teleporte curto visível em 8 blocos."
+T3:
+  Espiritos_Silvestres:
+    display: "§aEspíritos Silvestres"
+    type: active
+    trigger: summon
+    cost:
+      mana: 35
+    cooldown: 105
+    summon:
+      mob: druid_spirit_healer
+      amount: 2
+      duration: 12
+    effects:
+      aura_heal:
+        amount: "0.03*target.max_health"
+        interval: 1
+        radius: 5
+    tags: [sumonio, cura]
+    notes: "Familiars curam 3%/s aliados próximos."
+  Armadura_de_Casca_Ancestral:
+    display: "§2Armadura de Casca Ancestral"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 35
+    cooldown: 90
+    duration: 10
+    target:
+      range: 12
+      filter: ally
+    effects:
+      mitigation:
+        amount: 0.15
+    tags: [buff, defesa]
+    notes: "+15% mitigação por 10s sem exceder cap global."
+  Sopro_de_Renovacao:
+    display: "§aSopro de Renovação"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 35
+    cooldown: 90
+    target:
+      range: 12
+      filter: ally
+    effects:
+      cleanse:
+        strong: 1
+        light: 1
+    tags: [limpeza]
+    notes: "Remove 1 debuff forte e 1 leve."
+  Raizes_Profundas:
+    display: "§2Raízes Profundas"
+    type: active
+    trigger: ground
+    cost:
+      mana: 30
+    cooldown: 75
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      slow:
+        amount: 0.12
+    tags: [controle, area]
+    notes: "Zona reduz velocidade inimiga em 12%."
+T4:
+  Chamado_da_Floresta:
+    display: "§2Chamado da Floresta"
+    type: active
+    trigger: aura
+    cost:
+      mana: 45
+    cooldown: 240
+    duration: 12
+    area:
+      radius: 8
+    effects:
+      hot:
+        amount: "0.05*target.max_health"
+        interval: 1
+      mitigation:
+        amount: 0.10
+    tags: [aura, ult]
+    notes: "Ult. Aura cura 5%/s e +10% mitigação por 12s (60% uptime máximo)."
+  Auge_da_Colheita:
+    display: "§aAuge da Colheita"
+    type: active
+    trigger: burst
+    cost:
+      mana: 45
+    cooldown: 120
+    area:
+      radius: 8
+    effects:
+      hot:
+        amount: "0.0375*caster.max_health"
+        duration: 8
+        interval: 1
+    tags: [cura, area]
+    notes: "Distribui cura total 30% em 8s entre aliados."
+  Crescimento_Incontrolado:
+    display: "§2Crescimento Incontrolado"
+    type: active
+    trigger: ground
+    cost:
+      mana: 40
+    cooldown: 120
+    area:
+      radius: 8
+      duration: 3
+    effects:
+      snare:
+        duration: 3
+        diminishing: true
+      debuff_damage:
+        amount: -0.10
+        duration: 8
+    tags: [controle, debuff]
+    notes: "Enreda por 3s (PvP DR) e reduz dano inimigo em 10% por 8s."
+  Sussurros_Antigos:
+    display: "§aSussurros Antigos"
+    type: active
+    trigger: self
+    cost:
+      mana: 40
+    cooldown: 105
+    duration: 10
+    effects:
+      buff_heal:
+        amount: 0.15
+      buff_nature_damage:
+        amount: 0.15
+    tags: [buff, suporte]
+    notes: "+15% cura emitida e dano natureza por 10s."

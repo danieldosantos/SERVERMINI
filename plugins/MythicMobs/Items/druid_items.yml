@@ -1,146 +1,191 @@
-# Itens focais do Druida e Círculos
+# Itens focais do Druida - cada tier possui gatilhos para habilidades ProSkillAPI
 items:
-  DruidicFocusStone:
-    Id: HEART_OF_THE_SEA
-    Display: '&2Pedra do Véu Verde'
+  CajadoBosque_T1:
+    Id: MANGROVE_ROOTS
+    Display: '&2Cajado do Bosque Ancestral · Glifo de Raiz Viva [Broto]'
     Lore:
-      - '&7Canaliza &bForma Selvagem&7 (60s / CD 180s).'
-      - '&8Requer grupo: class_druid.'
+      - '&7Ativa magias comuns T1 (Toque, Lianas, Semente, Espinhos).'
+      - '&8Contém glifo de raiz viva básico para o Círculo da Terra.'
+      - '&8Requer: class_druid.'
     Options:
       Unbreakable: true
       KeepOnDeath: true
     PersistentData:
       classlock: 'class_druid'
-      skill: 'druid_wildshape'
+      tier: 'T1'
     Skills:
-      - skill{s=druid_wildshape} @self ~onUse
-  DruidicEssenceStaff:
-    Id: MANGROVE_ROOTS
-    Display: '&aCajado de Essência'
+      - skill{s=Toque_da_Vida_Verde} @self ~onRightClick
+      - skill{s=Lianas_Prendentes} @self ~onSneakRightClick
+      - skill{s=Semente_Revigorante} @self ~onLeftClick
+      - skill{s=Espinhos_Naturais} @self ~onDrop
+  TotemLua_T1:
+    Id: ACACIA_HANGING_SIGN
+    Display: '&dTotem da Lua Selvagem [Broto]'
     Lore:
-      - '&7Ativa &aVínculo Natural&7 e monitora HUD PlaceholderAPI.'
-      - '&8Requer grupo: class_druid.'
+      - '&7Dispara Forma Selvagem básica e buffs felinos.'
+      - '&8Requer: class_druid.lua.'
     Options:
       Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid.lua'
+      tier: 'T1'
+    Skills:
+      - skill{s=Forma_Selvagem} @self ~onRightClick
+      - skill{s=Uivo_Lunar} @self ~onSneakRightClick
+  FeticheTempestade_T1:
+    Id: CONDUIT
+    Display: '&bFetiche da Tempestade [Broto]'
+    Lore:
+      - '&7Canaliza rajadas e trovões menores.'
+      - '&8Requer: class_druid.tempestade.'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid.tempestade'
+      tier: 'T1'
+    Skills:
+      - skill{s=Rajada_de_Vento} @self ~onRightClick
+      - skill{s=Relampago_Curto} @target ~onSneakRightClick
+  CajadoBosque_T2:
+    Id: MANGROVE_WOOD
+    Display: '&2Cajado do Bosque Ancestral · Glifo de Raiz Viva [Folhagem]'
+    Lore:
+      - '&7Cura em área e buffs de mobilidade T2.'
+      - '&8Glifo reforçado: Terra Abençoada.'
+      - '&8Requer: class_druid.'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
     PersistentData:
       classlock: 'class_druid'
-      skill: 'druid_natural_bond'
+      tier: 'T2'
     Skills:
-      - skill{s=druid_natural_bond} @self ~onRightClick
-  LandStoneStaff:
-    Id: COBBLED_DEEPSLATE_WALL
-    Display: '&2Cajado Litopedra'
+      - skill{s=Circulo_de_Cura} @self ~onRightClick
+      - skill{s=Veu_do_Bosque} @self ~onSneakRightClick
+      - skill{s=Vinhas_Acoitantes} @target ~onLeftClick
+      - skill{s=Terra_Abencoada} @self ~onDrop
+  TotemLua_T2:
+    Id: CRIMSON_HANGING_SIGN
+    Display: '&dTotem da Lua Selvagem [Crescente]'
     Lore:
-      - '&7Invoca &7Pilares de Pedra&7 (CD 60s).'
-      - '&8Requer grupo: class_druid.land'
+      - '&7Potencializa Rasgar e Forma Selvagem Avançada.'
+      - '&8Requer: class_druid.lua.'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_druid.land'
-      skill: 'druid_land_stone_pillars'
+      classlock: 'class_druid.lua'
+      tier: 'T2'
     Skills:
-      - skill{s=druid_land_stone_pillars} @self ~onUse
-  LandEmeraldCharm:
-    Id: EMERALD
-    Display: '&aAmuleto do Bosque'
+      - skill{s=Forma_Selvagem_Avancada} @self ~onRightClick
+      - skill{s=Rasgar_e_Dilacerar} @target ~onSneakRightClick
+      - skill{s=Salto_Predatorio} @self ~onLeftClick
+  FeticheTempestade_T2:
+    Id: HEART_OF_THE_SEA
+    Display: '&bFetiche da Tempestade [Cumulus]'
     Lore:
-      - '&7Gera &2Aura do Bosque&7 (12s).'
-      - '&8Requer: class_druid.land'
+      - '&7Evoca Turíbulo Tempestuoso e Caminho do Furacão.'
+      - '&8Requer: class_druid.tempestade.'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_druid.land'
-      skill: 'druid_land_aura_grove'
+      classlock: 'class_druid.tempestade'
+      tier: 'T2'
     Skills:
-      - skill{s=druid_land_aura_grove} @self ~onRightClick
-  LandTotem:
-    Id: FERN
-    Display: '&6Totem Primal do Solo'
+      - skill{s=Turibulo_Tempestuoso} @self ~onRightClick
+      - skill{s=Caminho_do_Furacao} @self ~onSneakRightClick
+      - skill{s=Impulso_das_Correntes} @self ~onLeftClick
+  CajadoBosque_T3:
+    Id: BAMBOO_BLOCK
+    Display: '&2Cajado do Bosque Ancestral · Glifo de Raiz Viva [Canópia]'
     Lore:
-      - '&7Ativa &6Coração do Mundo&7 (CD 240s).'
-      - '&8Requer: class_druid.land'
+      - '&7Invoca Espíritos Silvestres e cascas ancestrais.'
+      - '&8Glifo canaliza Parede de Terra.'
+      - '&8Requer: class_druid.'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_druid'
+      tier: 'T3'
+    Skills:
+      - skill{s=Espiritos_Silvestres} @self ~onRightClick
+      - skill{s=Armadura_de_Casca_Ancestral} @target ~onSneakRightClick
+      - skill{s=Sopro_de_Renovacao} @target ~onLeftClick
+      - skill{s=Parede_de_Terra} @self ~onDrop
+  TotemLua_T3:
+    Id: WARPED_HANGING_SIGN
+    Display: '&dTotem da Lua Selvagem [Gibosa]'
+    Lore:
+      - '&7Canaliza Forma Selvagem Apex e Frenesi Lunar.'
+      - '&8Requer: class_druid.lua.'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_druid.land'
-      skill: 'druid_land_heart_of_world'
+      classlock: 'class_druid.lua'
+      tier: 'T3'
     Skills:
-      - skill{s=druid_land_heart_of_world} @self ~onUse
-  MoonTotem:
-    Id: MOON_TURTLE_HELMET
-    Display: '&bTotem do Luar'
+      - skill{s=Forma_Selvagem_Apex} @self ~onRightClick
+      - skill{s=Frenesi_Lunar} @self ~onSneakRightClick
+      - skill{s=Mordida_Destrutiva} @target ~onLeftClick
+  FeticheTempestade_T3:
+    Id: PRISMARINE_SHARD
+    Display: '&bFetiche da Tempestade [Nimbus]'
     Lore:
-      - '&7Transforma em &6Forma Ursina Primordial&7 ou ativa Forma Selvagem avançada.'
-      - '&8Requer: class_druid.moon'
+      - '&7Gera Olho da Tempestade e Ciclone Médio.'
+      - '&8Requer: class_druid.tempestade.'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_druid.moon'
-      skill: 'druid_moon_primal_bear'
+      classlock: 'class_druid.tempestade'
+      tier: 'T3'
     Skills:
-      - skill{s=druid_moon_primal_bear} @self ~onUse
-  MoonClawRing:
-    Id: AMETHYST_CLUSTER
-    Display: '&dAnel Garra Lunar'
+      - skill{s=Olho_da_Tempestade} @self ~onRightClick
+      - skill{s=Ciclone_Medio} @self ~onSneakRightClick
+      - skill{s=Carga_Estatica} @self ~onLeftClick
+  CajadoBosque_T4:
+    Id: FLOWERING_AZALEA
+    Display: '&2Cajado do Bosque Ancestral · Glifo de Raiz Viva [Ápice]'
     Lore:
-      - '&7Aciona &bForma Felina&7 (10s velocidade extra).'
-      - '&8Requer: class_druid.moon'
+      - '&7Libera Chamado da Floresta e Sussurros Antigos.'
+      - '&8Glifo supremo habilita Trono de Basalto.'
+      - '&8Requer: class_druid.'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_druid'
+      tier: 'T4'
+    Skills:
+      - skill{s=Chamado_da_Floresta} @self ~onRightClick
+      - skill{s=Sussurros_Antigos} @self ~onSneakRightClick
+      - skill{s=Trono_de_Basalto} @self ~onDrop
+  TotemLua_T4:
+    Id: CHERRY_HANGING_SIGN
+    Display: '&dTotem da Lua Selvagem [Plenilúnio]'
+    Lore:
+      - '&7Ativa Avatar Lunar e Rugido Primevo.'
+      - '&8Requer: class_druid.lua.'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_druid.moon'
-      skill: 'druid_moon_feline_form'
+      classlock: 'class_druid.lua'
+      tier: 'T4'
     Skills:
-      - skill{s=druid_moon_feline_form} @self ~onRightClick
-  MoonCelestialOrb:
-    Id: ENDER_PEARL
-    Display: '&dOrbe Celestial'
+      - skill{s=Avatar_Lunar} @self ~onRightClick
+      - skill{s=Rugido_Primevo} @self ~onSneakRightClick
+      - skill{s=Garras_Estelares} @self ~onLeftClick
+  FeticheTempestade_T4:
+    Id: END_ROD
+    Display: '&bFetiche da Tempestade [Supercélula]'
     Lore:
-      - '&7Invoca &dAvatar da Lua&7 (18s).'
-      - '&8Requer: class_druid.moon'
+      - '&7Desencadeia Fúria da Tempestade e Trovão Supremo.'
+      - '&8Requer: class_druid.tempestade.'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_druid.moon'
-      skill: 'druid_moon_avatar'
+      classlock: 'class_druid.tempestade'
+      tier: 'T4'
     Skills:
-      - skill{s=druid_moon_avatar} @self ~onUse
-  ShepherdTotem:
-    Id: BREEZE_ROD
-    Display: '&fTotem dos Espíritos Guardiões'
-    Lore:
-      - '&7Evoca &fChamado do Lobo Espiritual&7 (12s).'
-      - '&8Requer: class_druid.shepherd'
-    Options:
-      Unbreakable: true
-    PersistentData:
-      classlock: 'class_druid.shepherd'
-      skill: 'druid_shepherd_wolf_call'
-    Skills:
-      - skill{s=druid_shepherd_wolf_call} @self ~onUse
-  ShepherdCharm:
-    Id: GOAT_HORN
-    Display: '&eBerrante Ancestral'
-    Lore:
-      - '&7Ativa &eEscudo Ancestral&7 (8s).'
-      - '&8Requer: class_druid.shepherd'
-    Options:
-      Unbreakable: true
-    PersistentData:
-      classlock: 'class_druid.shepherd'
-      skill: 'druid_shepherd_ancestral_shield'
-    Skills:
-      - skill{s=druid_shepherd_ancestral_shield} @self ~onUse
-  ShepherdCircleStone:
-    Id: ECHO_SHARD
-    Display: '&dPedra do Conclave'
-    Lore:
-      - '&7Convoca &dConclave Primal&7 (16s de espíritos).'
-      - '&8Requer: class_druid.shepherd'
-    Options:
-      Unbreakable: true
-    PersistentData:
-      classlock: 'class_druid.shepherd'
-      skill: 'druid_shepherd_primal_conclave'
-    Skills:
-      - skill{s=druid_shepherd_primal_conclave} @self ~onUse
+      - skill{s=Furia_da_Tempestade} @self ~onRightClick
+      - skill{s=Trovao_Supremo} @target ~onSneakRightClick
+      - skill{s=Tempestade_Interior} @target ~onLeftClick
