@@ -1,0 +1,27 @@
+# Skill: Compasso do Caçador - passiva de rastreamento
+name: ranger_hunters_compass
+display: "§2Compasso do Caçador"
+icon: COMPASS
+type: Passive
+max-level: 1
+needs-permission: true
+description:
+  - "§fProjeta partículas no caminho do alvo marcado e adiciona HUD de rastreio."
+  - "§7Requer alvo marcado ou comando /rastrear_on para ativação."
+  - "§8Integrado com PlaceholderAPI ({mark_time_left}) e Scoreboard personalizado."
+components:
+  Passive:
+    type: trigger
+    data: {}
+    children:
+      InitCompass:
+        type: mechanic
+        data:
+          command: "skript run ranger_compass_tick %caster%"
+          caster: true
+          async: false
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_ranger_pet_status"
+          silent: true

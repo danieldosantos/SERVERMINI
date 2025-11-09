@@ -1,0 +1,26 @@
+# Skill: Mestre das Armadilhas - passiva tier 3+
+name: ranger_master_trapper
+display: "§6Mestre das Armadilhas"
+icon: STRING
+type: Passive
+max-level: 1
+needs-permission: true
+description:
+  - "§fAumenta limite de armadilhas simultâneas para 2 e reduz telegraph em 0.5s."
+  - "§7Recebe +15% dano nas armadilhas contra alvos marcados."
+components:
+  Passive:
+    type: trigger
+    data: {}
+    children:
+      UpgradeLimit:
+        type: mechanic
+        data:
+          command: "skript run ranger_upgrade_traps %caster%"
+          caster: true
+          async: false
+      IncreaseDamage:
+        type: mechanic
+        data:
+          command: "skillapi attrib %caster% trap_bonus 0.15"
+          async: false

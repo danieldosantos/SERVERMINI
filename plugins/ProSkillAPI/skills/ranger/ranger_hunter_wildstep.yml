@@ -1,0 +1,41 @@
+# Skill: Passo Silvestre - Hunter
+name: ranger_hunter_wildstep
+display: "§aPasso Silvestre"
+icon: LEATHER_BOOTS
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 75
+  cooldown-scale: -5
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fEnvolve o Patrulheiro em camuflagem leve, concede +0.04 velocidade por 8s."
+  - "§7Rompe se causar/receber dano direto, respeitando cap global de velocidade."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Camouflage:
+        type: mechanic
+        data:
+          potion: INVISIBILITY
+          seconds-base: 8
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      SpeedBuff:
+        type: mechanic
+        data:
+          command: "skript run ranger_apply_speed_cap %caster% 0.04 8"
+          caster: true
+          async: false
+      Message:
+        type: mechanic
+        data:
+          message: "§aVocê se mistura ao ambiente."
+          targets: self

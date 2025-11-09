@@ -1,0 +1,63 @@
+# Skill: Rede Enredante - Hunter
+name: ranger_hunter_entangling_net
+display: "§7Rede Enredante"
+icon: LEAD
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 60
+  cooldown-scale: -5
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fLança rede que imobiliza o alvo por 4s e aplica Vulnerabilidade 12% por 8s."
+  - "§7Possui telegraph claro de partículas e respeita limites PvP."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      TargetCone:
+        type: target
+        data:
+          type: Cone
+          range-base: 12
+          range-scale: 1
+          angle-base: 35
+          angle-scale: 0
+        children:
+          Snare:
+            type: mechanic
+            data:
+              potion: SLOW
+              seconds-base: 4
+              seconds-scale: 0
+              amplifier-base: 5
+              amplifier-scale: 0
+          Root:
+            type: mechanic
+            data:
+              command: "skript run ranger_apply_root %target% 4"
+              async: false
+          Vulnerability:
+            type: mechanic
+            data:
+              command: "skript run ranger_apply_vulnerability %caster% %target% 0.12 8"
+              async: false
+          Particles:
+            type: mechanic
+            data:
+              particle: CRIT
+              arrangement: Sphere
+              radius-base: 3
+              radius-scale: 0
+              amount-base: 40
+              amount-scale: 0
+          Message:
+            type: mechanic
+            data:
+              message: "§7Rede presa em %target name%!"
+              targets: self

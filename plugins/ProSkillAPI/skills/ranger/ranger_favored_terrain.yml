@@ -1,0 +1,28 @@
+# Skill: Terreno Favorito - passiva situacional
+name: ranger_favored_terrain
+display: "§aTerreno Favorito"
+icon: MOSS_BLOCK
+type: Passive
+max-level: 1
+needs-permission: true
+description:
+  - "§fConcede bônus de +12% dano à distância em biomas definidos ou contra criaturas-alvo."
+  - "§7Ativação manual via comando /rastrear_on (uptime máx. 60%)."
+  - "§8Aplica exaustão de resistência se raça do jogador já ampliar alcance/velocidade."
+components:
+  Passive:
+    type: trigger
+    data: {}
+    children:
+      ApplyBuff:
+        type: mechanic
+        data:
+          command: "skript run ranger_apply_favored %caster%"
+          caster: true
+          async: false
+      CheckRaceCaps:
+        type: mechanic
+        data:
+          command: "skript run ranger_race_cap %caster%"
+          caster: true
+          async: false

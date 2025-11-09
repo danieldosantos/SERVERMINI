@@ -1,0 +1,46 @@
+# Conclave do Caçador - Subclasse do Patrulheiro
+name: Ranger_Hunter
+display: "§6Conclave do Caçador"
+description:
+  - "§7Versatilidade ofensiva que alterna entre presa única e controle de multidões."
+  - "§eEspecializa-se em disparos precisos e preparação de áreas de dano sustentado."
+options:
+  needs-permission: true
+  parent: Ranger
+attributes:
+  attack-damage:
+    base: 1.6
+    scale: 0.04
+  crit-chance:
+    base: 0.08
+    scale: 0.02
+skills:
+  tier1:
+    active:
+      - ranger_hunter_predatory_volley
+      - ranger_hunter_entangling_net
+    passive: []
+  tier2:
+    active:
+      - ranger_hunter_predatory_volley
+      - ranger_hunter_entangling_net
+      - ranger_hunter_predators_eye
+    passive: []
+  tier3:
+    active:
+      - ranger_hunter_predatory_volley
+      - ranger_hunter_entangling_net
+      - ranger_hunter_predators_eye
+      - ranger_hunter_wildstep
+    passive: []
+  tier4:
+    active:
+      - ranger_hunter_predatory_volley
+      - ranger_hunter_entangling_net
+      - ranger_hunter_predators_eye
+      - ranger_hunter_wildstep
+      - ranger_hunter_arrow_storm
+    passive: []
+notes:
+  - "Rede Enredante usa telegraph de MythicMobs e aplica vulnerabilidade sem empilhar."
+  - "Chuva de Flechas bloqueia dano massivo em PvP via limite de 8 ticks efetivos."

@@ -1,0 +1,22 @@
+Skill,Tipo,Custo(Foco),Duração,CD,Dano/Redução,Área,Notas PvP,Tier
+Marca do Caçador,Ativa,1,12s,60/55/50/50s,+10/+12/+14/+16% alvo marcado,Single target,Uptime limitado a 60%; remove marca anterior,T1-T4
+Armadilha Tática,Ativa,1,10s,90/80/80/80s,60/65/70/80% + Lentidão II,Raio 3.5 blocos,Telegraph 1.5s; máx 1/1/2/2 ativas,T1-T4
+Comando de Disparo,Ativa,0,Instantâneo,45/40/40/40s,3 projéteis 75% cada,Cone 12 blocos,Nunca finaliza >30% HP,T1-T4
+Terreno Favorito,Passiva,0,Ativação manual,0,+12% dano situacional,N/A,Uptime ≤60%; aplica exaustão em buffs raciais,T1-T4
+Compasso do Caçador,Passiva,0,Enquanto marcado,0,Revelação/partículas,N/A,Somente PvP consensual,T1-T4
+Mestre das Armadilhas,Passiva,0,Permanente,0,+15% dano trap marcados,N/A,Habilita 2 armadilhas; respeita caps,T3-T4
+Rajada Predatória,Ativa,0,Instantâneo,45/40/40/40s,3 flechas 80% cada,Cone estreito,Bonus crit +5% se alvo marcado,T1-T4
+Rede Enredante,Ativa,0,4s root,60/55/55/55s,0% dano (controle),Raio 3 blocos,Vulnerabilidade 12%/8s; claro telegraph,T1-T4
+Olho do Predador,Ativa,0,10s,90/80/80/80s,+15% crit + revelar,N/A,Quebra se exceder caps de velocidade,T2-T4
+Passo Silvestre,Ativa,0,8s,75/70/70/70s,+0.04 vel + invis,N/A,Rompe ao causar/receber dano,T3-T4
+Chuva de Flechas (ULT),Ativa,0,8s,210/195/195/195s,70%/0.75s (máx 10 ticks),Raio 7 blocos,Bloqueia dano mortal; telegraph forte,T4
+Chamado Alpha,Ativa,1,12s,60/55/55/55s,+20% dano pet,N/A,Não invoca 2º pet; buff cancelado se pet morto,T1-T4
+Sincronia Selvagem,Ativa,0,Até 8s,45/40/40/40s,Replica ataque 100%,N/A,Não duplica ultimates/Tik combos,T1-T4
+Investida Coordenada,Ativa,0,Instantâneo,75/70/70/70s,120% ranger + 120% pet,Linha 5 blocos,Sem montaria; respeita colisão,T2-T4
+Proteção Instintiva,Ativa,0,10s,90/85/85/85s,Divide dano 50/50,N/A,Quebra <10% HP pet,T3-T4
+Fúria Primal (ULT),Ativa,0,15s,210/195/195/195s,+35% dano pet + cleave,Raio 4 blocos,Ultimate única; telegraph aura vermelha,T4
+Sombras Caçadoras,Ativa,0,2s medo,45/40/40/40s,100% dano + medo 2s,Cone 4 blocos,Medo ignora alvos <30% HP,T1-T4
+Salto Umbrático,Ativa,0,3s invis,60/55/55/55s,Reposicionamento,N/A,Bloqueado em arenas listadas,T1-T4
+Manto Penumbra,Ativa,0,10s,90/80/80/80s,+20% dano emboscada,N/A,Cancela ao sair de sombras,T2-T4
+Disparo Envenenado,Ativa,0,6s DoT,75/70/70/70s,6% HP alvo/seg,N/A,Não acumula; renova duração,T3-T4
+Caça Sombria (ULT),Ativa,0,12s,210/195/195/195s,80%/2s zona sombra,Raio 7 blocos,Telegraph 1s; aliados invisíveis,T4

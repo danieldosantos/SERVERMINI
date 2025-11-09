@@ -1,0 +1,41 @@
+# Skill: Salto Umbrático - Gloom Stalker
+name: ranger_gloom_shadow_step
+display: "§8Salto Umbrático"
+icon: ELYTRA
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 60
+  cooldown-scale: -5
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fTeleporta-se para trás do alvo marcado/olhado e concede invisibilidade por 3s."
+  - "§7Só funciona fora de arenas bloqueadas pelo Skript."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Teleport:
+        type: mechanic
+        data:
+          command: "skript run ranger_shadow_step %caster%"
+          caster: true
+          async: false
+      Invis:
+        type: mechanic
+        data:
+          potion: INVISIBILITY
+          seconds-base: 3
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      Message:
+        type: mechanic
+        data:
+          message: "§8Você surge das sombras."
+          targets: self

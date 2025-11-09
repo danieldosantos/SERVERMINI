@@ -1,0 +1,81 @@
+# Skill: Marca do Caçador - ativa principal do Patrulheiro
+name: ranger_hunters_mark
+display: "§aMarca do Caçador"
+icon: ENDER_EYE
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cost-base: 0
+  cost-scale: 0
+  cooldown-base: 60
+  cooldown-scale: -5
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fMarca um único alvo, revelando-o e aumentando o dano do Patrulheiro."
+  - "§7Custa 1 carga de §aFoco de Caça§7. Tempo de recarga: 60/55/50/50s."
+  - "§7Dano adicional: +10%/+12%/+14%/+16% conforme tier do Patrulheiro."
+  - "§8Atualiza HUD ({mark_time_left}) e envia efeito de partículas verde."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§aMarca do Caçador"
+    children:
+      CheckFocus:
+        type: mechanic
+        data:
+          command: "skript run ranger_spend_focus %caster% 1 mark"
+          caster: true
+          async: false
+          indicator: "§cSem Foco de Caça!"
+      ClearPrevious:
+        type: mechanic
+        data:
+          command: "skript run ranger_clear_mark %caster%"
+          caster: true
+          async: false
+      TargetForward:
+        type: target
+        data:
+          type: Single
+          range-base: 20
+          range-scale: 1
+          tolerance-base: 12
+          tolerance-scale: 0
+        children:
+          ApplyGlow:
+            type: mechanic
+            data:
+              potion: GLOWING
+              seconds-base: 12
+              seconds-scale: 1
+              amplifier-base: 0
+              amplifier-scale: 0
+          ApplyMarkMeta:
+            type: mechanic
+            data:
+              command: "skript run ranger_apply_mark %caster% %target%"
+              caster: true
+              async: false
+          DamageBuff:
+            type: mechanic
+            data:
+              command: "skillapi attrib %caster% mark_damage 0.1"
+              async: false
+              indicator: "§aFoco na presa!"
+          UpdateHUD:
+            type: mechanic
+            data:
+              command: "placeholderapi refresh %caster% skills_ranger_mark_timer"
+              silent: true
+          MessageCaster:
+            type: mechanic
+            data:
+              message: "§aVocê marcou §l%target name%§r por %math_{seconds}%s!"
+              targets: self

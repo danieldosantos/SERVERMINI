@@ -1,0 +1,138 @@
+# Classe base Patrulheiro para ProSkillAPI
+name: Ranger
+prefix: "Rngr"
+display: "§2Patrulheiro"
+main-class: true
+key: ranger
+description:
+  - "§7Especialista em DPS consistente à distância e controle de terreno."
+  - "§aAdministra o recurso §lFoco de Caça§r para marcar alvos, armar armadilhas e comandar o companheiro."
+  - "§7Integra limites globais do projeto: mitigação total ≤45% e velocidade adicional ≤0.05."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Foco de Caça"
+  mana-regen: 0
+  max-level: 60
+  exp-source: kill
+  attributes-scaled: true
+  needs-race: false
+  hunt-focus-resource:
+    key: hunt_focus
+    display: "Foco de Caça"
+    min: 0
+    max: 3
+    scaling:
+      tier1: 3
+      tier2: 3
+      tier3: 4
+      tier4: 4
+    regen-out-of-combat:
+      delay: 12
+      interval: 50
+      amount: 1
+  scoreboard:
+    focus: "ranger_focus"
+    mark: "ranger_mark_timer"
+    trap: "ranger_trap_cd"
+    pet: "ranger_pet_status"
+    placeholders:
+      focus: "%skills_hunt_focus%"
+      mark: "%skills_ranger_mark_timer%"
+      trap: "%skills_ranger_trap_cd%"
+      pet: "%skills_ranger_pet_status%"
+  combat-state-placeholder: "%skills_combat_state%"
+attributes:
+  health-base: 30
+  health-scale: 2.0
+  mana-base: 0
+  mana-scale: 0
+  walk-speed-base: 0.022
+  walk-speed-scale: 0.002
+  physical-defense-base: 3
+  physical-defense-scale: 0.9
+  magical-defense-base: 2
+  magical-defense-scale: 0.7
+  attack-damage: 1.55
+  skill-damage: 0.1
+  projectile-damage: 1.7
+  crit-chance-base: 0.05
+  crit-chance-scale: 0.01
+  level-bonus:
+    1:
+      health: 30
+      defense: 5
+      speed: 0.0
+      crit: 0.05
+    5:
+      health: 48
+      defense: 7
+      speed: 0.01
+      crit: 0.06
+    11:
+      health: 74
+      defense: 10
+      speed: 0.015
+      crit: 0.07
+    17:
+      health: 102
+      defense: 12
+      speed: 0.02
+      crit: 0.08
+mana:
+  regen-combat: 0
+  regen-out: 0
+exp:
+  kill-multiplier: 1.05
+  quest-multiplier: 1.0
+  pvp-multiplier: 1.0
+skills:
+  tier1:
+    active:
+      - ranger_hunters_mark
+      - ranger_tactical_trap
+      - ranger_burst_shot
+    passive:
+      - ranger_favored_terrain
+      - ranger_hunters_compass
+  tier2:
+    active:
+      - ranger_hunters_mark
+      - ranger_tactical_trap
+      - ranger_burst_shot
+    passive:
+      - ranger_favored_terrain
+      - ranger_hunters_compass
+  tier3:
+    active:
+      - ranger_hunters_mark
+      - ranger_tactical_trap
+      - ranger_burst_shot
+    passive:
+      - ranger_favored_terrain
+      - ranger_hunters_compass
+      - ranger_master_trapper
+  tier4:
+    active:
+      - ranger_hunters_mark
+      - ranger_tactical_trap
+      - ranger_burst_shot
+    passive:
+      - ranger_favored_terrain
+      - ranger_hunters_compass
+      - ranger_master_trapper
+subclasses:
+  hunter:
+    display: "§6Conclave do Caçador"
+    file: ranger_hunter.yml
+  beastmaster:
+    display: "§aConclave do Mestre das Feras"
+    file: ranger_beastmaster.yml
+  gloom:
+    display: "§8Conclave do Espreitador Noturno"
+    file: ranger_gloom.yml
+notes:
+  - "Marca do Caçador custa 1 carga de Foco e só permite um alvo ativo; reaplicar remove a marca anterior."
+  - "Armadilha Tática respeita limite global de 6-8 blocos e tem telegraph via partículas verdes."
+  - "Compasso do Caçador usa RacesEffects para aplicar exaustão se buffs raciais excederem alcance/velocidade permitidos."

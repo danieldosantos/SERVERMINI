@@ -1,0 +1,39 @@
+# Skill: Chamado Alpha - Beast Master
+name: ranger_beastmaster_alpha_call
+display: "§aChamado Alpha"
+icon: GOAT_HORN
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 60
+  cooldown-scale: -5
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fInvoca ou fortalece o companheiro concedendo +20% dano por 12s."
+  - "§7Custa 1 carga de §aFoco de Caça§7 e atualiza HUD do pet."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      SpendFocus:
+        type: mechanic
+        data:
+          command: "skript run ranger_spend_focus %caster% 1 pet"
+          caster: true
+          async: false
+      SummonPet:
+        type: mechanic
+        data:
+          command: "skript run ranger_pet_alpha %caster% 12"
+          caster: true
+          async: false
+      Message:
+        type: mechanic
+        data:
+          message: "§aSeu companheiro responde ao Chamado Alpha!"
+          targets: self
