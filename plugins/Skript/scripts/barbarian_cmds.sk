@@ -1,105 +1,370 @@
-# Skript - Comandos e integrações para classe Bárbaro
+# Skript - Comandos, HUD e integrações para a classe Bárbaro
 options:
   prefix: &6[Barbaro]&f
+  perm-base: group.class_barbarian
+  perm-berserker: group.class_barbarian.berserker
+  perm-totem: group.class_barbarian.totem
+  perm-storm: group.class_barbarian.storm
 
 on load:
   broadcast "&7Skript barbarian_cmds.sk carregado." to console
 
+function barbarian_setup_hud(p: player):
+  execute console command "scoreboard objectives add barbarian_stamina dummy" if scoreboard objective "barbarian_stamina" does not exist
+  execute console command "scoreboard objectives add barbarian_rage dummy" if scoreboard objective "barbarian_rage" does not exist
+  execute console command "scoreboard objectives add barbarian_major_cd dummy" if scoreboard objective "barbarian_major_cd" does not exist
+  execute console command "scoreboard objectives add barbarian_fury_time dummy" if scoreboard objective "barbarian_fury_time" does not exist
+  barbarian_refresh_hud(p)
+
+function barbarian_refresh_hud(p: player):
+  if p is not online:
+    stop
+  set {_stamina} to placeholderapi "%skills_barbarian_stamina%" with p
+  set {_rage} to placeholderapi "%skills_rage_stacks%" with p
+  set {_cd} to placeholderapi "%skills_barbarian_major_cd%" with p
+  set {_fury} to placeholderapi "%skills_fury_time%" with p
+  if {_stamina} is "" or {_stamina} is "null":
+    set {_stamina} to "0"
+  if {_rage} is "" or {_rage} is "null":
+    set {_rage} to "0"
+  if {_cd} is "" or {_cd} is "null":
+    set {_cd} to "0"
+  if {_fury} is "" or {_fury} is "null":
+    set {_fury} to "0"
+  set {_staminaNumber} to floor(parsed number from {_stamina})
+  set {_rageNumber} to floor(parsed number from {_rage})
+  set {_cdNumber} to floor(parsed number from {_cd})
+  set {_furyNumber} to floor(parsed number from {_fury})
+  execute console command "scoreboard players set %p% barbarian_stamina %{_staminaNumber}%"
+  execute console command "scoreboard players set %p% barbarian_rage %{_rageNumber}%"
+  execute console command "scoreboard players set %p% barbarian_major_cd %{_cdNumber}%"
+  execute console command "scoreboard players set %p% barbarian_fury_time %{_furyNumber}%"
+
+function barbarian_add_rage(p: player, amount: number=1):
+  if p is not online:
+    stop
+  execute console command "skillapi player %p% resource rage_stacks add %amount%"
+  wait 2 ticks
+  barbarian_refresh_hud(p)
+
+function barbarian_start_retaliation(p: player, duration: number, percent: number, cap: number):
+  if p is not online:
+    stop
+  set {barbarian.retaliation.%p%.percent} to percent
+  set {barbarian.retaliation.%p%.cap} to cap
+  set {barbarian.retaliation.%p%.expires} to now + duration seconds
+  send "{@prefix} &cRetaliação ativa por %{duration}%s." to p
+  wait duration seconds
+  delete {barbarian.retaliation.%p%::*}
+  send "{@prefix} &7Retaliação Frenética encerrada." to p
+
+function barbarian_carnage_hit(p: player, t: entity):
+  if p is not online:
+    stop
+  if t is not set:
+    stop
+  set {_list::*} to {barbarian.carnage.%p%.targets::*}
+  set {_uuid} to "%uuid of %t%%"
+  if {_uuid} is not set:
+    stop
+  if {_uuid} is not in {_list::*}:
+    add {_uuid} to {barbarian.carnage.%p%.targets::*}
+
+function barbarian_carnage_resolve(p: player):
+  if p is not online:
+    stop
+  set {_count} to size of {barbarian.carnage.%p%.targets::*}
+  delete {barbarian.carnage.%p%.targets::*}
+  if {_count} >= 3:
+    barbarian_add_rage(p, 1)
+    send "{@prefix} &cCarnificina alimenta sua Fúria!" to p
+
+function barbarian_start_relentless_slaughter(p: player, duration: number, lifesteal: number):
+  if p is not online:
+    stop
+  set {barbarian.relentless.%p%.percent} to lifesteal
+  set {barbarian.relentless.%p%.expires} to now + duration seconds
+  set {_pct} to lifesteal * 100
+  send "{@prefix} &4Carnificina Implacável concede %{_pct}%&f roubo de vida." to p
+  wait duration seconds
+  delete {barbarian.relentless.%p%::*}
+  send "{@prefix} &7Carnificina Implacável terminou." to p
+
+function barbarian_totem_eagle(p: player, seconds: number):
+  if p is not online:
+    stop
+  set {_base} to {barbarian.attack_range.%p%}
+  if {_base} is not set:
+    set {_base} to 3
+    set {barbarian.attack_range.%p%} to 3
+  execute console command "attribute %p% minecraft:generic.attack_range base set 4"
+  send "{@prefix} &fTotem da Águia: alcance aumentado." to p
+  wait seconds seconds
+  execute console command "attribute %p% minecraft:generic.attack_range base set %{_base}%"
+  send "{@prefix} &7Totem da Águia expirou." to p
+
+function barbarian_totem_wolf(p: player, t: entity, seconds: number, bonus: number):
+  if p is not online:
+    stop
+  if t is not set:
+    stop
+  set {_uuid} to uuid of t
+  set {barbarian.wolf.%p%.target} to {_uuid}
+  set {barbarian.wolf.%p%.bonus} to bonus
+  set {barbarian.wolf.%p%.expires} to now + seconds seconds
+  send "{@prefix} &fTotem do Lobo marca %name of t% por %{seconds}%s." to p
+  wait seconds seconds
+  delete {barbarian.wolf.%p%::*}
+
+function barbarian_totem_phoenix(p: player, seconds: number, radius: number):
+  if p is not online:
+    stop
+  set {barbarian.phoenix.%p%.center} to location of p
+  set {barbarian.phoenix.%p%.radius} to radius
+  set {barbarian.phoenix.%p%.expires} to now + seconds seconds
+  delete {barbarian.phoenix.%p%.revived::*}
+  send "{@prefix} &cTotem da Fênix ativo por %{seconds}%s." to p
+  wait seconds seconds
+  delete {barbarian.phoenix.%p%::*}
+  send "{@prefix} &7Totem da Fênix dissipou." to p
+
+function barbarian_storm_stun(t: entity, seconds: number):
+  if t is not set:
+    stop
+  set {barbarian.stun.%t%.expires} to now + seconds seconds
+
+function barbarian_storm_eye(p: player, seconds: number, radius: number, bonus: number):
+  if p is not online:
+    stop
+  set {barbarian.storm.eye.%p%.center} to location of p
+  set {barbarian.storm.eye.%p%.radius} to radius
+  set {barbarian.storm.eye.%p%.bonus} to bonus
+  set {barbarian.storm.eye.%p%.expires} to now + seconds seconds
+  send "{@prefix} &bOlho do Furacão ativo por %{seconds}%s." to p
+  wait seconds seconds
+  delete {barbarian.storm.eye.%p%::*}
+  send "{@prefix} &7Olho do Furacão encerrou." to p
+
 command /kit_barbaro:
-  permission: group.class_barbarian
+  permission: {@perm-base}
   trigger:
     clear player's inventory
-    give player blaze powder named "&6Talismã da Fúria" with lore "&7Clique para ativar Fúria." and "&8Grupo: class_barbarian"
-    give player goat horn named "&cBerrante Berserker" with lore "&7Clique para Grito Bestial." and "&8Grupo: class_barbarian.berserker"
-    give player netherite axe named "&4Machado Sanguinário" with lore "&7Clique para Investida." and "&8Grupo: class_barbarian.berserker"
-    give player carved pumpkin named "&6Totem do Urso" with lore "&7Clique para Totem do Urso." and "&8Grupo: class_barbarian.totem"
-    give player ender eye named "&bOlho do Furacão" with lore "&7Clique para Olho do Furacão." and "&8Grupo: class_barbarian.storm"
-    execute console command "scoreboard objectives add barbarian_rage dummy"
-    execute console command "scoreboard players set %player% barbarian_rage 0"
-    send "{@prefix} &7Kit de testes configurado."
+    execute console command "mm items give BarbarianRageCharm 1 %player%"
+    execute console command "mm items give BerserkerWarHorn 1 %player%"
+    execute console command "mm items give BerserkerBattleAxe 1 %player%"
+    execute console command "mm items give BerserkerSpikedShield 1 %player%"
+    execute console command "mm items give TotemBearCharm 1 %player%"
+    execute console command "mm items give TotemEagleCharm 1 %player%"
+    execute console command "mm items give TotemWolfCharm 1 %player%"
+    execute console command "mm items give TotemTigerCharm 1 %player%"
+    execute console command "mm items give TotemPhoenixCharm 1 %player%"
+    execute console command "mm items give StormWarHammer 1 %player%"
+    execute console command "mm items give StormChargeGauntlet 1 %player%"
+    execute console command "mm items give StormMantle 1 %player%"
+    execute console command "mm items give StormDrum 1 %player%"
+    execute console command "mm items give StormEyeTotem 1 %player%"
+    barbarian_setup_hud(player)
+    send "{@prefix} &7Kit de testes entregue. HUD inicializada."
 
 command /furia:
-  aliases: /rage
-  permission: group.class_barbarian
+  permission: {@perm-base}
   trigger:
     execute console command "skillapi cast barbarian_fury %player%"
+    wait 5 ticks
+    barbarian_refresh_hud(player)
 
 command /temerario:
-  permission: group.class_barbarian
+  permission: {@perm-base}
   trigger:
     execute console command "skillapi cast barbarian_reckless_attack %player%"
 
-command /berserk:
-  permission: group.class_barbarian.berserker
+command /investida:
+  permission: {@perm-base}
   trigger:
-    execute console command "skillapi cast barbarian_berserker_carnage %player%"
+    execute console command "skillapi cast barbarian_brutal_charge %player%"
+
+command /berserk:
+  permission: {@perm-berserker}
+  trigger:
+    execute console command "skillapi cast barbarian_berserker_relentless_slaughter %player%"
 
 command /totem_urso:
-  permission: group.class_barbarian.totem
+  permission: {@perm-totem}
   trigger:
     execute console command "skillapi cast barbarian_totem_bear %player%"
 
+command /totem_aguia:
+  permission: {@perm-totem}
+  trigger:
+    execute console command "skillapi cast barbarian_totem_eagle %player%"
+
 command /totem_lobo:
-  permission: group.class_barbarian.totem
+  permission: {@perm-totem}
   trigger:
     execute console command "skillapi cast barbarian_totem_wolf %player%"
 
+command /totem_tigre:
+  permission: {@perm-totem}
+  trigger:
+    execute console command "skillapi cast barbarian_totem_tiger %player%"
+
 command /totem_fenix:
-  permission: group.class_barbarian.totem
+  permission: {@perm-totem}
   trigger:
     execute console command "skillapi cast barbarian_totem_phoenix %player%"
 
+command /storm_martelo:
+  permission: {@perm-storm}
+  trigger:
+    execute console command "skillapi cast barbarian_storm_thunder_hammer %player%"
+
 command /storm_olho:
-  permission: group.class_barbarian.storm
+  permission: {@perm-storm}
   trigger:
     execute console command "skillapi cast barbarian_storm_eye %player%"
 
-command /barbaro_ooc <text>:
-  permission: op
-  trigger:
-    if arg-1 = "on":
-      execute console command "scoreboard players set %player% barbarian_ooc 1"
-      send "{@prefix} &7Estado fora de combate forçado."
-    else if arg-1 = "off":
-      execute console command "scoreboard players set %player% barbarian_ooc 0"
-      send "{@prefix} &7Estado normalizado."
-
 on rightclick with blaze powder:
-  if name of player's tool = "&6Talismã da Fúria":
-    if player has permission "group.class_barbarian":
+  if name of player's tool is "&6Talismã da Fúria":
+    if player has permission {@perm-base}:
       execute console command "skillapi cast barbarian_fury %player%"
+      wait 5 ticks
+      barbarian_refresh_hud(player)
     else:
       send "{@prefix} &cApenas Bárbaros podem usar isso."
 
 on rightclick with goat horn:
-  if name of player's tool = "&cBerrante Berserker":
-    if player has permission "group.class_barbarian.berserker":
+  if name of player's tool is "&cBerrante Berserker":
+    if player has permission {@perm-berserker}:
       execute console command "skillapi cast barbarian_berserker_bestial_roar %player%"
-    else:
-      send "{@prefix} &cApenas Berserkers."
 
 on leftclick with netherite axe:
-  if name of player's tool = "&4Machado Sanguinário":
-    if player has permission "group.class_barbarian.berserker":
-      execute console command "skillapi cast barbarian_berserker_bloody_charge %player%"
+  if name of player's tool is "&4Machado da Carnificina":
+    if player has permission {@perm-berserker}:
+      execute console command "skillapi cast barbarian_berserker_carnage %player%"
+
+on rightclick with shield:
+  if name of player's tool is "&4Broquel Espinhado":
+    if player has permission {@perm-berserker}:
+      execute console command "skillapi cast barbarian_berserker_frenzied_retaliation %player%"
 
 on rightclick with carved pumpkin:
-  if name of player's tool = "&6Totem do Urso":
-    if player has permission "group.class_barbarian.totem":
+  if name of player's tool is "&6Totem do Urso":
+    if player has permission {@perm-totem}:
       execute console command "skillapi cast barbarian_totem_bear %player%"
 
+on rightclick with feather:
+  if name of player's tool is "&fTotem da Águia":
+    if player has permission {@perm-totem}:
+      execute console command "skillapi cast barbarian_totem_eagle %player%"
+
+on rightclick with wolf spawn egg:
+  if name of player's tool is "&fTotem do Lobo":
+    if player has permission {@perm-totem}:
+      execute console command "skillapi cast barbarian_totem_wolf %player%"
+
+on rightclick with orange dye:
+  if name of player's tool is "&6Totem do Tigre":
+    if player has permission {@perm-totem}:
+      execute console command "skillapi cast barbarian_totem_tiger %player%"
+
 on rightclick with blaze rod:
-  if name of player's tool = "&cTotem da Fênix":
-    if player has permission "group.class_barbarian.totem":
+  if name of player's tool is "&cTotem da Fênix":
+    if player has permission {@perm-totem}:
       execute console command "skillapi cast barbarian_totem_phoenix %player%"
 
+on rightclick with golden axe:
+  if name of player's tool is "&bMartelo da Tempestade":
+    if player has permission {@perm-storm}:
+      execute console command "skillapi cast barbarian_storm_thunder_hammer %player%"
+
+on rightclick with iron horse armor:
+  if name of player's tool is "&9Manopla Galvânica":
+    if player has permission {@perm-storm}:
+      execute console command "skillapi cast barbarian_storm_galvanic_surge %player%"
+
+on rightclick with blue carpet:
+  if name of player's tool is "&bManto dos Ventos":
+    if player has permission {@perm-storm}:
+      execute console command "skillapi cast barbarian_storm_wind_cloak %player%"
+
+on rightclick with drum:
+  if name of player's tool is "&bTambor Tempestuoso":
+    if player has permission {@perm-storm}:
+      execute console command "skillapi cast barbarian_storm_tempest_cauldron %player%"
+
 on rightclick with ender eye:
-  if name of player's tool = "&bOlho do Furacão":
-    if player has permission "group.class_barbarian.storm":
+  if name of player's tool is "&bTotem do Olho da Tempestade":
+    if player has permission {@perm-storm}:
       execute console command "skillapi cast barbarian_storm_eye %player%"
 
-# Chamadas auxiliares para ajustes de resistência via Skript
-command /barbarian_res_cap <player>:
-  permission: op
-  trigger:
-    execute console command "scoreboard players set %arg-1% barbarian_res_cap 1"
+on damage:
+  set {_victim} to victim
+  set {_attacker} to attacker
+  if {_victim} is player:
+    if {_victim} has permission {@perm-base}:
+      if {barbarian.rage.victim.cd.%{_victim}%} is not set or difference between now and {barbarian.rage.victim.cd.%{_victim}%} > 2 seconds:
+        set {barbarian.rage.victim.cd.%{_victim}%} to now
+        barbarian_add_rage({_victim}, 1)
+      if {barbarian.retaliation.%{_victim}%::expires} is set:
+        if now <= {barbarian.retaliation.%{_victim}%.expires}:
+          set {_percent} to {barbarian.retaliation.%{_victim}%.percent}
+          set {_cap} to {barbarian.retaliation.%{_victim}%.cap}
+          set {_reflect} to damage * {_percent}
+          if {_reflect} > {_cap}:
+            set {_reflect} to {_cap}
+          if {_attacker} is set:
+            damage {_attacker} by {_reflect}
+  if {_attacker} is player:
+    if {_attacker} has permission {@perm-base}:
+      if {barbarian.rage.attacker.cd.%{_attacker}%} is not set or difference between now and {barbarian.rage.attacker.cd.%{_attacker}%} > 2 seconds:
+        set {barbarian.rage.attacker.cd.%{_attacker}%} to now
+        barbarian_add_rage({_attacker}, 1)
+      if {barbarian.relentless.%{_attacker}%::expires} is set:
+        if now <= {barbarian.relentless.%{_attacker}%.expires}:
+          set {_ls} to {barbarian.relentless.%{_attacker}%.percent}
+          set {_heal} to damage * {_ls}
+          heal {_attacker} by {_heal}
+      if {barbarian.wolf.%{_attacker}%::target} is set:
+        set {_targetUuid} to {barbarian.wolf.%{_attacker}%.target}
+        if {_targetUuid} = "%uuid of %{_victim}%":
+          if now <= {barbarian.wolf.%{_attacker}%.expires}:
+            set {_bonus} to {barbarian.wolf.%{_attacker}%.bonus}
+            set damage to damage * (1 + {_bonus})
+
+on death of player:
+  set {_p} to victim
+  loop all players:
+    if {barbarian.phoenix.%loop-player%.expires} is set:
+      if now <= {barbarian.phoenix.%loop-player%.expires}:
+        set {_center} to {barbarian.phoenix.%loop-player%.center}
+        set {_radius} to {barbarian.phoenix.%loop-player%.radius}
+        if distance between {_center} and location of {_p} <= {_radius}:
+          if {_p}'s uuid is not in {barbarian.phoenix.%loop-player%.revived::*}:
+            add {_p}'s uuid to {barbarian.phoenix.%loop-player%.revived::*}
+            wait 1 second
+            respawn {_p}
+            heal {_p} by max health of {_p} * 0.4
+            send "{@prefix} &cAs chamas da Fênix o revivem!" to {_p}
+            stop
+
+on damage:
+  set {_p} to attacker
+  if {_p} is player:
+    loop all players:
+      if {barbarian.storm.eye.%loop-player%.expires} is set:
+        if now <= {barbarian.storm.eye.%loop-player%.expires}:
+          set {_center} to {barbarian.storm.eye.%loop-player%.center}
+          set {_radius} to {barbarian.storm.eye.%loop-player%.radius}
+          if distance between {_center} and location of victim <= {_radius}:
+            if {_p} has permission {@perm-storm}:
+              set {_bonus} to {barbarian.storm.eye.%loop-player%.bonus}
+              set damage to damage * (1 + {_bonus})
+
+on quit:
+  delete {barbarian.retaliation.%player%::*}
+  delete {barbarian.relentless.%player%::*}
+  delete {barbarian.carnage.%player%::*}
+  delete {barbarian.wolf.%player%::*}
+  delete {barbarian.phoenix.%player%::*}
+  delete {barbarian.storm.eye.%player%::*}
+  delete {barbarian.attack_range.%player%}

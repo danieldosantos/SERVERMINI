@@ -1,36 +1,36 @@
-# Skill: Impetus Irrefreável
+# Skill: Ímpeto Irrefreável
 name: barbarian_berserker_relentless_impetus
-display: "§6Impetus Irrefreável"
-icon: LEATHER_BOOTS
+display: "§cÍmpeto Irrefreável"
+icon: SUGAR
 type: Active
 max-level: 1
 attributes:
   cooldown-base: 60
   cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
 description:
   - "§7Remove lentidão e concede +0.04 velocidade de movimento por 10s."
 components:
   Cast:
     type: trigger
+    data:
+      cooldown: true
     children:
       CleanseSlow:
         type: mechanic
         data:
-          remove-negative: true
-          types:
-            - SLOW
-            - LEVITATION
+          command: "effect clear %caster% minecraft:slowness"
+          silent: true
       ApplySpeed:
         type: mechanic
         data:
           potion: SPEED
           seconds-base: 10
-          seconds-scale: 0
-          amplifier-base: 1
-          amplifier-scale: 0
-          indicator: "§6Impetus"
-      Message:
+          amplifier-base: 0
+          indicator: "§cÍmpeto Irrefreável"
+      Notify:
         type: mechanic
         data:
-          message: "§6Seus passos não podem ser contidos!"
+          message: "§cVocê ruge e ignora amarras!"
           targets: self

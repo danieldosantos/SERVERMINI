@@ -7,27 +7,25 @@ max-level: 1
 attributes:
   cooldown-base: 70
   cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
 description:
-  - "§7Concede +30% velocidade de ataque por 8s aos aliados próximos."
+  - "§7Aumenta a velocidade de ataque em 30% por 8s."
 components:
   Cast:
     type: trigger
+    data:
+      cooldown: true
     children:
-      Allies:
-        type: target
-        data:
-          group: ally
-          radius-base: 8
-        children:
-          ApplyHaste:
-            type: mechanic
-            data:
-              potion: HASTE
-              seconds-base: 8
-              amplifier-base: 1
-              indicator: "§6Totem do Tigre"
-      Message:
+      SelfBuff:
         type: mechanic
         data:
-          message: "§6Os golpes felinos aceleram!"
+          potion: FAST_DIGGING
+          seconds-base: 8
+          amplifier-base: 1
+          indicator: "§6Totem do Tigre"
+      Notify:
+        type: mechanic
+        data:
+          message: "§6Garras do tigre liberadas!"
           targets: self

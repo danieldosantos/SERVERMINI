@@ -1,0 +1,38 @@
+# Skill: Instinto Perigoso (passivo)
+name: barbarian_danger_instinct
+display: "§eInstinto Perigoso"
+icon: SPYGLASS
+type: Passive
+max-level: 1
+description:
+  - "§7Ao sofrer dano em área, reduz em 25% explosões e projéteis por 6s."
+  - "§8Tempo de recarga interno: 20s para manter uptime <60%."
+components:
+  DamageTaken:
+    type: trigger
+    data:
+      cooldown: 20
+      group: enemy
+      damage-type: AOE
+    children:
+      ApplyExplosionShield:
+        type: mechanic
+        data:
+          potion: DAMAGE_RESISTANCE
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 0
+          indicator: "§eInstinto Perigoso"
+      ProjectileMitigation:
+        type: mechanic
+        data:
+          potion: SLOW_FALLING
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 3
+          indicator: "§eInstinto Perigoso"
+      Message:
+        type: mechanic
+        data:
+          message: "§eInstintos afiados protegem você!"
+          targets: self

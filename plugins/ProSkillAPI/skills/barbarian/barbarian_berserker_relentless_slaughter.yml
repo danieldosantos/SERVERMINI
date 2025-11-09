@@ -1,0 +1,62 @@
+# Skill: Carnificina Implacável (Ultimate)
+name: barbarian_berserker_relentless_slaughter
+display: "§4Carnificina Implacável"
+icon: TOTEM_OF_UNDYING
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+description:
+  - "§715s de golpes em cleave contínuo com roubo de vida de 25%."
+  - "§eConsome 1 carga de Fúria ao ativar."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CheckRage:
+        type: condition
+        data:
+          key: rage_stacks
+          min-value: 1
+          fail-message: "§cVocê precisa de Fúria acumulada."
+        children:
+          SpendRage:
+            type: mechanic
+            data:
+              key: rage_stacks
+              amount-base: 1
+              indicator: "§6-1 Rage"
+      CleaveLoop:
+        type: mechanic
+        data:
+          repeat: 15
+          interval: 1
+        children:
+          CleaveTarget:
+            type: target
+            data:
+              shape: cone
+              range-base: 4
+              angle-base: 100
+              group: enemy
+            children:
+              Damage:
+                type: mechanic
+                data:
+                  value-base: 1.1
+                  classifier: skill
+      LifestealHook:
+        type: mechanic
+        data:
+          command: "skript run barbarian_start_relentless_slaughter %caster% 15 0.25"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§4Carnificina Implacável tomada pela fúria!"
+          targets: self

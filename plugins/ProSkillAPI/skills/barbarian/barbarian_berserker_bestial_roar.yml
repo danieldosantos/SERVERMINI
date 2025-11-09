@@ -7,11 +7,11 @@ max-level: 1
 attributes:
   cooldown-base: 75
   cooldown-scale: 0
-  cost-base: 0
-  cost-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
 description:
-  - "§7Toca o berrante, reduzindo em 10% o dano causado por inimigos em 6 blocos."
-  - "§7Duração: 12s. Consome 1 carga de Fúria."
+  - "§7Sopra o chifre, reduzindo em 10% o dano de inimigos a 6 blocos por 12s."
+  - "§eGanha +10% velocidade de ataque por 8s. Consome 1 carga de Fúria."
 components:
   Cast:
     type: trigger
@@ -19,19 +19,23 @@ components:
       cooldown: true
     children:
       ConsumeRage:
-        type: mechanic
+        type: condition
         data:
           key: rage_stacks
-          amount-base: 1
-          amount-scale: 0
           min-value: 1
-          indicator: "§6-1 Rage"
+          fail-message: "§cPrecisa de Fúria acumulada."
+        children:
+          SpendRage:
+            type: mechanic
+            data:
+              key: rage_stacks
+              amount-base: 1
+              indicator: "§6-1 Rage"
       AreaDebuff:
         type: target
         data:
           shape: sphere
           radius-base: 6
-          radius-scale: 0
           group: enemy
         children:
           ApplyWeakness:
@@ -39,12 +43,17 @@ components:
             data:
               potion: WEAKNESS
               seconds-base: 12
-              seconds-scale: 0
               amplifier-base: 0
-              amplifier-scale: 0
               indicator: "§c-10% dano"
-      Message:
+      SelfHaste:
         type: mechanic
         data:
-          message: "§cVocê solta um grito bestial!"
+          potion: FAST_DIGGING
+          seconds-base: 8
+          amplifier-base: 0
+          indicator: "§c+10% velocidade de ataque"
+      Notify:
+        type: mechanic
+        data:
+          message: "§cGrito Bestial ecoa!"
           targets: self

@@ -1,12 +1,14 @@
 # Skill: Totem do Urso
 name: barbarian_totem_bear
 display: "§6Totem do Urso"
-icon: HONEYCOMB
+icon: CARVED_PUMPKIN
 type: Active
 max-level: 1
 attributes:
   cooldown-base: 120
   cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
 description:
   - "§7Ergue um totem que reduz em 35% o dano físico recebido por aliados em 5 blocos."
   - "§7Duração: 10s. Consome 1 carga de Fúria."
@@ -17,12 +19,18 @@ components:
       cooldown: true
     children:
       ConsumeRage:
-        type: mechanic
+        type: condition
         data:
           key: rage_stacks
-          amount-base: 1
           min-value: 1
-          indicator: "§6-1 Rage"
+          fail-message: "§cPrecisa de Fúria acumulada."
+        children:
+          Spend:
+            type: mechanic
+            data:
+              key: rage_stacks
+              amount-base: 1
+              indicator: "§6-1 Rage"
       TotemAura:
         type: mechanic
         data:
@@ -34,7 +42,6 @@ components:
             data:
               group: ally
               radius-base: 5
-              radius-scale: 0
             children:
               ApplyResistance:
                 type: mechanic
@@ -42,7 +49,7 @@ components:
                   potion: DAMAGE_RESISTANCE
                   seconds-base: 2.5
                   amplifier-base: 1
-                  indicator: "§6Totem do Urso"
+                  indicator: "§6Proteção do Urso"
       Message:
         type: mechanic
         data:

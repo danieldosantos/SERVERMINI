@@ -1,37 +1,30 @@
 # Skill: Retaliação Frenética
 name: barbarian_berserker_frenzied_retaliation
 display: "§4Retaliação Frenética"
-icon: SHIELD
+icon: PRISMARINE_SHARD
 type: Active
 max-level: 1
 attributes:
   cooldown-base: 90
   cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
 description:
-  - "§7Reflete 30% do dano recebido por 8s quando estiver abaixo de 50% de vida."
-  - "§cNão reflete dano de queda."
+  - "§78s refletindo 30% do dano recebido (máx. 200 por impacto)."
+  - "§7Não ultrapassa limites de mitigação globais."
 components:
   Cast:
     type: trigger
     data:
       cooldown: true
     children:
-      CheckHealth:
-        type: condition
+      StartWindow:
+        type: mechanic
         data:
-          health-percent-max: 0.5
-          fail-message: "§cUse apenas quando ferido (<50% HP)."
-        children:
-          ApplyReflect:
-            type: mechanic
-            data:
-              reflect-percent-base: 0.3
-              reflect-percent-scale: 0
-              seconds-base: 8
-              seconds-scale: 0
-              indicator: "§4Retaliação"
+          command: "skript run barbarian_start_retaliation %caster% 8 0.3 200"
+          silent: true
       Message:
         type: mechanic
         data:
-          message: "§4Você desafia os golpes inimigos!"
+          message: "§4Retaliação Frenética ativa!"
           targets: self
