@@ -1,0 +1,22 @@
+Skill,Tipo,Custo (Ki/Mana),Duração,CD,Dano/Redução,Área,Notas PvP,Tier
+Rajada de Golpes,Ativa,1 Ki,4s,45s,+12% dano & 2 ataques extras,Self buff,Burst controlado com limite,Todos
+Passo do Vento,Ativa,1 Ki,4s,45s,+0.05 vel / queda lenta,Dash linear,Escapar sem romper caps,Todos
+Mãos Curativas,Ativa,1 Ki,Instantâneo,60s,10% HP + cleanse,Alvo único,Suporte sem overheal,Todos
+Disciplina Desarmada,Passiva,0,6s reaplicados,N/A,+12% mitigação comb. máx,Self,Dependente de armadura leve,Todos
+Redirecionar Projéteis,Passiva,0,3s a cada 20s,N/A,20% resistência projétil,Sphere 0,Uptime 15%,Todos
+Equilíbrio de Ki,Passiva,0,HUD,5s ping,Sincronização HUD,Self,Regen via Skript,Todos
+Palmada Desestabilizadora,Ativa,1 Ki,Instantâneo,30s,130% dano / -10% dano alvo,Alvo único,Empurra 4 blocos,T2+
+Onda Interior,Ativa,1 Ki,8s,45s,-15% dano inimigo,Cone 6b,Não acumula,T2+
+Ritmo Harmonioso,Ativa,0,6s,75s,+2 Ki / cura 6%,Self,Janela segura,T2+
+Caminho do Zéfiro,Ativa,1 Ki,4s,60s,+0.05 vel + salto,Jogador,Respeita DR racial,T3+
+Sopro Tranquilo,Ativa,3 Ki,10s,210s,-40% dano aliados + 5%/s,Aura 6b,Não stacka com ultimates,T4
+Passo das Sombras,Ativa,1 Ki,Instantâneo,35s,Teleporte 12b,Self,Exige baixa luz,T2+
+Cutilada Sombria,Ativa,1 Ki,Instantâneo,40s,150% dano + cegueira,Alvo único,Burst contido,T2+
+Névoa Silenciosa,Ativa,1 Ki,4s invis,60s,Cegueira 4s + invis,Área 5b,Define zona de sombras,T2+
+Correntes Umbráticas,Ativa,2 Ki,3s root,75s,-10% mitigação,Alvo único,Set-up de kill,T3+
+Domínio da Penumbra,Ativa,3 Ki (fallback 2),12s ou 8s,210s,+70% dano sombra,Self + clone,Req. janelas controladas,T4
+Rajada Flamejante,Ativa,1 Ki,Instantâneo,40s,130% dano + queimadura,Linha 8b,Burst linear,T2+
+Muralha Aquática,Ativa,1 Ki,8s,60s,-60% projéteis,Aura 6b,Semi-estática,T2+
+Salto do Vendaval,Ativa,1 Ki,6s queda,50s,Impulso 10b,Semi-linha,Movimento evasivo,T2+
+Punho Terrano,Ativa,2 Ki,Instantâneo,75s,160% dano + stun 2s,Alvo único,Controle curto,T3+
+Avatar Elemental,Ativa,3 Ki,15s,240s,+20% dano→+20% mitig→cura 4%/s,Aura curta,Rotação previsível,T4

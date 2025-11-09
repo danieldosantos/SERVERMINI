@@ -1,0 +1,58 @@
+# Skill: Punho Terrano
+name: monk_elements_earth_punch
+display: "§6Punho Terrano"
+icon: TERRACOTTA
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+description:
+  - "§7160% dano e atordoamento de 2s via impacto terrano."
+  - "§7Consome 2 Ki."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiRequirement:
+        type: condition
+        data:
+          key: ki_points
+          min-value: 2
+          fail-message: "§cSão necessários 2 Ki para Punho Terrano."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_points
+              amount-base: 2
+              indicator: "§6-2 Ki"
+      TargetEnemy:
+        type: target
+        data:
+          shape: single
+          range-base: 4
+          range-scale: 0
+          group: enemy
+        children:
+          DealDamage:
+            type: mechanic
+            data:
+              damage-base: 1.6
+              damage-scale: 0
+              indicator: "§6Punho"
+          Stun:
+            type: mechanic
+            data:
+              potion: SLOWNESS
+              seconds-base: 2
+              seconds-scale: 0
+              amplifier-base: 6
+              amplifier-scale: 0
+          Message:
+            type: mechanic
+            data:
+              message: "§6A terra prende seus movimentos (2s)."
+              targets: enemy

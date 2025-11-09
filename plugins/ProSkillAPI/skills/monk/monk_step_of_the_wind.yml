@@ -1,0 +1,58 @@
+# Skill: Passo do Vento (classe base)
+name: monk_step_of_the_wind
+display: "§bPasso do Vento"
+icon: FEATHER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+description:
+  - "§7Consome 1 Ki para dar um dash curto com queda lenta por 4s."
+  - "§bNão ultrapassa o limite global de velocidade (cap +0.05)."
+  - "§7Interage com bônus raciais reduzindo ganhos quando já estiver próximo ao cap."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiRequirement:
+        type: condition
+        data:
+          key: ki_points
+          min-value: 1
+          fail-message: "§cKi insuficiente para Passo do Vento."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_points
+              amount-base: 1
+              indicator: "§b-1 Ki"
+      ApplyVelocity:
+        type: mechanic
+        data:
+          velocity-base: 1.15
+          velocity-scale: 0
+          forward: true
+          upward: 0.4
+          indicator: "§bImpulso do Vento"
+      ApplySlowFall:
+        type: mechanic
+        data:
+          potion: SLOW_FALLING
+          seconds-base: 4
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      SoftCapMessage:
+        type: mechanic
+        data:
+          message: "§bVocê desliza pelo vento, respeitando limites raciais."
+          targets: self
+      ScoreboardRefresh:
+        type: mechanic
+        data:
+          command: "placeholderapi parse me \"%skills_step_wind_cd%\""
+          silent: true

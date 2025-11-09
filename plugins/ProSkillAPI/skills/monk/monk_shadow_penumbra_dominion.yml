@@ -1,0 +1,64 @@
+# Skill: Domínio da Penumbra (ULT)
+name: monk_shadow_penumbra_dominion
+display: "§5Domínio da Penumbra"
+icon: WITHER_SKELETON_SKULL
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+description:
+  - "§7Invoca Sombra Viva por 12s que replica ataques com +70% dano."
+  - "§5Consome 3 Ki; se Ki <3 mas >=2, consome 2 e reduz duração para 8s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiCheck3:
+        type: condition
+        data:
+          key: ki_points
+          min-value: 3
+        children:
+          Consume3:
+            type: mechanic
+            data:
+              key: ki_points
+              amount-base: 3
+              indicator: "§5-3 Ki"
+          Summon12:
+            type: mechanic
+            data:
+              command: "mythicmobs spawn MonkShadowAvatar 1 @{location}"
+              silent: true
+          Message:
+            type: mechanic
+            data:
+              message: "§5Sua sombra luta ao seu lado por 12s."
+              targets: self
+      ElseCheck:
+        type: condition
+        data:
+          key: ki_points
+          min-value: 2
+          max-value: 2
+          fail-message: "§cÉ necessário ao menos 2 Ki para canalizar a Penumbra."
+        children:
+          Consume2:
+            type: mechanic
+            data:
+              key: ki_points
+              amount-base: 2
+              indicator: "§5-2 Ki"
+          Summon8:
+            type: mechanic
+            data:
+              command: "mythicmobs spawn MonkShadowAvatarShort 1 @{location}"
+              silent: true
+          MessageShort:
+            type: mechanic
+            data:
+              message: "§5Sombra breve amplifica seu dano (+70%) por 8s."
+              targets: self

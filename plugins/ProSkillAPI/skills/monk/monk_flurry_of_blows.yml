@@ -1,0 +1,59 @@
+# Skill: Rajada de Golpes (classe base)
+name: monk_flurry_of_blows
+display: "§eRajada de Golpes"
+icon: RABBIT_FOOT
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+description:
+  - "§7Consome 1 Ki para realizar 2 golpes extras em até 4s."
+  - "§eAplica +12% velocidade de ataque e dano corpo a corpo durante a janela."
+  - "§7Respeita limites raciais de velocidade através de retornos decrescentes."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiRequirement:
+        type: condition
+        data:
+          key: ki_points
+          min-value: 1
+          fail-message: "§cVocê precisa de Ki para usar Rajada de Golpes."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_points
+              amount-base: 1
+              indicator: "§e-1 Ki"
+      ApplyHaste:
+        type: mechanic
+        data:
+          potion: FAST_DIGGING
+          seconds-base: 4
+          seconds-scale: 0
+          amplifier-base: 1
+          amplifier-scale: 0
+          indicator: "§eRajada de Golpes"
+      ApplyDamageBuff:
+        type: mechanic
+        data:
+          potion: INCREASE_DAMAGE
+          seconds-base: 4
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      Actionbar:
+        type: mechanic
+        data:
+          message: "§eRajada ativa! Execute dois golpes extras."
+          targets: self
+      ScoreboardRefresh:
+        type: mechanic
+        data:
+          command: "placeholderapi parse me \"%skills_ki_points%\""
+          silent: true

@@ -1,0 +1,59 @@
+# Skill: Correntes Umbráticas
+name: monk_shadow_umbric_chains
+display: "§8Correntes Umbráticas"
+icon: CHAIN
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+description:
+  - "§7Consome 2 Ki para imobilizar alvo por 3s e reduzir mitigação em 10% por 6s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiRequirement:
+        type: condition
+        data:
+          key: ki_points
+          min-value: 2
+          fail-message: "§cSão necessários 2 Ki para Correntes Umbráticas."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_points
+              amount-base: 2
+              indicator: "§8-2 Ki"
+      TargetEnemy:
+        type: target
+        data:
+          shape: single
+          range-base: 10
+          range-scale: 0
+          group: enemy
+        children:
+          Root:
+            type: mechanic
+            data:
+              potion: SLOWNESS
+              seconds-base: 3
+              seconds-scale: 0
+              amplifier-base: 6
+              amplifier-scale: 0
+          MitigationDown:
+            type: mechanic
+            data:
+              potion: WEAKNESS
+              seconds-base: 6
+              seconds-scale: 0
+              amplifier-base: 1
+              amplifier-scale: 0
+          Message:
+            type: mechanic
+            data:
+              message: "§8Correntes umbráticas drenam sua defesa (-10%)."
+              targets: enemy

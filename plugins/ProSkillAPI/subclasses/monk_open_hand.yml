@@ -1,0 +1,39 @@
+# Subclasse Monge - Caminho da Mão Aberta
+name: Monk_OpenHand
+display: "§aCaminho da Mão Aberta"
+description:
+  - "§7Mestres do controle corporal que derrubam e desequilibram inimigos."
+  - "§aPrioriza mitigação grupal e brechas defensivas sem ultrapassar caps globais."
+options:
+  needs-permission: true
+  parent: Monk
+  mana-name: "Ki"
+  ki-tags:
+    focus: control
+skills:
+  tier1:
+    active:
+      - monk_open_hand_palm
+      - monk_open_hand_inner_wave
+    passive: []
+  tier2:
+    active:
+      - monk_open_hand_palm
+      - monk_open_hand_inner_wave
+      - monk_open_hand_harmonious_rhythm
+    passive: []
+  tier3:
+    active:
+      - monk_open_hand_palm
+      - monk_open_hand_inner_wave
+      - monk_open_hand_harmonious_rhythm
+      - monk_open_hand_zephyr_path
+    passive: []
+  tier4:
+    active:
+      - monk_open_hand_palm
+      - monk_open_hand_inner_wave
+      - monk_open_hand_harmonious_rhythm
+      - monk_open_hand_zephyr_path
+      - monk_open_hand_tranquil_breath
+    passive: []

@@ -1,0 +1,227 @@
+# Skript - Classe Monge (comandos, HUD e integrações)
+options:
+  prefix: &e[Monge]&f
+  perm-base: class_monk
+  perm-open: class_monk.open_hand
+  perm-shadow: class_monk.shadow
+  perm-elements: class_monk.elements
+  regen-delay: 10 seconds
+  regen-interval: 30 seconds
+
+on load:
+  broadcast "&7Skript monk_cmds.sk carregado." to console
+  if scoreboard objective "monk_ki" does not exist:
+    execute console command "scoreboard objectives add monk_ki dummy"
+  if scoreboard objective "monk_states" does not exist:
+    execute console command "scoreboard objectives add monk_states dummy"
+
+command /kit_monge:
+  permission: {@perm-base}
+  trigger:
+    clear player's inventory
+    execute console command "mm items give %player% MonkBracers"
+    execute console command "mm items give %player% MonkSandals"
+    execute console command "mm items give %player% MonkPrayerBeads"
+    if player has permission {@perm-open}:
+      execute console command "mm items give %player% OpenHandGloves"
+      execute console command "mm items give %player% OpenHandFocus"
+      execute console command "mm items give %player% OpenHandRelic"
+    if player has permission {@perm-shadow}:
+      execute console command "mm items give %player% ShadowCloak"
+      execute console command "mm items give %player% ShadowBlade"
+      execute console command "mm items give %player% ShadowObsidianOrb"
+    if player has permission {@perm-elements}:
+      execute console command "mm items give %player% ElementsFireFan"
+      execute console command "mm items give %player% ElementsWaterVial"
+      execute console command "mm items give %player% ElementsPrism"
+    execute console command "scoreboard players set %player% monk_ki 0"
+    execute console command "scoreboard players set %player% monk_states 0"
+    send "{@prefix} &7Kit de testes do Monge entregue."
+
+command /rajada:
+  permission: {@perm-base}
+  trigger:
+    execute console command "skillapi cast monk_flurry_of_blows %player%"
+    send title "&eRajada!" with subtitle "&7Dois golpes extras ativos" for 10 ticks and 20 ticks and 10 ticks
+
+command /passo_vento:
+  aliases: /passo, /stepvento
+  permission: {@perm-base}
+  trigger:
+    execute console command "skillapi cast monk_step_of_the_wind %player%"
+    send action bar "&bPasso do Vento ativado" to player
+
+command /maos_curativas:
+  aliases: /maos, /curar_monge
+  permission: {@perm-base}
+  trigger:
+    execute console command "skillapi cast monk_hand_of_healing %player%"
+    send "{@prefix} &aEnergia restauradora canalizada." to player
+
+command /mao_aberta_palmada:
+  permission: {@perm-open}
+  trigger:
+    execute console command "skillapi cast monk_open_hand_palm %player%"
+
+command /mao_aberta_onda:
+  permission: {@perm-open}
+  trigger:
+    execute console command "skillapi cast monk_open_hand_inner_wave %player%"
+
+command /mao_aberta_ritmo:
+  permission: {@perm-open}
+  trigger:
+    execute console command "skillapi cast monk_open_hand_harmonious_rhythm %player%"
+
+command /mao_aberta_zeffiro:
+  permission: {@perm-open}
+  trigger:
+    execute console command "skillapi cast monk_open_hand_zephyr_path %player%"
+
+command /mao_aberta_ult:
+  permission: {@perm-open}
+  trigger:
+    execute console command "skillapi cast monk_open_hand_tranquil_breath %player%"
+
+command /sombra_passo:
+  permission: {@perm-shadow}
+  trigger:
+    execute console command "skillapi cast monk_shadow_step %player%"
+
+command /sombra_golpe:
+  permission: {@perm-shadow}
+  trigger:
+    execute console command "skillapi cast monk_shadow_slash %player%"
+
+command /sombra_nevoa:
+  permission: {@perm-shadow}
+  trigger:
+    execute console command "skillapi cast monk_shadow_silent_mist %player%"
+
+command /sombra_correntes:
+  permission: {@perm-shadow}
+  trigger:
+    execute console command "skillapi cast monk_shadow_umbric_chains %player%"
+
+command /sombra_dominar:
+  permission: {@perm-shadow}
+  trigger:
+    execute console command "skillapi cast monk_shadow_penumbra_dominion %player%"
+
+command /elemento_fogo:
+  permission: {@perm-elements}
+  trigger:
+    execute console command "skillapi cast monk_elements_flaming_burst %player%"
+
+command /elemento_agua:
+  permission: {@perm-elements}
+  trigger:
+    execute console command "skillapi cast monk_elements_water_wall %player%"
+
+command /elemento_ar:
+  permission: {@perm-elements}
+  trigger:
+    execute console command "skillapi cast monk_elements_gale_leap %player%"
+
+command /elemento_terra:
+  permission: {@perm-elements}
+  trigger:
+    execute console command "skillapi cast monk_elements_earth_punch %player%"
+
+command /elemento_avatar:
+  permission: {@perm-elements}
+  trigger:
+    execute console command "skillapi cast monk_elements_elemental_avatar %player%"
+
+# Bindings item -> skill
+on rightclick:
+  if name of player's tool is "&eBraceletes do Monge":
+    if player has permission {@perm-base}:
+      execute console command "skillapi cast monk_flurry_of_blows %player%"
+  else if name of player's tool is "&bSandálias do Passo do Vento":
+    if player has permission {@perm-base}:
+      execute console command "skillapi cast monk_step_of_the_wind %player%"
+  else if name of player's tool is "&aContas Curativas":
+    if player has permission {@perm-base}:
+      execute console command "skillapi cast monk_hand_of_healing %player%"
+  else if name of player's tool is "&aLuvas da Mão Aberta":
+    if player has permission {@perm-open}:
+      execute console command "skillapi cast monk_open_hand_palm %player%"
+  else if name of player's tool is "&aFoco de Qi Harmonioso":
+    if player has permission {@perm-open}:
+      execute console command "skillapi cast monk_open_hand_harmonious_rhythm %player%"
+  else if name of player's tool is "&2Relíquia do Sopro Tranquilo":
+    if player has permission {@perm-open}:
+      execute console command "skillapi cast monk_open_hand_tranquil_breath %player%"
+  else if name of player's tool is "&8Manto das Sombras":
+    if player has permission {@perm-shadow}:
+      execute console command "skillapi cast monk_shadow_silent_mist %player%"
+  else if name of player's tool is "&8Lâmina Umbral":
+    if player has permission {@perm-shadow}:
+      execute console command "skillapi cast monk_shadow_slash %player%"
+  else if name of player's tool is "&5Orbe da Penumbra":
+    if player has permission {@perm-shadow}:
+      execute console command "skillapi cast monk_shadow_penumbra_dominion %player%"
+  else if name of player's tool is "&cLeque Flamejante":
+    if player has permission {@perm-elements}:
+      execute console command "skillapi cast monk_elements_flaming_burst %player%"
+  else if name of player's tool is "&9Ampola da Muralha":
+    if player has permission {@perm-elements}:
+      execute console command "skillapi cast monk_elements_water_wall %player%"
+  else if name of player's tool is "&dPrisma Elemental":
+    if player has permission {@perm-elements}:
+      execute console command "skillapi cast monk_elements_elemental_avatar %player%"
+
+on leftclick:
+  if name of player's tool is "&eBraceletes do Monge":
+    if player has permission {@perm-base}:
+      execute console command "skillapi cast monk_flurry_of_blows %player%"
+
+# Monitoramento de combate para regeneração de Ki
+on damage of player:
+  if victim has permission {@perm-base}:
+    set {monk.lastcombat.%victim%} to now
+    set {monk.ooc.%victim%} to false
+    execute console command "scoreboard players set %victim% monk_states 0"
+
+on quit:
+  delete {monk.lastcombat.%player%}
+  delete {monk.ooc.%player%}
+
+# Atualiza bandeiras fora de combate
+every 5 seconds:
+  loop all players:
+    if loop-player has permission {@perm-base}:
+      if {monk.lastcombat.%loop-player%} is not set:
+        set {monk.ooc.%loop-player%} to true
+      else if difference between now and {monk.lastcombat.%loop-player%} >= {@regen-delay}:
+        set {monk.ooc.%loop-player%} to true
+      else:
+        set {monk.ooc.%loop-player%} to false
+      if {monk.ooc.%loop-player%} is true:
+        execute console command "scoreboard players set %loop-player% monk_states 1"
+      else:
+        execute console command "scoreboard players set %loop-player% monk_states 0"
+      set {_ki} to placeholderapi "%skills_ki_points%" with loop-player
+      set {_kiMax} to placeholderapi "%skills_ki_cap%" with loop-player
+      set {_dashCd} to placeholderapi "%skills_step_wind_cd%" with loop-player
+      set {_majorCd} to placeholderapi "%skills_monk_major_cd%" with loop-player
+      set {_states} to placeholderapi "%skills_monk_states%" with loop-player
+      if {_ki} is "":
+        set {_ki} to "0"
+      if {_kiMax} is "":
+        set {_kiMax} to "0"
+      if {_dashCd} is "":
+        set {_dashCd} to "0"
+      if {_majorCd} is "":
+        set {_majorCd} to "0"
+      send action bar "&eKi: %{_ki}%/%{_kiMax}% &7| &bDash: %{_dashCd}%s &7| &dCD Maior: %{_majorCd}%s &7| &8Estado: %{_states}%" to loop-player
+
+# Regeneração fora de combate (1 Ki a cada 30s)
+every {@regen-interval}:
+  loop all players:
+    if loop-player has permission {@perm-base}:
+      if {monk.ooc.%loop-player%} is true:
+        execute console command "skillapi player %loop-player% resource ki_points add 1"
+        execute console command "skillapi player %loop-player% resource ki_points clamp"
+        send action bar "&a+1 Ki (fora de combate)" to loop-player

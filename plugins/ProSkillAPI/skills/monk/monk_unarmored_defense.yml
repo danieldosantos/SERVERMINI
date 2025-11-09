@@ -1,0 +1,40 @@
+# Skill: Defesa sem Armadura (Monge)
+name: monk_unarmored_defense
+display: "§7Disciplina Desarmada"
+icon: LEATHER_CHESTPLATE
+type: Passive
+max-level: 1
+description:
+  - "§7Converte destreza e sabedoria em mitigação moderada ao lutar sem armadura pesada."
+  - "§7Aplica até +12% redução combinada, respeitando limite global de 45%."
+components:
+  EquipCheck:
+    type: trigger
+    data:
+      slot: armor
+      allowed:
+        - LEATHER
+        - CHAIN
+        - NONE
+    children:
+      ApplyDefense:
+        type: mechanic
+        data:
+          potion: DAMAGE_RESISTANCE
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      ApplyProjectileMitigation:
+        type: mechanic
+        data:
+          potion: RESISTANCE
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      Message:
+        type: mechanic
+        data:
+          message: "§7Sua postura defensiva se ajusta ao estilo desarmado."
+          targets: self
