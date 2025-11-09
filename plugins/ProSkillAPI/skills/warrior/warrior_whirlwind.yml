@@ -1,0 +1,29 @@
+# Skill: Turbilhão
+name: warrior_whirlwind
+display: "§6Turbilhão"
+icon: TRIDENT
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 40
+  mana-cost-scale: 0
+description:
+  - "§712s de cleave contínuo em 5 blocos."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Channel:
+        type: mechanic
+        data:
+          command: "skript run warrior_whirlwind %caster% 12 5 1.1"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§6Você inicia um turbilhão devastador!"
+          targets: self

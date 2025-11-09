@@ -1,0 +1,130 @@
+# Itens focais do Guerreiro e arquétipos
+items:
+  WarriorTrainingBlade:
+    Id: IRON_SWORD
+    Display: '&6Lâmina de Treino do Guerreiro'
+    Lore:
+      - '&7Aciona Golpe Rápido em alvo próximo.'
+      - '&8Grupo: class_warrior'
+    Options:
+      Unbreakable: true
+      Damage: 6
+    PersistentData:
+      classlock: 'class_warrior'
+      skill: 'warrior_quick_strike'
+    Skills:
+      - skill{s=warrior_quick_strike} @target ~onLeftClick
+  WarriorShield:
+    Id: SHIELD
+    Display: '&6Escudo de Linha'
+    Lore:
+      - '&7Ativa Postura Defensiva e Empurrão.'
+      - '&8Grupo: class_warrior'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_warrior'
+      skill: 'warrior_defensive_stance'
+    Skills:
+      - skill{s=warrior_defensive_stance} @self ~onRightClick
+      - skill{s=warrior_shove} @target ~onLeftClick
+  WarriorBanner:
+    Id: WHITE_BANNER
+    Display: '&6Estandarte de Postura'
+    Lore:
+      - '&7Alterna Postura Preparada e Agressiva.'
+      - '&8Grupo: class_warrior'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_warrior'
+      skill: 'warrior_prepared_stance'
+    Skills:
+      - skill{s=warrior_prepared_stance} @self ~onUse
+      - skill{s=warrior_aggressive_stance} @self ~onSneakRightClick
+  ChampionClaymore:
+    Id: NETHERITE_SWORD
+    Display: '&eLâmina da Glória'
+    Lore:
+      - '&7Golpe Preciso e Pressão Constante.'
+      - '&8Grupo: class_warrior.champion'
+    Options:
+      Unbreakable: true
+      Damage: 9
+    PersistentData:
+      classlock: 'class_warrior.champion'
+      skill: 'warrior_champion_precise_strike'
+    Skills:
+      - skill{s=warrior_champion_precise_strike} @self ~onRightClick
+      - skill{s=warrior_quick_strike} @target ~onLeftClick
+  ChampionHelm:
+    Id: GOLDEN_HELMET
+    Display: '&eElmo da Fama'
+    Lore:
+      - '&7Ultimate: Glória do Campeão.'
+      - '&8Grupo: class_warrior.champion'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_warrior.champion'
+      skill: 'warrior_champion_glory'
+    Skills:
+      - skill{s=warrior_champion_glory} @self ~onSneakLeftClick
+  BattlemasterHalberd:
+    Id: IRON_AXE
+    Display: '&cAlabarda de Comando'
+    Lore:
+      - '&7Aciona Manobras de Derrubar e Ameaça.'
+      - '&8Grupo: class_warrior.battlemaster'
+    Options:
+      Unbreakable: true
+      Damage: 8
+    PersistentData:
+      classlock: 'class_warrior.battlemaster'
+      skill: 'warrior_battlemaster_trip'
+    Skills:
+      - skill{s=warrior_battlemaster_trip} @target ~onLeftClick
+      - skill{s=warrior_battlemaster_threaten} @target ~onRightClick
+  BattlemasterStandard:
+    Id: RED_BANNER
+    Display: '&cEstandarte de Guerra'
+    Lore:
+      - '&7Comandar Linha e Chamado de Guerra.'
+      - '&8Grupo: class_warrior.battlemaster'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_warrior.battlemaster'
+      skill: 'warrior_battlemaster_command_line'
+    Skills:
+      - skill{s=warrior_battlemaster_command_line} @self ~onUse
+      - skill{s=warrior_battlemaster_war_call} @self ~onSneakLeftClick
+  SamuraiKatana:
+    Id: NETHERITE_SWORD
+    Display: '&dKatana Ancestral'
+    Lore:
+      - '&7Foco da Lâmina e Postura Iaijutsu.'
+      - '&8Grupo: class_warrior.samurai'
+    Options:
+      Unbreakable: true
+      Damage: 8
+    PersistentData:
+      classlock: 'class_warrior.samurai'
+      skill: 'warrior_samurai_blade_focus'
+    Skills:
+      - skill{s=warrior_samurai_blade_focus} @self ~onRightClick
+      - skill{s=warrior_quick_strike} @target ~onLeftClick
+  SamuraiStandard:
+    Id: PURPLE_BANNER
+    Display: '&dEstandarte do Espírito'
+    Lore:
+      - '&7Retaliação e Espírito Guerreiro.'
+      - '&8Grupo: class_warrior.samurai'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_warrior.samurai'
+      skill: 'warrior_samurai_war_spirit'
+    Skills:
+      - skill{s=warrior_samurai_war_spirit} @self ~onSneakLeftClick
+      - skill{s=warrior_samurai_iaijutsu_stance} @self ~onUse

@@ -1,0 +1,30 @@
+# Skill: Postura Preparada
+name: warrior_prepared_stance
+display: "§6Postura Preparada"
+icon: IRON_HELMET
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 20
+  cooldown-scale: 0
+  mana-cost-base: 15
+  mana-cost-scale: 0
+description:
+  - "§7O próximo Golpe Rápido causa +20% de dano."
+  - "§7Reseta após 12s se não for consumida."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Flag:
+        type: mechanic
+        data:
+          command: "skript run warrior_set_posture %caster% prepared 12"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§6Você prepara a lâmina para o próximo golpe!"
+          targets: self

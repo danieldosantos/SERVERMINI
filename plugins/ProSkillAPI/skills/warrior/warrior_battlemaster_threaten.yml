@@ -1,0 +1,40 @@
+# Skill: Manobra Ameaça
+name: warrior_battlemaster_threaten
+display: "§cManobra: Ameaça"
+icon: BANNER_PATTERN
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  range-base: 10
+  range-scale: 0
+description:
+  - "§7Marca um alvo reduzindo o dano causado em 15% por 6s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          shape: single
+          range-base: 10
+          range-scale: 0
+          group: enemy
+        children:
+          Debuff:
+            type: mechanic
+            data:
+              command: "skript run warrior_battlemaster_threat %caster% %target% 6 0.15"
+              silent: true
+          Indicator:
+            type: mechanic
+            data:
+              effect: SMOKE
+              amount-base: 15
+              radius-base: 0.5

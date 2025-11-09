@@ -1,0 +1,144 @@
+# Classe base Guerreiro (sistema de Estamina)
+name: Warrior
+prefix: "War"
+display: "§6Guerreiro"
+main-class: true
+key: warrior
+description:
+  - "§7Combatente não-conjurador que converte §eEstamina§7 em pressão constante."
+  - "§eAdministra combos, posturas e execuções respeitando limites globais de mitigação e velocidade."
+  - "§7Compartilha recursos com Campeão, Mestre de Batalha e Samurai."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Estamina"
+  mana-regen: 0
+  max-level: 60
+  exp-source: kill
+  attributes-scaled: true
+  needs-race: false
+  resources:
+    stamina:
+      key: stamina
+      display: "Estamina"
+      min: 0
+      max: 220
+      scaling:
+        tier1: 100
+        tier2: 140
+        tier3: 180
+        tier4: 220
+      regen-in-combat:
+        delay: 1
+        interval: 1
+        amount: 4
+      regen-out-of-combat:
+        delay: 1
+        interval: 1
+        amount: 4
+    combo:
+      key: combo_stacks
+      display: "Combo"
+      min: 0
+      max: 10
+      scaling:
+        tier1: 4
+        tier2: 6
+        tier3: 8
+        tier4: 10
+  scoreboard:
+    stamina: "warrior_stamina"
+    regen: "warrior_stamina_regen"
+    combo: "warrior_combo"
+    posture: "warrior_posture"
+    placeholders:
+      stamina: "%skills_warrior_stamina%"
+      stamina_regen: "%skills_warrior_stamina_regen%"
+      combo_stacks: "%skills_warrior_combo%"
+      posture_active: "%skills_warrior_posture%"
+  combat-state-placeholder: "%skills_combat_state%"
+attributes:
+  health-base: 34
+  health-scale: 2.4
+  mana-base: 100
+  mana-scale: 0
+  physical-defense-base: 4
+  physical-defense-scale: 1.2
+  skill-damage: 0.0
+  attack-damage: 1.6
+  walk-speed-base: 0.02
+  walk-speed-scale: 0.002
+  knockback-resist-base: 0.05
+  knockback-resist-scale: 0.01
+  level-bonus:
+    1:
+      health: 34
+      mana: 100
+      defense: 6
+      speed: 0.0
+    5:
+      health: 60
+      mana: 140
+      defense: 9
+      speed: 0.01
+    11:
+      health: 96
+      mana: 180
+      defense: 13
+      speed: 0.015
+    17:
+      health: 132
+      mana: 220
+      defense: 16
+      speed: 0.02
+mana:
+  regen-combat: 4
+  regen-out: 4
+exp:
+  kill-multiplier: 1.0
+  quest-multiplier: 1.0
+  pvp-multiplier: 1.0
+skills:
+  tier1:
+    active:
+      - warrior_quick_strike
+      - warrior_shove
+      - warrior_deflect
+      - warrior_prepared_stance
+    passive: []
+  tier2:
+    active:
+      - warrior_stunning_blow
+      - warrior_line_dash
+      - warrior_deep_cut
+      - warrior_defensive_stance
+    passive: []
+  tier3:
+    active:
+      - warrior_rend_armor
+      - warrior_arena_spin
+      - warrior_target_lock
+      - warrior_aggressive_stance
+    passive: []
+  tier4:
+    active:
+      - warrior_cleaving_execution
+      - warrior_whirlwind
+      - warrior_pressure_assault
+      - warrior_iron_heart
+    passive: []
+subclasses:
+  champion:
+    display: "§eCampeão"
+    file: warrior_champion.yml
+  battlemaster:
+    display: "§cMestre de Batalha"
+    file: warrior_battlemaster.yml
+  samurai:
+    display: "§dSamurai"
+    file: warrior_samurai.yml
+notes:
+  - "Estamina nunca fica negativa; scripts aplicam Exaustão Física (-20% dano/velocidade por 4s) ao zerar."
+  - "Velocidade total capada em +0.05 através de warrior_cmds.sk."
+  - "Mitigação somada não ultrapassa 45%; controles máximos de 3s com imunidade decrescente."

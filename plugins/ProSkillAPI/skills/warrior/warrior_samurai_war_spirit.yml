@@ -1,0 +1,31 @@
+# Skill: Espírito Guerreiro
+name: warrior_samurai_war_spirit
+display: "§dEspírito Guerreiro"
+icon: DRAGON_BREATH
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  duration-base: 12
+  duration-scale: 0
+description:
+  - "§7Ultimate: +20% regen de Estamina e +25% dano por 12s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run warrior_samurai_war_spirit %caster% 12 0.2 0.25"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§dEspírito Guerreiro desperto!"
+          targets: self

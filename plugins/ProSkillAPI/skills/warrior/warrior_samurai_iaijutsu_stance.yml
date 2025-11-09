@@ -1,0 +1,29 @@
+# Skill: Postura Iaijutsu
+name: warrior_samurai_iaijutsu_stance
+display: "§dPostura Iaijutsu"
+icon: ENCHANTED_BOOK
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+description:
+  - "§7Garante crítico no próximo ataque dentro de 10s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Flag:
+        type: mechanic
+        data:
+          command: "skript run warrior_samurai_iaijutsu %caster% 10"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§dVocê assume a postura Iaijutsu."
+          targets: self

@@ -1,0 +1,30 @@
+# Skill: Postura Defensiva
+name: warrior_defensive_stance
+display: "§6Postura Defensiva"
+icon: SHIELD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§7Concede +20% mitigação por 6s drenando 2 Estamina/s."
+  - "§7Cancela ao atingir 45% de mitigação total."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run warrior_posture_defensiva %caster% 6 0.2 2"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§6Postura Defensiva ativada."
+          targets: self

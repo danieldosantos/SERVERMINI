@@ -1,0 +1,38 @@
+# Skill: Chamado de Guerra
+name: warrior_battlemaster_war_call
+display: "§cChamado de Guerra"
+icon: GOAT_HORN
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 10
+  radius-scale: 0
+description:
+  - "§7Ultimate: aliados a 10 blocos recebem +15% dano e +15% velocidade por 10s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Area:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 10
+          group: ally
+        children:
+          Buff:
+            type: mechanic
+            data:
+              command: "skript run warrior_battlemaster_war_call %caster% %target% 10 0.15 0.15"
+              silent: true
+      Sound:
+        type: mechanic
+        data:
+          command: "playsound minecraft:entity.goat.horn.play master %caster% 1 1"
+          silent: true

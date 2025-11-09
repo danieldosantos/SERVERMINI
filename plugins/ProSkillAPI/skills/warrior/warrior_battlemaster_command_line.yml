@@ -1,0 +1,39 @@
+# Skill: Manobra Comandar Linha
+name: warrior_battlemaster_command_line
+display: "§cManobra: Comandar Linha"
+icon: WHITE_BANNER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+  - "§7Aliados em 6 blocos recebem +10% mitigação por 8s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Area:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          group: ally
+        children:
+          Buff:
+            type: mechanic
+            data:
+              command: "skript run warrior_battlemaster_command %caster% %target% 8 0.1"
+              silent: true
+      Banner:
+        type: mechanic
+        data:
+          effect: BARRIER
+          amount-base: 30
+          radius-base: 3

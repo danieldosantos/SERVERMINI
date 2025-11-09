@@ -1,0 +1,525 @@
+# Skript - Comandos e integrações para a classe Guerreiro (Estamina)
+options:
+  prefix: &6[Warrior]&f
+  perm-base: group.class_warrior
+  perm-champion: group.class_warrior.champion
+  perm-battlemaster: group.class_warrior.battlemaster
+  perm-samurai: group.class_warrior.samurai
+
+on load:
+  broadcast "&7Skript warrior_cmds.sk carregado." to console
+
+command /kit_warrior:
+  permission: {@perm-base}
+  trigger:
+    clear player's inventory
+    execute console command "mm items give WarriorTrainingBlade 1 %player%"
+    execute console command "mm items give WarriorShield 1 %player%"
+    execute console command "mm items give WarriorBanner 1 %player%"
+    execute console command "mm items give ChampionClaymore 1 %player%"
+    execute console command "mm items give ChampionHelm 1 %player%"
+    execute console command "mm items give BattlemasterHalberd 1 %player%"
+    execute console command "mm items give BattlemasterStandard 1 %player%"
+    execute console command "mm items give SamuraiKatana 1 %player%"
+    execute console command "mm items give SamuraiStandard 1 %player%"
+    execute console command "scoreboard objectives add warrior_stamina dummy" if scoreboard objective "warrior_stamina" does not exist
+    execute console command "scoreboard objectives add warrior_stamina_regen dummy" if scoreboard objective "warrior_stamina_regen" does not exist
+    execute console command "scoreboard objectives add warrior_combo dummy" if scoreboard objective "warrior_combo" does not exist
+    execute console command "scoreboard objectives add warrior_posture dummy" if scoreboard objective "warrior_posture" does not exist
+    warrior_refresh_hud(player)
+    send "{@prefix} &7Kit de testes entregue. HUD inicializada."
+
+command /golpe:
+  permission: {@perm-base}
+  trigger:
+    execute console command "skillapi cast warrior_quick_strike %player%"
+
+command /postura:
+  permission: {@perm-base}
+  trigger:
+    execute console command "skillapi cast warrior_prepared_stance %player%"
+
+command /manobra:
+  permission: {@perm-battlemaster}
+  trigger:
+    execute console command "skillapi cast warrior_battlemaster_trip %player%"
+
+command /foco:
+  permission: {@perm-samurai}
+  trigger:
+    execute console command "skillapi cast warrior_samurai_blade_focus %player%"
+
+command /ult:
+  permission: {@perm-base}
+  trigger:
+    if player has permission {@perm-champion}:
+      execute console command "skillapi cast warrior_champion_glory %player%"
+    else if player has permission {@perm-battlemaster}:
+      execute console command "skillapi cast warrior_battlemaster_war_call %player%"
+    else if player has permission {@perm-samurai}:
+      execute console command "skillapi cast warrior_samurai_war_spirit %player%"
+    else:
+      execute console command "skillapi cast warrior_iron_heart %player%"
+
+# Bindings MythicMobs
+on leftclick with iron sword:
+  if name of player's tool is "&6Lâmina de Treino do Guerreiro":
+    if player has permission {@perm-base}:
+      execute console command "skillapi cast warrior_quick_strike %player%"
+    else:
+      send "{@prefix} &cApenas Guerreiros podem usar isso."
+
+on rightclick with shield:
+  if name of player's tool is "&6Escudo de Linha":
+    if player has permission {@perm-base}:
+      execute console command "skillapi cast warrior_defensive_stance %player%"
+
+on leftclick with shield:
+  if name of player's tool is "&6Escudo de Linha":
+    if player has permission {@perm-base}:
+      execute console command "skillapi cast warrior_shove %player%"
+
+on rightclick with white banner:
+  if name of player's tool is "&6Estandarte de Postura":
+    if player has permission {@perm-base}:
+      execute console command "skillapi cast warrior_prepared_stance %player%"
+
+on sneak right click with white banner:
+  if name of player's tool is "&6Estandarte de Postura":
+    if player has permission {@perm-base}:
+      execute console command "skillapi cast warrior_aggressive_stance %player%"
+
+on rightclick with netherite sword:
+  if name of player's tool is "&eLâmina da Glória":
+    if player has permission {@perm-champion}:
+      execute console command "skillapi cast warrior_champion_precise_strike %player%"
+
+on leftclick with netherite sword:
+  if name of player's tool is "&eLâmina da Glória":
+    if player has permission {@perm-champion}:
+      execute console command "skillapi cast warrior_quick_strike %player%"
+
+on sneak left click with golden helmet:
+  if name of player's tool is "&eElmo da Fama":
+    if player has permission {@perm-champion}:
+      execute console command "skillapi cast warrior_champion_glory %player%"
+
+on leftclick with iron axe:
+  if name of player's tool is "&cAlabarda de Comando":
+    if player has permission {@perm-battlemaster}:
+      execute console command "skillapi cast warrior_battlemaster_trip %player%"
+
+on rightclick with iron axe:
+  if name of player's tool is "&cAlabarda de Comando":
+    if player has permission {@perm-battlemaster}:
+      execute console command "skillapi cast warrior_battlemaster_threaten %player%"
+
+on use of red banner:
+  if name of player's tool is "&cEstandarte de Guerra":
+    if player has permission {@perm-battlemaster}:
+      execute console command "skillapi cast warrior_battlemaster_command_line %player%"
+
+on sneak left click with red banner:
+  if name of player's tool is "&cEstandarte de Guerra":
+    if player has permission {@perm-battlemaster}:
+      execute console command "skillapi cast warrior_battlemaster_war_call %player%"
+
+on rightclick with netherite sword:
+  if name of player's tool is "&dKatana Ancestral":
+    if player has permission {@perm-samurai}:
+      execute console command "skillapi cast warrior_samurai_blade_focus %player%"
+
+on leftclick with netherite sword:
+  if name of player's tool is "&dKatana Ancestral":
+    if player has permission {@perm-samurai}:
+      execute console command "skillapi cast warrior_quick_strike %player%"
+
+on sneak left click with purple banner:
+  if name of player's tool is "&dEstandarte do Espírito":
+    if player has permission {@perm-samurai}:
+      execute console command "skillapi cast warrior_samurai_war_spirit %player%"
+
+on use of purple banner:
+  if name of player's tool is "&dEstandarte do Espírito":
+    if player has permission {@perm-samurai}:
+      execute console command "skillapi cast warrior_samurai_iaijutsu_stance %player%"
+
+# Funções utilitárias
+function warrior_refresh_hud(p: player):
+  set {_stamina} to placeholderapi "%skills_warrior_stamina%" with p
+  set {_regen} to placeholderapi "%skills_warrior_stamina_regen%" with p
+  set {_combo} to {warrior.combo.%p%}
+  if {_combo} is not set:
+    set {_combo} to 0
+  if {_stamina} is "":
+    set {_stamina} to "0"
+  if {_regen} is "":
+    set {_regen} to "0"
+  set {_staminaNumber} to floor(parsed number from {_stamina})
+  set {_regenNumber} to floor(parsed number from {_regen})
+  execute console command "scoreboard players set %p% warrior_stamina %{_staminaNumber}%"
+  execute console command "scoreboard players set %p% warrior_stamina_regen %{_regenNumber}%"
+  execute console command "scoreboard players set %p% warrior_combo %{_combo}%"
+  warrior_refresh_posture(p)
+
+function warrior_refresh_posture(p: player):
+  if {warrior.posture.%p%} is set:
+    execute console command "scoreboard players set %p% warrior_posture 1"
+  else:
+    execute console command "scoreboard players set %p% warrior_posture 0"
+
+function warrior_increment_combo(p: player, t: entity, amount: number=1):
+  if p is not set:
+    stop
+  if t is not set:
+    stop
+  set {_uuid} to uuid of t
+  if {warrior.combo-target.%p%} != {_uuid}:
+    set {warrior.combo.%p%} to 0
+    set {warrior.combo-target.%p%} to {_uuid}
+    delete {warrior.champion.pressure.stack.%p%}
+  add amount to {warrior.combo.%p%}
+  if {warrior.combo.%p%} > 10:
+    set {warrior.combo.%p%} to 10
+  if p has permission {@perm-champion}:
+    add amount to {warrior.champion.pressure.stack.%p%}
+    if {warrior.champion.pressure.stack.%p%} > 10:
+      set {warrior.champion.pressure.stack.%p%} to 10
+  warrior_refresh_hud(p)
+
+function warrior_on_quick_strike(p: player, t: entity):
+  if p is not set:
+    stop
+  if t is set:
+    warrior_increment_combo(p, t, 1)
+    if {warrior.posture.%p%} = "prepared":
+      delete {warrior.posture.%p%}
+      warrior_refresh_posture(p)
+      set {_base} to attack damage of player's tool
+      if {_base} is not set:
+        set {_base} to 6
+      damage t by {_base} * 0.2
+      send "{@prefix} &aGolpe Preparado concede +20% dano!" to p
+  warrior_refresh_hud(p)
+
+function warrior_set_posture(p: player, posture: text, duration: number):
+  set {warrior.posture.%p%} to posture
+  warrior_refresh_posture(p)
+  send "{@prefix} &7Postura %posture% ativa." to p
+  if duration > 0:
+    wait duration seconds
+    if {warrior.posture.%p%} = posture:
+      delete {warrior.posture.%p%}
+      warrior_refresh_posture(p)
+      send "{@prefix} &7Postura %posture% expirou." to p
+
+function warrior_apply_deflect(p: player, percent: number):
+  set {warrior.deflect.%p%} to percent
+  set {warrior.deflect.expire.%p%} to now + 6 seconds
+  set {_pct} to percent * 100
+  send "{@prefix} &7Você irá desviar o próximo golpe (-%{_pct}% dano)." to p
+
+function warrior_line_dash(p: player, distance: number):
+  push p forward distance
+  play sound "minecraft:item.trident.riptide_2" with volume 1 and pitch 1 to p
+
+function warrior_apply_bleed(c: player, t: entity, duration: number, percent: number):
+  if t is not set:
+    stop
+  loop duration times:
+    if t is dead:
+      stop loop
+    set {_max} to max health of t
+    if {_max} is not set:
+      set {_max} to 20
+    damage t by {_max} * percent
+    wait 1 second
+
+function warrior_posture_defensiva(p: player, duration: number, reduction: number, drain: number):
+  apply resistance 1 to p for duration seconds
+  set {warrior.mitigation.%p%} to reduction
+  warrior_refresh_posture(p)
+  loop duration times:
+    execute console command "skillapi mana %p% -%drain%"
+    wait 1 second
+  delete {warrior.mitigation.%p%}
+  warrior_refresh_posture(p)
+
+function warrior_postura_agressiva(p: player, duration: number, bonus: number, drain: number):
+  set {warrior.aggressive.%p%} to now + duration seconds
+  warrior_refresh_posture(p)
+  loop duration times:
+    execute console command "skillapi mana %p% -%drain%"
+    wait 1 second
+  if {warrior.aggressive.%p%} <= now:
+    delete {warrior.aggressive.%p%}
+  warrior_refresh_posture(p)
+
+function warrior_reduce_resistance(c: player, t: entity, duration: number, amount: number):
+  if t is not set:
+    stop
+  set {warrior.rend.%t%} to amount
+  set {warrior.rend.expire.%t%} to now + duration seconds
+
+function warrior_mark_target(c: player, t: entity, duration: number, bonus: number):
+  if t is not set:
+    stop
+  set {_uuid} to uuid of t
+  set {warrior.mark.%c%} to {_uuid}
+  set {warrior.mark.expire.%c%} to now + duration seconds
+  set {warrior.mark.bonus.%c%} to bonus
+  send "{@prefix} &eAlvo marcado por %duration%s." to c
+
+function warrior_pressure_assault(p: player, duration: number, step: number, cap: number):
+  set {warrior.pressure.active.%p%} to now + duration seconds
+  clear {warrior.pressure.stack.%p%::*}
+  set {warrior.pressure.cap.%p%} to cap
+  set {warrior.pressure.step.%p%} to step
+  send "{@prefix} &7Assalto de Pressão ativo por %duration%s." to p
+
+function warrior_iron_heart(p: player, duration: number, reduction: number):
+  apply resistance 1 to p for duration seconds
+  set {warrior.ironheart.%p%} to now + duration seconds
+  set {warrior.mitigation.%p%} to reduction
+  warrior_refresh_posture(p)
+  wait duration seconds
+  if {warrior.ironheart.%p%} <= now:
+    delete {warrior.ironheart.%p%}
+    delete {warrior.mitigation.%p%}
+    warrior_refresh_posture(p)
+
+function warrior_execute(p: player, t: entity, threshold: number):
+  if t is not set:
+    stop
+  set {_ratio} to health of t / max health of t
+  if {_ratio} <= threshold:
+    kill t
+    play sound "minecraft:entity.player.attack.crit" with volume 1 and pitch 1.2 to p
+
+function warrior_whirlwind(p: player, duration: number, radius: number, dmg: number):
+  set {warrior.whirlwind.%p%} to now + duration seconds
+  loop duration times:
+    if p is offline:
+      stop loop
+    set {_loc} to location of p
+    set {_near::*} to all entities in radius radius of {_loc}
+    loop {_near::*}:
+      if loop-value is not p:
+        if loop-value is living entity:
+          damage loop-value by dmg
+    wait 1 second
+  delete {warrior.whirlwind.%p%}
+
+function warrior_champion_precise(p: player, duration: number):
+  set {warrior.champion.precise.%p%} to now + duration seconds
+  send "{@prefix} &ePróximo ataque com +20% crítico." to p
+
+function warrior_champion_methodical(p: player, duration: number, bonus: number):
+  set {warrior.champion.methodical.%p%} to now + duration seconds
+  set {warrior.champion.methodical.bonus.%p%} to bonus
+
+function warrior_champion_pressure(p: player):
+  if {warrior.champion.pressure.%p%} is not set:
+    set {warrior.champion.pressure.%p%} to 0
+
+function warrior_champion_glory(p: player, duration: number, crit: number, damage: number):
+  set {warrior.champion.glory.%p%} to now + duration seconds
+  set {warrior.champion.glory.crit.%p%} to crit
+  set {warrior.champion.glory.damage.%p%} to damage
+  send "{@prefix} &eGlória do Campeão ativa por %duration%s." to p
+
+function warrior_battlemaster_threat(c: player, t: entity, duration: number, reduction: number):
+  if t is not set:
+    stop
+  set {warrior.threat.%t%} to reduction
+  set {warrior.threat.expire.%t%} to now + duration seconds
+  send "{@prefix} &cAmeaça reduz dano do alvo." to c
+
+function warrior_battlemaster_command(c: player, ally: player, duration: number, mitigation: number):
+  if ally is not set:
+    stop
+  set {warrior.command.%ally%} to now + duration seconds
+  set {warrior.command.mitigation.%ally%} to mitigation
+  set {_percent} to mitigation * 100
+  send "{@prefix} &cVocê recebeu +%{_percent}% mitigação por %duration%s." to ally
+
+function warrior_battlemaster_war_call(c: player, ally: player, duration: number, damage: number, speed: number):
+  if ally is not set:
+    stop
+  set {warrior.warcall.%ally%} to now + duration seconds
+  set {warrior.warcall.damage.%ally%} to damage
+  set {warrior.warcall.speed.%ally%} to speed
+  warrior_check_speed_cap(ally)
+  send "{@prefix} &cChamado de Guerra concede bônus por %duration%s." to ally
+
+function warrior_samurai_blade_focus(p: player, duration: number, penetration: number):
+  set {warrior.samurai.focus.%p%} to now + duration seconds
+  set {warrior.samurai.focus.value.%p%} to penetration
+  send "{@prefix} &dFoco da Lâmina ativo." to p
+
+function warrior_samurai_iaijutsu(p: player, duration: number):
+  set {warrior.samurai.iaijutsu.%p%} to now + duration seconds
+  send "{@prefix} &dPróximo ataque crítico garantido." to p
+
+function warrior_samurai_retaliation(p: player):
+  if {warrior.samurai.retaliation.cd.%p%} is not set:
+    set {warrior.samurai.retaliation.cd.%p%} to now
+
+function warrior_samurai_war_spirit(p: player, duration: number, regen: number, damage: number):
+  set {warrior.samurai.spirit.%p%} to now + duration seconds
+  set {warrior.samurai.spirit.regen.%p%} to regen
+  set {warrior.samurai.spirit.damage.%p%} to damage
+  send "{@prefix} &dEspírito Guerreiro ativo." to p
+
+function warrior_apply_diminishing(t: entity, duration: number):
+  if t is not set:
+    stop
+  set {warrior.diminishing.%t%} to now + duration seconds
+
+function warrior_check_speed_cap(p: player):
+  if p's walk speed > 0.25:
+    set p's walk speed to 0.25
+
+# Monitoramento de dano e buffs
+on damage:
+  if attacker is player:
+    set {_p} to attacker
+    if {_p} has permission {@perm-base}:
+      set {_multiplier} to 1.0
+      if {warrior.aggressive.%_p%} is set:
+        if {warrior.aggressive.%_p%} > now:
+          add 0.15 to {_multiplier}
+        else:
+          delete {warrior.aggressive.%_p%}
+      if {warrior.pressure.active.%_p%} is set:
+        if {warrior.pressure.active.%_p%} > now:
+          set {_uuid} to uuid of victim
+          add 1 to {warrior.pressure.stack.%_p%.%{_uuid}%}
+          set {_step} to {warrior.pressure.step.%_p%}
+          set {_cap} to {warrior.pressure.cap.%_p%}
+          set {_bonus} to {warrior.pressure.stack.%_p%.%{_uuid}%} * {_step}
+          if {_bonus} > {_cap}:
+            set {_bonus} to {_cap}
+            set {warrior.pressure.stack.%_p%.%{_uuid}%} to {_cap} / {_step}
+          add {_bonus} to {_multiplier}
+        else:
+          delete {warrior.pressure.active.%_p%}
+          clear {warrior.pressure.stack.%_p%::*}
+      if {warrior.champion.precise.%_p%} is set:
+        if {warrior.champion.precise.%_p%} > now:
+          set {_crit} to random integer between 1 and 100
+          if {_crit} <= 20:
+            set damage to damage * 1.25
+          delete {warrior.champion.precise.%_p%}
+        else:
+          delete {warrior.champion.precise.%_p%}
+      if {warrior.champion.glory.%_p%} is set and {warrior.champion.glory.%_p%} > now:
+        add {warrior.champion.glory.damage.%_p%} to {_multiplier}
+      if {warrior.champion.methodical.%_p%} is set:
+        if {warrior.champion.methodical.%_p%} > now:
+          if health of {_p} = max health of {_p}:
+            add {warrior.champion.methodical.bonus.%_p%} to {_multiplier}
+        else:
+          delete {warrior.champion.methodical.%_p%}
+          delete {warrior.champion.methodical.bonus.%_p%}
+      if {_p} has permission {@perm-champion}:
+        set {_stack} to {warrior.champion.pressure.stack.%_p%}
+        if {_stack} is set:
+          add {_stack} * 0.02 to {_multiplier}
+      if {warrior.samurai.focus.%_p%} is set and {warrior.samurai.focus.%_p%} > now:
+        add {warrior.samurai.focus.value.%_p%} to {_multiplier}
+      if {warrior.samurai.spirit.%_p%} is set and {warrior.samurai.spirit.%_p%} > now:
+        add {warrior.samurai.spirit.damage.%_p%} to {_multiplier}
+      if {warrior.mark.%_p%} is set:
+        if victim is set:
+          if uuid of victim = {warrior.mark.%_p%} and {warrior.mark.expire.%_p%} > now:
+            add {warrior.mark.bonus.%_p%} to {_multiplier}
+          else if {warrior.mark.expire.%_p%} <= now:
+            delete {warrior.mark.%_p%}
+            delete {warrior.mark.expire.%_p%}
+            delete {warrior.mark.bonus.%_p%}
+      set damage to damage * {_multiplier}
+      warrior_refresh_hud({_p})
+  if victim is player:
+    set {_v} to victim
+    if {_v} has permission {@perm-base}:
+      set {_reduction} to 0
+      if {warrior.deflect.%_v%} is set:
+        if {warrior.deflect.expire.%_v%} > now:
+          set {_reduction} to {warrior.deflect.%_v%}
+          delete {warrior.deflect.%_v%}
+          delete {warrior.deflect.expire.%_v%}
+        else:
+          delete {warrior.deflect.%_v%}
+          delete {warrior.deflect.expire.%_v%}
+      if {warrior.command.%_v%} is set and {warrior.command.%_v%} > now:
+        add {warrior.command.mitigation.%_v%} to {_reduction}
+      if {warrior.mitigation.%_v%} is set:
+        add {warrior.mitigation.%_v%} to {_reduction}
+      if {_reduction} > 0.45:
+        set {_reduction} to 0.45
+      set damage to damage * (1 - {_reduction})
+      if attacker is entity:
+        if {warrior.rend.%attacker%} is set and {warrior.rend.expire.%attacker%} > now:
+          set damage to damage * (1 - {warrior.rend.%attacker%})
+        else:
+          delete {warrior.rend.%attacker%}
+          delete {warrior.rend.expire.%attacker%}
+      if {warrior.samurai.retaliation.cd.%_v%} is set:
+        if difference between now and {warrior.samurai.retaliation.cd.%_v%} >= 6 seconds:
+          set {warrior.samurai.retaliation.ready.%_v%} to true
+          set {warrior.samurai.retaliation.cd.%_v%} to now
+      else:
+        set {warrior.samurai.retaliation.ready.%_v%} to true
+        set {warrior.samurai.retaliation.cd.%_v%} to now
+
+on damage of player:
+  if attacker is set:
+    if attacker is player:
+      if {warrior.samurai.retaliation.ready.%attacker%} is true:
+        set damage to damage * 1.4
+        delete {warrior.samurai.retaliation.ready.%attacker%}
+
+# Controle de ameaças
+every 1 second:
+  loop all players:
+    if loop-player has permission {@perm-base}:
+      warrior_refresh_hud(loop-player)
+      warrior_check_speed_cap(loop-player)
+      if {warrior.samurai.spirit.%loop-player%} is set and {warrior.samurai.spirit.%loop-player%} > now:
+        execute console command "skillapi mana %loop-player% +4"
+      else:
+        delete {warrior.samurai.spirit.%loop-player%}
+      set {_lvl} to placeholderapi "%skillapi_level%" with loop-player
+      if {_lvl} is not "":
+        set {_lvlNum} to parsed number from {_lvl}
+      else:
+        set {_lvlNum} to level of loop-player
+      if {_lvlNum} < 5:
+        set {_targetRegen} to 4
+      else if {_lvlNum} < 11:
+        set {_targetRegen} to 6
+      else if {_lvlNum} < 17:
+        set {_targetRegen} to 8
+      else:
+        set {_targetRegen} to 10
+      set {_bonusRegen} to {_targetRegen} - 4
+      if {_bonusRegen} > 0:
+        set {_bonusInt} to floor({_bonusRegen})
+        execute console command "skillapi mana %loop-player% +%{_bonusInt}%"
+      set {_stamina} to placeholderapi "%skills_warrior_stamina%" with loop-player
+      if {_stamina} is "":
+        set {_stamina} to "0"
+      set {_staminaNumber} to parsed number from {_stamina}
+      if {_staminaNumber} <= 0:
+        if {warrior.exhaustion.%loop-player%} is not set or {warrior.exhaustion.%loop-player%} <= now:
+          set {warrior.exhaustion.%loop-player%} to now + 4 seconds
+          apply slowness 1 to loop-player for 4 seconds
+          apply weakness 1 to loop-player for 4 seconds
+          send "{@prefix} &cExaustão Física!" to loop-player
+      if {warrior.exhaustion.%loop-player%} is set and {warrior.exhaustion.%loop-player%} <= now:
+        delete {warrior.exhaustion.%loop-player%}
+    else:
+      delete {warrior.combo.%loop-player%}
+      delete {warrior.posture.%loop-player%}
+

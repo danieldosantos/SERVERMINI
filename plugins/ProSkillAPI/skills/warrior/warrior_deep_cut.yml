@@ -1,0 +1,42 @@
+# Skill: Corte Profundo
+name: warrior_deep_cut
+display: "§6Corte Profundo"
+icon: STONE_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  range-base: 4
+  range-scale: 0
+  damage-base: 1.1
+  damage-scale: 0
+description:
+  - "§7110% de dano inicial e aplica sangramento 5%/s por 6s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          shape: single
+          range-base: 4
+          range-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.1
+              value-scale: 0
+              classifier: skill
+          Bleed:
+            type: mechanic
+            data:
+              command: "skript run warrior_apply_bleed %caster% %target% 6 0.05"
+              silent: true

@@ -1,0 +1,29 @@
+# Skill: Glória do Campeão
+name: warrior_champion_glory
+display: "§eGlória do Campeão"
+icon: GOLDEN_HELMET
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+description:
+  - "§7Ultimate: +30% chance de crítico e +20% dano por 10s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run warrior_champion_glory %caster% 10 0.3 0.2"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§eGlória do Campeão ativa!"
+          targets: self

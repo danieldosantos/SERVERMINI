@@ -1,0 +1,49 @@
+# Subclasse: Campeão
+name: Warrior_Champion
+display: "§eCampeão"
+description:
+  - "§7Especialista em críticos e pressão linear."
+  - "§eMantém uptime elevado sem ultrapassar limites de velocidade ou mitigação."
+options:
+  needs-permission: true
+  parent: Warrior
+  focus: dps
+  cooldown-profile:
+    burst-window: 60
+    sustain-window: 120
+skills:
+  tier1:
+    active:
+      - warrior_quick_strike
+      - warrior_shove
+      - warrior_champion_precise_strike
+    passive:
+      - warrior_champion_relentless_pressure
+  tier2:
+    active:
+      - warrior_quick_strike
+      - warrior_deep_cut
+      - warrior_champion_precise_strike
+      - warrior_champion_methodical_fury
+    passive:
+      - warrior_champion_relentless_pressure
+  tier3:
+    active:
+      - warrior_rend_armor
+      - warrior_aggressive_stance
+      - warrior_champion_precise_strike
+      - warrior_champion_methodical_fury
+    passive:
+      - warrior_champion_relentless_pressure
+  tier4:
+    active:
+      - warrior_cleaving_execution
+      - warrior_pressure_assault
+      - warrior_champion_precise_strike
+      - warrior_champion_methodical_fury
+      - warrior_champion_glory
+    passive:
+      - warrior_champion_relentless_pressure
+notes:
+  - "Pressão Constante rastreada via PlaceholderAPI {combo_stacks}."
+  - "Glória do Campeão compartilha cooldown global 210s e respeita limite de velocidade total +0.05."

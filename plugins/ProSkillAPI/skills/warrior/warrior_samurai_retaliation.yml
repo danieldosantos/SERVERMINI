@@ -1,0 +1,17 @@
+# Skill Passiva: Retaliação
+name: warrior_samurai_retaliation
+display: "§dRetaliação"
+icon: TOTEM_OF_UNDYING
+type: Passive
+max-level: 1
+description:
+  - "§7Ao receber dano, o próximo ataque causa +40% (CD interno 6s)."
+components:
+  Passive:
+    type: trigger
+    children:
+      Hook:
+        type: mechanic
+        data:
+          command: "skript run warrior_samurai_retaliation %caster%"
+          silent: true
