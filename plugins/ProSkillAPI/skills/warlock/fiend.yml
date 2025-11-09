@@ -1,0 +1,272 @@
+# Habilidades específicas do patrono Fiend organizadas por TIER
+# Dados prontos para cadastro via ProSkillAPI (import manual ou scriptado)
+tiers:
+  T1:
+    - skill-id: warlock_fiend_chicote_infernal
+      display: "Chicote Infernal"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 45
+        area: cone
+        radius: 5
+        duration: 4
+        tags: [fire, burst, burn]
+        scaling:
+          tier-base: 1
+          damage-multi: 1.4
+          burn-per-second: 0.06
+      effects:
+        - "Cone de fogo (5 blocos) causando 140% dano e queimadura 6%/s por 4s."
+        - "Aplica stack de queimadura para sinergia com Brasa Salutar."
+    - skill-id: warlock_fiend_marca_ignea
+      display: "Marca Ígnea"
+      type: passive
+      psapi:
+        resource: none
+        cooldown: 0
+        tags: [hex_synergy, burn]
+        scaling:
+          tier-base: 1
+          bonus-damage: 0.05
+          burn-per-second: 0.02
+      effects:
+        - "Passiva que integra-se ao Hex comum adicionando +5% dano e 2%/s de queimadura."
+        - "Sem custo adicional; aplicar via trigger no Skript/PlaceholderAPI."
+    - skill-id: warlock_fiend_bainha_flamejante
+      display: "Bainha Flamejante"
+      type: active
+      psapi:
+        resource: mana
+        cost: 20
+        cooldown: 60
+        duration: 8
+        area: self
+        tags: [defense, fire_resist]
+        scaling:
+          tier-base: 1
+          fire-resist: 0.15
+      effects:
+        - "+15% resistência a fogo por 8s (aplica diminishing com raciais)."
+        - "HUD mostra ícone dedicado para controle de uptime."
+    - skill-id: warlock_fiend_passo_das_brasas
+      display: "Passo das Brasas"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 60
+        range: 6
+        duration: 3
+        area: trail
+        tags: [mobility, fire]
+        scaling:
+          tier-base: 1
+          damage-per-second: 0.40
+      effects:
+        - "Avança 6 blocos deixando trilha de fogo (40% dano/s por 3s)."
+        - "Trail usa partículas discretas e respeita limites de área."
+  T2:
+    - skill-id: warlock_fiend_armadilha_de_brasas
+      display: "Armadilha de Brasas"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 75
+        area: trap
+        radius: 4
+        delay: 1
+        tags: [fire, control]
+        scaling:
+          tier-base: 2
+          damage-multi: 1.4
+          root-duration: 2
+      effects:
+        - "Sigilo no chão explode após 1s (140% dano fogo) e enraíza 2s."
+        - "Aplicar imunidade decrescente no controle via Skript."
+    - skill-id: warlock_fiend_contrato_de_chamas
+      display: "Contrato de Chamas"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 90
+        duration: 10
+        area: self
+        tags: [lifesteal, fire]
+        scaling:
+          tier-base: 2
+          lifesteal-percent: 0.12
+      effects:
+        - "10s de 12% lifesteal em dano mágico (cap 25%)."
+        - "Integra scoreboard de recursos pactuais."
+    - skill-id: warlock_fiend_extase_abrasador
+      display: "Êxtase Abrasador"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 75
+        duration: 8
+        area: single
+        tags: [vulnerability, fire, hex_synergy]
+        scaling:
+          tier-base: 2
+          vulnerability: 0.10
+      effects:
+        - "Durante 8s, ataques contra alvo com Hex aplicam +10% vulnerabilidade a fogo."
+        - "Aplicação limitada por alvo (uma vez por 2s)."
+    - skill-id: warlock_fiend_brasa_salutar
+      display: "Brasa Salutar"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 75
+        area: radius
+        radius: 6
+        tags: [sustain, burn_consumption]
+        scaling:
+          tier-base: 2
+          heal-per-stack: 0.03
+      effects:
+        - "Consome queimaduras em inimigos (6 blocos) curando 3% por stack (cap 25%)."
+        - "Serve como botão de sustain controlado; atualiza HUD de cargas." 
+  T3:
+    - skill-id: warlock_fiend_portao_igneo
+      display: "Portão Ígneo"
+      type: active
+      psapi:
+        resource: mana
+        cost: 35
+        cooldown: 90
+        range: 12
+        area: teleport
+        tags: [mobility, fire]
+        scaling:
+          tier-base: 3
+          damage-multi: 1.2
+      effects:
+        - "Teleporta 12 blocos e causa explosão de 120% dano fogo no destino."
+        - "Aplicar resistência temporária a queda na chegada."
+    - skill-id: warlock_fiend_caldeira_do_inferno
+      display: "Caldeira do Inferno"
+      type: active
+      psapi:
+        resource: mana
+        cost: 40
+        cooldown: 120
+        duration: 10
+        area: zone
+        radius: 6
+        tags: [aoe, fire, zone_control]
+        scaling:
+          tier-base: 3
+          damage-per-tick: 0.60
+          tick-interval: 2
+      effects:
+        - "Zona de 6 blocos por 10s aplicando 60% dano a cada 2s."
+        - "Ideal para objetivos PvE/PvP; respeita limites de área."
+    - skill-id: warlock_fiend_furia_demonica
+      display: "Fúria Demoníaca"
+      type: active
+      psapi:
+        resource: mana
+        cost: 35
+        cooldown: 90
+        duration: 8
+        area: self
+        tags: [penetration, retaliation]
+        scaling:
+          tier-base: 3
+          penetration: 0.20
+          retaliation: 0.20
+      effects:
+        - "+20% penetração por 8s; tomar dano aplica 20% fogo retaliatório (1x por alvo)."
+        - "HUD monitora contagem de retaliações disponíveis."
+    - skill-id: warlock_fiend_pacto_ardente
+      display: "Pacto Ardente"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 75
+        area: single
+        tags: [execute, fire, hex_synergy]
+        scaling:
+          tier-base: 3
+          damage-multi: 1.5
+          health-threshold: 0.30
+      effects:
+        - "Quando Hex termina e alvo <30% HP, explode causando 150% dano fogo."
+        - "Não consome stacks se condição não atendida, evitando abuso."
+  T4:
+    - skill-id: warlock_fiend_inferno_pactuado
+      display: "Inferno Pactuado"
+      type: active
+      psapi:
+        resource: mana
+        cost: 50
+        cooldown: 240
+        area: meteor
+        radius: 6
+        duration: 8
+        tags: [ultimate, fire, burn]
+        scaling:
+          tier-base: 4
+          damage-multi: 2.2
+          burn-per-second: 0.08
+      effects:
+        - "Ultimate: meteoro em 6 blocos com 220% dano + queimadura 8%/s por 8s."
+        - "Integra marcador de ultimate na HUD (PlaceholderAPI)."
+    - skill-id: warlock_fiend_manto_de_cinzas
+      display: "Manto de Cinzas"
+      type: active
+      psapi:
+        resource: mana
+        cost: 40
+        cooldown: 120
+        duration: 8
+        area: aura
+        radius: 6
+        tags: [mitigation, projectile_defense]
+        scaling:
+          tier-base: 4
+          projectile-reduction: 0.25
+      effects:
+        - "Aura reduz projéteis recebidos em 25% por 8s (aplica a aliados)."
+        - "Cumulatividade limitada para manter mitigação <45%."
+    - skill-id: warlock_fiend_corrupcao_flamejante
+      display: "Corrupção Flamejante"
+      type: active
+      psapi:
+        resource: mana
+        cost: 40
+        cooldown: 120
+        duration: 12
+        area: single
+        tags: [hex_synergy, burn]
+        scaling:
+          tier-base: 4
+          hex-extension: 2
+      effects:
+        - "Durante 12s, efeitos de queimadura renovam o Hex por 2s (1x por alvo)."
+        - "Previne renovações infinitas via controle no Skript."
+    - skill-id: warlock_fiend_chama_vingativa
+      display: "Chama Vingativa"
+      type: active
+      psapi:
+        resource: mana
+        cost: 35
+        cooldown: 90
+        duration: 6
+        area: self
+        tags: [retaliation, fire]
+        scaling:
+          tier-base: 4
+          reflect-percent: 0.20
+      effects:
+        - "Reflete 20% do dano recebido como fogo por 6s."
+        - "Reflexão respeita caps de dano para PvP."

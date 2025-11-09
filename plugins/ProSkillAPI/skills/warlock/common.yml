@@ -1,0 +1,275 @@
+# Definição consolidada das magias comuns do Bruxo por TIER
+# Estrutura pensada para cadastro rápido no ProSkillAPI (skills.yml import)
+tiers:
+  T1:
+    - skill-id: warlock_common_hex_maldicao_menor
+      display: "Hex (Maldição Menor)"
+      type: active
+      psapi:
+        resource: mana
+        cost: 20
+        cooldown: 45
+        range: 18
+        duration: 10
+        area: single
+        tags: [hex, curse, damage_amp, pvp_core]
+        scaling:
+          tier-base: 1
+          damage-mod: 0.0
+          buff: "+12% dano do conjurador"
+      effects:
+        - "Marca 1 alvo e reduz a regeneração recebida em 10%."
+        - "Integra HUD de cargas e temporizador do Hex."
+        - "Reaplicar antes de expirar ativa efeitos de explosão (ver Selo de Ruína)."
+    - skill-id: warlock_common_rajada_mistica
+      display: "Rajada Mística"
+      type: active
+      psapi:
+        resource: mana
+        cost: 20
+        cooldown: 5
+        duration: 10
+        area: single_projectile
+        tags: [eldritch_blast, filler, projectile]
+        scaling:
+          tier-base: 1
+          damage-multi: 0.6
+          projectiles: 3
+      effects:
+        - "Abre janela de 10s permitindo até 3 projéteis de 60% do dano cada."
+        - "Cada acerto reduz o cooldown do Hex em 2s (1x por alvo/3s)."
+        - "Projéteis respeitam caps de mitigação e partículas configuradas via MythicMobs."
+    - skill-id: warlock_common_foco_profano
+      display: "Foco Profano"
+      type: active
+      psapi:
+        resource: mana
+        cost: 20
+        cooldown: 45
+        duration: 8
+        area: self
+        tags: [buff, penetration, setup]
+        scaling:
+          tier-base: 1
+          penetration-bonus: 0.10
+      effects:
+        - "+10% penetração mágica por 8s; rastreado em scoreboard de buffs."
+        - "Sinergiza com Rajada Mística e Evocar Potestade para bursts controlados."
+    - skill-id: warlock_common_escudo_sombrio
+      display: "Escudo Sombrio"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 60
+        duration: 6
+        area: self
+        tags: [shield, mitigation]
+        scaling:
+          tier-base: 1
+          shield-value: 90
+      effects:
+        - "Gera barreira de 90 pontos por 6s sem ultrapassar limite global de 45% mitig."
+        - "HUD mostra pontos restantes via PlaceholderAPI personalizado."
+  T2:
+    - skill-id: warlock_common_vinculo_mistico
+      display: "Vínculo Místico"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 75
+        duration: 8
+        area: self
+        tags: [lifesteal, sustain]
+        scaling:
+          tier-base: 2
+          lifesteal-percent: 0.10
+      effects:
+        - "Converte 10% do dano causado em cura própria (respeita limite de 25%)."
+        - "Ativa ícone no HUD para monitorar uptime (<60%)."
+    - skill-id: warlock_common_selo_de_ruina
+      display: "Selo de Ruína"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 60
+        area: radius
+        radius: 5
+        tags: [burst, hex_synergy]
+        scaling:
+          tier-base: 2
+          damage-multi: 1.2
+      effects:
+        - "Explode o Hex ao expirar/reativar causando 120% dano em 5 blocos."
+        - "Não se acumula; respeita diminuição de imunidades de controle anexas ao Hex."
+    - skill-id: warlock_common_caminho_das_sombras
+      display: "Caminho das Sombras"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 60
+        range: 8
+        duration: 3
+        area: trail
+        tags: [mobility, damage_over_time]
+        scaling:
+          tier-base: 2
+          damage-per-second: 0.40
+      effects:
+        - "Teleporta 8 blocos para ponto visível e deixa rastro por 3s (40% dano/s)."
+        - "Rastro aplica partículas discretas (MythicMobs) e respeita limite padrão 6-8 blocos."
+    - skill-id: warlock_common_olho_do_abismo
+      display: "Olho do Abismo"
+      type: active
+      psapi:
+        resource: mana
+        cost: 20
+        cooldown: 60
+        duration: 8
+        area: radius
+        radius: 10
+        tags: [reveal, utility]
+        scaling:
+          tier-base: 2
+      effects:
+        - "Revela furtivos a 10 blocos e concede visão noturna."
+        - "Sinergiza com HUD para contagem de detectados via PlaceholderAPI."
+  T3:
+    - skill-id: warlock_common_correntes_etereas
+      display: "Correntes Etéreas"
+      type: active
+      psapi:
+        resource: mana
+        cost: 35
+        cooldown: 90
+        duration: 2.5
+        area: radius
+        radius: 6
+        tags: [control, root, diminishing_returns]
+        scaling:
+          tier-base: 3
+      effects:
+        - "Imobiliza inimigos por 2.5s; aplica imunidade decrescente via Skript."
+        - "Ideal para combos com Rajada ou habilidades de patrono."
+    - skill-id: warlock_common_ruptura_arcanizada
+      display: "Ruptura Arcanizada"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 60
+        duration: 6
+        area: single
+        tags: [burst, debuff]
+        scaling:
+          tier-base: 3
+          damage-bonus: 0.80
+          resistance-reduction: 0.10
+      effects:
+        - "Próximo golpe de Rajada causa +80% dano e reduz resistência do alvo em 10% por 6s."
+        - "Debuff controlado para não exceder mitigação global."
+    - skill-id: warlock_common_veu_protetor
+      display: "Véu Protetor"
+      type: active
+      psapi:
+        resource: mana
+        cost: 35
+        cooldown: 105
+        duration: 8
+        area: aura
+        radius: 6
+        tags: [mitigation, group_support]
+        scaling:
+          tier-base: 3
+          damage-reduction: 0.20
+      effects:
+        - "-20% dano mágico recebido para conjurador + 4 aliados em 6 blocos."
+        - "Aplica uptime máximo de 8/105s (<60%)."
+    - skill-id: warlock_common_sussurros_da_lacuna
+      display: "Sussurros da Lacuna"
+      type: active
+      psapi:
+        resource: mana
+        cost: 35
+        cooldown: 90
+        area: cone
+        radius: 5
+        duration: 2
+        tags: [silence, psychic]
+        scaling:
+          tier-base: 3
+          damage-multi: 1.2
+      effects:
+        - "Cone de 5 blocos com 120% dano psíquico e silêncio por 2s."
+        - "Imunidade decrescente gerenciada via scoreboard de controles."
+  T4:
+    - skill-id: warlock_common_evocar_potestade
+      display: "Evocar Potestade"
+      type: active
+      psapi:
+        resource: mana
+        cost: 45
+        cooldown: 120
+        duration: 12
+        area: self
+        tags: [burst_window, hex_synergy]
+        scaling:
+          tier-base: 4
+          extra-projectile-damage: 0.40
+          hex_resist_shred: 0.05
+      effects:
+        - "Rajada gera projétil adicional de 40% dano e Hex acumula -5% resistência (máx. -15%)."
+        - "Respeita limites de resistência total (45% global)."
+    - skill-id: warlock_common_dobra_sombria
+      display: "Dobra Sombria"
+      type: active
+      psapi:
+        resource: mana
+        cost: 40
+        cooldown: 120
+        range: 12
+        area: relocation
+        tags: [mobility, ally_support]
+        scaling:
+          tier-base: 4
+          ally-count: 2
+      effects:
+        - "Teleporta o conjurador 12 blocos e reposiciona até 2 aliados para um ponto seguro."
+        - "Aplica proteção temporária de colisão para evitar bugs."
+    - skill-id: warlock_common_ritual_de_quebra_selo
+      display: "Ritual de Quebra-Selo"
+      type: active
+      psapi:
+        resource: mana
+        cost: 45
+        cooldown: 120
+        area: radius
+        radius: 6
+        duration: 2
+        tags: [silence, dispel]
+        scaling:
+          tier-base: 4
+      effects:
+        - "Contra-feitiço em área (6 blocos) aplicando silêncio de 2s e removendo 1 buff leve."
+        - "Controle curto evita abuso em PvP prolongado."
+    - skill-id: warlock_common_mantra_abissal
+      display: "Mantra Abissal"
+      type: active
+      psapi:
+        resource: mana
+        cost: 45
+        cooldown: 120
+        duration: 10
+        area: aura
+        radius: 8
+        tags: [aura, damage_amp, mitigation]
+        scaling:
+          tier-base: 4
+          ally-damage-bonus: 0.12
+          enemy-damage-reduction: 0.10
+      effects:
+        - "Aura por 10s: aliados +12% dano, inimigos -10% dano na zona."
+        - "Uptime controlado para não exceder 60%; acompanha HUD de carga."
