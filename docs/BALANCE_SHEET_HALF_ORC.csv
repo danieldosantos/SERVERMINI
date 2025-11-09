@@ -1,0 +1,13 @@
+Aspecto,Contexto,T1,T2,T3,T4,CD (s),Uptime,Limites,Notas
+Visão no Escuro,Alcance em baixa luz,24b,24b,24b,24b,45,<=0.60,"Apenas ajuste visual","Não remove penalidades de brilho"
+Tenacidade Implacável,Mitigação abaixo 35% HP,+15%,+15%,+15%,+15%,45,6s,"Mitigação total <=45%","DR com classe/itens; uptime ≈13%"
+Ameaça Orc,Dano retaliatório,+5%,+5%,+5%,+5%,0,<=0.40,"Aplica apenas após receber golpe","Evita burst inicial"
+Fúria Controlada,Buff dano corpo-a-corpo,+10%,+12%,+15%,+18%,75,8s,"Uptime ≈10.6%","Fatiga -10% dano por 6s garante compensação"
+Fatiga Orc,Penalidade pós-fúria,-10%,-10%,-10%,-10%,0,6s,"Dano não fica negativo","Impede chain com outras fúrias"
+Instinto do Rastreador,Revelar trilhas,Leve,Leve,Leve,Leve,0,10s,"Não revela invis total","Ativo apenas com marca"
+Passo Selvagem,Velocidade em bioma,+0.02,+0.02,+0.02,+0.02,30,8s,"Velocidade total <= +0.05","Biomas: forest/taiga/swamp/savanna"
+Chamado da Caça,Penetração vs alvo marcado,+12%,+12%,+12%,+12%,60,10s,"Respeita caps ofensivos","Cooldown garante uptime 16.6%"
+Ritmo de Arena,Velocidade de ataque combo,+10%,+10%,+10%,+10%,20,4s,"Velocidade total <= +0.05","Requer 3 golpes em ≤6s"
+Grito de Desafio,Provocação PvE,4b,4b,4b,4b,90,4s,"Sem efeito em jogadores","Cada alvo 1x/90s"
+Estouro de Arena,Dano corpo-a-corpo,+25%,+25%,+25%,+25%,120,6s,"Uptime 5%","Penalidade -20% atk speed por 6s"
+Exaustão de Arena,Penalidade pós-ult,-20%,-20%,-20%,-20%,0,6s,"Evita stacking com Haste","Aplicada automaticamente"

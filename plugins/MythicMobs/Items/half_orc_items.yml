@@ -1,0 +1,50 @@
+# Itens raciais Meio-Orc (base + variações)
+items:
+  OrcBattleTalisman:
+    Id: NETHERITE_SCRAP
+    Display: '&4Talismã de Batalha Orc'
+    Lore:
+      - '&7Um foco ancestral que responde à fúria controlada.'
+      - '&eClique direito:&f ativa Fúria Controlada.'
+      - '&8Requer raça: Meio-Orc.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    Enchantments:
+      - SHARPNESS:2
+    NBT:
+      race-lock: 'race_half_orc'
+      skill: 'HalfOrc_FuriaControlada'
+      skript-trigger: 'furia_orc'
+  TribalBoneCharm:
+    Id: BONE
+    Display: '&6Amuleto Tribal de Ossos'
+    Lore:
+      - '&7Banhado em sangue de caça, vibra quando um alvo é marcado.'
+      - '&eClique direito:&f ativa Chamado da Caça.'
+      - '&8Requer raça: Meio-Orc Tribal.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    Enchantments:
+      - LOOTING:2
+    NBT:
+      race-lock: 'race_half_orc.tribal'
+      skill: 'HalfOrc_Tribal_ChamadoCaca'
+      skript-trigger: 'tribal'
+  ArenaWarBangle:
+    Id: IRON_NUGGET
+    Display: '&cBracelete de Guerra da Arena'
+    Lore:
+      - '&7Ressoa com o rugido da multidão quando a arena chama.'
+      - '&eClique direito:&f ativa Estouro de Arena.'
+      - '&8Requer raça: Meio-Orc Gladiador.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    Enchantments:
+      - FIRE_ASPECT:1
+    NBT:
+      race-lock: 'race_half_orc.gladiador'
+      skill: 'HalfOrc_Gladiador_EstouroArena'
+      skript-trigger: 'arena'

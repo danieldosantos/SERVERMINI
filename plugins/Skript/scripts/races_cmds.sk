@@ -37,6 +37,9 @@ command /racial:
     if function "halflingRacialHelp" is defined:
       if halflingRacialHelp(player):
         set {_sent} to true
+    if function "halfOrcRacialHelp" is defined:
+      if halfOrcRacialHelp(player):
+        set {_sent} to true
     if {_sent} is false:
       send "&7Nenhum traço racial detectado neste comando."
 

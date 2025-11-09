@@ -1,0 +1,5 @@
+lp creategroup race_half_orc
+lp creategroup race_half_orc.tribal
+lp creategroup race_half_orc.gladiador
+lp parent add race_half_orc.tribal race_half_orc
+lp parent add race_half_orc.gladiador race_half_orc

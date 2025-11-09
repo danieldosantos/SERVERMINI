@@ -1,0 +1,122 @@
+# races_half_orc.sk — Integração da raça Meio-Orc (base, Tribal, Gladiador)
+# Requer: Skript + SkBee (PlaceholderAPI), ProSkillAPI, MythicMobs, LuckPerms.
+
+options:
+  skillcmd: psa cast
+  hud-prefix: "&4[Meio-Orc]"
+
+function halfOrcHasGroup(p: player, group: text) :: boolean:
+  set {_perm1} to "group."
+  add {_group} to {_perm1}
+  set {_perm2} to "lp."
+  add {_group} to {_perm2}
+  if {_p} has permission {_perm1} or {_p} has permission {_perm2}:
+    return true
+  return false
+
+function halfOrcCastSkill(p: player, group: text, skill: text, label: text):
+  if halfOrcHasGroup({_p}, {_group}):
+    set {_name} to name of {_p}
+    execute console command "{@skillcmd} %{_name}% %{_skill}%"
+    halfOrcShowHud({_p}, {_label})
+  else:
+    send "&cPermissão racial insuficiente." to {_p}
+
+function halfOrcShowHud(p: player, label: text):
+  send action bar "{@hud-prefix} &f%{_label}%" to {_p}
+
+function halfOrcRacialHelp(p: player) :: boolean:
+  set {_sent} to false
+  if halfOrcHasGroup({_p}, "race_half_orc"):
+    send "{@hud-prefix} Use /furia_orc (75s) e monitore Tenacidade com /tenacidade." to {_p}
+    set {_sent} to true
+    if halfOrcHasGroup({_p}, "race_half_orc.tribal"):
+      send "&6[Tribal] /tribal marca o alvo (60s) e ativa rastros." to {_p}
+    if halfOrcHasGroup({_p}, "race_half_orc.gladiador"):
+      send "&c[Gladiador] /arena prepara Estouro (120s) — lembre da Exaustão." to {_p}
+  return {_sent}
+
+function halfOrcResolveTarget(s: command sender, arg) :: player:
+  if {_arg} is set:
+    if {_arg} is a player:
+      return {_arg}
+    if {_arg} is text:
+      set {_candidate} to {_arg} parsed as player
+      if {_candidate} is set:
+        return {_candidate}
+    send "&cJogador alvo inválido." to {_s}
+    return null
+  if {_s} is a player:
+    return {_s}
+  send "&cInforme o jogador alvo." to {_s}
+  return null
+
+function halfOrcHandleItem(p: player, i: item):
+  if {_i} is air:
+    stop
+  set {_lock} to nbt data "race-lock" of {_i}
+  if {_lock} is set:
+    if halfOrcHasGroup({_p}, {_lock}) is false:
+      send "&cEste foco responde apenas a meio-orcs autorizados." to {_p}
+      cancel event
+      stop
+  set {_trigger} to nbt data "skript-trigger" of {_i}
+  if {_trigger} is not set:
+    stop
+  if {_trigger} is "furia_orc":
+    halfOrcCastSkill({_p}, "race_half_orc", "HalfOrc_FuriaControlada", "Fúria Controlada")
+  else if {_trigger} is "tribal":
+    halfOrcCastSkill({_p}, "race_half_orc.tribal", "HalfOrc_Tribal_ChamadoCaca", "Chamado da Caça")
+  else if {_trigger} is "arena":
+    halfOrcCastSkill({_p}, "race_half_orc.gladiador", "HalfOrc_Gladiador_EstouroArena", "Estouro de Arena")
+  cancel event
+
+on right click:
+  halfOrcHandleItem(player, player's tool)
+
+on left click:
+  halfOrcHandleItem(player, player's tool)
+
+command /furia_orc:
+  trigger:
+    halfOrcCastSkill(player, "race_half_orc", "HalfOrc_FuriaControlada", "Fúria Controlada")
+
+command /tenacidade:
+  trigger:
+    if halfOrcHasGroup(player, "race_half_orc"):
+      set {_ten} to placeholderapi parse "%raceseffects_racial_tenacidade%" for player
+      set {_cd} to placeholderapi parse "%raceseffects_racial_cd_main%" for player
+      if {_ten} is "" or {_ten} is "null":
+        set {_ten} to "-"
+      if {_cd} is "" or {_cd} is "null":
+        set {_cd} to "-"
+      send "{@hud-prefix} Tenacidade:&f %{_ten}% &7| CD Fúria:&f %{_cd}%" to player
+    else:
+      send "&cSomente meio-orcs podem usar este comando." to player
+
+command /tribal:
+  trigger:
+    halfOrcCastSkill(player, "race_half_orc.tribal", "HalfOrc_Tribal_ChamadoCaca", "Chamado da Caça")
+
+command /arena:
+  trigger:
+    halfOrcCastSkill(player, "race_half_orc.gladiador", "HalfOrc_Gladiador_EstouroArena", "Estouro de Arena")
+
+command /kit_racial_half_orc [<player>] [<text>]:
+  permission: op
+  trigger:
+    set {_target} to halfOrcResolveTarget(sender, arg-1)
+    if {_target} is not set:
+      stop
+    set {_mode} to "base"
+    if arg-2 is set:
+      set {_mode} to lowercase arg-2
+    if {_mode} is "base" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% OrcBattleTalisman 1"
+    if {_mode} is "tribal" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% TribalBoneCharm 1"
+    if {_mode} is "gladiador" or {_mode} is "arena" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% ArenaWarBangle 1"
+    send "&aItens raciais meio-orc entregues (%{_mode}%)." to sender
+    if sender is not {_target}:
+      send "&aVocê recebeu itens raciais meio-orc (%{_mode}%)." to {_target}

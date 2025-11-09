@@ -1,0 +1,44 @@
+# Skill racial — Estouro de Arena
+skills:
+  HalfOrc_Gladiador_EstouroArena:
+    display: "&cEstouro de Arena"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Concentra toda a força em uma explosão de 6s com +25% dano corpo-a-corpo.
+      Após expirar, aplica Exaustão de Arena por 6s (-20% velocidade de ataque).
+      Cooldown de 120s limita o burst a janelas bem definidas.
+    tiers:
+      T1: { cooldown: 120, duration: 6, damage_bonus: 0.25, exhaustion_penalty: -0.20 }
+      T2: { cooldown: 120, duration: 6, damage_bonus: 0.25, exhaustion_penalty: -0.20 }
+      T3: { cooldown: 120, duration: 6, damage_bonus: 0.25, exhaustion_penalty: -0.20 }
+      T4: { cooldown: 120, duration: 6, damage_bonus: 0.25, exhaustion_penalty: -0.20 }
+    cost:
+      resource: stamina
+      amount: 15
+    effects:
+      - target: self
+        type: status
+        id: half_orc_estouro_arena
+        duration: { tier: duration }
+        modifiers:
+          melee_damage: { tier: damage_bonus }
+      - target: self
+        type: status
+        id: half_orc_exaustao_arena
+        delay: { tier: duration }
+        duration: 6
+        modifiers:
+          attack_speed: { tier: exhaustion_penalty }
+      - target: self
+        type: particles
+        effect: mythicmobs:HalfOrcArenaBurst
+      - target: self
+        type: placeholder_update
+        keys:
+          - racial_cd_main
+          - racial_combo
+    notes: |
+      • Penalidade de velocidade garante compensação pós-burst e respeita limite global de +0.05 em buffs somados.
+      • Uso simultâneo com recursos de Guerreiro/Barbaro aplica DR para evitar stack excessiva.
+      • Partículas acionam efeito MythicMobs `HalfOrcArenaBurst` (sons metálicos + poeira). 

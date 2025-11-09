@@ -1,0 +1,54 @@
+# Sub-raça: Meio-Orc Tribal
+race_id: half_orc_tribal
+name: "Meio-Orc Tribal"
+identity: "Caçadores que leem rastros e mantêm o ritmo natural da perseguição."
+luckperms:
+  required: "race_half_orc.tribal"
+  inherit: "race_half_orc"
+placeholders:
+  racial_cd_main: "{cooldown:skill_half_orc_chamado_caca}"
+  racial_tracker: "{status:instinto_rastreador}"
+passives:
+  instinto_rastreador:
+    name: "Instinto do Rastreador"
+    type: tracking_reveal
+    trigger: marked_target
+    duration: 10
+    cooldown: 0
+    uptime_cap: 0.6
+    reveal_strength: 0.4
+    description: "Alvos marcados deixam vestígios visuais leves (não revela invisibilidade plena) por 10s."
+  passo_selvagem:
+    name: "Passo Selvagem"
+    type: biome_speed_boost
+    trigger: biome_tag:natural_hunt
+    duration: 8
+    cooldown: 30
+    uptime_cap: 0.4
+    biomes:
+      - forest
+      - taiga
+      - swamp
+      - mangrove_swamp
+      - savanna
+    effects:
+      speed_bonus: 0.02
+    description: "+0.02 velocidade em florestas, taigas, pântanos e savanas por 8s (cap global +0.05)."
+actives:
+  chamado_caca:
+    name: "Chamado da Caça"
+    skill: HalfOrc_Tribal_ChamadoCaca
+    cooldown: 60
+    charges: 1
+    description: "Marca 1 alvo por 10s concedendo +12% penetração de armadura contra ele."
+resistances: {}
+synergy_notes:
+  - "Marca tribo se integra com Rastreador, exibindo trilhas sem quebrar furtividade total."
+  - "Combina com classes de caça (Patrulheiro) sem ultrapassar limite de velocidade."
+tests:
+  pve:
+    - "Caçada em floresta: confirmar que vestígios aparecem apenas em alvos marcados e desaparecem após 10s."
+    - "Boss móvel em pântano validando que Passo Selvagem mantém uptime ≤40%."
+  pvp:
+    - "Duelo vs Ladino: marca deve revelar contorno leve sem cancelar invisibilidade total."
+    - "Skirmish 3v3: testar Chamado da Caça respeitando CD 60s e bônus apenas contra alvo marcado."
