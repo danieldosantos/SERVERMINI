@@ -1,0 +1,63 @@
+# Skill ativa: Raio Arcano
+name: sorcerer_arcane_bolt
+display: "§5Raio Arcano"
+icon: AMETHYST_SHARD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 5
+  cooldown-scale: 0
+  mana-cost-base: 14
+  mana-cost-scale: 0
+  range-base: 24
+  range-scale: 0
+  damage-base: 1.1
+  damage-scale: 0
+  projectile-speed-base: 36
+  projectile-speed-scale: 0
+  projectile-gravity: 0
+  sorcery-points-cost: 0
+description:
+  - "§5Projétil arcano que causa 110% do poder mágico ao contato."
+  - "§7Aceita Metamagia Rápida, Alcance Estendido e Potencializada."
+  - "§7Comunica Skript para consumir metamagia selecionada e atualizar HUD."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      MetamagicHook:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_metamagic_consume %caster% sorcerer_arcane_bolt"
+          silent: true
+      Projectile:
+        type: mechanic
+        data:
+          group: enemy
+          amount-base: 1
+          amount-scale: 0
+          range-base: 24
+          range-scale: 0
+          forward-base: 1
+          upward-base: 0
+          speed-base: 36
+          gravity: 0
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.1
+              value-scale: 0
+              classifier: skill
+              type: damage
+              element: arcane
+          ParticleTrail:
+            type: mechanic
+            data:
+              effect: ENCHANTMENT_TABLE
+              amount-base: 12
+              amount-scale: 0
+              radius-base: 0.2
+              radius-scale: 0

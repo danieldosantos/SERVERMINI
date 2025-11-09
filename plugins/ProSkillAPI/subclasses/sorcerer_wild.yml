@@ -1,0 +1,42 @@
+# Subclasse Feiticeiro: Magia Selvagem
+name: Sorcerer_Wild
+display: "§dMagia Selvagem"
+description:
+  - "§7Aproveita fluxos de caos para gerar efeitos imprevisíveis e recompensas explosivas."
+  - "§dCada conjuração importante pode gerar bônus ou penalidades leves controladas via Skript."
+  - "§7Mantém mitigação dentro de 45% e evita remoção de debuffs críticos em PvP."
+options:
+  needs-permission: true
+  parent: Sorcerer
+  mana-name: "Mana Caótica"
+skills:
+  tier1:
+    active:
+      - sorcerer_wild_surge
+      - sorcerer_wild_flux
+    passive:
+      - sorcerer_metamagic_dado_do_caos
+  tier2:
+    active:
+      - sorcerer_wild_surge
+      - sorcerer_wild_flux
+      - sorcerer_wild_reversion
+    passive:
+      - sorcerer_metamagic_dado_do_caos
+  tier3:
+    active:
+      - sorcerer_wild_surge
+      - sorcerer_wild_flux
+      - sorcerer_wild_reversion
+      - sorcerer_wild_veil
+    passive:
+      - sorcerer_metamagic_dado_do_caos
+  tier4:
+    active:
+      - sorcerer_wild_surge
+      - sorcerer_wild_flux
+      - sorcerer_wild_reversion
+      - sorcerer_wild_veil
+      - sorcerer_wild_tempest
+    passive:
+      - sorcerer_metamagic_dado_do_caos

@@ -1,0 +1,48 @@
+# Ultimate: Avatar Dracônico
+name: sorcerer_draconic_avatar
+display: "§4Avatar Dracônico"
+icon: NETHER_STAR
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  mana-cost-base: 45
+  duration-base: 15
+description:
+  - "§4Transforma-se em avatar que causa 80% de dano elemental por segundo em 6 blocos."
+  - "§7Concede antiknockback e respeita limite de mitigação total."
+  - "§7PvP: exige alvo abaixo de 30% para qualquer finalizador scriptado."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Aura:
+        type: mechanic
+        data:
+          shape: sphere
+          radius-base: 6
+          duration-base: 15
+          period: 1
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 0.8
+              classifier: skill
+              element: elemental
+      Antiknockback:
+        type: mechanic
+        data:
+          key: draconic_avatar
+          type: attribute
+          modifier: knockback-resist
+          value-base: 1.0
+          seconds-base: 15
+      SkriptMsg:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_draconic_avatar %caster%"
+          silent: true

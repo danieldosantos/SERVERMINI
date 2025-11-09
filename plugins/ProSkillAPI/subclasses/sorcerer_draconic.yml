@@ -1,0 +1,42 @@
+# Subclasse Feiticeiro: Origem Dracônica
+name: Sorcerer_Draconic
+display: "§4Origem Dracônica"
+description:
+  - "§7Canaliza o sangue dracônico para alternar entre supremacia elemental e defesa escamosa."
+  - "§cAumenta resistência até o limite global de 45% ao combinar com RacesEffects (diminishing)."
+  - "§7Gera um ultimate de aura que pressiona áreas sem remover alvos full-vida."
+options:
+  needs-permission: true
+  parent: Sorcerer
+  mana-name: "Mana Dracônica"
+skills:
+  tier1:
+    active:
+      - sorcerer_draconic_breath
+      - sorcerer_draconic_scales
+    passive:
+      - sorcerer_metamagic_conversao_elemental
+  tier2:
+    active:
+      - sorcerer_draconic_breath
+      - sorcerer_draconic_scales
+      - sorcerer_draconic_wings
+    passive:
+      - sorcerer_metamagic_conversao_elemental
+  tier3:
+    active:
+      - sorcerer_draconic_breath
+      - sorcerer_draconic_scales
+      - sorcerer_draconic_wings
+      - sorcerer_draconic_heart
+    passive:
+      - sorcerer_metamagic_conversao_elemental
+  tier4:
+    active:
+      - sorcerer_draconic_breath
+      - sorcerer_draconic_scales
+      - sorcerer_draconic_wings
+      - sorcerer_draconic_heart
+      - sorcerer_draconic_avatar
+    passive:
+      - sorcerer_metamagic_conversao_elemental

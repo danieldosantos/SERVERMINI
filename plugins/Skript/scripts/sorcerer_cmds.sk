@@ -1,0 +1,351 @@
+# Skript - Classe Feiticeiro (comandos, metamagia e HUD)
+options:
+  prefix: &5[Feiticeiro]&f
+  sp-objective: "sorcerer_sp"
+  meta-objective: "sorcerer_metamagic"
+  cd-objective: "sorcerer_major_cd"
+  placeholder-sp: "%skills_sorcery_points%"
+  placeholder-sp-max: "%skills_sorcery_points_max%"
+  placeholder-meta: "%skills_sorcerer_metamagic%"
+  placeholder-cd: "%skills_sorcerer_highest_cd%"
+  lp-class: "group.class_sorcerer"
+  lp-draconic: "group.class_sorcerer.draconic"
+  lp-wild: "group.class_sorcerer.wild"
+  lp-storm: "group.class_sorcerer.storm"
+  admin-perm: "group.class_admin"
+  ooc-delay: 8
+
+function sorcerer_refresh_hud(p: player):
+  set {_name} to name of {_p}
+  set {_sp} to placeholder {@placeholder-sp} for {_p}
+  set {_spmax} to placeholder {@placeholder-sp-max} for {_p}
+  set {_meta} to {sorcerer.metamagic.%uuid of {_p}%}
+  set {_cd} to placeholder {@placeholder-cd} for {_p}
+  if {_sp} is not set:
+    set {_sp} to 0
+  if {_spmax} is not set:
+    set {_spmax} to 0
+  if {_cd} is not set:
+    set {_cd} to 0
+  execute console command "scoreboard players set %{_name}% {@sp-objective} %floor({_sp})%"
+  set {_metaValue} to 0
+  if {_meta} is "rapida":
+    set {_metaValue} to 1
+  else if {_meta} is "alcance":
+    set {_metaValue} to 2
+  else if {_meta} is "potencializada":
+    set {_metaValue} to 3
+  else if {_meta} is "conversao":
+    set {_metaValue} to 4
+  else if {_meta} is "caos":
+    set {_metaValue} to 5
+  else if {_meta} is "canal":
+    set {_metaValue} to 6
+  execute console command "scoreboard players set %{_name}% {@meta-objective} %{_metaValue}%"
+  execute console command "scoreboard players set %{_name}% {@cd-objective} %floor({_cd})%"
+  if {_meta} is not set:
+    set {_meta} to "Nenhum"
+  send action bar "&dSP: %{_sp}%/&5%{_spmax}% &7| Metamagia: &d%{_meta}%" to {_p}
+
+function sorcerer_metamagic_set(playerName: text, meta: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  set {_meta} to meta parsed as text
+  set {sorcerer.metamagic.%uuid of {_p}%} to {_meta}
+  send "{@prefix} &7Metamagia preparada: &d%{_meta}%" to {_p}
+  sorcerer_refresh_hud({_p})
+
+function sorcerer_metamagic_consume(playerName: text, skill: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  set {_meta} to {sorcerer.metamagic.%uuid of {_p}%}
+  if {_meta} is not set:
+    stop
+  if {_meta} is "rapida":
+    send action bar "&dConjuração instantânea aplicada!" to {_p}
+  if {_meta} is "alcance":
+    send action bar "&dAlcance estendido na habilidade." to {_p}
+  if {_meta} is "potencializada":
+    send action bar "&dDano final aumentado em 15%." to {_p}
+  if {_meta} is "conversao":
+    set {sorcerer.element.override.%uuid of {_p}%} to true
+  if {_meta} is "caos":
+    send action bar "&dEfeito caótico extra possível." to {_p}
+  if {_meta} is "canal":
+    set {sorcerer.canal.%uuid of {_p}%} to now
+  delete {sorcerer.metamagic.%uuid of {_p}%}
+  sorcerer_refresh_hud({_p})
+
+function sorcerer_sp_refresh(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  sorcerer_refresh_hud({_p})
+
+function sorcerer_focus_refresh(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  send action bar "&dFoco Instintivo ativo." to {_p}
+
+function sorcerer_check_resistance(p: player, element: text, bonus: number):
+  set {_placeholder} to placeholder "%raceseffects_resistance_%{element}%" for {_p}
+  if {_placeholder} is set:
+    set {_value} to {_placeholder} parsed as number
+    if {_value} is set:
+      set {_final} to {_value} + {_bonus}
+      if {_final} > 0.45:
+        send action bar "&6Resistência ajustada para respeitar 45%." to {_p}
+
+function sorcerer_draconic_element(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  if {sorcerer.element.override.%uuid of {_p}%} is set:
+    delete {sorcerer.element.override.%uuid of {_p}%}
+  set {_element} to {sorcerer.element.%uuid of {_p}%}
+  if {_element} is not set:
+    set {_element} to "fogo"
+  send action bar "&cSopro elemental: %{_element}%" to {_p}
+
+function sorcerer_draconic_scales(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  sorcerer_check_resistance({_p}, "elemental", 0.15)
+  send "{@prefix} &cEscamas manifestas por 10s." to {_p}
+
+function sorcerer_wings_enable(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  send action bar "&cAsas Etéreas concedem planar." to {_p}
+
+function sorcerer_draconic_heart(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  send "{@prefix} &cCoração Elemental amplifica o dano elemental." to {_p}
+
+function sorcerer_draconic_avatar(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  send title "&cAvatar Dracônico" with subtitle "&7Aura de 15 segundos" to {_p}
+
+function sorcerer_wild_surge(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  set {_roll} to random element out of "fogo", "frio", "raio"
+  send action bar "&dSurto caótico: %{_roll}%" to {_p}
+
+function sorcerer_wild_flux(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  set {_chance} to random integer between 1 and 100
+  if {_chance} <= 12:
+    apply slowness 1 to {_p} for 3 seconds
+    send action bar "&dFluxo instável penalizou você." to {_p}
+  else:
+    send action bar "&dFluxo instável ativo." to {_p}
+
+function sorcerer_wild_reversion(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  send action bar "&dDebuffs rerrolados." to {_p}
+
+function sorcerer_wild_veil(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  send action bar "&dVéu probabilístico ativo." to {_p}
+
+function sorcerer_wild_tempest(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  send title "&dTempestade Caótica" with subtitle "&7Controle a zona de 12s" to {_p}
+
+function sorcerer_storm_discharge(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  sorcerer_check_resistance({_p}, "raio", 0.0)
+
+function sorcerer_storm_gale(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  send action bar "&bPulso eólico lançado." to {_p}
+
+function sorcerer_storm_cloud(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  send action bar "&bNuvem de trovões ativa." to {_p}
+
+function sorcerer_storm_conduit(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  send action bar "&bConvertendo dano elétrico em mana." to {_p}
+
+function sorcerer_storm_eye(playerName: text):
+  set {_p} to player named {_playerName}
+  if {_p} is not set:
+    stop
+  send title "&bOlho da Tempestade" with subtitle "&7Direcione a nuvem" to {_p}
+
+function sorcerer_handle_combat(p: player):
+  set {sorcerer.combat.%uuid of {_p}%} to now
+
+function sorcerer_out_of_combat(p: player) :: boolean:
+  if {sorcerer.combat.%uuid of {_p}%} is not set:
+    return true
+  if difference between now and {sorcerer.combat.%uuid of {_p}%} > {@ooc-delay} seconds:
+    return true
+  return false
+
+function sorcerer_trigger_item(p: player, i: item):
+  if {_i} is air:
+    stop
+  set {_lock} to nbt data "class-lock" of {_i}
+  if {_lock} is not set:
+    stop
+  set {_perm} to "group.%{_lock}%"
+  if {_p} has permission {_perm}:
+    set {_skill} to nbt data "psapi-skill" of {_i}
+    if {_skill} is set:
+      execute console command "skillapi cast %{_skill}% %player%"
+    set {_skript} to nbt data "skript-trigger" of {_i}
+    if {_skript} is set:
+      call function {_skript}({_p})
+    sorcerer_refresh_hud({_p})
+  else:
+    send "{@prefix} &cVocê não possui acesso a este foco." to {_p}
+
+on load:
+  broadcast "&7sorcerer_cmds.sk carregado." to console
+  execute console command "scoreboard objectives add {@sp-objective} dummy"
+  execute console command "scoreboard objectives add {@meta-objective} dummy"
+  execute console command "scoreboard objectives add {@cd-objective} dummy"
+
+on right click:
+  sorcerer_trigger_item(player, player's tool)
+
+on left click:
+  sorcerer_trigger_item(player, player's tool)
+
+on damage of player:
+  sorcerer_handle_combat(victim)
+
+on damage by player:
+  sorcerer_handle_combat(attacker)
+
+command /kit_feiticeiro:
+  permission: {@lp-class}
+  trigger:
+    clear player's inventory
+    execute console command "mm items give %player% ArcaneFocus"
+    execute console command "mm items give %player% ArcaneWaveCrystal"
+    execute console command "mm items give %player% ArcaneBlinkCharm"
+    execute console command "scoreboard players set %player% {@sp-objective} 0"
+    execute console command "scoreboard players set %player% {@meta-objective} 0"
+    execute console command "scoreboard players set %player% {@cd-objective} 0"
+    delete {sorcerer.metamagic.%uuid of player%}
+    delete {sorcerer.combat.%uuid of player%}
+    send "{@prefix} &7Kit de teste entregue." to player
+    sorcerer_refresh_hud(player)
+
+command /metamagia [<text>]:
+  permission: {@lp-class}
+  trigger:
+    if arg-1 is not set:
+      send "{@prefix} &7Opções: rapida, alcance, potencia, conversao, caos, canal."
+      stop
+    set {_arg} to arg-1 parsed as text
+    if {_arg} is "rapida":
+      execute console command "skillapi cast sorcerer_metamagic_rapida %player%"
+    else if {_arg} is "alcance":
+      execute console command "skillapi cast sorcerer_metamagic_alcance %player%"
+    else if {_arg} is "potencia" or {_arg} is "potencializada":
+      execute console command "skillapi cast sorcerer_metamagic_potenciada %player%"
+    else if {_arg} is "conversao":
+      execute console command "skillapi cast sorcerer_metamagic_conversao_elemental %player%"
+    else if {_arg} is "caos":
+      execute console command "skillapi cast sorcerer_metamagic_dado_do_caos %player%"
+    else if {_arg} is "canal":
+      execute console command "skillapi cast sorcerer_metamagic_canal_eletrico %player%"
+    else:
+      send "{@prefix} &cMetamagia desconhecida."
+      stop
+    sorcerer_refresh_hud(player)
+
+command /blink:
+  aliases: /arcane_blink
+  permission: {@lp-class}
+  trigger:
+    execute console command "skillapi cast sorcerer_arcane_blink %player%"
+
+command /sopro_draconico:
+  permission: {@lp-draconic}
+  trigger:
+    execute console command "skillapi cast sorcerer_draconic_breath %player%"
+
+command /escamas_draconicas:
+  permission: {@lp-draconic}
+  trigger:
+    execute console command "skillapi cast sorcerer_draconic_scales %player%"
+
+command /surto_caotico:
+  permission: {@lp-wild}
+  trigger:
+    execute console command "skillapi cast sorcerer_wild_surge %player%"
+
+command /tempestade_caotica:
+  permission: {@lp-wild}
+  trigger:
+    execute console command "skillapi cast sorcerer_wild_tempest %player%"
+
+command /tempestade_olho:
+  permission: {@lp-storm}
+  trigger:
+    execute console command "skillapi cast sorcerer_storm_eye %player%"
+
+command /descarga_tempestuosa:
+  permission: {@lp-storm}
+  trigger:
+    execute console command "skillapi cast sorcerer_storm_discharge %player%"
+
+command /give_sp <player> <number>:
+  permission: {@admin-perm}
+  trigger:
+    execute console command "skillapi give-resource %arg-1% sorcery_points %arg-2%"
+    send "{@prefix} &7Pontos de Feitiçaria ajustados para %arg-1%." to player
+
+command /set_origin <player> <text>:
+  permission: {@admin-perm}
+  trigger:
+    set {_origin} to arg-2 parsed as text
+    if {_origin} is "draconic":
+      execute console command "lp user %arg-1% parent add class_sorcerer.draconic"
+    else if {_origin} is "wild":
+      execute console command "lp user %arg-1% parent add class_sorcerer.wild"
+    else if {_origin} is "storm":
+      execute console command "lp user %arg-1% parent add class_sorcerer.storm"
+    else:
+      send "{@prefix} &cOrigem inválida." to player
+      stop
+    send "{@prefix} &7Origem de %arg-1% definida para %{_origin}%." to player
+
+every 10 seconds:
+  loop all players:
+    if loop-player has permission {@lp-class}:
+      sorcerer_refresh_hud(loop-player)
+      if sorcerer_out_of_combat(loop-player):
+        send action bar "&dRecuperação de Feitiçaria ativa." to loop-player

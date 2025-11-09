@@ -1,0 +1,44 @@
+# Skill ativa: Descarga Tempestuosa
+name: sorcerer_storm_discharge
+display: "§bDescarga Tempestuosa"
+icon: TRIDENT
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  mana-cost-base: 24
+  range-base: 20
+  damage-base: 1.4
+description:
+  - "§bLança raio em linha causando 140% de dano elétrico e enraizando por 2s."
+  - "§7Skript verifica resistências raciais elétricas (diminishing)."
+  - "§7Metamagia Canal Elétrico adiciona rastro estático."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Beam:
+        type: mechanic
+        data:
+          range-base: 20
+          amount-base: 1
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.4
+              classifier: skill
+              element: lightning
+          Root:
+            type: mechanic
+            data:
+              seconds-base: 2
+              seconds-scale: 0
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_storm_discharge %caster%"
+          silent: true

@@ -1,0 +1,134 @@
+# Classe base Feiticeiro para ProSkillAPI
+name: Sorcerer
+prefix: "Sorcerer"
+display: "§5Feiticeiro"
+main-class: true
+description:
+  - "§7Conjurador nato que converte poder inato em explosões arcanas e controle de campo."
+  - "§5Administra Pontos de Feitiçaria para personalizar conjurações com metamagias."
+  - "§7Mantém mobilidade moderada e defesa baixa, respeitando caps globais do servidor."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Mana"
+  mana-regen: 4
+  max-level: 60
+  exp-source: quest
+  attributes-scaled: true
+  needs-race: false
+  sorcery-resource:
+    key: sorcery_points
+    display: "Pontos de Feitiçaria"
+    min: 0
+    max: 3
+    scaling:
+      tier1: 3
+      tier2: 4
+      tier3: 5
+      tier4: 6
+    regen-out-of-combat:
+      delay: 10
+      interval: 12
+      amount: 1
+  scoreboard:
+    sorcery-points: "sorcerer_sp"
+    metamagic: "sorcerer_metamagic"
+    major-cd: "sorcerer_major_cd"
+    placeholders:
+      sorcery-current: "%skills_sorcery_points%"
+      sorcery-max: "%skills_sorcery_points_max%"
+      metamagic-active: "%skills_sorcerer_metamagic%"
+      highest-cd: "%skills_sorcerer_highest_cd%"
+attributes:
+  health-base: 26
+  health-scale: 1.8
+  mana-base: 150
+  mana-scale: 22
+  walk-speed-base: 0.025
+  walk-speed-scale: 0.004
+  physical-defense-base: 1
+  physical-defense-scale: 0.5
+  magical-defense-base: 3
+  magical-defense-scale: 0.9
+  skill-damage: 5.0
+  attack-damage: 1.0
+  level-bonus:
+    1:
+      mana: 150
+      sorcery-points: 3
+      speed: 0.0
+    5:
+      mana: 180
+      sorcery-points: 4
+      speed: 0.01
+    11:
+      mana: 220
+      sorcery-points: 5
+      speed: 0.02
+    17:
+      mana: 260
+      sorcery-points: 6
+      speed: 0.03
+mana:
+  regen-combat: 7
+  regen-out: 13
+exp:
+  kill-multiplier: 0.9
+  quest-multiplier: 1.1
+  pvp-multiplier: 1.0
+skills:
+  tier1:
+    active:
+      - sorcerer_arcane_bolt
+      - sorcerer_arcane_wave
+      - sorcerer_arcane_blink
+    passive:
+      - sorcerer_sorcery_recovery
+      - sorcerer_instinctive_focus
+      - sorcerer_metamagic_rapida
+      - sorcerer_metamagic_alcance
+      - sorcerer_metamagic_potenciada
+  tier2:
+    active:
+      - sorcerer_arcane_bolt
+      - sorcerer_arcane_wave
+      - sorcerer_arcane_blink
+    passive:
+      - sorcerer_sorcery_recovery
+      - sorcerer_instinctive_focus
+      - sorcerer_metamagic_rapida
+      - sorcerer_metamagic_alcance
+      - sorcerer_metamagic_potenciada
+  tier3:
+    active:
+      - sorcerer_arcane_bolt
+      - sorcerer_arcane_wave
+      - sorcerer_arcane_blink
+    passive:
+      - sorcerer_sorcery_recovery
+      - sorcerer_instinctive_focus
+      - sorcerer_metamagic_rapida
+      - sorcerer_metamagic_alcance
+      - sorcerer_metamagic_potenciada
+  tier4:
+    active:
+      - sorcerer_arcane_bolt
+      - sorcerer_arcane_wave
+      - sorcerer_arcane_blink
+    passive:
+      - sorcerer_sorcery_recovery
+      - sorcerer_instinctive_focus
+      - sorcerer_metamagic_rapida
+      - sorcerer_metamagic_alcance
+      - sorcerer_metamagic_potenciada
+subclasses:
+  draconic:
+    display: "§4Origem Dracônica"
+    file: sorcerer_draconic.yml
+  wild:
+    display: "§dMagia Selvagem"
+    file: sorcerer_wild.yml
+  storm:
+    display: "§bMagia da Tempestade"
+    file: sorcerer_storm.yml

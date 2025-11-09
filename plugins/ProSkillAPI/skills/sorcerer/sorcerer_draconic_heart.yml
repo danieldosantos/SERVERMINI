@@ -1,0 +1,32 @@
+# Skill ativa: Coração Elemental
+name: sorcerer_draconic_heart
+display: "§4Coração Elemental"
+icon: NETHERITE_INGOT
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 105
+  mana-cost-base: 32
+description:
+  - "§4Aumenta o dano elemental em 20% por 12s."
+  - "§7Atualiza metamagias para corresponder ao elemento ativo."
+  - "§7Respeita limites de burst mantendo TTK saudável em PvP."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      BuffDamage:
+        type: mechanic
+        data:
+          key: draconic_heart
+          type: attribute
+          modifier: elemental-damage
+          value-base: 0.2
+          seconds-base: 12
+      SkriptMsg:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_draconic_heart %caster%"
+          silent: true

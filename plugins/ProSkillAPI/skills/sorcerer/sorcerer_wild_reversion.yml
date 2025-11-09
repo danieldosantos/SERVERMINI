@@ -1,0 +1,30 @@
+# Skill ativa: Reversão Quântica
+name: sorcerer_wild_reversion
+display: "§dReversão Quântica"
+icon: CLOCK
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  mana-cost-base: 26
+description:
+  - "§dRerrola até 2 debuffs: 50% remover, 50% converter em buff leve."
+  - "§7Skript consulta tabelas de efeitos e aplica resultado instantâneo."
+  - "§7Não remove penalidades PvP severas acima do previsto."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      SkriptRoll:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_wild_reversion %caster%"
+          silent: true
+      Particle:
+        type: mechanic
+        data:
+          effect: PORTAL
+          amount-base: 30
+          radius-base: 1

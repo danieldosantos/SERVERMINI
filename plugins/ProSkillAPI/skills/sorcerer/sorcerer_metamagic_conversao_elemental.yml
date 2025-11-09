@@ -1,0 +1,41 @@
+# Metamagia: Conversão Elemental
+name: sorcerer_metamagic_conversao_elemental
+display: "§4Metamagia: Conversão Elemental"
+icon: DRAGON_HEAD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 30
+  sorcery-points-cost: 1
+description:
+  - "§4Transforma o próximo feitiço no elemento do sangue dracônico ativo."
+  - "§7Consome 1 Ponto de Feitiçaria e impõe lockout de 30s."
+  - "§7Skript garante ajustes visuais e evita stack com resistências raciais."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      ResourceCheck:
+        type: condition
+        data:
+          key: sorcery_points
+          amount-base: 1
+          type: at least
+        children:
+          ConsumeResource:
+            type: mechanic
+            data:
+              key: sorcery_points
+              amount-base: 1
+          SkriptFlag:
+            type: mechanic
+            data:
+              command: "skript run sorcerer_metamagic_set %caster% conversao"
+              silent: true
+          Message:
+            type: mechanic
+            data:
+              message: "§4Próximo feitiço convertido para o elemento dracônico ativo!"
+              targets: self

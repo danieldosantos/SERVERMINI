@@ -1,0 +1,42 @@
+# Subclasse Feiticeiro: Magia da Tempestade
+name: Sorcerer_Storm
+display: "§bMagia da Tempestade"
+description:
+  - "§7Domina ventos e trovões para controlar zonas e reposicionar inimigos."
+  - "§bGarante mobilidade elevada sem ultrapassar bônus globais de velocidade (≤0.05)."
+  - "§7Danos elétricos verificam resistências raciais e aplicam retornos decrescentes em buffs."
+options:
+  needs-permission: true
+  parent: Sorcerer
+  mana-name: "Mana Tempestuosa"
+skills:
+  tier1:
+    active:
+      - sorcerer_storm_discharge
+      - sorcerer_storm_gale
+    passive:
+      - sorcerer_metamagic_canal_eletrico
+  tier2:
+    active:
+      - sorcerer_storm_discharge
+      - sorcerer_storm_gale
+      - sorcerer_storm_cloud
+    passive:
+      - sorcerer_metamagic_canal_eletrico
+  tier3:
+    active:
+      - sorcerer_storm_discharge
+      - sorcerer_storm_gale
+      - sorcerer_storm_cloud
+      - sorcerer_storm_conduit
+    passive:
+      - sorcerer_metamagic_canal_eletrico
+  tier4:
+    active:
+      - sorcerer_storm_discharge
+      - sorcerer_storm_gale
+      - sorcerer_storm_cloud
+      - sorcerer_storm_conduit
+      - sorcerer_storm_eye
+    passive:
+      - sorcerer_metamagic_canal_eletrico

@@ -1,0 +1,46 @@
+# Skill ativa: Surto Caótico
+name: sorcerer_wild_surge
+display: "§dSurto Caótico"
+icon: ENDER_PEARL
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  mana-cost-base: 22
+  range-base: 24
+  damage-base: 1.5
+description:
+  - "§dDispara projétil aleatório (fogo, frio ou raio) com 150% de dano."
+  - "§7Elemento sorteado via Skript atualiza partículas e cheque de resistência."
+  - "§7Integra metamagia Dado do Caos para buffs extras."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      SkriptElement:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_wild_surge %caster%"
+          silent: true
+      Projectile:
+        type: mechanic
+        data:
+          group: enemy
+          amount-base: 1
+          range-base: 24
+          speed-base: 34
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.5
+              classifier: skill
+              element: elemental
+          Particle:
+            type: mechanic
+            data:
+              effect: SPELL_WITCH
+              amount-base: 20
+              radius-base: 0.3

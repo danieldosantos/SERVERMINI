@@ -1,0 +1,41 @@
+# Metamagia: Dado do Caos
+name: sorcerer_metamagic_dado_do_caos
+display: "§dMetamagia: Dado do Caos"
+icon: GHAST_TEAR
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 30
+  sorcery-points-cost: 1
+description:
+  - "§dPróxima skill recebe +10% dano e chance de efeito caótico adicional."
+  - "§7Lockout de 30s e custo de 1 Ponto de Feitiçaria."
+  - "§7Skript manipula tabela de bônus sem ultrapassar caps de mitigação/dano."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      ResourceCheck:
+        type: condition
+        data:
+          key: sorcery_points
+          amount-base: 1
+          type: at least
+        children:
+          ConsumeResource:
+            type: mechanic
+            data:
+              key: sorcery_points
+              amount-base: 1
+          SkriptFlag:
+            type: mechanic
+            data:
+              command: "skript run sorcerer_metamagic_set %caster% caos"
+              silent: true
+          Message:
+            type: mechanic
+            data:
+              message: "§dVocê rolou o Dado do Caos!"
+              targets: self

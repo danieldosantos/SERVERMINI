@@ -1,0 +1,37 @@
+# Passiva: Foco Instintivo
+name: sorcerer_instinctive_focus
+display: "§bFoco Instintivo"
+icon: LAPIS_LAZULI
+type: Passive
+max-level: 1
+description:
+  - "§bApós conjurar uma skill, ganha +4% penetração mágica por 6s."
+  - "§7Uptime efetivo limitado abaixo de 60% por cooldown interno."
+  - "§7Skript atualiza scoreboard com duração restante."
+components:
+  CastTrigger:
+    type: trigger
+    data:
+      trigger: cast
+    children:
+      Buff:
+        type: mechanic
+        data:
+          key: sorcerer_focus
+          type: attribute
+          modifier: skill-penetration
+          value-base: 0.04
+          value-scale: 0
+          seconds-base: 6
+          seconds-scale: 0
+      Cooldown:
+        type: mechanic
+        data:
+          key: sorcerer_focus_cd
+          seconds-base: 9
+          seconds-scale: 0
+      HUD:
+        type: mechanic
+        data:
+          command: "skript run sorcerer_focus_refresh %caster%"
+          silent: true
