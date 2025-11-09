@@ -2,12 +2,12 @@ options:
   group-base: "class_cleric"
   resource-divinity: "divinity"
   resource-mana: "mana"
-  skill-canalizar: "Cleric_ChannelDivinity"
-  skill-palavra: "Cleric_WordHeal"
-  skill-vida: "Cleric_Domain_Life"
-  skill-guerra: "Cleric_Domain_War"
-  skill-crepusculo: "Cleric_Domain_Twilight"
-  skill-ultimate: "Cleric_Ultimate"
+  skill-canalizar: Cleric_ChannelDivinity
+  skill-palavra: Cleric_WordHeal
+  skill-vida: Cleric_Domain_Life
+  skill-guerra: Cleric_Domain_War
+  skill-crepusculo: Cleric_Domain_Twilight
+  skill-ultimate: Cleric_Ultimate
   cost-canalizar: 1
   cost-palavra: 20
   cost-dominio: 1
@@ -25,7 +25,8 @@ command /canalizar:
       stop
     if classes_consume_resource(player, {@resource-divinity}, {@cost-canalizar}) is false:
       stop
-    execute console command "mm skills cast {@skill-canalizar} target=%player%"
+    set {_skill} to {@skill-canalizar}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&fDivindade canalizada!", "block.beacon.activate", 1.0)
 
 command /palavradivina <player>:
@@ -36,7 +37,8 @@ command /palavradivina <player>:
       stop
     if classes_consume_resource(player, {@resource-mana}, {@cost-palavra}) is false:
       stop
-    execute console command "mm skills cast {@skill-palavra} target=%arg-1% caster=%player%"
+    set {_skill} to {@skill-palavra}
+    execute console command "mm skills cast %{_skill}% target=%arg-1% caster=%player%"
     classes_play_feedback(player, "&fPalavra curativa enviada a %{arg-1}%!", "entity.experience_orb.pickup", 1.0)
 
 command /dominio <text>:
@@ -51,7 +53,7 @@ command /dominio <text>:
       set {_id} to "war"
       set {_display} to "guerra"
       set {_skill} to {@skill-guerra}
-    else if {_choice} is "crepusculo" or {_choice} is "crepúsculo" or {_choice} is "twilight":
+    else if {_choice} is any of "crepusculo" or "crepúsculo" or "twilight":
       set {_id} to "twilight"
       set {_display} to "crepúsculo"
       set {_skill} to {@skill-crepusculo}
@@ -70,5 +72,6 @@ command /ultimate_clr:
       stop
     if classes_consume_resource(player, {@resource-divinity}, {@cost-ultimate}) is false:
       stop
-    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    set {_skill} to {@skill-ultimate}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&fMilagre vital convocado!", "block.beacon.power_select", 0.8)

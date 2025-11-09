@@ -1,12 +1,12 @@
 options:
   group-base: "class_monk"
   resource-ki: "ki"
-  skill-rajada: "Monk_FlurryOfBlows"
-  skill-passo: "Monk_StepOfTheWind"
-  skill-maos: "Monk_Tradition_OpenHand"
-  skill-sombras: "Monk_Tradition_Shadow"
-  skill-elementos: "Monk_Tradition_Elements"
-  skill-ultimate: "Monk_Ultimate"
+  skill-rajada: Monk_FlurryOfBlows
+  skill-passo: Monk_StepOfTheWind
+  skill-maos: Monk_Tradition_OpenHand
+  skill-sombras: Monk_Tradition_Shadow
+  skill-elementos: Monk_Tradition_Elements
+  skill-ultimate: Monk_Ultimate
   cost-rajada: 1
   cost-passo: 1
   cost-tradicao: 2
@@ -16,7 +16,7 @@ options:
   cd-tradicao: 90
   cd-ultimate: 210
 
-command /rajada:
+command /rajada_mnk:
   trigger:
     if classes_has_group(player, {@group-base}, "Monge") is false:
       stop
@@ -24,7 +24,8 @@ command /rajada:
       stop
     if classes_consume_resource(player, {@resource-ki}, {@cost-rajada}) is false:
       stop
-    execute console command "mm skills cast {@skill-rajada} target=%player%"
+    set {_skill} to {@skill-rajada}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&eRajada de golpes executada!", "entity.player.attack.knockback", 1.2)
 
 command /passo:
@@ -35,7 +36,8 @@ command /passo:
       stop
     if classes_consume_resource(player, {@resource-ki}, {@cost-passo}) is false:
       stop
-    execute console command "mm skills cast {@skill-passo} target=%player%"
+    set {_skill} to {@skill-passo}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&ePasso do Vento ativo!", "entity.player.attack.sweep", 1.4)
 
 command /tradicao <text>:
@@ -46,11 +48,11 @@ command /tradicao <text>:
     set {_id} to "openhand"
     set {_display} to "mãos abertas"
     set {_skill} to {@skill-maos}
-    if {_choice} is "sombras" or {_choice} is "shadow":
+    if {_choice} is any of "sombras" or "shadow":
       set {_id} to "shadow"
       set {_display} to "sombra"
       set {_skill} to {@skill-sombras}
-    else if {_choice} is "elementos" or {_choice} is "elements":
+    else if {_choice} is any of "elementos" or "elements":
       set {_id} to "elements"
       set {_display} to "quatro elementos"
       set {_skill} to {@skill-elementos}
@@ -69,5 +71,6 @@ command /ultimate_mnk:
       stop
     if classes_consume_resource(player, {@resource-ki}, {@cost-ultimate}) is false:
       stop
-    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    set {_skill} to {@skill-ultimate}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&eAvatar disciplinado alcançado!", "entity.lightning_bolt.thunder", 1.5)

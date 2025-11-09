@@ -2,12 +2,12 @@ options:
   group-base: "class_warlock"
   resource-mana: "mana"
   resource-focus: "focus"
-  skill-hex: "Warlock_Hex"
-  skill-rajada: "Warlock_EldritchBlast"
-  skill-fiend: "Warlock_Pact_Fiend"
-  skill-archfey: "Warlock_Pact_Archfey"
-  skill-oldone: "Warlock_Pact_OldOne"
-  skill-ultimate: "Warlock_Ultimate"
+  skill-hex: Warlock_Hex
+  skill-rajada: Warlock_EldritchBlast
+  skill-fiend: Warlock_Pact_Fiend
+  skill-archfey: Warlock_Pact_Archfey
+  skill-oldone: Warlock_Pact_OldOne
+  skill-ultimate: Warlock_Ultimate
   cost-hex: 25
   cost-rajada: 10
   cost-pacto: 30
@@ -25,7 +25,8 @@ command /hex <player>:
       stop
     if classes_consume_resource(player, {@resource-mana}, {@cost-hex}) is false:
       stop
-    execute console command "mm skills cast {@skill-hex} target=%arg-1% caster=%player%"
+    set {_skill} to {@skill-hex}
+    execute console command "mm skills cast %{_skill}% target=%arg-1% caster=%player%"
     classes_play_feedback(player, "&5Hex conjurado em %{arg-1}%!", "entity.witch.celebrate", 1.1)
 
 command /rajada:
@@ -36,7 +37,8 @@ command /rajada:
       stop
     if classes_consume_resource(player, {@resource-mana}, {@cost-rajada}) is false:
       stop
-    execute console command "mm skills cast {@skill-rajada} target=%player%"
+    set {_skill} to {@skill-rajada}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&5Rajada Mística disparada!", "entity.blaze.shoot", 1.2)
 
 command /pacto <text>:
@@ -47,11 +49,11 @@ command /pacto <text>:
     set {_id} to "fiend"
     set {_display} to "fiend"
     set {_skill} to {@skill-fiend}
-    if {_choice} is "archfey" or {_choice} is "arquifada":
+    if {_choice} is any of "archfey" or "arquifada":
       set {_id} to "archfey"
       set {_display} to "archfey"
       set {_skill} to {@skill-archfey}
-    else if {_choice} is "oldone" or {_choice} is "antigo":
+    else if {_choice} is any of "oldone" or "antigo":
       set {_id} to "oldone"
       set {_display} to "great old one"
       set {_skill} to {@skill-oldone}
@@ -70,5 +72,6 @@ command /ultimate_wlk:
       stop
     if classes_consume_resource(player, {@resource-mana}, {@cost-ultimate}) is false:
       stop
-    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    set {_skill} to {@skill-ultimate}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&5Abismo sussurrante atende ao chamado!", "entity.warden.sonic_charge", 0.7)

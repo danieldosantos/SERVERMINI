@@ -2,12 +2,12 @@ options:
   group-base: "class_rogue"
   resource-stamina: "stamina"
   resource-focus: "focus"
-  skill-furtivo: "Rogue_Stealth"
-  skill-golpe: "Rogue_SneakAttack"
-  skill-ladrao: "Rogue_Archetype_Thief"
-  skill-assassino: "Rogue_Archetype_Assassin"
-  skill-arcano: "Rogue_Archetype_Arcane"
-  skill-ultimate: "Rogue_Ultimate"
+  skill-furtivo: Rogue_Stealth
+  skill-golpe: Rogue_SneakAttack
+  skill-ladrao: Rogue_Archetype_Thief
+  skill-assassino: Rogue_Archetype_Assassin
+  skill-arcano: Rogue_Archetype_Arcane
+  skill-ultimate: Rogue_Ultimate
   cost-furtivo: 15
   cost-golpe: 25
   cost-truque: 20
@@ -25,7 +25,8 @@ command /furtivo:
       stop
     if classes_consume_resource(player, {@resource-stamina}, {@cost-furtivo}) is false:
       stop
-    execute console command "mm skills cast {@skill-furtivo} target=%player%"
+    set {_skill} to {@skill-furtivo}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&8Você se mistura às sombras.", "entity.bat.takeoff", 1.4)
 
 command /golpefurtivo <player>:
@@ -36,7 +37,8 @@ command /golpefurtivo <player>:
       stop
     if classes_consume_resource(player, {@resource-focus}, {@cost-golpe}) is false:
       stop
-    execute console command "mm skills cast {@skill-golpe} target=%arg-1% caster=%player%"
+    set {_skill} to {@skill-golpe}
+    execute console command "mm skills cast %{_skill}% target=%arg-1% caster=%player%"
     classes_play_feedback(player, "&8Ataque furtivo em %{arg-1}%!", "entity.player.attack.crit", 1.3)
 
 command /truque <text>:
@@ -47,11 +49,11 @@ command /truque <text>:
     set {_id} to "thief"
     set {_display} to "ladrão"
     set {_skill} to {@skill-ladrao}
-    if {_choice} is "assassino" or {_choice} is "assassin":
+    if {_choice} is any of "assassino" or "assassin":
       set {_id} to "assassin"
       set {_display} to "assassino"
       set {_skill} to {@skill-assassino}
-    else if {_choice} is "arcano" or {_choice} is "arcanista":
+    else if {_choice} is any of "arcano" or "arcanista":
       set {_id} to "arcane"
       set {_display} to "arcano"
       set {_skill} to {@skill-arcano}
@@ -70,5 +72,6 @@ command /ultimate_rog:
       stop
     if classes_consume_resource(player, {@resource-focus}, {@cost-ultimate}) is false:
       stop
-    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    set {_skill} to {@skill-ultimate}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&8Golpe das sombras desencadeado!", "entity.enderman.stare", 0.8)

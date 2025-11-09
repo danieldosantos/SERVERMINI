@@ -2,12 +2,12 @@ options:
   group-base: "class_ranger"
   resource-stamina: "stamina"
   resource-focus: "focus"
-  skill-marca: "Ranger_HuntersMark"
-  skill-companheiro: "Ranger_CompanionSummon"
-  skill-cacador: "Ranger_Conclave_Hunter"
-  skill-bestas: "Ranger_Conclave_Beast"
-  skill-trevas: "Ranger_Conclave_Gloom"
-  skill-ultimate: "Ranger_Ultimate"
+  skill-marca: Ranger_HuntersMark
+  skill-companheiro: Ranger_CompanionSummon
+  skill-cacador: Ranger_Conclave_Hunter
+  skill-bestas: Ranger_Conclave_Beast
+  skill-trevas: Ranger_Conclave_Gloom
+  skill-ultimate: Ranger_Ultimate
   cost-marca: 20
   cost-companheiro: 30
   cost-conclave: 25
@@ -25,7 +25,8 @@ command /marca <player>:
       stop
     if classes_consume_resource(player, {@resource-focus}, {@cost-marca}) is false:
       stop
-    execute console command "mm skills cast {@skill-marca} target=%arg-1% caster=%player%"
+    set {_skill} to {@skill-marca}
+    execute console command "mm skills cast %{_skill}% target=%arg-1% caster=%player%"
     classes_play_feedback(player, "&2Marca do caçador aplicada em %{arg-1}%!", "entity.arrow.hit_player", 1.2)
 
 command /companheiro:
@@ -36,7 +37,8 @@ command /companheiro:
       stop
     if classes_consume_resource(player, {@resource-stamina}, {@cost-companheiro}) is false:
       stop
-    execute console command "mm skills cast {@skill-companheiro} target=%player%"
+    set {_skill} to {@skill-companheiro}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&2Companheiro convocado!", "entity.wolf.howl", 0.9)
 
 command /conclave <text>:
@@ -47,11 +49,11 @@ command /conclave <text>:
     set {_id} to "hunter"
     set {_display} to "caçador"
     set {_skill} to {@skill-cacador}
-    if {_choice} is "bestas" or {_choice} is "beast":
+    if {_choice} is any of "bestas" or "beast":
       set {_id} to "beast"
       set {_display} to "mestre das bestas"
       set {_skill} to {@skill-bestas}
-    else if {_choice} is "trevas" or {_choice} is "gloom":
+    else if {_choice} is any of "trevas" or "gloom":
       set {_id} to "gloom"
       set {_display} to "gloom stalker"
       set {_skill} to {@skill-trevas}
@@ -70,5 +72,6 @@ command /ultimate_rng:
       stop
     if classes_consume_resource(player, {@resource-focus}, {@cost-ultimate}) is false:
       stop
-    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    set {_skill} to {@skill-ultimate}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&2Convergência da caça iniciada!", "entity.arrow.shoot", 0.7)

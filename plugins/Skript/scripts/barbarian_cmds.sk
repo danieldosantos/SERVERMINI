@@ -3,7 +3,7 @@ options:
   prefix: &6[Barbaro]&f
 
 on load:
-  broadcast "&7Skript barbarian_cmds.sk carregado." to console
+  send "&7Skript barbarian_cmds.sk carregado." to console
 
 command /kit_barbaro:
   permission: group.class_barbarian
@@ -17,17 +17,6 @@ command /kit_barbaro:
     execute console command "scoreboard objectives add barbarian_rage dummy"
     execute console command "scoreboard players set %player% barbarian_rage 0"
     send "{@prefix} &7Kit de testes configurado."
-
-command /furia:
-  aliases: /rage
-  permission: group.class_barbarian
-  trigger:
-    execute console command "skillapi cast barbarian_fury %player%"
-
-command /temerario:
-  permission: group.class_barbarian
-  trigger:
-    execute console command "skillapi cast barbarian_reckless_attack %player%"
 
 command /berserk:
   permission: group.class_barbarian.berserker
@@ -69,14 +58,14 @@ on rightclick with blaze powder:
     if player has permission "group.class_barbarian":
       execute console command "skillapi cast barbarian_fury %player%"
     else:
-      send "{@prefix} &cApenas Bárbaros podem usar isso."
+      send "{@prefix} &cApenas Bárbaros podem usar isso." to player
 
 on rightclick with goat horn:
   if name of player's tool = "&cBerrante Berserker":
     if player has permission "group.class_barbarian.berserker":
       execute console command "skillapi cast barbarian_berserker_bestial_roar %player%"
     else:
-      send "{@prefix} &cApenas Berserkers."
+      send "{@prefix} &cApenas Berserkers." to player
 
 on leftclick with netherite axe:
   if name of player's tool = "&4Machado Sanguinário":

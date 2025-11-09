@@ -2,12 +2,12 @@ options:
   group-base: "class_fighter"
   resource-stamina: "stamina"
   resource-focus: "battle_focus"
-  skill-surto: "Fighter_ActionSurge"
-  skill-vento: "Fighter_SecondWind"
-  skill-campeao: "Fighter_Archetype_Champion"
-  skill-mestre: "Fighter_Archetype_Battlemaster"
-  skill-arcano: "Fighter_Archetype_Eldritch"
-  skill-ultimate: "Fighter_Ultimate"
+  skill-surto: Fighter_ActionSurge
+  skill-vento: Fighter_SecondWind
+  skill-campeao: Fighter_Archetype_Champion
+  skill-mestre: Fighter_Archetype_Battlemaster
+  skill-arcano: Fighter_Archetype_Eldritch
+  skill-ultimate: Fighter_Ultimate
   cost-surto: 1
   cost-vento: 30
   cost-arquetipo: 25
@@ -25,7 +25,8 @@ command /surto:
       stop
     if classes_consume_resource(player, {@resource-focus}, {@cost-surto}) is false:
       stop
-    execute console command "mm skills cast {@skill-surto} target=%player%"
+    set {_skill} to {@skill-surto}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&7Action Surge ativado!", "entity.player.attack.sweep", 1.0)
 
 command /segundovento:
@@ -36,7 +37,8 @@ command /segundovento:
       stop
     if classes_consume_resource(player, {@resource-stamina}, {@cost-vento}) is false:
       stop
-    execute console command "mm skills cast {@skill-vento} target=%player%"
+    set {_skill} to {@skill-vento}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&7Second Wind restaura suas forças!", "entity.iron_golem.repair", 1.2)
 
 command /arquetipo <text>:
@@ -47,11 +49,11 @@ command /arquetipo <text>:
     set {_id} to "champion"
     set {_display} to "campeão"
     set {_skill} to {@skill-campeao}
-    if {_choice} is "mestre" or {_choice} is "batalha" or {_choice} is "battlemaster":
+    if {_choice} is any of "mestre" or "batalha" or "battlemaster":
       set {_id} to "battlemaster"
       set {_display} to "mestre de batalha"
       set {_skill} to {@skill-mestre}
-    else if {_choice} is "arcano" or {_choice} is "eldritch":
+    else if {_choice} is any of "arcano" or "eldritch":
       set {_id} to "eldritch"
       set {_display} to "cavaleiro élfico"
       set {_skill} to {@skill-arcano}
@@ -70,5 +72,6 @@ command /ultimate_fgt:
       stop
     if classes_consume_resource(player, {@resource-focus}, {@cost-ultimate}) is false:
       stop
-    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    set {_skill} to {@skill-ultimate}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&7Triunfo inesquecível!", "entity.ender_dragon.growl", 0.8)

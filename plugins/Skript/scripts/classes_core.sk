@@ -16,19 +16,13 @@ function classes_has_group(p: player, group: text, label: text) :: boolean:
   send "%classes_prefix()%&cVocê precisa estar na classe %{_label}% para usar esta habilidade." to {_p}
   return false
 
-function classes_placeholder(p: player, node: text) :: text:
-  set {_value} to placeholder "%{_node}%" with {_p}
-  if {_value} is not set:
-    set {_value} to ""
-  return {_value}
-
 function classes_get_resource(p: player, resource: text) :: number:
   if {_resource} is "":
     return 0
-  set {_raw} to classes_placeholder({_p}, "auraskills_resource_%{_resource}%")
-  if {_raw} is a number:
-    return {_raw} parsed as number
-  return {classes_resource::%uuid of {_p}%::%{_resource}%}
+  set {_stored} to {classes_resource::%uuid of {_p}%::%{_resource}%}
+  if {_stored} is not set:
+    return 0
+  return {_stored}
 
 function classes_set_resource(p: player, resource: text, value: number):
   if {_resource} is "":
@@ -51,20 +45,17 @@ function classes_consume_resource(p: player, resource: text, cost: number) :: bo
   return true
 
 function classes_cooldown_ready(p: player, ability: text, cooldown: number) :: boolean:
-  set {_placeholder} to classes_placeholder({_p}, "auraskills_cooldown_%{_ability}%")
-  if {_placeholder} is a number:
-    set {_placeholderSeconds} to {_placeholder} parsed as number
-    if {_placeholderSeconds} > 0:
-      send "%classes_prefix()%&eHabilidade em recarga por %{_placeholderSeconds}%s (AuraSkills)." to {_p}
-      return false
   set {_now} to now
-  set {_expires} to {classes_cd::%uuid of {_p}%::%{_ability}%}
-  if {_expires} is set:
-    if {_expires} > {_now}:
-      set {_span} to difference between {_expires} and {_now}
-      send "%classes_prefix()%&eAguarde %{_span}% para reutilizar." to {_p}
+  set {_last} to {classes_cd::%uuid of {_p}%::%{_ability}%}
+  if {_last} is set:
+    set {_elapsed} to seconds between {_last} and {_now}
+    if {_elapsed} < {_cooldown}:
+      set {_remaining} to round({_cooldown} - {_elapsed})
+      if {_remaining} < 1:
+        set {_remaining} to 1
+      send "%classes_prefix()%&eAguarde %{_remaining}%s para reutilizar." to {_p}
       return false
-  set {classes_cd::%uuid of {_p}%::%{_ability}%} to {_now} + {_cooldown} seconds
+  set {classes_cd::%uuid of {_p}%::%{_ability}%} to {_now}
   execute console command "auraskills player %uuid of {_p}% cooldown %{_ability}% set %{_cooldown}%"
   return true
 
@@ -72,4 +63,4 @@ function classes_play_feedback(p: player, message: text, sound: text="entity.exp
   if {_message} is not "":
     send "%classes_prefix()%{_message}" to {_p}
   if {_sound} is not "":
-    play sound {_sound} for {_p} with pitch {_pitch}
+    play sound {_sound} with pitch {_pitch} to {_p}

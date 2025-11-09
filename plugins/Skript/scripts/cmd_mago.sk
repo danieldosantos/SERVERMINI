@@ -2,12 +2,12 @@ options:
   group-base: "class_wizard"
   resource-mana: "mana"
   resource-cargas: "arcane_charges"
-  skill-preparar: "Wizard_SpellPrep"
-  skill-grimorio: "Wizard_ArcaneVolley"
-  skill-evocacao: "Wizard_School_Evocation"
-  skill-ilusao: "Wizard_School_Illusion"
-  skill-abjuracao: "Wizard_School_Abjuration"
-  skill-ultimate: "Wizard_Ultimate"
+  skill-preparar: Wizard_SpellPrep
+  skill-grimorio: Wizard_ArcaneVolley
+  skill-evocacao: Wizard_School_Evocation
+  skill-ilusao: Wizard_School_Illusion
+  skill-abjuracao: Wizard_School_Abjuration
+  skill-ultimate: Wizard_Ultimate
   cost-preparar: 1
   cost-grimorio: 30
   cost-escola: 35
@@ -25,7 +25,8 @@ command /preparar <text>:
       stop
     if classes_consume_resource(player, {@resource-cargas}, {@cost-preparar}) is false:
       stop
-    execute console command "mm skills cast {@skill-preparar} target=%player% data=%arg-1%"
+    set {_skill} to {@skill-preparar}
+    execute console command "mm skills cast %{_skill}% target=%player% data=%arg-1%"
     classes_play_feedback(player, "&9Memorizando feitiços de %{arg-1}%.", "block.enchantment_table.use", 1.0)
 
 command /grimorio:
@@ -36,7 +37,8 @@ command /grimorio:
       stop
     if classes_consume_resource(player, {@resource-mana}, {@cost-grimorio}) is false:
       stop
-    execute console command "mm skills cast {@skill-grimorio} target=%player%"
+    set {_skill} to {@skill-grimorio}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&9Energia arcana liberada!", "entity.vex.charge", 1.1)
 
 command /escola <text>:
@@ -47,11 +49,11 @@ command /escola <text>:
     set {_id} to "evocation"
     set {_display} to "evocação"
     set {_skill} to {@skill-evocacao}
-    if {_choice} is "ilusao" or {_choice} is "ilusão" or {_choice} is "illusion":
+    if {_choice} is any of "ilusao" or "ilusão" or "illusion":
       set {_id} to "illusion"
       set {_display} to "ilusão"
       set {_skill} to {@skill-ilusao}
-    else if {_choice} is "abjuracao" or {_choice} is "abjuração" or {_choice} is "abjuration":
+    else if {_choice} is any of "abjuracao" or "abjuração" or "abjuration":
       set {_id} to "abjuration"
       set {_display} to "abjuração"
       set {_skill} to {@skill-abjuracao}
@@ -70,5 +72,6 @@ command /ultimate_wiz:
       stop
     if classes_consume_resource(player, {@resource-cargas}, {@cost-ultimate}) is false:
       stop
-    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    set {_skill} to {@skill-ultimate}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&9Tempestade arcana assoladora!", "entity.elder_guardian.curse", 0.7)

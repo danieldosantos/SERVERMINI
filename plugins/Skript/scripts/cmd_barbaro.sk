@@ -1,13 +1,13 @@
 options:
   group-base: "class_barbarian"
   resource: "fury"
-  skill-furia: "Barbarian_Rage"
-  skill-temerario: "Barbarian_Reckless"
-  skill-totem-bear: "Barbarian_Totem_Bear"
-  skill-totem-eagle: "Barbarian_Totem_Eagle"
-  skill-totem-wolf: "Barbarian_Totem_Wolf"
-  skill-totem-phoenix: "Barbarian_Totem_Phoenix"
-  skill-ultimate: "Barbarian_Ultimate"
+  skill-furia: Barbarian_Rage
+  skill-temerario: Barbarian_Reckless
+  skill-totem-bear: Barbarian_Totem_Bear
+  skill-totem-eagle: Barbarian_Totem_Eagle
+  skill-totem-wolf: Barbarian_Totem_Wolf
+  skill-totem-phoenix: Barbarian_Totem_Phoenix
+  skill-ultimate: Barbarian_Ultimate
   cost-furia: 30
   cost-temerario: 15
   cost-totem: 20
@@ -25,7 +25,8 @@ command /furia:
       stop
     if classes_consume_resource(player, {@resource}, {@cost-furia}) is false:
       stop
-    execute console command "mm skills cast {@skill-furia} target=%player%"
+    set {_skill} to {@skill-furia}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&aFúria ativada!")
 
 command /temerario:
@@ -36,7 +37,8 @@ command /temerario:
       stop
     if classes_consume_resource(player, {@resource}, {@cost-temerario}) is false:
       stop
-    execute console command "mm skills cast {@skill-temerario} target=%player%"
+    set {_skill} to {@skill-temerario}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&aAtaque Temerário lançado!")
 
 command /totem [<text>]:
@@ -49,15 +51,15 @@ command /totem [<text>]:
     set {_id} to "bear"
     set {_display} to "urso"
     set {_skill} to {@skill-totem-bear}
-    if {_choice} is "aguia" or {_choice} is "águia" or {_choice} is "eagle":
+    if {_choice} is any of "aguia" or "águia" or "eagle":
       set {_id} to "eagle"
       set {_display} to "águia"
       set {_skill} to {@skill-totem-eagle}
-    else if {_choice} is "lobo" or {_choice} is "wolf":
+    else if {_choice} is any of "lobo" or "wolf":
       set {_id} to "wolf"
       set {_display} to "lobo"
       set {_skill} to {@skill-totem-wolf}
-    else if {_choice} is "fenix" or {_choice} is "fênix" or {_choice} is "phoenix":
+    else if {_choice} is any of "fenix" or "fênix" or "phoenix":
       set {_id} to "phoenix"
       set {_display} to "fênix"
       set {_skill} to {@skill-totem-phoenix}
@@ -76,5 +78,6 @@ command /ultimate_brb:
       stop
     if classes_consume_resource(player, {@resource}, {@cost-ultimate}) is false:
       stop
-    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    set {_skill} to {@skill-ultimate}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&6Carnificina implacável!", "entity.wither.spawn", 0.8)

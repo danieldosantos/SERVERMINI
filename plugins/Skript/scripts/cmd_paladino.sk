@@ -2,12 +2,12 @@ options:
   group-base: "class_paladin"
   resource-divinity: "divinity"
   resource-mana: "mana"
-  skill-golpe: "Paladin_DivineSmite"
-  skill-aura: "Paladin_AuraToggle"
-  skill-devocao: "Paladin_Oath_Devotion"
-  skill-vinganca: "Paladin_Oath_Vengeance"
-  skill-ancioes: "Paladin_Oath_Ancients"
-  skill-ultimate: "Paladin_Ultimate"
+  skill-golpe: Paladin_DivineSmite
+  skill-aura: Paladin_AuraToggle
+  skill-devocao: Paladin_Oath_Devotion
+  skill-vinganca: Paladin_Oath_Vengeance
+  skill-ancioes: Paladin_Oath_Ancients
+  skill-ultimate: Paladin_Ultimate
   cost-golpe: 1
   cost-aura: 1
   cost-voto: 1
@@ -25,7 +25,8 @@ command /golpe <player>:
       stop
     if classes_consume_resource(player, {@resource-divinity}, {@cost-golpe}) is false:
       stop
-    execute console command "mm skills cast {@skill-golpe} target=%arg-1% caster=%player%"
+    set {_skill} to {@skill-golpe}
+    execute console command "mm skills cast %{_skill}% target=%arg-1% caster=%player%"
     classes_play_feedback(player, "&6Golpe divino aplicado em %{arg-1}%!", "entity.player.attack.strong", 1.0)
 
 command /aura:
@@ -36,7 +37,8 @@ command /aura:
       stop
     if classes_consume_resource(player, {@resource-divinity}, {@cost-aura}) is false:
       stop
-    execute console command "mm skills cast {@skill-aura} target=%player%"
+    set {_skill} to {@skill-aura}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&6Aura protetora ativa por 12s!", "block.beacon.activate", 0.9)
 
 command /voto <text>:
@@ -47,11 +49,11 @@ command /voto <text>:
     set {_id} to "devotion"
     set {_display} to "devoção"
     set {_skill} to {@skill-devocao}
-    if {_choice} is "vinganca" or {_choice} is "vingança" or {_choice} is "vengeance":
+    if {_choice} is any of "vinganca" or "vingança" or "vengeance":
       set {_id} to "vengeance"
       set {_display} to "vingança"
       set {_skill} to {@skill-vinganca}
-    else if {_choice} is "ancioes" or {_choice} is "anciões" or {_choice} is "ancoes" or {_choice} is "ancients":
+    else if {_choice} is any of "ancioes" or "anciões" or "ancoes" or "ancients":
       set {_id} to "ancients"
       set {_display} to "anciões"
       set {_skill} to {@skill-ancioes}
@@ -70,5 +72,6 @@ command /ultimate_pld:
       stop
     if classes_consume_resource(player, {@resource-divinity}, {@cost-ultimate}) is false:
       stop
-    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    set {_skill} to {@skill-ultimate}
+    execute console command "mm skills cast %{_skill}% target=%player%"
     classes_play_feedback(player, "&6Milagre supremo manifestado!", "entity.wither.spawn", 0.7)
