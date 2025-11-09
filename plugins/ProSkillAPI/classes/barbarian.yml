@@ -1,75 +1,103 @@
-# Classe base Bárbaro para ProSkillAPI
+# Classe base Bárbaro para ProSkillAPI (Stamina + Fúria)
 name: Barbarian
 prefix: "Barb"
 display: "§6Bárbaro"
 main-class: true
+key: barbarian
 description:
-  - "§7Guerreiro primal que alterna entre tanque e DPS corpo a corpo."
-  - "§eAdministra cargas de Fúria para ativar janelas de poder controlado."
-  - "§7Sinergia moderada com raças resistentes, com retornos decrescentes."
+  - "§7Guerreiro primal que alterna entre DPS e presença de linha de frente."
+  - "§eAdministra §6Estamina§e para explosões curtas enquanto acumula §cFúria§e."
+  - "§7Sinergiza com raças robustas (ver RacesEffects) com retornos decrescentes."
 options:
   needs-permission: true
   tree: requirement
   reset-on-death: false
-  mana-name: "Fúria"
+  mana-name: "Estamina"
   mana-regen: 0
   max-level: 60
   exp-source: kill
   attributes-scaled: true
   needs-race: false
-  rage-resource:
-    key: rage_stacks
-    display: "Rage"
-    min: 0
-    max: 3
-    scaling:
-      tier1: 3
-      tier2: 3
-      tier3: 4
-      tier4: 4
-    decay-out-of-combat:
-      delay: 12
-      interval: 6
-      amount: 1
+  resources:
+    stamina:
+      key: stamina
+      display: "Estamina"
+      min: 0
+      max: 200
+      scaling:
+        tier1: 100
+        tier2: 120
+        tier3: 140
+        tier4: 160
+      regen-in-combat:
+        delay: 1
+        interval: 1
+        amount: 4
+      regen-out-of-combat:
+        delay: 1
+        interval: 1
+        amount: 10
+    rage:
+      key: rage_stacks
+      display: "Fúria"
+      min: 0
+      max: 4
+      scaling:
+        tier1: 3
+        tier2: 3
+        tier3: 4
+        tier4: 4
+      decay-out-of-combat:
+        delay: 12
+        interval: 6
+        amount: 1
   scoreboard:
+    stamina: "barbarian_stamina"
     rage: "barbarian_rage"
-    fury-duration: "barbarian_fury_time"
-    major-cd: "barbarian_major_cd"
+    cooldown: "barbarian_major_cd"
+    fury: "barbarian_fury_time"
     placeholders:
+      stamina: "%skills_barbarian_stamina%"
       rage: "%skills_rage_stacks%"
-      fury-time: "%skills_fury_time%"
-      major-cd: "%skills_major_cd%"
+      fury_time: "%skills_fury_time%"
+      cooldown_major: "%skills_barbarian_major_cd%"
+  combat-state-placeholder: "%skills_combat_state%"
 attributes:
-  health-base: 36
-  health-scale: 2.5
-  mana-base: 0
+  health-base: 38
+  health-scale: 2.6
+  mana-base: 100
   mana-scale: 0
-  walk-speed-base: 0.02
-  walk-speed-scale: 0.004
+  attack-damage: 2.2
   physical-defense-base: 3
-  physical-defense-scale: 1.2
-  skill-damage: 0.0
-  attack-damage: 2.0
+  physical-defense-scale: 1.3
+  knockback-resist-base: 0.08
+  knockback-resist-scale: 0.01
+  walk-speed-base: 0.02
+  walk-speed-scale: 0.003
   level-bonus:
     1:
-      health: 36
-      defense: 5
+      health: 38
+      mana: 100
+      defense: 6
       speed: 0.0
     5:
-      health: 58
+      health: 64
+      mana: 120
       defense: 8
       speed: 0.01
     11:
-      health: 92
-      defense: 12
+      health: 102
+      mana: 140
+      defense: 11
       speed: 0.015
     17:
-      health: 128
-      defense: 15
+      health: 140
+      mana: 160
+      defense: 14
       speed: 0.02
 mana:
-  regen-combat: 0
-  regen-out: 0
+  regen-combat: 4
+  regen-out: 10
 exp:
   kill-multiplier: 1.0
   quest-multiplier: 1.0
@@ -79,33 +107,37 @@ skills:
     active:
       - barbarian_fury
       - barbarian_reckless_attack
+      - barbarian_brutal_charge
     passive:
       - barbarian_unarmored_defense
-      - barbarian_danger_sense
+      - barbarian_danger_instinct
   tier2:
     active:
       - barbarian_fury
       - barbarian_reckless_attack
+      - barbarian_brutal_charge
     passive:
       - barbarian_unarmored_defense
-      - barbarian_danger_sense
-      - barbarian_vigor
+      - barbarian_danger_instinct
+      - barbarian_savage_vigor
   tier3:
     active:
       - barbarian_fury
       - barbarian_reckless_attack
+      - barbarian_brutal_charge
     passive:
       - barbarian_unarmored_defense
-      - barbarian_danger_sense
-      - barbarian_vigor
+      - barbarian_danger_instinct
+      - barbarian_savage_vigor
   tier4:
     active:
       - barbarian_fury
       - barbarian_reckless_attack
+      - barbarian_brutal_charge
     passive:
       - barbarian_unarmored_defense
-      - barbarian_danger_sense
-      - barbarian_vigor
+      - barbarian_danger_instinct
+      - barbarian_savage_vigor
 subclasses:
   berserker:
     display: "§cCaminho do Berserker"
@@ -116,3 +148,8 @@ subclasses:
   storm:
     display: "§bArauto da Tempestade"
     file: barbarian_storm.yml
+notes:
+  - "Estamina 100/120/140/160 e regeneração 4/s em combate, 10/s fora."
+  - "Stacks de Fúria geradas por dano recebido/combo via Skript; máximos 3/3/4/4."
+  - "Velocidade adicional total limitada a +0.05; mitigação total máxima 45%; lifesteal 25%."
+  - "Passivas consultam RacesEffects apenas para leitura (sem modificações automáticas)."

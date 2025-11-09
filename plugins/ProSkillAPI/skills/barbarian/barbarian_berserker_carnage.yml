@@ -1,61 +1,74 @@
-# Skill: Carnificina Implacável (ULT)
+# Skill: Carnificina
 name: barbarian_berserker_carnage
-display: "§4Carnificina Implacável"
-icon: TOTEM_OF_UNDYING
+display: "§4Carnificina"
+icon: NETHERITE_AXE
 type: Active
 max-level: 1
 attributes:
-  cooldown-base: 210
+  cooldown-base: 60
   cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
 description:
-  - "§715s de golpes em área (3 blocos) com roubo de vida de 25% do dano causado."
-  - "§cRespeita limite de cura por golpe."
+  - "§73 golpes em cleave (3 blocos) causando 120% cada."
+  - "§eSe atingir 3 ou mais alvos na sequência, ganha 1 carga de Fúria."
 components:
   Cast:
     type: trigger
     data:
       cooldown: true
     children:
-      RageRequirement:
-        type: condition
+      Sweep:
+        type: target
         data:
-          key: rage_stacks
-          min-value: 1
-          fail-message: "§cAcumule Fúria antes de usar a Carnificina."
+          shape: cone
+          range-base: 3
+          angle-base: 80
+          group: enemy
         children:
-          ConsumeRage:
+          Strike1:
             type: mechanic
             data:
-              key: rage_stacks
-              amount-base: 1
-              indicator: "§6-1 Rage"
-      CleaveLoop:
+              value-base: 1.2
+              classifier: skill
+            children:
+              Track:
+                type: mechanic
+                data:
+                  command: "skript run barbarian_carnage_hit %caster% %target%"
+                  silent: true
+          Strike2:
+            type: mechanic
+            data:
+              delay: 4
+              value-base: 1.2
+              classifier: skill
+            children:
+              Track2:
+                type: mechanic
+                data:
+                  command: "skript run barbarian_carnage_hit %caster% %target%"
+                  silent: true
+          Strike3:
+            type: mechanic
+            data:
+              delay: 8
+              value-base: 1.2
+              classifier: skill
+            children:
+              Track3:
+                type: mechanic
+                data:
+                  command: "skript run barbarian_carnage_hit %caster% %target%"
+                  silent: true
+      ResolveStacks:
         type: mechanic
         data:
-          repeat: 5
-          interval: 3
-        children:
-          AreaDamage:
-            type: target
-            data:
-              shape: sphere
-              radius-base: 3
-              group: enemy
-            children:
-              DealDamage:
-                type: mechanic
-                data:
-                  damage-base: 1.1
-                  damage-scale: 0
-                  indicator: "§4Carnificina"
-              LifeSteal:
-                type: mechanic
-                data:
-                  heal-percent-base: 0.25
-                  heal-percent-scale: 0
-                  indicator: "§aRoubo de Vida"
+          delay: 10
+          command: "skript run barbarian_carnage_resolve %caster%"
+          silent: true
       Message:
         type: mechanic
         data:
-          message: "§4Carnificina Implacável liberada!"
+          message: "§4Carnificina desencadeada!"
           targets: self

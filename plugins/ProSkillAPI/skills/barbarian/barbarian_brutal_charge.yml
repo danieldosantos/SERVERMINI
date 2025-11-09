@@ -1,0 +1,59 @@
+# Skill: Investida Brutal
+name: barbarian_brutal_charge
+display: "§6Investida Brutal"
+icon: LEATHER_BOOTS
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  range-base: 6
+  range-scale: 0
+description:
+  - "§7Avança 5 blocos esmagando inimigos com 140% de dano corpo a corpo."
+  - "§eSe acertar, ganha +20% mitigação por 4s (respeita limite de 45%)."
+  - "§8Comando: /investida ou clique com arma focada."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      DashForward:
+        type: mechanic
+        data:
+          type: leap
+          forward-base: 5
+          upward-base: 0.1
+          indicator: "§6Investida"
+      Target:
+        type: target
+        data:
+          shape: cone
+          range-base: 6
+          range-scale: 0
+          angle-base: 40
+          angle-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.4
+              value-scale: 0
+              classifier: skill
+          ApplyMitigation:
+            type: mechanic
+            data:
+              potion: DAMAGE_RESISTANCE
+              seconds-base: 4
+              amplifier-base: 0
+              indicator: "§6Carapaça Brutal"
+      Message:
+        type: mechanic
+        data:
+          message: "§6Você investe brutalmente!"
+          targets: self

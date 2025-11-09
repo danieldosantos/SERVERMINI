@@ -1,24 +1,22 @@
-Skill,Tipo,Custo(Fúria/Mana),Duração,CD,Dano/Redução,Área,Notas PvP,Tier
-barbarian_fury,Ativa,0 (reaplicar consome 1 Rage),120s,180s,+18% dano/+18% redução,Self,Cap resistência 45%,T1
-barbarian_reckless_attack,Ativa,0,20s,60s,+25% crit / +15% dano recebido,Self,Risco adicional controlado,T1
-barbarian_danger_sense,Passiva,0,6s uptime,12s ICD,-25% explosões/projéteis,Self trigger,Uptime <60%,T1
-barbarian_unarmored_defense,Passiva,0,Contínuo (checks 6s),--,+8% redução/+6% esquiva,Self,Requer sem armadura pesada,T1
-barbarian_vigor,Passiva,0,4s tick,8s delay,1.5% HP por tick,Self,Fora de combate,T2
-barbarian_berserker_bestial_roar,Ativa,1 Rage,12s,75s,-10% dano inimigo,6 blocos,Útil para mitigar burst,T2
-barbarian_berserker_bloody_charge,Ativa,0,Impacto,45s,160% dano/+20% redução,5 blocos dash,Recuo limitado,T2
-barbarian_berserker_frenzied_retaliation,Ativa,0,8s,90s,Reflete 30% (<50% HP),Self,Sem dano de queda,T3
-barbarian_berserker_relentless_impetus,Ativa,0,10s,60s,+0.04 velocidade,Self,Capa velocidade total ≤0.05,T2
-barbarian_berserker_carnage,Ativa (ULT),1 Rage,15s,210s,1.1x dano +25% lifesteal,3 blocos cleave,Lifesteal cap 25%,T3
-barbarian_berserker_risk_reward,Passiva,0,Enquanto buffs,2s refresh,+10% dano recebido,Fúria+Temerário,Somente se ambos ativos,T2
-barbarian_totem_bear,Ativa,1 Rage,10s,120s,-35% dano físico,5 blocos,RacesEffects aplica DR,T2
-barbarian_totem_eagle,Ativa,0,15s,75s,Visão noturna/+1 alcance,8 blocos,Vantagem posicionamento,T2
-barbarian_totem_wolf,Ativa,0,12s,90s,+12% dano aliado,Marca alvo+8 blocos,Sem stack multiplicativo,T2
-barbarian_totem_tiger,Ativa,0,8s,70s,+30% vel ataque,8 blocos,Não ultrapassa cap haste,T3
-barbarian_totem_phoenix,Ativa (ULT),0,12s,240s,Revive 40% HP,Aura 8 blocos,Bloqueio arenas ranqueadas,T4
-barbarian_totem_spirit_link,Passiva,0,Checks 4s,--,Retorno decrescente resistências,Aliados Totem,Integração RacesEffects,T2
-barbarian_storm_thunder_hammer,Ativa,0,2s stun,45s,140% dano+stun alvo,6 blocos alvo,PvP stun 2s,T2
-barbarian_storm_galvanic_surge,Ativa,0,3 ticks/8s,60s,3x40% dano,8 blocos alvo,Cooldown controlado,T2
-barbarian_storm_wind_cloak,Ativa,0,10s,90s,+50% resist projétil/empurra,4 blocos,Uso defensivo,T3
-barbarian_storm_tempest_cauldron,Ativa,0,10s,120s,50%/2s (x5),6 blocos,Avaliar DPS sustentado,T3
-barbarian_storm_eye,Ativa (ULT),0,12s,210s,Puxão +20% dano elétrico,8 blocos,Puxão lento,T3
-barbarian_storm_tempest_aegis,Passiva,0,Escudo 8s ciclo,8s intervalo,Escudo projétil 8%,Self,RacesEffects aplica DR,T2
+Skill,Custo,CD,Dmg/Redução,Área,Tier,Notas PvP
+Fúria,25 Estamina + 1 Rage,90s,+15/20/25/30% dano & +10/12/15/18% resist,Self,T1-4,Janela principal; respeitar caps 45% mitigação
+Ataque Temerário,20 Estamina,60s,+15% pen (agachado) ou crit (em pé),Self,T1-4,+10% dano recebido limita uso prolongado
+Investida Brutal,25 Estamina,45s,140% dano +20% mitigação 4s,Cone 6b,T1-4,Controle curto; imobilizados requerem imunidade
+Instinto Perigoso,Passivo,20s icd,-25% explosões/projéteis,Self,T1-4,Reseta após dano AOE; útil contra burst
+Defesa sem Armadura,Passivo,6s renováveis,-leve resistência,Self,T1-4,Não exceder 45% total com totens
+Vigor Selvagem,Passivo,20s icd,1% HP/s por 6s,Self,T2-4,Mitigação fora de combate; cancelado por dano
+Grito Bestial,20 Estamina + 1 Rage,75s,-10% dano inimigos +10% ASPD,Raio 6b,T2+,Debuff curto; boa abertura em PvP
+Retaliação Frenética,25 Estamina,90s,Reflete 30% (cap 200),Self,T3+,Reduz burst; cuidado com reflect loops
+Carnificina,30 Estamina,60s,3×120% dano,Cone 3b,T2+,Gera 1 Rage se 3 alvos; ótimo em clumps
+Ímpeto Irrefreável,20 Estamina,60s,+0.04 velocidade 10s,Self,T2+,Não ultrapassa limite +0.05
+Carnificina Implacável,35 Estamina + 1 Rage,210s,15s cleave +25% lifesteal,Cone 4b,T4,Ultimate com lifesteal máximo permitido
+Totem do Urso,25 Estamina + 1 Rage,120s,-35% dano físico,Raio 5b,T2+,Stacka com def base sem exceder cap
+Totem da Águia,20 Estamina,75s,+1 alcance melee + visão,Self,T2+,Usar controle para negar fugitivos
+Totem do Lobo,25 Estamina,90s,+12% dano aliado alvo,Alvo único,T2+,Marca com Glow; foco em calls
+Totem do Tigre,25 Estamina,70s,+30% velocidade ataque,Self,T3+,Sinergia com Ataque Temerário
+Totem da Fênix,35 Estamina + 1 Rage,240s,Revive 40% HP + -20% dano,Raio 8b,T4,Ultimate defensivo; uma revivência por aura
+Martelo do Trovão,25 Estamina,45s,140% dano + stun 2s,Alvo único,T1+,Imunidade decrescente evita chain
+Surto Galvânico,20 Estamina,60s,3×40% dano,Raio 6b (proc),T1+,Pressão prolongada; counters com mobilidade
+Capa de Ventos,25 Estamina,90s,-50% projéteis 10s + empurrão,Raio 4b,T2+,Útil contra arqueiros e magos
+Caldeirão da Tempestade,30 Estamina,120s,50%/2s por 10s,Raio 6b,T3+,Zona de controle; evitar empilhar com outras DOTs
+Olho do Furacão,35 Estamina + 1 Rage,210s,Vórtice 12s +20% vulnerabilidade elétrica,Raio 8b,T4,Ultimate de setup; observar DR de controle

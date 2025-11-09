@@ -5,31 +5,31 @@ icon: LEATHER_CHESTPLATE
 type: Passive
 max-level: 1
 description:
-  - "§7Enquanto não estiver usando armadura pesada, ganha +8% redução física"
-  - "§7e +6% chance de esquiva baseada em mobilidade."
+  - "§7Enquanto sem armadura pesada, converte Constituição e Destreza em mitigação leve."
+  - "§8Mantém redução total abaixo do limite de 45%."
 components:
-  EquipCheck:
+  ArmorCheck:
     type: trigger
     data:
       slot: armor
       allowed:
         - LEATHER
+        - GOLD
         - CHAIN
         - NONE
     children:
-      ApplyDefense:
+      ApplyMitigation:
         type: mechanic
         data:
           potion: DAMAGE_RESISTANCE
-          seconds-base: 6
+          seconds-base: 8
           seconds-scale: 0
           amplifier-base: 0
-          amplifier-scale: 0
-      ApplyDodge:
+          indicator: "§7Defesa sem Armadura"
+      ApplyKnockbackResist:
         type: mechanic
         data:
-          potion: SPEED
-          seconds-base: 6
-          seconds-scale: 0
-          amplifier-base: 0
-          amplifier-scale: 0
+          potion: SLOWNESS
+          seconds-base: 2
+          amplifier-base: 6
+          indicator: "§7Estabilidade"

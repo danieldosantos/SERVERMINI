@@ -2,42 +2,37 @@
 name: Barbarian_Berserker
 display: "§cCaminho do Berserker"
 description:
-  - "§7Canaliza fúria bruta para explosões de dano."
-  - "§cRecebe dano adicional quando combina Fúria e Ataque Temerário."
+  - "§7Explosões de dano arriscadas que consomem Stamina e cargas de Fúria."
+  - "§cCombina Fúria com Ataque Temerário para janelas devastadoras, respeitando caps."
 options:
   needs-permission: true
   parent: Barbarian
-  mana-name: "Fúria"
-  rage-synergy:
-    fury-temerario-risk: 0.10
 skills:
   tier1:
     active:
       - barbarian_berserker_bestial_roar
-      - barbarian_berserker_bloody_charge
-    passive:
-      - barbarian_berserker_risk_reward
+      - barbarian_berserker_relentless_impetus
+    passive: []
   tier2:
     active:
       - barbarian_berserker_bestial_roar
-      - barbarian_berserker_bloody_charge
       - barbarian_berserker_relentless_impetus
-    passive:
-      - barbarian_berserker_risk_reward
+      - barbarian_berserker_carnage
+    passive: []
   tier3:
     active:
       - barbarian_berserker_bestial_roar
-      - barbarian_berserker_bloody_charge
       - barbarian_berserker_relentless_impetus
+      - barbarian_berserker_carnage
       - barbarian_berserker_frenzied_retaliation
-    passive:
-      - barbarian_berserker_risk_reward
+    passive: []
   tier4:
     active:
       - barbarian_berserker_bestial_roar
-      - barbarian_berserker_bloody_charge
       - barbarian_berserker_relentless_impetus
-      - barbarian_berserker_frenzied_retaliation
       - barbarian_berserker_carnage
-    passive:
-      - barbarian_berserker_risk_reward
+      - barbarian_berserker_frenzied_retaliation
+      - barbarian_berserker_relentless_slaughter
+    passive: []
+notes:
+  - "Retaliação e Carnificina Implacável acionam eventos via barbarian_cmds.sk (reflexo, lifesteal)."

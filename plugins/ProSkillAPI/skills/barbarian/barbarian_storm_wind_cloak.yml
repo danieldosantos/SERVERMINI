@@ -7,13 +7,17 @@ max-level: 1
 attributes:
   cooldown-base: 90
   cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
 description:
-  - "§7Cria redemoinho que repele inimigos em 4 blocos e concede +50% resistência a projéteis por 10s."
+  - "§710s com -50% dano de projéteis e empurra inimigos ao ativar."
 components:
   Cast:
     type: trigger
+    data:
+      cooldown: true
     children:
-      PushEnemies:
+      Push:
         type: target
         data:
           shape: sphere
@@ -23,17 +27,17 @@ components:
           Knockback:
             type: mechanic
             data:
-              push-base: 1.2
-              push-up-base: 0.2
-      ApplyProjectileResist:
+              type: knockback
+              speed-base: 0.8
+      ProjectileShield:
         type: mechanic
         data:
-          potion: RESISTANCE
+          potion: SLOW_FALLING
           seconds-base: 10
-          amplifier-base: 1
-          indicator: "§b+50% Resist. Projétil"
+          amplifier-base: 3
+          indicator: "§bCapa de Ventos"
       Message:
         type: mechanic
         data:
-          message: "§bVentos protegem você e sua equipe!"
+          message: "§bVentos tempestuosos protegem você!"
           targets: self

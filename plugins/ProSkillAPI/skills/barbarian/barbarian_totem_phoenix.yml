@@ -1,53 +1,62 @@
-# Skill: Totem da Fênix (ULT)
+# Skill: Totem da Fênix (Ultimate)
 name: barbarian_totem_phoenix
 display: "§cTotem da Fênix"
-icon: FIRE_CHARGE
+icon: BLAZE_ROD
 type: Active
 max-level: 1
 attributes:
   cooldown-base: 240
   cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
 description:
-  - "§7Invoca aura de 8 blocos por 12s; revive aliados uma vez com 40% HP."
-  - "§cBloqueado em arenas PvP rankeadas via verificação de região."
+  - "§7Aura de 8 blocos por 12s reduzindo em 20% o dano recebido."
+  - "§eRevive aliados caídos com 40% da vida uma vez por aura. Consome 1 Rage."
 components:
   Cast:
     type: trigger
     data:
       cooldown: true
     children:
-      PvPLock:
+      CheckRage:
         type: condition
         data:
-          region-flag: disable_totem_phoenix
-          invert: true
-          fail-message: "§cTotem da Fênix desativado nesta arena."
+          key: rage_stacks
+          min-value: 1
+          fail-message: "§cNecessita de Fúria acumulada."
         children:
-          AuraLoop:
+          Spend:
             type: mechanic
             data:
-              repeat: 6
-              interval: 2
+              key: rage_stacks
+              amount-base: 1
+              indicator: "§6-1 Rage"
+      Aura:
+        type: mechanic
+        data:
+          repeat: 6
+          interval: 2
+        children:
+          Allies:
+            type: target
+            data:
+              group: ally
+              radius-base: 8
             children:
-              Allies:
-                type: target
+              ApplyResistance:
+                type: mechanic
                 data:
-                  group: ally
-                  radius-base: 8
-                children:
-                  ApplyFireShield:
-                    type: mechanic
-                    data:
-                      potion: FIRE_RESISTANCE
-                      seconds-base: 2.5
-                      amplifier-base: 0
-                  FlagResurrection:
-                    type: mechanic
-                    data:
-                      command: "skript run revive_barbarian %target%"
-                      silent: true
+                  potion: DAMAGE_RESISTANCE
+                  seconds-base: 2.5
+                  amplifier-base: 0
+                  indicator: "§cChama Fênix"
+      ReviveHook:
+        type: mechanic
+        data:
+          command: "skript run barbarian_totem_phoenix %caster% 12 8"
+          silent: true
       Message:
         type: mechanic
         data:
-          message: "§cA chama da Fênix protege a tribo!"
+          message: "§cTotem da Fênix renova os guerreiros!"
           targets: self

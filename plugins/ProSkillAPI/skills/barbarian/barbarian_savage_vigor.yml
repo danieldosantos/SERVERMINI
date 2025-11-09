@@ -1,0 +1,28 @@
+# Skill: Vigor Selvagem
+name: barbarian_savage_vigor
+display: "§aVigor Selvagem"
+icon: APPLE
+type: Passive
+max-level: 1
+description:
+  - "§7Após 6s sem sofrer dano, regenera 1% da vida por segundo durante 6s."
+  - "§8Recarga interna de 20s para evitar uptime excessivo."
+components:
+  OutOfCombat:
+    type: trigger
+    data:
+      delay: 6
+      interval: 20
+    children:
+      HealWindow:
+        type: mechanic
+        data:
+          repeat: 6
+          interval: 1
+        children:
+          HealTick:
+            type: mechanic
+            data:
+              heal-percent-base: 0.01
+              heal-percent-scale: 0
+              indicator: "§aVigor Selvagem"

@@ -1,11 +1,11 @@
-# Itens focais para o Bárbaro e subclasses
+# Itens focais do Bárbaro e Caminhos Primitivos
 items:
   BarbarianRageCharm:
     Id: BLAZE_POWDER
     Display: '&6Talismã da Fúria'
     Lore:
-      - '&7Canaliza a habilidade §6Fúria§7.'
-      - '&8Requer grupo LuckPerms: class_barbarian.'
+      - '&7Ativa §6Fúria§7 (20s, +dano e resistência).'
+      - '&8Vinculado ao grupo: class_barbarian.'
     Options:
       Unbreakable: true
       KeepOnDeath: true
@@ -18,8 +18,8 @@ items:
     Id: GOAT_HORN
     Display: '&cBerrante Berserker'
     Lore:
-      - '&7Ativa §cGrito Bestial§7 (consome 1 Rage).'
-      - '&8Requer grupo: class_barbarian.berserker'
+      - '&7Sopre para aplicar §cGrito Bestial§7.'
+      - '&8Permissão: class_barbarian.berserker'
     Options:
       Unbreakable: true
     PersistentData:
@@ -29,37 +29,37 @@ items:
       - skill{s=barbarian_berserker_bestial_roar} @self ~onUse
   BerserkerBattleAxe:
     Id: NETHERITE_AXE
-    Display: '&4Machado Sanguinário'
+    Display: '&4Machado da Carnificina'
     Lore:
-      - '&7Golpeia com §4Investida Sanguinária§7.'
-      - '&8Requer grupo: class_barbarian.berserker'
+      - '&7Libera §4Carnificina§7 (cleave triplo).'
+      - '&8Permissão: class_barbarian.berserker'
     Options:
       Unbreakable: true
       Damage: 9
     PersistentData:
       classlock: 'class_barbarian.berserker'
-      skill: 'barbarian_berserker_bloody_charge'
+      skill: 'barbarian_berserker_carnage'
     Skills:
-      - skill{s=barbarian_berserker_bloody_charge} @self ~onUse
-  BerserkerTotem:
-    Id: TOTEM_OF_UNDYING
-    Display: '&4Ídolo da Carnificina'
+      - skill{s=barbarian_berserker_carnage} @self ~onLeftClick
+  BerserkerSpikedShield:
+    Id: SHIELD
+    Display: '&4Broquel Espinhado'
     Lore:
-      - '&715s de cleave e roubo de vida.'
-      - '&8Requer grupo: class_barbarian.berserker'
+      - '&7Ativa §4Retaliação Frenética§7 (reflexo 30%).'
+      - '&8Permissão: class_barbarian.berserker'
     Options:
       Unbreakable: true
     PersistentData:
       classlock: 'class_barbarian.berserker'
-      skill: 'barbarian_berserker_carnage'
+      skill: 'barbarian_berserker_frenzied_retaliation'
     Skills:
-      - skill{s=barbarian_berserker_carnage} @self ~onUse
+      - skill{s=barbarian_berserker_frenzied_retaliation} @self ~onUse
   TotemBearCharm:
-    Id: CARVED_PUMPKIN
+    Id: TOTEM_OF_UNDYING
     Display: '&6Totem do Urso'
     Lore:
-      - '&7Protege aliados com -35% dano físico.'
-      - '&8Requer: class_barbarian.totem'
+      - '&7Projeta -35% dano físico por 10s (5b).' 
+      - '&8Permissão: class_barbarian.totem'
     Options:
       Unbreakable: true
     PersistentData:
@@ -67,12 +67,25 @@ items:
       skill: 'barbarian_totem_bear'
     Skills:
       - skill{s=barbarian_totem_bear} @self ~onUse
+  TotemEagleCharm:
+    Id: FEATHER
+    Display: '&fTotem da Águia'
+    Lore:
+      - '&7Concede alcance +1 bloco e visão por 15s.'
+      - '&8Permissão: class_barbarian.totem'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.totem'
+      skill: 'barbarian_totem_eagle'
+    Skills:
+      - skill{s=barbarian_totem_eagle} @self ~onUse
   TotemWolfCharm:
     Id: WOLF_SPAWN_EGG
     Display: '&fTotem do Lobo'
     Lore:
-      - '&7Marca alvo e amplia dano aliado.'
-      - '&8Requer: class_barbarian.totem'
+      - '&7Marca um inimigo (12s, +12% dano aliado).'
+      - '&8Permissão: class_barbarian.totem'
     Options:
       Unbreakable: true
     PersistentData:
@@ -80,12 +93,25 @@ items:
       skill: 'barbarian_totem_wolf'
     Skills:
       - skill{s=barbarian_totem_wolf} @self ~onUse
+  TotemTigerCharm:
+    Id: ORANGE_DYE
+    Display: '&6Totem do Tigre'
+    Lore:
+      - '&7+30% velocidade de ataque por 8s.'
+      - '&8Permissão: class_barbarian.totem'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.totem'
+      skill: 'barbarian_totem_tiger'
+    Skills:
+      - skill{s=barbarian_totem_tiger} @self ~onUse
   TotemPhoenixCharm:
     Id: BLAZE_ROD
     Display: '&cTotem da Fênix'
     Lore:
-      - '&7Revive aliados uma vez durante a aura.'
-      - '&8Requer: class_barbarian.totem'
+      - '&7Aura 8b/12s com reviver (40% HP).'
+      - '&8Permissão: class_barbarian.totem'
     Options:
       Unbreakable: true
     PersistentData:
@@ -95,10 +121,10 @@ items:
       - skill{s=barbarian_totem_phoenix} @self ~onUse
   StormWarHammer:
     Id: GOLDEN_AXE
-    Display: '&bMartelo do Trovão'
+    Display: '&bMartelo da Tempestade'
     Lore:
-      - '&7140% dano + atordoamento.'
-      - '&8Requer: class_barbarian.storm'
+      - '&7140% dano + atordoamento 2s.'
+      - '&8Permissão: class_barbarian.storm'
     Options:
       Unbreakable: true
     PersistentData:
@@ -110,8 +136,8 @@ items:
     Id: IRON_HORSE_ARMOR
     Display: '&9Manopla Galvânica'
     Lore:
-      - '&7Libera 3 descargas ao longo do tempo.'
-      - '&8Requer: class_barbarian.storm'
+      - '&7Dispara §bSurto Galvânico§7 (3 descargas).'
+      - '&8Permissão: class_barbarian.storm'
     Options:
       Unbreakable: true
     PersistentData:
@@ -119,12 +145,38 @@ items:
       skill: 'barbarian_storm_galvanic_surge'
     Skills:
       - skill{s=barbarian_storm_galvanic_surge} @self ~onUse
+  StormMantle:
+    Id: BLUE_CARPET
+    Display: '&bManto dos Ventos'
+    Lore:
+      - '&7Ativa §bCapa de Ventos§7 (-projéteis).'
+      - '&8Permissão: class_barbarian.storm'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.storm'
+      skill: 'barbarian_storm_wind_cloak'
+    Skills:
+      - skill{s=barbarian_storm_wind_cloak} @self ~onUse
+  StormDrum:
+    Id: DRUM
+    Display: '&bTambor Tempestuoso'
+    Lore:
+      - '&7Invoca §bCaldeirão da Tempestade§7 (zona 6b).'
+      - '&8Permissão: class_barbarian.storm'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.storm'
+      skill: 'barbarian_storm_tempest_cauldron'
+    Skills:
+      - skill{s=barbarian_storm_tempest_cauldron} @self ~onUse
   StormEyeTotem:
     Id: ENDER_EYE
-    Display: '&bOlho do Furacão'
+    Display: '&bTotem do Olho da Tempestade'
     Lore:
-      - '&7Cria vórtice elétrico de 8 blocos.'
-      - '&8Requer: class_barbarian.storm'
+      - '&7Canaliza §bOlho do Furacão§7 (vórtice 8b).'
+      - '&8Permissão: class_barbarian.storm'
     Options:
       Unbreakable: true
     PersistentData:

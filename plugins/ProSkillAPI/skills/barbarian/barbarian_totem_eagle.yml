@@ -1,38 +1,35 @@
 # Skill: Totem da Águia
 name: barbarian_totem_eagle
-display: "§bTotem da Águia"
+display: "§fTotem da Águia"
 icon: FEATHER
 type: Active
 max-level: 1
 attributes:
   cooldown-base: 75
   cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
 description:
-  - "§7Concede visão aguçada e +1 bloco de alcance corpo a corpo por 15s."
+  - "§7Projeta visão aguçada e aumenta alcance corpo a corpo em +1 bloco por 15s."
 components:
   Cast:
     type: trigger
+    data:
+      cooldown: true
     children:
-      Allies:
-        type: target
-        data:
-          group: ally
-          radius-base: 8
-        children:
-          ApplyVision:
-            type: mechanic
-            data:
-              potion: NIGHT_VISION
-              seconds-base: 15
-              amplifier-base: 0
-          ApplyReach:
-            type: mechanic
-            data:
-              attribute: GENERIC_ATTACK_RANGE
-              amount-base: 1
-              seconds-base: 15
-      Message:
+      ApplyVision:
         type: mechanic
         data:
-          message: "§bA visão da águia guia seus aliados."
+          potion: NIGHT_VISION
+          seconds-base: 15
+          amplifier-base: 0
+      RangeHook:
+        type: mechanic
+        data:
+          command: "skript run barbarian_totem_eagle %caster% 15"
+          silent: true
+      Notify:
+        type: mechanic
+        data:
+          message: "§fTotem da Águia amplia sua percepção."
           targets: self
