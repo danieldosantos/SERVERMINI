@@ -1,0 +1,51 @@
+# Skill Comum: Golpe Arcano
+name: rogue_arcanetrickster_arcane_strike
+display: "§5Golpe Arcano"
+icon: IRON_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 4
+description:
+  - "§7Carrega a lâmina com energia arcana causando +120% dano mágico no próximo golpe."
+  - "§8Aciona contagem de cargas no HUD ({arcane_charges})."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 4
+          range-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 1.2
+              damage-scale: 0
+              classifier: magic
+          ArcaneMark:
+            type: mechanic
+            data:
+              command: "skript run rogue_mark_arcane %caster% %target% 3"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: ENCHANT
+          amount-base: 20
+          radius-base: 1
+          target: caster
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "skript run rogue_update_charges %caster% -1"
+          silent: true

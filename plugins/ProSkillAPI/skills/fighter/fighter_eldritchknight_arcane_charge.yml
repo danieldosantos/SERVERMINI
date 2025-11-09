@@ -1,0 +1,32 @@
+# Tier 3: Investida Arcana
+name: fighter_eldritchknight_arcane_charge
+display: "§bInvestida Arcana"
+icon: TRIDENT
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+description:
+  - "§7Avança 8 blocos causando 130% dano no impacto."
+  - "§8Utiliza comando Skript para colisão controlada."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Charge:
+        type: mechanic
+        data:
+          command: "skript run fighter_arcane_charge %caster% 8 1.3"
+          silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: ELECTRIC_SPARK
+          amount-base: 20
+          radius-base: 1
+          target: caster

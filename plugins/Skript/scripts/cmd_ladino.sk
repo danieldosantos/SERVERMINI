@@ -72,3 +72,13 @@ command /ultimate_rog:
       stop
     execute console command "mm skills cast {@skill-ultimate} target=%player%"
     classes_play_feedback(player, "&8Golpe das sombras desencadeado!", "entity.enderman.stare", 0.8)
+
+command /arcano:
+  permission: group.class_rogue.arcane_trickster
+  trigger:
+    execute console command "skillapi cast rogue_arcanetrickster_arcane_strike %player%"
+
+command /shadowstep:
+  permission: group.class_rogue.arcane_trickster
+  trigger:
+    execute console command "skillapi cast rogue_arcanetrickster_shadow_step %player%"

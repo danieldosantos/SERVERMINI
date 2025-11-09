@@ -1,0 +1,44 @@
+# Tier 3: Corte Rachador
+name: fighter_eldritchknight_sundering_cut
+display: "§bCorte Rachador"
+icon: NETHERITE_AXE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  range-base: 4
+description:
+  - "§7Causa 160% dano e reduz resistência do alvo em 10% por 8s."
+  - "§8Respeita retornos decrescentes de debuffs defensivos."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 4
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 1.6
+              classifier: magic
+          Debuff:
+            type: mechanic
+            data:
+              command: "skript run fighter_sundering_cut %caster% %target% 8 0.10"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: SWEEP_ATTACK
+          amount-base: 1
+          radius-base: 0.7
+          target: caster

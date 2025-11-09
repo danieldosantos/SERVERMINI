@@ -159,68 +159,69 @@ items:
       skill: 'fighter_battlemaster_victory_spin'
     Skills:
       - skill{s=fighter_battlemaster_victory_spin} @target ~onSneakLeftClick
-  EldritchKnightBlade:
-    Id: DIAMOND_SWORD
-    Display: '&bLâmina Arcana'
+  EldritchKnightRuneblade:
+    Id: NETHERITE_SWORD
+    Display: '&bLâmina Rúnica'
     Lore:
-      - '&7120% dano elemental escolhido.'
-      - '&8Grupo: class_fighter.eldritchknight'
+      - '&7Ativa Golpe Imbuído (130% dano mágico).'
+      - '&8Grupo: class_fighter.eldritch_knight'
     Options:
       Unbreakable: true
+      Damage: 7
     PersistentData:
-      classlock: 'class_fighter.eldritchknight'
-      skill: 'fighter_eldritchknight_arcane_blade'
+      classlock: 'class_fighter.eldritch_knight'
+      skill: 'fighter_eldritchknight_imbued_strike'
     Skills:
-      - skill{s=fighter_eldritchknight_arcane_blade} @target ~onLeftClick
-  EldritchKnightFocus:
+      - skill{s=fighter_eldritchknight_imbued_strike} @target ~onLeftClick
+  EldritchKnightRuneFocus:
     Id: AMETHYST_SHARD
-    Display: '&bFoco Arcano'
+    Display: '&bFoco de Runas'
     Lore:
-      - '&7Levanta Escudo Arcano (absorção).'
-      - '&8Grupo: class_fighter.eldritchknight'
+      - '&7Concede Arma Rúnica (+20% dano por 10s).'
+      - '&8Grupo: class_fighter.eldritch_knight'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_fighter.eldritchknight'
-      skill: 'fighter_eldritchknight_arcane_shield'
+      classlock: 'class_fighter.eldritch_knight'
+      skill: 'fighter_eldritchknight_runic_weapon'
     Skills:
-      - skill{s=fighter_eldritchknight_arcane_shield} @self ~onUse
-  EldritchKnightRune:
-    Id: ENDER_PEARL
-    Display: '&bRuna de Dobra'
+      - skill{s=fighter_eldritchknight_runic_weapon} @self ~onUse
+  EldritchKnightGuardianSigil:
+    Id: SHIELD
+    Display: '&bSigilo Guardião'
     Lore:
-      - '&7Teleporte Tático de 8 blocos.'
-      - '&8Grupo: class_fighter.eldritchknight'
+      - '&7Ativa Guardião Arcano (+15% mit. mágica).'
+      - '&8Grupo: class_fighter.eldritch_knight'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_fighter.eldritchknight'
-      skill: 'fighter_eldritchknight_tactical_teleport'
+      classlock: 'class_fighter.eldritch_knight'
+      skill: 'fighter_eldritchknight_arcane_guardian'
     Skills:
-      - skill{s=fighter_eldritchknight_tactical_teleport} @self ~onRightClick
-  EldritchKnightSigil:
+      - skill{s=fighter_eldritchknight_arcane_guardian} @self ~onRightClick
+  EldritchKnightStaticTotem:
     Id: LAPIS_LAZULI
-    Display: '&bSigilo de Baluarte'
+    Display: '&bTotem Estático'
     Lore:
-      - '&7Reduz dano elemental aliado. '
-      - '&8Grupo: class_fighter.eldritchknight'
+      - '&7Projeta Escudo Estático (projéteis -30%).'
+      - '&8Grupo: class_fighter.eldritch_knight'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_fighter.eldritchknight'
-      skill: 'fighter_eldritchknight_energy_bulwark'
+      classlock: 'class_fighter.eldritch_knight'
+      skill: 'fighter_eldritchknight_static_shield'
     Skills:
-      - skill{s=fighter_eldritchknight_energy_bulwark} @self ~onUse
-  EldritchKnightCodex:
+      - skill{s=fighter_eldritchknight_static_shield} @self ~onUse
+  EldritchKnightArcaneCodex:
     Id: WRITABLE_BOOK
-    Display: '&bCódice Tempestuoso'
+    Display: '&bCódice do Gládio'
     Lore:
-      - '&7Ultimate Tempestade da Lâmina.'
-      - '&8Grupo: class_fighter.eldritchknight'
+      - '&7Ultimate Gládio Arcano (12s cleave).'
+      - '&8Grupo: class_fighter.eldritch_knight'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_fighter.eldritchknight'
-      skill: 'fighter_eldritchknight_blade_storm'
+      classlock: 'class_fighter.eldritch_knight'
+      skill: 'fighter_eldritchknight_arcane_gladius'
     Skills:
-      - skill{s=fighter_eldritchknight_blade_storm} @target ~onSneakLeftClick
+      - skill{s=fighter_eldritchknight_arcane_gladius} @self ~onSneakLeftClick

@@ -1,0 +1,145 @@
+# Funções e suportes para Trapaceiro Arcano
+options:
+  prefix: "&5[Trapaceiro]&f"
+
+on load:
+  broadcast "&7Skript rogue_arcane_skills.sk carregado." to console
+  execute console command "scoreboard objectives add arcane_charges dummy" if scoreboard objective "arcane_charges" does not exist
+  execute console command "scoreboard objectives add stealth_time dummy" if scoreboard objective "stealth_time" does not exist
+
+function rogue_mark_arcane(c: player, t: entity, seconds: number):
+  if t is not set:
+    stop
+  set {_duration} to seconds parsed as number
+  set {rogue.arcane_mark.%uuid of t%} to now + {_duration} seconds
+  apply glowing to t for {_duration} seconds
+
+function rogue_update_charges(p: player, delta: number):
+  set {_change} to delta parsed as number
+  if {rogue.arcane_charges.%p%} is not set:
+    set {rogue.arcane_charges.%p%} to 3
+  add {_change} to {rogue.arcane_charges.%p%}
+  if {rogue.arcane_charges.%p%} < 0:
+    set {rogue.arcane_charges.%p%} to 0
+  if {rogue.arcane_charges.%p%} > 3:
+    set {rogue.arcane_charges.%p%} to 3
+  set {_name} to name of p
+  set {_charges} to {rogue.arcane_charges.%p%}
+  execute console command "scoreboard players set %{_name}% arcane_charges %{_charges}%"
+
+function rogue_enter_shadow(p: player, seconds: number):
+  set {_duration} to seconds parsed as number
+  set {rogue.shadow.%p%} to now + {_duration} seconds
+  set {_name} to name of p
+  execute console command "scoreboard players set %{_name}% stealth_time %{_duration}%"
+  wait {_duration} seconds
+  delete {rogue.shadow.%p%}
+  execute console command "scoreboard players set %{_name}% stealth_time 0"
+
+function rogue_apply_diminishing(t: entity, seconds: number):
+  if t is not set:
+    stop
+  set {rogue.cc_immunity.%uuid of t%} to now + seconds parsed as number seconds
+
+function rogue_phantom_hand(c: player, t: entity, seconds: number):
+  if t is a player:
+    set {_held} to tool of t
+    if {_held} is not air:
+      set {rogue.disarmed.%uuid of t%} to {_held}
+      set tool of t to air
+      wait seconds parsed as number seconds
+      if {rogue.disarmed.%uuid of t%} is set:
+        give {rogue.disarmed.%uuid of t%} to t
+        delete {rogue.disarmed.%uuid of t%}
+
+function rogue_spawn_decoy(p: player, seconds: number):
+  set {_loc} to location of p
+  spawn armor stand at {_loc}
+  set {_stand} to last spawned entity
+  set {_stand}'s custom name to "§5Eco Sombrio"
+  set marker state of {_stand} to true
+  set size of {_stand} to small
+  wait seconds parsed as number seconds
+  kill {_stand}
+
+function rogue_silent_step(p: player, seconds: number, bonus: number):
+  set {rogue.speedbonus.%p%} to bonus parsed as number
+  wait seconds parsed as number seconds
+  delete {rogue.speedbonus.%p%}
+
+function rogue_shadow_strike(c: player, t: entity):
+  if {rogue.shadow.%c%} is set:
+    damage t by 4 hearts
+    delete {rogue.shadow.%c%}
+    rogue_update_charges(c, 1)
+
+function rogue_deceptive_mist(p: player, radius: number, seconds: number):
+  set {_radius} to radius parsed as number
+  set {_duration} to seconds parsed as number
+  repeat {_duration} times:
+    show smoke at location of p for all players
+    wait 1 second
+
+function rogue_reveal_ping(c: player, t: entity, seconds: number):
+  if t is set:
+    apply glowing to t for seconds parsed as number seconds
+
+function rogue_shadow_step(p: player, dist: number):
+  teleport p 0, 0, dist parsed as number relative
+
+function rogue_phantasmal_window(p: player, seconds: number, multiplier: number):
+  set {rogue.phantasmal.%p%::multiplier} to multiplier parsed as number
+  set {rogue.phantasmal.%p%::expires} to now + seconds parsed as number seconds
+  wait seconds parsed as number seconds
+  delete {rogue.phantasmal.%p%::multiplier}
+  delete {rogue.phantasmal.%p%::expires}
+
+function rogue_apply_silence(c: player, t: entity, seconds: number):
+  if t is set:
+    apply slowness 1 to t for seconds parsed as number seconds
+    apply weakness 1 to t for seconds parsed as number seconds
+
+function rogue_night_veil(p: player, seconds: number, bonus: number):
+  set {rogue.nightveil.%p%} to now + seconds parsed as number seconds
+  wait seconds parsed as number seconds
+  delete {rogue.nightveil.%p%}
+
+function rogue_steal_scene(p: player, seconds: number):
+  set {rogue.steal_scene.%p%} to now + seconds parsed as number seconds
+  wait seconds parsed as number seconds
+  delete {rogue.steal_scene.%p%}
+
+function rogue_shadow_dance(p: player, seconds: number):
+  set {rogue.shadow_dance.%p%} to now + seconds parsed as number seconds
+  wait seconds parsed as number seconds
+  delete {rogue.shadow_dance.%p%}
+
+function rogue_accuracy_debuff(c: player, t: entity, seconds: number):
+  if t is set:
+    apply blindness 1 to t for 1 second
+
+function rogue_eclipse_field(p: player, radius: number, seconds: number):
+  set {_duration} to seconds parsed as number
+  set {_radius} to radius parsed as number
+  repeat {_duration} times:
+    show ash at location of p for all players
+    wait 1 second
+
+on death of entity:
+  set {_killer} to attacker
+  if {_killer} is a player:
+    if {rogue.steal_scene.%{_killer}%} is set:
+      set {_uuid} to uuid of {_killer}
+      set {_name} to name of {_killer}
+      execute console command "auraskills player %{_uuid}% resource mana add 40"
+      execute console command "skillapi cooldown %{_name}% -8"
+
+on damage of entity:
+  attacker is a player
+  set {_attacker} to attacker
+  set {_victim} to victim
+  if {rogue.shadow_dance.%{_attacker}%} is set:
+    apply weakness 1 to {_victim} for 6 seconds
+  if {rogue.phantasmal.%{_attacker}%::multiplier} is set:
+    if {rogue.arcane_mark.%uuid of {_victim}%} is set:
+      damage {_victim} by 2 hearts

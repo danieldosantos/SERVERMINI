@@ -1,0 +1,39 @@
+# Tier 3: Marca Guerreiro
+name: fighter_eldritchknight_war_mark
+display: "§bMarca Guerreiro"
+icon: LODESTONE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  range-base: 10
+description:
+  - "§7Marca alvo por 10s, recebendo +15% dano de todos os ataques do Cavaleiro."
+  - "§8Atualiza marcador via HUD e respeita DR."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 10
+          group: enemy
+        children:
+          Mark:
+            type: mechanic
+            data:
+              command: "skript run fighter_war_mark %caster% %target% 10 0.15"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: DUST
+          amount-base: 20
+          radius-base: 0.8
+          target: target

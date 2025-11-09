@@ -1,0 +1,32 @@
+# Tier 4: Dança da Sombra
+name: rogue_arcanetrickster_shadow_dance
+display: "§5Dança da Sombra"
+icon: MUSIC_DISC_OTHERSIDE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+description:
+  - "§7Durante 10s, ataques aplicam -10% dano no alvo."
+  - "§8Debuff dura 6s por alvo com retornos decrescentes."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run rogue_shadow_dance %caster% 10"
+          silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: SMOKE_NORMAL
+          amount-base: 30
+          radius-base: 2
+          target: caster

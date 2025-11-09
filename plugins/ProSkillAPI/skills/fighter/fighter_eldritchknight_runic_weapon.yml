@@ -1,0 +1,32 @@
+# Skill Comum: Arma Rúnica
+name: fighter_eldritchknight_runic_weapon
+display: "§bArma Rúnica"
+icon: ENCHANTED_BOOK
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+description:
+  - "§7Por 10s, ataques causam +20% dano mágico adicional."
+  - "§8Atualiza HUD de runas ({rune_uptime})."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run fighter_runic_weapon %caster% 10 0.20"
+          silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: ENCHANT
+          amount-base: 25
+          radius-base: 1
+          target: caster

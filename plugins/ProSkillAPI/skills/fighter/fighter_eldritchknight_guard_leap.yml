@@ -1,0 +1,37 @@
+# Tier 2: Salto de Guarda
+name: fighter_eldritchknight_guard_leap
+display: "§bSalto de Guarda"
+icon: FEATHER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+description:
+  - "§7Avança rapidamente e reduz dano causado pelos inimigos próximos em 10% por 6s."
+  - "§8Controle respeita retorno decrescente."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Dash:
+        type: mechanic
+        data:
+          command: "skript run fighter_guard_leap %caster% 4"
+          silent: true
+      Debuff:
+        type: mechanic
+        data:
+          command: "skript run fighter_guard_zone %caster% 6 0.10"
+          silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: CLOUD
+          amount-base: 12
+          radius-base: 1
+          target: caster

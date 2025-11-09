@@ -1,0 +1,38 @@
+# Skill Comum: Sombra Arcana
+name: rogue_arcanetrickster_shadow_shroud
+display: "§5Sombra Arcana"
+icon: ENDER_PEARL
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+description:
+  - "§7Envolve-se em sombras por 2.5s, ganhando furtividade temporária (rompe ao atacar)."
+  - "§8Atualiza o HUD de furtividade ({stealth_time})."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Stealth:
+        type: mechanic
+        data:
+          potion: INVISIBILITY
+          seconds-base: 2.5
+          seconds-scale: 0
+          amplifier-base: 0
+          ambient: true
+      SilenceSteps:
+        type: mechanic
+        data:
+          command: "skript run rogue_enter_shadow %caster% 2.5"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§5Você desaparece em sombras ilusórias."
+          targets: self

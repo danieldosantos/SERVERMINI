@@ -1,0 +1,37 @@
+# Tier 3: Lâmina Fantasmagórica
+name: rogue_arcanetrickster_phantasmal_blade
+display: "§8Lâmina Fantasmagórica"
+icon: DIAMOND_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+description:
+  - "§7Por 6s, ataques causam 150% dano em alvos marcados."
+  - "§8Marcação provém de Dardo Rúnico e Golpe Arcano."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run rogue_phantasmal_window %caster% 6 1.5"
+          silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: ENCHANTMENT_TABLE
+          amount-base: 20
+          radius-base: 1
+          target: caster
+      Message:
+        type: mechanic
+        data:
+          message: "§8Sua lâmina encontra ecos do alvo marcado."
+          targets: self

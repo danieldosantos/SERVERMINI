@@ -1,0 +1,50 @@
+# Tier 2: Dardo Rúnico
+name: rogue_arcanetrickster_runic_dart
+display: "§5Dardo Rúnico"
+icon: TIPPED_ARROW
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  range-base: 12
+description:
+  - "§7Projétil rápido causando 120% dano mágico e revelando por 4s."
+  - "§8Marcador usa efeito Glowing controlado via Skript."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 12
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 1.2
+              classifier: magic
+          Reveal:
+            type: mechanic
+            data:
+              potion: GLOWING
+              seconds-base: 4
+              amplifier-base: 0
+          Sync:
+            type: mechanic
+            data:
+              command: "skript run rogue_reveal_ping %caster% %target% 4"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: CRIT
+          amount-base: 6
+          radius-base: 0.5
+          target: target

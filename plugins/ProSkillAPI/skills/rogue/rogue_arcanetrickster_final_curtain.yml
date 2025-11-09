@@ -1,0 +1,50 @@
+# Tier 4: Golpe da Cortina Final (Ultimate)
+name: rogue_arcanetrickster_final_curtain
+display: "§5Golpe da Cortina Final"
+icon: NETHERITE_DAGGER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 50
+  mana-cost-scale: 0
+  range-base: 5
+description:
+  - "§7Ataque devastador de 220% dano mágico e marca o alvo por 3s."
+  - "§8Marca revela o inimigo e amplia dano de Lâmina Fantasmagórica."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 5
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 2.2
+              classifier: magic
+          Reveal:
+            type: mechanic
+            data:
+              potion: GLOWING
+              seconds-base: 3
+              amplifier-base: 0
+          Mark:
+            type: mechanic
+            data:
+              command: "skript run rogue_mark_arcane %caster% %target% 3"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: DRAGON_BREATH
+          amount-base: 40
+          radius-base: 1
+          target: target

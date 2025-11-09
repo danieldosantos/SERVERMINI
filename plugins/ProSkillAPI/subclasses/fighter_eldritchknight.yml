@@ -1,9 +1,9 @@
-# Subclasse Cavaleiro Élfico do Guerreiro
+# Subclasse Cavaleiro Arcano do Guerreiro
 name: Fighter_EldritchKnight
-display: "§bCavaleiro Élfico"
+display: "§bCavaleiro Arcano"
 description:
-  - "§7Mistura combate marcial com magia elemental controlada."
-  - "§bAcesso a mana padrão fora de combate e mitigação elemental coordenada."
+  - "§7Mistura combate marcial com magia rúnica disciplinada."
+  - "§bGerencia janelas curtas de dano e defesa via runas e marcações."
 options:
   needs-permission: true
   parent: Fighter
@@ -11,37 +11,78 @@ options:
   mana-name: "Mana"
   mana-regen: 12
   mana-max: 160
+  scoreboard:
+    rune: "rune_uptime"
+    guardian: "arcane_guardian"
+    placeholders:
+      rune: "%skills_rune_uptime%"
+      guardian: "%skills_arcane_guardian%"
 skills:
   tier1:
     active:
-      - fighter_eldritchknight_arcane_blade
-      - fighter_eldritchknight_arcane_shield
+      - fighter_eldritchknight_runic_weapon
+      - fighter_eldritchknight_arcane_guardian
+      - fighter_eldritchknight_imbued_strike
+      - fighter_eldritchknight_arcane_discipline
+      - fighter_eldritchknight_firm_seal
+      - fighter_eldritchknight_energetic_impact
     passive:
       - fighter_martial_training
   tier2:
     active:
-      - fighter_eldritchknight_arcane_blade
-      - fighter_eldritchknight_arcane_shield
-      - fighter_eldritchknight_tactical_teleport
+      - fighter_eldritchknight_runic_weapon
+      - fighter_eldritchknight_arcane_guardian
+      - fighter_eldritchknight_imbued_strike
+      - fighter_eldritchknight_arcane_discipline
+      - fighter_eldritchknight_firm_seal
+      - fighter_eldritchknight_energetic_impact
+      - fighter_eldritchknight_wave_slash
+      - fighter_eldritchknight_arcanized_assault
+      - fighter_eldritchknight_static_shield
+      - fighter_eldritchknight_guard_leap
     passive:
       - fighter_martial_training
   tier3:
     active:
-      - fighter_eldritchknight_arcane_blade
-      - fighter_eldritchknight_arcane_shield
-      - fighter_eldritchknight_tactical_teleport
-      - fighter_eldritchknight_energy_bulwark
+      - fighter_eldritchknight_runic_weapon
+      - fighter_eldritchknight_arcane_guardian
+      - fighter_eldritchknight_imbued_strike
+      - fighter_eldritchknight_arcane_discipline
+      - fighter_eldritchknight_firm_seal
+      - fighter_eldritchknight_energetic_impact
+      - fighter_eldritchknight_wave_slash
+      - fighter_eldritchknight_arcanized_assault
+      - fighter_eldritchknight_static_shield
+      - fighter_eldritchknight_guard_leap
+      - fighter_eldritchknight_sundering_cut
+      - fighter_eldritchknight_defensive_aura
+      - fighter_eldritchknight_arcane_charge
+      - fighter_eldritchknight_war_mark
     passive:
       - fighter_martial_training
   tier4:
     active:
-      - fighter_eldritchknight_arcane_blade
-      - fighter_eldritchknight_arcane_shield
-      - fighter_eldritchknight_tactical_teleport
-      - fighter_eldritchknight_energy_bulwark
-      - fighter_eldritchknight_blade_storm
+      - fighter_eldritchknight_runic_weapon
+      - fighter_eldritchknight_arcane_guardian
+      - fighter_eldritchknight_imbued_strike
+      - fighter_eldritchknight_arcane_discipline
+      - fighter_eldritchknight_firm_seal
+      - fighter_eldritchknight_energetic_impact
+      - fighter_eldritchknight_wave_slash
+      - fighter_eldritchknight_arcanized_assault
+      - fighter_eldritchknight_static_shield
+      - fighter_eldritchknight_guard_leap
+      - fighter_eldritchknight_sundering_cut
+      - fighter_eldritchknight_defensive_aura
+      - fighter_eldritchknight_arcane_charge
+      - fighter_eldritchknight_war_mark
+      - fighter_eldritchknight_arcane_gladius
+      - fighter_eldritchknight_static_circle
+      - fighter_eldritchknight_iron_crown
+      - fighter_eldritchknight_victory_thrust
     passive:
       - fighter_martial_training
 notes:
-  - "Escudo Arcano consulta resistências raciais via PlaceholderAPI antes de aplicar." 
-  - "Baluarte de Energia aplica retornos decrescentes se a raça já possui resistência elementar >25%."
+  - "HUD usa {rune_uptime} para acompanhar Arma Rúnica e Guardião Arcano."
+  - "Mitigações adicionais consultam PlaceholderAPI racial antes de aplicar buffs."
+  - "Todas as janelas ofensivas respeitam limites de +20% velocidade e 45% mitigação."

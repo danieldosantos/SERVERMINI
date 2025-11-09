@@ -1,0 +1,42 @@
+# Itens focais para Trapaceiro Arcano
+items:
+  ArcaneTricksterDagger:
+    Id: DIAMOND_SWORD
+    Display: '&5Adaga Arcana'
+    Lore:
+      - '&7Canaliza Golpe Arcano (+120% dano).'
+      - '&8Grupo: class_rogue.arcane_trickster'
+    Options:
+      Unbreakable: true
+      Damage: 6
+    PersistentData:
+      classlock: 'class_rogue.arcane_trickster'
+      skill: 'rogue_arcanetrickster_arcane_strike'
+    Skills:
+      - skill{s=rogue_arcanetrickster_arcane_strike} @target ~onLeftClick
+  ArcaneTricksterVeil:
+    Id: BLACK_DYE
+    Display: '&5Véu Sombrio'
+    Lore:
+      - '&7Ativa Sombra Arcana (furtividade).'
+      - '&8Grupo: class_rogue.arcane_trickster'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_rogue.arcane_trickster'
+      skill: 'rogue_arcanetrickster_shadow_shroud'
+    Skills:
+      - skill{s=rogue_arcanetrickster_shadow_shroud} @self ~onUse
+  ArcaneTricksterCodex:
+    Id: WRITABLE_BOOK
+    Display: '&5Códice da Cortina'
+    Lore:
+      - '&7Ultimate Golpe da Cortina Final.'
+      - '&8Grupo: class_rogue.arcane_trickster'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_rogue.arcane_trickster'
+      skill: 'rogue_arcanetrickster_final_curtain'
+    Skills:
+      - skill{s=rogue_arcanetrickster_final_curtain} @target ~onSneakLeftClick

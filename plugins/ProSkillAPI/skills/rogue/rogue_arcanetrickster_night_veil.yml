@@ -1,0 +1,38 @@
+# Tier 3: Véu Noturno
+name: rogue_arcanetrickster_night_veil
+display: "§8Véu Noturno"
+icon: BLACK_CARPET
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+description:
+  - "§7Garante +15% esquiva e +0.02 velocidade por 10s."
+  - "§8Aplicação respeita limite global de velocidade e HUD de cargas."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Speed:
+        type: mechanic
+        data:
+          potion: SPEED
+          seconds-base: 10
+          amplifier-base: 0
+      DodgeWindow:
+        type: mechanic
+        data:
+          command: "skript run rogue_night_veil %caster% 10 0.02"
+          silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: PORTAL
+          amount-base: 18
+          radius-base: 1.2
+          target: caster

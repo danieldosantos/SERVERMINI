@@ -1,0 +1,30 @@
+# Tier 1: Selo de Firmeza
+name: fighter_eldritchknight_firm_seal
+display: "§bSelo de Firmeza"
+icon: HEAVY_WEIGHTED_PRESSURE_PLATE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 15
+  mana-cost-scale: 0
+description:
+  - "§7Garante resistência a empurrões por 8s."
+  - "§8Aciona função Skript para limitar knockback conforme caps."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run fighter_firm_seal %caster% 8"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§bVocê finca os pés no chão."
+          targets: self

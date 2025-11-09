@@ -1,0 +1,30 @@
+# Tier 2: Ataque Arcanizado
+name: fighter_eldritchknight_arcanized_assault
+display: "§bAtaque Arcanizado"
+icon: PRISMARINE_CRYSTALS
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+description:
+  - "§7Ganha +15% penetração de armadura por 8s."
+  - "§8Atualiza placeholder de penetração via Skript."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run fighter_arcanized_assault %caster% 8 0.15"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§bRunas enfraquecem a defesa inimiga."
+          targets: self
