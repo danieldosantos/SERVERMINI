@@ -1,53 +1,57 @@
 # Raça: Elfo da Floresta
-# Fantasia: caçadores ágeis ligados à natureza.
 race_id: elfo_floresta
 name: "Elfo da Floresta"
-identity: "Exploradores ligeiros que caminham em harmonia com as copas e sombras."
+identity: "Batedores leves que dominam trilhas naturais e caçadas à distância."
 luckperms:
   required: "race_elfo.floresta"
   inherit: "race_elfo"
 tags:
   - elf
 placeholders:
-  racial_cd_main: "{cooldown:skill_passos_faes}"
+  racial_cd_main: "{cooldown:skill_salto_galho}"
+  racial_cd_mark: "{cooldown:skill_marca_bosque}"
 passives:
-  passo_ligeiro:
-    name: "Passo Ligeiro"
-    type: speed_boost
+  passo_silvestre:
+    name: "Passo Silvestre"
+    type: biome_speed
     trigger: biome_tag:forest
     duration: 15
-    cooldown: 45
-    uptime_cap: 0.5
+    cooldown: 30
+    uptime_cap: 0.6
     speed_bonus: 0.02
-    description: "Em florestas ganha +0.02 de velocidade por 15s (não empilha com montarias)."
-  sentidos_aguçados:
-    name: "Sentidos Aguçados"
-    type: detection
-    trigger: time:dusk
+    fallback_speed: 0.01
+    fallback_duration: 8
+    description: "+0.02 velocidade em biomas de floresta (≤60%). Fora deles, ao entrar em combate ganha +0.01 por 8s (CD 30s)."
+  camuflagem_natural:
+    name: "Camuflagem Natural"
+    type: detection_reduction
+    trigger: vegetation_cover
     duration: 18
-    cooldown: 60
-    uptime_cap: 0.5
-    reveal_radius: 8
-    description: "Revela entidades furtivas em 8 blocos ao entardecer ou em folhagens densas."
+    cooldown: 36
+    uptime_cap: 0.6
+    detection_penalty: 0.1
+    description: "Enquanto em vegetação densa reduz chance de ser detectado em 10%."
 actives:
-  passos_faes:
-    name: "Passos Feéricos"
-    skill: PassosFaes
-    cooldown: 75
-    charges: 2
-    description: "Translada 6 blocos entre árvores com camuflagem leve (40% invis) por 6s."
-resistances:
-  nature:
-    base: 0.12
-    max: 0.35
-    notes: "DR quando combinado com classes druídicas; mantém vulnerabilidade a fogo."
+  marca_bosque:
+    name: "Marca do Bosque"
+    skill: MarcaBosque
+    cooldown: 60
+    charges: 1
+    description: "Marca alvo por 10s concedendo +12% dano e +1 bloco de alcance à distância."
+  salto_galho:
+    name: "Salto de Galho"
+    skill: SaltoGalho
+    cooldown: 45
+    charges: 1
+    description: "Impulso de 6 blocos com queda lenta por 3s."
+resistances: {}
 synergy_notes:
-  - "Combina com Patrulheiro T2 focado em arco, usando Passos Feéricos para reposicionar."
-  - "Restrição: classes sombra não excedem 60% de invis total (aplicar redução no efeito de camuflagem)."
+  - "Perfeito para patrulheiros arqueiros que dependem de burst curto sem exceder cap de velocidade."
+  - "Camuflagem garante rotas de emboscada sem resultar em invisibilidade permanente."
 tests:
   pve:
-    - "Patrulhar floresta enfrentando matilha (tempo alvo 50s com Passos ativo 6s)."
-    - "Evento de escolta na selva usando detecção para prever emboscadas."
+    - "Escort mission em floresta verificando uptime de Passo Silvestre ≤60%."
+    - "Combate em campo aberto garantindo fallback de velocidade ativa apenas 8s a cada 30s."
   pvp:
-    - "Duelo vs arqueiro rival; velocidade total ≤0.05 e camuflagem contrabalanceada."
-    - "Capture the point em mapa de floresta, segurar ponto 30s com camuflagem alternada."
+    - "Guerra de territórios: Marca do Bosque aumenta dano focado sem quebrar limite de alcance (+1 bloco)."
+    - "Skirmish 1v1: Salto de Galho usado como escape mantendo velocidade total ≤+0.05."

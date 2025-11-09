@@ -45,12 +45,17 @@ lp group race_draconato permission set psa.skill.SoproDraconico true
 lp group race_draconato permission set mythicmobs.item.DraconicCharm true
 
 # Elfos
-lp group race_elfo.alto permission set psa.skill.TruqueArcano true
-lp group race_elfo.alto permission set mythicmobs.item.HighElfFoci true
-lp group race_elfo.floresta permission set psa.skill.PassosFaes true
-lp group race_elfo.floresta permission set mythicmobs.item.ForestElfQuiver true
+lp group race_elfo permission set psa.skill.FaePassos true
+lp group race_elfo permission set mythicmobs.item.ElvenMoonbrooch true
+lp group race_elfo.alto permission set psa.skill.TruqueArcanoSeta true
+lp group race_elfo.alto permission set psa.skill.TruqueArcanoBarreira true
+lp group race_elfo.alto permission set psa.skill.TruqueArcanoPiscar true
+lp group race_elfo.alto permission set mythicmobs.item.HighElfCrystal true
+lp group race_elfo.floresta permission set psa.skill.MarcaBosque true
+lp group race_elfo.floresta permission set psa.skill.SaltoGalho true
+lp group race_elfo.floresta permission set mythicmobs.item.ForestLeafCharm true
 lp group race_elfo.drow permission set psa.skill.LuzesFeericas true
-lp group race_elfo.drow permission set psa.skill.MantoSombras true
+lp group race_elfo.drow permission set psa.skill.PassoUmbratico true
 lp group race_elfo.drow permission set mythicmobs.item.DrowMoonbrooch true
 
 # Gnomos
@@ -89,9 +94,13 @@ lp group race_tiefling permission set mythicmobs.item.TieflingSparkGlove true
 lp group race_draconato permission set skript.command.sopro_draco true
 lp group race_anao.colina permission set skript.command.fortitude_anao true
 lp group race_anao.montanha permission set skript.command.postura_pedra true
+lp group race_elfo permission set skript.command.racial true
+lp group race_elfo permission set skript.command.fae_passos true
 lp group race_elfo.alto permission set skript.command.truque_arcano true
-lp group race_elfo.floresta permission set skript.command.passos_faes true
 lp group race_elfo.drow permission set skript.command.luzes_feericas true
+lp group race_elfo.drow permission set skript.command.passo_umbratico true
+lp group race_elfo.floresta permission set skript.command.marca_bosque true
+lp group race_elfo.floresta permission set skript.command.salto_galho true
 lp group race_gnomo.floresta permission set skript.command.canto_cativante true
 lp group race_gnomo.rocha permission set skript.command.engenho_gnomesco true
 lp group race_halfling.pesleves permission set skript.command.passos_silenciosos true

@@ -1,0 +1,22 @@
+# ProSkillAPI - Marca do Bosque
+skills:
+  MarcaBosque:
+    display: "&aMarca do Bosque"
+    type: ACTIVE
+    skill_class: racial
+    description: "Marca um alvo por 10s, aumentando dano à distância do usuário e alcance em +1 bloco."
+    tiers:
+      T1: { cooldown: 60, duration: 10, damage_bonus: 0.12, range_bonus: 1.0 }
+      T2: { cooldown: 60, duration: 10, damage_bonus: 0.12, range_bonus: 1.0 }
+      T3: { cooldown: 60, duration: 11, damage_bonus: 0.13, range_bonus: 1.0 }
+      T4: { cooldown: 60, duration: 11, damage_bonus: 0.14, range_bonus: 1.0 }
+    cost:
+      resource: stamina
+      amount: 10
+    effects:
+      - target: enemy_single
+        type: mark
+        duration: { tier: duration }
+        damage_taken_projectile: { tier: damage_bonus }
+        range_bonus: { tier: range_bonus }
+    notes: "Aplica-se apenas ao usuário; não ultrapassa cap de alcance de +1 bloco."

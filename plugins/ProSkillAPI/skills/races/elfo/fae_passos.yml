@@ -1,0 +1,27 @@
+# ProSkillAPI - Habilidade Racial Base dos Elfos
+skills:
+  FaePassos:
+    display: "&bFae Passos"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Avança 5 blocos envolto por véu feérico e amortece empurrões por 2 segundos.
+      Usado para reposicionamento rápido sem exceder o limite de velocidade global.
+    tiers:
+      T1: { cooldown: 45, distance: 5, knockback_resist: 0.3 }
+      T2: { cooldown: 45, distance: 5, knockback_resist: 0.35 }
+      T3: { cooldown: 45, distance: 5, knockback_resist: 0.4 }
+      T4: { cooldown: 45, distance: 6, knockback_resist: 0.4 }
+    cost:
+      resource: stamina
+      amount: 0
+    effects:
+      - target: self
+        type: dash
+        distance: { tier: distance }
+      - target: self
+        type: status
+        id: knockback_resist
+        duration: 2
+        value: { tier: knockback_resist }
+    notes: "Cooldown mínimo 45s para seguir diretriz de habilidades-chave."

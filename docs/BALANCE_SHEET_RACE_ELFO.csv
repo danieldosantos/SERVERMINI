@@ -1,0 +1,8 @@
+Aspecto,Base,Alto,Drow,Floresta,Notas
+Mobilidade,Graça Élfica +0.01→0.02 (12s/30s) + Fae Passos 5b/45s,Piscar Breve 6-7b/60s,Passo Umbrático 6-7b/60s (sombras),Salto de Galho 6-7b/45s + slow fall,Cap de velocidade +0.05 mantido
+Detecção/Sigilo,Sentidos +5% alcance ≤60%,Disciplina visual sem bônus,Luzes Feéricas revela 7-8b/8-9s,Camuflagem Natural -10% detecção,HUD com placeholders `{cooldown:skill_*}`
+Fraquezas,Penalidade nenhuma própria,Sem penalidades extras,Penalidade solar -5% acerto/-5% conjuração,Sem penalidades extras,Não remover fraquezas raciais
+Suporte/Controle,Transe regen 2%/s 10s/45s,Barreira Cintilante escudo 120-190/75s,Luzes Feéricas -8-10% evasão/75s,Marca do Bosque +12-14% dano/+1 bloco/60s,Cooldowns ≥45s
+Dano Direto,Sem bônus ofensivo,Seta Arcana 120-135%/45s,Luzes Feéricas prepara foco,Marca do Bosque impulsiona projéteis,Aplicar diminishing returns com builds de dano
+Utilidade,Base dash + knockback resist 0.3-0.4,Disciplina Mística -5% CD utilidade/12s (CD 60s),Visão Superior 26b ≤60%,Passo Silvestre +0.02 floresta ≤60%,Todos efeitos condicionais ≤60% uptime
+Itens Racial,ElvenMoonbrooch → Fae Passos,HighElfCrystal → Truque selecionado,DrowMoonbrooch → Luzes Feéricas,ForestLeafCharm → Salto de Galho,LuckPerms garante bloqueio correto
