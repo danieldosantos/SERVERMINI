@@ -1,281 +1,267 @@
-# Itens focais do Paladino - MythicMobs
-DevotionBlade:
+# Itens focais do Paladino alinhados aos tiers e juramentos.
+Paladin_T1_Blade:
+  Id: "minecraft:iron_sword"
+  Display: "&eLâmina do Voto"
+  Lore:
+    - "&7Dispara Golpe Divino (/golpe)."
+    - "&eRequer permissão: class_paladin"
+  Options:
+    Unbreakable: true
+    HideFlags: true
+    CustomModelData: 21001
+    MaxStackSize: 1
+    Rarity: class
+  PersistentData:
+    paladinClass: "common"
+    skillBinding: "paladin_golpe_divino"
+  Skills:
+    - condition{c=permission{p=class_paladin}} true
+    - command{c="paladin_cast paladin_golpe_divino";delay=1} @self ~onRightClick
+    - command{c="paladin_cast paladin_golpe_divino";delay=1} @self ~onLeftClick
+
+Paladin_T1_Talisman:
+  Id: "minecraft:prismarine_crystals"
+  Display: "&aTalismã de Imposição"
+  Lore:
+    - "&7Canaliza Imposição Menor (/imposicao)."
+    - "&eRequer permissão: class_paladin"
+  Options:
+    Unbreakable: true
+    HideFlags: true
+    CustomModelData: 21002
+    MaxStackSize: 1
+    Rarity: class
+  PersistentData:
+    paladinClass: "common"
+    skillBinding: "paladin_imposicao_menor"
+  Skills:
+    - condition{c=permission{p=class_paladin}} true
+    - command{c="paladin_cast paladin_imposicao_menor";delay=1} @self ~onRightClick
+
+Paladin_T1_Banner:
+  Id: "minecraft:white_banner"
+  Display: "&bEstandarte Protetor"
+  Lore:
+    - "&7Ativa Selo Protetor."
+    - "&eRequer permissão: class_paladin"
+  Options:
+    Unbreakable: true
+    HideFlags: true
+    CustomModelData: 21003
+    MaxStackSize: 1
+    Rarity: class
+  PersistentData:
+    paladinClass: "common"
+    skillBinding: "paladin_selo_protetor"
+  Skills:
+    - condition{c=permission{p=class_paladin}} true
+    - command{c="paladin_cast paladin_selo_protetor";delay=1} @self ~onRightClick
+
+Devotion_T2_Blade:
   Id: "minecraft:diamond_sword"
-  Display: "&fLâmina da Devoção"
+  Display: "&fLâmina Consagrada"
   Lore:
-    - "&7Condutora de Golpe Sagrado."
-    - "&fJuramento: Devoção"
-    - "&eRequer permissão LuckPerms: class_paladin.devotion"
+    - "&7Golpe Sagrado focado em inimigos profanos."
+    - "&ePermissão: class_paladin.devotion"
   Options:
     Unbreakable: true
     HideFlags: true
-    CustomModelData: 12001
+    CustomModelData: 22001
     MaxStackSize: 1
     Rarity: class
-  Enchantments:
-    - SHARPNESS:4
   PersistentData:
     paladinOath: "devotion"
-    skillBinding: "golpe_sagrado"
+    skillBinding: "paladin_golpe_sagrado"
   Skills:
     - condition{c=permission{p=class_paladin.devotion}} true
-    - command{c="paladin_cast golpe_sagrado";delay=1} @self ~onRightClick
-    - command{c="paladin_cast golpe_sagrado";delay=1} @self ~onLeftClick
-DevotionRelic:
+    - command{c="paladin_cast paladin_golpe_sagrado";delay=1} @self ~onRightClick
+
+Devotion_T2_Relic:
   Id: "minecraft:heart_of_the_sea"
-  Display: "&fRelíquia do Juramento"
+  Display: "&bRelíquia da Pureza"
   Lore:
-    - "&7Canaliza Aura de Pureza."
-    - "&8Aplica resistências seguindo limites globais."
+    - "&7Projeta Aura de Pureza (/voto_devocao)."
     - "&ePermissão: class_paladin.devotion"
   Options:
     Unbreakable: true
     HideFlags: true
-    CustomModelData: 12002
+    CustomModelData: 22002
     MaxStackSize: 1
     Rarity: class
   PersistentData:
     paladinOath: "devotion"
-    skillBinding: "aura_de_pureza"
+    skillBinding: "paladin_aura_de_pureza"
   Skills:
     - condition{c=permission{p=class_paladin.devotion}} true
-    - command{c="paladin_cast aura_pureza";delay=1} @self ~onRightClick
-DevotionLantern:
-  Id: "minecraft:sea_lantern"
-  Display: "&fLanterna Orientadora"
-  Lore:
-    - "&7Revela sombras com Luz Orientadora."
-    - "&ePermissão: class_paladin.devotion"
-  Options:
-    Unbreakable: true
-    HideFlags: true
-    CustomModelData: 12003
-    MaxStackSize: 1
-    Rarity: class
-  PersistentData:
-    paladinOath: "devotion"
-    skillBinding: "luz_orientadora"
-  Skills:
-    - condition{c=permission{p=class_paladin.devotion}} true
-    - command{c="paladin_cast luz_orientadora";delay=1} @self ~onRightClick
-DevotionShield:
-  Id: "minecraft:shield"
-  Display: "&fEscudo Devoto"
-  Lore:
-    - "&7Ativa Escudo Devoto por 6s."
-    - "&eJuramento da Devoção"
-  Options:
-    Unbreakable: true
-    HideFlags: true
-    CustomModelData: 12004
-    MaxStackSize: 1
-    Rarity: class
-  PersistentData:
-    paladinOath: "devotion"
-    skillBinding: "escudo_devoto"
-  Skills:
-    - condition{c=permission{p=class_paladin.devotion}} true
-    - command{c="paladin_cast escudo_devoto";delay=1} @self ~onRightClick
-DevotionCodex:
-  Id: "minecraft:enchanted_book"
-  Display: "&fCódice dos Milagres"
-  Lore:
-    - "&7Desencadeia Milagre da Fé (ULT)."
-    - "&cCooldown 240s"
-    - "&ePermissão: class_paladin.devotion"
-  Options:
-    Unbreakable: true
-    HideFlags: true
-    CustomModelData: 12005
-    MaxStackSize: 1
-    Rarity: class
-  PersistentData:
-    paladinOath: "devotion"
-    skillBinding: "milagre_da_fe"
-  Skills:
-    - condition{c=permission{p=class_paladin.devotion}} true
-    - command{c="paladin_cast milagre";delay=1} @self ~onRightClick
+    - command{c="paladin_cast paladin_aura_de_pureza";delay=1} @self ~onRightClick
 
-VengeanceSigil:
-  Id: "minecraft:ender_eye"
-  Display: "&cSigilo da Vingança"
+Devotion_T3_Banner:
+  Id: "minecraft:light_blue_banner"
+  Display: "&bEstandarte da Virtude"
   Lore:
-    - "&7Marca inimigos via Juramento de Inimizade."
-    - "&ePermissão: class_paladin.vengeance"
+    - "&7Ativa Estandarte da Virtude."
+    - "&ePermissão: class_paladin.devotion"
   Options:
     Unbreakable: true
     HideFlags: true
-    CustomModelData: 13001
+    CustomModelData: 23001
     MaxStackSize: 1
     Rarity: class
   PersistentData:
-    paladinOath: "vengeance"
-    skillBinding: "juramento_de_inimizade"
+    paladinOath: "devotion"
+    skillBinding: "paladin_estandarte_da_virtude"
   Skills:
-    - condition{c=permission{p=class_paladin.vengeance}} true
-    - command{c="paladin_cast juramento";delay=1} @self ~onRightClick
-VengeanceBlade:
-  Id: "minecraft:netherite_sword"
-  Display: "&cLâmina Implacável"
+    - condition{c=permission{p=class_paladin.devotion}} true
+    - command{c="paladin_cast paladin_estandarte_da_virtude";delay=1} @self ~onRightClick
+
+Devotion_T4_Relic:
+  Id: "minecraft:nether_star"
+  Display: "&fCálice do Milagre"
   Lore:
-    - "&7Canaliza Fúria Celestial."
-    - "&eJuramento da Vingança"
+    - "&7Canaliza Milagre da Fé."
+    - "&ePermissão: class_paladin.devotion"
   Options:
     Unbreakable: true
     HideFlags: true
-    CustomModelData: 13002
+    CustomModelData: 24001
     MaxStackSize: 1
     Rarity: class
   PersistentData:
-    paladinOath: "vengeance"
-    skillBinding: "furia_celestial"
+    paladinOath: "devotion"
+    skillBinding: "paladin_milagre_da_fe"
   Skills:
-    - condition{c=permission{p=class_paladin.vengeance}} true
-    - command{c="paladin_cast furia";delay=1} @self ~onRightClick
-VengeanceBoots:
-  Id: "minecraft:netherite_boots"
-  Display: "&cBotas do Redentor"
-  Lore:
-    - "&7Ativa Passo do Redentor."
-    - "&eSomente juramento da Vingança"
-  Options:
-    Unbreakable: true
-    HideFlags: true
-    CustomModelData: 13003
-    MaxStackSize: 1
-    Rarity: class
-  PersistentData:
-    paladinOath: "vengeance"
-    skillBinding: "passo_do_redentor"
-  Skills:
-    - condition{c=permission{p=class_paladin.vengeance}} true
-    - command{c="paladin_cast passo";delay=1} @self ~onRightClick
-VengeanceChain:
+    - condition{c=permission{p=class_paladin.devotion}} true
+    - command{c="paladin_cast paladin_milagre_da_fe";delay=1} @self ~onRightClick
+
+Vengeance_T2_Chains:
   Id: "minecraft:chain"
-  Display: "&cCorrente do Pecado"
+  Display: "&cCorrentes da Justiça"
   Lore:
-    - "&7Lança Cadeia do Pecado."
+    - "&7Dispara Cadeia do Pecado."
     - "&ePermissão: class_paladin.vengeance"
   Options:
     Unbreakable: true
     HideFlags: true
-    CustomModelData: 13004
+    CustomModelData: 22011
     MaxStackSize: 1
     Rarity: class
   PersistentData:
     paladinOath: "vengeance"
-    skillBinding: "cadeia_do_pecado"
+    skillBinding: "paladin_cadeia_do_pecado"
   Skills:
     - condition{c=permission{p=class_paladin.vengeance}} true
-    - command{c="paladin_cast cadeia";delay=1} @self ~onRightClick
-VengeanceRelic:
-  Id: "minecraft:totem_of_undying"
-  Display: "&cRelíquia da Execução"
-  Lore:
-    - "&7Invoca Execução Divina (ULT)."
-    - "&cRespeita travas de arena"
-    - "&ePermissão: class_paladin.vengeance"
-  Options:
-    Unbreakable: true
-    HideFlags: true
-    CustomModelData: 13005
-    MaxStackSize: 1
-    Rarity: class
-  PersistentData:
-    paladinOath: "vengeance"
-    skillBinding: "execucao_divina"
-  Skills:
-    - condition{c=permission{p=class_paladin.vengeance}} true
-    - command{c="paladin_cast execucao";delay=1} @self ~onRightClick
+    - command{c="paladin_cast paladin_cadeia_do_pecado";delay=1} @self ~onRightClick
 
-AncientsSpear:
-  Id: "minecraft:trident"
-  Display: "&aLança das Vides"
+Vengeance_T2_Sigil:
+  Id: "minecraft:lodestone"
+  Display: "&cSelo do Predador"
   Lore:
-    - "&7Dispara Vinha Restritiva."
-    - "&ePermissão: class_paladin.ancients"
+    - "&7Marca inimigos com Juramento de Inimizade."
+    - "&ePermissão: class_paladin.vengeance"
   Options:
     Unbreakable: true
     HideFlags: true
-    CustomModelData: 14001
+    CustomModelData: 22012
     MaxStackSize: 1
     Rarity: class
   PersistentData:
-    paladinOath: "ancients"
-    skillBinding: "vinha_restritiva"
+    paladinOath: "vengeance"
+    skillBinding: "paladin_juramento_de_inimizade"
   Skills:
-    - condition{c=permission{p=class_paladin.ancients}} true
-    - command{c="paladin_cast vinha";delay=1} @self ~onRightClick
-AncientsCrown:
-  Id: "minecraft:flower_pot"
-  Display: "&aCoroa da Canópia"
+    - condition{c=permission{p=class_paladin.vengeance}} true
+    - command{c="paladin_cast paladin_juramento_de_inimizade";delay=1} @self ~onRightClick
+
+Vengeance_T3_Relic:
+  Id: "minecraft:netherite_scrap"
+  Display: "&4Fragmento da Caça"
   Lore:
-    - "&7Ativa Aura da Natureza."
-    - "&eRestrita ao juramento dos Anciões"
+    - "&7Canaliza Caça Sagrada."
+    - "&ePermissão: class_paladin.vengeance"
   Options:
     Unbreakable: true
     HideFlags: true
-    CustomModelData: 14002
+    CustomModelData: 23011
     MaxStackSize: 1
     Rarity: class
   PersistentData:
-    paladinOath: "ancients"
-    skillBinding: "aura_da_natureza"
+    paladinOath: "vengeance"
+    skillBinding: "paladin_caca_sagrada"
   Skills:
-    - condition{c=permission{p=class_paladin.ancients}} true
-    - command{c="paladin_cast aura_natureza";delay=1} @self ~onRightClick
-AncientsLantern:
-  Id: "minecraft:soul_lantern"
-  Display: "&aLanterna Radiante"
+    - condition{c=permission{p=class_paladin.vengeance}} true
+    - command{c="paladin_cast paladin_caca_sagrada";delay=1} @self ~onRightClick
+
+Vengeance_T4_Greatsword:
+  Id: "minecraft:netherite_sword"
+  Display: "&4Lâmina da Execução"
   Lore:
-    - "&7Emite Luz Radiante."
-    - "&ePermissão: class_paladin.ancients"
+    - "&7Ativa Execução Divina."
+    - "&ePermissão: class_paladin.vengeance"
   Options:
     Unbreakable: true
     HideFlags: true
-    CustomModelData: 14003
+    CustomModelData: 24011
     MaxStackSize: 1
     Rarity: class
   PersistentData:
-    paladinOath: "ancients"
-    skillBinding: "luz_radiante"
+    paladinOath: "vengeance"
+    skillBinding: "paladin_execucao_divina"
   Skills:
-    - condition{c=permission{p=class_paladin.ancients}} true
-    - command{c="paladin_cast luz_radiante";delay=1} @self ~onRightClick
-AncientsMantle:
-  Id: "minecraft:elytra"
-  Display: "&aManto Safira"
-  Lore:
-    - "&7Invoca Asas de Safira."
-    - "&eApenas juramento dos Anciões"
-  Options:
-    Unbreakable: true
-    HideFlags: true
-    CustomModelData: 14004
-    MaxStackSize: 1
-    Rarity: class
-  PersistentData:
-    paladinOath: "ancients"
-    skillBinding: "asas_de_safira"
-  Skills:
-    - condition{c=permission{p=class_paladin.ancients}} true
-    - command{c="paladin_cast asas";delay=1} @self ~onRightClick
-AncientsTotem:
+    - condition{c=permission{p=class_paladin.vengeance}} true
+    - command{c="paladin_cast paladin_execucao_divina";delay=1} @self ~onRightClick
+
+Ancients_T2_Bough:
   Id: "minecraft:warped_fungus_on_a_stick"
-  Display: "&aTotem Harmônico"
+  Display: "&2Galho Ancestral"
   Lore:
-    - "&7Ergue Harmonia Primordial (ULT)."
-    - "&cCooldown 240s"
+    - "&7Invoca Vinha Restritiva."
     - "&ePermissão: class_paladin.ancients"
   Options:
     Unbreakable: true
     HideFlags: true
-    CustomModelData: 14005
+    CustomModelData: 22021
     MaxStackSize: 1
     Rarity: class
   PersistentData:
     paladinOath: "ancients"
-    skillBinding: "harmonia_primordial"
+    skillBinding: "paladin_vinha_restritiva"
   Skills:
     - condition{c=permission{p=class_paladin.ancients}} true
-    - command{c="paladin_cast harmonia";delay=1} @self ~onRightClick
+    - command{c="paladin_cast paladin_vinha_restritiva";delay=1} @self ~onRightClick
+
+Ancients_T3_Totem:
+  Id: "minecraft:flower_pot"
+  Display: "&2Totem Esmeralda"
+  Lore:
+    - "&7Semeia Chamado Silvestre."
+    - "&ePermissão: class_paladin.ancients"
+  Options:
+    Unbreakable: true
+    HideFlags: true
+    CustomModelData: 23021
+    MaxStackSize: 1
+    Rarity: class
+  PersistentData:
+    paladinOath: "ancients"
+    skillBinding: "paladin_chamado_silvestre"
+  Skills:
+    - condition{c=permission{p=class_paladin.ancients}} true
+    - command{c="paladin_cast paladin_chamado_silvestre";delay=1} @self ~onRightClick
+
+Ancients_T4_Banner:
+  Id: "minecraft:green_banner"
+  Display: "&2Estandarte Primordial"
+  Lore:
+    - "&7Desencadeia Harmonia Primordial."
+    - "&ePermissão: class_paladin.ancients"
+  Options:
+    Unbreakable: true
+    HideFlags: true
+    CustomModelData: 24021
+    MaxStackSize: 1
+    Rarity: class
+  PersistentData:
+    paladinOath: "ancients"
+    skillBinding: "paladin_harmonia_primordial"
+  Skills:
+    - condition{c=permission{p=class_paladin.ancients}} true
+    - command{c="paladin_cast paladin_harmonia_primordial";delay=1} @self ~onRightClick

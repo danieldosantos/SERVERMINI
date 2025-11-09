@@ -1,0 +1,337 @@
+# Habilidades do Juramento da Vingança.
+skills:
+  JuramentoDeInimizade:
+    display: "&cJuramento de Inimizade"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_juramento_de_inimizade
+    description: |
+      Marca um alvo por 10s, aumentando em 20% o dano do paladino contra ele e revelando
+      sua posição via partículas escarlates.
+    tiers:
+      T1: { cooldown: 60, duration: 10, damage_bonus: 0.20 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      mark: true
+      duration: 10
+      damage_bonus: 0.20
+      reveal: true
+    tags: [mark, burst]
+    notes:
+      pvp: "Bônus reduzido para 15% em duelos."
+
+  PassoDoRedentor:
+    display: "&fPasso do Redentor"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_passo_do_redentor
+    description: |
+      Avança até 10 blocos na direção mirada e concede resistência a controle por 2s.
+    tiers:
+      T1: { cooldown: 60, dash: 10, cc_resistance: 0.60, duration: 2 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      dash: 10
+      duration: 2
+      control_resistance: 0.60
+    tags: [mobility]
+    notes:
+      pvp: "Aplica imunidade decrescente a deslocamentos por 10s."
+
+  CadeiaDoPecado:
+    display: "&cCadeia do Pecado"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_cadeia_do_pecado
+    description: |
+      Puxa o alvo marcado 3 blocos e reduz sua velocidade em 40% por 4s.
+    tiers:
+      T1: { cooldown: 60, pull: 3, slow: 0.40, duration: 4 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      pull: 3
+      slow: 0.40
+      duration: 4
+    tags: [control]
+    notes:
+      pvp: "Duração da lentidão cai para 2.5s com imunidade decrescente."
+
+  ZeloImplacavel:
+    display: "&eZelo Implacável"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_zelo_implacavel
+    description: |
+      Aumenta a velocidade de ataque do paladino em 15% por 8s.
+    tiers:
+      T1: { cooldown: 75, duration: 8, attack_speed: 0.15 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      self_buff: true
+      duration: 8
+      attack_speed: 0.15
+    tags: [offense]
+    notes:
+      pvp: "Capado a +12% em arenas para respeitar limite de DPS."
+
+  SentencaAcelerada:
+    display: "&cSentença Acelerada"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_sentenca_acelerada
+    description: |
+      Potencializa o próximo Golpe Divino para causar +30% de dano adicional se o alvo
+      estiver marcado.
+    tiers:
+      T2: { cooldown: 60, bonus: 0.30 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      trigger: next_golpe_divino
+      bonus_vs_marked: 0.30
+    tags: [combo]
+    notes:
+      pvp: "Bônus cai para 20% contra jogadores."
+
+  LamaDaJustica:
+    display: "&fLama da Justiça"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_lama_da_justica
+    description: |
+      Invoca lama que imobiliza por 2s o alvo marcado ao pisar na área (4 blocos).
+    tiers:
+      T2: { cooldown: 75, radius: 4, root_duration: 2, duration: 6 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      trap: true
+      radius: 4
+      duration: 6
+      root: 2
+      target: marked
+    tags: [control, zone]
+    notes:
+      pvp: "Enraizamento reduzido para 1.5s com imunidade decrescente."
+
+  OlhosDaPresa:
+    display: "&eOlhos da Presa"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_olhos_da_presa
+    description: |
+      Permite rastrear o alvo marcado através de obstáculos por 6s.
+    tiers:
+      T2: { cooldown: 60, duration: 6 }
+    cost:
+      resource: mana
+      amount: 20
+    effects:
+      reveal_marked: true
+      duration: 6
+      wallhack: true
+    tags: [utility]
+    notes:
+      pvp: "Não revela localização exata em combate de massa; apenas direção."
+
+  PurgaDePecados:
+    display: "&fPurga de Pecados"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_purga_de_pecados
+    description: |
+      Ao atingir o alvo marcado, remove um buff leve ativo nele.
+    tiers:
+      T2: { cooldown: 75, dispel: 1 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      trigger: on_hit_marked
+      dispel: 1
+    tags: [anti_buff]
+    notes:
+      pvp: "Não remove barreiras de ultimate."
+
+  CacaSagrada:
+    display: "&cCaça Sagrada"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_caca_sagrada
+    description: |
+      Por 8s concede +20% penetração e imunidade a empurrões; ao terminar aplica fadiga
+      de -10% dano ao paladino por 6s.
+    tiers:
+      T3: { cooldown: 90, duration: 8, penetration: 0.20, fatigue: -0.10, fatigue_duration: 6 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      duration: 8
+      penetration: 0.20
+      knockback_immunity: true
+      post_effect:
+        damage_penalty: 0.10
+        duration: 6
+    tags: [offense, stance]
+    notes:
+      pvp: "Fadiga aumenta para -15% em arenas."
+
+  FlageloDoIniquo:
+    display: "&eFlagelo do Iníquo"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_flagelo_do_iniquo
+    description: |
+      Golpe em cone de 5 blocos causando 140% de dano radiante (+20% se atingir alvo marcado).
+    tiers:
+      T3: { cooldown: 75, radius: 5, damage_multiplier: 1.4, bonus_vs_marked: 0.20 }
+    cost:
+      resource: mana
+      amount: 30
+    effects:
+      shape: cone
+      radius: 5
+      damage:
+        type: radiant
+        multiplier: 1.4
+      bonus_vs_marked: 0.20
+    tags: [burst, cone]
+    notes:
+      pvp: "Bônus reduzido para 0.12 em PvP classificado."
+
+  RedencaoArdente:
+    display: "&6Redenção Ardente"
+    type: PASSIVE
+    tier: T3
+    skill-id: paladin_redencao_ardente
+    description: |
+      Ao eliminar um alvo marcado, restaura 1 carga de Fé (tempo interno de 45s).
+    tiers:
+      T3: { internal_cooldown: 45, faith_restore: 1 }
+    effects:
+      trigger: on_kill_marked
+      faith_restore: 1
+      internal_cooldown: 45
+    tags: [resource]
+    notes:
+      pvp: "Não aciona em eliminações assistidas em arenas."
+
+  GrilhaoDeLuz:
+    display: "&fGrilhão de Luz"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_grilhao_de_luz
+    description: |
+      Imobiliza o alvo marcado na área por 2.5s aplicando imunidade decrescente.
+    tiers:
+      T3: { cooldown: 90, root: 2.5 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      root: 2.5
+      diminishing: true
+      target: marked
+    tags: [control]
+    notes:
+      pvp: "Raiz reduzida para 1.75s em arenas."
+
+  ExecucaoDivina:
+    display: "&4Execução Divina"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_execucao_divina
+    description: |
+      Golpe devastador que causa 250% de dano radiante; se o alvo estiver abaixo de 25% HP
+      executa-o (sem ultrapassar limites de dano).
+    tiers:
+      T4: { cooldown: 240, damage_multiplier: 2.5, execute_threshold: 0.25 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      damage:
+        type: radiant
+        multiplier: 2.5
+      execute_threshold: 0.25
+      cap_multiplier: 3.0
+    tags: [ultimate, burst]
+    notes:
+      pvp: "Dano máximo limitado a 180% em jogadores; execução só finaliza abaixo de 15% HP."
+
+  VotoImplacavel:
+    display: "&cVoto Implacável"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_voto_implacavel
+    description: |
+      Por 10s concede +20% dano e +15% velocidade de movimento contra o alvo marcado.
+    tiers:
+      T4: { cooldown: 120, duration: 10, damage_bonus: 0.20, speed_bonus: 0.15 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      duration: 10
+      damage_bonus_vs_marked: 0.20
+      speed_bonus_vs_marked: 0.15
+    tags: [buff]
+    notes:
+      pvp: "Velocidade respeita cap global de +0.05."
+
+  CorrentesCelestiais:
+    display: "&dCorrentes Celestiais"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_correntes_celestiais
+    description: |
+      Zona de 6 blocos por 8s que reduz penetração e velocidade dos inimigos em 15%.
+    tiers:
+      T4: { cooldown: 120, duration: 8, radius: 6, penetration_down: 0.15, slow: 0.15 }
+    cost:
+      resource: mana
+      amount: 35
+    effects:
+      radius: 6
+      duration: 8
+      debuffs:
+        - type: penetration_down
+          value: 0.15
+          duration: 2
+        - type: slow
+          value: 0.15
+          duration: 2
+    tags: [zone, debuff]
+    notes:
+      pvp: "Valores ajustados para 10% em arenas competitivas."
+
+  PerseguirAteOFim:
+    display: "&fPerseguir até o Fim"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_perseguir_ate_o_fim
+    description: |
+      Teleporta 6 blocos para trás do alvo marcado respeitando linha de visão.
+    tiers:
+      T4: { cooldown: 90, teleport: 6 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      teleport: 6
+      position: behind
+      require_los: true
+    tags: [mobility]
+    notes:
+      pvp: "Não atravessa barreiras sólidas de eventos PvP."
