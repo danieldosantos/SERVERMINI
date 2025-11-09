@@ -1,0 +1,27 @@
+# Skill: Toxina Preparada
+name: rogue_assassin_prepared_toxin
+display: "§2Toxina Preparada"
+icon: POTION
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+description:
+  - "§712s onde acertos aplicam -10% velocidade e -10% cura recebida."
+  - "§7Reaplicação renova duração sem empilhar penalidades."
+  - "§8Utiliza MythicMobs para partículas verdes discretas."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§2Toxina"
+    children:
+      ApplyBuff:
+        type: mechanic
+        data:
+          command: "skript run rogue_assassin_toxin %caster% 12"
+          silent: true

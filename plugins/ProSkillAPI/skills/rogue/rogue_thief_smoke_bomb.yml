@@ -1,0 +1,34 @@
+# Skill: Bomba de Fumaça
+name: rogue_thief_smoke_bomb
+display: "§7Bomba de Fumaça"
+icon: FIREWORK_STAR
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+  - "§76 blocos de raio por 6s: inimigos ficam cegos e -30% velocidade."
+  - "§7Aliados ganham camuflagem leve (sem invis total)."
+  - "§8Utiliza particulas cinzentas discretas para telegraph."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§7Fumaça"
+    children:
+      DeploySmoke:
+        type: mechanic
+        data:
+          command: "skript run rogue_smoke_bomb %caster% 6 6"
+          silent: false
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_rogue_sneak_cd"
+          silent: true

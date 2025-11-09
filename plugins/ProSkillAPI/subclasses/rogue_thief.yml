@@ -1,0 +1,46 @@
+# Subclasse Ladrão do Ladino
+name: Rogue_Thief
+display: "§2Arquétipo Ladrão"
+description:
+  - "§7Especialista em mobilidade vertical, controle de campo e suporte utilitário."
+  - "§aMaximiza ganchos, bombas e resets de deslocamento respeitando velocidade adicional ≤0.05."
+options:
+  needs-permission: true
+  parent: Rogue
+attributes:
+  walk-speed:
+    base: 0.026
+    scale: 0.003
+  dodge-rate:
+    base: 0.08
+    scale: 0.02
+  cooldown-reduction:
+    base: 0.05
+    scale: 0.01
+skills:
+  tier1:
+    active:
+      - rogue_thief_hookshot
+    passive: []
+  tier2:
+    active:
+      - rogue_thief_hookshot
+      - rogue_thief_smoke_bomb
+    passive: []
+  tier3:
+    active:
+      - rogue_thief_hookshot
+      - rogue_thief_smoke_bomb
+      - rogue_thief_fast_hands
+    passive: []
+  tier4:
+    active:
+      - rogue_thief_hookshot
+      - rogue_thief_smoke_bomb
+      - rogue_thief_fast_hands
+      - rogue_thief_master_lockbreaker
+    passive: []
+notes:
+  - "Hookshot limita puxão de jogadores a 3 blocos e verifica massa via MythicMobs (sem puxar chefes)."
+  - "Bomba de Fumaça oferece camuflagem de aliados sem conceder invisibilidade total (>60% uptime)."
+  - "Arrombador Mestre reduz 25% dos CDs de mobilidade/utilidade do grupo dentro de 8 blocos por 12s." 

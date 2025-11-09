@@ -1,0 +1,45 @@
+# Skill: Furtividade Tática
+name: rogue_tactical_stealth
+display: "§8Furtividade Tática"
+icon: BLACK_DYE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+description:
+  - "§76s de furtividade: 2s invisibilidade total + 4s camuflagem com -60% ruído."
+  - "§7Cancelar ao atacar ou sofrer dano direto."
+  - "§8Atualiza HUD de vantagem ({sneak_cd}) e estado de combate."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§8Furtividade"
+    children:
+      ApplyInvisibility:
+        type: mechanic
+        data:
+          potion: INVISIBILITY
+          seconds-base: 2
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      ApplyCamouflage:
+        type: mechanic
+        data:
+          command: "skript run rogue_apply_camouflage %caster% 6"
+          silent: true
+      FootstepMute:
+        type: mechanic
+        data:
+          command: "skript run rogue_reduce_noise %caster% 0.4 6"
+          silent: true
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_rogue_sneak_cd"
+          silent: true

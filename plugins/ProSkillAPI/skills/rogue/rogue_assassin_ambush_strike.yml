@@ -1,0 +1,32 @@
+# Skill: Ataque de Emboscada
+name: rogue_assassin_ambush_strike
+display: "§4Ataque de Emboscada"
+icon: STONE_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+description:
+  - "§7Se usado fora de combate ou até 2s após sair de furtividade, próximo ataque recebe +120% dano."
+  - "§7Falha se utilizado em combate prolongado (>6s)."
+  - "§8Integra marcador para Golpe Furtivo."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§4Emboscada"
+    children:
+      ApplyWindow:
+        type: mechanic
+        data:
+          command: "skript run rogue_assassin_ambush %caster%"
+          silent: false
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_rogue_advantage"
+          silent: true

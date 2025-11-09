@@ -1,0 +1,46 @@
+# Subclasse Assassino do Ladino
+name: Rogue_Assassin
+display: "§4Arquétipo Assassino"
+description:
+  - "§7Mestre das emboscadas que prepara execuções cirúrgicas com toxinas e marcações."
+  - "§cConverte janelas de furtividade em rajadas letais mantendo o limite PvP sem one-shot."
+options:
+  needs-permission: true
+  parent: Rogue
+attributes:
+  attack-damage:
+    base: 1.65
+    scale: 0.05
+  crit-chance:
+    base: 0.16
+    scale: 0.02
+  skill-damage:
+    base: 0.15
+    scale: 0.02
+skills:
+  tier1:
+    active:
+      - rogue_assassin_mark_target
+    passive: []
+  tier2:
+    active:
+      - rogue_assassin_mark_target
+      - rogue_assassin_ambush_strike
+    passive: []
+  tier3:
+    active:
+      - rogue_assassin_mark_target
+      - rogue_assassin_ambush_strike
+      - rogue_assassin_prepared_toxin
+    passive: []
+  tier4:
+    active:
+      - rogue_assassin_mark_target
+      - rogue_assassin_ambush_strike
+      - rogue_assassin_prepared_toxin
+      - rogue_assassin_calculated_execution
+    passive: []
+notes:
+  - "Marcador de Alvo adiciona +25% de Golpe Furtivo e hemorragia controlada (6%/s por 4s)."
+  - "Ataque de Emboscada só ativa fora de combate ou 2s após sair de furtividade."
+  - "Execução Calculada verifica HP <30% para bônus de 240%; caso contrário, aplica -15% resistência por 6s." 

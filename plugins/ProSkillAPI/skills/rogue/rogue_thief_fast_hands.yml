@@ -1,0 +1,37 @@
+# Skill: Mãos Velozes
+name: rogue_thief_fast_hands
+display: "§eMãos Velozes"
+icon: CLOCK
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 15
+  mana-cost-scale: 0
+description:
+  - "§7Reseta o CD de Pique e concede +0.05 velocidade por 4s."
+  - "§7Afeta apenas habilidades de mobilidade (Hookshot incluído)."
+  - "§8Respeita limite global de velocidade adicional."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§eMãos Velozes"
+    children:
+      ResetDash:
+        type: mechanic
+        data:
+          command: "skript run rogue_reset_dash %caster%"
+          silent: true
+      SpeedBuff:
+        type: mechanic
+        data:
+          command: "skript run rogue_speed_buff %caster% 4 0.05"
+          silent: true
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_rogue_mobility"
+          silent: true

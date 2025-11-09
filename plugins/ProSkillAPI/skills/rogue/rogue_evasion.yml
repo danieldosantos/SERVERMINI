@@ -1,0 +1,40 @@
+# Skill: Evasão
+name: rogue_evasion
+display: "§aEvasão"
+icon: FEATHER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+description:
+  - "§74s com -50% dano de área/projéteis recebidos e +0.03 velocidade."
+  - "§7Respeita caps globais de mitigação (≤45%) e velocidade (+0.05)."
+  - "§8Aciona placeholder {cooldown_next} e {mobility}."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§aEvasão"
+    children:
+      ApplySpeed:
+        type: mechanic
+        data:
+          potion: SPEED
+          seconds-base: 4
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      ApplyMitigation:
+        type: mechanic
+        data:
+          command: "skript run rogue_apply_evasion %caster% 4"
+          silent: true
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_rogue_mobility"
+          silent: true

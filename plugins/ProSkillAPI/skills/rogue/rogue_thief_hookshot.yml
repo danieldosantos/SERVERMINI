@@ -1,0 +1,32 @@
+# Skill: Hookshot
+name: rogue_thief_hookshot
+display: "§2Hookshot"
+icon: TRIPWIRE_HOOK
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+description:
+  - "§7Lança gancho até 12 blocos puxando o Ladino ou inimigos leves (3 blocos)."
+  - "§7Cancela se alvo for pesado (boss / massa alta)."
+  - "§8Integra MythicMobs para colisão e retorno do item."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§2Hookshot"
+    children:
+      FireHook:
+        type: mechanic
+        data:
+          command: "skript run rogue_hookshot %caster% 12 3"
+          silent: false
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_rogue_mobility"
+          silent: true

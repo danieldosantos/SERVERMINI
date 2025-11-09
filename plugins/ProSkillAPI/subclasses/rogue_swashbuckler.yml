@@ -1,0 +1,46 @@
+# Subclasse Espadachim do Ladino
+name: Rogue_Swashbuckler
+display: "§bArquétipo Espadachim"
+description:
+  - "§7Duelista ágil que alterna pressão ofensiva e evasão agressiva."
+  - "§bControla marca de duelo para garantir Golpe Furtivo sem vantagem explícita."
+options:
+  needs-permission: true
+  parent: Rogue
+attributes:
+  attack-damage:
+    base: 1.6
+    scale: 0.05
+  walk-speed:
+    base: 0.026
+    scale: 0.003
+  lifesteal:
+    base: 0.05
+    scale: 0.01
+skills:
+  tier1:
+    active:
+      - rogue_swash_duelist_challenge
+    passive: []
+  tier2:
+    active:
+      - rogue_swash_duelist_challenge
+      - rogue_swash_dance_step
+    passive: []
+  tier3:
+    active:
+      - rogue_swash_duelist_challenge
+      - rogue_swash_dance_step
+      - rogue_swash_rapid_thrust
+    passive: []
+  tier4:
+    active:
+      - rogue_swash_duelist_challenge
+      - rogue_swash_dance_step
+      - rogue_swash_rapid_thrust
+      - rogue_swash_duelist_climax
+    passive: []
+notes:
+  - "Desafio do Duelista remove requisito de vantagem apenas contra o alvo marcado (respeitando CD de Golpe Furtivo)."
+  - "Passo de Dança concede 20% de esquiva frontal por 6s mantendo uptime ≤60%."
+  - "Clímax do Duelista fornece 15% de roubo de vida respeitando limite global de 25%." 

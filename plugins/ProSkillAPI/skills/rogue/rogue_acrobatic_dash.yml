@@ -1,0 +1,37 @@
+# Skill: Pique Acrobático
+name: rogue_acrobatic_dash
+display: "§ePique Acrobático"
+icon: RABBIT_FOOT
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+description:
+  - "§7Avanço acrobático de 6 blocos com direcionamento baseado na mira."
+  - "§7Próximo golpe em até 3s ganha +10% penetração."
+  - "§8Integra Hookshot/Mãos Velozes via reset de cooldown."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§ePique"
+    children:
+      Dash:
+        type: mechanic
+        data:
+          command: "skript run rogue_dash %caster% 6"
+          silent: true
+      ApplyPenetrationBuff:
+        type: mechanic
+        data:
+          command: "skript run rogue_dash_penetration %caster% 3 0.1"
+          silent: true
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_rogue_mobility"
+          silent: true

@@ -1,0 +1,42 @@
+# Skill: Desafio do Duelista
+name: rogue_swash_duelist_challenge
+display: "§bDesafio do Duelista"
+icon: IRON_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 10
+  range-scale: 0
+description:
+  - "§7Marca um alvo por 10s concedendo +10% velocidade e +10% penetração contra ele."
+  - "§7Permite Golpe Furtivo sem vantagem adicional no alvo marcado."
+  - "§8Remove marca antiga ao aplicar em novo inimigo."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§bDuelo"
+    children:
+      TargetEnemy:
+        type: target
+        data:
+          shape: single
+          range-base: 10
+          range-scale: 0
+          group: enemy
+        children:
+          ApplyChallenge:
+            type: mechanic
+            data:
+              command: "skript run rogue_swash_challenge %caster% %target% 10"
+              silent: false
+          UpdateHUD:
+            type: mechanic
+            data:
+              command: "placeholderapi refresh %caster% skills_rogue_advantage"
+              silent: true

@@ -1,0 +1,132 @@
+# Classe base Ladino para ProSkillAPI
+name: Rogue
+prefix: "Ldn"
+display: "§8Ladino"
+main-class: true
+key: rogue
+description:
+  - "§7Especialista em DPS oportunista com janelas curtas de vantagem."
+  - "§eAdministra §6Estamina§e para furtividade, evasão e burst pontual."
+  - "§7Respeita limites globais: mitigação ≤45%, velocidade adicional ≤0.05 e controles ≤4s."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Estamina"
+  mana-regen: 0
+  max-level: 60
+  exp-source: kill
+  attributes-scaled: true
+  needs-race: false
+  scoreboard:
+    stamina: "rogue_stamina"
+    stealth: "rogue_sneak_cd"
+    advantage: "rogue_advantage"
+    mobility: "rogue_mobility"
+    placeholders:
+      stamina: "%skills_rogue_stamina%"
+      sneak_cd: "%skills_rogue_sneak_cd%"
+      advantage_state: "%skills_rogue_advantage%"
+      mobility_window: "%skills_rogue_mobility%"
+      sneak_cooldown: "%skills_rogue_sneak_cd%"
+  combat-state-placeholder: "%skills_combat_state%"
+attributes:
+  health-base: 28
+  health-scale: 1.8
+  mana-base: 90
+  mana-scale: 0
+  physical-defense-base: 3
+  physical-defense-scale: 0.8
+  magical-defense-base: 2
+  magical-defense-scale: 0.6
+  attack-damage: 1.55
+  skill-damage: 0.1
+  crit-chance-base: 0.12
+  crit-chance-scale: 0.02
+  walk-speed-base: 0.024
+  walk-speed-scale: 0.002
+  dodge-rate-base: 0.05
+  dodge-rate-scale: 0.02
+  level-bonus:
+    1:
+      health: 28
+      mana: 90
+      defense: 4
+      speed: 0.0
+      crit: 0.12
+    5:
+      health: 46
+      mana: 110
+      defense: 5
+      speed: 0.01
+      crit: 0.14
+    11:
+      health: 68
+      mana: 130
+      defense: 7
+      speed: 0.02
+      crit: 0.16
+    17:
+      health: 94
+      mana: 150
+      defense: 9
+      speed: 0.03
+      crit: 0.18
+mana:
+  regen-combat: 4
+  regen-out: 7
+exp:
+  kill-multiplier: 1.05
+  quest-multiplier: 1.0
+  pvp-multiplier: 1.0
+skills:
+  tier1:
+    active:
+      - rogue_tactical_stealth
+      - rogue_evasion
+      - rogue_acrobatic_dash
+      - rogue_sneak_attack
+    passive:
+      - rogue_light_hands
+      - rogue_finesse
+  tier2:
+    active:
+      - rogue_tactical_stealth
+      - rogue_evasion
+      - rogue_acrobatic_dash
+      - rogue_sneak_attack
+    passive:
+      - rogue_light_hands
+      - rogue_finesse
+  tier3:
+    active:
+      - rogue_tactical_stealth
+      - rogue_evasion
+      - rogue_acrobatic_dash
+      - rogue_sneak_attack
+    passive:
+      - rogue_light_hands
+      - rogue_finesse
+  tier4:
+    active:
+      - rogue_tactical_stealth
+      - rogue_evasion
+      - rogue_acrobatic_dash
+      - rogue_sneak_attack
+    passive:
+      - rogue_light_hands
+      - rogue_finesse
+subclasses:
+  assassin:
+    display: "§4Arquétipo Assassino"
+    file: rogue_assassin.yml
+  thief:
+    display: "§2Arquétipo Ladrão"
+    file: rogue_thief.yml
+  swashbuckler:
+    display: "§bArquétipo Espadachim"
+    file: rogue_swashbuckler.yml
+notes:
+  - "Estamina escala 90/110/130/150 por tier e regenera 7/s fora de combate e 4/s em combate via Skript."
+  - "Golpe Furtivo exige vantagem confirmada, consome 15 Estamina e ativa CD interno de 6s por alvo."
+  - "Passivas de Mãos Leves e Finesse integram MythicMobs/Skript para interação com cordas, ganchos e redução de custo." 
