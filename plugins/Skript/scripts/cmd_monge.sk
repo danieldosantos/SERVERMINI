@@ -1,12 +1,12 @@
 options:
-  group-base: "class_monk"
-  resource-ki: "ki"
-  skill-rajada: "Monk_FlurryOfBlows"
-  skill-passo: "Monk_StepOfTheWind"
-  skill-maos: "Monk_Tradition_OpenHand"
-  skill-sombras: "Monk_Tradition_Shadow"
-  skill-elementos: "Monk_Tradition_Elements"
-  skill-ultimate: "Monk_Ultimate"
+  group-base: class_monk
+  resource-ki: ki
+  skill-rajada: Monk_FlurryOfBlows
+  skill-passo: Monk_StepOfTheWind
+  skill-maos: Monk_Tradition_OpenHand
+  skill-sombras: Monk_Tradition_Shadow
+  skill-elementos: Monk_Tradition_Elements
+  skill-ultimate: Monk_Ultimate
   cost-rajada: 1
   cost-passo: 1
   cost-tradicao: 2
@@ -16,16 +16,16 @@ options:
   cd-tradicao: 90
   cd-ultimate: 210
 
-command /rajada:
-  trigger:
-    if classes_has_group(player, {@group-base}, "Monge") is false:
-      stop
-    if classes_cooldown_ready(player, "monk_rajada", {@cd-rajada}) is false:
-      stop
-    if classes_consume_resource(player, {@resource-ki}, {@cost-rajada}) is false:
-      stop
-    execute console command "mm skills cast {@skill-rajada} target=%player%"
-    classes_play_feedback(player, "&eRajada de golpes executada!", "entity.player.attack.knockback", 1.2)
+function monk_use_rajada(p: player) :: boolean:
+  if {_p} does not have permission "group.%{@group-base}%":
+    return false
+  if classes_cooldown_ready({_p}, "monk_rajada", {@cd-rajada}) is false:
+    return true
+  if classes_consume_resource({_p}, {@resource-ki}, {@cost-rajada}) is false:
+    return true
+  execute console command "mm skills cast {@skill-rajada} target=%name of {_p}%"
+  classes_play_feedback({_p}, "&eRajada de golpes executada!", "entity.player.attack.knockback", 1.2)
+  return true
 
 command /passo:
   trigger:
@@ -46,11 +46,11 @@ command /tradicao <text>:
     set {_id} to "openhand"
     set {_display} to "mãos abertas"
     set {_skill} to {@skill-maos}
-    if {_choice} is "sombras" or {_choice} is "shadow":
+    if {_choice} is one of "sombras", "shadow":
       set {_id} to "shadow"
       set {_display} to "sombra"
       set {_skill} to {@skill-sombras}
-    else if {_choice} is "elementos" or {_choice} is "elements":
+    else if {_choice} is one of "elementos", "elements":
       set {_id} to "elements"
       set {_display} to "quatro elementos"
       set {_skill} to {@skill-elementos}

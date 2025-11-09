@@ -1,13 +1,13 @@
 options:
-  group-base: "class_paladin"
-  resource-divinity: "divinity"
-  resource-mana: "mana"
-  skill-golpe: "Paladin_DivineSmite"
-  skill-aura: "Paladin_AuraToggle"
-  skill-devocao: "Paladin_Oath_Devotion"
-  skill-vinganca: "Paladin_Oath_Vengeance"
-  skill-ancioes: "Paladin_Oath_Ancients"
-  skill-ultimate: "Paladin_Ultimate"
+  group-base: class_paladin
+  resource-divinity: divinity
+  resource-mana: mana
+  skill-golpe: Paladin_DivineSmite
+  skill-aura: Paladin_AuraToggle
+  skill-devocao: Paladin_Oath_Devotion
+  skill-vinganca: Paladin_Oath_Vengeance
+  skill-ancioes: Paladin_Oath_Ancients
+  skill-ultimate: Paladin_Ultimate
   cost-golpe: 1
   cost-aura: 1
   cost-voto: 1
@@ -47,11 +47,11 @@ command /voto <text>:
     set {_id} to "devotion"
     set {_display} to "devoção"
     set {_skill} to {@skill-devocao}
-    if {_choice} is "vinganca" or {_choice} is "vingança" or {_choice} is "vengeance":
+    if {_choice} is one of "vinganca", "vingança", "vengeance":
       set {_id} to "vengeance"
       set {_display} to "vingança"
       set {_skill} to {@skill-vinganca}
-    else if {_choice} is "ancioes" or {_choice} is "anciões" or {_choice} is "ancoes" or {_choice} is "ancients":
+    else if {_choice} is one of "ancioes", "anciões", "ancoes", "ancients":
       set {_id} to "ancients"
       set {_display} to "anciões"
       set {_skill} to {@skill-ancioes}

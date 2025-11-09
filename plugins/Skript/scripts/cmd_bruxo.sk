@@ -1,13 +1,13 @@
 options:
-  group-base: "class_warlock"
-  resource-mana: "mana"
-  resource-focus: "focus"
-  skill-hex: "Warlock_Hex"
-  skill-rajada: "Warlock_EldritchBlast"
-  skill-fiend: "Warlock_Pact_Fiend"
-  skill-archfey: "Warlock_Pact_Archfey"
-  skill-oldone: "Warlock_Pact_OldOne"
-  skill-ultimate: "Warlock_Ultimate"
+  group-base: class_warlock
+  resource-mana: mana
+  resource-focus: focus
+  skill-hex: Warlock_Hex
+  skill-rajada: Warlock_EldritchBlast
+  skill-fiend: Warlock_Pact_Fiend
+  skill-archfey: Warlock_Pact_Archfey
+  skill-oldone: Warlock_Pact_OldOne
+  skill-ultimate: Warlock_Ultimate
   cost-hex: 25
   cost-rajada: 10
   cost-pacto: 30
@@ -30,14 +30,17 @@ command /hex <player>:
 
 command /rajada:
   trigger:
-    if classes_has_group(player, {@group-base}, "Bruxo") is false:
+    if player has permission "group.%{@group-base}%":
+      if classes_cooldown_ready(player, "warlock_rajada", {@cd-rajada}) is false:
+        stop
+      if classes_consume_resource(player, {@resource-mana}, {@cost-rajada}) is false:
+        stop
+      execute console command "mm skills cast {@skill-rajada} target=%player%"
+      classes_play_feedback(player, "&5Rajada Mística disparada!", "entity.blaze.shoot", 1.2)
       stop
-    if classes_cooldown_ready(player, "warlock_rajada", {@cd-rajada}) is false:
+    if monk_use_rajada(player):
       stop
-    if classes_consume_resource(player, {@resource-mana}, {@cost-rajada}) is false:
-      stop
-    execute console command "mm skills cast {@skill-rajada} target=%player%"
-    classes_play_feedback(player, "&5Rajada Mística disparada!", "entity.blaze.shoot", 1.2)
+    send "%classes_prefix()%&cVocê precisa ser Bruxo ou Monge para usar esta habilidade." to player
 
 command /pacto <text>:
   trigger:
@@ -47,11 +50,11 @@ command /pacto <text>:
     set {_id} to "fiend"
     set {_display} to "fiend"
     set {_skill} to {@skill-fiend}
-    if {_choice} is "archfey" or {_choice} is "arquifada":
+    if {_choice} is one of "archfey", "arquifada":
       set {_id} to "archfey"
       set {_display} to "archfey"
       set {_skill} to {@skill-archfey}
-    else if {_choice} is "oldone" or {_choice} is "antigo":
+    else if {_choice} is one of "oldone", "antigo":
       set {_id} to "oldone"
       set {_display} to "great old one"
       set {_skill} to {@skill-oldone}

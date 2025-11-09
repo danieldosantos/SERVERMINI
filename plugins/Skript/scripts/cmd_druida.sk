@@ -1,13 +1,13 @@
 options:
-  group-base: "class_druid"
-  resource-essencia: "nature_essence"
-  resource-mana: "mana"
-  skill-forma: "Druid_Wildshape"
-  skill-raizes: "Druid_EntanglingRoots"
-  skill-terra: "Druid_Circle_Land"
-  skill-lua: "Druid_Circle_Moon"
-  skill-pastor: "Druid_Circle_Shepherd"
-  skill-ultimate: "Druid_Ultimate"
+  group-base: class_druid
+  resource-essencia: nature_essence
+  resource-mana: mana
+  skill-forma: Druid_Wildshape
+  skill-raizes: Druid_EntanglingRoots
+  skill-terra: Druid_Circle_Land
+  skill-lua: Druid_Circle_Moon
+  skill-pastor: Druid_Circle_Shepherd
+  skill-ultimate: Druid_Ultimate
   cost-forma: 1
   cost-raizes: 20
   cost-circulo: 30

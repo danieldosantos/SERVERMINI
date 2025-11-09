@@ -1,15 +1,15 @@
 options:
-  group-base: "class_sorcerer"
-  resource-mana: "mana"
-  resource-sorcery: "sorcery_points"
-  skill-rajada: "Sorcerer_ElementalBurst"
-  skill-metamagia-acelerar: "Sorcerer_Metamagic_Quickened"
-  skill-metamagia-gemea: "Sorcerer_Metamagic_Twinned"
-  skill-metamagia-potente: "Sorcerer_Metamagic_Empowered"
-  skill-linhagem-draconica: "Sorcerer_Lineage_Draconic"
-  skill-linhagem-tempestade: "Sorcerer_Lineage_Storm"
-  skill-linhagem-selvagem: "Sorcerer_Lineage_Wild"
-  skill-ultimate: "Sorcerer_Ultimate"
+  group-base: class_sorcerer
+  resource-mana: mana
+  resource-sorcery: sorcery_points
+  skill-rajada: Sorcerer_ElementalBurst
+  skill-metamagia-acelerar: Sorcerer_Metamagic_Quickened
+  skill-metamagia-gemea: Sorcerer_Metamagic_Twinned
+  skill-metamagia-potente: Sorcerer_Metamagic_Empowered
+  skill-linhagem-draconica: Sorcerer_Lineage_Draconic
+  skill-linhagem-tempestade: Sorcerer_Lineage_Storm
+  skill-linhagem-selvagem: Sorcerer_Lineage_Wild
+  skill-ultimate: Sorcerer_Ultimate
   cost-rajada: 25
   cost-metamagia: 2
   cost-linhagem: 1
@@ -38,11 +38,11 @@ command /metamagia <text>:
     set {_id} to "quickened"
     set {_display} to "acelerar"
     set {_skill} to {@skill-metamagia-acelerar}
-    if {_choice} is "gemea" or {_choice} is "gêmea" or {_choice} is "twinned":
+    if {_choice} is one of "gemea", "gêmea", "twinned":
       set {_id} to "twinned"
       set {_display} to "gêmea"
       set {_skill} to {@skill-metamagia-gemea}
-    else if {_choice} is "potente" or {_choice} is "empowered":
+    else if {_choice} is one of "potente", "empowered":
       set {_id} to "empowered"
       set {_display} to "potente"
       set {_skill} to {@skill-metamagia-potente}
@@ -61,11 +61,11 @@ command /linhagem <text>:
     set {_id} to "draconic"
     set {_display} to "dracônica"
     set {_skill} to {@skill-linhagem-draconica}
-    if {_choice} is "tempestade" or {_choice} is "storm":
+    if {_choice} is one of "tempestade", "storm":
       set {_id} to "storm"
       set {_display} to "tempestade"
       set {_skill} to {@skill-linhagem-tempestade}
-    else if {_choice} is "selvagem" or {_choice} is "wild":
+    else if {_choice} is one of "selvagem", "wild":
       set {_id} to "wild"
       set {_display} to "selvagem"
       set {_skill} to {@skill-linhagem-selvagem}

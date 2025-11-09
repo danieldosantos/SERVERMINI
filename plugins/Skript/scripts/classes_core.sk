@@ -17,8 +17,8 @@ function classes_has_group(p: player, group: text, label: text) :: boolean:
   return false
 
 function classes_placeholder(p: player, node: text) :: text:
-  set {_value} to placeholder "%{_node}%" with {_p}
-  if {_value} is not set:
+  set {_value} to placeholder api "%{_node}%" with {_p}
+  if {_value} is not set or {_value} is "%{_node}%":
     set {_value} to ""
   return {_value}
 
@@ -38,7 +38,9 @@ function classes_set_resource(p: player, resource: text, value: number):
   execute console command "auraskills player %uuid of {_p}% resource %{_resource}% set %{_rounded}%"
 
 function classes_consume_resource(p: player, resource: text, cost: number) :: boolean:
-  if {_resource} is "" or {_cost} <= 0:
+  if {_resource} is "":
+    return true
+  if {_cost} <= 0:
     return true
   set {_current} to classes_get_resource({_p}, {_resource})
   if {_current} is not set:
@@ -64,7 +66,9 @@ function classes_cooldown_ready(p: player, ability: text, cooldown: number) :: b
       set {_span} to difference between {_expires} and {_now}
       send "%classes_prefix()%&eAguarde %{_span}% para reutilizar." to {_p}
       return false
-  set {classes_cd::%uuid of {_p}%::%{_ability}%} to {_now} + {_cooldown} seconds
+  set {_newExpires} to {_now}
+  add {_cooldown} seconds to {_newExpires}
+  set {classes_cd::%uuid of {_p}%::%{_ability}%} to {_newExpires}
   execute console command "auraskills player %uuid of {_p}% cooldown %{_ability}% set %{_cooldown}%"
   return true
 
@@ -72,4 +76,4 @@ function classes_play_feedback(p: player, message: text, sound: text="entity.exp
   if {_message} is not "":
     send "%classes_prefix()%{_message}" to {_p}
   if {_sound} is not "":
-    play sound {_sound} for {_p} with pitch {_pitch}
+    play {_sound} sound to {_p} with volume 1 and pitch {_pitch}

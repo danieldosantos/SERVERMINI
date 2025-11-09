@@ -1,13 +1,13 @@
 options:
-  group-base: "class_cleric"
-  resource-divinity: "divinity"
-  resource-mana: "mana"
-  skill-canalizar: "Cleric_ChannelDivinity"
-  skill-palavra: "Cleric_WordHeal"
-  skill-vida: "Cleric_Domain_Life"
-  skill-guerra: "Cleric_Domain_War"
-  skill-crepusculo: "Cleric_Domain_Twilight"
-  skill-ultimate: "Cleric_Ultimate"
+  group-base: class_cleric
+  resource-divinity: divinity
+  resource-mana: mana
+  skill-canalizar: Cleric_ChannelDivinity
+  skill-palavra: Cleric_WordHeal
+  skill-vida: Cleric_Domain_Life
+  skill-guerra: Cleric_Domain_War
+  skill-crepusculo: Cleric_Domain_Twilight
+  skill-ultimate: Cleric_Ultimate
   cost-canalizar: 1
   cost-palavra: 20
   cost-dominio: 1
@@ -51,7 +51,7 @@ command /dominio <text>:
       set {_id} to "war"
       set {_display} to "guerra"
       set {_skill} to {@skill-guerra}
-    else if {_choice} is "crepusculo" or {_choice} is "crepúsculo" or {_choice} is "twilight":
+    else if {_choice} is one of "crepusculo", "crepúsculo", "twilight":
       set {_id} to "twilight"
       set {_display} to "crepúsculo"
       set {_skill} to {@skill-crepusculo}

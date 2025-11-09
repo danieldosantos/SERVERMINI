@@ -1,13 +1,13 @@
 options:
-  group-base: "class_wizard"
-  resource-mana: "mana"
-  resource-cargas: "arcane_charges"
-  skill-preparar: "Wizard_SpellPrep"
-  skill-grimorio: "Wizard_ArcaneVolley"
-  skill-evocacao: "Wizard_School_Evocation"
-  skill-ilusao: "Wizard_School_Illusion"
-  skill-abjuracao: "Wizard_School_Abjuration"
-  skill-ultimate: "Wizard_Ultimate"
+  group-base: class_wizard
+  resource-mana: mana
+  resource-cargas: arcane_charges
+  skill-preparar: Wizard_SpellPrep
+  skill-grimorio: Wizard_ArcaneVolley
+  skill-evocacao: Wizard_School_Evocation
+  skill-ilusao: Wizard_School_Illusion
+  skill-abjuracao: Wizard_School_Abjuration
+  skill-ultimate: Wizard_Ultimate
   cost-preparar: 1
   cost-grimorio: 30
   cost-escola: 35
@@ -47,11 +47,11 @@ command /escola <text>:
     set {_id} to "evocation"
     set {_display} to "evocação"
     set {_skill} to {@skill-evocacao}
-    if {_choice} is "ilusao" or {_choice} is "ilusão" or {_choice} is "illusion":
+    if {_choice} is one of "ilusao", "ilusão", "illusion":
       set {_id} to "illusion"
       set {_display} to "ilusão"
       set {_skill} to {@skill-ilusao}
-    else if {_choice} is "abjuracao" or {_choice} is "abjuração" or {_choice} is "abjuration":
+    else if {_choice} is one of "abjuracao", "abjuração", "abjuration":
       set {_id} to "abjuration"
       set {_display} to "abjuração"
       set {_skill} to {@skill-abjuracao}

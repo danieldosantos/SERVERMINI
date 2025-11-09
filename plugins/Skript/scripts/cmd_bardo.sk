@@ -1,13 +1,13 @@
 options:
-  group-base: "class_bard"
-  resource-inspirar: "focus"
-  resource-cancao: "mana"
-  skill-inspirar: "Bard_Inspiration"
-  skill-cancao: "Bard_Song"
-  skill-lore: "Bard_College_Lore"
-  skill-valor: "Bard_College_Valor"
-  skill-glamour: "Bard_College_Glamour"
-  skill-ultimate: "Bard_Ultimate"
+  group-base: class_bard
+  resource-inspirar: focus
+  resource-cancao: mana
+  skill-inspirar: Bard_Inspiration
+  skill-cancao: Bard_Song
+  skill-lore: Bard_College_Lore
+  skill-valor: Bard_College_Valor
+  skill-glamour: Bard_College_Glamour
+  skill-ultimate: Bard_Ultimate
   cost-inspirar: 1
   cost-cancao: 25
   cost-collegio: 30
@@ -50,11 +50,11 @@ command /collegio <text>:
     set {_id} to "lore"
     set {_display} to "conhecimento"
     set {_skill} to {@skill-lore}
-    if {_choice} is "valor" or {_choice} is "valoroso":
+    if {_choice} is one of "valor", "valoroso":
       set {_id} to "valor"
       set {_display} to "valor"
       set {_skill} to {@skill-valor}
-    else if {_choice} is "glamour" or {_choice} is "glamor":
+    else if {_choice} is one of "glamour", "glamor":
       set {_id} to "glamour"
       set {_display} to "glamour"
       set {_skill} to {@skill-glamour}

@@ -1,13 +1,13 @@
 options:
-  group-base: "class_fighter"
-  resource-stamina: "stamina"
-  resource-focus: "battle_focus"
-  skill-surto: "Fighter_ActionSurge"
-  skill-vento: "Fighter_SecondWind"
-  skill-campeao: "Fighter_Archetype_Champion"
-  skill-mestre: "Fighter_Archetype_Battlemaster"
-  skill-arcano: "Fighter_Archetype_Eldritch"
-  skill-ultimate: "Fighter_Ultimate"
+  group-base: class_fighter
+  resource-stamina: stamina
+  resource-focus: battle_focus
+  skill-surto: Fighter_ActionSurge
+  skill-vento: Fighter_SecondWind
+  skill-campeao: Fighter_Archetype_Champion
+  skill-mestre: Fighter_Archetype_Battlemaster
+  skill-arcano: Fighter_Archetype_Eldritch
+  skill-ultimate: Fighter_Ultimate
   cost-surto: 1
   cost-vento: 30
   cost-arquetipo: 25
@@ -47,11 +47,11 @@ command /arquetipo <text>:
     set {_id} to "champion"
     set {_display} to "campeão"
     set {_skill} to {@skill-campeao}
-    if {_choice} is "mestre" or {_choice} is "batalha" or {_choice} is "battlemaster":
+    if {_choice} is one of "mestre", "batalha", "battlemaster":
       set {_id} to "battlemaster"
       set {_display} to "mestre de batalha"
       set {_skill} to {@skill-mestre}
-    else if {_choice} is "arcano" or {_choice} is "eldritch":
+    else if {_choice} is one of "arcano", "eldritch":
       set {_id} to "eldritch"
       set {_display} to "cavaleiro élfico"
       set {_skill} to {@skill-arcano}

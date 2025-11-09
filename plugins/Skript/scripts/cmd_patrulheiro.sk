@@ -1,13 +1,13 @@
 options:
-  group-base: "class_ranger"
-  resource-stamina: "stamina"
-  resource-focus: "focus"
-  skill-marca: "Ranger_HuntersMark"
-  skill-companheiro: "Ranger_CompanionSummon"
-  skill-cacador: "Ranger_Conclave_Hunter"
-  skill-bestas: "Ranger_Conclave_Beast"
-  skill-trevas: "Ranger_Conclave_Gloom"
-  skill-ultimate: "Ranger_Ultimate"
+  group-base: class_ranger
+  resource-stamina: stamina
+  resource-focus: focus
+  skill-marca: Ranger_HuntersMark
+  skill-companheiro: Ranger_CompanionSummon
+  skill-cacador: Ranger_Conclave_Hunter
+  skill-bestas: Ranger_Conclave_Beast
+  skill-trevas: Ranger_Conclave_Gloom
+  skill-ultimate: Ranger_Ultimate
   cost-marca: 20
   cost-companheiro: 30
   cost-conclave: 25
@@ -47,11 +47,11 @@ command /conclave <text>:
     set {_id} to "hunter"
     set {_display} to "caçador"
     set {_skill} to {@skill-cacador}
-    if {_choice} is "bestas" or {_choice} is "beast":
+    if {_choice} is one of "bestas", "beast":
       set {_id} to "beast"
       set {_display} to "mestre das bestas"
       set {_skill} to {@skill-bestas}
-    else if {_choice} is "trevas" or {_choice} is "gloom":
+    else if {_choice} is one of "trevas", "gloom":
       set {_id} to "gloom"
       set {_display} to "gloom stalker"
       set {_skill} to {@skill-trevas}

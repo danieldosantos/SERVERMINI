@@ -1,13 +1,13 @@
 options:
-  group-base: "class_rogue"
-  resource-stamina: "stamina"
-  resource-focus: "focus"
-  skill-furtivo: "Rogue_Stealth"
-  skill-golpe: "Rogue_SneakAttack"
-  skill-ladrao: "Rogue_Archetype_Thief"
-  skill-assassino: "Rogue_Archetype_Assassin"
-  skill-arcano: "Rogue_Archetype_Arcane"
-  skill-ultimate: "Rogue_Ultimate"
+  group-base: class_rogue
+  resource-stamina: stamina
+  resource-focus: focus
+  skill-furtivo: Rogue_Stealth
+  skill-golpe: Rogue_SneakAttack
+  skill-ladrao: Rogue_Archetype_Thief
+  skill-assassino: Rogue_Archetype_Assassin
+  skill-arcano: Rogue_Archetype_Arcane
+  skill-ultimate: Rogue_Ultimate
   cost-furtivo: 15
   cost-golpe: 25
   cost-truque: 20
@@ -47,11 +47,11 @@ command /truque <text>:
     set {_id} to "thief"
     set {_display} to "ladrão"
     set {_skill} to {@skill-ladrao}
-    if {_choice} is "assassino" or {_choice} is "assassin":
+    if {_choice} is one of "assassino", "assassin":
       set {_id} to "assassin"
       set {_display} to "assassino"
       set {_skill} to {@skill-assassino}
-    else if {_choice} is "arcano" or {_choice} is "arcanista":
+    else if {_choice} is one of "arcano", "arcanista":
       set {_id} to "arcane"
       set {_display} to "arcano"
       set {_skill} to {@skill-arcano}
