@@ -116,10 +116,9 @@ lp group race_meioorc permission set psa.skill.TenacidadeImplacavel true
 lp group race_meioorc permission set mythicmobs.item.HalfOrcBattleBrand true
 
 # Tiefling
-lp group race_tiefling permission set psa.skill.ToqueIgneo true
-lp group race_tiefling permission set psa.skill.LaminaDasChamas true
-lp group race_tiefling permission set mythicmobs.item.TieflingHellbrand true
-lp group race_tiefling permission set mythicmobs.item.TieflingSparkGlove true
+lp group race_tiefling permission set psa.skill.Tiefling_ChamaInfernal true
+lp group race_tiefling permission set psa.skill.Tiefling_ExplosaoAbissal true
+lp group race_tiefling permission set psa.skill.Tiefling_EscuridaoUmbral true
 
 # Permissões de Skript (comandos de teste)
 lp group race_draconato permission set skript.command.sopro_draco true
@@ -159,5 +158,8 @@ lp group race_half_elf.drow permission set skript.command.fae_lights true
 lp group race_half_elf.drow permission set skript.command.shadow_step true
 lp group race_half_elf.wood permission set skript.command.camuflagem_silvestre true
 lp group race_meioorc permission set skript.command.tenacidade_implacavel true
-lp group race_tiefling permission set skript.command.toque_igneo true
-lp group race_tiefling permission set skript.command.lamina_das_chamas true
+lp group race_tiefling permission set skript.command.racial_tiefling true
+lp group race_tiefling permission set skript.command.fogo_infernal true
+lp group race_tiefling permission set skript.command.abismo true
+lp group race_tiefling permission set skript.command.sombra true
+lp group race_tiefling permission set skript.command.kit_racial_tiefling true

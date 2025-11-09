@@ -1,0 +1,13 @@
+Aspecto,Contexto,T1,T2,T3,T4,CD (s),Uptime,Limites,Notas
+Visão no Escuro Superior,Alcance em baixa luz,32b,32b,32b,32b,36,<=0.58,"Não remove penalidades de brilho","Ativa apenas luz ≤6"
+Resistência Infernal,Mitigação fogo reagente,20%,20%,20%,20%,22,<=0.36,"Mitigação total ≤45%","DR compartilhada com Warlock/itens"
+Aura de Intimidação,Redução dano inimigos,5%,5%,5%,5%,20,4s,"Sem stack com auras similares","Raio 4 blocos"
+Chama Infernal,Cone fogo 6b,120%,130%,145%,160%,60,Instant/6s fadiga,"Cooldown ≥45s; exaustão -8% dano","Penalidade garante uptime efetivo <60%"
+Fluxo Caótico,Bônus aleatório abaixo 40% HP,"+10% dano","+15% speed","+10% mitig","Aleatório",45,6s,"Velocidade total ≤+0.05; mitig ≤45%","Um único efeito por ativação"
+Afinidade Abissal,Dano vs alvos debilitados,5%,5%,5%,5%,8,<=0.5,"Aplica apenas se alvo tem slow/burn/bleed","Sem efeito em alvos limpos"
+Explosão Abissal,Área 6b dano sombrio,140%,145%,150%,155%,75,Instant/2s debuff,"Cooldown 75s","Desorientação leve (FOV)"
+Toque das Sombras,Velocidade+esquiva em luz baixa,"+0.02/+15%","+0.02/+15%","+0.02/+15%","+0.02/+15%",12,8s,"Velocidade total ≤+0.05","Luz ≤6 somente"
+Vulnerabilidade à Luz,Penalidade dano em luz alta,-10%,-10%,-10%,-10%,0,<=0.6,"Sem redução abaixo de 0 dano","Remove 2s após sair da luz"
+Visão Sombria Profunda,Revelação em escuridão,10b,10b,10b,10b,20,<=0.5,"Não revela invisíveis reais","Somente em darkness"
+Escuridão Umbral,Campo 6b suporte,"-15% acc/+10% ev","-15% acc/+11% ev","-15% acc/+12% ev","-15% acc/+13% ev",90,8s,"Cooldown ≥90s","Sem invisibilidade"
+Resistência Sombria,Mitigação trevas (Sombrio),8%,8%,8%,8%,passiva,<=0.3,"Mitig ≤45%","Stacka com DR de classe"

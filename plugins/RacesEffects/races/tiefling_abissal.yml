@@ -1,0 +1,64 @@
+# Sub-raça: Tiefling Abissal
+race_id: tiefling_abissal
+name: "Tiefling Abissal"
+identity: "Portadores do caos demoníaco, alternando mutações súbitas e explosões sombrias."
+luckperms:
+  required: "race_tiefling.abissal"
+  inherit: "race_tiefling"
+tags:
+  - tiefling
+placeholders:
+  racial_cd_main: "{cooldown:skill_tiefling_explosao_abissal}"
+  racial_charges: "{status:tiefling_cargas}"
+passives:
+  fluxo_caotico:
+    name: "Fluxo Caótico"
+    type: chaos_flux
+    trigger: health_threshold_self:0.4
+    duration: 6
+    cooldown: 45
+    uptime_cap: 0.25
+    random_bonuses:
+      - { id: "frenesi", damage_bonus: 0.10 }
+      - { id: "celeridade", speed_bonus: 0.15 }
+      - { id: "endurecimento", mitigation_general: 0.10 }
+    description: "Ao cair abaixo de 40% HP recebe aleatoriamente 1 entre 3 bônus por 6s (ICD 45s)."
+  afinidade_abissal:
+    name: "Afinidade Abissal"
+    type: conditional_damage_bonus
+    trigger: target_debuffed
+    duration: 4
+    cooldown: 8
+    uptime_cap: 0.5
+    bonus:
+      damage: 0.05
+    conditions:
+      debuffs:
+        - slow
+        - burn
+        - bleed
+    description: "+5% dano contra alvos já debilitados (lentidão, queimadura ou sangramento)."
+actives:
+  explosao_abissal:
+    name: "Explosão Abissal"
+    skill: Tiefling_ExplosaoAbissal
+    cooldown: 75
+    charges: 1
+    description: "Explode energia sombria em 6 blocos, causando 140% dano e desorientando inimigos por 2s."
+resistances:
+  shadow:
+    base: 0.1
+    max: 0.35
+    notes: "Mitigação de trevas moderada; acumula com DR de classe respeitando teto de 45%."
+weaknesses:
+  - "Recebe +5% dano radiante enquanto Fluxo Caótico estiver ativo (contrajogo claro)."
+synergy_notes:
+  - "Buffs aleatórios mantêm uptime médio abaixo de 25% e evitam loops com Feiticeiro Caótico."
+  - "Afinidade Abissal reforça DOTs de classes (Warlock/Blood Hunter) sem criar burst inicial exagerado."
+tests:
+  pve:
+    - "Simular quedas de HP sucessivas garantindo ICD de 45s e rolagem única por ativação."
+    - "Boss com adds sob DOT para validar +5% dano apenas em inimigos debilitados."
+  pvp:
+    - "Duelo prolongado monitorando rotação dos bônus aleatórios e sua duração de 6s."
+    - "Teamfight com Explosão Abissal verificando debuff de desorientação sem cegueira total."

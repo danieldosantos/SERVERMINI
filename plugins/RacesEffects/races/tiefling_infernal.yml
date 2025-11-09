@@ -1,0 +1,68 @@
+# Sub-raça: Tiefling Infernal (Asmodeus)
+race_id: tiefling_infernal
+name: "Tiefling Infernal"
+identity: "Descendentes diretos dos nove infernos, especialistas em chamas e intimidação."
+luckperms:
+  required: "race_tiefling.infernal"
+  inherit: "race_tiefling"
+tags:
+  - tiefling
+placeholders:
+  racial_cd_main: "{cooldown:skill_tiefling_chama_infernal}"
+  racial_resistencia_temporaria: "{uptime:resistencia_infernal}" 
+passives:
+  visao_no_escuro_superior:
+    name: "Visão no Escuro Superior"
+    type: darkvision
+    trigger: light_level:low
+    duration: 20
+    cooldown: 36
+    uptime_cap: 0.58
+    range: 32
+    description: "Enxerga 32 blocos em baixa luminosidade; alternância respeita uptime ≤58%."
+  resistencia_infernal:
+    name: "Resistência Infernal"
+    type: timed_attribute
+    trigger: fire_damage
+    duration: 8
+    cooldown: 22
+    uptime_cap: 0.36
+    attributes:
+      mitigation_fire: 0.2
+    diminishing_returns: fire
+    description: "Ao sofrer dano de fogo reduz 20% por 8s. DR aplicado se houver outras fontes (Warlock/itens)."
+  aura_intimidacao:
+    name: "Aura de Intimidação"
+    type: retaliation_debuff
+    trigger: player_critical_hit
+    duration: 4
+    cooldown: 20
+    uptime_cap: 0.2
+    radius: 4
+    modifiers:
+      enemy_damage: -0.05
+    description: "Após crítico, inimigos a 4 blocos causam -5% dano por 4s. ICD interno 20s."
+actives:
+  chama_infernal:
+    name: "Chama Infernal"
+    skill: Tiefling_ChamaInfernal
+    cooldown: 60
+    charges: 1
+    description: "Rajada cônica 6 blocos (120–160% dano). Após o efeito aplica exaustão leve (-8% dano por 6s)."
+resistances:
+  fire:
+    base: 0.2
+    max: 0.45
+    diminishing: additive
+    notes: "Resistência adicional converte em DR progressiva para não exceder 45%."
+weaknesses: []
+synergy_notes:
+  - "Integrar com Warlock (Pacto Infernal) aplica DR compartilhada via marcador `resistencia_infernal`."
+  - "Aura ativa apenas em críticas reais; não reduz dano verdadeiro ou habilidades fixas."
+tests:
+  pve:
+    - "Dungeon ígnea: medir uptime da Resistência (8/22s ≈ 36%) e validar DR ≤45%."
+    - "Checar Aura após crítico em múltiplos mobs sem ultrapassar raio padrão de 4 blocos."
+  pvp:
+    - "Arena curta: ativar Chama Infernal cada 60s confirmando penalidade -8% dano por 6s."
+    - "Duelo vs arqueiro de fogo garantindo DR acumulada mantém limites globais."

@@ -1,0 +1,57 @@
+# Skill racial — Chama Infernal (Tiefling Infernal)
+skills:
+  Tiefling_ChamaInfernal:
+    display: "&cChama Infernal"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Libera rajada de fogo em cone de 6 blocos causando 120–160% do dano base.
+      Após o disparo, o tiefling sofre Exaustão Infernal reduzindo seu dano em 8% por 6s.
+      Cooldown de 60s mantém uptime efetivo abaixo do limite de 60%.
+    tiers:
+      T1: { cooldown: 60, damage_multiplier: 1.20, self_penalty: -0.08 }
+      T2: { cooldown: 60, damage_multiplier: 1.30, self_penalty: -0.08 }
+      T3: { cooldown: 60, damage_multiplier: 1.45, self_penalty: -0.08 }
+      T4: { cooldown: 60, damage_multiplier: 1.60, self_penalty: -0.08 }
+    cost:
+      resource: stamina
+      amount: 0
+    effects:
+      - target: cone
+        radius: 6
+        angle: 55
+        max_targets: 6
+        type: damage
+        scaling: percent
+        value: { tier: damage_multiplier }
+        element: fire
+        flags:
+          ignite: true
+      - target: cone
+        radius: 6
+        angle: 55
+        type: status
+        id: tiefling_ignite_minor
+        duration: 3
+        potency: 1
+        element: fire
+      - target: self
+        type: status
+        id: tiefling_exaustao_infernal
+        delay: 10
+        duration: 6
+        modifiers:
+          damage: { tier: self_penalty }
+      - target: self
+        type: placeholder_update
+        keys:
+          - racial_cd_main
+          - racial_resistencia_temporaria
+      - target: self
+        type: status
+        id: tiefling_cd_main
+        duration: { tier: cooldown }
+      notes: |
+        • Exaustão Infernal aplica -8% dano total respeitando caps globais de mitigação/ofensiva.
+        • Ignite menor serve apenas para feedback visual (DOT leve já balanceado no servidor).
+        • Ativação por item/Skript garante custo racial (exaustão) sem depender de mana.

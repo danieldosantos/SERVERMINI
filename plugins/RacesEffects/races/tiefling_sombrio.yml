@@ -1,0 +1,70 @@
+# Sub-raça: Tiefling Sombrio (Umbral)
+race_id: tiefling_sombrio
+name: "Tiefling Sombrio"
+identity: "Manipuladores de sombras que brilham em ambientes escuros, mas sofrem em luz intensa."
+luckperms:
+  required: "race_tiefling.sombrio"
+  inherit: "race_tiefling"
+tags:
+  - tiefling
+placeholders:
+  racial_cd_main: "{cooldown:skill_tiefling_escuridao_umbral}"
+  racial_penalidade_luz: "{status:tiefling_penalidade_luz}"
+passives:
+  toque_das_sombras:
+    name: "Toque das Sombras"
+    type: conditional_evasion_speed
+    trigger: light_level:max:6
+    duration: 8
+    cooldown: 12
+    uptime_cap: 0.6
+    bonuses:
+      speed: 0.02
+      evasion: 0.15
+    description: "Em áreas com luz ≤6 recebe +0.02 velocidade e +15% esquiva por 8s (ICD 12s)."
+  vulnerabilidade_luz:
+    name: "Vulnerabilidade à Luz"
+    type: light_penalty
+    trigger: light_level:high
+    duration: 6
+    cooldown: 0
+    uptime_cap: 0.6
+    penalties:
+      damage: -0.10
+    description: "Sob luz ≥13 sofre -10% dano causado temporariamente, removido 2s após deixar a área iluminada."
+  visao_sombria_profunda:
+    name: "Visão Sombria Profunda"
+    type: detection
+    trigger: darkness_presence
+    duration: 10
+    cooldown: 20
+    uptime_cap: 0.5
+    range: 10
+    reveals:
+      include_non_invisible: true
+      include_hostiles: true
+    description: "Percebe entidades não invisíveis em até 10 blocos quando imerso em escuridão."
+actives:
+  escuridao_umbral:
+    name: "Escuridão Umbral"
+    skill: Tiefling_EscuridaoUmbral
+    cooldown: 90
+    charges: 1
+    description: "Cria zona de sombras 6 blocos/8s: inimigos -15% precisão, aliados +10% esquiva."
+resistances:
+  shadow:
+    base: 0.08
+    max: 0.30
+    notes: "Resistência leve a dano sombrio; compartilha DR com classes de sombras."
+weaknesses:
+  - "Exposição contínua a luz nível ≥13 ativa penalidade de dano e bloqueia Toque das Sombras."
+synergy_notes:
+  - "Ideal para Ladinos/Monjes da Sombra — bônus condicionais dependem de posicionamento, mantendo uptime ≤60%."
+  - "Vulnerabilidade leve assegura contrajogo em mapas iluminados sem inviabilizar a sub-raça."
+tests:
+  pve:
+    - "Cavernas: validar bônus de velocidade/esquiva com uptime médio ~40–50%."
+    - "Boss iluminado: monitorar penalidade -10% dano quando exposto a holofotes."
+  pvp:
+    - "Arena noturna: usar Escuridão Umbral (90s) como principal ferramenta de controle."
+    - "Arena diurna: confirmar penalidade ativa e necessidade de reposicionamento constante."

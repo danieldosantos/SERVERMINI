@@ -1,0 +1,32 @@
+# LuckPerms — grupos para Tiefling e variações clássicas.
+lp creategroup race_tiefling
+lp group race_tiefling setdisplayname "Raça: Tiefling"
+lp group race_tiefling meta setprefix "&8[&5Tiefling&8] "
+lp group race_tiefling setweight 10
+lp group race_tiefling permission set race.id.tiefling true
+lp group race_tiefling permission set skript.command.racial_tiefling true
+lp group race_tiefling permission set skript.command.fogo_infernal true
+lp group race_tiefling permission set skript.command.abismo true
+lp group race_tiefling permission set skript.command.sombra true
+lp group race_tiefling permission set skript.command.kit_racial_tiefling true
+
+lp creategroup race_tiefling.infernal
+lp parent add race_tiefling.infernal race_tiefling
+lp group race_tiefling.infernal setdisplayname "Tiefling Infernal"
+lp group race_tiefling.infernal permission set raceseffects.race.tiefling_infernal true
+lp group race_tiefling.infernal permission set psa.skill.Tiefling_ChamaInfernal true
+lp group race_tiefling.infernal permission set mythicmobs.item.AmuletoInfernus true
+
+lp creategroup race_tiefling.abissal
+lp parent add race_tiefling.abissal race_tiefling
+lp group race_tiefling.abissal setdisplayname "Tiefling Abissal"
+lp group race_tiefling.abissal permission set raceseffects.race.tiefling_abissal true
+lp group race_tiefling.abissal permission set psa.skill.Tiefling_ExplosaoAbissal true
+lp group race_tiefling.abissal permission set mythicmobs.item.SigiloAbissal true
+
+lp creategroup race_tiefling.sombrio
+lp parent add race_tiefling.sombrio race_tiefling
+lp group race_tiefling.sombrio setdisplayname "Tiefling Sombrio"
+lp group race_tiefling.sombrio permission set raceseffects.race.tiefling_sombrio true
+lp group race_tiefling.sombrio permission set psa.skill.Tiefling_EscuridaoUmbral true
+lp group race_tiefling.sombrio permission set mythicmobs.item.VeloUmbral true
