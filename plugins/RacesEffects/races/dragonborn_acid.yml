@@ -1,0 +1,57 @@
+# Subrace: Dragonborn Acid
+race_id: dragonborn_acid
+name: "Draconato Corrosivo"
+identity: "Escamas maculadas por ácidos que dissolvem defesas com paciência cirúrgica."
+luckperms:
+  required: "race_dragonborn.acid"
+  inherit: "race_dragonborn"
+tags:
+  - dragonborn
+placeholders:
+  racial_cd_main: "{cooldown:skill_dragonacid_focus}"
+passives:
+  corrosao:
+    name: "Corrosão"
+    type: stacking_debuff
+    trigger: melee_hit
+    duration: 6
+    cooldown: 0
+    stacks_max: 2
+    armor_reduction: 0.05
+    description: "Ataques aplicam -5% de defesa física acumulando até 2x por 6s."
+  vapores_toxicos:
+    name: "Vapores Tóxicos"
+    type: aura
+    trigger: in_combat
+    duration: 5
+    cooldown: 25
+    uptime_cap: 0.4
+    effects:
+      particles: acid_mist
+      damage_taken_bonus: 0.05
+    description: "Enquanto ativo, inimigos próximos sofrem 5% mais dano de ácido (não acumula)."
+actives:
+  erosao_concentrada:
+    name: "Erosão Concentrada"
+    skill: Dragonacid_Focus
+    cooldown: 60
+    charges: 1
+    description: "Marca um alvo, aumentando o limite de Corrosão e renovando duração."
+resistances:
+  acid:
+    base: 0.12
+    max: 0.45
+    diminishing: quadratic
+    notes: "DR compartilhado com base. Recebe +10% de dano de trovoada quando Vapores não está ativo."
+weaknesses:
+  - "Vulnerável a raio (+10% dano) sempre que Vapores Tóxicos estiver em recarga."
+synergy_notes:
+  - "Ideal para grupos que alternam golpes físicos rápidos para manter as 2 pilhas."
+  - "Erosão Concentrada sincroniza com Sopro para remover defesas antes do burst."
+tests:
+  pve:
+    - "Checar empilhamento de Corrosão sem exceder 2 stacks."
+    - "Boss blindado: confirmar que marca renova duração e limita mitigação a ≤45%."
+  pvp:
+    - "Arena 1v1: testar troca entre Vapores on/off confirmando vulnerabilidade a raio."
+    - "Duelo: garantir que Erosão tenha recarga real de 60s sem reduções extras."

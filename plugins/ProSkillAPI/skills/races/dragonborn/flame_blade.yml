@@ -1,0 +1,34 @@
+# ProSkillAPI - Habilidade ativa da linhagem ígnea
+skills:
+  Dragonfire_Blade:
+    display: "&6Lâmina Ígnea Dracônica"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Revest e arma principal com fogo ancestral por 4s.
+      Cada acerto aplica queimadura leve (1s stackável até 4s) e ativa Sangue Ígneo.
+    tiers:
+      T1: { cooldown: 60, duration: 4, burn_damage: 0.20 }
+      T2: { cooldown: 60, duration: 4, burn_damage: 0.24 }
+      T3: { cooldown: 60, duration: 4, burn_damage: 0.28 }
+      T4: { cooldown: 60, duration: 4, burn_damage: 0.32 }
+    cost:
+      resource: stamina
+      amount: 0
+    effects:
+      - target: self
+        type: weapon_enchant
+        duration: { tier: duration }
+        element: fire
+        on_hit:
+          - type: status
+            id: burn
+            duration: 1
+            potency: { tier: burn_damage }
+            max_duration: 4
+      - target: self
+        type: trigger
+        id: MythicMobs~DragonfireTrail
+    notes: |
+      • Mantém cooldown ≥60s para respeitar uptime global.
+      • Veneno/controle não acumulam além de 4s de queimadura contínua.

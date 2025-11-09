@@ -1,0 +1,113 @@
+# Itens e efeitos raciais do Draconato e linhagens.
+items:
+  DraconicCharm:
+    Id: HEART_OF_THE_SEA
+    Display: '&cAmuleto Dracônico'
+    Lore:
+      - '&7Canaliza o sopro ancestral.'
+      - '&eClique direito:&f dispara Sopro Dracônico se houver carga.'
+      - '&8Elemento: vinculado à Ascendência.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    Enchantments:
+      - DURABILITY:5
+    NBT:
+      race-lock: 'race_dragonborn'
+      skill: 'Dragonborn_Breath'
+  FlameScaleAmulet:
+    Id: BLAZE_POWDER
+    Display: '&6Escama Ardente'
+    Lore:
+      - '&7Vibra com calor intenso.'
+      - '&eClique direito:&f Lâmina Ígnea Dracônica.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_dragonborn.fire'
+      skill: 'Dragonfire_Blade'
+  FrostShardTalisman:
+    Id: PRISMARINE_CRYSTALS
+    Display: '&bTalismã de Estilhaço Gélido'
+    Lore:
+      - '&7Gela o ar ao redor.'
+      - '&eClique direito:&f Congelamento Breve.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_dragonborn.ice'
+      skill: 'Dragonice_Freeze'
+  CorrosiveSpineCharm:
+    Id: FERMENTED_SPIDER_EYE
+    Display: '&2Glândula Corrosiva'
+    Lore:
+      - '&7Goteja ácido volátil.'
+      - '&eClique direito:&f Erosão Concentrada.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_dragonborn.acid'
+      skill: 'Dragonacid_Focus'
+  StormGlandBand:
+    Id: LIGHTNING_ROD
+    Display: '&9Anel da Tempestade'
+    Lore:
+      - '&7Crepita com eletricidade azul.'
+      - '&eClique direito:&f Estalo Dracônico.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_dragonborn.lightning'
+      skill: 'Dragonstorm_Dash'
+  ToxicDrakeCharm:
+    Id: SLIME_BALL
+    Display: '&aTalismã da Névoa Tóxica'
+    Lore:
+      - '&7Exala vapores nocivos.'
+      - '&eClique direito:&f Bruma Ácida.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_dragonborn.poison'
+      skill: 'Dragonpoison_Cloud'
+
+skills:
+  DragonbornBreathCone:
+    Cooldown: 0
+    Skills:
+      - effect:particles{particle=dragon_breath;amount=40;speed=0.1;hS=0.4;vS=0.4;y=0} @SelfLocation
+      - projectile{ot=DragonbornBreathProjector;range=6;oh=DragonbornBreathHit} @Forward
+  DragonbornBreathHit:
+    Skills:
+      - effect:particles{particle=small_flame;amount=10;speed=0.2;hS=0.3;vS=0.3} @Location
+  DragonbornBreathProjector:
+    Type: CONE
+    Yaw: 60
+    Pitch: 45
+    Steps: 6
+  DragonfireTrail:
+    Skills:
+      - effect:particles{particle=flame;amount=12;speed=0.02;hS=0.2;vS=0.2} @Self
+  DragoniceShard:
+    Skills:
+      - effect:particles{particle=snowflake;amount=16;speed=0.01;hS=0.3;vS=0.4} @Target
+  DragonacidMark:
+    Skills:
+      - effect:particles{particle=block;material=slime_block;amount=10;hS=0.2;vS=0.2} @Target
+  DragonstormArc:
+    Skills:
+      - effect:lightning{repeat=1} @Self
+      - effect:particles{particle=electric_spark;amount=20;speed=0.3;hS=0.5;vS=0.3} @Self
+  DragonpoisonMist:
+    Skills:
+      - effect:particles{particle=campfire_cosy_smoke;amount=30;speed=0.05;hS=0.6;vS=0.4} @Location
+
+projectors:
+  DragonbornBreathProjector:
+    type: cone
+    range: 6
+    angle: 60
+    particles:
+      particle: dragon_breath
+      density: 4
+      speed: 0.05

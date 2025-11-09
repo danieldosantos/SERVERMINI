@@ -1,0 +1,33 @@
+# ProSkillAPI - Habilidade ativa da linhagem gélida
+skills:
+  Dragonice_Freeze:
+    display: "&bCongelamento Breve"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Canaliza frio absoluto em um alvo único por 2s.
+      Aplica enraizamento breve respeitando imunidades decrescentes do servidor.
+    tiers:
+      T1: { cooldown: 75, root_duration: 2.0, slow_after: 0.20 }
+      T2: { cooldown: 75, root_duration: 2.0, slow_after: 0.24 }
+      T3: { cooldown: 75, root_duration: 2.0, slow_after: 0.28 }
+      T4: { cooldown: 75, root_duration: 2.0, slow_after: 0.32 }
+    effects:
+      - target: single
+        range: 12
+        type: status
+        id: root
+        duration: { tier: root_duration }
+        diminishing: control
+      - target: single
+        range: 12
+        type: status
+        id: slow
+        duration: 2
+        potency: { tier: slow_after }
+      - target: self
+        type: trigger
+        id: MythicMobs~DragoniceShard
+    notes: |
+      • Não ultrapassa 4s de controle combinando com passivo Gélido.
+      • Cooldown de 75s garante janelas claras para counterplay em PvP. 

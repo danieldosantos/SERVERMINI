@@ -1,0 +1,13 @@
+# LuckPerms groups for Dragonborn race and lineages
+lp creategroup race_dragonborn
+lp creategroup race_dragonborn.fire
+lp creategroup race_dragonborn.ice
+lp creategroup race_dragonborn.acid
+lp creategroup race_dragonborn.lightning
+lp creategroup race_dragonborn.poison
+
+lp parent set race_dragonborn.fire race_dragonborn
+lp parent set race_dragonborn.ice race_dragonborn
+lp parent set race_dragonborn.acid race_dragonborn
+lp parent set race_dragonborn.lightning race_dragonborn
+lp parent set race_dragonborn.poison race_dragonborn

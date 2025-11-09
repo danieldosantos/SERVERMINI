@@ -1,0 +1,47 @@
+# ProSkillAPI - Sopro Dracônico base
+skills:
+  Dragonborn_Breath:
+    display: "&cSopro Dracônico"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Libera um cone de 6 blocos alinhado ao elemento da linhagem.
+      Consome 1 carga de sopro e causa 120–180% do poder base.
+      Cargas se regeneram fora de combate (45–60s) via recurso personalizado.
+    tiers:
+      T1: { cooldown: 55, damage_multiplier: 1.20, charge_regen: 45, dot_scale: 1.0 }
+      T2: { cooldown: 55, damage_multiplier: 1.35, charge_regen: 45, dot_scale: 1.1 }
+      T3: { cooldown: 55, damage_multiplier: 1.55, charge_regen: 50, dot_scale: 1.2 }
+      T4: { cooldown: 55, damage_multiplier: 1.80, charge_regen: 55, dot_scale: 1.3 }
+    cost:
+      resource: breath_charge
+      amount: 1
+    attributes:
+      charge_recovery: { tier: charge_regen }
+    effects:
+      - target: cone
+        radius: 6
+        angle: 60
+        max_targets: 8
+        type: damage
+        scaling: percent
+        value: { tier: damage_multiplier }
+        element: lineage
+        flags:
+          apply_element_marker: true
+      - target: cone
+        radius: 6
+        angle: 60
+        max_targets: 8
+        type: status
+        id: elemental_dot
+        duration: 4
+        potency: { tier: dot_scale }
+        element: lineage
+      - target: self
+        type: trigger
+        id: MythicMobs~DragonbornBreathCone
+    notes: |
+      • Cooldown travado em 55s para respeitar limite ≥45s.
+      • DOT reduzido pela metade em PvP conforme configuração de servidor.
+      • Elemento definido pelo marcador Ascendência Dracônica.

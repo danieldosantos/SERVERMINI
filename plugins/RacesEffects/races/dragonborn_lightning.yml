@@ -1,0 +1,57 @@
+# Subrace: Dragonborn Lightning
+race_id: dragonborn_lightning
+name: "Draconato Tempestuoso"
+identity: "Canalizadores de tempestades que convertem crítica em fúria elétrica."
+luckperms:
+  required: "race_dragonborn.lightning"
+  inherit: "race_dragonborn"
+tags:
+  - dragonborn
+placeholders:
+  racial_cd_main: "{cooldown:skill_dragonstorm_dash}"
+passives:
+  frenesi_eletrico:
+    name: "Frenesi Elétrico"
+    type: resource_gain
+    trigger: critical_hit
+    cooldown: 15
+    gain:
+      resource: breath_charge
+      amount: 0.05
+    description: "Acertos críticos restauram 5% de uma carga de sopro (CD interno 15s)."
+  pele_trovoada:
+    name: "Pele de Trovoada"
+    type: timed_attribute
+    trigger: lightning_damage_taken
+    duration: 6
+    cooldown: 20
+    uptime_cap: 0.3
+    attributes:
+      mitigation_lightning: 0.18
+    diminishing_returns: elemental
+    description: "Após sofrer dano elétrico ganha 18% DR vs raio por 6s."
+actives:
+  estalo_draconico:
+    name: "Estalo Dracônico"
+    skill: Dragonstorm_Dash
+    cooldown: 65
+    charges: 1
+    description: "Dash curto de 6 blocos que explode em choque leve, respeitando limite de controle."
+resistances:
+  lightning:
+    base: 0.12
+    max: 0.45
+    diminishing: quadratic
+    notes: "Stacka com base respeitando DR. Vulnerável a ácido quando sem cargas."
+weaknesses:
+  - "Recebe +10% de dano ácido se Frenesi Elétrico não estiver disponível."
+synergy_notes:
+  - "Funciona bem com builds críticos que aproveitam a recuperação parcial da carga."
+  - "Evitar stacking excessivo de velocidade: dash respeita limite global de +0.05."
+tests:
+  pve:
+    - "Simular dash atravessando 6 blocos sem exceder limite de 0.05 velocidade adicional."
+    - "Checar retorno de recurso a cada 15s com rotações de crítico."
+  pvp:
+    - "Arena: usar Estalo como gap closer garantindo cooldown real de 65s."
+    - "Duelo vs assassino ácido monitorando fraqueza quando Frenesi está em cooldown."

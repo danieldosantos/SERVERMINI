@@ -1,0 +1,115 @@
+# races_dragonborn_cmds.sk — Integração da raça Draconato e linhagens elementais.
+options:
+  skillcmd: psa cast
+  charm_name: "&cAmuleto Dracônico"
+  fire_name: "&6Escama Ardente"
+  ice_name: "&bTalismã de Estilhaço Gélido"
+  acid_name: "&2Glândula Corrosiva"
+  lightning_name: "&9Anel da Tempestade"
+  poison_name: "&aTalismã da Névoa Tóxica"
+
+function dragonbornHasPerm(p: player, group: text) :: boolean:
+  set {_perm1} to "group.%{_group}%"
+  set {_perm2} to "lp.%{_group}%"
+  if {_p} has permission {_perm1} or {_p} has permission {_perm2}:
+    return true
+  return false
+
+function dragonbornCastBreath(p: player):
+  if dragonbornHasPerm({_p}, "race_dragonborn"):
+    execute console command "{@skillcmd} %player% Dragonborn_Breath"
+    dragonbornShowHud({_p}, "Sopro Dracônico")
+  else:
+    send "&cSomente draconatos podem usar o sopro." to {_p}
+
+function dragonbornCastLineage(p: player, group: text, skill: text, label: text):
+  if dragonbornHasPerm({_p}, {_group}):
+    set {_skillName} to {_skill}
+    execute console command "{@skillcmd} %player% %{_skillName}%"
+    dragonbornShowHud({_p}, {_label})
+  else:
+    send "&cSua linhagem não corresponde a %{_label}%." to {_p}
+
+function dragonbornShowHud(p: player, label: text):
+  send action bar "&cRacial:&f %{_label}%" to {_p}
+
+command /sopro_draco:
+  description: "Ativa o Sopro Dracônico usando cargas disponíveis."
+  trigger:
+    dragonbornCastBreath(player)
+
+command /foco_draco_fogo:
+  trigger:
+    dragonbornCastLineage(player, "race_dragonborn.fire", "Dragonfire_Blade", "Lâmina Ígnea")
+
+command /foco_draco_gelo:
+  trigger:
+    dragonbornCastLineage(player, "race_dragonborn.ice", "Dragonice_Freeze", "Congelamento Breve")
+
+command /foco_draco_acido:
+  trigger:
+    dragonbornCastLineage(player, "race_dragonborn.acid", "Dragonacid_Focus", "Erosão Concentrada")
+
+command /foco_draco_raio:
+  trigger:
+    dragonbornCastLineage(player, "race_dragonborn.lightning", "Dragonstorm_Dash", "Estalo Dracônico")
+
+command /foco_draco_veneno:
+  trigger:
+    dragonbornCastLineage(player, "race_dragonborn.poison", "Dragonpoison_Cloud", "Bruma Ácida")
+
+command /kit_racial_draco [<player>] [<text>]:
+  description: "Entrega itens focais de QA para draconatos (modo: base/fogo/gelo/acido/raio/veneno/all)."
+  permission: op
+  trigger:
+    if arg-1 is set:
+      if arg-1 is player:
+        set {_target} to arg-1
+      else:
+        set {_target} to player named arg-1
+        if {_target} is not set:
+          send "&cJogador inválido." to sender
+          stop
+    else if sender is player:
+      set {_target} to sender
+    else:
+      send "&cUso: /kit_racial_draco <jogador> [modo]" to sender
+      stop
+    set {_mode} to "all"
+    if arg-2 is set:
+      set {_mode} to lowercase arg-2
+    if {_mode} is "base" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% DraconicCharm 1"
+    if {_mode} is "fogo" or {_mode} is "fire" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% FlameScaleAmulet 1"
+    if {_mode} is "gelo" or {_mode} is "ice" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% FrostShardTalisman 1"
+    if {_mode} is "acido" or {_mode} is "acid" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% CorrosiveSpineCharm 1"
+    if {_mode} is "raio" or {_mode} is "relampago" or {_mode} is "lightning" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% StormGlandBand 1"
+    if {_mode} is "veneno" or {_mode} is "poison" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% ToxicDrakeCharm 1"
+    send "&aItens dracônicos entregues (%{_mode}%)." to {_target}
+
+on right click:
+  if event-item is not air:
+    set {_name} to display name of event-item
+    if {_name} is colored {@charm_name}:
+      cancel event
+      dragonbornCastBreath(player)
+    else if {_name} is colored {@fire_name}:
+      cancel event
+      dragonbornCastLineage(player, "race_dragonborn.fire", "Dragonfire_Blade", "Lâmina Ígnea")
+    else if {_name} is colored {@ice_name}:
+      cancel event
+      dragonbornCastLineage(player, "race_dragonborn.ice", "Dragonice_Freeze", "Congelamento Breve")
+    else if {_name} is colored {@acid_name}:
+      cancel event
+      dragonbornCastLineage(player, "race_dragonborn.acid", "Dragonacid_Focus", "Erosão Concentrada")
+    else if {_name} is colored {@lightning_name}:
+      cancel event
+      dragonbornCastLineage(player, "race_dragonborn.lightning", "Dragonstorm_Dash", "Estalo Dracônico")
+    else if {_name} is colored {@poison_name}:
+      cancel event
+      dragonbornCastLineage(player, "race_dragonborn.poison", "Dragonpoison_Cloud", "Bruma Ácida")

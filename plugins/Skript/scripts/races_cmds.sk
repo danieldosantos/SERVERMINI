@@ -4,13 +4,6 @@
 options:
   skillcmd: psa cast
 
-command /sopro_draco:
-  trigger:
-    if player has permission "lp.race_draconato":
-      execute console command "{@skillcmd} %player% SoproDraconico"
-    else:
-      send "&cRequer sangue dracônico."
-
 command /truque_arcano:
   trigger:
     if player has permission "lp.race_elfo.alto":
