@@ -1,42 +1,246 @@
-# Itens focais para Trapaceiro Arcano
+# Itens focais para Ladino e subclasses (Assassino, Ladrão, Espadachim)
 items:
-  ArcaneTricksterDagger:
-    Id: DIAMOND_SWORD
-    Display: '&5Adaga Arcana'
+  RogueStealthCloak:
+    Id: LEATHER_CHESTPLATE
+    Display: '&8Manto de Sombras'
     Lore:
-      - '&7Canaliza Golpe Arcano (+120% dano).'
-      - '&8Grupo: class_rogue.arcane_trickster'
+      - '&7Ativa &8Furtividade Tática&7 (/furtivo).'
+      - '&8Requer: class_rogue'
     Options:
       Unbreakable: true
+      Color: 25,25,25
+      KeepOnDeath: true
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue'
+      tier: 'T1'
+      skill: 'rogue_tactical_stealth'
+    Skills:
+      - skill{s=rogue_tactical_stealth} @self ~onRightClick
+  RogueEvasionCharm:
+    Id: FEATHER
+    Display: '&aTalismã de Evasão'
+    Lore:
+      - '&7Canaliza &aEvasão&7 (/evasao).'
+      - '&8Requer: class_rogue'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue'
+      tier: 'T2'
+      skill: 'rogue_evasion'
+    Skills:
+      - skill{s=rogue_evasion} @self ~onUse
+  RogueDashHook:
+    Id: FISHING_ROD
+    Display: '&eCorda de Pique'
+    Lore:
+      - '&7Dispara &ePique Acrobático&7 (/pique).'
+      - '&8Requer: class_rogue'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue'
+      tier: 'T2'
+      skill: 'rogue_acrobatic_dash'
+    Skills:
+      - skill{s=rogue_acrobatic_dash} @self ~onRightClick
+
+  AssassinDagger:
+    Id: IRON_SWORD
+    Display: '&4Adaga do Carrasco'
+    Lore:
+      - '&7Habilita &4Marcador de Alvo&7 e combos de execução.'
+      - '&8Requer: class_rogue.assassin'
+    Options:
+      Unbreakable: true
+      MaxStackSize: 1
       Damage: 6
     PersistentData:
-      classlock: 'class_rogue.arcane_trickster'
-      skill: 'rogue_arcanetrickster_arcane_strike'
+      classlock: 'class_rogue.assassin'
+      tier: 'T2'
+      skill: 'rogue_assassin_mark_target'
     Skills:
-      - skill{s=rogue_arcanetrickster_arcane_strike} @target ~onLeftClick
-  ArcaneTricksterVeil:
+      - skill{s=rogue_assassin_mark_target} @self ~onLeftClick
+  AssassinCloak:
     Id: BLACK_DYE
-    Display: '&5Véu Sombrio'
+    Display: '&4Véu de Emboscada'
     Lore:
-      - '&7Ativa Sombra Arcana (furtividade).'
-      - '&8Grupo: class_rogue.arcane_trickster'
+      - '&7Garante &4Ataque de Emboscada&7 após furtividade.'
+      - '&8Requer: class_rogue.assassin'
     Options:
       Unbreakable: true
+      KeepOnDeath: true
+      MaxStackSize: 1
     PersistentData:
-      classlock: 'class_rogue.arcane_trickster'
-      skill: 'rogue_arcanetrickster_shadow_shroud'
+      classlock: 'class_rogue.assassin'
+      tier: 'T3'
+      skill: 'rogue_assassin_ambush_strike'
     Skills:
-      - skill{s=rogue_arcanetrickster_shadow_shroud} @self ~onUse
-  ArcaneTricksterCodex:
-    Id: WRITABLE_BOOK
-    Display: '&5Códice da Cortina'
+      - skill{s=rogue_assassin_ambush_strike} @self ~onUse
+  ToxinVial:
+    Id: POTION
+    Display: '&2Frasco de Toxina'
     Lore:
-      - '&7Ultimate Golpe da Cortina Final.'
-      - '&8Grupo: class_rogue.arcane_trickster'
+      - '&7Aplica &2Toxina Preparada&7 nos golpes.'
+      - '&8Requer: class_rogue.assassin'
     Options:
       Unbreakable: true
+      MaxStackSize: 1
     PersistentData:
-      classlock: 'class_rogue.arcane_trickster'
-      skill: 'rogue_arcanetrickster_final_curtain'
+      classlock: 'class_rogue.assassin'
+      tier: 'T3'
+      skill: 'rogue_assassin_prepared_toxin'
     Skills:
-      - skill{s=rogue_arcanetrickster_final_curtain} @target ~onSneakLeftClick
+      - skill{s=rogue_assassin_prepared_toxin} @self ~onRightClick
+  AssassinExecutionCharm:
+    Id: NETHERITE_SWORD
+    Display: '&4Símbolo de Execução'
+    Lore:
+      - '&7Ativa &4Execução Calculada&7 (ultimate).'
+      - '&8Requer: class_rogue.assassin'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue.assassin'
+      tier: 'T4'
+      skill: 'rogue_assassin_calculated_execution'
+    Skills:
+      - skill{s=rogue_assassin_calculated_execution} @self ~onUse
+
+  ThiefHook:
+    Id: TRIPWIRE_HOOK
+    Display: '&2Grapple do Ladrão'
+    Lore:
+      - '&7Dispara &2Hookshot&7.'
+      - '&8Requer: class_rogue.thief'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue.thief'
+      tier: 'T2'
+      skill: 'rogue_thief_hookshot'
+    Skills:
+      - skill{s=rogue_thief_hookshot} @self ~onUse
+  ThiefSmokeBomb:
+    Id: FIREWORK_STAR
+    Display: '&7Granada de Fumaça'
+    Lore:
+      - '&7Invoca &7Bomba de Fumaça&7.'
+      - '&8Requer: class_rogue.thief'
+    Options:
+      Unbreakable: true
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue.thief'
+      tier: 'T3'
+      skill: 'rogue_thief_smoke_bomb'
+    Skills:
+      - skill{s=rogue_thief_smoke_bomb} @self ~onUse
+  ThiefBoots:
+    Id: LEATHER_BOOTS
+    Display: '&eBotas Levíssimas'
+    Lore:
+      - '&7Ativa &eMãos Velozes&7 para resets de mobilidade.'
+      - '&8Requer: class_rogue.thief'
+    Options:
+      Unbreakable: true
+      Color: 120,120,60
+      KeepOnDeath: true
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue.thief'
+      tier: 'T3'
+      skill: 'rogue_thief_fast_hands'
+    Skills:
+      - skill{s=rogue_thief_fast_hands} @self ~onRightClick
+  ThiefMasterKit:
+    Id: GOLDEN_PICKAXE
+    Display: '&6Ferramenta Mestre'
+    Lore:
+      - '&7Canaliza &6Arrombador Mestre&7 (ultimate).'
+      - '&8Requer: class_rogue.thief'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue.thief'
+      tier: 'T4'
+      skill: 'rogue_thief_master_lockbreaker'
+    Skills:
+      - skill{s=rogue_thief_master_lockbreaker} @self ~onUse
+
+  SwashRapier:
+    Id: DIAMOND_SWORD
+    Display: '&bRapieira do Bravoure'
+    Lore:
+      - '&7Aciona &bDesafio do Duelista&7.'
+      - '&8Requer: class_rogue.swashbuckler'
+    Options:
+      Unbreakable: true
+      Damage: 7
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue.swashbuckler'
+      tier: 'T2'
+      skill: 'rogue_swash_duelist_challenge'
+    Skills:
+      - skill{s=rogue_swash_duelist_challenge} @self ~onLeftClick
+  SwashPlume:
+    Id: FEATHER
+    Display: '&bPluma de Gala'
+    Lore:
+      - '&7Garante &bPasso de Dança&7.'
+      - '&8Requer: class_rogue.swashbuckler'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue.swashbuckler'
+      tier: 'T3'
+      skill: 'rogue_swash_dance_step'
+    Skills:
+      - skill{s=rogue_swash_dance_step} @self ~onUse
+  SwashBoots:
+    Id: LEATHER_BOOTS
+    Display: '&bBotas do Duelista'
+    Lore:
+      - '&7Ativa &bEstocada Rápida&7.'
+      - '&8Requer: class_rogue.swashbuckler'
+    Options:
+      Unbreakable: true
+      Color: 30,60,90
+      KeepOnDeath: true
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue.swashbuckler'
+      tier: 'T3'
+      skill: 'rogue_swash_rapid_thrust'
+    Skills:
+      - skill{s=rogue_swash_rapid_thrust} @self ~onRightClick
+  SwashCrest:
+    Id: FIRE_CHARGE
+    Display: '&dInsígnia do Duelista'
+    Lore:
+      - '&7Canaliza &dClímax do Duelista&7 (ultimate).'
+      - '&8Requer: class_rogue.swashbuckler'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+      MaxStackSize: 1
+    PersistentData:
+      classlock: 'class_rogue.swashbuckler'
+      tier: 'T4'
+      skill: 'rogue_swash_duelist_climax'
+    Skills:
+      - skill{s=rogue_swash_duelist_climax} @self ~onUse

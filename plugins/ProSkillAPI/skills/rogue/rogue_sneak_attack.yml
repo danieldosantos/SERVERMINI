@@ -1,0 +1,31 @@
+# Skill: Golpe Furtivo
+name: rogue_sneak_attack
+display: "§cGolpe Furtivo"
+icon: IRON_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 0
+  cooldown-scale: 0
+  mana-cost-base: 15
+  mana-cost-scale: 0
+description:
+  - "§7Prepara o próximo ataque em até 3s para dano bônus se houver vantagem."
+  - "§7Bônus: +70/+110/+150/+190% conforme tier (sem crítico extra em PvP)."
+  - "§8CD interno de 6s por alvo; custo 15 Estamina."
+components:
+  Cast:
+    type: trigger
+    data:
+      indicator: "§cGolpe Furtivo"
+    children:
+      PrepareWindow:
+        type: mechanic
+        data:
+          command: "skript run rogue_prepare_sneak_attack %caster%"
+          silent: false
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_rogue_advantage"
+          silent: true

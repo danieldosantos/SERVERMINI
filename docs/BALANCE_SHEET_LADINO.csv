@@ -1,0 +1,19 @@
+Skill,Tipo,Custo(Estamina),Duração,CD,Dano/Redução,Área,Notas PvP,Tier
+Furtividade Tática,Ativa,25,6s,60s,--,--,"Invis 2s + camuflagem 4s; cancela ao atacar",Base
+Evasão,Ativa,25,4s,75s,-50% projéteis/área,--,"Mitigação respeita cap 45%",Base
+Pique Acrobático,Ativa,20,3s buff,45s,+10% penetração próximo golpe,Auto,"Dash 6 blocos",Base
+Golpe Furtivo,Ativa,15,3s janela,6s/alvo,+70/+110/+150/+190% dano single,--,"Sem crítico extra; requer vantagem",Base
+Mãos Leves,Passiva,0,Constante,--,--,6 blocos interação,"Apenas QoL, sem impacto direto",Base
+Finesse,Passiva,0,Constante,--,-10% custo mobilidade,--,"Mantém custo mínimo 1",Base
+Marcador de Alvo,Ativa,20,10s marca,45s,+25% Sneak + Hemorragia 6%/s,Single,"Hemorragia limitada",Assassino
+Ataque de Emboscada,Ativa,25,3s janela,75s,+120% próximo ataque,--,"Falha em combate prolongado",Assassino
+Toxina Preparada,Ativa,25,12s,90s,-10% vel/-10% cura,Ar 6b,"Sem stackar além de 60% uptime",Assassino
+Execução Calculada,Ativa,35,Instantâneo,210s,240% (<30%) / 180% + -15% res,Single,"Executa apenas <30% HP",Assassino
+Hookshot,Ativa,20,Instantâneo,45s,--,12b alvo / 3b puxão,"Não puxa chefes; controle ≤3s",Ladrão
+Bomba de Fumaça,Ativa,25,6s,90s,-30% vel + cegueira,Raio 6b,"Controle ≤4s, aplica imunidade",Ladrão
+Mãos Velozes,Ativa,15,4s,45s,+0.05 velocidade,--,"Reseta Pique/Hookshot, respeita cap",Ladrão
+Arrombador Mestre,Ativa,30,12s,210s,-25% CDs mobilidade,Raio 8b,"Reduz apenas utilidade/mobilidade",Ladrão
+Desafio do Duelista,Ativa,20,10s,60s,+10% vel/penetração,Single,"Golpe Furtivo ignora vantagem somente marcado",Espadachim
+Passo de Dança,Ativa,20,6s,60s,20% esquiva frontal,--,"Não acumula com Evasão >60% uptime",Espadachim
+Estocada Rápida,Ativa,25,Instantâneo,45s,140% dano,2b avanço,"Reposiciona atrás se espaço livre",Espadachim
+Clímax do Duelista,Ativa,35,8s,210s,+25% atk speed / 15% lifesteal,Auto,"Lifesteal cap 25%",Espadachim

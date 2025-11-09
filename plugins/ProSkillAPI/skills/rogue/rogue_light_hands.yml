@@ -1,0 +1,19 @@
+# Passiva: Mãos Leves
+name: rogue_light_hands
+display: "§7Mãos Leves"
+icon: STRING
+type: Passive
+max-level: 1
+description:
+  - "§7+15% velocidade de interação com cordas, ganchos e fechaduras leves."
+  - "§8Integra MythicMobs/Skript para reduzir delays de alpinismo e saque."
+components:
+  Passive:
+    type: trigger
+    data: {}
+    children:
+      ApplyModifier:
+        type: mechanic
+        data:
+          command: "skript run rogue_apply_light_hands %caster%"
+          silent: true

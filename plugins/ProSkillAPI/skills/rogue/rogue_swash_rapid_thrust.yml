@@ -1,0 +1,43 @@
+# Skill: Estocada Rápida
+name: rogue_swash_rapid_thrust
+display: "§bEstocada Rápida"
+icon: DIAMOND_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  damage-base: 1.4
+  damage-scale: 0
+description:
+  - "§7140% de dano e avanço de 2 blocos, tentando reposicionar atrás do alvo."
+  - "§7Cancela se colisão for sólida."
+  - "§8Interage com marca de duelo para garantir vantagem."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§bEstocada"
+    children:
+      TargetEnemy:
+        type: target
+        data:
+          shape: single
+          range-base: 4
+          range-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.4
+              value-scale: 0
+              classifier: skill
+          Dash:
+            type: mechanic
+            data:
+              command: "skript run rogue_swash_thrust %caster% %target% 2"
+              silent: true

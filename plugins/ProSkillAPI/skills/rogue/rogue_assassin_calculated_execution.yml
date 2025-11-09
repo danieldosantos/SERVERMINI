@@ -1,0 +1,44 @@
+# Skill: Execução Calculada
+name: rogue_assassin_calculated_execution
+display: "§4Execução Calculada"
+icon: NETHERITE_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  range-base: 5
+  range-scale: 0
+description:
+  - "§7Ataque finalizador: 240% dano em alvos <30% HP."
+  - "§7Acima do limiar causa 180% e -15% resistências por 6s (PvP friendly)."
+  - "§8Ultimate respeita janela global de 180–240s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§4Execução"
+    children:
+      TargetEnemy:
+        type: target
+        data:
+          shape: single
+          range-base: 5
+          range-scale: 0
+          group: enemy
+        children:
+          Execute:
+            type: mechanic
+            data:
+              command: "skript run rogue_assassin_execute %caster% %target%"
+              silent: false
+          Effect:
+            type: mechanic
+            data:
+              effect: CRIT
+              amount-base: 6
+              radius-base: 0.5
+              target: target

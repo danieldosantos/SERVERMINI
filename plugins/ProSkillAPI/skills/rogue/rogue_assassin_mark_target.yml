@@ -1,0 +1,47 @@
+# Skill: Marcador de Alvo
+name: rogue_assassin_mark_target
+display: "§4Marcador de Alvo"
+icon: ENDER_EYE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+description:
+  - "§7Marca um inimigo para fortalecer o próximo Golpe Furtivo em +25%."
+  - "§7Aplica Hemorragia: 6% da vida atual por 4s (PvP limitado)."
+  - "§8CD individual por alvo para evitar spam."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§4Marcado"
+    children:
+      TargetEnemy:
+        type: target
+        data:
+          shape: single
+          range-base: 18
+          range-scale: 0
+          group: enemy
+        children:
+          ApplyMark:
+            type: mechanic
+            data:
+              command: "skript run rogue_assassin_mark %caster% %target%"
+              silent: false
+          Hemorrhage:
+            type: mechanic
+            data:
+              command: "skript run rogue_apply_bleed %caster% %target% 4 0.06"
+              silent: true
+          HUD:
+            type: mechanic
+            data:
+              command: "placeholderapi refresh %caster% skills_rogue_advantage"
+              silent: true

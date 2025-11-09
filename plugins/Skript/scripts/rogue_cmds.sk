@@ -1,0 +1,460 @@
+# Ladino - comandos, integrações e HUD
+options:
+  hud-refresh: 5 seconds
+  combat-timeout: 8 seconds
+  sneak-window: 3 seconds
+
+on load:
+  broadcast "&8[Rogue] Integrações carregadas." to console
+  execute console command "scoreboard objectives add rogue_stamina dummy" if scoreboard objective "rogue_stamina" does not exist
+  execute console command "scoreboard objectives add rogue_sneak_cd dummy" if scoreboard objective "rogue_sneak_cd" does not exist
+  execute console command "scoreboard objectives add rogue_advantage dummy" if scoreboard objective "rogue_advantage" does not exist
+  execute console command "scoreboard objectives add rogue_mobility dummy" if scoreboard objective "rogue_mobility" does not exist
+
+function rogue_is_class(p: player) :: boolean:
+  if {_p} is not set:
+    return false
+  if {_p} has permission "class_rogue" or {_p} has permission "class_rogue.*" or {_p} has permission "group.class_rogue":
+    return true
+  return false
+
+function rogue_tier(p: player) :: number:
+  set {_level_text} to placeholderapi "%skillapi_primary_level%" with {_p}
+  if {_level_text} is "" or {_level_text} is not set:
+    set {_level} to 1
+  else:
+    set {_level} to floor(parsed number from {_level_text})
+  if {_level} >= 17:
+    return 4
+  if {_level} >= 11:
+    return 3
+  if {_level} >= 5:
+    return 2
+  return 1
+
+function rogue_refresh_hud(p: player):
+  if {_p} is not set:
+    stop
+  set {_name} to name of {_p}
+  set {_stamina_raw} to placeholderapi "%skills_rogue_stamina%" with {_p}
+  if {_stamina_raw} is "" or {_stamina_raw} is not set:
+    set {_stamina_raw} to "0"
+  set {_stamina} to floor(parsed number from {_stamina_raw})
+  set {_sneak_raw} to placeholderapi "%skills_rogue_sneak_cd%" with {_p}
+  if {_sneak_raw} is "" or {_sneak_raw} is not set:
+    set {_sneak_raw} to "0"
+  set {_sneak_cd} to floor(parsed number from {_sneak_raw})
+  set {_adv_raw} to placeholderapi "%skills_rogue_advantage%" with {_p}
+  if {_adv_raw} is "" or {_adv_raw} is not set:
+    if {rogue.advantage.%{_p}%} is set:
+      set {_adv_raw} to "1"
+    else:
+      set {_adv_raw} to "0"
+  set {_advantage} to floor(parsed number from {_adv_raw})
+  set {_mob_raw} to placeholderapi "%skills_rogue_mobility%" with {_p}
+  if {_mob_raw} is "" or {_mob_raw} is not set:
+    set {_mob_raw} to "0"
+  set {_mobility} to floor(parsed number from {_mob_raw})
+  execute console command "scoreboard players set %{_name}% rogue_stamina %{_stamina}%"
+  execute console command "scoreboard players set %{_name}% rogue_sneak_cd %{_sneak_cd}%"
+  execute console command "scoreboard players set %{_name}% rogue_advantage %{_advantage}%"
+  execute console command "scoreboard players set %{_name}% rogue_mobility %{_mobility}%"
+
+function rogue_enter_combat(p: player):
+  if {_p} is set:
+    set {rogue.combat.%{_p}%} to now
+
+function rogue_is_in_combat(p: player) :: boolean:
+  if {rogue.combat.%{_p}%} is set:
+    if difference between now and {rogue.combat.%{_p}%} <= {@combat-timeout}:
+      return true
+  return false
+
+function rogue_spend_stamina(p: player, amount: number, tag: text="skill") :: boolean:
+  if rogue_is_class({_p}) is false:
+    return false
+  set {_base_cost} to {_amount}
+  if {rogue.finesse.%{_p}%} is set:
+    set {_base_cost} to {_base_cost} * 0.9
+  set {_cost} to ceil({_base_cost})
+  if {_cost} < 1:
+    set {_cost} to 1
+  set {_mana_raw} to placeholderapi "%skills_rogue_stamina%" with {_p}
+  if {_mana_raw} is "" or {_mana_raw} is not set:
+    set {_mana_raw} to "0"
+  set {_current} to floor(parsed number from {_mana_raw})
+  if {_current} < {_cost}:
+    send "&cEstamina insuficiente (&f%{_current}%&c)." to {_p}
+    return false
+  set {_name} to name of {_p}
+  execute console command "skillapi mana add %{_name}% -%{_cost}%"
+  rogue_refresh_hud({_p})
+  return true
+
+function rogue_sneak_multiplier(p: player) :: number:
+  set {_tier} to rogue_tier({_p})
+  if {_tier} = 4:
+    return 2.9
+  if {_tier} = 3:
+    return 2.5
+  if {_tier} = 2:
+    return 2.1
+  return 1.7
+
+function rogue_prepare_sneak_attack(p: player):
+  if rogue_is_class({_p}) is false:
+    send "&cApenas Ladinos podem usar Golpe Furtivo." to {_p}
+    stop
+  if rogue_spend_stamina({_p}, 15, "golpe_furtivo") is false:
+    stop
+  if rogue_has_advantage({_p}, null) is false and {rogue.duelist.free.%{_p}%} is not set:
+    send "&cGolpe Furtivo requer vantagem, marca ou Desafio do Duelista." to {_p}
+    stop
+  set {rogue.sneak.window.%{_p}%} to now + {@sneak-window} seconds
+  set {rogue.sneak.multiplier.%{_p}%} to rogue_sneak_multiplier({_p})
+  send "&aVocê prepara um Golpe Furtivo. Ataque em até {@sneak-window} segundos." to {_p}
+  rogue_refresh_hud({_p})
+
+function rogue_has_advantage(p: player, t: entity) :: boolean:
+  if {rogue.camouflage.%{_p}%} is set:
+    return true
+  if {rogue.ambush.ready.%{_p}%} is set:
+    return true
+  if {_t} is set:
+    set {_uuid} to uuid of {_t}
+    if {rogue.duelist.target.%{_p}%} = {_uuid}:
+      return true
+    if {rogue.assassin.mark.%{_p}%} = {_uuid}:
+      return true
+    if {rogue.sneak.target.%{_p}%} = {_uuid}:
+      return true
+  return false
+
+function rogue_apply_camouflage(p: player, seconds: number):
+  set {rogue.camouflage.%{_p}%} to now + seconds parsed as number seconds
+  wait seconds parsed as number seconds
+  delete {rogue.camouflage.%{_p}%}
+  set {rogue.last_stealth_exit.%{_p}%} to now
+  rogue_refresh_hud({_p})
+
+function rogue_reduce_noise(p: player, mult: number, seconds: number):
+  set {rogue.noise.%{_p}%} to mult parsed as number
+  wait seconds parsed as number seconds
+  delete {rogue.noise.%{_p}%}
+
+function rogue_apply_evasion(p: player, seconds: number):
+  if rogue_spend_stamina({_p}, 25, "evasao") is false:
+    stop
+  set {rogue.evasion.%{_p}%} to now + seconds parsed as number seconds
+  wait seconds parsed as number seconds
+  delete {rogue.evasion.%{_p}%}
+  rogue_refresh_hud({_p})
+
+function rogue_dash(p: player, distance: number):
+  if rogue_spend_stamina({_p}, 20, "pique") is false:
+    stop
+  push {_p} forward by distance parsed as number
+  set {rogue.sneak.target.%{_p}%} to ""
+  rogue_enter_combat({_p})
+
+function rogue_dash_penetration(p: player, seconds: number, bonus: number):
+  set {rogue.penetration.%{_p}%} to bonus parsed as number
+  wait seconds parsed as number seconds
+  delete {rogue.penetration.%{_p}%}
+
+function rogue_assassin_mark(c: player, t: entity):
+  if rogue_spend_stamina({_c}, 20, "marca") is false:
+    stop
+  if {_t} is not set:
+    stop
+  set {_uuid} to uuid of {_t}
+  set {rogue.assassin.mark.%{_c}%} to {_uuid}
+  set {rogue.sneak.target.%{_c}%} to {_uuid}
+  send "&4Alvo marcado para execução." to {_c}
+
+function rogue_apply_bleed(c: player, t: entity, seconds: number, pct: number):
+  if {_t} is not set:
+    stop
+  set {_uuid} to uuid of {_t}
+  set {rogue.bleed.%{_uuid}%::owner} to {_c}
+  set {rogue.bleed.%{_uuid}%::pct} to pct parsed as number
+  set {rogue.bleed.%{_uuid}%::expires} to now + seconds parsed as number seconds
+
+function rogue_assassin_ambush(p: player):
+  if rogue_spend_stamina({_p}, 25, "emboscada") is false:
+    stop
+  if rogue_is_in_combat({_p}) is true:
+    if {rogue.last_stealth_exit.%{_p}%} is not set or difference between now and {rogue.last_stealth_exit.%{_p}%} > 2 seconds:
+      send "&cEmboscada exige estar fora de combate ou recém saído da furtividade." to {_p}
+      stop
+  set {rogue.ambush.ready.%{_p}%} to now + 3 seconds
+  send "&4Você prepara uma emboscada mortal." to {_p}
+
+function rogue_assassin_toxin(p: player, seconds: number):
+  if rogue_spend_stamina({_p}, 25, "toxina") is false:
+    stop
+  set {rogue.toxin.%{_p}%} to now + seconds parsed as number seconds
+  wait seconds parsed as number seconds
+  delete {rogue.toxin.%{_p}%}
+
+function rogue_assassin_execute(c: player, t: entity):
+  if rogue_spend_stamina({_c}, 35, "execucao") is false:
+    stop
+  if {_t} is not set:
+    stop
+  set {_uuid} to uuid of {_t}
+  set {_hp_raw} to placeholderapi "%skills_target_health%" with {_t}
+  set {_max_raw} to placeholderapi "%skills_target_max_health%" with {_t}
+  if {_hp_raw} is "" or {_max_raw} is "":
+    set {_mult} to 1.8
+  else:
+    set {_hp} to parsed number from {_hp_raw}
+    set {_max} to parsed number from {_max_raw}
+    if {_max} <= 0:
+      set {_mult} to 1.8
+    else if {_hp} / {_max} <= 0.3:
+      set {_mult} to 2.4
+    else:
+      set {_mult} to 1.8
+  damage {_t} by damage of {_c} * {_mult}
+  if {_mult} <= 1.8:
+    apply weakness 1 to {_t} for 6 seconds
+    apply slowness 1 to {_t} for 6 seconds
+  set {rogue.sneak.cd.%{_c}%::%{_uuid}%} to now + 6 seconds
+  rogue_enter_combat({_c})
+
+function rogue_hookshot(p: player, dist: number, pull: number):
+  if rogue_spend_stamina({_p}, 20, "hookshot") is false:
+    stop
+  set {_target} to targeted entity of {_p}
+  if {_target} is set:
+    if {_target} is player or {_target} is living entity:
+      push {_target} towards {_p} by pull parsed as number
+  else:
+    pull {_p} towards target location of {_p} by dist parsed as number
+  rogue_enter_combat({_p})
+
+function rogue_smoke_bomb(p: player, radius: number, seconds: number):
+  if rogue_spend_stamina({_p}, 25, "fumaca") is false:
+    stop
+  repeat seconds parsed as number times:
+    set {_center} to location of {_p}
+    show smoke for all players at {_center} with radius radius parsed as number
+    loop all players in radius radius parsed as number around {_center}:
+      if loop-player is {_p}:
+        apply invisibility 1 to loop-player for 1 second
+      else:
+        apply blindness 1 to loop-player for 1 second
+        apply slowness 1 to loop-player for 1 second
+    wait 1 second
+
+function rogue_speed_buff(p: player, seconds: number, bonus: number):
+  apply speed floor(bonus parsed as number * 20) to {_p} for seconds parsed as number seconds
+  set {rogue.speedbonus.%{_p}%} to bonus parsed as number
+  wait seconds parsed as number seconds
+  delete {rogue.speedbonus.%{_p}%}
+
+function rogue_reset_dash(p: player):
+  if rogue_spend_stamina({_p}, 15, "maos_velozes") is false:
+    stop
+  execute console command "skillapi cooldown %player% rogue_acrobatic_dash -45"
+  execute console command "skillapi cooldown %player% rogue_thief_hookshot -45"
+
+function rogue_lockbreaker(p: player, seconds: number, radius: number):
+  if rogue_spend_stamina({_p}, 30, "arrombador") is false:
+    stop
+  set {_end} to now + seconds parsed as number seconds
+  while {_end} > now:
+    loop all players in radius radius parsed as number around {_p}:
+      execute console command "skillapi cooldown %loop-player% -1"
+    wait 1 second
+  send "&6Portas e ganchos próximos foram liberados." to {_p}
+
+function rogue_swash_challenge(c: player, t: entity, seconds: number):
+  if rogue_spend_stamina({_c}, 20, "duelo") is false:
+    stop
+  if {_t} is not set:
+    stop
+  set {_uuid} to uuid of {_t}
+  set {rogue.duelist.target.%{_c}%} to {_uuid}
+  set {rogue.duelist.free.%{_c}%} to now + seconds parsed as number seconds
+  wait seconds parsed as number seconds
+  delete {rogue.duelist.target.%{_c}%}
+  delete {rogue.duelist.free.%{_c}%}
+  rogue_refresh_hud({_c})
+
+function rogue_swash_dodge(p: player, seconds: number, chance: number):
+  set {rogue.dodge.%{_p}%} to chance parsed as number
+  wait seconds parsed as number seconds
+  delete {rogue.dodge.%{_p}%}
+
+function rogue_swash_thrust(p: player, t: entity, distance: number):
+  if {_t} is not set:
+    stop
+  push {_p} towards {_t} by distance parsed as number
+  teleport {_p} behind {_t}
+  rogue_enter_combat({_p})
+
+function rogue_swash_climax(p: player, seconds: number, attack_speed: number, lifesteal: number):
+  if rogue_spend_stamina({_p}, 35, "climax") is false:
+    stop
+  set {rogue.climax.%{_p}%::speed} to attack_speed parsed as number
+  set {rogue.climax.%{_p}%::lifesteal} to lifesteal parsed as number
+  wait seconds parsed as number seconds
+  delete {rogue.climax.%{_p}%::speed}
+  delete {rogue.climax.%{_p}%::lifesteal}
+
+command /furtivo:
+  permission: class_rogue.command
+  trigger:
+    if rogue_is_class(player) is false:
+      send "&cApenas Ladinos." to player
+      stop
+    execute console command "skillapi cast %player% rogue_tactical_stealth"
+    rogue_refresh_hud(player)
+
+command /evasao:
+  permission: class_rogue.command
+  trigger:
+    if rogue_is_class(player) is false:
+      send "&cApenas Ladinos." to player
+      stop
+    execute console command "skillapi cast %player% rogue_evasion"
+    rogue_refresh_hud(player)
+
+command /pique:
+  permission: class_rogue.command
+  trigger:
+    if rogue_is_class(player) is false:
+      send "&cApenas Ladinos." to player
+      stop
+    execute console command "skillapi cast %player% rogue_acrobatic_dash"
+    rogue_refresh_hud(player)
+
+command /quebra:
+  permission: class_rogue.command
+  trigger:
+    if player has permission "class_rogue.thief":
+      execute console command "skillapi cast %player% rogue_thief_master_lockbreaker"
+    else:
+      send "&cSomente Ladrões podem usar /quebra." to player
+
+command /finese:
+  permission: class_rogue.command
+  trigger:
+    send "&7Finesse ativo. Custos de mobilidade reduzidos." to player
+    set {rogue.finesse.%player%} to true
+
+command /kit_ladino:
+  permission: class_rogue.command
+  trigger:
+    if rogue_is_class(player) is false:
+      send "&cApenas Ladinos." to player
+      stop
+    clear player's inventory
+    clear all potion effects of player
+    execute console command "mm items give %player% RogueStealthCloak"
+    execute console command "mm items give %player% RogueEvasionCharm"
+    execute console command "mm items give %player% RogueDashHook"
+    if player has permission "class_rogue.assassin":
+      execute console command "mm items give %player% AssassinDagger"
+      execute console command "mm items give %player% AssassinCloak"
+      execute console command "mm items give %player% ToxinVial"
+      execute console command "mm items give %player% AssassinExecutionCharm"
+    if player has permission "class_rogue.thief":
+      execute console command "mm items give %player% ThiefHook"
+      execute console command "mm items give %player% ThiefSmokeBomb"
+      execute console command "mm items give %player% ThiefBoots"
+      execute console command "mm items give %player% ThiefMasterKit"
+    if player has permission "class_rogue.swashbuckler":
+      execute console command "mm items give %player% SwashRapier"
+      execute console command "mm items give %player% SwashPlume"
+      execute console command "mm items give %player% SwashBoots"
+      execute console command "mm items give %player% SwashCrest"
+    send "&8Kit de testes do Ladino entregue." to player
+    rogue_refresh_hud(player)
+
+# Binds MythicMobs -> ProSkillAPI
+on right click:
+  set {_item} to player's tool
+  if {_item} is air:
+    stop
+  set {_skill} to nbt string "skill" of {_item}
+  if {_skill} is set:
+    if rogue_is_class(player):
+      cancel event
+      execute console command "skillapi cast %player% %{_skill}%"
+      rogue_refresh_hud(player)
+
+on left click:
+  set {_item} to player's tool
+  if {_item} is air:
+    stop
+  set {_skill} to nbt string "skill" of {_item}
+  if {_skill} is set:
+    if rogue_is_class(player):
+      cancel event
+      execute console command "skillapi cast %player% %{_skill}%"
+      rogue_refresh_hud(player)
+
+# Combate e efeitos
+on damage of entity:
+  set {_victim} to victim
+  set {_attacker} to attacker
+  if {_attacker} is player:
+    if rogue_is_class({_attacker}):
+      rogue_enter_combat({_attacker})
+      if {rogue.sneak.window.%{_attacker}%} is set:
+        if now <= {rogue.sneak.window.%{_attacker}%}:
+          if rogue_has_advantage({_attacker}, {_victim}) is true:
+            set {_uuid} to uuid of {_victim}
+            if {rogue.sneak.cd.%{_attacker}%::%{_uuid}%} is set:
+              if difference between now and {rogue.sneak.cd.%{_attacker}%::%{_uuid}%} < 6 seconds:
+                send "&cGolpe Furtivo neste alvo ainda em recarga." to {_attacker}
+              else:
+                set damage to damage * {rogue.sneak.multiplier.%{_attacker}%}
+                set {rogue.sneak.cd.%{_attacker}%::%{_uuid}%} to now
+                send "&aGolpe Furtivo executado!" to {_attacker}
+            else:
+              set damage to damage * {rogue.sneak.multiplier.%{_attacker}%}
+              set {rogue.sneak.cd.%{_attacker}%::%{_uuid}%} to now
+              send "&aGolpe Furtivo executado!" to {_attacker}
+          else:
+            send "&cSem vantagem: Golpe Furtivo dissipado." to {_attacker}
+          delete {rogue.sneak.window.%{_attacker}%}
+          delete {rogue.sneak.multiplier.%{_attacker}%}
+          rogue_refresh_hud({_attacker})
+      if {rogue.penetration.%{_attacker}%} is set:
+        set damage to damage * (1 + {rogue.penetration.%{_attacker}%})
+      if {rogue.toxin.%{_attacker}%} is set:
+        apply slowness 1 to {_victim} for 2 seconds
+        apply weakness 1 to {_victim} for 2 seconds
+      if {rogue.climax.%{_attacker}%::lifesteal} is set:
+        heal {_attacker} by damage * {rogue.climax.%{_attacker}%::lifesteal}
+  if {_victim} is player:
+    if rogue_is_class({_victim}):
+      rogue_enter_combat({_victim})
+      if {rogue.evasion.%{_victim}%} is set:
+        if last damage cause is projectile or last damage cause is explosion:
+          set damage to damage * 0.5
+      if {rogue.dodge.%{_victim}%} is set:
+        set {_chance} to {rogue.dodge.%{_victim}%}
+        if random number between 0 and 1 < {_chance}:
+          cancel event
+          play sound "entity.ender_pearl.throw" at {_victim}
+          send "&bVocê desviou habilmente!" to {_victim}
+
+# Tick handlers
+every {@hud-refresh} seconds:
+  loop all players:
+    if rogue_is_class(loop-player):
+      if {rogue.combat.%loop-player%} is set:
+        if difference between now and {rogue.combat.%loop-player%} > {@combat-timeout}:
+          delete {rogue.combat.%loop-player%}
+      rogue_refresh_hud(loop-player)
+
+on death of entity:
+  if {rogue.bleed.%uuid of victim%::owner} is set:
+    delete {rogue.bleed.%uuid of victim%::owner}
+    delete {rogue.bleed.%uuid of victim%::pct}
+    delete {rogue.bleed.%uuid of victim%::expires}

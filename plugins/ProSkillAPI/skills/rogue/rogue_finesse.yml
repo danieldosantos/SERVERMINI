@@ -1,0 +1,19 @@
+# Passiva: Finesse
+name: rogue_finesse
+display: "§6Finesse"
+icon: GOLDEN_SWORD
+type: Passive
+max-level: 1
+description:
+  - "§7Reduz em 10% o custo de Estamina das skills de mobilidade do Ladino."
+  - "§8Aplicado via Skript em Pique, Hookshot e Passo de Dança (mínimo 1)."
+components:
+  Passive:
+    type: trigger
+    data: {}
+    children:
+      ApplyDiscount:
+        type: mechanic
+        data:
+          command: "skript run rogue_apply_finesse %caster%"
+          silent: true

@@ -1,0 +1,27 @@
+# Skill: Arrombador Mestre
+name: rogue_thief_master_lockbreaker
+display: "§6Arrombador Mestre"
+icon: GOLDEN_PICKAXE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+description:
+  - "§712s reduzindo em 25% os CDs de mobilidade/utilidade do grupo em 8 blocos."
+  - "§7Destrava portas/ganchos marcados via MythicMobs ao ativar."
+  - "§8Ultimate de suporte com partículas douradas discretas."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§6Arrombador"
+    children:
+      ApplyAura:
+        type: mechanic
+        data:
+          command: "skript run rogue_lockbreaker %caster% 12 8"
+          silent: false

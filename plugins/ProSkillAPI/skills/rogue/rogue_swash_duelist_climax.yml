@@ -1,0 +1,27 @@
+# Skill: Clímax do Duelista
+name: rogue_swash_duelist_climax
+display: "§dClímax do Duelista"
+icon: FIRE_CHARGE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+description:
+  - "§78s de +25% velocidade de ataque e 15% roubo de vida (capado ≤25%)."
+  - "§7Sinergiza com Desafio do Duelista para pressão agressiva."
+  - "§8Ultimate ofensivo com partículas carmesim."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§dClímax"
+    children:
+      ApplyBuff:
+        type: mechanic
+        data:
+          command: "skript run rogue_swash_climax %caster% 8 0.25 0.15"
+          silent: false

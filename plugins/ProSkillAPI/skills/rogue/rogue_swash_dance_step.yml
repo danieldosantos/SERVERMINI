@@ -1,0 +1,37 @@
+# Skill: Passo de Dança
+name: rogue_swash_dance_step
+display: "§bPasso de Dança"
+icon: LEATHER_BOOTS
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+description:
+  - "§76s de +0.04 velocidade e 20% chance de esquiva frontal."
+  - "§7Não acumula com Evasão além do limite de 60% uptime."
+  - "§8Utiliza partículas azuis para indicar ritmo."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§bPasso"
+    children:
+      SpeedBuff:
+        type: mechanic
+        data:
+          command: "skript run rogue_speed_buff %caster% 6 0.04"
+          silent: true
+      DodgeBuff:
+        type: mechanic
+        data:
+          command: "skript run rogue_swash_dodge %caster% 6 0.2"
+          silent: true
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_rogue_mobility"
+          silent: true
