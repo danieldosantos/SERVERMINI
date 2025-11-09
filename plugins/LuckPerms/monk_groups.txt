@@ -1,0 +1,80 @@
+# LuckPerms - configuração de grupos para classe Monge
+lp creategroup class_monk
+lp creategroup class_monk.open_hand
+lp creategroup class_monk.shadow
+lp creategroup class_monk.elements
+
+# Heranças
+lp group class_monk.open_hand parents add class_monk
+lp group class_monk.shadow parents add class_monk
+lp group class_monk.elements parents add class_monk
+
+# Permissões base da classe
+lp group class_monk permission set skillapi.class.monk true
+lp group class_monk permission set skillapi.cast.monk_flurry_of_blows true
+lp group class_monk permission set skillapi.cast.monk_step_of_the_wind true
+lp group class_monk permission set skillapi.cast.monk_hand_of_healing true
+lp group class_monk permission set skript.command.rajada true
+lp group class_monk permission set skript.command.passo_vento true
+lp group class_monk permission set skript.command.maos_curativas true
+lp group class_monk permission set mythicmobs.item.MonkBracers true
+lp group class_monk permission set mythicmobs.item.MonkSandals true
+lp group class_monk permission set mythicmobs.item.MonkPrayerBeads true
+lp group class_monk permission set mm.items.give.MonkBracers true
+lp group class_monk permission set mm.items.give.MonkSandals true
+lp group class_monk permission set mm.items.give.MonkPrayerBeads true
+lp group class_monk permission set skript.command.kit_monge true
+
+# Permissões Caminho da Mão Aberta
+lp group class_monk.open_hand permission set skillapi.cast.monk_open_hand_palm true
+lp group class_monk.open_hand permission set skillapi.cast.monk_open_hand_inner_wave true
+lp group class_monk.open_hand permission set skillapi.cast.monk_open_hand_harmonious_rhythm true
+lp group class_monk.open_hand permission set skillapi.cast.monk_open_hand_zephyr_path true
+lp group class_monk.open_hand permission set skillapi.cast.monk_open_hand_tranquil_breath true
+lp group class_monk.open_hand permission set skript.command.mao_aberta_palmada true
+lp group class_monk.open_hand permission set skript.command.mao_aberta_onda true
+lp group class_monk.open_hand permission set skript.command.mao_aberta_ritmo true
+lp group class_monk.open_hand permission set skript.command.mao_aberta_zeffiro true
+lp group class_monk.open_hand permission set skript.command.mao_aberta_ult true
+lp group class_monk.open_hand permission set mythicmobs.item.OpenHandGloves true
+lp group class_monk.open_hand permission set mythicmobs.item.OpenHandFocus true
+lp group class_monk.open_hand permission set mythicmobs.item.OpenHandRelic true
+lp group class_monk.open_hand permission set mm.items.give.OpenHandGloves true
+lp group class_monk.open_hand permission set mm.items.give.OpenHandFocus true
+lp group class_monk.open_hand permission set mm.items.give.OpenHandRelic true
+
+# Permissões Caminho da Sombra
+lp group class_monk.shadow permission set skillapi.cast.monk_shadow_step true
+lp group class_monk.shadow permission set skillapi.cast.monk_shadow_slash true
+lp group class_monk.shadow permission set skillapi.cast.monk_shadow_silent_mist true
+lp group class_monk.shadow permission set skillapi.cast.monk_shadow_umbric_chains true
+lp group class_monk.shadow permission set skillapi.cast.monk_shadow_penumbra_dominion true
+lp group class_monk.shadow permission set skript.command.sombra_passo true
+lp group class_monk.shadow permission set skript.command.sombra_golpe true
+lp group class_monk.shadow permission set skript.command.sombra_nevoa true
+lp group class_monk.shadow permission set skript.command.sombra_correntes true
+lp group class_monk.shadow permission set skript.command.sombra_dominar true
+lp group class_monk.shadow permission set mythicmobs.item.ShadowCloak true
+lp group class_monk.shadow permission set mythicmobs.item.ShadowBlade true
+lp group class_monk.shadow permission set mythicmobs.item.ShadowObsidianOrb true
+lp group class_monk.shadow permission set mm.items.give.ShadowCloak true
+lp group class_monk.shadow permission set mm.items.give.ShadowBlade true
+lp group class_monk.shadow permission set mm.items.give.ShadowObsidianOrb true
+
+# Permissões Caminho dos Quatro Elementos
+lp group class_monk.elements permission set skillapi.cast.monk_elements_flaming_burst true
+lp group class_monk.elements permission set skillapi.cast.monk_elements_water_wall true
+lp group class_monk.elements permission set skillapi.cast.monk_elements_gale_leap true
+lp group class_monk.elements permission set skillapi.cast.monk_elements_earth_punch true
+lp group class_monk.elements permission set skillapi.cast.monk_elements_elemental_avatar true
+lp group class_monk.elements permission set skript.command.elemento_fogo true
+lp group class_monk.elements permission set skript.command.elemento_agua true
+lp group class_monk.elements permission set skript.command.elemento_ar true
+lp group class_monk.elements permission set skript.command.elemento_terra true
+lp group class_monk.elements permission set skript.command.elemento_avatar true
+lp group class_monk.elements permission set mythicmobs.item.ElementsFireFan true
+lp group class_monk.elements permission set mythicmobs.item.ElementsWaterVial true
+lp group class_monk.elements permission set mythicmobs.item.ElementsPrism true
+lp group class_monk.elements permission set mm.items.give.ElementsFireFan true
+lp group class_monk.elements permission set mm.items.give.ElementsWaterVial true
+lp group class_monk.elements permission set mm.items.give.ElementsPrism true

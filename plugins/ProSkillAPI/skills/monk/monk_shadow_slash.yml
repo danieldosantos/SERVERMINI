@@ -1,0 +1,73 @@
+# Skill: Cutilada Sombria
+name: monk_shadow_slash
+display: "§8Cutilada Sombria"
+icon: IRON_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 40
+  cooldown-scale: 0
+description:
+  - "§7150% dano e cegueira por 3s no alvo."
+  - "§8Se estiver invisível, ignora 10% da mitigação inimiga (aplicado via debuff)."
+  - "§7Consome 1 Ki."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiRequirement:
+        type: condition
+        data:
+          key: ki_points
+          min-value: 1
+          fail-message: "§cVocê precisa de Ki para Cutilada Sombria."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_points
+              amount-base: 1
+              indicator: "§8-1 Ki"
+      TargetEnemy:
+        type: target
+        data:
+          shape: single
+          range-base: 5
+          range-scale: 0
+          group: enemy
+        children:
+          DealDamage:
+            type: mechanic
+            data:
+              damage-base: 1.5
+              damage-scale: 0
+              indicator: "§8Cutilada"
+          ApplyBlindness:
+            type: mechanic
+            data:
+              potion: BLINDNESS
+              seconds-base: 3
+              seconds-scale: 0
+              amplifier-base: 0
+              amplifier-scale: 0
+          InvisCheck:
+            type: condition
+            data:
+              placeholder: "%skills_monk_states%"
+              value: "invis"
+            children:
+              ArmorBreach:
+                type: mechanic
+                data:
+                  potion: WEAKNESS
+                  seconds-base: 4
+                  seconds-scale: 0
+                  amplifier-base: 0
+                  amplifier-scale: 0
+          Message:
+            type: mechanic
+            data:
+              message: "§8Sua lâmina sombria ceifa a visão do alvo."
+              targets: enemy

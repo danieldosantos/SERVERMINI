@@ -1,0 +1,39 @@
+# Subclasse Monge - Caminho dos Quatro Elementos
+name: Monk_Elements
+display: "§bCaminho dos Quatro Elementos"
+description:
+  - "§7Manipula fogo, água, ar e terra com versatilidade utilitária."
+  - "§bControla picos de dano e mitigação alternados respeitando caps globais."
+options:
+  needs-permission: true
+  parent: Monk
+  mana-name: "Ki"
+  ki-tags:
+    focus: elements
+skills:
+  tier1:
+    active:
+      - monk_elements_flaming_burst
+      - monk_elements_water_wall
+    passive: []
+  tier2:
+    active:
+      - monk_elements_flaming_burst
+      - monk_elements_water_wall
+      - monk_elements_gale_leap
+    passive: []
+  tier3:
+    active:
+      - monk_elements_flaming_burst
+      - monk_elements_water_wall
+      - monk_elements_gale_leap
+      - monk_elements_earth_punch
+    passive: []
+  tier4:
+    active:
+      - monk_elements_flaming_burst
+      - monk_elements_water_wall
+      - monk_elements_gale_leap
+      - monk_elements_earth_punch
+      - monk_elements_elemental_avatar
+    passive: []

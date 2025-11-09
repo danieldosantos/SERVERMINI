@@ -1,0 +1,74 @@
+# Skill: Avatar Elemental (ULT)
+name: monk_elements_elemental_avatar
+display: "§dAvatar Elemental"
+icon: HEART_OF_THE_SEA
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+description:
+  - "§7Assume forma elemental por 15s alternando bônus de dano, defesa e cura."
+  - "§dConsome 3 Ki para ativar sequência completa."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiRequirement:
+        type: condition
+        data:
+          key: ki_points
+          min-value: 3
+          fail-message: "§cSão necessários 3 Ki para o Avatar Elemental."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_points
+              amount-base: 3
+              indicator: "§d-3 Ki"
+      PhaseFire:
+        type: mechanic
+        data:
+          potion: INCREASE_DAMAGE
+          seconds-base: 5
+          seconds-scale: 0
+          amplifier-base: 1
+          amplifier-scale: 0
+      PhaseEarthDelay:
+        type: mechanic
+        data:
+          delay: 5
+        children:
+          EarthBuff:
+            type: mechanic
+            data:
+              potion: DAMAGE_RESISTANCE
+              seconds-base: 5
+              seconds-scale: 0
+              amplifier-base: 1
+              amplifier-scale: 0
+      PhaseWaterDelay:
+        type: mechanic
+        data:
+          delay: 10
+        children:
+          HealLoop:
+            type: mechanic
+            data:
+              repeat: 5
+              interval: 1
+            children:
+              HealPercent:
+                type: mechanic
+                data:
+                  heal-percent-base: 0.04
+                  heal-percent-scale: 0
+                  indicator: "§d+4%"
+      Message:
+        type: mechanic
+        data:
+          message: "§dVocê canaliza os quatro elementos por 15s."
+          targets: self

@@ -1,0 +1,52 @@
+# Skill: Caminho do Zéfiro
+name: monk_open_hand_zephyr_path
+display: "§aCaminho do Zéfiro"
+icon: PHANTOM_MEMBRANE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§7Consome 1 Ki para ganhar +0.05 velocidade (cap aplicado) por 4s."
+  - "§aConcede salto duplo temporário via impulso vertical controlado."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiRequirement:
+        type: condition
+        data:
+          key: ki_points
+          min-value: 1
+          fail-message: "§cKi insuficiente para Caminho do Zéfiro."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_points
+              amount-base: 1
+              indicator: "§a-1 Ki"
+      ApplySpeed:
+        type: mechanic
+        data:
+          potion: SPEED
+          seconds-base: 4
+          seconds-scale: 0
+          amplifier-base: 1
+          amplifier-scale: 0
+      ApplyJump:
+        type: mechanic
+        data:
+          potion: JUMP
+          seconds-base: 4
+          seconds-scale: 0
+          amplifier-base: 1
+          amplifier-scale: 0
+      Message:
+        type: mechanic
+        data:
+          message: "§aO vento guia seus passos sem ultrapassar o limite global."
+          targets: self

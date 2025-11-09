@@ -1,0 +1,168 @@
+# Itens focais do Monge - MythicMobs
+MonkBracers:
+  Id: "minecraft:leather_horse_armor"
+  Display: "&eBraceletes do Monge"
+  Lore:
+    - "&7Canaliza Rajada de Golpes (/rajada)."
+    - "&eRequer permissão: class_monk"
+  Options:
+    Unbreakable: true
+    HideFlags: true
+  PersistentData:
+    monkClass: "base"
+    skillBinding: "monk_flurry_of_blows"
+  Skills:
+    - condition{c=permission{p=class_monk}} true
+    - command{c="skillapi cast monk_flurry_of_blows";delay=1} @self ~onRightClick
+    - command{c="skillapi cast monk_flurry_of_blows";delay=1} @self ~onLeftClick
+
+MonkSandals:
+  Id: "minecraft:leather_boots"
+  Display: "&bSandálias do Passo do Vento"
+  Lore:
+    - "&7Dash e queda lenta controlados."
+    - "&eRequer permissão: class_monk"
+  Options:
+    Unbreakable: true
+    Color: 85,170,170
+  PersistentData:
+    monkClass: "base"
+    skillBinding: "monk_step_of_the_wind"
+  Skills:
+    - condition{c=permission{p=class_monk}} true
+    - command{c="skillapi cast monk_step_of_the_wind";delay=1} @self ~onRightClick
+
+MonkPrayerBeads:
+  Id: "minecraft:ghast_tear"
+  Display: "&aContas Curativas"
+  Lore:
+    - "&7Canaliza Mãos Curativas."
+    - "&eRequer permissão: class_monk"
+  Options:
+    Unbreakable: true
+  PersistentData:
+    monkClass: "base"
+    skillBinding: "monk_hand_of_healing"
+  Skills:
+    - condition{c=permission{p=class_monk}} true
+    - command{c="skillapi cast monk_hand_of_healing";delay=1} @self ~onRightClick
+
+# Caminho da Mão Aberta
+OpenHandGloves:
+  Id: "minecraft:rabbit_hide"
+  Display: "&aLuvas da Mão Aberta"
+  Lore:
+    - "&7Foco para Palmada Desestabilizadora."
+    - "&eRequer permissão: class_monk.open_hand"
+  Options:
+    Unbreakable: true
+    HideFlags: true
+  PersistentData:
+    monkSubclass: "open_hand"
+    skillBinding: "monk_open_hand_palm"
+  Skills:
+    - condition{c=permission{p=class_monk.open_hand}} true
+    - command{c="skillapi cast monk_open_hand_palm";delay=1} @self ~onRightClick
+
+OpenHandFocus:
+  Id: "minecraft:prismarine_crystals"
+  Display: "&aFoco de Qi Harmonioso"
+  Lore:
+    - "&7Ativa Ritmo Harmonioso para recuperar Ki."
+  PersistentData:
+    monkSubclass: "open_hand"
+    skillBinding: "monk_open_hand_harmonious_rhythm"
+  Skills:
+    - condition{c=permission{p=class_monk.open_hand}} true
+    - command{c="skillapi cast monk_open_hand_harmonious_rhythm";delay=1} @self ~onRightClick
+
+OpenHandRelic:
+  Id: "minecraft:sea_lantern"
+  Display: "&2Relíquia do Sopro Tranquilo"
+  Lore:
+    - "&7Ultimato defensivo em área."
+  PersistentData:
+    monkSubclass: "open_hand"
+    skillBinding: "monk_open_hand_tranquil_breath"
+  Skills:
+    - condition{c=permission{p=class_monk.open_hand}} true
+    - command{c="skillapi cast monk_open_hand_tranquil_breath";delay=1} @self ~onRightClick
+
+# Caminho da Sombra
+ShadowCloak:
+  Id: "minecraft:black_carpet"
+  Display: "&8Manto das Sombras"
+  Lore:
+    - "&7Gera Névoa Silenciosa ao clique."
+  PersistentData:
+    monkSubclass: "shadow"
+    skillBinding: "monk_shadow_silent_mist"
+  Skills:
+    - condition{c=permission{p=class_monk.shadow}} true
+    - command{c="skillapi cast monk_shadow_silent_mist";delay=1} @self ~onRightClick
+
+ShadowBlade:
+  Id: "minecraft:netherite_sword"
+  Display: "&8Lâmina Umbral"
+  Lore:
+    - "&7Executa Cutilada Sombria."
+  Options:
+    Unbreakable: true
+    HideFlags: true
+  PersistentData:
+    monkSubclass: "shadow"
+    skillBinding: "monk_shadow_slash"
+  Skills:
+    - condition{c=permission{p=class_monk.shadow}} true
+    - command{c="skillapi cast monk_shadow_slash";delay=1} @self ~onRightClick
+
+ShadowObsidianOrb:
+  Id: "minecraft:obsidian"
+  Display: "&5Orbe da Penumbra"
+  Lore:
+    - "&7Canaliza Domínio da Penumbra (ULT)."
+  PersistentData:
+    monkSubclass: "shadow"
+    skillBinding: "monk_shadow_penumbra_dominion"
+  Skills:
+    - condition{c=permission{p=class_monk.shadow}} true
+    - command{c="skillapi cast monk_shadow_penumbra_dominion";delay=1} @self ~onRightClick
+
+# Caminho dos Quatro Elementos
+ElementsFireFan:
+  Id: "minecraft:fire_charge"
+  Display: "&cLeque Flamejante"
+  Lore:
+    - "&7Dispara Rajada Flamejante."
+  PersistentData:
+    monkSubclass: "elements"
+    skillBinding: "monk_elements_flaming_burst"
+  Skills:
+    - condition{c=permission{p=class_monk.elements}} true
+    - command{c="skillapi cast monk_elements_flaming_burst";delay=1} @self ~onRightClick
+
+ElementsWaterVial:
+  Id: "minecraft:potion"
+  Display: "&9Ampola da Muralha"
+  Lore:
+    - "&7Ergue Muralha Aquática."
+  Options:
+    HideFlags: true
+  PersistentData:
+    monkSubclass: "elements"
+    skillBinding: "monk_elements_water_wall"
+  Skills:
+    - condition{c=permission{p=class_monk.elements}} true
+    - command{c="skillapi cast monk_elements_water_wall";delay=1} @self ~onRightClick
+
+ElementsPrism:
+  Id: "minecraft:prismarine_shard"
+  Display: "&dPrisma Elemental"
+  Lore:
+    - "&7Ativa Avatar Elemental."
+  PersistentData:
+    monkSubclass: "elements"
+    skillBinding: "monk_elements_elemental_avatar"
+  Skills:
+    - condition{c=permission{p=class_monk.elements}} true
+    - command{c="skillapi cast monk_elements_elemental_avatar";delay=1} @self ~onRightClick

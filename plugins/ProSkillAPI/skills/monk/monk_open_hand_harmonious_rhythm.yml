@@ -1,0 +1,44 @@
+# Skill: Ritmo Harmonioso
+name: monk_open_hand_harmonious_rhythm
+display: "§aRitmo Harmonioso"
+icon: MUSIC_DISC_WAIT
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+description:
+  - "§7Canaliza respirações ritmadas gerando +2 Ki ao longo de 6s."
+  - "§aCura 6% da vida máxima de forma gradual."
+  - "§7Não consome Ki e respeita caps de autocura."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      HealPulse:
+        type: mechanic
+        data:
+          potion: REGENERATION
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      KiGainLoop:
+        type: mechanic
+        data:
+          repeat: 2
+          interval: 3
+        children:
+          AddKi:
+            type: mechanic
+            data:
+              key: ki_points
+              amount-base: 1
+              indicator: "§a+1 Ki"
+      Message:
+        type: mechanic
+        data:
+          message: "§aSeu ritmo harmonioso restaura corpo e mente."
+          targets: self

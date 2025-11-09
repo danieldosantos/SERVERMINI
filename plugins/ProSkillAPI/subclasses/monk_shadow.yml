@@ -1,0 +1,39 @@
+# Subclasse Monge - Caminho da Sombra
+name: Monk_Shadow
+display: "§8Caminho da Sombra"
+description:
+  - "§7Especialistas em furtividade e emboscadas com controle de visão."
+  - "§8Limita o burst por janelas e exige gerenciamento de Ki e iluminação."
+options:
+  needs-permission: true
+  parent: Monk
+  mana-name: "Ki"
+  ki-tags:
+    focus: stealth
+skills:
+  tier1:
+    active:
+      - monk_shadow_step
+      - monk_shadow_slash
+    passive: []
+  tier2:
+    active:
+      - monk_shadow_step
+      - monk_shadow_slash
+      - monk_shadow_silent_mist
+    passive: []
+  tier3:
+    active:
+      - monk_shadow_step
+      - monk_shadow_slash
+      - monk_shadow_silent_mist
+      - monk_shadow_umbric_chains
+    passive: []
+  tier4:
+    active:
+      - monk_shadow_step
+      - monk_shadow_slash
+      - monk_shadow_silent_mist
+      - monk_shadow_umbric_chains
+      - monk_shadow_penumbra_dominion
+    passive: []

@@ -1,0 +1,65 @@
+# Skill: Névoa Silenciosa
+name: monk_shadow_silent_mist
+display: "§8Névoa Silenciosa"
+icon: GRAY_DYE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§7Cria nuvem que reduz visão inimiga e concede invisibilidade ao monge por 4s."
+  - "§7Consome 1 Ki e marca a área como Sombras para Passo das Sombras."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiRequirement:
+        type: condition
+        data:
+          key: ki_points
+          min-value: 1
+          fail-message: "§cFalta Ki para Névoa Silenciosa."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_points
+              amount-base: 1
+              indicator: "§8-1 Ki"
+      SpawnCloud:
+        type: mechanic
+        data:
+          command: "mythicmobs signal monk_shadow_mist @{location}"
+          silent: true
+      EnemyDebuff:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 5
+          radius-scale: 0
+          group: enemy
+        children:
+          ApplyBlindness:
+            type: mechanic
+            data:
+              potion: BLINDNESS
+              seconds-base: 4
+              seconds-scale: 0
+              amplifier-base: 0
+              amplifier-scale: 0
+      SelfInvis:
+        type: mechanic
+        data:
+          potion: INVISIBILITY
+          seconds-base: 4
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      StateFlag:
+        type: mechanic
+        data:
+          command: "placeholderapi set %skills_monk_states% invis"
+          silent: true
