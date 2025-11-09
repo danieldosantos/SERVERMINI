@@ -1,0 +1,6 @@
+Barb_BattleAxe:
+  Skills:
+  - command{c="mmbarb_baxe_mark <caster.name>";async=true} @self
+  - sound{s=entity.player.attack.sweep;v=1;p=0.9} @self
+  - damage{a=12;pk=true;ia=true} @Cone{r=5;angle=70}
+  - throw{velocity=1;velocityY=0.2} @Cone{r=5;angle=70}

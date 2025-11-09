@@ -1,0 +1,28 @@
+Items:
+  EldritchWand:
+    Id: BLAZE_ROD
+    Display: '&5Varinha Eldritch'
+    Lore:
+      - '&7Vinculada à classe: class_warlock'
+      - '&7Uso: clique para Eldritch Blast'
+    Options:
+      Unbreakable: true
+      CustomModelData: 123456
+    Skills:
+      RightClick:
+        # Delegate to datapack function run as the player so behavior matches existing mcfunction
+        - command{c=execute as @trigger_name run function reffects_cd:eldritch} @trigger
+  HexTalisman:
+    Id: GHAST_TEAR
+    Display: '&6Talismã do Hex'
+    Lore:
+      - '&7Vinculada à classe: class_warlock'
+      - '&7Uso: clique para aplicar Hex no alvo'
+    Options:
+      Unbreakable: true
+      CustomModelData: 223344
+    Skills:
+      RightClick:
+        - targetnearest{range=8} @trigger
+        # Run datapack function as the targeted entity so hex effects are applied exactly as mcfunction
+        - command{c=execute as @target_name run function reffects_cd:hex_target} @trigger

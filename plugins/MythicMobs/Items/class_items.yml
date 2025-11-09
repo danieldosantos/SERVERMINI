@@ -1,0 +1,430 @@
+BarbarianRecklessCharm:
+  Id: GOLD_NUGGET
+  Display: '&6Talisma Temerario &8(Classe)'
+  Lore:
+  - '&7Clique direito: Ataque Temerario'
+  - '&7Efeitos: Forca I 10s'
+  - '&7Efeito negativo: +25% dano recebido por 10s'
+  - '&7Cooldown: 30s'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+# ===================== BRUXO =====================
+EldritchWand:
+  Id: BLAZE_ROD
+  Display: '&5Varinha Eldritch &8(Bruxo)'
+  Lore:
+  - '&7Clique direito: Rajada Mistica'
+  - '&7Efeitos: bonus de Patrono por 10s'
+  - '&7Arquifada/Diabo/Grande Antigo'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+HexTalisman:
+  Id: GHAST_TEAR
+  Display: '&6Talisma do Hex &8(Bruxo)'
+  Lore:
+  - '&7Clique direito: Hex'
+  - '&7Efeitos no alvo: Fraqueza I 45s, Brilho 5s'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+FeyCharm:
+  Id: EMERALD
+  Display: '&aAmuleto da Arquifada &8(Subclasse)'
+  Lore:
+  - '&7Subclasse: Arquifada'
+  - '&7Bonus: Speed I 10s ao usar Rajada'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+FiendMark:
+  Id: NETHER_WART
+  Display: '&cMarca do Diabolico &8(Subclasse)'
+  Lore:
+  - '&7Subclasse: Diabo'
+  - '&7Bonus: Strength I 10s ao usar Rajada'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+EldritchMark:
+  Id: ENDER_EYE
+  Display: '&5Marca do Ancestral &8(Subclasse)'
+  Lore:
+  - '&7Subclasse: Grande Antigo'
+  - '&7Bonus: Resistance I 10s ao usar Rajada'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+# ===================== BARDO =====================
+BardLute:
+  Id: MUSIC_DISC_13
+  Display: '&dAlaude do Bardo &8(Classe)'
+  Lore:
+  - '&7Clique direito: Inspiracao'
+  - '&7Efeitos: Speed I 45s ao aliado proximo'
+  - '&7Valor: +1.0 dano no alvo'
+  - '&7Lore: +10s duracao'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+BardLoreBook:
+  Id: BOOK
+  Display: '&aLivro do Conhecimento &8(Subclasse)'
+  Lore:
+  - '&7Clique direito: Cancao de Descanso'
+  - '&7Efeitos: Regeneracao I 30s (raio 12)'
+  - '&7Lore: +4 de raio'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+BardValorMedal:
+  Id: IRON_NUGGET
+  Display: '&aMedalha do Valor &8(Subclasse)'
+  Lore:
+  - '&7Subclasse: Valor'
+  - '&7Inspiracao concede +1.0 dano'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+# ===================== RACIAIS =====================
+HalfElfFeather:
+  Id: FEATHER
+  Display: '&bPena de Meio-Elfo &8(Racial)'
+  Lore:
+  - '&7Clique direito: Queda Lenta I 7s'
+  - '&7Cooldown: 3 minutos'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+DragonbornScale:
+  Id: PRISMARINE_SHARD
+  Display: '&bEscama de Dragonborn &8(Racial)'
+  Lore:
+  - '&7Passivo: +1.0 de Vida Max'
+  - '&7Alias: /breath (conforme ascendencia)'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+DragonbornBreathAcid:
+  Id: SLIME_BALL
+  Display: '&aSopro Acido &8(Racial)'
+  Lore:
+  - '&7Sopro: dano acido em area'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+  Skills:
+  - skill{s=DB_AcidBreath} ~onRightClick
+
+DragonbornBreathCold:
+  Id: SNOWBALL
+  Display: '&fSopro Gelido &8(Racial)'
+  Lore:
+  - '&7Sopro: efeito de frio/lentidao'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+  Skills:
+  - skill{s=DB_ColdBreath} ~onRightClick
+
+DragonbornBreathFire:
+  Id: FIRE_CHARGE
+  Display: '&cSopro de Fogo &8(Racial)'
+  Lore:
+  - '&7Sopro: jato de fogo a frente'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+  Skills:
+  - skill{s=DB_FireBreath} ~onRightClick
+
+DragonbornBreathLightning:
+  Id: AMETHYST_SHARD
+  Display: '&eSopro Eletrico &8(Racial)'
+  Lore:
+  - '&7Sopro: descarga eletrica'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+  Skills:
+  - skill{s=DB_LightningBreath} ~onRightClick
+
+DragonbornBreathPoison:
+  Id: SPIDER_EYE
+  Display: '&2Sopro Venenoso &8(Racial)'
+  Lore:
+  - '&7Sopro: nuvem venenosa'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+  Skills:
+  - skill{s=DB_PoisonBreath} ~onRightClick
+
+DwarfStone:
+  Id: COBBLESTONE
+  Display: '&7Pedra Ana &8(Racial)'
+  Lore:
+  - '&7Passivo: resistencia a veneno'
+  - '&7Darkvision (config)'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+DwarfHillAle:
+  Id: HONEY_BOTTLE
+  Display: '&6Hidromel da Colina &8(Racial)'
+  Lore:
+  - '&7Passivo: +2.0 Vida Max'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+DwarfMountainPick:
+  Id: STONE_PICKAXE
+  Display: '&8Picareta da Montanha &8(Racial)'
+  Lore:
+  - '&7Passivo: Strength I (curto)'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+# Picareta racial unificada dos Anões (base e sub-raças)
+DwarfRacialPick:
+  Id: IRON_PICKAXE
+  Display: '&7Picareta Anao &8(Racial)'
+  Lore:
+  - '&7Encantos: Eficiencia I, Fortuna I'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+  Enchantments:
+  - DIG_SPEED:1       # Efficiency I
+  - LOOT_BONUS_BLOCKS:1  # Fortune I
+
+ElfCharm:
+  Id: MOSS_BLOCK
+  Display: '&aAmuleto Elfico &8(Racial)'
+  Lore:
+  - '&7Passivo: Darkvision'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+DrowPendant:
+  Id: AMETHYST_CLUSTER
+  Display: '&5Pingente Drow &8(Racial)'
+  Lore:
+  - '&7Passivo: Darkvision'
+  - '&7Aliases opcionais: /drowdarkness /drowsun'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+# ===================== HALFLINGS =====================
+HalflingHorn:
+  Id: GOAT_HORN
+  Display: '&eTrombeta Halfling &8(Racial)'
+  Lore:
+  - '&7Clique direito: Paralisa inimigos proximos'
+  - '&7Afeta ate 5 alvos por 7s'
+  - '&7Cooldown: 2 minutos'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+HighElfGem:
+  Id: LAPIS_LAZULI
+  Display: '&aGema do Alto Elfo &8(Racial)'
+  Lore:
+  - '&7Passivo: sorte/inteligencia leve'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+WoodElfLeaf:
+  Id: OAK_LEAVES
+  Display: '&2Folha Elfica &8(Racial)'
+  Lore:
+  - '&7Passivo: +0.02 velocidade'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+GnomeCog:
+  Id: CLOCK
+  Display: '&6Engrenagem Gnomica &8(Racial)'
+  Lore:
+  - '&7Passivo: Darkvision'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+ForestGnomeAcorn:
+  Id: ACACIA_SAPLING
+  Display: '&aBolota da Floresta &8(Racial)'
+  Lore:
+  - '&7Passivo: Haste I (curto)'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+RockGnomeGear:
+  Id: IRON_NUGGET
+  Display: '&7Peca de Engrenagem &8(Racial)'
+  Lore:
+  - '&7Passivo: Absorcao I (curto)'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+HalflingPipe:
+  Id: STICK
+  Display: '&eCachimbo Halfling &8(Racial)'
+  Lore:
+  - '&7Passivo: sem bonus diretos'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+LightfootLuckyCoin:
+  Id: GOLD_NUGGET
+  Display: '&6Moeda da Sorte &8(Racial)'
+  Lore:
+  - '&7Passivo: sorte (pequena)'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+StoutSturdyBelt:
+  Id: LEATHER_HORSE_ARMOR
+  Display: '&6Cinto Robusto &8(Racial)'
+  Lore:
+  - '&7Passivo: saturacao curta'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+HumanMedal:
+  Id: IRON_INGOT
+  Display: '&fMedalha Humana &8(Racial)'
+  Lore:
+  - '&7Passivo: Regeneracao II continua'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+TieflingSigil:
+  Id: NETHER_BRICK
+  Display: '&cSigilo Infernal &8(Racial)'
+  Lore:
+  - '&7Passivo: resistencia ao fogo'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+HalfOrcTusk:
+  Id: BONE
+  Display: '&fPresa de Meio-Orc &8(Racial)'
+  Lore:
+  - '&7Racial: Meio-Orc'
+  - '&7Passivo: Relentless Endurance'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+HalfOrcBerserkCharm:
+  Id: MAGMA_CREAM
+  Display: '&6Talisma Berserk &8(Racial)'
+  Lore:
+  - '&7Clique direito: Berserk'
+  - '&7Efeitos: Forca I 10s, Resistencia I 10s'
+  - '&7Efeito negativo: Lentidao I por 5s (apos)'
+  - '&7Cooldown: 5 minutos'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+BarbarianBerserkerCharm:
+  Id: BLAZE_POWDER
+  Display: '&6Talisma do Berserker &8(Subclasse)'
+  Lore:
+  - '&7Subclasse: Berserker'
+  - '&7Durante Furia: +1.0 dano (RacesEffects)'
+  - '&7Som de grito na Furia'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+ElfWoodBrooch:
+  Id: OAK_LEAVES
+  Display: '&aBroche da Floresta &8(Racial)'
+  Lore:
+  - '&7Um broche feito de folhas e cipas.'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+DrowWeb:
+  Id: COBWEB
+  Display: '&8Teia de Drow &8(Racial)'
+  Lore:
+  - '&7Clique direito: teleporte aleatorio (raio 7)'
+  - '&7Cargas: 3 | Recarga total: 4m'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+TotemBearCharm:
+  Id: LEATHER
+  Display: '&6Totem do Urso &8(Subclasse)'
+  Lore:
+  - '&7Subclasse: Totem (Urso)'
+  - '&7Durante Furia: +15% reducao de dano'
+  - '&7Som de urso na Furia'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+TotemEagleCharm:
+  Id: FEATHER
+  Display: '&6Totem da Aguia &8(Subclasse)'
+  Lore:
+  - '&7Subclasse: Totem (Aguia)'
+  - '&7Durante Furia: +0.02 velocidade (sem armadura)'
+  - '&7Som de aguia na Furia'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+
+TotemWolfCharm:
+  Id: FLINT
+  Display: '&6Totem do Lobo &8(Subclasse)'
+  Lore:
+  - '&7Subclasse: Totem (Lobo)'
+  - '&7Durante Furia: +0.05 resistencia a knockback'
+  - '&7Som de lobo na Furia'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true
+BarbarianRageCharm:
+  Id: REDSTONE
+  Display: '&6Talisma da Furia &8(Classe)'
+  Lore:
+  - '&7Clique direito: Furia'
+  - '&7Efeitos: Forca I 120s, Resistencia I 120s'
+  - '&7Bonus do Caminho durante a Furia (RacesEffects)'
+  - '&7Som do animal do Caminho'
+  - '&9Indestrutivel!'
+  Options:
+    Unbreakable: true

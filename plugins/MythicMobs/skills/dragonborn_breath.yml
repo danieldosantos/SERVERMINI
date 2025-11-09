@@ -1,0 +1,39 @@
+DB_FireBreath:
+  Cooldown: 10
+  Skills:
+  # Nuvem tipo dragao: amostra pontos a frente e aplica dano instantaneo + particula dragon_breath
+  - command{c='execute as <caster.name> at @s positioned ^0 ^0 ^3 run effect give @e[distance=..3,tag=!db_fire] minecraft:instant_damage 1 1 true';asCaster=true}
+  - command{c='execute as <caster.name> at @s positioned ^0 ^0 ^3 run particle minecraft:dragon_breath ~ ~ ~ 0.6 0.1 0.6 0 30';asCaster=true}
+  - command{c='execute as <caster.name> at @s positioned ^-1 ^0 ^4 run effect give @e[distance=..2,tag=!db_fire] minecraft:instant_damage 1 1 true';asCaster=true}
+  - command{c='execute as <caster.name> at @s positioned ^-1 ^0 ^4 run particle minecraft:dragon_breath ~ ~ ~ 0.5 0.1 0.5 0 20';asCaster=true}
+  - command{c='execute as <caster.name> at @s positioned ^1 ^0 ^4 run effect give @e[distance=..2,tag=!db_fire] minecraft:instant_damage 1 1 true';asCaster=true}
+  - command{c='execute as <caster.name> at @s positioned ^1 ^0 ^4 run particle minecraft:dragon_breath ~ ~ ~ 0.5 0.1 0.5 0 20';asCaster=true}
+
+DB_ColdBreath:
+  Cooldown: 10
+  Skills:
+  - command{c='execute as <caster.name> at @s positioned ^0 ^0 ^4 run effect give @e[distance=..4,tag=!db_cold] minecraft:slowness 6 1 true';asCaster=true}
+  - command{c='execute as <caster.name> at @s positioned ^0 ^0 ^4 run particle minecraft:dragon_breath ~ ~ ~ 1 0.2 1 0 40';asCaster=true}
+
+DB_LightningBreath:
+  Cooldown: 10
+  Skills:
+  - command{c='execute as <caster.name> at @s run summon minecraft:lightning_bolt ^1 ^ ^';asCaster=true}
+  - command{c='execute as <caster.name> at @s run summon minecraft:lightning_bolt ^2 ^ ^';asCaster=true}
+  - command{c='execute as <caster.name> at @s run summon minecraft:lightning_bolt ^3 ^ ^';asCaster=true}
+  - command{c='execute as <caster.name> at @s run summon minecraft:lightning_bolt ^4 ^ ^';asCaster=true}
+  - command{c='execute as <caster.name> at @s run summon minecraft:lightning_bolt ^5 ^ ^';asCaster=true}
+  - command{c='execute as <caster.name> at @s run particle minecraft:dragon_breath ^3 ^ ^3 1 0.2 1 0 30';asCaster=true}
+
+DB_AcidBreath:
+  Cooldown: 10
+  Skills:
+  - command{c='execute as <caster.name> at @s positioned ^0 ^0 ^3 run effect give @e[distance=..3,tag=!db_acid] minecraft:wither 6 1 true';asCaster=true}
+  - command{c='execute as <caster.name> at @s positioned ^0 ^0 ^3 run particle minecraft:dragon_breath ~ ~ ~ 0.8 0.2 0.8 0 30';asCaster=true}
+
+DB_PoisonBreath:
+  Cooldown: 10
+  Skills:
+  - command{c='execute as <caster.name> at @s positioned ^0 ^0 ^4 run effect give @e[distance=..4,tag=!db_poison] minecraft:poison 6 1 true';asCaster=true}
+  - command{c='execute as <caster.name> at @s positioned ^0 ^0 ^4 run particle minecraft:dragon_breath ~ ~ ~ 1 0.2 1 0 40';asCaster=true}
+

@@ -1,0 +1,72 @@
+Items:
+  BerserkerWarHorn:
+    Id: GOAT_HORN
+    Display: '&6Grito Bestial &8(Berserker)'
+    Lore:
+      - '&7Usar: Clique direito'
+      - '&7Fraqueza em inimigos (r=6, 12s)'
+      - '&8[MM]'
+    Options:
+      Unbreakable: true
+    Skills:
+      RightClick:
+        - playsound{sound=entity.goat.horn_sound;volume=1;pitch=1} @self
+        - command{c="mmbarb_warhorn <caster.name>";async=true}
+        - cooldown{t=75}
+
+  BerserkerBattleAxe:
+    Id: IRON_AXE
+    Display: '&6Investida Sanguinaria &8(Berserker)'
+    Lore:
+      - '&7Usar: Clique direito'
+      - '&7Cone 70°/5b com empurrao; DR 6s'
+      - '&8[MM]'
+    Options:
+      Unbreakable: true
+    Skills:
+      RightClick:
+        - skill{s=Barb_BattleAxe} @self
+        - cooldown{t=45}
+
+  BerserkerSpikedShield:
+    Id: SHIELD
+    Display: '&6Retaliacao Frenetica &8(Berserker)'
+    Lore:
+      - '&7Usar: Clique direito (HP < 50%)'
+      - '&7Reflete 30% do dano por 8s'
+      - '&8[MM]'
+    Options:
+      Unbreakable: true
+    Skills:
+      RightClick:
+        - command{c="mmbarb_shield <caster.name>";async=true}
+        - cooldown{t=90}
+
+  BerserkerBoots:
+    Id: LEATHER_BOOTS
+    Display: '&6Impetus Irrefreavel &8(Berserker)'
+    Lore:
+      - '&7Usar: Clique direito'
+      - '&7Remove lentidao e da velocidade por 10s'
+      - '&8[MM]'
+    Options:
+      Unbreakable: true
+    Skills:
+      RightClick:
+        - command{c="mmbarb_boots <caster.name>";async=true}
+        - cooldown{t=60}
+
+  BerserkerTotem:
+    Id: TOTEM_OF_UNDYING
+    Display: '&6Carnificina Implacavel &8(Berserker)'
+    Lore:
+      - '&7Usar: Clique direito (canaliza 3s)'
+      - '&7Cleave 3b + Lifesteal 25% por 15s'
+      - '&8[MM]'
+    Options:
+      Unbreakable: true
+    Skills:
+      RightClick:
+        - playsound{sound=entity.evoker.prepare_summon;volume=1;pitch=1} @self
+        - command{c="mmbarb_ultimate <caster.name>";async=true}
+        - cooldown{t=210}
