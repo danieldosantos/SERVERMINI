@@ -1,0 +1,56 @@
+# Skill Glamour: Manto de Inspiração
+name: bard_glamour_manto_de_inspiracao
+display: "§5Manto de Inspiração"
+icon: PURPLE_CARPET
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 26
+  mana-cost-scale: 0
+  radius-base: 7
+  radius-scale: 0
+description:
+  - "§5Distribui 60 de escudo a até 5 aliados e permite movimento livre por 3s."
+  - "§7Proteção móvel sem ultrapassar limite de mitigações."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Allies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 7
+          radius-scale: 0
+          group: ally
+          max: 5
+        children:
+          Shield:
+            type: mechanic
+            data:
+              shield-base: 60
+              shield-scale: 0
+              seconds-base: 12
+              seconds-scale: 0
+          Freedom:
+            type: mechanic
+            data:
+              immunity: SLOW
+              seconds-base: 3
+              seconds-scale: 0
+          Message:
+            type: mechanic
+            data:
+              message: "§5Manto de Inspiração envolve você em luz protetora!"
+              targets: target
+      Visual:
+        type: mechanic
+        data:
+          effect: SPELL_MOB
+          amount-base: 40
+          radius-base: 4
+          target: caster

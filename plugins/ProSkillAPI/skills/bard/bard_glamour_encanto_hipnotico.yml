@@ -1,0 +1,49 @@
+# Skill Glamour: Encanto Hipnótico
+name: bard_glamour_encanto_hipnotico
+display: "§5Encanto Hipnótico"
+icon: AMETHYST_CLUSTER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 18
+  mana-cost-scale: 0
+  radius-base: 5
+  radius-scale: 0
+description:
+  - "§5Imobiliza inimigos em 5 blocos por 3s. Aplica DR personalizado via flag PvP."
+  - "§7Excelente para controle curto sem travar arenas."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Enemies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 5
+          radius-scale: 0
+          group: enemy
+        children:
+          Root:
+            type: mechanic
+            data:
+              potion: SLOW
+              seconds-base: 3
+              seconds-scale: 0
+              amplifier-base: 10
+          Message:
+            type: mechanic
+            data:
+              message: "§5Você está hipnotizado e imóvel!"
+              targets: target
+      Visual:
+        type: mechanic
+        data:
+          effect: ENCHANT
+          amount-base: 30
+          radius-base: 5
+          target: caster

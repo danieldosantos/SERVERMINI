@@ -1,0 +1,37 @@
+# Subclasse Colégio do Glamour
+name: Bard_Glamour
+display: "§5Colégio do Glamour"
+description:
+  - "§7Manipula encanto e mobilidade para proteger aliados com estilo feérico."
+  - "§5Controle curto porém impactante para PvP sem quebrar limites de CC."
+options:
+  needs-permission: true
+  parent: Bard
+  mana-name: "Foco"
+skills:
+  tier1:
+    active:
+      - bard_glamour_encanto_hipnotico
+      - bard_glamour_manto_de_inspiracao
+    passive: []
+  tier2:
+    active:
+      - bard_glamour_encanto_hipnotico
+      - bard_glamour_manto_de_inspiracao
+      - bard_glamour_brilho_deslumbrante
+    passive: []
+  tier3:
+    active:
+      - bard_glamour_encanto_hipnotico
+      - bard_glamour_manto_de_inspiracao
+      - bard_glamour_brilho_deslumbrante
+      - bard_glamour_passo_ferico
+    passive: []
+  tier4:
+    active:
+      - bard_glamour_encanto_hipnotico
+      - bard_glamour_manto_de_inspiracao
+      - bard_glamour_brilho_deslumbrante
+      - bard_glamour_passo_ferico
+      - bard_glamour_refrao_sublime
+    passive: []

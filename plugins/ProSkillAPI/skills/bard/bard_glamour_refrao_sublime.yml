@@ -1,0 +1,56 @@
+# Skill Glamour: Refrão Sublime (Ultimate)
+name: bard_glamour_refrao_sublime
+display: "§5Refrão Sublime"
+icon: MUSIC_DISC_MELLOHI
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 7
+  radius-scale: 0
+description:
+  - "§5Área de 7 blocos cura 6% da vida máx a cada 2s e remove debuffs por 12s."
+  - "§7Ideal para estabilizar lutas longas sem ultrapassar 60% de uptime."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Allies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 7
+          radius-scale: 0
+          group: ally
+          duration-base: 12
+          duration-scale: 0
+          repeat: 40
+        children:
+          HealTick:
+            type: mechanic
+            data:
+              heal-percent-base: 0.06
+              heal-percent-scale: 0
+          Cleanse:
+            type: mechanic
+            data:
+              cleanse: negative
+              amount-base: 2
+              amount-scale: 0
+          Message:
+            type: mechanic
+            data:
+              message: "§5Refrão Sublime regenera você!"
+              targets: target
+      Visual:
+        type: mechanic
+        data:
+          effect: NOTE
+          amount-base: 60
+          radius-base: 7
+          target: caster

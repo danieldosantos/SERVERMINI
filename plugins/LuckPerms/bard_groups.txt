@@ -1,0 +1,64 @@
+# LuckPerms - grupos da classe Bardo e colégios
+lp creategroup class_bard
+lp creategroup class_bard.lore
+lp creategroup class_bard.valor
+lp creategroup class_bard.glamour
+
+# Heranças
+lp group class_bard.lore parent add class_bard
+lp group class_bard.valor parent add class_bard
+lp group class_bard.glamour parent add class_bard
+
+# Permissões gerais da classe
+lp group class_bard permission set proskillapi.class.bard true
+lp group class_bard permission set skillapi.skill.bard_inspiration true
+lp group class_bard permission set skillapi.skill.bard_song_of_rest true
+lp group class_bard permission set skript.command.inspirar true
+lp group class_bard permission set skript.command.cancao true
+lp group class_bard permission set mythicmobs.item.BardLute true
+lp group class_bard permission set mythicmobs.item.BardLoreBook true
+
+# PlaceholderAPI / scoreboard acesso
+lp group class_bard permission set placeholderapi.placeholder.skills_inspiration_charges true
+lp group class_bard permission set placeholderapi.placeholder.skills_bard_song_timer true
+lp group class_bard permission set placeholderapi.placeholder.skills_bard_major_cd true
+
+# Subclasse Lore
+lp group class_bard.lore permission set proskillapi.subclass.bard_lore true
+lp group class_bard.lore permission set skillapi.skill.bard_lore_verso_analisador true
+lp group class_bard.lore permission set skillapi.skill.bard_lore_balada_dos_segredos true
+lp group class_bard.lore permission set skillapi.skill.bard_lore_palavra_desconcertante true
+lp group class_bard.lore permission set skillapi.skill.bard_lore_orquestracao_perfeita true
+lp group class_bard.lore permission set skillapi.skill.bard_lore_sinfonia_onisciente true
+lp group class_bard.lore permission set mythicmobs.item.LoreSongbook true
+lp group class_bard.lore permission set mythicmobs.item.LoreRelicHarp true
+lp group class_bard.lore permission set mythicmobs.item.LoreFocusQuill true
+
+# Subclasse Valor
+lp group class_bard.valor permission set proskillapi.subclass.bard_valor true
+lp group class_bard.valor permission set skillapi.skill.bard_valor_hino_da_coragem true
+lp group class_bard.valor permission set skillapi.skill.bard_valor_ritmo_de_batalha true
+lp group class_bard.valor permission set skillapi.skill.bard_valor_coda_inspirador true
+lp group class_bard.valor permission set skillapi.skill.bard_valor_marcha_recuada true
+lp group class_bard.valor permission set skillapi.skill.bard_valor_cantiga_dos_herois true
+lp group class_bard.valor permission set mythicmobs.item.ValorWarDrum true
+lp group class_bard.valor permission set mythicmobs.item.ValorWarHorn true
+lp group class_bard.valor permission set mythicmobs.item.ValorSacredLute true
+
+# Subclasse Glamour
+lp group class_bard.glamour permission set proskillapi.subclass.bard_glamour true
+lp group class_bard.glamour permission set skillapi.skill.bard_glamour_encanto_hipnotico true
+lp group class_bard.glamour permission set skillapi.skill.bard_glamour_manto_de_inspiracao true
+lp group class_bard.glamour permission set skillapi.skill.bard_glamour_brilho_deslumbrante true
+lp group class_bard.glamour permission set skillapi.skill.bard_glamour_passo_ferico true
+lp group class_bard.glamour permission set skillapi.skill.bard_glamour_refrao_sublime true
+lp group class_bard.glamour permission set mythicmobs.item.GlamourTiara true
+lp group class_bard.glamour permission set mythicmobs.item.GlamourFaerieCharm true
+lp group class_bard.glamour permission set mythicmobs.item.GlamourStarLyre true
+
+# Comandos auxiliares / kit
+lp group class_bard permission set skript.command.kit_bardo true
+lp group class_bard permission set skript.command.bard_inspire true
+lp group class_bard.lore permission set skript.command.lore_verso true
+lp group class_bard.valor permission set skript.command.valor_hino true
+lp group class_bard.glamour permission set skript.command.glamour_encanto true

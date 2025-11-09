@@ -1,0 +1,58 @@
+# Skill Valor: Ritmo de Batalha
+name: bard_valor_ritmo_de_batalha
+display: "§6Ritmo de Batalha"
+icon: MUSIC_DISC_PIGSTEP
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+  - "§6Aliados recebem +15% velocidade de ataque e arqueiros ganham +2 projéteis por 10s."
+  - "§7Configura atributo temporário para sinergia controlada com raças."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Allies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: ally
+        children:
+          AttackSpeed:
+            type: mechanic
+            data:
+              potion: HASTE
+              seconds-base: 10
+              seconds-scale: 0
+              amplifier-base: 1
+          ExtraProjectiles:
+            type: mechanic
+            data:
+              attribute: projectile_bonus
+              amount-base: 2
+              amount-scale: 0
+              seconds-base: 10
+              seconds-scale: 0
+              indicator: "§6+2 Flechas"
+          Message:
+            type: mechanic
+            data:
+              message: "§6Ritmo de Batalha acelera seus ataques!"
+              targets: target
+      Visual:
+        type: mechanic
+        data:
+          effect: FIREWORK
+          amount-base: 6
+          radius-base: 5
+          target: caster

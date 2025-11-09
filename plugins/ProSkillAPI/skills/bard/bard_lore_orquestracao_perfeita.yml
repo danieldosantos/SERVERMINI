@@ -1,0 +1,53 @@
+# Skill Lore: Orquestração Perfeita
+name: bard_lore_orquestracao_perfeita
+display: "§bOrquestração Perfeita"
+icon: BLAZE_ROD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+  - "§bConcede -20% cooldown aos aliados em 8 blocos por 12s."
+  - "§7Não acumula com outras fontes acima do limite global."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      AllyPulse:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: ally
+        children:
+          ApplyCDR:
+            type: mechanic
+            data:
+              attribute: cooldown_reduction
+              amount-base: 0.20
+              amount-scale: 0
+              seconds-base: 12
+              seconds-scale: 0
+              indicator: "§b-20% CD"
+          Visual:
+            type: mechanic
+            data:
+              effect: HAPPY_VILLAGER
+              amount-base: 20
+              amount-scale: 0
+              radius-base: 4
+              radius-scale: 0
+              target: target
+      Message:
+        type: mechanic
+        data:
+          message: "§bOrquestração Perfeita harmoniza os tempos!"
+          targets: self

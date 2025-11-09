@@ -1,0 +1,60 @@
+# Skill Valor: Cantiga dos Heróis (Ultimate)
+name: bard_valor_cantiga_dos_herois
+display: "§6Cantiga dos Heróis"
+icon: MUSIC_DISC_OTHERSIDE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 10
+  radius-scale: 0
+description:
+  - "§6Reanima aliados caídos nos últimos 10s com 35% vida e 3s de invulnerabilidade."
+  - "§7Bloqueia uso em arenas PvP ranqueadas via checagem de flag no Skript."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      AlliesDowned:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 10
+          radius-scale: 0
+          group: ally
+          only-dead: true
+        children:
+          RecentCheck:
+            type: condition
+            data:
+              death-time-max: 10
+            children:
+              Revive:
+                type: mechanic
+                data:
+                  revive-health-percent: 0.35
+                  invulnerable-seconds: 3
+                  indicator: "§6Herói erguido!"
+              Cleanse:
+                type: mechanic
+                data:
+                  cleanse: negative
+                  amount-base: 5
+                  amount-scale: 0
+      Visual:
+        type: mechanic
+        data:
+          effect: LIGHTNING
+          amount-base: 1
+          radius-base: 0
+          target: caster
+      Message:
+        type: mechanic
+        data:
+          message: "§6Cantiga dos Heróis chama os caídos de volta!"
+          targets: self

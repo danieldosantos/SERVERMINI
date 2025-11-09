@@ -1,0 +1,52 @@
+# Skill Lore: Palavra Desconcertante
+name: bard_lore_palavra_desconcertante
+display: "§bPalavra Desconcertante"
+icon: FEATHER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 18
+  mana-cost-scale: 0
+  range-base: 16
+  range-scale: 0
+description:
+  - "§bSilencia um alvo por 4s e aplica lentidão leve para evitar fuga imediata."
+  - "§7Duração curta para respeitar PvP com DR."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      TargetEnemy:
+        type: target
+        data:
+          group: enemy
+          max: 1
+          range-base: 16
+        children:
+          Silence:
+            type: mechanic
+            data:
+              silence: true
+              seconds-base: 4
+              seconds-scale: 0
+          Slow:
+            type: mechanic
+            data:
+              potion: SLOW
+              seconds-base: 4
+              seconds-scale: 0
+              amplifier-base: 0
+          Message:
+            type: mechanic
+            data:
+              message: "§bVocê está silenciado!"
+              targets: target
+      Feedback:
+        type: mechanic
+        data:
+          message: "§bPalavra Desconcertante ecoa."
+          targets: self

@@ -1,0 +1,32 @@
+# Passive: Talento Versátil
+name: bard_talento_versatil
+display: "§dTalento Versátil"
+icon: KNOWLEDGE_BOOK
+type: Passive
+max-level: 1
+description:
+  - "§7Fora de combate recebe pequenos bônus utilitários para interações e deslocamento."
+  - "§8Não aumenta dano direto para evitar sinergias excessivas com raças."
+components:
+  OutOfCombat:
+    type: trigger
+    data:
+      delay: 6
+      interval: 8
+    children:
+      ApplyLuck:
+        type: mechanic
+        data:
+          potion: LUCK
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      ApplyStep:
+        type: mechanic
+        data:
+          potion: SPEED
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0

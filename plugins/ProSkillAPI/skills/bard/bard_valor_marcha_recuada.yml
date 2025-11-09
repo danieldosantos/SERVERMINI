@@ -1,0 +1,56 @@
+# Skill Valor: Marcha Recuada
+name: bard_valor_marcha_recuada
+display: "§6Marcha Recuada"
+icon: GOAT_HORN
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 28
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+  - "§6Reposiciona aliados 6 blocos para trás e concede +0.03 velocidade por 8s."
+  - "§7Ferramenta tática para kite controlado sem quebrar limites de mobilidade."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Allies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: ally
+        children:
+          PullBack:
+            type: mechanic
+            data:
+              velocity-base: -1.1
+              velocity-scale: 0
+              upward-base: 0.1
+              indicator: "§6Marcha Recuada"
+          SpeedBuff:
+            type: mechanic
+            data:
+              potion: SPEED
+              seconds-base: 8
+              seconds-scale: 0
+              amplifier-base: 0
+          Message:
+            type: mechanic
+            data:
+              message: "§6Marcha Recuada reposiciona você!"
+              targets: target
+      Visual:
+        type: mechanic
+        data:
+          effect: CLOUD
+          amount-base: 25
+          radius-base: 5
+          target: caster

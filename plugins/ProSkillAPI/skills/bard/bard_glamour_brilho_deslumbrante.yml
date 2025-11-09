@@ -1,0 +1,57 @@
+# Skill Glamour: Brilho Deslumbrante
+name: bard_glamour_brilho_deslumbrante
+display: "§5Brilho Deslumbrante"
+icon: GLOWSTONE_DUST
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+  - "§5Cega inimigos por 4s e reduz precisão em 15%."
+  - "§7Controle suave focado em PvP e PvE sem sobrecarga de CC."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Enemies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: enemy
+        children:
+          Blind:
+            type: mechanic
+            data:
+              potion: BLINDNESS
+              seconds-base: 4
+              seconds-scale: 0
+          ReduceAccuracy:
+            type: mechanic
+            data:
+              attribute: accuracy
+              amount-base: -0.15
+              amount-scale: 0
+              seconds-base: 6
+              seconds-scale: 0
+              indicator: "§5-15% Precisão"
+          Message:
+            type: mechanic
+            data:
+              message: "§5Você é ofuscado pelo brilho!"
+              targets: target
+      Visual:
+        type: mechanic
+        data:
+          effect: FLASH
+          amount-base: 1
+          radius-base: 6
+          target: caster

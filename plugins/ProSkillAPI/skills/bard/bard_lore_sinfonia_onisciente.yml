@@ -1,0 +1,75 @@
+# Skill Lore: Sinfonia Onisciente (Ultimate)
+name: bard_lore_sinfonia_onisciente
+display: "§bSinfonia Onisciente"
+icon: MUSIC_DISC_5
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 30
+  radius-scale: 0
+description:
+  - "§bCanaliza 2s, revela inimigos por 10s e concede +15% dano/cura por 15s."
+  - "§7Única por 240s para evitar uptime excessivo."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Channel:
+        type: mechanic
+        data:
+          delay-base: 40
+          delay-scale: 0
+          still: true
+          indicator: "§bCanalizando Sinfonia..."
+      AfterChannel:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 30
+          radius-scale: 0
+          group: enemy
+        children:
+          Reveal:
+            type: mechanic
+            data:
+              potion: GLOWING
+              seconds-base: 10
+              seconds-scale: 0
+          MessageEnemy:
+            type: mechanic
+            data:
+              message: "§bSinfonia Onisciente revela sua posição!"
+              targets: target
+      AllyBuff:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 15
+          radius-scale: 0
+          group: ally
+        children:
+          BuffDamage:
+            type: mechanic
+            data:
+              potion: STRENGTH
+              seconds-base: 15
+              seconds-scale: 0
+              amplifier-base: 0
+          BuffCura:
+            type: mechanic
+            data:
+              heal-percent-base: 0.15
+              heal-percent-scale: 0
+              seconds-base: 15
+              seconds-scale: 0
+          MessageAlly:
+            type: mechanic
+            data:
+              message: "§bSinfonia Onisciente: +15% dano/cura."
+              targets: target

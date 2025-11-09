@@ -1,0 +1,21 @@
+Skill,Tipo,Custo (Cargas/Mana),Duração,CD,Bônus/Dano/Cura,Área,Notas PvP,Tier
+bard_inspiration,Ativa,1 carga,20s,60s,"+8% dano, +5% crit/precisão",Alvo único,"Aplicar DR se usado repetidamente",T1
+bard_song_of_rest,Ativa,25 mana,30s,60s,"Regeneração leve +5% CDR",Aura 8b,"Não acumulável com ultimates",T1
+bard_virtuoso,Passiva,-,Contínuo,-,"-10% custo de instrumentos",Self,"Sem efeito ofensivo direto",T1
+bard_talento_versatil,Passiva,-,6s a cada 8s,-,"Luck I + Speed I",Self,"Apenas fora de combate",T1
+bard_maestro_da_cadencia,Passiva,-,8s por pulso,12s interno,"-5% CD aliados",Raio 8b,"Mantém uptime <60%",T3
+bard_lore_verso_analisador,Ativa,15 mana,8s,45s,"-10% resistência mágica",Alvo único,"Boa para abrir combos",T2
+bard_lore_balada_dos_segredos,Ativa,20 mana,Instantâneo,75s,"Remove 1 buff e revela 5s",Raio 6b,"Útil vs absorções",T2
+bard_lore_palavra_desconcertante,Ativa,18 mana,4s,60s,"Silêncio + Lentidão",Alvo único,"Aplicar DR manual",T3
+bard_lore_orquestracao_perfeita,Ativa,30 mana,12s,120s,"-20% CD aliados",Raio 8b,"Sinergia limitada com outras fontes",T3
+bard_lore_sinfonia_onisciente,Ultimate,45 mana,15s buff/10s revelação,240s,"+15% dano/cura + revelar",Mapa 30b,"Canalização vulnerável",T4
+bard_valor_hino_da_coragem,Ativa,20 mana,12s,60s,"+10% mitigação + imunidade medo",Raio 8b,"Respeitar teto 45%",T2
+bard_valor_ritmo_de_batalha,Ativa,25 mana,10s,75s,"+15% atk speed +2 projéteis",Raio 8b,"Sinergia com arqueiros",T2
+bard_valor_coda_inspirador,Ativa,30 mana,15s,90s,"Escudo 120",Raio 8b,"Bloqueado por DR de escudos",T3
+bard_valor_marcha_recuada,Ativa,28 mana,8s,105s,"Reposiciona -6b +0.03 speed",Raio 8b,"Não atravessa barreiras",T3
+bard_valor_cantiga_dos_herois,Ultimate,45 mana,Instantâneo revive,240s,"Revive 35% HP + 3s invuln",Raio 10b,"Bloqueio arena via flag",T4
+bard_glamour_encanto_hipnotico,Ativa,18 mana,3s,45s,"Root forte",Raio 5b,"Aplicar DR após 2 usos",T2
+bard_glamour_manto_de_inspiracao,Ativa,26 mana,3s liberdade/12s escudo,75s,"Escudo 60 + imunidade slow",Raio 7b,"Limite 5 aliados",T2
+bard_glamour_brilho_deslumbrante,Ativa,20 mana,4-6s,60s,"Cegueira + -15% precisão",Raio 6b,"DR contra cegueira de raças",T3
+bard_glamour_passo_ferico,Ativa,35 mana,Instantâneo,120s,"Teleporte 12b + Speed",Self+2 aliados,"Checar colisões",T3
+bard_glamour_refrao_sublime,Ultimate,45 mana,12s,240s,"Cura 6%/2s + cleanse",Raio 7b,"Excelente em teamfights",T4

@@ -1,0 +1,31 @@
+# Passive: Maestro da Cadência
+name: bard_maestro_da_cadencia
+display: "§dMaestro da Cadência"
+icon: CLOCK
+type: Passive
+max-level: 1
+description:
+  - "§7A partir do Tier 3 concede 5% de redução global de cooldown aos aliados próximos."
+  - "§8Uptime controlado para respeitar o limite máximo de 60%."
+components:
+  Pulse:
+    type: trigger
+    data:
+      interval: 12
+    children:
+      Allies:
+        type: target
+        data:
+          group: ally
+          radius-base: 8
+          radius-scale: 0
+        children:
+          ApplyCDR:
+            type: mechanic
+            data:
+              attribute: cooldown_reduction
+              amount-base: 0.05
+              amount-scale: 0
+              seconds-base: 8
+              seconds-scale: 0
+              indicator: "§dCadência -5% CD"

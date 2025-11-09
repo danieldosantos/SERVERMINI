@@ -1,0 +1,49 @@
+# Skill Lore: Verso Analisador
+name: bard_lore_verso_analisador
+display: "§bVerso Analisador"
+icon: SPYGLASS
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 15
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+description:
+  - "§bRevela a vida/buffs do alvo e reduz resistência mágica em 10% por 8s."
+  - "§7Ideal para preparar rajadas coordenadas sem romper limites de resistência."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      TargetEnemy:
+        type: target
+        data:
+          group: enemy
+          max: 1
+          range-base: 18
+        children:
+          Reveal:
+            type: mechanic
+            data:
+              potion: GLOWING
+              seconds-base: 8
+              seconds-scale: 0
+          LowerResist:
+            type: mechanic
+            data:
+              attribute: magic_resistance
+              amount-base: -0.10
+              amount-scale: 0
+              seconds-base: 8
+              seconds-scale: 0
+              indicator: "§b-10% Resist. Mágica"
+          Message:
+            type: mechanic
+            data:
+              message: "§bVerso Analisador expõe as defesas mágicas!"
+              targets: both
