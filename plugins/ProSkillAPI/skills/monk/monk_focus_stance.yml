@@ -1,0 +1,41 @@
+# Skill: Postura de Foco
+name: monk_focus_stance
+display: "§6Postura de Foco"
+icon: TOTEM_OF_UNDYING
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 6
+  cooldown-scale: 0
+description:
+  - "§7Alterna postura defensiva: +10% mitigação e +10% precisão."
+  - "§6Enquanto ativa, regeneração de Estamina é reduzida em 30%."
+  - "§7Skript limita uptime em 60% e aplica DR com resistências raciais."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Toggle:
+        type: mechanic
+        data:
+          command: "skript run monk_focus_toggle %caster%"
+          silent: true
+      AuraCue:
+        type: mechanic
+        data:
+          effect: ENCHANT
+          radius-base: 1.5
+          particles-base: 30
+          arrangement: sphere
+      Actionbar:
+        type: mechanic
+        data:
+          message: "§6Postura de Foco alternada"
+          targets: self
+      RefreshHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% monk_posture"
+          silent: true

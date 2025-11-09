@@ -1,0 +1,58 @@
+# Ultimate: Sombra Vinculante
+name: monk_shadow_binding_shroud
+display: "§8Sombra Vinculante"
+icon: WITHER_ROSE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+  range-base: 12
+  range-scale: 0
+description:
+  - "§7Marca um alvo por 12s; ataques aplicam -12% resistência (acumula até -24%)."
+  - "§8Consome 2 Ki e adiciona exaustão se o alvo já estiver com debuff racial similar."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiCheck:
+        type: condition
+        data:
+          key: ki_charges
+          min-value: 2
+          fail-message: "§cVocê precisa de 2 Ki para Sombra Vinculante."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_charges
+              amount-base: 2
+              indicator: "§8-2 Ki"
+      Target:
+        type: target
+        data:
+          shape: single
+          range-base: 12
+          range-scale: 0
+          group: enemy
+        children:
+          ApplyMark:
+            type: mechanic
+            data:
+              command: "skript run monk_shadow_bind %caster% %target% 12 0.12"
+              silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: SMOKE_LARGE
+          radius-base: 2
+          particles-base: 30
+          arrangement: spiral
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% monk_ki"
+          silent: true

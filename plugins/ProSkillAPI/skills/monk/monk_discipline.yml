@@ -1,0 +1,19 @@
+# Passiva: Disciplina
+name: monk_discipline
+display: "§6Disciplina"
+icon: EXPERIENCE_BOTTLE
+type: Passive
+max-level: 1
+description:
+  - "§7Ao esquivar com sucesso, recupera instantaneamente 10 de Estamina (CD interno 12s)."
+  - "§8Monitorado via monk_cmds.sk, aplica ação no evento de esquiva ou parry."
+components:
+  Passive:
+    type: trigger
+    data: {}
+    children:
+      Register:
+        type: mechanic
+        data:
+          command: "skript run monk_register_discipline %caster% 10 12"
+          silent: true

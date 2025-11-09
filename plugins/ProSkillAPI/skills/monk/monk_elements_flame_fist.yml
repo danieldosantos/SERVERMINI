@@ -1,0 +1,64 @@
+# Skill: Punho Ígneo
+name: monk_elements_flame_fist
+display: "§cPunho Ígneo"
+icon: BLAZE_POWDER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  range-base: 4
+  range-scale: 0
+description:
+  - "§7150% de dano e aplica queimadura de 6%/s por 4s."
+  - "§cConsome 1 Ki."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiCheck:
+        type: condition
+        data:
+          key: ki_charges
+          min-value: 1
+          fail-message: "§cVocê precisa de Ki para Punho Ígneo."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_charges
+              amount-base: 1
+              indicator: "§c-1 Ki"
+      Target:
+        type: target
+        data:
+          shape: single
+          range-base: 4
+          range-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.5
+              value-scale: 0
+              classifier: skill
+          Burn:
+            type: mechanic
+            data:
+              command: "skript run monk_flame_burn %caster% %target% 4 0.06"
+              silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: FLAME
+          radius-base: 1.5
+          particles-base: 20
+          arrangement: sphere
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% monk_ki"
+          silent: true

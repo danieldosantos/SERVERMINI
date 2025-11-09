@@ -1,0 +1,55 @@
+# Ultimate: Palma Retumbante
+name: monk_openhand_resounding_palm
+display: "§aPalma Retumbante"
+icon: BELL
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+description:
+  - "§7Cria círculo de 6 blocos por 6s causando 70% de dano por segundo."
+  - "§aInimigos que entram são enraizados por 2s (imunidade decrescente)."
+  - "§7Consome 2 Ki e marca alvo para controle via MythicMobs aura."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiCheck:
+        type: condition
+        data:
+          key: ki_charges
+          min-value: 2
+          fail-message: "§cVocê precisa de 2 Ki para Palma Retumbante."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_charges
+              amount-base: 2
+              indicator: "§a-2 Ki"
+      AreaPulse:
+        type: mechanic
+        data:
+          command: "skript run monk_resounding_palm %caster% 6 6 0.7 2"
+          silent: true
+      Sound:
+        type: mechanic
+        data:
+          sound: BLOCK_NOTE_BLOCK_BELL
+          volume-base: 1
+          pitch-base: 0.8
+      Particles:
+        type: mechanic
+        data:
+          effect: EXPLOSION_NORMAL
+          radius-base: 6
+          particles-base: 40
+          arrangement: ring
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% monk_ki"
+          silent: true

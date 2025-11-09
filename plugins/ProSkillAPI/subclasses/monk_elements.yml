@@ -1,39 +1,42 @@
-# Subclasse Monge - Caminho dos Quatro Elementos
-name: Monk_Elements
+# Subclasse: Caminho dos Quatro Elementos
+name: Monk_WayOfTheFourElements
 display: "§bCaminho dos Quatro Elementos"
 description:
-  - "§7Manipula fogo, água, ar e terra com versatilidade utilitária."
-  - "§bControla picos de dano e mitigação alternados respeitando caps globais."
+  - "§7Manipula fogo, gelo, vento e pedra por meio do Ki, alternando utilidade elemental."
+  - "§bMistura dash, mitigação e zonas de controle mantendo custos altos em Ki e Estamina."
 options:
   needs-permission: true
   parent: Monk
   mana-name: "Ki"
-  ki-tags:
+  tags:
     focus: elements
 skills:
   tier1:
     active:
-      - monk_elements_flaming_burst
-      - monk_elements_water_wall
+      - monk_elements_flame_fist
+      - monk_elements_frost_wave
     passive: []
   tier2:
     active:
-      - monk_elements_flaming_burst
-      - monk_elements_water_wall
-      - monk_elements_gale_leap
+      - monk_elements_flame_fist
+      - monk_elements_frost_wave
+      - monk_elements_vortex_step
     passive: []
   tier3:
     active:
-      - monk_elements_flaming_burst
-      - monk_elements_water_wall
-      - monk_elements_gale_leap
-      - monk_elements_earth_punch
+      - monk_elements_flame_fist
+      - monk_elements_frost_wave
+      - monk_elements_vortex_step
+      - monk_elements_stone_skin
     passive: []
   tier4:
     active:
-      - monk_elements_flaming_burst
-      - monk_elements_water_wall
-      - monk_elements_gale_leap
-      - monk_elements_earth_punch
-      - monk_elements_elemental_avatar
+      - monk_elements_flame_fist
+      - monk_elements_frost_wave
+      - monk_elements_vortex_step
+      - monk_elements_stone_skin
+      - monk_elements_four_storm
     passive: []
+notes:
+  - "Pele de Pedra verifica limites de mitigação (≤45%) e aplica Exaustão de Resistência em raças já resistentes."
+  - "Tormenta dos Quatro alterna pulsos elementais com leve puxão a cada 2s (controlado via MythicMobs + Skript)."

@@ -1,0 +1,49 @@
+# Skill: Pele de Pedra
+name: monk_elements_stone_skin
+display: "§7Pele de Pedra"
+icon: STONE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+description:
+  - "§78s de +25% mitigação (respeita teto global de 45%)."
+  - "§7Consome 1 Ki e aplica Exaustão de Resistência se houver redundância racial."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiCheck:
+        type: condition
+        data:
+          key: ki_charges
+          min-value: 1
+          fail-message: "§cVocê precisa de Ki para Pele de Pedra."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_charges
+              amount-base: 1
+              indicator: "§7-1 Ki"
+      ApplySkin:
+        type: mechanic
+        data:
+          command: "skript run monk_stone_skin %caster% 8 0.25"
+          silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: BLOCK_CRACK
+          material: STONE
+          radius-base: 1.5
+          particles-base: 24
+          arrangement: sphere
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% monk_ki"
+          silent: true

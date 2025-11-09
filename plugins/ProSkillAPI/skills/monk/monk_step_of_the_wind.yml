@@ -1,4 +1,4 @@
-# Skill: Passo do Vento (classe base)
+# Skill: Passo do Vento
 name: monk_step_of_the_wind
 display: "§bPasso do Vento"
 icon: FEATHER
@@ -7,52 +7,53 @@ max-level: 1
 attributes:
   cooldown-base: 45
   cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
 description:
-  - "§7Consome 1 Ki para dar um dash curto com queda lenta por 4s."
-  - "§bNão ultrapassa o limite global de velocidade (cap +0.05)."
-  - "§7Interage com bônus raciais reduzindo ganhos quando já estiver próximo ao cap."
+  - "§7Gasta 30 de Estamina para ganhar +0.05 velocidade e salto aprimorado por 6s."
+  - "§bIgnora dano de queda leve durante a duração."
+  - "§7Respeita limite global de velocidade via retornos decrescentes."
 components:
   Cast:
     type: trigger
     data:
       cooldown: true
     children:
-      KiRequirement:
-        type: condition
-        data:
-          key: ki_points
-          min-value: 1
-          fail-message: "§cKi insuficiente para Passo do Vento."
-        children:
-          ConsumeKi:
-            type: mechanic
-            data:
-              key: ki_points
-              amount-base: 1
-              indicator: "§b-1 Ki"
-      ApplyVelocity:
+      BuffSelf:
         type: mechanic
         data:
-          velocity-base: 1.15
-          velocity-scale: 0
-          forward: true
-          upward: 0.4
-          indicator: "§bImpulso do Vento"
-      ApplySlowFall:
-        type: mechanic
-        data:
-          potion: SLOW_FALLING
-          seconds-base: 4
+          potion: SPEED
+          seconds-base: 6
           seconds-scale: 0
-          amplifier-base: 0
+          amplifier-base: 1
           amplifier-scale: 0
-      SoftCapMessage:
+      JumpBoost:
         type: mechanic
         data:
-          message: "§bVocê desliza pelo vento, respeitando limites raciais."
+          potion: JUMP
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 1
+          amplifier-scale: 0
+      WindTrail:
+        type: mechanic
+        data:
+          effect: CLOUD
+          radius-base: 1.5
+          particles-base: 20
+          arrangement: circle
+      ScriptHook:
+        type: mechanic
+        data:
+          command: "skript run monk_step_wind %caster% 6"
+          silent: true
+      Actionbar:
+        type: mechanic
+        data:
+          message: "§bPasso do Vento ativo (+movimento / salto)"
           targets: self
-      ScoreboardRefresh:
+      RefreshHUD:
         type: mechanic
         data:
-          command: "placeholderapi parse me \"%skills_step_wind_cd%\""
+          command: "placeholderapi refresh %caster% monk_cooldowns"
           silent: true

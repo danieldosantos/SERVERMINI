@@ -1,0 +1,61 @@
+# Skill: Mão que Cura
+name: monk_openhand_hand_of_mercy
+display: "§aMão que Cura"
+icon: GHAST_TEAR
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+description:
+  - "§7Cura 18% da vida máxima de si ou aliado em alcance corpo a corpo."
+  - "§aConsome 1 Ki e respeita limite de cura por golpe (≤25%)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiCheck:
+        type: condition
+        data:
+          key: ki_charges
+          min-value: 1
+          fail-message: "§cVocê precisa de Ki para Mão que Cura."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_charges
+              amount-base: 1
+              indicator: "§a-1 Ki"
+      Target:
+        type: target
+        data:
+          shape: single
+          range-base: 4
+          range-scale: 0
+          group: ally
+        children:
+          Heal:
+            type: mechanic
+            data:
+              heal-percent-base: 0.18
+              heal-percent-scale: 0
+          CapCheck:
+            type: mechanic
+            data:
+              command: "skript run monk_heal_cap %target% 0.25"
+              silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: HEART
+          radius-base: 1
+          particles-base: 8
+          arrangement: circle
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% monk_ki"
+          silent: true

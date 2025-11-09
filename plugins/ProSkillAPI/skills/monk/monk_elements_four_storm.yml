@@ -1,0 +1,55 @@
+# Ultimate: Tormenta dos Quatro
+name: monk_elements_four_storm
+display: "§bTormenta dos Quatro"
+icon: HEART_OF_THE_SEA
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+description:
+  - "§7Zona de 8 blocos por 10s com pulsos alternados (fogo, gelo, vento, pedra)."
+  - "§bCada pulso causa 60% de dano a cada 2s e puxa levemente os inimigos."
+  - "§7Consome 2 Ki."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiCheck:
+        type: condition
+        data:
+          key: ki_charges
+          min-value: 2
+          fail-message: "§cVocê precisa de 2 Ki para Tormenta dos Quatro."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_charges
+              amount-base: 2
+              indicator: "§b-2 Ki"
+      Storm:
+        type: mechanic
+        data:
+          command: "skript run monk_four_storm %caster% 8 10 0.6"
+          silent: true
+      Sound:
+        type: mechanic
+        data:
+          sound: WEATHER_RAIN
+          volume-base: 1.2
+          pitch-base: 1.0
+      Particles:
+        type: mechanic
+        data:
+          effect: DRAGON_BREATH
+          radius-base: 8
+          particles-base: 60
+          arrangement: ring
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% monk_ki"
+          silent: true

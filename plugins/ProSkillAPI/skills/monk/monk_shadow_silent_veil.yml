@@ -1,0 +1,48 @@
+# Skill: Véu Silencioso
+name: monk_shadow_silent_veil
+display: "§8Véu Silencioso"
+icon: GRAY_CARPET
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+description:
+  - "§76s de redução de ruído/agro e +15% de chance de esquiva."
+  - "§8Consome 1 Ki e habilita stealth parcial em PvE."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiCheck:
+        type: condition
+        data:
+          key: ki_charges
+          min-value: 1
+          fail-message: "§cVocê precisa de Ki para Véu Silencioso."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_charges
+              amount-base: 1
+              indicator: "§8-1 Ki"
+      ApplyVeil:
+        type: mechanic
+        data:
+          command: "skript run monk_silent_veil %caster% 6 0.15"
+          silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: SPELL
+          radius-base: 1.5
+          particles-base: 18
+          arrangement: sphere
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% monk_ki"
+          silent: true

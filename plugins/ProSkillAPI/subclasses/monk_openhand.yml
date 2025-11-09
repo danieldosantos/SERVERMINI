@@ -1,0 +1,42 @@
+# Subclasse: Caminho da Mão Aberta
+name: Monk_WayOfTheOpenHand
+display: "§aCaminho da Mão Aberta"
+description:
+  - "§7Especialistas em controle corporal, quedas suaves e interrupções de conjuração."
+  - "§aCombina empurrões, tropeços e cura situacional sem romper caps de controle (≤4s)."
+options:
+  needs-permission: true
+  parent: Monk
+  mana-name: "Ki"
+  tags:
+    focus: control
+skills:
+  tier1:
+    active:
+      - monk_openhand_tranquil_palm
+      - monk_openhand_soft_fall
+    passive: []
+  tier2:
+    active:
+      - monk_openhand_tranquil_palm
+      - monk_openhand_soft_fall
+      - monk_openhand_harmonious_push
+    passive: []
+  tier3:
+    active:
+      - monk_openhand_tranquil_palm
+      - monk_openhand_soft_fall
+      - monk_openhand_harmonious_push
+      - monk_openhand_hand_of_mercy
+    passive: []
+  tier4:
+    active:
+      - monk_openhand_tranquil_palm
+      - monk_openhand_soft_fall
+      - monk_openhand_harmonious_push
+      - monk_openhand_hand_of_mercy
+      - monk_openhand_resounding_palm
+    passive: []
+notes:
+  - "Palmada Tranquilizante aplica tropeço com imunidade decrescente via monk_cmds.sk."
+  - "Empurrão Harmonioso força resistência racial a entrar em exaustão se já fornecer resistência a empurrão."

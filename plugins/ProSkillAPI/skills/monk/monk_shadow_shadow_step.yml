@@ -1,0 +1,48 @@
+# Skill: Passo das Sombras
+name: monk_shadow_shadow_step
+display: "§8Passo das Sombras"
+icon: ENDER_PEARL
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§7Teleporta até 8 blocos para um ponto em penumbra."
+  - "§8Consome 1 Ki e falha se a luz ambiente for >7."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiCheck:
+        type: condition
+        data:
+          key: ki_charges
+          min-value: 1
+          fail-message: "§cVocê precisa de Ki para Passo das Sombras."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_charges
+              amount-base: 1
+              indicator: "§8-1 Ki"
+      Teleport:
+        type: mechanic
+        data:
+          command: "skript run monk_shadow_step %caster% 8"
+          silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: SMOKE_NORMAL
+          radius-base: 1
+          particles-base: 20
+          arrangement: sphere
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% monk_ki"
+          silent: true
