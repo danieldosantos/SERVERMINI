@@ -1,0 +1,37 @@
+# Great Old One Skill: Cascata de Loucura
+name: warlock_greatoldone_cascata_de_loucura
+display: "§3Cascata de Loucura"
+icon: SCULK_CATALYST
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 40
+  mana-cost-scale: 0
+  range-base: 8
+  range-scale: 0
+description:
+  - "§7Área de 6 blocos causando 100% dano +10% por stack de Loucura."
+  - "§7Stacks controlados via Skript com limite para evitar explosões injustas."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandCascade:
+        type: mechanic
+        data:
+          command: "skript run warlock_oldone_cascata %caster%"
+          silent: true
+      ResistanceCheck:
+        type: mechanic
+        data:
+          command: "skript run warlock_resistance_cap %caster% psychic"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§3Uma onda de loucura se expande de sua posição!"
+          targets: self

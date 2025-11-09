@@ -1,0 +1,32 @@
+# Archfey Skill: Domínio do Sonho
+name: warlock_archfey_dominio_do_sonho
+display: "§aDomínio do Sonho"
+icon: PHANTOM_MEMBRANE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 34
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+description:
+  - "§aInduz sono por 4s (quebra com dano alto)."
+  - "§7Integração com MythicMobs gera bolha visual e sinal sonoro."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandSleep:
+        type: mechanic
+        data:
+          command: "skript run warlock_archfey_sonho %caster%"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§aVocê domina os sonhos de seu alvo."
+          targets: self

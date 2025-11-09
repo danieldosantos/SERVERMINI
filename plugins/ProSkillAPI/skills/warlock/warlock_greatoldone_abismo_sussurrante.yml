@@ -1,0 +1,37 @@
+# Great Old One Ultimate: Abismo Sussurrante
+name: warlock_greatoldone_abismo_sussurrante
+display: "§3Abismo Sussurrante"
+icon: END_PORTAL_FRAME
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 60
+  mana-cost-scale: 0
+  range-base: 16
+  range-scale: 0
+description:
+  - "§3Abre fenda por 12s que puxa inimigos, aplica medo e garante +20% mitigação ao Bruxo."
+  - "§7Mitigação respeita o cap total de 45% com monitoramento via Skript/RacesEffects."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandAbyss:
+        type: mechanic
+        data:
+          command: "skript run warlock_oldone_abismo %caster%"
+          silent: true
+      ResistanceCheck:
+        type: mechanic
+        data:
+          command: "skript run warlock_resistance_cap %caster% psychic"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§3O abismo responde ao seu chamado!"
+          targets: self

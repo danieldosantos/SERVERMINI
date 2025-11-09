@@ -1,0 +1,37 @@
+# Subclasse Pacto do Grande Antigo
+name: Warlock_GreatOldOne
+display: "§3Pacto do Grande Antigo"
+description:
+  - "§7Manipula mentes e debuffs psíquicos, enfraquecendo linhas inimigas."
+  - "§3Combina controle de zona com mitigação situacional limitada (≤45%) e terror persistente."
+options:
+  needs-permission: true
+  parent: Warlock
+  mana-name: "Mana Pactual"
+skills:
+  tier1:
+    active:
+      - warlock_greatoldone_sussurros_devastadores
+      - warlock_greatoldone_visoes_alienigenas
+    passive: []
+  tier2:
+    active:
+      - warlock_greatoldone_sussurros_devastadores
+      - warlock_greatoldone_visoes_alienigenas
+      - warlock_greatoldone_marionete_mental
+    passive: []
+  tier3:
+    active:
+      - warlock_greatoldone_sussurros_devastadores
+      - warlock_greatoldone_visoes_alienigenas
+      - warlock_greatoldone_marionete_mental
+      - warlock_greatoldone_cascata_de_loucura
+    passive: []
+  tier4:
+    active:
+      - warlock_greatoldone_sussurros_devastadores
+      - warlock_greatoldone_visoes_alienigenas
+      - warlock_greatoldone_marionete_mental
+      - warlock_greatoldone_cascata_de_loucura
+      - warlock_greatoldone_abismo_sussurrante
+    passive: []

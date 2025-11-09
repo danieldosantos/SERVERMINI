@@ -1,0 +1,32 @@
+# Great Old One Skill: Visões Alienígenas
+name: warlock_greatoldone_visoes_alienigenas
+display: "§3Visões Alienígenas"
+icon: AMETHYST_CLUSTER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  range-base: 12
+  range-scale: 0
+description:
+  - "§7Revela inimigos camuflados em 12 blocos e aplica slow de 30% por 6s."
+  - "§7Destaca alvos com VFX de olhos abissais."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandReveal:
+        type: mechanic
+        data:
+          command: "skript run warlock_oldone_visoes %caster%"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§3Suas visões alienígenas revelam o invisível."
+          targets: self

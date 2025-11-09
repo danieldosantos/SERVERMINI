@@ -1,0 +1,37 @@
+# Fiend Skill: Portal Ígneo
+name: warlock_fiend_portal_igneo
+display: "§cPortal Ígneo"
+icon: NETHERITE_SCRAP
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 40
+  mana-cost-scale: 0
+  range-base: 15
+  range-scale: 0
+description:
+  - "§7Teleporta até 15 blocos deixando trilha de fogo (40%/s por 4s)."
+  - "§7Inclui telegraph com partículas e atraso de 0.6s para contra-jogo PvP."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandTeleport:
+        type: mechanic
+        data:
+          command: "skript run warlock_fiend_portal %caster%"
+          silent: true
+      ResistanceCheck:
+        type: mechanic
+        data:
+          command: "skript run warlock_resistance_cap %caster% fire"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§cVocê rasga o plano com um portal ígneo!"
+          targets: self

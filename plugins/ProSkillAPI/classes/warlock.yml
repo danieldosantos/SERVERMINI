@@ -1,0 +1,119 @@
+# Classe base Bruxo para ProSkillAPI
+name: Warlock
+prefix: "Wlk"
+display: "§5Bruxo"
+main-class: true
+description:
+  - "§7Conjurador de longo alcance focado em dano sustentado e controle."
+  - "§5Gasta mana e espaços de pacto para invocações rápidas e janelas de rajada."
+  - "§7Sinergiza com raças de resistência moderada sem ultrapassar o limite global (45%)."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Mana Pactual"
+  mana-regen: 4
+  max-level: 60
+  exp-source: quest
+  attributes-scaled: true
+  needs-race: false
+  pact-resource:
+    key: warlock_pact_slots
+    display: "Espaços de Pacto"
+    min: 0
+    max: 3
+    scaling:
+      tier1: 1
+      tier2: 2
+      tier3: 3
+      tier4: 3
+    regen-out-of-combat:
+      delay: 14
+      interval: 12
+      amount: 1
+  scoreboard:
+    hex-stacks: "warlock_hex_stacks"
+    eldritch-window: "warlock_eldritch_window"
+    major-cd: "warlock_major_cd"
+    placeholders:
+      hex-stacks: "%skills_warlock_hex_stacks%"
+      hex-timer: "%skills_warlock_hex_timer%"
+      eldritch-window: "%skills_warlock_eldritch_window%"
+      major-cd: "%skills_warlock_major_cd%"
+attributes:
+  health-base: 26
+  health-scale: 1.8
+  mana-base: 160
+  mana-scale: 22
+  walk-speed-base: 0.02
+  walk-speed-scale: 0.0025
+  physical-defense-base: 1
+  physical-defense-scale: 0.4
+  magical-defense-base: 3
+  magical-defense-scale: 0.9
+  skill-damage: 3.0
+  attack-damage: 1.0
+  level-bonus:
+    1:
+      health: 26
+      defense: 2
+      speed: 0.0
+    5:
+      health: 38
+      defense: 3
+      speed: 0.01
+    11:
+      health: 56
+      defense: 4
+      speed: 0.015
+    17:
+      health: 74
+      defense: 6
+      speed: 0.02
+mana:
+  regen-combat: 7
+  regen-out: 12
+exp:
+  kill-multiplier: 1.0
+  quest-multiplier: 1.2
+  pvp-multiplier: 1.1
+skills:
+  tier1:
+    active:
+      - warlock_hex
+      - warlock_eldritch_blast
+    passive:
+      - warlock_pact_ward
+  tier2:
+    active:
+      - warlock_hex
+      - warlock_eldritch_blast
+    passive:
+      - warlock_pact_ward
+      - warlock_hex_study
+  tier3:
+    active:
+      - warlock_hex
+      - warlock_eldritch_blast
+    passive:
+      - warlock_pact_ward
+      - warlock_hex_study
+      - warlock_invocation_reserve
+  tier4:
+    active:
+      - warlock_hex
+      - warlock_eldritch_blast
+    passive:
+      - warlock_pact_ward
+      - warlock_hex_study
+      - warlock_invocation_reserve
+subclasses:
+  fiend:
+    display: "§cPacto do Diabólico"
+    file: warlock_fiend.yml
+  archfey:
+    display: "§aPacto da Arquifada"
+    file: warlock_archfey.yml
+  greatoldone:
+    display: "§3Pacto do Grande Antigo"
+    file: warlock_greatoldone.yml

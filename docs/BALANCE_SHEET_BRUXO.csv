@@ -1,0 +1,21 @@
+Skill,Tipo,Custo,Duração,CD,Dano/Redução,Área,Notas PvP,Tier
+warlock_hex,Ativa,30 Mana,12s (+2s passiva),45s,+18% dano recebido alvo,Single target,"Cooldown individual, não empilha",T1
+warlock_eldritch_blast,Ativa,18 Mana,Janela 10s,5s,3 projéteis 65% cada,Raios consecutivos,"Telegraph curto; punível por escudos",T1
+warlock_pact_ward,Passiva,0,Enquanto Hex ativo,N/A,+6% resistência mágica,+5% speed,Habilita alerta de resistência,T1
+warlock_hex_study,Passiva,0,Contínua,N/A,+4% penetração por alvo (máx. 12%),Self,Atualiza HUD e limita stacks,T2
+warlock_invocation_reserve,Passiva,0,Tick 45s OOC,N/A,+1 espaço pacto,Self,Checa combate antes de regenerar,T3
+warlock_fiend_chicote_infernal,Ativa,28 Mana,Instantâneo,45s,180% fogo,+5% dano recebido/stack (máx.3),Cone 5 blocos,Aplica DR de resistência fogo,T2
+warlock_fiend_armadilha_de_brasas,Ativa,32 Mana,Delay 4s,75s,140% fogo + root 2s,Raio 4 blocos,Sinalização visual forte,T2
+warlock_fiend_contrato_de_chamas,Ativa,35 Mana,10s,90s,12% lifesteal,Linha de visão,Cap 25% lifesteal total,T3
+warlock_fiend_portal_igneo,Ativa,40 Mana,4s trilha,120s,40%/s queimadura,Rastro 15 blocos,Telegraph 0.6s antes do teleporte,T3
+warlock_fiend_inferno_pactuado,Ultimate,65 Mana,8s dot,240s,250% impacto +8%/s fogo,Raio 6 blocos,Sem imunidade >45% mitigação,T4
+warlock_archfey_explosao_encantadora,Ativa,26 Mana,Confusão 3s,40s,150% arcano,Alvo único,Clones Mythic confundem,T2
+warlock_archfey_passo_brumoso,Ativa,30 Mana,Clones 2s,60s,Reposicionamento,10 blocos,Bloqueia mira inimiga,T2
+warlock_archfey_dominio_do_sonho,Ativa,34 Mana,4s sono,90s,0 dano direto,Single target,Quebra com dano alto,T3
+warlock_archfey_laco_feerico,Ativa,38 Mana,Root 5s + slow 3s,120s,0 dano,Raio 7 blocos,DR aplicado via scripts,T3
+warlock_archfey_cortejo_da_rainha,Ultimate,60 Mana,15s,240s,70% arcano/2s & -20% CD aliados,Raio 8 blocos,Aliados recebem buff apenas no interior,T4
+warlock_greatoldone_sussurros_devastadores,Ativa,24 Mana,8s,45s,120% psíquico +15% dano recebido,Single target,Verifica resistência psíquica,T2
+warlock_greatoldone_visoes_alienigenas,Ativa,30 Mana,6s slow,75s,0 dano,Raio 12 blocos,Revela invisíveis,T2
+warlock_greatoldone_marionete_mental,Ativa,32 Mana,3s,90s,Controle de movimento,Alvo único,Força deslocamento e silêncio,T3
+warlock_greatoldone_cascata_de_loucura,Ativa,40 Mana,Instantâneo,120s,100% +10%/stack Loucura,Raio 6 blocos,Limite de stacks monitorado,T3
+warlock_greatoldone_abismo_sussurrante,Ultimate,60 Mana,12s,240s,Medo em pulsos +20% mitigação,Raio 8 blocos,Puxa lentamente; total ≤45% mitigação,T4

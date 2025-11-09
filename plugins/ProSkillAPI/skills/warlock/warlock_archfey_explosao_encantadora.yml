@@ -1,0 +1,32 @@
+# Archfey Skill: Explosão Encantadora
+name: warlock_archfey_explosao_encantadora
+display: "§aExplosão Encantadora"
+icon: GLOW_BERRIES
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 40
+  cooldown-scale: 0
+  mana-cost-base: 26
+  mana-cost-scale: 0
+  range-base: 20
+  range-scale: 0
+description:
+  - "§aProjétil arcano que causa 150% dano e aplica confusão por 3s."
+  - "§7Aciona clones visuais via MythicMobs para reforçar fantasia feérica."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandBlast:
+        type: mechanic
+        data:
+          command: "skript run warlock_archfey_explosao %caster%"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§aSua energia encantadora explode sobre o alvo!"
+          targets: self

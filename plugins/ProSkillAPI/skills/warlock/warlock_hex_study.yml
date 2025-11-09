@@ -1,0 +1,25 @@
+# Passiva: Estudo de Hex
+name: warlock_hex_study
+display: "§5Estudo de Hex"
+icon: ENCHANTED_BOOK
+type: Passive
+max-level: 1
+description:
+  - "§7Amplia duração do Hex em +2s e revela stacks no HUD via PlaceholderAPI."
+  - "§7Cada alvo hexado concede +4% penetração mágica (máx. 12%)."
+components:
+  Tick:
+    type: trigger
+    data:
+      interval: 5
+    children:
+      SyncHUD:
+        type: mechanic
+        data:
+          command: "skript run warlock_update_hud %caster%"
+          silent: true
+      PenetrationStacks:
+        type: mechanic
+        data:
+          command: "skript run warlock_hex_penetration %caster%"
+          silent: true

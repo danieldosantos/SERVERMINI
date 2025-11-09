@@ -1,0 +1,48 @@
+# LuckPerms configuração de grupos para classe Bruxo
+lp creategroup class_warlock
+lp group class_warlock setdisplayname "Bruxo"
+lp group class_warlock meta add prefix "&5[Bruxo]&f "
+lp group class_warlock permission set class.warlock true
+lp group class_warlock permission set skillapi.class.warlock true
+lp group class_warlock permission set mythicmobs.item.warlock true
+lp group class_warlock permission set skript.command.hex true
+lp group class_warlock permission set skript.command.eldritch true
+lp group class_warlock permission set skript.command.kit_bruxo true
+lp group class_warlock permission set raceseffects.abilities true
+lp group class_warlock permission set placeholderapi.placeholder.skills_warlock_hex_stacks true
+
+lp creategroup class_warlock.fiend
+lp group class_warlock.fiend parent add class_warlock
+lp group class_warlock.fiend setdisplayname "Bruxo - Pacto do Diabólico"
+lp group class_warlock.fiend meta add prefix "&c[Fiend]&f "
+lp group class_warlock.fiend permission set skillapi.subclass.warlock_fiend true
+lp group class_warlock.fiend permission set mythicmobs.item.warlock.fiend true
+lp group class_warlock.fiend permission set skript.command.fiend_whip true
+lp group class_warlock.fiend permission set skript.command.fiend_trap true
+lp group class_warlock.fiend permission set skript.command.fiend_contract true
+lp group class_warlock.fiend permission set skript.command.fiend_gate true
+lp group class_warlock.fiend permission set skript.command.fiend_inferno true
+
+lp creategroup class_warlock.archfey
+lp group class_warlock.archfey parent add class_warlock
+lp group class_warlock.archfey setdisplayname "Bruxo - Pacto da Arquifada"
+lp group class_warlock.archfey meta add prefix "&a[Archfey]&f "
+lp group class_warlock.archfey permission set skillapi.subclass.warlock_archfey true
+lp group class_warlock.archfey permission set mythicmobs.item.warlock.archfey true
+lp group class_warlock.archfey permission set skript.command.archfey_burst true
+lp group class_warlock.archfey permission set skript.command.archfey_step true
+lp group class_warlock.archfey permission set skript.command.archfey_dream true
+lp group class_warlock.archfey permission set skript.command.archfey_laco true
+lp group class_warlock.archfey permission set skript.command.archfey_cortejo true
+
+lp creategroup class_warlock.greatoldone
+lp group class_warlock.greatoldone parent add class_warlock
+lp group class_warlock.greatoldone setdisplayname "Bruxo - Pacto do Grande Antigo"
+lp group class_warlock.greatoldone meta add prefix "&3[Old One]&f "
+lp group class_warlock.greatoldone permission set skillapi.subclass.warlock_greatoldone true
+lp group class_warlock.greatoldone permission set mythicmobs.item.warlock.greatoldone true
+lp group class_warlock.greatoldone permission set skript.command.oldone_whispers true
+lp group class_warlock.greatoldone permission set skript.command.oldone_visoes true
+lp group class_warlock.greatoldone permission set skript.command.oldone_marionete true
+lp group class_warlock.greatoldone permission set skript.command.oldone_cascata true
+lp group class_warlock.greatoldone permission set skript.command.oldone_abismo true

@@ -1,0 +1,32 @@
+# Great Old One Skill: Marionete Mental
+name: warlock_greatoldone_marionete_mental
+display: "§3Marionete Mental"
+icon: CHAIN
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 32
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+description:
+  - "§7Força o alvo a andar 3 blocos em direção indicada e silencia por 3s."
+  - "§7Inclui aviso sonoro e partículas violetas para PvP justo."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandPuppet:
+        type: mechanic
+        data:
+          command: "skript run warlock_oldone_marionete %caster%"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§3Fios invisíveis controlam seu inimigo."
+          targets: self

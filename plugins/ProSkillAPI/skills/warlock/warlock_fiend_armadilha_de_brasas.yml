@@ -1,0 +1,37 @@
+# Fiend Skill: Armadilha de Brasas
+name: warlock_fiend_armadilha_de_brasas
+display: "§cArmadilha de Brasas"
+icon: CAMPFIRE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 32
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+description:
+  - "§7Coloca um sigilo que explode em 4s causando 140% dano de fogo."
+  - "§7Inimigos atingidos ficam enraizados por 2s (telegraph com partículas)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandSigil:
+        type: mechanic
+        data:
+          command: "skript run warlock_fiend_brasas %caster%"
+          silent: true
+      ResistanceCheck:
+        type: mechanic
+        data:
+          command: "skript run warlock_resistance_cap %caster% fire"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§cVocê arma um sigilo de brasas incandescentes."
+          targets: self

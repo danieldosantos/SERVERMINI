@@ -1,0 +1,37 @@
+# Great Old One Skill: Sussurros Devastadores
+name: warlock_greatoldone_sussurros_devastadores
+display: "§3Sussurros Devastadores"
+icon: ECHO_SHARD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 24
+  mana-cost-scale: 0
+  range-base: 20
+  range-scale: 0
+description:
+  - "§3Inflige 120% dano psíquico e aplica Desespero (+15% dano recebido) por 8s."
+  - "§7Garante checagem de resistência psíquica racial via Skript."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandWhisper:
+        type: mechanic
+        data:
+          command: "skript run warlock_oldone_sussurros %caster%"
+          silent: true
+      ResistanceCheck:
+        type: mechanic
+        data:
+          command: "skript run warlock_resistance_cap %caster% psychic"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§3Sussurros além do véu atormentam seu alvo."
+          targets: self

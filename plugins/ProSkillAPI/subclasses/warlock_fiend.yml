@@ -1,0 +1,37 @@
+# Subclasse Pacto do Diabólico
+name: Warlock_Fiend
+display: "§cPacto do Diabólico"
+description:
+  - "§7Canaliza poder infernal com foco em dano explosivo e autosustentação."
+  - "§cAprimora queimaduras e drenos respeitando os limites de mitigação (≤45%) e roubo de vida (≤25%)."
+options:
+  needs-permission: true
+  parent: Warlock
+  mana-name: "Mana Pactual"
+skills:
+  tier1:
+    active:
+      - warlock_fiend_chicote_infernal
+      - warlock_fiend_armadilha_de_brasas
+    passive: []
+  tier2:
+    active:
+      - warlock_fiend_chicote_infernal
+      - warlock_fiend_armadilha_de_brasas
+      - warlock_fiend_contrato_de_chamas
+    passive: []
+  tier3:
+    active:
+      - warlock_fiend_chicote_infernal
+      - warlock_fiend_armadilha_de_brasas
+      - warlock_fiend_contrato_de_chamas
+      - warlock_fiend_portal_igneo
+    passive: []
+  tier4:
+    active:
+      - warlock_fiend_chicote_infernal
+      - warlock_fiend_armadilha_de_brasas
+      - warlock_fiend_contrato_de_chamas
+      - warlock_fiend_portal_igneo
+      - warlock_fiend_inferno_pactuado
+    passive: []

@@ -1,0 +1,42 @@
+# Skill ativa: Rajada Mística
+name: warlock_eldritch_blast
+display: "§5Rajada Mística"
+icon: BLAZE_ROD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 5
+  cooldown-scale: 0
+  mana-cost-base: 18
+  mana-cost-scale: 0
+  range-base: 26
+  range-scale: 0
+description:
+  - "§5Dispara uma janela de 3 projéteis canalizados ao longo de 10s."
+  - "§7Cada projétil causa 65% dano arcano e consome 6 mana da janela."
+  - "§7Integração com MythicMobs/Skript atualiza HUD de janela e próximo CD."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandStart:
+        type: mechanic
+        data:
+          command: "skript run warlock_eldritch_start %caster%"
+          silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: DRAGON_BREATH
+          amount-base: 24
+          amount-scale: 0
+          radius-base: 1.4
+          radius-scale: 0
+          target: self
+      Message:
+        type: mechanic
+        data:
+          message: "§5Rajada Mística carregada!"
+          targets: self

@@ -1,0 +1,32 @@
+# Archfey Ultimate: Cortejo da Rainha
+name: warlock_archfey_cortejo_da_rainha
+display: "§aCortejo da Rainha"
+icon: FLOWER_BANNER_PATTERN
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 60
+  mana-cost-scale: 0
+  range-base: 0
+  range-scale: 0
+description:
+  - "§aEvoca espíritos orbitais por 15s (70% arcano/2s) reduzindo CDs aliados em 20%."
+  - "§7Área de 8 blocos alinhada às diretrizes de balanceamento."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandSummon:
+        type: mechanic
+        data:
+          command: "skript run warlock_archfey_cortejo %caster%"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§aO cortejo da Rainha das Fadas atende ao chamado!"
+          targets: self

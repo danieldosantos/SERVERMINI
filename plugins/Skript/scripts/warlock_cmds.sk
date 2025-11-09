@@ -1,0 +1,245 @@
+# Skript - Comandos e HUD da classe Bruxo
+options:
+  prefix: &5[Bruxo]&f
+  hex-duration: 12
+  hex-duration-bonus: 2
+  hex-cooldown: 45
+  eldritch-window: 10
+  eldritch-cooldown: 5
+  pact-regen: 45
+  major-cd-objective: "warlock_major_cd"
+  hex-objective: "warlock_hex_stacks"
+  window-objective: "warlock_eldritch_window"
+  lp-class: "group.class_warlock"
+  lp-fiend: "group.class_warlock.fiend"
+  lp-archfey: "group.class_warlock.archfey"
+  lp-oldone: "group.class_warlock.greatoldone"
+
+function warlock_update_hud(p: player):
+  set {_name} to name of {_p}
+  set {_hex-stacks} to size of {warlock.hex.active.%uuid of {_p}%::*}
+  if {_hex-stacks} is not set:
+    set {_hex-stacks} to 0
+  execute console command "scoreboard players set %{_name}% {@hex-objective} %{_hex-stacks}%"
+  if {warlock.eldritch.window.%uuid of {_p}%} is set:
+    set {_elapsed} to difference between now and {warlock.eldritch.window.%uuid of {_p}%}
+    set {_elapsed} to {_elapsed} / 1 second
+    set {_remaining} to {@eldritch-window} - {_elapsed}
+    if {_remaining} < 0:
+      delete {warlock.eldritch.window.%uuid of {_p}%}
+      set {_remaining} to 0
+  else:
+    set {_remaining} to 0
+  execute console command "scoreboard players set %{_name}% {@window-objective} %floor({_remaining})%"
+  set {_major} to placeholder "%skills_warlock_major_cd%" for {_p}
+  if {_major} is not set:
+    set {_major} to 0
+  execute console command "scoreboard players set %{_name}% {@major-cd-objective} %{_major}%"
+
+function warlock_register_hex(p: player, target: text):
+  set {_uuid} to uuid of {_p}
+  set {warlock.hex.active.%{_uuid}%::%{target}%} to now
+  set {warlock.hex.cooldown.%{_uuid}%::%{target}%} to now
+  warlock_update_hud({_p})
+  send action bar "&5Hex aplicado em &d%{target}%" to {_p}
+
+function warlock_hex_apply(caster: text, target: text):
+  set {_p} to player named {_caster}
+  if {_p} is not set:
+    stop
+  if {_target} is "":
+    stop
+  set {_key} to "%{_target}%"
+  set {_last} to {warlock.hex.cooldown.%uuid of {_p}%::%{_key}%}
+  if {_last} is set:
+    if difference between now and {_last} < {@hex-cooldown} seconds:
+      send action bar "&cHex em %{_key}% ainda recarregando." to {_p}
+      stop
+  warlock_register_hex({_p}, {_key})
+
+function warlock_hex_cleanup():
+  loop {warlock.hex.active::*}:
+    set {_parts::*} to split "%loop-index%" at "::"
+    if size of {_parts::*} < 2:
+      continue
+    set {_uuid} to {_parts::1}
+    set {_target} to {_parts::2}
+    set {_player} to player with uuid {_uuid}
+    if {_player} is not set:
+      delete {warlock.hex.active.%loop-index%}
+      delete {warlock.hex.cooldown.%loop-index%}
+      next loop
+    if difference between now and {warlock.hex.active.%loop-index%} > ({@hex-duration} + {@hex-duration-bonus}) seconds:
+      delete {warlock.hex.active.%loop-index%}
+      warlock_update_hud({_player})
+
+function warlock_eldritch_start(caster: text):
+  set {_p} to player named {_caster}
+  if {_p} is not set:
+    stop
+  set {warlock.eldritch.window.%uuid of {_p}%} to now
+  warlock_update_hud({_p})
+  send action bar "&5Rajada ativa: projeteis liberados!" to {_p}
+
+function warlock_resistance_cap(caster: text, element: text):
+  set {_p} to player named {_caster}
+  if {_p} is not set:
+    stop
+  set {_placeholder} to placeholder "%raceseffects_resistance_elemental%" for {_p}
+  if {_placeholder} is not set:
+    stop
+  set {_value} to {_placeholder} parsed as number
+  if {_value} is not set:
+    stop
+  if {_value} > 0.45:
+    if {warlock.resist.warn.%uuid of {_p}%} is not set or difference between now and {warlock.resist.warn.%uuid of {_p}%} > 10 seconds:
+      set {warlock.resist.warn.%uuid of {_p}%} to now
+      send action bar "&6Resistência reduzida para respeitar o limite de 45%." to {_p}
+
+function warlock_hex_penetration(caster: text):
+  set {_p} to player named {_caster}
+  if {_p} is not set:
+    stop
+  set {_count} to size of {warlock.hex.active.%uuid of {_p}%::*}
+  if {_count} is not set:
+    set {_count} to 0
+  set {warlock.hex.penetration.%uuid of {_p}%} to {_count}
+
+function warlock_regen_pact(caster: text):
+  set {_p} to player named {_caster}
+  if {_p} is not set:
+    stop
+  if {warlock.pact.last.%uuid of {_p}%} is not set or difference between now and {warlock.pact.last.%uuid of {_p}%} > {@pact-regen} seconds:
+    set {warlock.pact.last.%uuid of {_p}%} to now
+    execute console command "skillapi give-mana %{_p}% 1"
+
+on load:
+  broadcast "&7warlock_cmds.sk carregado." to console
+  execute console command "scoreboard objectives add {@hex-objective} dummy"
+  execute console command "scoreboard objectives add {@window-objective} dummy"
+  execute console command "scoreboard objectives add {@major-cd-objective} dummy"
+
+every 5 seconds:
+  warlock_hex_cleanup()
+
+command /kit_bruxo:
+  permission: {@lp-class}
+  trigger:
+    clear player's inventory
+    execute console command "mm items give %player% EldritchWand"
+    execute console command "mm items give %player% HexTalisman"
+    execute console command "mm items give %player% PactLedger"
+    execute console command "scoreboard players set %player% {@hex-objective} 0"
+    execute console command "scoreboard players set %player% {@window-objective} 0"
+    execute console command "scoreboard players set %player% {@major-cd-objective} 0"
+    delete {warlock.hex.active.%uuid of player%::*}
+    delete {warlock.eldritch.window.%uuid of player%}
+    send "{@prefix} &7Kit base do Bruxo entregue."
+
+command /hex [<player>]:
+  aliases: /warlock_hex
+  permission: {@lp-class}
+  trigger:
+    set {_target} to arg-1
+    if {_target} is not set:
+      set {_target} to targeted entity
+    if {_target} is not set:
+      send "{@prefix} &cSelecione ou informe um alvo."
+      stop
+    execute console command "skillapi cast warlock_hex %player%"
+    warlock_update_hud(player)
+
+command /eldritch:
+  aliases: /warlock_eldritch
+  permission: {@lp-class}
+  trigger:
+    execute console command "skillapi cast warlock_eldritch_blast %player%"
+    warlock_update_hud(player)
+
+command /fiend_whip:
+  aliases: /fiend_chicote
+  permission: {@lp-fiend}
+  trigger:
+    execute console command "skillapi cast warlock_fiend_chicote_infernal %player%"
+
+command /fiend_trap:
+  aliases: /fiend_brasas
+  permission: {@lp-fiend}
+  trigger:
+    execute console command "skillapi cast warlock_fiend_armadilha_de_brasas %player%"
+
+command /fiend_contract:
+  permission: {@lp-fiend}
+  trigger:
+    execute console command "skillapi cast warlock_fiend_contrato_de_chamas %player%"
+
+command /fiend_gate:
+  permission: {@lp-fiend}
+  trigger:
+    execute console command "skillapi cast warlock_fiend_portal_igneo %player%"
+
+command /fiend_inferno:
+  permission: {@lp-fiend}
+  trigger:
+    execute console command "skillapi cast warlock_fiend_inferno_pactuado %player%"
+
+command /archfey_burst:
+  aliases: /archfey_explosao
+  permission: {@lp-archfey}
+  trigger:
+    execute console command "skillapi cast warlock_archfey_explosao_encantadora %player%"
+
+command /archfey_step:
+  aliases: /archfey_passo
+  permission: {@lp-archfey}
+  trigger:
+    execute console command "skillapi cast warlock_archfey_passo_brumoso %player%"
+
+command /archfey_dream:
+  permission: {@lp-archfey}
+  trigger:
+    execute console command "skillapi cast warlock_archfey_dominio_do_sonho %player%"
+
+command /archfey_laco:
+  permission: {@lp-archfey}
+  trigger:
+    execute console command "skillapi cast warlock_archfey_laco_feerico %player%"
+
+command /archfey_cortejo:
+  permission: {@lp-archfey}
+  trigger:
+    execute console command "skillapi cast warlock_archfey_cortejo_da_rainha %player%"
+
+command /oldone_whispers:
+  aliases: /oldone_sussurros
+  permission: {@lp-oldone}
+  trigger:
+    execute console command "skillapi cast warlock_greatoldone_sussurros_devastadores %player%"
+
+command /oldone_visoes:
+  permission: {@lp-oldone}
+  trigger:
+    execute console command "skillapi cast warlock_greatoldone_visoes_alienigenas %player%"
+
+command /oldone_marionete:
+  permission: {@lp-oldone}
+  trigger:
+    execute console command "skillapi cast warlock_greatoldone_marionete_mental %player%"
+
+command /oldone_cascata:
+  permission: {@lp-oldone}
+  trigger:
+    execute console command "skillapi cast warlock_greatoldone_cascata_de_loucura %player%"
+
+command /oldone_abismo:
+  permission: {@lp-oldone}
+  trigger:
+    execute console command "skillapi cast warlock_greatoldone_abismo_sussurrante %player%"
+
+# Glue: clique de itens MythicMobs
+on rightclick:
+  if player's tool is set:
+    if player's tool has nbt tag "psapi-skill":
+      set {_skill} to nbt tag "psapi-skill" of player's tool
+      execute console command "skillapi cast %{_skill}% %player%"
+      cancel event
