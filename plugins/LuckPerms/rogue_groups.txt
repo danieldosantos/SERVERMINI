@@ -1,0 +1,19 @@
+# LuckPerms configuração de grupos para classe Ladino
+lp creategroup class_rogue
+lp group class_rogue setdisplayname "Ladino"
+lp group class_rogue meta add prefix "&8[Ladino]&f "
+lp group class_rogue permission set class.rogue true
+lp group class_rogue permission set skillapi.class.rogue true
+lp group class_rogue permission set mythicmobs.item.rogue true
+lp group class_rogue permission set skript.command.furtivo true
+lp group class_rogue permission set skript.command.golpefurtivo true
+lp group class_rogue permission set command.cmd_ladino true
+
+lp creategroup class_rogue.arcane_trickster
+lp group class_rogue.arcane_trickster parent add class_rogue
+lp group class_rogue.arcane_trickster setdisplayname "Ladino - Trapaceiro Arcano"
+lp group class_rogue.arcane_trickster meta add prefix "&5[Arcano]&f "
+lp group class_rogue.arcane_trickster permission set skillapi.subclass.rogue_arcanetrickster true
+lp group class_rogue.arcane_trickster permission set mythicmobs.item.arcane_trickster true
+lp group class_rogue.arcane_trickster permission set skript.command.arcano true
+lp group class_rogue.arcane_trickster permission set skript.command.shadowstep true

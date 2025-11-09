@@ -15,11 +15,16 @@ command /kit_guerreiro:
     execute console command "mm items give ChampionShield 1 %player%"
     execute console command "mm items give BattlemasterWhip 1 %player%"
     execute console command "mm items give BattlemasterManual 1 %player%"
-    execute console command "mm items give EldritchKnightBlade 1 %player%"
-    execute console command "mm items give EldritchKnightFocus 1 %player%"
+    execute console command "mm items give EldritchKnightRuneblade 1 %player%"
+    execute console command "mm items give EldritchKnightRuneFocus 1 %player%"
+    execute console command "mm items give EldritchKnightGuardianSigil 1 %player%"
+    execute console command "mm items give EldritchKnightStaticTotem 1 %player%"
+    execute console command "mm items give EldritchKnightArcaneCodex 1 %player%"
     execute console command "scoreboard objectives add fighter_action_surge_cd dummy" if scoreboard objective "fighter_action_surge_cd" does not exist
     execute console command "scoreboard objectives add fighter_second_wind_cd dummy" if scoreboard objective "fighter_second_wind_cd" does not exist
     execute console command "scoreboard objectives add fighter_major_cd dummy" if scoreboard objective "fighter_major_cd" does not exist
+    execute console command "scoreboard objectives add rune_uptime dummy" if scoreboard objective "rune_uptime" does not exist
+    execute console command "scoreboard objectives add arcane_guardian dummy" if scoreboard objective "arcane_guardian" does not exist
     execute console command "scoreboard objectives add fighter_ooc dummy" if scoreboard objective "fighter_ooc" does not exist
     execute console command "scoreboard players set %player% fighter_ooc 1"
     send "{@prefix} &7Kit de testes entregue. Placeholders atualizados."
@@ -66,25 +71,30 @@ command /battle_giro:
   trigger:
     execute console command "skillapi cast fighter_battlemaster_victory_spin %player%"
 
-command /eld_escudo:
-  permission: group.class_fighter.eldritchknight
+command /arma_rúnica:
+  permission: group.class_fighter.eldritch_knight
   trigger:
-    execute console command "skillapi cast fighter_eldritchknight_arcane_shield %player%"
+    execute console command "skillapi cast fighter_eldritchknight_runic_weapon %player%"
 
-command /eld_tempestade:
-  permission: group.class_fighter.eldritchknight
+command /golpe_imbuido:
+  permission: group.class_fighter.eldritch_knight
   trigger:
-    execute console command "skillapi cast fighter_eldritchknight_blade_storm %player%"
+    execute console command "skillapi cast fighter_eldritchknight_imbued_strike %player%"
 
-command /eld_elemento <text>:
-  permission: group.class_fighter.eldritchknight
+command /guardiao_arcano:
+  permission: group.class_fighter.eldritch_knight
   trigger:
-    set {_element} to arg-1 parsed as text
-    if {_element} is not "fogo" and {_element} is not "gelo" and {_element} is not "raio":
-      send "{@prefix} &cOpções: fogo, gelo ou raio."
-      stop
-    set {fighter.element.%player%} to {_element}
-    send "{@prefix} &7Elemento definido para %{fighter.element.%player%}%."
+    execute console command "skillapi cast fighter_eldritchknight_arcane_guardian %player%"
+
+command /circulo_estatico:
+  permission: group.class_fighter.eldritch_knight
+  trigger:
+    execute console command "skillapi cast fighter_eldritchknight_static_circle %player%"
+
+command /gladio_arcano:
+  permission: group.class_fighter.eldritch_knight
+  trigger:
+    execute console command "skillapi cast fighter_eldritchknight_arcane_gladius %player%"
 
 command /fighter_ooc <text>:
   permission: op
@@ -154,30 +164,30 @@ on sneak left click with iron axe:
     if player has permission "group.class_fighter.battlemaster":
       execute console command "skillapi cast fighter_battlemaster_victory_spin %player%"
 
-on leftclick with diamond sword:
-  if name of player's tool is "&bLâmina Arcana":
-    if player has permission "group.class_fighter.eldritchknight":
-      execute console command "skillapi cast fighter_eldritchknight_arcane_blade %player%"
+on leftclick with netherite sword:
+  if name of player's tool is "&bLâmina Rúnica":
+    if player has permission "group.class_fighter.eldritch_knight":
+      execute console command "skillapi cast fighter_eldritchknight_imbued_strike %player%"
 
 on rightclick with amethyst shard:
-  if name of player's tool is "&bFoco Arcano":
-    if player has permission "group.class_fighter.eldritchknight":
-      execute console command "skillapi cast fighter_eldritchknight_arcane_shield %player%"
+  if name of player's tool is "&bFoco de Runas":
+    if player has permission "group.class_fighter.eldritch_knight":
+      execute console command "skillapi cast fighter_eldritchknight_runic_weapon %player%"
 
-on rightclick with ender pearl:
-  if name of player's tool is "&bRuna de Dobra":
-    if player has permission "group.class_fighter.eldritchknight":
-      execute console command "skillapi cast fighter_eldritchknight_tactical_teleport %player%"
+on rightclick with shield:
+  if name of player's tool is "&bSigilo Guardião":
+    if player has permission "group.class_fighter.eldritch_knight":
+      execute console command "skillapi cast fighter_eldritchknight_arcane_guardian %player%"
 
 on rightclick with lapis lazuli:
-  if name of player's tool is "&bSigilo de Baluarte":
-    if player has permission "group.class_fighter.eldritchknight":
-      execute console command "skillapi cast fighter_eldritchknight_energy_bulwark %player%"
+  if name of player's tool is "&bTotem Estático":
+    if player has permission "group.class_fighter.eldritch_knight":
+      execute console command "skillapi cast fighter_eldritchknight_static_shield %player%"
 
 on sneak left click with writable book:
-  if name of player's tool is "&bCódice Tempestuoso":
-    if player has permission "group.class_fighter.eldritchknight":
-      execute console command "skillapi cast fighter_eldritchknight_blade_storm %player%"
+  if name of player's tool is "&bCódice do Gládio":
+    if player has permission "group.class_fighter.eldritch_knight":
+      execute console command "skillapi cast fighter_eldritchknight_arcane_gladius %player%"
 
 # Funções utilitárias chamadas pelas skills via "skript run"
 function fighter_speed_cap(p: player):
@@ -256,4 +266,102 @@ function fighter_arcane_projectile(c: player, t: entity):
 
 function fighter_crit_window(p: player, amount: number, seconds: number):
   set {fighter.critbonus.%p%} to now + seconds parsed as number seconds
+
+function fighter_runic_weapon(p: player, seconds: number, bonus: number):
+  set {_duration} to seconds parsed as number
+  set {_name} to name of p
+  set {fighter.runic_weapon.%p%::bonus} to bonus parsed as number
+  set {fighter.runic_weapon.%p%::expires} to now + {_duration} seconds
+  execute console command "scoreboard players set %{_name}% rune_uptime %{_duration}%"
+  wait {_duration} seconds
+  delete {fighter.runic_weapon.%p%::bonus}
+  delete {fighter.runic_weapon.%p%::expires}
+  execute console command "scoreboard players set %{_name}% rune_uptime 0"
+
+function fighter_arcane_guardian(p: player, seconds: number, amount: number):
+  set {_duration} to seconds parsed as number
+  set {_name} to name of p
+  apply resistance 1 to p for {_duration} seconds
+  execute console command "scoreboard players set %{_name}% arcane_guardian %{_duration}%"
+  wait {_duration} seconds
+  execute console command "scoreboard players set %{_name}% arcane_guardian 0"
+
+function fighter_arcane_discipline(p: player, seconds: number, amount: number):
+  set {_duration} to seconds parsed as number
+  apply resistance 1 to p for {_duration} seconds
+  execute console command "placeholderapi refresh %player% skills_damage_taken"
+
+function fighter_firm_seal(p: player, seconds: number):
+  set {_duration} to seconds parsed as number
+  set {fighter.firmseal.%p%} to now + {_duration} seconds
+  apply slowness 1 to p for 1 second
+  wait {_duration} seconds
+  delete {fighter.firmseal.%p%}
+
+function fighter_arcanized_assault(p: player, seconds: number, amount: number):
+  set {_duration} to seconds parsed as number
+  set {fighter.penetration.%p%} to amount parsed as number
+  wait {_duration} seconds
+  delete {fighter.penetration.%p%}
+
+function fighter_static_shield(p: player, seconds: number, amount: number):
+  set {_duration} to seconds parsed as number
+  apply resistance 1 to p for {_duration} seconds
+  execute console command "placeholderapi refresh %player% skills_projectile_resist"
+
+function fighter_guard_leap(p: player, dist: number):
+  push p forward dist parsed as number
+
+function fighter_guard_zone(p: player, seconds: number, amount: number):
+  set {_duration} to seconds parsed as number
+  repeat {_duration} times:
+    loop all entities in radius 4 around p:
+      if loop-entity is not p:
+        apply weakness 1 to loop-entity for 2 seconds
+    wait 1 second
+
+function fighter_sundering_cut(p: player, t: entity, seconds: number, amount: number):
+  if t is set:
+    apply glowing to t for seconds parsed as number seconds
+
+function fighter_defensive_aura(c: player, t: player, seconds: number, amount: number):
+  if t is set:
+    apply resistance 1 to t for seconds parsed as number seconds
+
+function fighter_arcane_charge(p: player, dist: number, damage: number):
+  push p forward dist parsed as number
+
+function fighter_war_mark(c: player, t: entity, seconds: number, amount: number):
+  if t is set:
+    set {_duration} to seconds parsed as number
+    apply glowing to t for {_duration} seconds
+    set {fighter.warmark.%c%} to uuid of t
+    wait {_duration} seconds
+    delete {fighter.warmark.%c%}
+
+function fighter_arcane_gladius(p: player, seconds: number, amount: number):
+  set {fighter.arcane_gladius.%p%::expires} to now + seconds parsed as number seconds
+  wait seconds parsed as number seconds
+  delete {fighter.arcane_gladius.%p%::expires}
+
+function fighter_static_circle(p: player, radius: number, seconds: number):
+  set {_duration} to seconds parsed as number
+  set {_radius} to radius parsed as number
+  repeat {_duration} times:
+    loop all entities in radius {_radius} around p:
+      if loop-entity is not p:
+        apply slowness 1 to loop-entity for 2 seconds
+    wait 1 second
+
+function fighter_iron_crown(p: player, seconds: number, amount: number):
+  set {_duration} to seconds parsed as number
+  apply resistance 2 to p for {_duration} seconds
+
+function fighter_victory_thrust(p: player, t: entity, mana: number):
+  if t is a living entity:
+    wait 1 tick
+    if t is dead:
+      set {_uuid} to uuid of p
+      set {_mana} to mana parsed as number
+      execute console command "auraskills player %{_uuid}% resource mana add %{_mana}%"
 

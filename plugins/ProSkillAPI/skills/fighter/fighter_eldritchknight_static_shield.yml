@@ -1,0 +1,32 @@
+# Tier 2: Escudo Estático
+name: fighter_eldritchknight_static_shield
+display: "§bEscudo Estático"
+icon: AMETHYST_CLUSTER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+description:
+  - "§7Reduz dano de projéteis em 30% por 8s."
+  - "§8Aplica campo estático com retorno decrescente."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Shield:
+        type: mechanic
+        data:
+          command: "skript run fighter_static_shield %caster% 8 0.30"
+          silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: ELECTRIC_SPARK
+          amount-base: 25
+          radius-base: 2
+          target: caster

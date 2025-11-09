@@ -1,0 +1,32 @@
+# Tier 1: Ilusão Breve
+name: rogue_arcanetrickster_brief_illusion
+display: "§dIlusão Breve"
+icon: PLAYER_HEAD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+description:
+  - "§7Cria uma cópia estacionária por 6s que pode atrair mobs."
+  - "§8Invoca armor stand temporário via Skript."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      SummonDecoy:
+        type: mechanic
+        data:
+          command: "skript run rogue_spawn_decoy %caster% 6"
+          silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: CLOUD
+          amount-base: 20
+          radius-base: 1.5
+          target: caster

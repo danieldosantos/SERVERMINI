@@ -1,0 +1,33 @@
+# Tier 2: Névoa Enganadora
+name: rogue_arcanetrickster_deceptive_mist
+display: "§5Névoa Enganadora"
+icon: GLASS_BOTTLE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 6
+description:
+  - "§7Cria névoa de 6 blocos por 8s reduzindo alcance de detecção inimigo."
+  - "§8Integra PlaceholderAPI para atualizar HUD de furtividade."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      MistField:
+        type: mechanic
+        data:
+          command: "skript run rogue_deceptive_mist %caster% 6 8"
+          silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: LARGE_SMOKE
+          amount-base: 40
+          radius-base: 3
+          target: caster

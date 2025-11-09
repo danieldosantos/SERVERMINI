@@ -1,0 +1,30 @@
+# Tier 1: Disciplina Arcana
+name: fighter_eldritchknight_arcane_discipline
+display: "§bDisciplina Arcana"
+icon: BOOK
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+description:
+  - "§7Reduz dano recebido em 15% por 6s."
+  - "§8Checa limites globais de mitigação."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run fighter_arcane_discipline %caster% 6 0.15"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§bSua disciplina arcana minimiza impactos."
+          targets: self

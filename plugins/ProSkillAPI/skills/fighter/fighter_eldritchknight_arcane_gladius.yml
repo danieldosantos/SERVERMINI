@@ -1,0 +1,32 @@
+# Tier 4: Gládio Arcano (Ultimate)
+name: fighter_eldritchknight_arcane_gladius
+display: "§bGládio Arcano"
+icon: NETHERITE_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 50
+  mana-cost-scale: 0
+description:
+  - "§712s: golpes atingem em cleave, +20% dano e +20% penetração."
+  - "§8Integra retorno decrescente com Arma Rúnica."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run fighter_arcane_gladius %caster% 12 0.20"
+          silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: SWEEP_ATTACK
+          amount-base: 12
+          radius-base: 3
+          target: caster

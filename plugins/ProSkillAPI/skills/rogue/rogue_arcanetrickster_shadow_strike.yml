@@ -1,0 +1,44 @@
+# Tier 2: Golpe Sombrio
+name: rogue_arcanetrickster_shadow_strike
+display: "§5Golpe Sombrio"
+icon: NETHERITE_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  range-base: 4
+description:
+  - "§7130% dano base +40% adicional se sair da furtividade."
+  - "§8Consome estado de furtividade da Sombra Arcana."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 4
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 1.0
+              classifier: magic
+          Bonus:
+            type: mechanic
+            data:
+              command: "skript run rogue_shadow_strike %caster% %target%"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: SWEEP_ATTACK
+          amount-base: 1
+          radius-base: 0.5
+          target: caster

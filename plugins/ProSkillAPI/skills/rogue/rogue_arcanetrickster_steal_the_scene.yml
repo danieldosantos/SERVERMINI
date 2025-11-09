@@ -1,0 +1,28 @@
+# Tier 4: Roubando a Cena
+name: rogue_arcanetrickster_steal_the_scene
+display: "§5Roubando a Cena"
+icon: EMERALD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+description:
+  - "§7Por 15s, ao abater inimigo restaura 40 mana e reduz 8s dos CDs ativos."
+  - "§8Efeito limitado a 1 gatilho por alvo e respeita limites de mana."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run rogue_steal_scene %caster% 15"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§5Você se alimenta do caos da batalha."
+          targets: self

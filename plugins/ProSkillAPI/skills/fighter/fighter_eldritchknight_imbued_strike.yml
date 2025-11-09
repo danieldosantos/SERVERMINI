@@ -1,0 +1,39 @@
+# Tier 1: Golpe Imbuído
+name: fighter_eldritchknight_imbued_strike
+display: "§bGolpe Imbuído"
+icon: IRON_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 4
+description:
+  - "§7Desfere golpe imbuído causando 130% dano mágico."
+  - "§8Contribui para uptime da Arma Rúnica."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 4
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 1.3
+              classifier: magic
+      Visual:
+        type: mechanic
+        data:
+          effect: SWEEP_ATTACK
+          amount-base: 1
+          radius-base: 0.5
+          target: caster

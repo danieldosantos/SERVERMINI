@@ -1,0 +1,36 @@
+# Skill Comum: Guardião Arcano
+name: fighter_eldritchknight_arcane_guardian
+display: "§bGuardião Arcano"
+icon: SHIELD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+description:
+  - "§7Concede +15% mitigação mágica por 6s."
+  - "§8Respeita limite global de mitigação (45%)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Check:
+        type: condition
+        data:
+          placeholder: "%raceseffects_magical_resist%"
+          compare: "<0.45"
+        children:
+          Buff:
+            type: mechanic
+            data:
+              command: "skript run fighter_arcane_guardian %caster% 6 0.15"
+              silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§bRunas protetoras o envolvem."
+          targets: self

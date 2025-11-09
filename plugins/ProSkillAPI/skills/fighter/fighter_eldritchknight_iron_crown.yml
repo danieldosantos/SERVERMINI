@@ -1,0 +1,30 @@
+# Tier 4: Coroa de Ferro
+name: fighter_eldritchknight_iron_crown
+display: "§bCoroa de Ferro"
+icon: NETHERITE_HELMET
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 150
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+description:
+  - "§7Concede +25% mitigação total por 6s (não acumula com escudos maiores)."
+  - "§8Consulta caps globais antes de aplicar."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run fighter_iron_crown %caster% 6 0.25"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§bUma coroa rúnica protege seu corpo."
+          targets: self

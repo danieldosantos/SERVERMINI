@@ -1,0 +1,51 @@
+# Tier 1: Lâmina Ilusória
+name: rogue_arcanetrickster_illusory_blade
+display: "§dLâmina Ilusória"
+icon: AMETHYST_SHARD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 50
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 4
+description:
+  - "§7110% de dano arcano e confusão leve por 2s."
+  - "§8Controle respeita imunidade decrescente."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 4
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 1.1
+              classifier: magic
+          Confuse:
+            type: mechanic
+            data:
+              potion: NAUSEA
+              seconds-base: 2
+              amplifier-base: 0
+              indicator: "§dConfuso"
+          ImmunityCheck:
+            type: mechanic
+            data:
+              command: "skript run rogue_apply_diminishing %target% 3"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: CRIT_MAGIC
+          amount-base: 10
+          radius-base: 1
+          target: target

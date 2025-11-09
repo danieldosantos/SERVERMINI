@@ -1,0 +1,40 @@
+# Tier 3: Aura Defensiva
+name: fighter_eldritchknight_defensive_aura
+display: "§bAura Defensiva"
+icon: HEART_OF_THE_SEA
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 40
+  mana-cost-scale: 0
+  radius-base: 6
+description:
+  - "§7Aliados em 6 blocos recebem +10% mitigação por 8s."
+  - "§8Respeita caps globais de resistência."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Allies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          group: ally
+        children:
+          Buff:
+            type: mechanic
+            data:
+              command: "skript run fighter_defensive_aura %caster% %target% 8 0.10"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: HAPPY_VILLAGER
+          amount-base: 25
+          radius-base: 2
+          target: caster

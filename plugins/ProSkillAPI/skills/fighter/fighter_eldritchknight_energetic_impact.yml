@@ -1,0 +1,44 @@
+# Tier 1: Impacto Energético
+name: fighter_eldritchknight_energetic_impact
+display: "§bImpacto Energético"
+icon: LAPIS_LAZULI
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 50
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 4
+description:
+  - "§7Golpe mágico causando 110% dano e pequeno empurrão."
+  - "§8Empurrão respeita limite de controle (<=3s)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 4
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 1.1
+              classifier: magic
+          Knockback:
+            type: mechanic
+            data:
+              knockback-base: 0.7
+              knockup-base: 0.1
+      Visual:
+        type: mechanic
+        data:
+          effect: ELECTRIC_SPARK
+          amount-base: 15
+          radius-base: 1
+          target: target

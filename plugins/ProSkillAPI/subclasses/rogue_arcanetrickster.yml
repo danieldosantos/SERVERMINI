@@ -1,0 +1,84 @@
+# Subclasse Ladino Trapaceiro Arcano
+name: Rogue_ArcaneTrickster
+display: "§5Trapaceiro Arcano"
+description:
+  - "§7Ladino que combina furtividade com truques arcanos rápidos."
+  - "§5Mantém bursts curtos e controle leve para isolar alvos."
+options:
+  needs-permission: true
+  parent: Rogue
+  focus: hybrid
+  mana-name: "Mana"
+  mana-regen: 14
+  mana-max: 150
+  scoreboard:
+    charges: "arcane_charges"
+    stealth: "stealth_time"
+    placeholders:
+      charges: "%skills_arcane_charges%"
+      stealth: "%skills_stealth_time%"
+skills:
+  tier1:
+    active:
+      - rogue_arcanetrickster_arcane_strike
+      - rogue_arcanetrickster_shadow_shroud
+      - rogue_arcanetrickster_illusory_blade
+      - rogue_arcanetrickster_phantom_hand
+      - rogue_arcanetrickster_brief_illusion
+      - rogue_arcanetrickster_silent_step
+    passive: []
+  tier2:
+    active:
+      - rogue_arcanetrickster_arcane_strike
+      - rogue_arcanetrickster_shadow_shroud
+      - rogue_arcanetrickster_illusory_blade
+      - rogue_arcanetrickster_phantom_hand
+      - rogue_arcanetrickster_brief_illusion
+      - rogue_arcanetrickster_silent_step
+      - rogue_arcanetrickster_shadow_strike
+      - rogue_arcanetrickster_phantom_cord
+      - rogue_arcanetrickster_deceptive_mist
+      - rogue_arcanetrickster_runic_dart
+    passive: []
+  tier3:
+    active:
+      - rogue_arcanetrickster_arcane_strike
+      - rogue_arcanetrickster_shadow_shroud
+      - rogue_arcanetrickster_illusory_blade
+      - rogue_arcanetrickster_phantom_hand
+      - rogue_arcanetrickster_brief_illusion
+      - rogue_arcanetrickster_silent_step
+      - rogue_arcanetrickster_shadow_strike
+      - rogue_arcanetrickster_phantom_cord
+      - rogue_arcanetrickster_deceptive_mist
+      - rogue_arcanetrickster_runic_dart
+      - rogue_arcanetrickster_shadow_step
+      - rogue_arcanetrickster_phantasmal_blade
+      - rogue_arcanetrickster_directed_silence
+      - rogue_arcanetrickster_night_veil
+    passive: []
+  tier4:
+    active:
+      - rogue_arcanetrickster_arcane_strike
+      - rogue_arcanetrickster_shadow_shroud
+      - rogue_arcanetrickster_illusory_blade
+      - rogue_arcanetrickster_phantom_hand
+      - rogue_arcanetrickster_brief_illusion
+      - rogue_arcanetrickster_silent_step
+      - rogue_arcanetrickster_shadow_strike
+      - rogue_arcanetrickster_phantom_cord
+      - rogue_arcanetrickster_deceptive_mist
+      - rogue_arcanetrickster_runic_dart
+      - rogue_arcanetrickster_shadow_step
+      - rogue_arcanetrickster_phantasmal_blade
+      - rogue_arcanetrickster_directed_silence
+      - rogue_arcanetrickster_night_veil
+      - rogue_arcanetrickster_final_curtain
+      - rogue_arcanetrickster_steal_the_scene
+      - rogue_arcanetrickster_shadow_dance
+      - rogue_arcanetrickster_brief_eclipse
+    passive: []
+notes:
+  - "HUD utiliza {arcane_charges} e {stealth_time} para controlar recursos arcanos."
+  - "Controle respeita imunidades decrescentes via funções Skript."
+  - "Buffs de velocidade respeitam limite global de +0.05 velocidade total."

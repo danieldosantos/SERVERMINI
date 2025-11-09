@@ -29,12 +29,14 @@ lp group class_fighter.battlemaster permission set skript.command.manobra true
 lp group class_fighter.battlemaster permission set skript.command.battle_comando true
 lp group class_fighter.battlemaster permission set skript.command.battle_giro true
 
-lp creategroup class_fighter.eldritchknight
-lp group class_fighter.eldritchknight parent add class_fighter
-lp group class_fighter.eldritchknight setdisplayname "Guerreiro - Cavaleiro Élfico"
-lp group class_fighter.eldritchknight meta add prefix "&b[Eldritch]&f "
-lp group class_fighter.eldritchknight permission set skillapi.subclass.fighter_eldritchknight true
-lp group class_fighter.eldritchknight permission set mythicmobs.item.eldritchknight true
-lp group class_fighter.eldritchknight permission set skript.command.eld_escudo true
-lp group class_fighter.eldritchknight permission set skript.command.eld_tempestade true
-lp group class_fighter.eldritchknight permission set skript.command.eld_elemento true
+lp creategroup class_fighter.eldritch_knight
+lp group class_fighter.eldritch_knight parent add class_fighter
+lp group class_fighter.eldritch_knight setdisplayname "Guerreiro - Cavaleiro Arcano"
+lp group class_fighter.eldritch_knight meta add prefix "&b[Eldritch]&f "
+lp group class_fighter.eldritch_knight permission set skillapi.subclass.fighter_eldritchknight true
+lp group class_fighter.eldritch_knight permission set mythicmobs.item.eldritch_knight true
+lp group class_fighter.eldritch_knight permission set skript.command.arma_rúnica true
+lp group class_fighter.eldritch_knight permission set skript.command.golpe_imbuido true
+lp group class_fighter.eldritch_knight permission set skript.command.guardiao_arcano true
+lp group class_fighter.eldritch_knight permission set skript.command.circulo_estatico true
+lp group class_fighter.eldritch_knight permission set skript.command.gladio_arcano true

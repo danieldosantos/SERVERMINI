@@ -1,0 +1,44 @@
+# Tier 1: Mãos Fantasmas
+name: rogue_arcanetrickster_phantom_hand
+display: "§dMãos Fantasmas"
+icon: SPECTRAL_ARROW
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 15
+  mana-cost-scale: 0
+  range-base: 6
+description:
+  - "§7Desarma e empurra levemente um alvo pequeno."
+  - "§8Utiliza comando Skript para devolver arma após 3s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 6
+          group: enemy
+        children:
+          Push:
+            type: mechanic
+            data:
+              knockback-base: 0.6
+              knockup-base: 0.1
+          Disarm:
+            type: mechanic
+            data:
+              command: "skript run rogue_phantom_hand %caster% %target% 3"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: SPELL
+          amount-base: 15
+          radius-base: 1
+          target: target

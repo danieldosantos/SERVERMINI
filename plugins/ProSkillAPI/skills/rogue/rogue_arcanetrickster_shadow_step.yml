@@ -1,0 +1,36 @@
+# Tier 3: Passo das Sombras
+name: rogue_arcanetrickster_shadow_step
+display: "§8Passo das Sombras"
+icon: BLACK_DYE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+description:
+  - "§7Teleporta-se até 8 blocos e recebe furtividade por 1s."
+  - "§8Ativa comando Skript /shadowstep para binds."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Blink:
+        type: mechanic
+        data:
+          command: "skript run rogue_shadow_step %caster% 8"
+          silent: true
+      Stealth:
+        type: mechanic
+        data:
+          potion: INVISIBILITY
+          seconds-base: 1
+          amplifier-base: 0
+      Message:
+        type: mechanic
+        data:
+          message: "§8Você desliza pelas sombras."
+          targets: self

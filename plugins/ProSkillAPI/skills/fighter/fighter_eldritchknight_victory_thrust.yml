@@ -1,0 +1,44 @@
+# Tier 4: Estocada da Vitória
+name: fighter_eldritchknight_victory_thrust
+display: "§bEstocada da Vitória"
+icon: SPEAR
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  range-base: 5
+description:
+  - "§7Ataque perfurante de 200% dano. Se eliminar o alvo, restaura 40 mana."
+  - "§8Verificação ocorre via Skript para evitar abusos."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 5
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 2.0
+              classifier: magic
+          Execute:
+            type: mechanic
+            data:
+              command: "skript run fighter_victory_thrust %caster% %target% 40"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: SWEEP_ATTACK
+          amount-base: 1
+          radius-base: 0.6
+          target: caster

@@ -1,0 +1,44 @@
+# Tier 4: Eclipse Breve
+name: rogue_arcanetrickster_brief_eclipse
+display: "§5Eclipse Breve"
+icon: OBSIDIAN
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 150
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 8
+description:
+  - "§7Escurece área de 8 blocos por 6s, reduzindo precisão inimiga em 10%."
+  - "§8Aplica cegueira leve e integra HUD via PlaceholderAPI."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Area:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          group: enemy
+        children:
+          Blind:
+            type: mechanic
+            data:
+              potion: BLINDNESS
+              seconds-base: 2
+              amplifier-base: 0
+          AccuracyDebuff:
+            type: mechanic
+            data:
+              command: "skript run rogue_accuracy_debuff %caster% %target% 6"
+              silent: true
+      Field:
+        type: mechanic
+        data:
+          command: "skript run rogue_eclipse_field %caster% 8 6"
+          silent: true

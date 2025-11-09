@@ -1,0 +1,36 @@
+# Tier 1: Passo Silencioso
+name: rogue_arcanetrickster_silent_step
+display: "§dPasso Silencioso"
+icon: LEATHER_BOOTS
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+description:
+  - "§7Ganha +0.03 de velocidade e silencia passos por 8s."
+  - "§8Verifica limite global de velocidade (+0.05)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      SpeedBuff:
+        type: mechanic
+        data:
+          potion: SPEED
+          seconds-base: 8
+          amplifier-base: 0
+      StepSilence:
+        type: mechanic
+        data:
+          command: "skript run rogue_silent_step %caster% 8 0.03"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§dSeus passos tornam-se inaudíveis."
+          targets: self

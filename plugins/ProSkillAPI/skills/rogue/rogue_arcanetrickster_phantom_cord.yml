@@ -1,0 +1,51 @@
+# Tier 2: Corda Fantasma
+name: rogue_arcanetrickster_phantom_cord
+display: "§5Corda Fantasma"
+icon: TRIPWIRE_HOOK
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  range-base: 10
+description:
+  - "§7Puxa o alvo em até 3 blocos e aplica -15% velocidade por 6s."
+  - "§8Utiliza resistência decrescente via Skript."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          range-base: 10
+          group: enemy
+        children:
+          Pull:
+            type: mechanic
+            data:
+              pull-base: 0.6
+              pull-y-base: 0.0
+          Slow:
+            type: mechanic
+            data:
+              potion: SLOW
+              seconds-base: 6
+              amplifier-base: 0
+              indicator: "§5-15% mov"
+          Diminish:
+            type: mechanic
+            data:
+              command: "skript run rogue_apply_diminishing %target% 6"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: SPELL_INSTANT
+          amount-base: 12
+          radius-base: 1
+          target: target

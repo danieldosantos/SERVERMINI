@@ -1,0 +1,46 @@
+# Tier 3: Silêncio Direcionado
+name: rogue_arcanetrickster_directed_silence
+display: "§8Silêncio Direcionado"
+icon: GOAT_HORN
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  range-base: 5
+description:
+  - "§7Cone de 5 blocos aplicando silêncio por 2s (DR aplicada)."
+  - "§8Usa PlaceholderAPI para comunicar duração no HUD."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Cone:
+        type: target
+        data:
+          shape: cone
+          range-base: 5
+          angle-base: 60
+          group: enemy
+        children:
+          Silence:
+            type: mechanic
+            data:
+              command: "skript run rogue_apply_silence %caster% %target% 2"
+              silent: true
+          Diminish:
+            type: mechanic
+            data:
+              command: "skript run rogue_apply_diminishing %target% 4"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: SONIC_BOOM
+          amount-base: 1
+          radius-base: 3
+          target: caster
