@@ -153,8 +153,9 @@ command /talento [<text>]:
 
 command /harmonia_hibrida:
   trigger:
-    if player has permission "lp.race_meioelfo":
-      execute console command "{@skillcmd} %player% HarmoniaHibrida"
+    if player has permission "lp.race_half_elf":
+      execute console command "{@skillcmd} %player% HalfElf_TatoSocial"
+      send "&eHarmonia Híbrida foi aposentada. Novo efeito: Tato Social." to player
     else:
       send "&cSomente meio-elfos."
 
@@ -232,7 +233,10 @@ function give_race_kit(p: player, raceKey: text):
     add "TalentToken" to {_kit::*}
     add "HumanSignet" to {_kit::*}
   else if {_racekey} is "meio_elfo":
-    add "HalfElfHarmonyOrb" to {_kit::*}
+    add "HalfElfFeather" to {_kit::*}
+    add "HighLoreSigil" to {_kit::*}
+    add "DrowMoonbrooch" to {_kit::*}
+    add "GroveCharm" to {_kit::*}
   else if {_racekey} is "meio_orc":
     add "HalfOrcBattleBrand" to {_kit::*}
   else if {_racekey} is "tiefling":

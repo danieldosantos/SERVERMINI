@@ -1,0 +1,55 @@
+# ProSkillAPI - Habilidades da herança Elfo da Floresta
+skills:
+  HalfElf_CamuflagemSilvestre:
+    display: "&2Camuflagem Silvestre"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Concede camuflagem adaptativa (não invisibilidade) por 10s quando em
+      biomas florestais. Cancela ao atacar, sofrer dano direto ou sair da área.
+    tiers:
+      T1: { cooldown: 90, duration: 10, speed_bonus: 0.01 }
+      T2: { cooldown: 90, duration: 10, speed_bonus: 0.012 }
+      T3: { cooldown: 85, duration: 11, speed_bonus: 0.015 }
+      T4: { cooldown: 80, duration: 12, speed_bonus: 0.015 }
+    cost:
+      resource: stamina
+      amount: 16
+    requirements:
+      biome: forest
+    effects:
+      - target: self
+        type: status
+        id: camouflage
+        duration: { tier: duration }
+        value: 0.4
+      - target: self
+        type: status
+        id: speed
+        duration: { tier: duration }
+        value: { tier: speed_bonus }
+    notes: "Camuflagem reduz detecção, mas não concede invisibilidade completa nem ignora tracking mágico."
+  HalfElf_FlechaBosque:
+    display: "&aFlecha do Bosque"
+    type: ACTIVE
+    skill_class: racial
+    description: "Dispara flecha natural que causa 120% do dano de arma e marca o alvo por 6s, aumentando dano da próxima flecha em 5%."
+    tiers:
+      T1: { cooldown: 60, damage_multiplier: 1.2, mark_duration: 6, mark_bonus: 0.05 }
+      T2: { cooldown: 60, damage_multiplier: 1.22, mark_duration: 6, mark_bonus: 0.055 }
+      T3: { cooldown: 60, damage_multiplier: 1.25, mark_duration: 6, mark_bonus: 0.06 }
+      T4: { cooldown: 55, damage_multiplier: 1.28, mark_duration: 6, mark_bonus: 0.06 }
+    cost:
+      resource: stamina
+      amount: 12
+    effects:
+      - target: enemy_single
+        type: projectile
+        damage_multiplier: { tier: damage_multiplier }
+        element: piercing
+      - target: enemy_single
+        type: debuff
+        id: woodland_mark
+        duration: { tier: mark_duration }
+        value: { tier: mark_bonus }
+    notes: "Marca aplica DR acumulativa ao combinar com habilidades de Patrulheiro para manter bônus ≤15%."

@@ -1,0 +1,21 @@
+Variação,Traço,Tipo,Custo (Carga/Mana),Duração,CD,Área,Bônus/Redução,Notas PvP,Tier,Observações DR
+Padrão,Versatilidade Meio-Élfica (Diplomata),Passivo,0,10s,90s,Self,-10% CDs suporte,N/A,T1-T4,Selecionar 2; uptime ≤60%
+Padrão,Versatilidade Meio-Élfica (Instinto),Passivo,0,8s,30s,Self,+0.02 velocidade condicional,N/A,T1-T4,Limite global +0.05
+Padrão,Versatilidade Meio-Élfica (Calma),Passivo,0,6s,45s,Self,+10% resistência a controle,Reduz combos de stun,T1-T4,DR compartilhada com classes
+Padrão,Versatilidade Meio-Élfica (Descendência),Passivo,0,6s,45s,Self,+12% resistência encanto/medo,Resiste charms leves,T1-T4,Cap mental 35%
+Padrão,Descendência Mista (Reativa),Passivo,0,6s,45s,Self,+12% resistência encanto/medo,Mitiga fear/charm,T1-T4,DR mental aplicada
+Padrão,Tato Social,Ativo,20 mana,12s,90-80s,Raio 6,+5% cura/-5% dano (primário),Suporte leve,T1-T4,Bônus secundário 50% (DR mitigação)
+Alto Elfo,Astúcia Arcana,Passivo,0,8s,24s,Self,+5% eficiência mágica,N/A,T1-T4,DR com talentos >15%
+Alto Elfo,Estudo Rápido,Passivo,0,Até uso,60s,Self,Slot truque ativo,N/A,T1-T4,Alteração fora de combate
+Alto Elfo,Truque Arcano (Faísca),Ativo,12 mana,Instantâneo,55-45s,Alvo único,110-125% dano + slow,Reveal leve,T1-T4,Respeita cap dano leve
+Alto Elfo,Truque Arcano (Luz),Ativo,10 mana,6-7s,60-50s,Raio 6-7,+5-7% precisão,Remove camuflagem,T1-T4,DR precisão ≤20%
+Alto Elfo,Truque Arcano (Mão),Ativo,8 mana,8-10s,45s,Raio 10-13,Push 0.4-0.5/telecinese,N/A,T1-T4,Sem dano direto
+Drow,Visão no Escuro Superior,Passivo,0,Constante,0,Self,Visão 28 blocos,N/A,T1-T4,Sem impacto combate direto
+Drow,Sensibilidade à Luz,Passivo,0,Enquanto exposto,0,Self,-5% precisão/-0.01 velocidade,Compensa stealth,T1-T4,Aplica ao sair da sombra
+Drow,Afinidade Umbrática,Passivo,0,6s,18s,Self,+10% duração stealth,Prolonga camuflagem,T1-T4,DR exponencial >20%
+Drow,Luzes Feéricas,Ativo,18 mana,6-7s,75s,Raio 6-7,-7-10% evasão,Revela furtivos,T1-T4,Evasão total ≤25%
+Drow,Passo Sombrio,Ativo,12 stamina,Instantâneo,90s,6-8 blocos,Teleporte +8-12% resistência projétil,Engage/disengage,T1-T4,Bloqueado luz >7
+Floresta,Passo Silvestre,Passivo,0,8s,30s,Self,+0.02 velocidade em florestas,N/A,T1-T4,Checa bioma a cada 10s
+Floresta,Sentidos Aguçados,Passivo,0,Constante,0,Raio HUD,+10% alcance detecção,N/A,T1-T4,DR com Patrulheiro
+Floresta,Camuflagem Silvestre,Ativo,16 stamina,10-12s,90-80s,Self,Redução detecção +0.01-0.015 vel,TK break on attack,T1-T4,Nunca invisibilidade total
+Floresta,Flecha do Bosque,Ativo,12 stamina,6s,60-55s,Projétil,120-128% dano + marca 5-6%,Burst controlado,T1-T4,Marca soma ≤15%

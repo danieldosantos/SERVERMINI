@@ -1,0 +1,36 @@
+# ProSkillAPI - Habilidade ativa padrão dos meio-elfos (versatilidade)
+skills:
+  HalfElf_TatoSocial:
+    display: "&dTato Social"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Marca um aliado alvo por 12s, fortalecendo vínculos sociais.
+      O aliado recebe +5% cura e -5% dano recebido; aliados até 6 blocos
+      compartilham metade do bônus. Respeita limites globais de mitigação.
+    tiers:
+      T1: { cooldown: 90, duration: 12, primary_bonus: 0.05, secondary_bonus: 0.025, radius: 6 }
+      T2: { cooldown: 90, duration: 12, primary_bonus: 0.055, secondary_bonus: 0.027, radius: 6 }
+      T3: { cooldown: 85, duration: 12, primary_bonus: 0.06, secondary_bonus: 0.03, radius: 6 }
+      T4: { cooldown: 80, duration: 12, primary_bonus: 0.06, secondary_bonus: 0.032, radius: 6 }
+    cost:
+      resource: mana
+      amount: 20
+    effects:
+      - target: ally_single
+        type: status
+        id: tato_social_primary
+        duration: { tier: duration }
+        values:
+          damage_reduction: { tier: primary_bonus }
+          healing_received: { tier: primary_bonus }
+      - target: allies_radius
+        radius: { tier: radius }
+        include_caster: false
+        type: status
+        id: tato_social_secondary
+        duration: { tier: duration }
+        values:
+          damage_reduction: { tier: secondary_bonus }
+          healing_received: { tier: secondary_bonus }
+    notes: "Aplica DR compartilhada ao acumular com auras de classes de suporte."

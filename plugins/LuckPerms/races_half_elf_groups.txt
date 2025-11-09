@@ -1,0 +1,36 @@
+# LuckPerms script para raça Meio-Elfo e suas heranças.
+lp creategroup race_half_elf
+lp creategroup race_half_elf.high
+lp creategroup race_half_elf.drow
+lp creategroup race_half_elf.wood
+lp parent set race_half_elf.high race_half_elf
+lp parent set race_half_elf.drow race_half_elf
+lp parent set race_half_elf.wood race_half_elf
+# Permissões gerais da raça
+lp group race_half_elf permission set races.halfelf.base true
+lp group race_half_elf permission set psa.skill.HalfElf_TatoSocial true
+lp group race_half_elf permission set mythicmobs.item.HalfElfFeather true
+lp group race_half_elf permission set skript.command.meioelfo_modo true
+lp group race_half_elf permission set skript.command.racial true
+lp group race_half_elf permission set skript.command.kit_racial_halfelf true
+# Herança Alto Elfo
+lp group race_half_elf.high permission set races.halfelf.high true
+lp group race_half_elf.high permission set psa.skill.HalfElf_TruqueArcano true
+lp group race_half_elf.high permission set psa.skill.HalfElf_TruqueFaisca true
+lp group race_half_elf.high permission set psa.skill.HalfElf_TruqueLuz true
+lp group race_half_elf.high permission set psa.skill.HalfElf_TruqueMao true
+lp group race_half_elf.high permission set mythicmobs.item.HighLoreSigil true
+lp group race_half_elf.high permission set skript.command.truque_arcano true
+# Herança Drow
+lp group race_half_elf.drow permission set races.halfelf.drow true
+lp group race_half_elf.drow permission set psa.skill.HalfElf_LuzesFeericas true
+lp group race_half_elf.drow permission set psa.skill.HalfElf_PassoSombrio true
+lp group race_half_elf.drow permission set mythicmobs.item.DrowMoonbrooch true
+lp group race_half_elf.drow permission set skript.command.fae_lights true
+lp group race_half_elf.drow permission set skript.command.shadow_step true
+# Herança Elfo da Floresta
+lp group race_half_elf.wood permission set races.halfelf.wood true
+lp group race_half_elf.wood permission set psa.skill.HalfElf_CamuflagemSilvestre true
+lp group race_half_elf.wood permission set psa.skill.HalfElf_FlechaBosque true
+lp group race_half_elf.wood permission set mythicmobs.item.GroveCharm true
+lp group race_half_elf.wood permission set skript.command.camuflagem_silvestre true

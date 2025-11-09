@@ -196,15 +196,6 @@ items:
       race-lock: 'race_human.variant'
       lp_required: 'race_human.variant'
       command: '/versatilidade'
-  HalfElfHarmonyOrb:
-    Id: HEART_OF_THE_SEA
-    Display: '&dOrbe da Harmonia'
-    Lore:
-      - '&dPulsa ao ritmo de duas linhagens.'
-      - '&eClique:&f Harmonia Híbrida.'
-    NBT:
-      race-lock: 'race_meioelfo'
-      skill: 'HarmoniaHibrida'
   HalfOrcBattleBrand:
     Id: IRON_AXE
     Display: '&4Marca de Guerra'
