@@ -1,0 +1,22 @@
+Skill,Tipo,Custo(Carga/Mana),Duração,CD,Dano/Redução,Área,Notas PvP,Tier
+Infundir Item,Ativa,1 carga,720/900/1200s,120s,Modificador utilitário,Alvo único,Sem burst; exige preparação,T1-4
+Campo Rúnico,Ativa,25 Mana,8/9/10s,75s,36 máx por tick / cura 40%,Raio 6 blocos,Telegráfico; sem stackar resistência,T1-4
+Sobrecarregar,Ativa,1 carga,12s,90s,+15% velocidade atk/proj,Raio 6 blocos,Checar haste total ≤35%,T1-4
+Ferramentas de Tinker,Passiva,0,Permanente,-,+10-15% eficácia,-,Apenas com itens focais,T1-4
+Recuperar Infusão,Passiva,0,Fora de combate,-,+3/6/9/12% regen,-,Depende de flag out-of-combat,T2-4
+Mudar Modo,Ativa,1 carga,Instantâneo,45s,Switch Guardião/Infiltrador,Self,Sem spam; cancela stealth ao usar,T1-4
+Punho Trovão,Ativa,20 Mana,Instantâneo,45s,1.2–1.4x + stun 1.5–2s,Alvo único,Controle curto; respeita DR,T1-4
+Campo Repulsor,Ativa,30 Mana,8s,90s,-50% projéteis + repel,Raio 6 blocos,Mitigação total ≤45%,T3-4
+Descarga Silenciosa,Ativa,25 Mana,3s silêncio,60s,1.1–1.2x,Alvo único,Burst controlado; sem revelar invis,T1-4
+Passo Amplificado,Ativa,1 carga,2–3s,60s,+0.05 speed + invis,Self,Nenhum stack além do cap,T2-4
+Núcleo Arcano,Ativa,1 carga,15s,210s,+20% DR + pulso 60%/2s,Raio 6 blocos,Apenas 7 pulsos; sem overlap,T4
+Invocar Defensor de Aço,Ativa,1 carga,Permanente/até morrer,120s,Construto 80HP base,Companheiro,Teleporta se vivo; sem dano aliado,T1-4
+Sintonizar Arma,Ativa,25 Mana,12s,60s,+15% dano/+20% pen,Alvo único,Uptime controlado,T1-4
+Comando Reparar,Ativa,1 carga,6s,45s,Cura 20% + -20% dano,Defensor,Somente construto,T2-4
+Interferência,Ativa,30 Mana,8s,75s,-40% speed/-10% dano,Cone 5 blocos,Sem slow stacking infinito,T3-4
+Protocolo Guardião,Ativa,0 cargas,12s,210s,-25% dano recebido,Raio 8 blocos,Alerta HUD; sem exceder cap,T4
+Frasco Explosivo,Ativa,20 Mana,DoT 6s,45s,1.2–1.4x + 6%/s,Raio 5 blocos,DoT via Skript; sem stack múltiplo,T1-4
+Elixir de Vitalidade,Ativa,1 carga,Instantâneo,60s,Cura 18–22% + cleanse,Alvo único,Cura ≤25% HP,T1-4
+Nuvem Corrosiva,Ativa,30 Mana,10s,90s,-15% mitigação,Raio 6 blocos,Aplica exaustão resistência,T2-4
+Tônico Acelerante,Ativa,1 carga,10s,75s,+20% atk/magia,Raio 6 blocos,Somar com Sobrecarregar ≤35%,T3-4
+Panaceia,Ativa,0 cargas,12s,210s,Cura 5%/s +10% DR,Raio 8 blocos,Ultimate defensivo; cleanse leve,T4

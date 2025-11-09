@@ -1,0 +1,40 @@
+name: artificer_armorer_passo_amplificado
+display: "§bPasso Amplificado"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_armorer
+description:
+  - "Modo Infiltrador: concede +0.05 velocidade e invisibilidade curta (2/2.5/3/3 s)."
+  - "Consome 1 carga de Infusão; ideal para reposicionamento sem ultrapassar cap de velocidade."
+icon: LEATHER_BOOTS
+cooldown:
+  base: 60
+  scale: -4
+resource:
+  infusoes_charges:
+    cost: 1
+    minimum: 1
+custom:
+  duration:
+    tier1: 2.0
+    tier2: 2.5
+    tier3: 3.0
+    tier4: 3.0
+components:
+  cast:
+    sequence:
+      - type: self
+      - type: buff
+        stat: walk-speed
+        value: 0.05
+        duration: "%custom.duration%"
+      - type: buff
+        stat: invisibility
+        value: 1
+        duration: "%custom.duration%"
+      - type: message
+        text: "&b[Armeiro] Passo Amplificado ativo."
+messages:
+  fail-resource: "&cSem cargas de Infusão suficientes."
+  cooldown: "&cPasso Amplificado ainda recarregando (%cooldown%s)."

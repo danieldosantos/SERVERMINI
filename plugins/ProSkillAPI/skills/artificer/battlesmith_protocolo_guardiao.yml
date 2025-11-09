@@ -1,0 +1,37 @@
+name: artificer_battlesmith_protocolo_guardiao
+display: "§aProtocolo Guardião"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_battlesmith
+description:
+  - "Ordena o Defensor de Aço a projetar guarda de 8 blocos reduzindo 25% do dano sofrido por aliados por 12 s."
+  - "Ultimate com 210 s de recarga; aplica mensagens e HUD do guardião."
+icon: SHIELD
+cooldown:
+  base: 210
+  scale: 0
+custom:
+  radius: 8
+  duration: 12
+  reduction: 0.25
+  command: "skript run artificer_defender_guardian %player%"
+components:
+  cast:
+    sequence:
+      - type: self
+      - type: command
+        command: "%custom.command%"
+        async: true
+      - type: area
+        radius: "%custom.radius%"
+        allies: true
+        actions:
+          - type: buff
+            stat: damage-reduction
+            value: "%custom.reduction%"
+            duration: "%custom.duration%"
+      - type: message
+        text: "&a[Battle Smith] Protocolo Guardião ativo por %custom.duration%s."
+messages:
+  cooldown: "&cProtocolo Guardião ainda recarregando (%cooldown%s)."

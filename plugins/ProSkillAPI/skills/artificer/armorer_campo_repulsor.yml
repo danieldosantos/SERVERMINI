@@ -1,0 +1,48 @@
+name: artificer_armorer_campo_repulsor
+display: "§bCampo Repulsor"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_armorer
+description:
+  - "Modo Guardião: cria domo de 6 blocos que repele inimigos e reduz projéteis em 50% por 8 s."
+  - "Consome 30 Mana Arcana e não excede mitigação global de 45%."
+icon: SHIELD
+cooldown:
+  base: 90
+  scale: -5
+resource:
+  mana_arcana:
+    cost: 30
+    minimum: 30
+custom:
+  radius: 6
+  duration: 8
+components:
+  cast:
+    sequence:
+      - type: ground
+        radius: "%custom.radius%"
+        duration: "%custom.duration%"
+        period: 1
+        effects:
+          - type: effect
+            effect: "particle"
+            particle: CLOUD
+            radius: "%custom.radius%"
+          - type: knockback
+            strength: 0.5
+            enemies-only: true
+      - type: area
+        radius: "%custom.radius%"
+        allies: true
+        actions:
+          - type: buff
+            stat: projectile-damage
+            value: "-0.5"
+            duration: "%custom.duration%"
+      - type: message
+        text: "&b[Armeiro] Campo Repulsor ativado por %custom.duration%s."
+messages:
+  fail-resource: "&cMana Arcana insuficiente."
+  cooldown: "&cCampo Repulsor ainda recarregando (%cooldown%s)."

@@ -1,0 +1,34 @@
+name: artificer_battlesmith_invocar_defensor
+display: "§aInvocar Defensor de Aço"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_battlesmith
+description:
+  - "Conjura o Defensor de Aço aliado (MythicMobs) com vida escalonada e IA de guarda."
+  - "Se já estiver ativo, teleporta para o Artífice e restaura comandos." 
+icon: IRON_GOLEM_SPAWN_EGG
+cooldown:
+  base: 120
+  scale: 0
+resource:
+  infusoes_charges:
+    cost: 1
+    minimum: 1
+custom:
+  command: "skript run artificer_defender_summon %player%"
+components:
+  cast:
+    sequence:
+      - type: self
+      - type: command
+        command: "%custom.command%"
+        async: true
+      - type: effect
+        effect: "sound"
+        sound: BLOCK_ANVIL_USE
+      - type: message
+        text: "&a[Battle Smith] Defensor de Aço convocado."
+messages:
+  fail-resource: "&cSem cargas de Infusão para invocar o Defensor."
+  cooldown: "&cDefensor de Aço ainda recarregando (%cooldown%s)."

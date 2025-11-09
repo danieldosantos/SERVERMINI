@@ -1,0 +1,100 @@
+# Utilidades e cola para a classe Artífice
+options:
+  baseperm: class.artificer
+
+on load:
+  broadcast "&3[Skript] Artífice carregado."
+  delete {artificer::regenbonus::*}
+
+function artificer_refresh_hud(p: player):
+  execute console command "placeholderapi refresh %p% artificer_infusions"
+  execute console command "placeholderapi refresh %p% artificer_mana"
+  execute console command "placeholderapi refresh %p% artificer_cd"
+  execute console command "placeholderapi refresh %p% artificer_defender"
+
+command /kit_artifice:
+  permission: {@baseperm}.kit
+  trigger:
+    execute console command "mm items give %player% ArtificerInfusionWrench"
+    execute console command "mm items give %player% ArtificerRunicProjector"
+    execute console command "mm items give %player% ArtificerOverchargeFocus"
+    execute console command "mm items give %player% ArmorerArcCore"
+    execute console command "mm items give %player% BattleSmithForgeHammer"
+    execute console command "mm items give %player% AlchemistKit"
+    execute console command "mm items give %player% AlchemistElixirSatchel"
+    send "&3[Artífice] Kit de testes entregue."
+    artificer_refresh_hud(player)
+
+command /infundir [<player>]:
+  permission: {@baseperm}.skill
+  trigger:
+    if arg-1 is set:
+      execute console command "skillapi cast %player% artificer_infundir_item %arg-1%"
+    else:
+      execute console command "skillapi cast %player% artificer_infundir_item %player%"
+
+command /sobrecarregar:
+  permission: {@baseperm}.skill
+  trigger:
+    execute console command "skillapi cast %player% artificer_sobrecarregar %player%"
+
+command /defensor:
+  permission: {@baseperm}.battlesmith
+  trigger:
+    execute console command "skillapi cast %player% artificer_battlesmith_invocar_defensor %player%"
+
+command /modo_armadura:
+  permission: {@baseperm}.armorer
+  trigger:
+    execute console command "skillapi cast %player% artificer_armorer_mudar_modo %player%"
+
+command /frasco_explosivo:
+  permission: {@baseperm}.alchemist
+  trigger:
+    execute console command "skillapi cast %player% artificer_alchemist_frasco_explosivo %player%"
+
+command /frasco_tonico:
+  permission: {@baseperm}.alchemist
+  trigger:
+    execute console command "skillapi cast %player% artificer_alchemist_tonico_acelerante %player%"
+
+# Chamadas diretas vindas dos YAML do ProSkillAPI/MythicMobs
+command /skript artificer_infundir <player> <player>:
+  trigger:
+    execute console command "skillapi cast %player% artificer_infundir_item %arg-2%"
+
+command /skript artificer_register_regen <player> <number>:
+  trigger:
+    set {artificer::regenbonus::%arg-1%} to arg-2
+
+command /skript artificer_resistance_sync <player>:
+  trigger:
+    execute console command "raceseffects applyexhaust %arg-1% artificer"
+
+command /skript artificer_apply_dot <player> <player> <number> <number>:
+  trigger:
+    set {_ticks} to arg-3
+    loop {_ticks} times:
+      wait 20 ticks
+      set {_amount} to arg-4 * (max health of arg-2)
+      damage arg-2 by {_amount} with cause magic
+
+command /skript artificer_defender_summon <player>:
+  trigger:
+    execute console command "mm mobs spawn SteelDefender 1 %arg-1%"
+
+command /skript artificer_defender_repair <player>:
+  trigger:
+    execute console command "skillapi cast %arg-1% artificer_battlesmith_comando_reparar %arg-1%"
+
+command /skript artificer_defender_guardian <player>:
+  trigger:
+    execute console command "skillapi cast %arg-1% artificer_battlesmith_protocolo_guardiao %arg-1%"
+
+command /skript artificer_defender_sync <player>:
+  trigger:
+    execute console command "placeholderapi refresh %arg-1% artificer_defender"
+
+command /skript artificer_alchemy_menu <player>:
+  trigger:
+    send "&d[Alquimista] Digite /frasco_explosivo ou /frasco_tonico para lançar rapidamente."

@@ -1,0 +1,47 @@
+name: artificer_battlesmith_interferencia
+display: "§aInterferência"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_battlesmith
+description:
+  - "Emite cone de 5 blocos que aplica Lentidão 40% e -10% dano aos inimigos por 8 s."
+  - "Consome 30 Mana Arcana e usa partículas sutis para sinalizar a área."
+icon: BLAST_FURNACE
+cooldown:
+  base: 75
+  scale: -5
+resource:
+  mana_arcana:
+    cost: 30
+    minimum: 30
+custom:
+  radius: 5
+  duration: 8
+  slow: -0.4
+  weaken: -0.1
+components:
+  cast:
+    sequence:
+      - type: cone
+        radius: "%custom.radius%"
+        angle: 70
+        actions:
+          - type: debuff
+            stat: walk-speed
+            value: "%custom.slow%"
+            duration: "%custom.duration%"
+          - type: debuff
+            stat: attack-damage
+            value: "%custom.weaken%"
+            duration: "%custom.duration%"
+      - type: effect
+        effect: "particle"
+        particle: REDSTONE
+        color: "120,220,255"
+        radius: "%custom.radius%"
+      - type: message
+        text: "&a[Battle Smith] Interferência aplicada."
+messages:
+  fail-resource: "&cMana Arcana insuficiente."
+  cooldown: "&cInterferência ainda recarregando (%cooldown%s)."

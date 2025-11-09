@@ -1,0 +1,42 @@
+name: artificer_battlesmith_sintonizar_arma
+display: "§aSintonizar Arma"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_battlesmith
+description:
+  - "Aprimora arma do alvo (self/aliado) com +15% dano e +20% penetração por 12 s."
+  - "Consome 25 Mana Arcana e respeita caps globais de mitigação."
+icon: SMITHING_TABLE
+cooldown:
+  base: 60
+  scale: -4
+resource:
+  mana_arcana:
+    cost: 25
+    minimum: 25
+custom:
+  duration: 12
+  damage-bonus: 0.15
+  penetration-bonus: 0.2
+components:
+  cast:
+    sequence:
+      - type: target
+        range: 10
+        ally: true
+        enemy: false
+      - type: buff
+        stat: attack-damage
+        value: "%custom.damage-bonus%"
+        duration: "%custom.duration%"
+      - type: buff
+        stat: armor-penetration
+        value: "%custom.penetration-bonus%"
+        duration: "%custom.duration%"
+      - type: message
+        text: "&a[Battle Smith] Arma sintonizada por %custom.duration%s."
+messages:
+  fail-resource: "&cMana Arcana insuficiente."
+  cooldown: "&cSintonizar Arma ainda recarregando (%cooldown%s)."
+  no-target: "&eSelecione um aliado ou use a bigorna portátil."

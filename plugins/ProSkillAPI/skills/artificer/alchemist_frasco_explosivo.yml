@@ -1,0 +1,52 @@
+name: artificer_alchemist_frasco_explosivo
+display: "§dFrasco Explosivo"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_alchemist
+description:
+  - "Arremessa frasco que causa 120/130/135/140% de dano e aplica queimadura 6%/s por 6 s em raio 5 blocos."
+  - "Consome 20 Mana Arcana e respeita limites de área e dano PvP."
+icon: SPLASH_POTION
+cooldown:
+  base: 45
+  scale: -3
+resource:
+  mana_arcana:
+    cost: 20
+    minimum: 20
+custom:
+  radius: 5
+  duration: 6
+  damage:
+    tier1: 1.2
+    tier2: 1.3
+    tier3: 1.35
+    tier4: 1.4
+  dot: 0.06
+components:
+  cast:
+    sequence:
+      - type: projectile
+        speed: 1.2
+        gravity: 0.04
+        item: SPLASH_POTION
+        on-hit:
+          - type: area
+            radius: "%custom.radius%"
+            actions:
+              - type: damage
+                value: "%custom.damage%"
+                classification: skill
+                ignore-armor: false
+              - type: command
+                command: "skript run artificer_apply_dot %player% %victim% %custom.duration% %custom.dot%"
+                async: true
+              - type: effect
+                effect: "particle"
+                particle: FIREWORK
+      - type: message
+        text: "&d[Alquimista] Frasco Explosivo lançado."
+messages:
+  fail-resource: "&cMana Arcana insuficiente."
+  cooldown: "&cFrasco Explosivo ainda recarregando (%cooldown%s)."

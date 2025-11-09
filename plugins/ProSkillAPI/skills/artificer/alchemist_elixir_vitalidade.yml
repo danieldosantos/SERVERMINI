@@ -1,0 +1,42 @@
+name: artificer_alchemist_elixir_vitalidade
+display: "§dElixir de Vitalidade"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_alchemist
+description:
+  - "Frasco de suporte que cura 18/20/21/22% da vida máxima e remove 1 debuff leve do alvo."
+  - "Consome 1 carga de Infusão e respeita cooldown de 60 s."
+icon: HONEY_BOTTLE
+cooldown:
+  base: 60
+  scale: -4
+resource:
+  infusoes_charges:
+    cost: 1
+    minimum: 1
+custom:
+  heal:
+    tier1: 0.18
+    tier2: 0.2
+    tier3: 0.21
+    tier4: 0.22
+  cleanse-level: 1
+components:
+  cast:
+    sequence:
+      - type: target
+        range: 10
+        ally: true
+        enemy: false
+      - type: heal
+        value: "%custom.heal%"
+        scaling: max-health
+      - type: cleanse
+        level: "%custom.cleanse-level%"
+      - type: message
+        text: "&d[Alquimista] Elixir de Vitalidade aplicado em %target%."
+messages:
+  fail-resource: "&cSem cargas de Infusão suficientes."
+  cooldown: "&cElixir de Vitalidade ainda recarregando (%cooldown%s)."
+  no-target: "&eSelecione um aliado válido."

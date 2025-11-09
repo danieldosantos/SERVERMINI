@@ -1,0 +1,51 @@
+name: artificer_alchemist_panaceia
+display: "§dPanaceia"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_alchemist
+description:
+  - "Chuva alquímica por 12 s cura 5%/s, remove queimaduras/venenos e concede 10% resistência em aliados a 8 blocos."
+  - "Ultimate com recarga de 210 s; não ultrapassa cap global de mitigação."
+icon: HEART_OF_THE_SEA
+cooldown:
+  base: 210
+  scale: 0
+custom:
+  radius: 8
+  duration: 12
+  heal-tick: 0.05
+  resistance: 0.1
+components:
+  cast:
+    sequence:
+      - type: ground
+        radius: "%custom.radius%"
+        duration: "%custom.duration%"
+        period: 1
+        effects:
+          - type: effect
+            effect: "particle"
+            particle: DRIPPING_WATER
+            radius: "%custom.radius%"
+      - type: repeat
+        period: 1
+        times: "%custom.duration%"
+        actions:
+          - type: area
+            radius: "%custom.radius%"
+            allies: true
+            actions:
+              - type: heal
+                value: "%custom.heal-tick%"
+                scaling: max-health
+              - type: buff
+                stat: damage-reduction
+                value: "%custom.resistance%"
+                duration: "%custom.duration%"
+              - type: cleanse
+                level: 2
+      - type: message
+        text: "&d[Alquimista] Panaceia ativa por %custom.duration%s."
+messages:
+  cooldown: "&cPanaceia ainda recarregando (%cooldown%s)."

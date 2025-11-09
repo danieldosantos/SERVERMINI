@@ -1,0 +1,61 @@
+name: artificer_campo_runico
+display: "§3Campo Rúnico"
+type: active
+max-level: 4
+requires:
+  class: artificer
+description:
+  - "Projeta um sigilo rúnico no chão (raio 6 blocos) por 8/9/10/10 s."
+  - "Alterna automaticamente entre pulsos de dano leve (PvE) e cura estabilizadora (aliados)."
+  - "Aplica exaustão de resistência ao interagir com raças que já possuem resistência similar."
+icon: ENCHANTING_TABLE
+cooldown:
+  base: 75
+  scale: -3
+resource:
+  mana_arcana:
+    cost: 25
+    minimum: 25
+custom:
+  radius: 6
+  duration:
+    tier1: 8
+    tier2: 9
+    tier3: 10
+    tier4: 10
+  tick-damage:
+    tier1: 24
+    tier2: 30
+    tier3: 36
+    tier4: 42
+components:
+  cast:
+    sequence:
+      - type: ground
+        radius: "%custom.radius%"
+        duration: "%custom.duration%"
+        period: 1
+        effects:
+          - type: particle
+            particle: REDSTONE
+            color: "0,170,170"
+            radius: "%custom.radius%"
+          - type: damage
+            value: "%custom.tick-damage%"
+            classification: skill
+            ignore-armor: false
+            pve-only: true
+          - type: heal
+            value: "%custom.tick-damage% * 0.4"
+            allies-only: true
+          - type: command
+            command: "skript run artificer_resistance_sync %player%"
+            async: true
+      - type: message
+        text: "&3[Artífice] Campo Rúnico ativo por %custom.duration%s."
+      - type: command
+        command: "placeholderapi refresh %player% artificer_cd"
+        async: true
+messages:
+  fail-resource: "&cMana Arcana insuficiente."
+  cooldown: "&cCampo Rúnico ainda recarregando (%cooldown%s)."

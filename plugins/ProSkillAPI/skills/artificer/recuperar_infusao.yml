@@ -1,0 +1,25 @@
+name: artificer_recuperar_infusao
+display: "§3Recuperar Infusão"
+type: passive
+max-level: 4
+requires:
+  class: artificer
+description:
+  - "Fora de combate, regenera 1 carga de Infusão a cada 45 s (3/6/9/12% mais rápido conforme tier)."
+  - "Integra-se ao Skript de estado de combate para evitar abuso em PvP."
+icon: CLOCK
+custom:
+  bonus-regen:
+    tier1: 0.03
+    tier2: 0.06
+    tier3: 0.09
+    tier4: 0.12
+components:
+  passive:
+    sequence:
+      - type: self
+      - type: command
+        command: "skript run artificer_register_regen %player% %custom.bonus-regen%"
+        async: true
+messages:
+  apply: "&3[Artífice] Recuperação de Infusão ativada."

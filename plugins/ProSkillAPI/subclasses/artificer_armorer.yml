@@ -1,0 +1,41 @@
+# Subclasse Artífice Armeiro - armadura modular
+name: Artificer_Armorer
+display: "§bArmeiro"
+description:
+  - "§7Canaliza infusões em uma armadura arcano-mecânica com modos Guardião e Infiltrador."
+  - "§bAlterna funções defensivas e ofensivas mantendo limites de mitigação do servidor."
+options:
+  needs-permission: true
+  parent: Artificer
+  mana-name: "Mana Arcana"
+skills:
+  tier1:
+    active:
+      - artificer_armorer_mudar_modo
+      - artificer_armorer_punho_trovao
+      - artificer_armorer_descarga_silenciosa
+    passive: []
+  tier2:
+    active:
+      - artificer_armorer_mudar_modo
+      - artificer_armorer_punho_trovao
+      - artificer_armorer_descarga_silenciosa
+      - artificer_armorer_passo_amplificado
+    passive: []
+  tier3:
+    active:
+      - artificer_armorer_mudar_modo
+      - artificer_armorer_punho_trovao
+      - artificer_armorer_descarga_silenciosa
+      - artificer_armorer_passo_amplificado
+      - artificer_armorer_campo_repulsor
+    passive: []
+  tier4:
+    active:
+      - artificer_armorer_mudar_modo
+      - artificer_armorer_punho_trovao
+      - artificer_armorer_descarga_silenciosa
+      - artificer_armorer_passo_amplificado
+      - artificer_armorer_campo_repulsor
+      - artificer_armorer_nucleo_arcano
+    passive: []

@@ -1,0 +1,37 @@
+# Subclasse Artífice Ferreiro de Batalha - construtos ofensivos
+name: Artificer_BattleSmith
+display: "§aFerreiro de Batalha"
+description:
+  - "§7Artesão marcial que luta ao lado do Defensor de Aço e aprimora armas aliadas."
+  - "§aMistura comando tático com controle de campo sem exceder caps de mitigação."
+options:
+  needs-permission: true
+  parent: Artificer
+  mana-name: "Mana Arcana"
+skills:
+  tier1:
+    active:
+      - artificer_battlesmith_invocar_defensor
+      - artificer_battlesmith_sintonizar_arma
+    passive: []
+  tier2:
+    active:
+      - artificer_battlesmith_invocar_defensor
+      - artificer_battlesmith_sintonizar_arma
+      - artificer_battlesmith_comando_reparar
+    passive: []
+  tier3:
+    active:
+      - artificer_battlesmith_invocar_defensor
+      - artificer_battlesmith_sintonizar_arma
+      - artificer_battlesmith_comando_reparar
+      - artificer_battlesmith_interferencia
+    passive: []
+  tier4:
+    active:
+      - artificer_battlesmith_invocar_defensor
+      - artificer_battlesmith_sintonizar_arma
+      - artificer_battlesmith_comando_reparar
+      - artificer_battlesmith_interferencia
+      - artificer_battlesmith_protocolo_guardiao
+    passive: []

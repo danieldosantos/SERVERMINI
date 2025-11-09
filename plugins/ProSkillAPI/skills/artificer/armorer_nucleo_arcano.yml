@@ -1,0 +1,56 @@
+name: artificer_armorer_nucleo_arcano
+display: "§bNúcleo Arcano"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_armorer
+description:
+  - "Ativa o núcleo da armadura por 15 s: +20% mitigação e pulso de 60% dano a cada 2 s em 6 blocos."
+  - "Consome 1 carga de Infusão; ultimate com 210 s de recarga compartilhada."
+icon: NETHER_STAR
+cooldown:
+  base: 210
+  scale: 0
+resource:
+  infusoes_charges:
+    cost: 1
+    minimum: 1
+custom:
+  radius: 6
+  duration: 15
+  pulse-interval: 2
+  pulses: 7
+  pulse-damage:
+    tier1: 0.6
+    tier2: 0.62
+    tier3: 0.64
+    tier4: 0.66
+components:
+  cast:
+    sequence:
+      - type: self
+      - type: buff
+        stat: damage-reduction
+        value: 0.2
+        duration: "%custom.duration%"
+      - type: repeat
+        period: "%custom.pulse-interval%"
+        times: "%custom.pulses%"
+        actions:
+          - type: area
+            radius: "%custom.radius%"
+            enemy: true
+            actions:
+              - type: damage
+                value: "%custom.pulse-damage%"
+                classification: skill
+                ignore-armor: false
+          - type: effect
+            effect: "particle"
+            particle: ENCHANTMENT_TABLE
+            radius: "%custom.radius%"
+      - type: message
+        text: "&b[Armeiro] Núcleo Arcano sobrecarregado!"
+messages:
+  fail-resource: "&cSem cargas de Infusão suficientes."
+  cooldown: "&cNúcleo Arcano ainda recarregando (%cooldown%s)."

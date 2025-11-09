@@ -1,0 +1,37 @@
+# Subclasse Artífice Alquimista - frascos e elixires
+name: Artificer_Alchemist
+display: "§dAlquimista"
+description:
+  - "§7Concocta elixires e frascos instáveis para controle de área e suporte."
+  - "§dAlterna entre dano em zona e cura emergencial respeitando limites globais."
+options:
+  needs-permission: true
+  parent: Artificer
+  mana-name: "Mana Arcana"
+skills:
+  tier1:
+    active:
+      - artificer_alchemist_frasco_explosivo
+      - artificer_alchemist_elixir_vitalidade
+    passive: []
+  tier2:
+    active:
+      - artificer_alchemist_frasco_explosivo
+      - artificer_alchemist_elixir_vitalidade
+      - artificer_alchemist_nuvem_corrosiva
+    passive: []
+  tier3:
+    active:
+      - artificer_alchemist_frasco_explosivo
+      - artificer_alchemist_elixir_vitalidade
+      - artificer_alchemist_nuvem_corrosiva
+      - artificer_alchemist_tonico_acelerante
+    passive: []
+  tier4:
+    active:
+      - artificer_alchemist_frasco_explosivo
+      - artificer_alchemist_elixir_vitalidade
+      - artificer_alchemist_nuvem_corrosiva
+      - artificer_alchemist_tonico_acelerante
+      - artificer_alchemist_panaceia
+    passive: []
