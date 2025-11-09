@@ -1,0 +1,32 @@
+# Tabela de XP centralizada para MythicMobs -> ProSkillAPI
+# Utilize estas entradas em mobs com DropTables:
+#   Drops:
+#     - xp_normal 1
+#     - xp_elite 1
+#     - xp_boss 1
+# Cada entrada chama o comando /levelxp para aplicar XP com DR automático.
+
+xp_normal:
+  Conditions:
+    - playerwithin{d=35}
+  Drops:
+    - command{c="levelxp <trigger.name> 90 normal <mob.internalname>";p=1}
+    - experience 5
+
+xp_elite:
+  Conditions:
+    - playerwithin{d=40}
+    - incombat{}
+  Drops:
+    - command{c="levelxp <trigger.name> 240 elite <mob.internalname>";p=1}
+    - experience 25
+
+xp_boss:
+  Conditions:
+    - playerwithin{d=50}
+    - mobsinradius{t=<mob.internalname>;a<=3;r=80}
+    - cooldown{t=600}
+  Drops:
+    - command{c="levelxp <trigger.name> 650 boss <mob.internalname>";p=1}
+    - experience 150
+    - command{c="say §6[XP] §f%trigger.name% derrotou um chefe %mob.internalname%!";p=1}

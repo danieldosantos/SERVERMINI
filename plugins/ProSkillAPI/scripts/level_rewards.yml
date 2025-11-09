@@ -1,0 +1,166 @@
+# Recompensas e desbloqueios globais por nível/tier
+# Utilizado pelo script level_system.sk para sincronizar tiers, bônus e mensagens.
+meta:
+  max-level: 20
+  tiers:
+    tier_t1:
+      label: "Tier 1"
+      levels: [1, 2, 3, 4]
+      luckperms-group: "tier_t1"
+      proskillapi-attributes:
+        health-multiplier: 1.00
+        damage-multiplier: 1.00
+        resistance-multiplier: 1.00
+        speed-bonus: 0.00
+      unlocks:
+        - "Habilidades básicas de classe"
+        - "Habilidades raciais iniciais"
+        - "Itens focais iniciais"
+    tier_t2:
+      label: "Tier 2"
+      levels: [5, 6, 7, 8, 9, 10]
+      luckperms-group: "tier_t2"
+      proskillapi-attributes:
+        health-multiplier: 1.08
+        damage-multiplier: 1.10
+        resistance-multiplier: 1.05
+        speed-bonus: 0.01
+      unlocks:
+        - "Subclasses iniciais"
+        - "Habilidades raciais aprimoradas"
+        - "Itens focais intermediários"
+        - "Dungeon Tier 2"
+    tier_t3:
+      label: "Tier 3"
+      levels: [11, 12, 13, 14, 15, 16]
+      luckperms-group: "tier_t3"
+      proskillapi-attributes:
+        health-multiplier: 1.16
+        damage-multiplier: 1.20
+        resistance-multiplier: 1.12
+        speed-bonus: 0.02
+      unlocks:
+        - "Subclasses completas"
+        - "Habilidades raciais superiores"
+        - "Eventos PvE avançados"
+        - "Acesso a itens focais lendários"
+    tier_t4:
+      label: "Tier 4"
+      levels: [17, 18, 19, 20]
+      luckperms-group: "tier_t4"
+      proskillapi-attributes:
+        health-multiplier: 1.30
+        damage-multiplier: 1.38
+        resistance-multiplier: 1.24
+        speed-bonus: 0.03
+      unlocks:
+        - "Habilidades finais de classe"
+        - "Eventos míticos e chefes globais"
+        - "Progressão racial máxima"
+        - "Itens focais míticos"
+levels:
+  1:
+    title: "§aBem-vindo ao Tier 1"
+    reward-summary:
+      skill-points: 1
+      attribute-points: 2
+      focus-slots: 1
+      gold-suggestion: 25
+    commands:
+      - "broadcast §6%player%§f alcançou o nível 1 e iniciou sua jornada!"
+  2:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  3:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  4:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  5:
+    title: "§eTransição para Tier 2"
+    reward-summary:
+      skill-points: 1
+      attribute-points: 2
+      focus-slots: 1
+      unlock-hint: "Habilidades intermediárias de classe"
+    commands:
+      - "broadcast §6%player%§f alcançou Tier 2!"
+  6:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  7:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  8:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  9:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  10:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  11:
+    title: "§dTier 3 desbloqueado"
+    reward-summary:
+      skill-points: 1
+      attribute-points: 2
+      focus-slots: 1
+      unlock-hint: "Eventos avançados e subclasses completas"
+    commands:
+      - "broadcast §d%player%§f abriu o Tier 3!"
+  12:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  13:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  14:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  15:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  16:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  17:
+    title: "§cTier 4 desbloqueado"
+    reward-summary:
+      skill-points: 1
+      attribute-points: 2
+      focus-slots: 1
+      unlock-hint: "Chefes míticos e recompensas finais"
+    commands:
+      - "broadcast §c%player%§f alcançou o auge da campanha!"
+  18:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  19:
+    reward-summary:
+      skill-points: 1
+      attribute-points: 1
+  20:
+    title: "§6Nível Máximo"
+    reward-summary:
+      skill-points: 2
+      attribute-points: 2
+      focus-slots: 1
+      unlock-hint: "Todo conteúdo PvE disponível"
+    commands:
+      - "broadcast §6%player%§f atingiu o nível máximo (20)!"

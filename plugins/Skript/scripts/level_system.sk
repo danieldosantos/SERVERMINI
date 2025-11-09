@@ -1,0 +1,415 @@
+# Sistema global de níveis 1-20 + tiers automáticos
+# Requisitos: ProSkillAPI, LuckPerms, PlaceholderAPI, MythicMobs, Scoreboard nativo do Skript
+# Responsável por sincronia de XP, grupos, HUD MMORPG e redução de grind.
+
+options:
+  level-prefix: "&6[Níveis]&r "
+  scoreboard-title: "&6Progressão"
+  scoreboard-update-seconds: 2
+  tier-groups: "tier_t1,tier_t2,tier_t3,tier_t4"
+  tier-codes: "tier_t1,tier_t2,tier_t3,tier_t4"
+  tier-label-t1: "Tier 1"
+  tier-label-t2: "Tier 2"
+  tier-label-t3: "Tier 3"
+  tier-label-t4: "Tier 4"
+  tier-range-t1: "1-4"
+  tier-range-t2: "5-10"
+  tier-range-t3: "11-16"
+  tier-range-t4: "17-20"
+  tier-health-t1: 1.00
+  tier-health-t2: 1.08
+  tier-health-t3: 1.16
+  tier-health-t4: 1.30
+  tier-damage-t1: 1.00
+  tier-damage-t2: 1.10
+  tier-damage-t3: 1.20
+  tier-damage-t4: 1.38
+  tier-resist-t1: 1.00
+  tier-resist-t2: 1.05
+  tier-resist-t3: 1.12
+  tier-resist-t4: 1.24
+  tier-speed-t1: 0.00
+  tier-speed-t2: 0.01
+  tier-speed-t3: 0.02
+  tier-speed-t4: 0.03
+  tier-unlocks-t1: "Habilidades básicas de classe|Passivos raciais iniciais|Itens focais iniciais"
+  tier-unlocks-t2: "Subclasses iniciais|Habilidades raciais aprimoradas|Dungeon Tier 2|Itens focais intermediários"
+  tier-unlocks-t3: "Subclasses completas|Eventos PvE avançados|Habilidades raciais superiores|Itens focais lendários"
+  tier-unlocks-t4: "Habilidades finais de classe|Chefes míticos globais|Progressão racial máxima|Itens focais míticos"
+  dr-threshold: 3
+  dr-window-seconds: 45
+  dr-multiplier: 0.4
+
+function level_prefix() :: text:
+  return {@level-prefix}
+
+function level_placeholder(p: player, node: text) :: text:
+  if {_p} is not set:
+    return ""
+  set {_value} to placeholder "%{_node}%" with {_p}
+  if {_value} is not set:
+    set {_value} to ""
+  return {_value}
+
+function level_number_placeholder(p: player, node: text) :: number:
+  set {_raw} to level_placeholder({_p}, {_node})
+  if {_raw} is a number:
+    return {_raw} parsed as number
+  if {_raw} parsed as number is set:
+    return {_raw} parsed as number
+  return 0
+
+function level_get_tier(level: number) :: text:
+  if {_level} >= 17:
+    return "tier_t4"
+  if {_level} >= 11:
+    return "tier_t3"
+  if {_level} >= 5:
+    return "tier_t2"
+  return "tier_t1"
+
+function level_get_tier_label(tier: text) :: text:
+  switch {_tier}:
+    case "tier_t1":
+      return {@tier-label-t1}
+    case "tier_t2":
+      return {@tier-label-t2}
+    case "tier_t3":
+      return {@tier-label-t3}
+    case "tier_t4":
+      return {@tier-label-t4}
+  return "Tier desconhecido"
+
+function level_get_tier_unlocks(tier: text) :: texts:
+  set {_raw} to ""
+  switch {_tier}:
+    case "tier_t1":
+      set {_raw} to {@tier-unlocks-t1}
+    case "tier_t2":
+      set {_raw} to {@tier-unlocks-t2}
+    case "tier_t3":
+      set {_raw} to {@tier-unlocks-t3}
+    case "tier_t4":
+      set {_raw} to {@tier-unlocks-t4}
+  if {_raw} is "":
+    return {_list::*}
+  set {_list::*} to {_raw} split at "|"
+  return {_list::*}
+
+function level_get_tier_attribute(tier: text, attribute: text) :: number:
+  switch {_tier}:
+    case "tier_t1":
+      switch {_attribute}:
+        case "health": return {@tier-health-t1}
+        case "damage": return {@tier-damage-t1}
+        case "resistance": return {@tier-resist-t1}
+        case "speed": return {@tier-speed-t1}
+    case "tier_t2":
+      switch {_attribute}:
+        case "health": return {@tier-health-t2}
+        case "damage": return {@tier-damage-t2}
+        case "resistance": return {@tier-resist-t2}
+        case "speed": return {@tier-speed-t2}
+    case "tier_t3":
+      switch {_attribute}:
+        case "health": return {@tier-health-t3}
+        case "damage": return {@tier-damage-t3}
+        case "resistance": return {@tier-resist-t3}
+        case "speed": return {@tier-speed-t3}
+    case "tier_t4":
+      switch {_attribute}:
+        case "health": return {@tier-health-t4}
+        case "damage": return {@tier-damage-t4}
+        case "resistance": return {@tier-resist-t4}
+        case "speed": return {@tier-speed-t4}
+  return 0
+
+function level_progress_bar(progress: number, total: number, segments: number=10) :: text:
+  if {_segments} <= 0:
+    set {_segments} to 10
+  if {_total} <= 0:
+    return "▒▒▒▒▒▒▒▒▒▒"
+  set {_ratio} to {_progress} / {_total}
+  if {_ratio} > 1:
+    set {_ratio} to 1
+  if {_ratio} < 0:
+    set {_ratio} to 0
+  set {_filled} to floor({_ratio} * {_segments})
+  set {_bar} to ""
+  set {_index} to 1
+  while {_index} <= {_segments}:
+    if {_index} <= {_filled}:
+      set {_bar} to "%{_bar}%█"
+    else:
+      set {_bar} to "%{_bar}%▒"
+    add 1 to {_index}
+  return {_bar}
+
+function level_tier_bar(tier: text) :: text:
+  set {_codes::*} to split {@tier-codes} at ","
+  set {_current-index} to 1
+  loop {_codes::*}:
+    if loop-value is {_tier}:
+      set {_current-index} to loop-index
+      stop loop
+  set {_result} to ""
+  loop {_codes::*}:
+    if loop-index <= {_current-index}:
+      set {_result} to "%{_result}%&a●"
+    else:
+      set {_result} to "%{_result}%&7○"
+    if loop-index < size of {_codes::*}:
+      set {_result} to "%{_result}% &7"
+  return "&fTiers: %{_result}%"
+
+function level_apply_tier_groups(p: player, target-tier: text):
+  if {_p} is not set:
+    stop
+  set {_name} to name of {_p}
+  set {_groups::*} to split {@tier-groups} at ","
+  loop {_groups::*}:
+    if loop-value is not {_target-tier}:
+      execute console command "lp user %{_name}% parent remove %loop-value%"
+  if {_target-tier} is not "":
+    execute console command "lp user %{_name}% parent add %{_target-tier}%"
+
+function level_apply_tier_attributes(p: player, tier: text):
+  if {_p} is not set:
+    stop
+  set {_name} to name of {_p}
+  set {_groups::*} to split {@tier-codes} at ","
+  loop {_groups::*}:
+    execute console command "psapi player %{_name}% attrmod remove global_%loop-value%"
+  if {_tier} is "tier_t1":
+    stop
+  set {_health} to level_get_tier_attribute({_tier}, "health")
+  set {_damage} to level_get_tier_attribute({_tier}, "damage")
+  set {_resist} to level_get_tier_attribute({_tier}, "resistance")
+  set {_speed} to level_get_tier_attribute({_tier}, "speed")
+  execute console command "psapi player %{_name}% attrmod add global_%{_tier}% max_health %{_health}%"
+  execute console command "psapi player %{_name}% attrmod add global_%{_tier}% attack_damage %{_damage}%"
+  execute console command "psapi player %{_name}% attrmod add global_%{_tier}% damage_reduction %{_resist}%"
+  if {_speed} > 0:
+    execute console command "psapi player %{_name}% attrmod add global_%{_tier}% walk_speed %{_speed}%"
+
+function level_sync_tier(p: player, level: number):
+  if {_p} is not set:
+    stop
+  set {_tier} to level_get_tier({_level})
+  set {_current} to {level.current-tier::%uuid of {_p}%}
+  if {_tier} is {_current}:
+    stop
+  level_apply_tier_groups({_p}, {_tier})
+  level_apply_tier_attributes({_p}, {_tier})
+  set {level.current-tier::%uuid of {_p}%} to {_tier}
+  set {_label} to level_get_tier_label({_tier})
+  send "%level_prefix()%&fVocê agora é &e%{_label}%&f." to {_p}
+  show title "&6%{_label}%" with subtitle "&eTier sincronizado!" for {_p}
+
+function level_update_scoreboard(p: player, level: number, xp: number, next: number):
+  if {_p} is not set:
+    stop
+  set {_tier} to {level.current-tier::%uuid of {_p}%}
+  if {_tier} is not set:
+    set {_tier} to level_get_tier({_level})
+  set {_tierLabel} to level_get_tier_label({_tier})
+  set {_percent} to 0
+  if {_next} > 0:
+    set {_percent} to floor({_xp} / {_next} * 1000) / 10
+  set {_bar} to level_progress_bar({_xp}, {_next}, 5)
+  set {_tierBar} to level_tier_bar({_tier})
+  set {_tierLine} to colored({_tierBar})
+  set {_board} to new scoreboard
+  set display name of sidebar of {_board} to colored({@scoreboard-title})
+  set {_slot} to 7
+  set score "§7──────────────" in sidebar of {_board} to {_slot}
+  remove 1 from {_slot}
+  set score "§fNível: §e%{_level}%" in sidebar of {_board} to {_slot}
+  remove 1 from {_slot}
+  set score "§fTier: §6%{_tierLabel}%" in sidebar of {_board} to {_slot}
+  remove 1 from {_slot}
+  set score "§bBarra XP: %{_bar}%" in sidebar of {_board} to {_slot}
+  remove 1 from {_slot}
+  set score "§fXP: §b%{_xp}%§7/§b%{_next}%" in sidebar of {_board} to {_slot}
+  remove 1 from {_slot}
+  set score "§fProgresso: §a%{_percent}%§7%%" in sidebar of {_board} to {_slot}
+  remove 1 from {_slot}
+  set score "%{_tierLine}%" in sidebar of {_board} to {_slot}
+  set {_p}'s scoreboard to {_board}
+
+function level_refresh_player(p: player, force: boolean=false):
+  if {_p} is not set:
+    stop
+  set {_level} to level_number_placeholder({_p}, "level")
+  if {_level} <= 0:
+    return
+  set {_xp} to level_number_placeholder({_p}, "xp_atual")
+  set {_next} to level_number_placeholder({_p}, "xp_proximo")
+  if {_force} is true:
+    delete {level.cached-level::%uuid of {_p}%}
+  if {level.cached-level::%uuid of {_p}%} is not {_level}:
+    set {level.cached-level::%uuid of {_p}%} to {_level}
+    level_sync_tier({_p}, {_level})
+  level_update_scoreboard({_p}, {_level}, {_xp}, {_next})
+
+function level_register_recent_kill(p: player, mob: text) :: number:
+  if {_p} is not set or {_mob} is "":
+    return 1
+  set {_uuid} to uuid of {_p}
+  set {_now} to now
+  set {_list::*} to {level.recent-kills::%{_uuid}%::%{_mob}%::*}
+  clear {level.recent-kills::%{_uuid}%::%{_mob}%::*}
+  loop {_list::*}:
+    set {_diff} to difference between {_now} and loop-value
+    if {_diff} <= {@dr-window-seconds} seconds:
+      add loop-value to {level.recent-kills::%{_uuid}%::%{_mob}%::*}
+  add {_now} to {level.recent-kills::%{_uuid}%::%{_mob}%::*}
+  set {_count} to size of {level.recent-kills::%{_uuid}%::%{_mob}%::*}
+  return {_count}
+
+function level_award_xp(p: player, base: number, source: text="pve", mob: text=""):
+  if {_p} is not set:
+    stop
+  if {_base} <= 0:
+    stop
+  set {_xp} to floor({_base})
+  if {_xp} < 1:
+    set {_xp} to 1
+  set {_multiplier} to 1.0
+  if {_mob} is not "":
+    set {_count} to level_register_recent_kill({_p}, {_mob})
+    if {_count} >= {@dr-threshold}:
+      set {_multiplier} to {@dr-multiplier}
+  set {_final} to floor({_xp} * {_multiplier})
+  if {_final} < 1:
+    set {_final} to 1
+  set {_name} to name of {_p}
+  execute console command "psapi player %{_name}% exp add %{_final}%"
+  if {_multiplier} < 1:
+    set {_percent} to floor({_multiplier} * 1000) / 10
+    send "%level_prefix()%&cDR aplicado: %{_final}% XP (%{_percent}%%) em %{_mob}%" to {_p}
+  level_refresh_player({_p}, false)
+
+on load:
+  delete {level.current-tier::*}
+  delete {level.cached-level::*}
+  delete {level.recent-kills::*}
+
+on unload:
+  delete {level.recent-kills::*}
+
+on join:
+  wait 20 ticks
+  level_refresh_player(player, true)
+
+on quit:
+  delete {level.current-tier::%uuid of player%}
+  delete {level.cached-level::%uuid of player%}
+  delete {level.recent-kills::%uuid of player%::*}
+
+on respawn:
+  wait 10 ticks
+  level_refresh_player(player, false)
+
+on world change:
+  level_refresh_player(player, false)
+
+on experience change:
+  if event-entity is a player:
+    level_refresh_player(event-entity, false)
+
+# Atualização passiva do HUD
+every {@scoreboard-update-seconds} seconds:
+  loop all players:
+    level_refresh_player(loop-player, false)
+
+# Interface de comandos para MythicMobs e QA
+command /nivel:
+  description: "Exibe o status atual de nível e tier"
+  trigger:
+    level_refresh_player(player, false)
+    set {_level} to level_number_placeholder(player, "level")
+    set {_tier} to level_get_tier({_level})
+    set {_label} to level_get_tier_label({_tier})
+    send "%level_prefix()%&fNível atual: &e%{_level}%&f | Tier: &6%{_label}%" to player
+
+command /tier_info:
+  description: "Mostra o que o próximo tier libera"
+  trigger:
+    set {_level} to level_number_placeholder(player, "level")
+    set {_tier} to level_get_tier({_level})
+    set {_codes::*} to split {@tier-codes} at ","
+    set {_index} to 0
+    loop {_codes::*}:
+      add 1 to {_index}
+      if loop-value is {_tier}:
+        stop loop
+    set {_next} to {_codes::%{_index} + 1%}
+    if {_next} is not set:
+      send "%level_prefix()%&aVocê já atingiu o Tier final!" to player
+      stop
+    set {_label} to level_get_tier_label({_next})
+    set {_range} to ""
+    switch {_next}:
+      case "tier_t1": set {_range} to {@tier-range-t1}
+      case "tier_t2": set {_range} to {@tier-range-t2}
+      case "tier_t3": set {_range} to {@tier-range-t3}
+      case "tier_t4": set {_range} to {@tier-range-t4}
+    send "%level_prefix()%&fPróximo tier: &6%{_label}% &f(Níveis %{_range}%)." to player
+    set {_unlocks::*} to level_get_tier_unlocks({_next})
+    loop {_unlocks::*}:
+      send " &7• &f%loop-value%" to player
+
+command /dar_xp <player> <number>:
+  permission: op
+  description: "Força XP em um jogador"
+  trigger:
+    set {_target} to arg-1
+    set {_xp} to arg-2 parsed as number
+    if {_xp} <= 0:
+      send "%level_prefix()%&cInforme um valor positivo." to sender
+      stop
+    level_award_xp({_target}, {_xp}, "admin", "console")
+    send "%level_prefix()%&fAplicados %{_xp}% XP para %name of {_target}%" to sender
+
+command /set_lvl <player> <number>:
+  permission: op
+  description: "Define manualmente o nível global (1-20)"
+  trigger:
+    set {_target} to arg-1
+    set {_level} to arg-2 parsed as number
+    if {_level} < 1 or {_level} > 20:
+      send "%level_prefix()%&cNível precisa estar entre 1 e 20." to sender
+      stop
+    execute console command "psapi player %name of {_target}% level set %{_level}%"
+    wait 10 ticks
+    if {_target} is online:
+      level_refresh_player({_target}, true)
+    send "%level_prefix()%&fNível de %name of {_target}% ajustado para %{_level}%." to sender
+
+command /levelxp <text> <number> [<text>] [<text>]:
+  permission: op
+  executable by: console
+  trigger:
+    set {_name} to arg-1
+    set {_xp} to arg-2 parsed as number
+    set {_source} to "mob"
+    if arg-3 is set:
+      set {_source} to arg-3
+    set {_mob} to ""
+    if arg-4 is set:
+      set {_mob} to arg-4
+    set {_target} to offline player {_name}
+    if {_target} is not online:
+      stop
+    level_award_xp({_target}'s player, {_xp}, {_source}, {_mob})
+
+# Eventos de combate para reduzir grind repetido
+on mythicmob death:
+  set {_killer} to killer
+  if {_killer} is not a player:
+    stop
+  set {_mob} to event-mythicmob internal name
+  if {_mob} is not set:
+    set {_mob} to "%event-entity%"
+  level_register_recent_kill({_killer}, {_mob})
