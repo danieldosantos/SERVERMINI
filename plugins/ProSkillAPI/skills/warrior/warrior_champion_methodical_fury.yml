@@ -1,0 +1,31 @@
+# Skill: Fúria Metódica
+name: warrior_champion_methodical_fury
+display: "§eFúria Metódica"
+icon: BLAZE_POWDER
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  duration-base: 12
+  duration-scale: 0
+description:
+  - "§7Concede +10% dano enquanto estiver com vida cheia."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run warrior_champion_methodical %caster% 12 0.1"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§eFúria Metódica ativa."
+          targets: self

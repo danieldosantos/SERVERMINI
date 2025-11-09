@@ -1,0 +1,7 @@
+lp creategroup class_warrior
+lp creategroup class_warrior.champion
+lp creategroup class_warrior.battlemaster
+lp creategroup class_warrior.samurai
+lp parent set class_warrior.champion class_warrior
+lp parent set class_warrior.battlemaster class_warrior
+lp parent set class_warrior.samurai class_warrior

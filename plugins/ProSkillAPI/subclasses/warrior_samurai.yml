@@ -1,0 +1,49 @@
+# Subclasse: Samurai
+name: Warrior_Samurai
+display: "§dSamurai"
+description:
+  - "§7Especialista em foco, penetração e retaliação."
+  - "§dExplosões curtas controladas por janelas de postura Iaijutsu."
+options:
+  needs-permission: true
+  parent: Warrior
+  focus: dps
+  cooldown-profile:
+    burst-window: 60
+    sustain-window: 120
+skills:
+  tier1:
+    active:
+      - warrior_quick_strike
+      - warrior_prepared_stance
+      - warrior_samurai_blade_focus
+    passive:
+      - warrior_samurai_retaliation
+  tier2:
+    active:
+      - warrior_stunning_blow
+      - warrior_line_dash
+      - warrior_samurai_blade_focus
+      - warrior_samurai_iaijutsu_stance
+    passive:
+      - warrior_samurai_retaliation
+  tier3:
+    active:
+      - warrior_rend_armor
+      - warrior_target_lock
+      - warrior_samurai_blade_focus
+      - warrior_samurai_iaijutsu_stance
+    passive:
+      - warrior_samurai_retaliation
+  tier4:
+    active:
+      - warrior_cleaving_execution
+      - warrior_pressure_assault
+      - warrior_samurai_blade_focus
+      - warrior_samurai_iaijutsu_stance
+      - warrior_samurai_war_spirit
+    passive:
+      - warrior_samurai_retaliation
+notes:
+  - "Retaliação possui tempo interno de 6s controlado via warrior_cmds.sk."
+  - "Espírito Guerreiro aumenta regen de Estamina respeitando teto de 10/s."

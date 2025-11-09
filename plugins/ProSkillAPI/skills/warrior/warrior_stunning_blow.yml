@@ -1,0 +1,59 @@
+# Skill: Golpe Atordoante
+name: warrior_stunning_blow
+display: "§6Golpe Atordoante"
+icon: GOLDEN_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  range-base: 4
+  range-scale: 0
+  damage-base: 1.3
+  damage-scale: 0
+description:
+  - "§7130% de dano e aplica atordoamento de 1s (lento nível V)."
+  - "§7Respeita imunidade decrescente de controle."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          shape: single
+          range-base: 4
+          range-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.3
+              value-scale: 0
+              classifier: skill
+          Stun:
+            type: mechanic
+            data:
+              potion: SLOW
+              seconds-base: 1
+              seconds-scale: 0
+              amplifier-base: 4
+              amplifier-scale: 0
+          JumpLock:
+            type: mechanic
+            data:
+              potion: JUMP
+              seconds-base: 1
+              seconds-scale: 0
+              amplifier-base: 128
+              amplifier-scale: 0
+          Diminishing:
+            type: mechanic
+            data:
+              command: "skript run warrior_apply_diminishing %target% 1"
+              silent: true

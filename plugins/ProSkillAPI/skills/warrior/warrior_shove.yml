@@ -1,0 +1,49 @@
+# Skill: Empurrão
+name: warrior_shove
+display: "§6Empurrão"
+icon: SHIELD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 12
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 4
+  range-scale: 0
+description:
+  - "§7Empurra o alvo 2 blocos e reduz sua velocidade em 10% por 4s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          shape: single
+          range-base: 4
+          range-scale: 0
+          group: enemy
+        children:
+          Knockback:
+            type: mechanic
+            data:
+              speed-base: 0.7
+              speed-scale: 0
+              direction: caster
+              type: velocity
+          Slow:
+            type: mechanic
+            data:
+              potion: SLOW
+              seconds-base: 4
+              seconds-scale: 0
+              amplifier-base: 0
+              amplifier-scale: 0
+          Diminishing:
+            type: mechanic
+            data:
+              command: "skript run warrior_apply_diminishing %target% 4"
+              silent: true

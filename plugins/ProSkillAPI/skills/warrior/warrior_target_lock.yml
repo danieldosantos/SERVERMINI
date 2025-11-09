@@ -1,0 +1,41 @@
+# Skill: Caça Alvo
+name: warrior_target_lock
+display: "§6Caça Alvo"
+icon: SPYGLASS
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  range-base: 10
+  range-scale: 0
+description:
+  - "§7Marca um alvo, concedendo +15% de dano contra ele por 10s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          shape: single
+          range-base: 10
+          range-scale: 0
+          group: enemy
+        children:
+          Mark:
+            type: mechanic
+            data:
+              command: "skript run warrior_mark_target %caster% %target% 10 0.15"
+              silent: true
+          Indicator:
+            type: mechanic
+            data:
+              effect: REDSTONE
+              amount-base: 20
+              radius-base: 0.5
+              particle-offset: 0.2

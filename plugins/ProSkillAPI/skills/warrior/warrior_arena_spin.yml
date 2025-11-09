@@ -1,0 +1,49 @@
+# Skill: Giro de Arena
+name: warrior_arena_spin
+display: "§6Giro de Arena"
+icon: IRON_AXE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  radius-base: 5
+  radius-scale: 0
+  damage-base: 1.4
+  damage-scale: 0
+description:
+  - "§7Causa 140% de dano em cleave de 5 blocos."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Spin:
+        type: mechanic
+        data:
+          effect: SWEEP_ATTACK
+          amount-base: 20
+          radius-base: 5
+          particle-offset: 0.3
+      Area:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 5
+          radius-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.4
+              value-scale: 0
+              classifier: skill
+          ComboHook:
+            type: mechanic
+            data:
+              command: "skript run warrior_increment_combo %caster% %target% 1"
+              silent: true

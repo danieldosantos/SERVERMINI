@@ -1,0 +1,45 @@
+# Subclasse: Mestre de Batalha
+name: Warrior_BattleMaster
+display: "§cMestre de Batalha"
+description:
+  - "§7Controlador de campo com marcações e suporte defensivo."
+  - "§cManobras priorizam utilidade sem ultrapassar controles de 3s."
+options:
+  needs-permission: true
+  parent: Warrior
+  focus: controller
+  cooldown-profile:
+    burst-window: 75
+    sustain-window: 150
+skills:
+  tier1:
+    active:
+      - warrior_quick_strike
+      - warrior_shove
+      - warrior_battlemaster_trip
+    passive: []
+  tier2:
+    active:
+      - warrior_stunning_blow
+      - warrior_line_dash
+      - warrior_battlemaster_trip
+      - warrior_battlemaster_threaten
+    passive: []
+  tier3:
+    active:
+      - warrior_arena_spin
+      - warrior_target_lock
+      - warrior_battlemaster_threaten
+      - warrior_battlemaster_command_line
+    passive: []
+  tier4:
+    active:
+      - warrior_whirlwind
+      - warrior_pressure_assault
+      - warrior_battlemaster_trip
+      - warrior_battlemaster_command_line
+      - warrior_battlemaster_war_call
+    passive: []
+notes:
+  - "Controles respeitam imunidade decrescente via warrior_cmds.sk."
+  - "Chamado de Guerra buffa aliados sem exceder +15% velocidade (cap total +0.05)."

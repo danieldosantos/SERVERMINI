@@ -1,0 +1,31 @@
+# Skill: Assalto de Pressão
+name: warrior_pressure_assault
+display: "§6Assalto de Pressão"
+icon: IRON_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  duration-base: 8
+  duration-scale: 0
+description:
+  - "§7Durante 8s, ataques consecutivos reduzem a defesa inimiga em 2% (máx. -20%)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run warrior_pressure_assault %caster% 8 0.02 0.2"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§6Assalto de Pressão ativado."
+          targets: self

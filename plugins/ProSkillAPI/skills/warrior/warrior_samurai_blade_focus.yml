@@ -1,0 +1,31 @@
+# Skill: Foco da Lâmina
+name: warrior_samurai_blade_focus
+display: "§dFoco da Lâmina"
+icon: IRON_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  duration-base: 8
+  duration-scale: 0
+description:
+  - "§7Concede +15% penetração por 8s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run warrior_samurai_blade_focus %caster% 8 0.15"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§dFoco da Lâmina ativo."
+          targets: self

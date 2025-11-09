@@ -1,0 +1,29 @@
+# Skill: Coração de Aço
+name: warrior_iron_heart
+display: "§6Coração de Aço"
+icon: NETHERITE_CHESTPLATE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+description:
+  - "§7Ultimate: +30% mitigação por 8s, respeitando limite de 45%."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run warrior_iron_heart %caster% 8 0.3"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§6Coração de Aço endurece seu corpo!"
+          targets: self

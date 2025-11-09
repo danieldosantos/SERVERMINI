@@ -1,0 +1,29 @@
+# Skill: Avanço de Linha
+name: warrior_line_dash
+display: "§6Avanço de Linha"
+icon: IRON_BOOTS
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 20
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+description:
+  - "§7Avança 6 blocos em linha reta atravessando pequenos obstáculos."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Dash:
+        type: mechanic
+        data:
+          command: "skript run warrior_line_dash %caster% 6"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§6Você avança com força pela linha inimiga."
+          targets: self

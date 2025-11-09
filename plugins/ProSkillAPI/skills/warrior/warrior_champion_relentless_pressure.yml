@@ -1,0 +1,17 @@
+# Skill Passiva: Pressão Constante
+name: warrior_champion_relentless_pressure
+display: "§ePressão Constante"
+icon: ANVIL
+type: Passive
+max-level: 1
+description:
+  - "§7Ataques consecutivos no mesmo alvo concedem +2% dano (máx. +20%)."
+components:
+  Passive:
+    type: trigger
+    children:
+      Hook:
+        type: mechanic
+        data:
+          command: "skript run warrior_champion_pressure %caster%"
+          silent: true

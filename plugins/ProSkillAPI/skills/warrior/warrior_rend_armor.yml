@@ -1,0 +1,42 @@
+# Skill: Ruptura
+name: warrior_rend_armor
+display: "§6Ruptura"
+icon: DIAMOND_AXE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  range-base: 4
+  range-scale: 0
+  damage-base: 1.6
+  damage-scale: 0
+description:
+  - "§7160% de dano e reduz a resistência do alvo em 10% por 8s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          shape: single
+          range-base: 4
+          range-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.6
+              value-scale: 0
+              classifier: skill
+          Debuff:
+            type: mechanic
+            data:
+              command: "skript run warrior_reduce_resistance %caster% %target% 8 0.1"
+              silent: true

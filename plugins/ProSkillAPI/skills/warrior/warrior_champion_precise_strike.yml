@@ -1,0 +1,29 @@
+# Skill: Golpe Preciso
+name: warrior_champion_precise_strike
+display: "§eGolpe Preciso"
+icon: DIAMOND_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 20
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+description:
+  - "§7Concede +20% de chance de crítico no próximo ataque."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Flag:
+        type: mechanic
+        data:
+          command: "skript run warrior_champion_precise %caster% 20"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§eGolpe Preciso preparado."
+          targets: self

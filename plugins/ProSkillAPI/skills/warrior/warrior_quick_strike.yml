@@ -1,0 +1,48 @@
+# Skill: Golpe Rápido
+name: warrior_quick_strike
+display: "§6Golpe Rápido"
+icon: IRON_SWORD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 4
+  cooldown-scale: 0
+  mana-cost-base: 15
+  mana-cost-scale: 0
+  range-base: 4
+  range-scale: 0
+  damage-base: 1.2
+  damage-scale: 0
+description:
+  - "§7120% de dano corpo a corpo em alvo único."
+  - "§7Converte combos e beneficia-se de Postura Preparada (+20% no próximo golpe)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          shape: single
+          range-base: 4
+          range-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.2
+              value-scale: 0
+              classifier: skill
+          ComboHook:
+            type: mechanic
+            data:
+              command: "skript run warrior_on_quick_strike %caster% %target%"
+              silent: true
+      HUDUpdate:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% warrior_combo"
+          silent: true

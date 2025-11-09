@@ -1,0 +1,30 @@
+# Skill: Desviar
+name: warrior_deflect
+display: "§6Desviar"
+icon: RABBIT_HIDE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 10
+  cooldown-scale: 0
+  mana-cost-base: 15
+  mana-cost-scale: 0
+description:
+  - "§7Reduz o próximo dano recebido em 30%."
+  - "§7Aplica imunidade curta a controles subsequentes via script."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Flag:
+        type: mechanic
+        data:
+          command: "skript run warrior_apply_deflect %caster% 0.3"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§6Você assume postura defensiva."
+          targets: self

@@ -1,0 +1,29 @@
+# Skill: Postura Agressiva
+name: warrior_aggressive_stance
+display: "§6Postura Agressiva"
+icon: GOLDEN_AXE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§7Concede +15% ataque por 8s drenando 3 Estamina/s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          command: "skript run warrior_postura_agressiva %caster% 8 0.15 3"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§6Postura Agressiva ativada."
+          targets: self
