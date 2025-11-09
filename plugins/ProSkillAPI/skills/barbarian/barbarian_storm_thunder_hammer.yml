@@ -1,0 +1,38 @@
+# Skill: Martelo do Trovão
+name: barbarian_storm_thunder_hammer
+display: "§bMartelo do Trovão"
+icon: IRON_AXE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+description:
+  - "§7140% de dano e atordoamento de 2s no alvo atingido."
+components:
+  Cast:
+    type: trigger
+    children:
+      TargetEnemy:
+        type: target
+        data:
+          range-base: 6
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 1.4
+              damage-scale: 0
+              indicator: "§bMartelo"
+          Stun:
+            type: mechanic
+            data:
+              potion: SLOW
+              seconds-base: 2
+              amplifier-base: 6
+      Message:
+        type: mechanic
+        data:
+          message: "§bMartelo do Trovão descarregado!"
+          targets: self

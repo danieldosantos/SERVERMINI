@@ -1,0 +1,61 @@
+# Skill: Carnificina Implacável (ULT)
+name: barbarian_berserker_carnage
+display: "§4Carnificina Implacável"
+icon: TOTEM_OF_UNDYING
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+description:
+  - "§715s de golpes em área (3 blocos) com roubo de vida de 25% do dano causado."
+  - "§cRespeita limite de cura por golpe."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      RageRequirement:
+        type: condition
+        data:
+          key: rage_stacks
+          min-value: 1
+          fail-message: "§cAcumule Fúria antes de usar a Carnificina."
+        children:
+          ConsumeRage:
+            type: mechanic
+            data:
+              key: rage_stacks
+              amount-base: 1
+              indicator: "§6-1 Rage"
+      CleaveLoop:
+        type: mechanic
+        data:
+          repeat: 5
+          interval: 3
+        children:
+          AreaDamage:
+            type: target
+            data:
+              shape: sphere
+              radius-base: 3
+              group: enemy
+            children:
+              DealDamage:
+                type: mechanic
+                data:
+                  damage-base: 1.1
+                  damage-scale: 0
+                  indicator: "§4Carnificina"
+              LifeSteal:
+                type: mechanic
+                data:
+                  heal-percent-base: 0.25
+                  heal-percent-scale: 0
+                  indicator: "§aRoubo de Vida"
+      Message:
+        type: mechanic
+        data:
+          message: "§4Carnificina Implacável liberada!"
+          targets: self

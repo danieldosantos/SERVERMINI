@@ -1,0 +1,47 @@
+# Skill: Ataque Temerário
+name: barbarian_reckless_attack
+display: "§cAtaque Temerário"
+icon: IRON_AXE
+type: Active
+max-level: 1
+attributes:
+  level-base: 1
+  level-scale: 0
+  cost-base: 0
+  cost-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 0
+description:
+  - "§ePor 20s, seus ataques corpo a corpo ganham +25% chance de crítico"
+  - "§eou penetram 35% da armadura do alvo (PvE)."
+  - "§cEnquanto ativo, você recebe +15% dano."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      ApplyOffense:
+        type: mechanic
+        data:
+          potion: STRENGTH
+          seconds-base: 20
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+          indicator: "§cAtaque Temerário: +crit"
+      ApplyVulnerability:
+        type: mechanic
+        data:
+          potion: WEAKNESS
+          seconds-base: 20
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+          indicator: "§cRecebe +15% dano"
+      Message:
+        type: mechanic
+        data:
+          message: "§cVocê ataca com temeridade!"
+          targets: self

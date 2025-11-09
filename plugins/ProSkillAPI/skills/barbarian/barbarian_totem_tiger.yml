@@ -1,0 +1,33 @@
+# Skill: Totem do Tigre
+name: barbarian_totem_tiger
+display: "§6Totem do Tigre"
+icon: ORANGE_DYE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 70
+  cooldown-scale: 0
+description:
+  - "§7Concede +30% velocidade de ataque por 8s aos aliados próximos."
+components:
+  Cast:
+    type: trigger
+    children:
+      Allies:
+        type: target
+        data:
+          group: ally
+          radius-base: 8
+        children:
+          ApplyHaste:
+            type: mechanic
+            data:
+              potion: HASTE
+              seconds-base: 8
+              amplifier-base: 1
+              indicator: "§6Totem do Tigre"
+      Message:
+        type: mechanic
+        data:
+          message: "§6Os golpes felinos aceleram!"
+          targets: self

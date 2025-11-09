@@ -1,0 +1,105 @@
+# Skript - Comandos e integrações para classe Bárbaro
+options:
+  prefix: &6[Barbaro]&f
+
+on load:
+  broadcast "&7Skript barbarian_cmds.sk carregado." to console
+
+command /kit_barbaro:
+  permission: group.class_barbarian
+  trigger:
+    clear player's inventory
+    give player blaze powder named "&6Talismã da Fúria" with lore "&7Clique para ativar Fúria." and "&8Grupo: class_barbarian"
+    give player goat horn named "&cBerrante Berserker" with lore "&7Clique para Grito Bestial." and "&8Grupo: class_barbarian.berserker"
+    give player netherite axe named "&4Machado Sanguinário" with lore "&7Clique para Investida." and "&8Grupo: class_barbarian.berserker"
+    give player carved pumpkin named "&6Totem do Urso" with lore "&7Clique para Totem do Urso." and "&8Grupo: class_barbarian.totem"
+    give player ender eye named "&bOlho do Furacão" with lore "&7Clique para Olho do Furacão." and "&8Grupo: class_barbarian.storm"
+    execute console command "scoreboard objectives add barbarian_rage dummy"
+    execute console command "scoreboard players set %player% barbarian_rage 0"
+    send "{@prefix} &7Kit de testes configurado."
+
+command /furia:
+  aliases: /rage
+  permission: group.class_barbarian
+  trigger:
+    execute console command "skillapi cast barbarian_fury %player%"
+
+command /temerario:
+  permission: group.class_barbarian
+  trigger:
+    execute console command "skillapi cast barbarian_reckless_attack %player%"
+
+command /berserk:
+  permission: group.class_barbarian.berserker
+  trigger:
+    execute console command "skillapi cast barbarian_berserker_carnage %player%"
+
+command /totem_urso:
+  permission: group.class_barbarian.totem
+  trigger:
+    execute console command "skillapi cast barbarian_totem_bear %player%"
+
+command /totem_lobo:
+  permission: group.class_barbarian.totem
+  trigger:
+    execute console command "skillapi cast barbarian_totem_wolf %player%"
+
+command /totem_fenix:
+  permission: group.class_barbarian.totem
+  trigger:
+    execute console command "skillapi cast barbarian_totem_phoenix %player%"
+
+command /storm_olho:
+  permission: group.class_barbarian.storm
+  trigger:
+    execute console command "skillapi cast barbarian_storm_eye %player%"
+
+command /barbaro_ooc <text>:
+  permission: op
+  trigger:
+    if arg-1 = "on":
+      execute console command "scoreboard players set %player% barbarian_ooc 1"
+      send "{@prefix} &7Estado fora de combate forçado."
+    else if arg-1 = "off":
+      execute console command "scoreboard players set %player% barbarian_ooc 0"
+      send "{@prefix} &7Estado normalizado."
+
+on rightclick with blaze powder:
+  if name of player's tool = "&6Talismã da Fúria":
+    if player has permission "group.class_barbarian":
+      execute console command "skillapi cast barbarian_fury %player%"
+    else:
+      send "{@prefix} &cApenas Bárbaros podem usar isso."
+
+on rightclick with goat horn:
+  if name of player's tool = "&cBerrante Berserker":
+    if player has permission "group.class_barbarian.berserker":
+      execute console command "skillapi cast barbarian_berserker_bestial_roar %player%"
+    else:
+      send "{@prefix} &cApenas Berserkers."
+
+on leftclick with netherite axe:
+  if name of player's tool = "&4Machado Sanguinário":
+    if player has permission "group.class_barbarian.berserker":
+      execute console command "skillapi cast barbarian_berserker_bloody_charge %player%"
+
+on rightclick with carved pumpkin:
+  if name of player's tool = "&6Totem do Urso":
+    if player has permission "group.class_barbarian.totem":
+      execute console command "skillapi cast barbarian_totem_bear %player%"
+
+on rightclick with blaze rod:
+  if name of player's tool = "&cTotem da Fênix":
+    if player has permission "group.class_barbarian.totem":
+      execute console command "skillapi cast barbarian_totem_phoenix %player%"
+
+on rightclick with ender eye:
+  if name of player's tool = "&bOlho do Furacão":
+    if player has permission "group.class_barbarian.storm":
+      execute console command "skillapi cast barbarian_storm_eye %player%"
+
+# Chamadas auxiliares para ajustes de resistência via Skript
+command /barbarian_res_cap <player>:
+  permission: op
+  trigger:
+    execute console command "scoreboard players set %arg-1% barbarian_res_cap 1"

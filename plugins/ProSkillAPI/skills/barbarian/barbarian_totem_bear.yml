@@ -1,0 +1,50 @@
+# Skill: Totem do Urso
+name: barbarian_totem_bear
+display: "§6Totem do Urso"
+icon: HONEYCOMB
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+description:
+  - "§7Ergue um totem que reduz em 35% o dano físico recebido por aliados em 5 blocos."
+  - "§7Duração: 10s. Consome 1 carga de Fúria."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      ConsumeRage:
+        type: mechanic
+        data:
+          key: rage_stacks
+          amount-base: 1
+          min-value: 1
+          indicator: "§6-1 Rage"
+      TotemAura:
+        type: mechanic
+        data:
+          repeat: 5
+          interval: 2
+        children:
+          Allies:
+            type: target
+            data:
+              group: ally
+              radius-base: 5
+              radius-scale: 0
+            children:
+              ApplyResistance:
+                type: mechanic
+                data:
+                  potion: DAMAGE_RESISTANCE
+                  seconds-base: 2.5
+                  amplifier-base: 1
+                  indicator: "§6Totem do Urso"
+      Message:
+        type: mechanic
+        data:
+          message: "§6Totem do Urso protege a tribo!"
+          targets: self

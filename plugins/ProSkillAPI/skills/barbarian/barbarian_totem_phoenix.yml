@@ -1,0 +1,53 @@
+# Skill: Totem da Fênix (ULT)
+name: barbarian_totem_phoenix
+display: "§cTotem da Fênix"
+icon: FIRE_CHARGE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+description:
+  - "§7Invoca aura de 8 blocos por 12s; revive aliados uma vez com 40% HP."
+  - "§cBloqueado em arenas PvP rankeadas via verificação de região."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      PvPLock:
+        type: condition
+        data:
+          region-flag: disable_totem_phoenix
+          invert: true
+          fail-message: "§cTotem da Fênix desativado nesta arena."
+        children:
+          AuraLoop:
+            type: mechanic
+            data:
+              repeat: 6
+              interval: 2
+            children:
+              Allies:
+                type: target
+                data:
+                  group: ally
+                  radius-base: 8
+                children:
+                  ApplyFireShield:
+                    type: mechanic
+                    data:
+                      potion: FIRE_RESISTANCE
+                      seconds-base: 2.5
+                      amplifier-base: 0
+                  FlagResurrection:
+                    type: mechanic
+                    data:
+                      command: "skript run revive_barbarian %target%"
+                      silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§cA chama da Fênix protege a tribo!"
+          targets: self

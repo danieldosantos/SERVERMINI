@@ -1,0 +1,22 @@
+# Skill: Vigor
+name: barbarian_vigor
+display: "§aVigor Primal"
+icon: APPLE
+type: Passive
+max-level: 1
+description:
+  - "§7Regenera 1.5% da vida máxima a cada 4s enquanto fora de combate."
+  - "§8Ativa após 8s sem causar ou receber dano."
+components:
+  OutOfCombat:
+    type: trigger
+    data:
+      delay: 8
+      interval: 4
+    children:
+      Heal:
+        type: mechanic
+        data:
+          heal-percent-base: 0.015
+          heal-percent-scale: 0
+          indicator: "§aVigor Primal"

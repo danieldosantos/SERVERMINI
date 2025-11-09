@@ -1,0 +1,39 @@
+# Skill: Capa de Ventos
+name: barbarian_storm_wind_cloak
+display: "§bCapa de Ventos"
+icon: BLUE_CARPET
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+description:
+  - "§7Cria redemoinho que repele inimigos em 4 blocos e concede +50% resistência a projéteis por 10s."
+components:
+  Cast:
+    type: trigger
+    children:
+      PushEnemies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 4
+          group: enemy
+        children:
+          Knockback:
+            type: mechanic
+            data:
+              push-base: 1.2
+              push-up-base: 0.2
+      ApplyProjectileResist:
+        type: mechanic
+        data:
+          potion: RESISTANCE
+          seconds-base: 10
+          amplifier-base: 1
+          indicator: "§b+50% Resist. Projétil"
+      Message:
+        type: mechanic
+        data:
+          message: "§bVentos protegem você e sua equipe!"
+          targets: self

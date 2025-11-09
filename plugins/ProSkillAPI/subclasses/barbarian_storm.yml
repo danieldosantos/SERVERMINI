@@ -1,0 +1,41 @@
+# Subclasse Arauto da Tempestade do Bárbaro
+name: Barbarian_Storm
+display: "§bArauto da Tempestade"
+description:
+  - "§7Controla descargas elementais e zonas de vento."
+  - "§bSuprime projéteis e controla posicionamento inimigo."
+options:
+  needs-permission: true
+  parent: Barbarian
+  mana-name: "Fúria"
+skills:
+  tier1:
+    active:
+      - barbarian_storm_thunder_hammer
+      - barbarian_storm_galvanic_surge
+    passive:
+      - barbarian_storm_tempest_aegis
+  tier2:
+    active:
+      - barbarian_storm_thunder_hammer
+      - barbarian_storm_galvanic_surge
+      - barbarian_storm_wind_cloak
+    passive:
+      - barbarian_storm_tempest_aegis
+  tier3:
+    active:
+      - barbarian_storm_thunder_hammer
+      - barbarian_storm_galvanic_surge
+      - barbarian_storm_wind_cloak
+      - barbarian_storm_tempest_cauldron
+    passive:
+      - barbarian_storm_tempest_aegis
+  tier4:
+    active:
+      - barbarian_storm_thunder_hammer
+      - barbarian_storm_galvanic_surge
+      - barbarian_storm_wind_cloak
+      - barbarian_storm_tempest_cauldron
+      - barbarian_storm_eye
+    passive:
+      - barbarian_storm_tempest_aegis

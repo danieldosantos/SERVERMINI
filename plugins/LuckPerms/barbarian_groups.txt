@@ -1,0 +1,35 @@
+# LuckPerms configuração de grupos para classe Bárbaro
+lp creategroup class_barbarian
+lp group class_barbarian setdisplayname "Bárbaro"
+lp group class_barbarian meta add prefix "&6[Bárbaro]&f "
+lp group class_barbarian permission set class.barbarian true
+lp group class_barbarian permission set skillapi.class.barbarian true
+lp group class_barbarian permission set mythicmobs.item.barbarian true
+lp group class_barbarian permission set skript.command.furia true
+lp group class_barbarian permission set skript.command.temerario true
+
+lp creategroup class_barbarian.berserker
+lp group class_barbarian.berserker parent add class_barbarian
+lp group class_barbarian.berserker setdisplayname "Bárbaro - Berserker"
+lp group class_barbarian.berserker meta add prefix "&c[Berserker]&f "
+lp group class_barbarian.berserker permission set skillapi.subclass.barbarian_berserker true
+lp group class_barbarian.berserker permission set mythicmobs.item.berserker true
+lp group class_barbarian.berserker permission set skript.command.berserk true
+
+lp creategroup class_barbarian.totem
+lp group class_barbarian.totem parent add class_barbarian
+lp group class_barbarian.totem setdisplayname "Bárbaro - Guardião Totêmico"
+lp group class_barbarian.totem meta add prefix "&a[Totem]&f "
+lp group class_barbarian.totem permission set skillapi.subclass.barbarian_totem true
+lp group class_barbarian.totem permission set mythicmobs.item.totem true
+lp group class_barbarian.totem permission set skript.command.totem_urso true
+lp group class_barbarian.totem permission set skript.command.totem_lobo true
+lp group class_barbarian.totem permission set skript.command.totem_fenix true
+
+lp creategroup class_barbarian.storm
+lp group class_barbarian.storm parent add class_barbarian
+lp group class_barbarian.storm setdisplayname "Bárbaro - Arauto da Tempestade"
+lp group class_barbarian.storm meta add prefix "&b[Tempestade]&f "
+lp group class_barbarian.storm permission set skillapi.subclass.barbarian_storm true
+lp group class_barbarian.storm permission set mythicmobs.item.storm true
+lp group class_barbarian.storm permission set skript.command.storm_olho true

@@ -1,0 +1,134 @@
+# Itens focais para o Bárbaro e subclasses
+items:
+  BarbarianRageCharm:
+    Id: BLAZE_POWDER
+    Display: '&6Talismã da Fúria'
+    Lore:
+      - '&7Canaliza a habilidade §6Fúria§7.'
+      - '&8Requer grupo LuckPerms: class_barbarian.'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_barbarian'
+      skill: 'barbarian_fury'
+    Skills:
+      - skill{s=barbarian_fury} @self ~onUse
+  BerserkerWarHorn:
+    Id: GOAT_HORN
+    Display: '&cBerrante Berserker'
+    Lore:
+      - '&7Ativa §cGrito Bestial§7 (consome 1 Rage).'
+      - '&8Requer grupo: class_barbarian.berserker'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.berserker'
+      skill: 'barbarian_berserker_bestial_roar'
+    Skills:
+      - skill{s=barbarian_berserker_bestial_roar} @self ~onUse
+  BerserkerBattleAxe:
+    Id: NETHERITE_AXE
+    Display: '&4Machado Sanguinário'
+    Lore:
+      - '&7Golpeia com §4Investida Sanguinária§7.'
+      - '&8Requer grupo: class_barbarian.berserker'
+    Options:
+      Unbreakable: true
+      Damage: 9
+    PersistentData:
+      classlock: 'class_barbarian.berserker'
+      skill: 'barbarian_berserker_bloody_charge'
+    Skills:
+      - skill{s=barbarian_berserker_bloody_charge} @self ~onUse
+  BerserkerTotem:
+    Id: TOTEM_OF_UNDYING
+    Display: '&4Ídolo da Carnificina'
+    Lore:
+      - '&715s de cleave e roubo de vida.'
+      - '&8Requer grupo: class_barbarian.berserker'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.berserker'
+      skill: 'barbarian_berserker_carnage'
+    Skills:
+      - skill{s=barbarian_berserker_carnage} @self ~onUse
+  TotemBearCharm:
+    Id: CARVED_PUMPKIN
+    Display: '&6Totem do Urso'
+    Lore:
+      - '&7Protege aliados com -35% dano físico.'
+      - '&8Requer: class_barbarian.totem'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.totem'
+      skill: 'barbarian_totem_bear'
+    Skills:
+      - skill{s=barbarian_totem_bear} @self ~onUse
+  TotemWolfCharm:
+    Id: WOLF_SPAWN_EGG
+    Display: '&fTotem do Lobo'
+    Lore:
+      - '&7Marca alvo e amplia dano aliado.'
+      - '&8Requer: class_barbarian.totem'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.totem'
+      skill: 'barbarian_totem_wolf'
+    Skills:
+      - skill{s=barbarian_totem_wolf} @self ~onUse
+  TotemPhoenixCharm:
+    Id: BLAZE_ROD
+    Display: '&cTotem da Fênix'
+    Lore:
+      - '&7Revive aliados uma vez durante a aura.'
+      - '&8Requer: class_barbarian.totem'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.totem'
+      skill: 'barbarian_totem_phoenix'
+    Skills:
+      - skill{s=barbarian_totem_phoenix} @self ~onUse
+  StormWarHammer:
+    Id: GOLDEN_AXE
+    Display: '&bMartelo do Trovão'
+    Lore:
+      - '&7140% dano + atordoamento.'
+      - '&8Requer: class_barbarian.storm'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.storm'
+      skill: 'barbarian_storm_thunder_hammer'
+    Skills:
+      - skill{s=barbarian_storm_thunder_hammer} @self ~onUse
+  StormChargeGauntlet:
+    Id: IRON_HORSE_ARMOR
+    Display: '&9Manopla Galvânica'
+    Lore:
+      - '&7Libera 3 descargas ao longo do tempo.'
+      - '&8Requer: class_barbarian.storm'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.storm'
+      skill: 'barbarian_storm_galvanic_surge'
+    Skills:
+      - skill{s=barbarian_storm_galvanic_surge} @self ~onUse
+  StormEyeTotem:
+    Id: ENDER_EYE
+    Display: '&bOlho do Furacão'
+    Lore:
+      - '&7Cria vórtice elétrico de 8 blocos.'
+      - '&8Requer: class_barbarian.storm'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_barbarian.storm'
+      skill: 'barbarian_storm_eye'
+    Skills:
+      - skill{s=barbarian_storm_eye} @self ~onUse

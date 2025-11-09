@@ -1,0 +1,37 @@
+# Skill: Retaliação Frenética
+name: barbarian_berserker_frenzied_retaliation
+display: "§4Retaliação Frenética"
+icon: SHIELD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+description:
+  - "§7Reflete 30% do dano recebido por 8s quando estiver abaixo de 50% de vida."
+  - "§cNão reflete dano de queda."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CheckHealth:
+        type: condition
+        data:
+          health-percent-max: 0.5
+          fail-message: "§cUse apenas quando ferido (<50% HP)."
+        children:
+          ApplyReflect:
+            type: mechanic
+            data:
+              reflect-percent-base: 0.3
+              reflect-percent-scale: 0
+              seconds-base: 8
+              seconds-scale: 0
+              indicator: "§4Retaliação"
+      Message:
+        type: mechanic
+        data:
+          message: "§4Você desafia os golpes inimigos!"
+          targets: self

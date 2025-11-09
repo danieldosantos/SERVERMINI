@@ -1,0 +1,41 @@
+# Subclasse Guardião Totêmico do Bárbaro
+name: Barbarian_Totem
+display: "§aGuardião Totêmico"
+description:
+  - "§7Invoca totens espirituais para apoiar aliados."
+  - "§aControla auras variadas com custos de Fúria."
+options:
+  needs-permission: true
+  parent: Barbarian
+  mana-name: "Fúria"
+skills:
+  tier1:
+    active:
+      - barbarian_totem_bear
+      - barbarian_totem_eagle
+    passive:
+      - barbarian_totem_spirit_link
+  tier2:
+    active:
+      - barbarian_totem_bear
+      - barbarian_totem_eagle
+      - barbarian_totem_wolf
+    passive:
+      - barbarian_totem_spirit_link
+  tier3:
+    active:
+      - barbarian_totem_bear
+      - barbarian_totem_eagle
+      - barbarian_totem_wolf
+      - barbarian_totem_tiger
+    passive:
+      - barbarian_totem_spirit_link
+  tier4:
+    active:
+      - barbarian_totem_bear
+      - barbarian_totem_eagle
+      - barbarian_totem_wolf
+      - barbarian_totem_tiger
+      - barbarian_totem_phoenix
+    passive:
+      - barbarian_totem_spirit_link
