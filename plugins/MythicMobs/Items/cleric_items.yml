@@ -1,0 +1,159 @@
+# Itens focais do Clérigo - MythicMobs
+LifeHolySymbol:
+  Id: "minecraft:blaze_rod"
+  Display: "&aSímbolo Sagrado da Vida"
+  Lore:
+    - "&7Canaliza curas divinas quando clicado."
+    - "&eRequer permissão: class_cleric.life"
+  Options:
+    Unbreakable: true
+    HideFlags: true
+  Enchantments:
+    - DURABILITY:3
+  PersistentData:
+    clericDomain: "life"
+    skillBinding: "palavra_curativa"
+  Skills:
+    - condition{c=permission{p=class_cleric.life}} true
+    - command{c="cleric_cast palavra";delay=1} @self ~onRightClick
+    - command{c="cleric_cast palavra";delay=1} @self ~onLeftClick
+LifeGuardianMace:
+  Id: "minecraft:iron_shovel"
+  Display: "&aMaça do Guardião"
+  Lore:
+    - "&7Atalho para Proteção Sagrada."
+    - "&ePermissão necessária: class_cleric"
+  Options:
+    Unbreakable: true
+    HideFlags: true
+  Enchantments:
+    - KNOCKBACK:2
+  PersistentData:
+    clericDomain: "life"
+    skillBinding: "protecao_sagrada"
+  Skills:
+    - condition{c=permission{p=class_cleric}} true
+    - command{c="cleric_cast escudo";delay=1} @self ~onRightClick
+LifePrayerBeads:
+  Id: "minecraft:amethyst_shard"
+  Display: "&aContas de Oração"
+  Lore:
+    - "&7Troca rápida para Bênção Abundante."
+  Options:
+    Unbreakable: true
+  PersistentData:
+    clericDomain: "life"
+    skillBinding: "bencao_abundante"
+  Skills:
+    - condition{c=permission{p=class_cleric.life}} true
+    - command{c="cleric_cast bencao";delay=1} @self ~onRightClick
+LifeSanctuaryUrn:
+  Id: "minecraft:cauldron"
+  Display: "&aUrna do Santuário"
+  Lore:
+    - "&7Toque Purificador em área."
+  Skills:
+    - condition{c=permission{p=class_cleric.life}} true
+    - command{c="cleric_cast purificar";delay=1} @self ~onRightClick
+LifeDivineRelic:
+  Id: "minecraft:respawn_anchor"
+  Display: "&aRelíquia Divina"
+  Lore:
+    - "&cHabilita Milagre Vital (PvP bloqueado)."
+  Skills:
+    - condition{c=permission{p=class_cleric.life}} true
+    - command{c="cleric_cast milagre";delay=1} @self ~onRightClick
+
+WarSacredHammer:
+  Id: "minecraft:golden_axe"
+  Display: "&cMartelo Sagrado de Guerra"
+  Lore:
+    - "&7Canaliza Golpe Divinamente Guiado."
+  Options:
+    Unbreakable: true
+    HideFlags: true
+  PersistentData:
+    clericDomain: "war"
+    skillBinding: "golpe_divino"
+  Skills:
+    - condition{c=permission{p=class_cleric.war}} true
+    - command{c="cleric_cast golpe";delay=1} @self ~onRightClick
+WarHolySpear:
+  Id: "minecraft:trident"
+  Display: "&cLança Consagrada"
+  Lore:
+    - "&7Dispara Estilhaço Consagrado."
+  Skills:
+    - condition{c=permission{p=class_cleric.war}} true
+    - command{c="cleric_cast estilhaco";delay=1} @self ~onRightClick
+WarBattleBanner:
+  Id: "minecraft:orange_banner"
+  Display: "&cEstandarte Sagrado"
+  Lore:
+    - "&7Clique direito para erguer o estandarte."
+  Skills:
+    - condition{c=permission{p=class_cleric.war}} true
+    - command{c="cleric_cast estandarte";delay=1} @self ~onRightClick
+WarWarhorn:
+  Id: "minecraft:goat_horn"
+  Display: "&cChifre de Guerra"
+  Lore:
+    - "&7Ativa Marcha do Zelote."
+  Skills:
+    - condition{c=permission{p=class_cleric.war}} true
+    - command{c="cleric_cast marcha";delay=1} @self ~onRightClick
+WarCelestialCrown:
+  Id: "minecraft:golden_helmet"
+  Display: "&cCoroa Celestial"
+  Lore:
+    - "&7Ativa Coroa do Campeão."
+  Skills:
+    - condition{c=permission{p=class_cleric.war}} true
+    - command{c="cleric_cast coroa";delay=1} @self ~onRightClick
+
+TwilightLantern:
+  Id: "minecraft:lantern"
+  Display: "&5Lanterna do Crepúsculo"
+  Lore:
+    - "&7Clicar concede Manto do Poente."
+  Options:
+    Unbreakable: true
+    HideFlags: true
+  PersistentData:
+    clericDomain: "twilight"
+    skillBinding: "manto"
+  Skills:
+    - condition{c=permission{p=class_cleric.twilight}} true
+    - command{c="cleric_cast manto";delay=1} @self ~onRightClick
+TwilightOrb:
+  Id: "minecraft:ender_pearl"
+  Display: "&5Orbe Crepuscular"
+  Lore:
+    - "&7Dispara Raio Crepuscular."
+  Skills:
+    - condition{c=permission{p=class_cleric.twilight}} true
+    - command{c="cleric_cast raio";delay=1} @self ~onRightClick
+TwilightSanctum:
+  Id: "minecraft:shulker_shell"
+  Display: "&5Santuário Crepuscular"
+  Lore:
+    - "&7Ergue Refúgio Noturno."
+  Skills:
+    - condition{c=permission{p=class_cleric.twilight}} true
+    - command{c="cleric_cast refugio";delay=1} @self ~onRightClick
+TwilightCenser:
+  Id: "minecraft:brewing_stand"
+  Display: "&5Turíbulo do Entardecer"
+  Lore:
+    - "&7Invoca Bruma Reconfortante."
+  Skills:
+    - condition{c=permission{p=class_cleric.twilight}} true
+    - command{c="cleric_cast bruma";delay=1} @self ~onRightClick
+TwilightDiadem:
+  Id: "minecraft:amethyst_cluster"
+  Display: "&5Diadema do Eclipse"
+  Lore:
+    - "&7Ativa Eclipse Sagrado."
+  Skills:
+    - condition{c=permission{p=class_cleric.twilight}} true
+    - command{c="cleric_cast eclipse";delay=1} @self ~onRightClick

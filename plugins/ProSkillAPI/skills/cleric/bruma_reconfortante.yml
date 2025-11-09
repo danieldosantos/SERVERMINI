@@ -1,0 +1,41 @@
+name: Bruma Reconfortante
+type: active
+max-level: 4
+requires:
+  subclass: cleric_twilight
+description:
+  - "Libera bruma que cura 5% da vida por segundo durante 6s."
+  - "Remove efeitos mentais (medo, confusão) dos aliados na área."
+icon: POTION
+mana:
+  base: 70
+  scale: 18
+cooldown:
+  base: 120
+  scale: -10
+  minimum: 100
+custom:
+  radius: 6
+  duration: 6
+  heal-per-second: 0.05
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%custom.radius%"
+        targets: allies
+        indicator: cloud
+      - type: hot
+        value: "%custom.heal-per-second%"
+        duration: "%custom.duration%"
+        scaling: max-health
+      - type: cleanse
+        level: 2
+        remove:
+          - fear
+          - confusion
+          - blindness
+      - type: message
+        text: "&5[Domínio do Crepúsculo] Uma bruma reconfortante envolve você."
+messages:
+  cast: "&5[Domínio do Crepúsculo] Cura contínua por 6s iniciada."

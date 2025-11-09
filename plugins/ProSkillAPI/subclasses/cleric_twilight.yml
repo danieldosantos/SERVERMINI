@@ -1,0 +1,38 @@
+# Domínio do Crepúsculo - Subclasse do Clérigo
+name: "Clérigo - Crepúsculo"
+key: cleric_twilight
+parent: cleric
+description:
+  - "Guardiões da luz e sombra que protegem as linhas de frente ao anoitecer."
+  - "Controle de campo e proteção contra projéteis."
+attributes:
+  health:
+    base: 28
+    scale: 7
+  defense:
+    base: 16
+    scale: 6
+  skill-defense:
+    base: 10
+    scale: 4
+  mana:
+    base: 55
+    scale: 22
+skills:
+  - name: Manto do Poente
+    level: 1
+  - name: Raio Crepuscular
+    level: 1
+  - name: Refugio Noturno
+    level: 2
+  - name: Bruma Reconfortante
+    level: 3
+  - name: Eclipse Sagrado
+    level: 4
+channel-options:
+  - id: crepusculo_barreira
+    skill: Refugio Noturno
+    description: "Converte Canalizar Divindade em uma bolha protetora temporária."
+notes:
+  - "Refúgio Noturno bloqueia projéteis mas respeita limites de duração de 8s."
+  - "Bruma Reconfortante remove efeitos mentais sem ultrapassar caps de cura."

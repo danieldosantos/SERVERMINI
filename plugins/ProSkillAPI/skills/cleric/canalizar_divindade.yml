@@ -1,0 +1,37 @@
+name: Canalizar Divindade
+type: active
+max-level: 4
+requires:
+  class: cleric
+description:
+  - "Gasta 1 carga de Canalizar Divindade para ativar um efeito do domínio escolhido."
+  - "Cooldown interno compartilhado: 120s." 
+  - "Efeitos específicos são definidos pelas subclasses e scripts."
+icon: NETHER_STAR
+mana:
+  base: 20
+  scale: 5
+cooldown:
+  base: 120
+  scale: 0
+resource:
+  divinity:
+    cost: 1
+    minimum: 1
+custom:
+  selection-mode: submenu
+  options:
+    - dominio_vida
+    - dominio_guerra
+    - dominio_crepusculo
+components:
+  cast:
+    sequence:
+      - type: trigger
+        key: cleric_channel
+        data:
+          cooldown: 120
+          resource: divinity
+messages:
+  cast: "&6[Clérigo] Você canaliza a energia divina! Escolha seu efeito." 
+  fail-resource: "&cSem cargas de Canalizar Divindade disponíveis." 

@@ -1,0 +1,36 @@
+name: Bencao Abundante
+type: active
+max-level: 4
+requires:
+  subclass: cleric_life
+description:
+  - "Aumenta em 20% a cura recebida pelos aliados por 12s."
+  - "Não ultrapassa o limite de cura efetiva com raciais." 
+icon: GOLDEN_APPLE
+mana:
+  base: 65
+  scale: 20
+cooldown:
+  base: 105
+  scale: -5
+  minimum: 90
+custom:
+  duration: 12
+  heal-bonus: 0.20
+  radius: 6
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%custom.radius%"
+        targets: allies
+      - type: buff
+        key: bencao_abundante
+        stat: healing-received
+        value: "%custom.heal-bonus%"
+        duration: "%custom.duration%"
+        diminishing-cap: 0.60
+      - type: message
+        text: "&a[Domínio da Vida] Bênção Abundante paira sobre você!"
+messages:
+  cast: "&a[Domínio da Vida] Cura recebida aumentada em 20% por 12s."

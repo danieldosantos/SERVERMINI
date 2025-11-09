@@ -1,0 +1,38 @@
+# Domínio da Guerra - Subclasse do Clérigo
+name: "Clérigo - Guerra"
+key: cleric_war
+parent: cleric
+description:
+  - "Inspira aliados a marchar para o combate com fervor divino."
+  - "Ênfase em buffs ofensivos e penetração."
+attributes:
+  health:
+    base: 32
+    scale: 9
+  defense:
+    base: 12
+    scale: 4
+  skill-damage:
+    base: 10
+    scale: 4
+  mana:
+    base: 40
+    scale: 18
+skills:
+  - name: Golpe Divinamente Guiado
+    level: 1
+  - name: Estilhaco Consagrado
+    level: 1
+  - name: Estandarte Sagrado
+    level: 2
+  - name: Marcha do Zelote
+    level: 3
+  - name: Coroa do Campeao
+    level: 4
+channel-options:
+  - id: guerra_ofensivo
+    skill: Golpe Divinamente Guiado
+    description: "Canalizar Divindade concede um buff ofensivo poderoso."
+notes:
+  - "Buffs ofensivos respeitam limite de mitigação 45% ao combinar com raças resistentes."
+  - "Marcha do Zelote não ignora fraquezas raciais, apenas suaviza com limite de 8s."

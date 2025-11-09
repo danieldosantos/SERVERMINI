@@ -1,0 +1,83 @@
+# Classe base do Clérigo - ProSkillAPI
+name: Cleric
+key: cleric
+prefix: "Clérigo"
+type: base
+parents: []
+description:
+  - "Sacerdotes devotos que canalizam a energia divina para proteger e curar."
+  - "Função primária: Suporte/Curador com mitigação utilitária."
+exp-source: class
+mana:
+  base: 120
+  per-level: 25
+  # Regeneração previsível fora de combate
+  regen-base: 6
+  regen-scale: 2
+attributes:
+  # Valores aproximados por tier T1/T2/T3/T4
+  health:
+    base: 24
+    scale: 6
+  mana:
+    base: 0
+    scale: 0
+  defense:
+    base: 12
+    scale: 4
+  skill-damage:
+    base: 0
+    scale: 0
+  skill-defense:
+    base: 5
+    scale: 2
+  cooldown-reduction:
+    base: 0
+    scale: 0
+  walk-speed:
+    base: 0.1
+    scale: 0.01
+
+# Recurso secundário - cargas de Canalizar Divindade
+resources:
+  divinity:
+    display: "Canalizar Divindade"
+    type: charges
+    base: 1
+    max: 2
+    scale: 0
+    unlock-level: 3
+    description: "Cargas usadas para efeitos de Canalizar Divindade."
+  # Placares para PlaceholderAPI/Scoreboard
+placeholders:
+  mana: "%skillapi_mana%"
+  divinity: "%skillapi_resource_divinity%"
+  cooldown_major: "%skillapi_cooldown_protecao_sagrada%"
+skills:
+  # Skills base aprendidas automaticamente
+  - name: Palavra Curativa
+    level: 1
+  - name: Protecao Sagrada
+    level: 3
+  - name: Aura de Fe
+    level: 5
+  - name: Canalizar Divindade
+    level: 5
+actions:
+  on-join:
+    # Aplica scoreboard customizado
+    - type: scoreboard
+      board: cleric_hud
+  on-leave:
+    - type: scoreboard
+      clear: cleric_hud
+requirements:
+  race-blacklist:
+    # Exemplo de integração com RacesEffects - restringe raças incompatíveis
+    - undead
+flags:
+  - holy
+  - support
+notes:
+  - "Aura de Fé deve ser ativada manualmente, uptime máximo 12s a cada 90s (<=60%)."
+  - "Canalizar Divindade consome 1 charge e respeita o limite de 120s entre usos." 

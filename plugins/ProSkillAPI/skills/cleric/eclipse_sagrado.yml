@@ -1,0 +1,43 @@
+name: Eclipse Sagrado
+type: ultimate
+max-level: 4
+requires:
+  subclass: cleric_twilight
+description:
+  - "Invoca um eclipse que obscurece inimigos e amplia curas aliadas por 15s."
+  - "Aplica -visão e +20% cura recebida dentro da área."
+icon: BLACK_DYE
+mana:
+  base: 80
+  scale: 20
+cooldown:
+  base: 240
+  scale: 0
+custom:
+  radius: 8
+  duration: 15
+  heal-bonus: 0.20
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%custom.radius%"
+        indicator: eclipse
+        targets: all
+      - type: buff
+        key: eclipse_cura
+        stat: healing-received
+        value: "%custom.heal-bonus%"
+        duration: "%custom.duration%"
+        target-filter: allies
+        diminishing-cap: 0.60
+      - type: debuff
+        key: eclipse_visao
+        stat: vision
+        value: -0.70
+        duration: "%custom.duration%"
+        target-filter: enemies
+      - type: message
+        text: "&5[Domínio do Crepúsculo] Eclipse Sagrado cobre a área!"
+messages:
+  cast: "&5[Domínio do Crepúsculo] Zona de eclipse ativa por 15s."

@@ -1,0 +1,38 @@
+name: Toque Purificador
+type: active
+max-level: 4
+requires:
+  subclass: cleric_life
+description:
+  - "Purifica aliados em 5 blocos removendo venenos e doenças."
+  - "Aplica breve cura residual para estabilizar."
+icon: MILK_BUCKET
+mana:
+  base: 40
+  scale: 10
+cooldown:
+  base: 75
+  scale: -5
+  minimum: 60
+custom:
+  radius: 5
+  heal: 0.05
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%custom.radius%"
+        targets: allies
+        indicator: sphere
+      - type: cleanse
+        level: 3
+        remove:
+          - poison
+          - wither
+          - blindness
+          - hunger
+      - type: heal
+        value: "%custom.heal%"
+        scaling: max-health
+messages:
+  cast: "&a[Domínio da Vida] Toque Purificador dissipa venenos na área!"

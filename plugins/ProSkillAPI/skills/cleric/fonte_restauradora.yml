@@ -1,0 +1,39 @@
+name: Fonte Restauradora
+type: active
+max-level: 4
+requires:
+  subclass: cleric_life
+description:
+  - "Canaliza energia curativa restaurando 18% da vida do alvo."
+  - "Remove um debuff adicional e gera partículas verdes."
+icon: HEART_OF_THE_SEA
+mana:
+  base: 50
+  scale: 12
+cooldown:
+  base: 45
+  scale: -3
+  minimum: 36
+range:
+  base: 10
+  scale: 2
+custom:
+  heal-percent: 0.18
+  cleanse-level: 2
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        indicator: particles
+      - type: heal
+        value: "%custom.heal-percent%"
+        scaling: max-health
+      - type: cleanse
+        level: 2
+      - type: particles
+        shape: halo
+        color: green
+messages:
+  cast: "&a[Domínio da Vida] Fonte Restauradora cura %target% em 18% da vida máxima."

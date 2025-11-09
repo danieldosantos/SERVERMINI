@@ -1,0 +1,41 @@
+name: Raio Crepuscular
+type: active
+max-level: 4
+requires:
+  subclass: cleric_twilight
+description:
+  - "Dispara raio radiante de 140% de poder."
+  - "Reduz velocidade do alvo em 40% por 6s."
+icon: END_ROD
+mana:
+  base: 45
+  scale: 12
+cooldown:
+  base: 50
+  scale: -3
+  minimum: 40
+range:
+  base: 16
+  scale: 2
+custom:
+  damage-multiplier: 1.40
+  slow: 0.40
+  duration: 6
+components:
+  cast:
+    sequence:
+      - type: projectile
+        speed: 1.8
+        range: "%range%"
+        pierce: false
+        hit:
+          - type: damage
+            modifier: "%custom.damage-multiplier%"
+            element: holy
+          - type: debuff
+            key: raio_crepuscular_slow
+            stat: movement-speed
+            value: "-%custom.slow%"
+            duration: "%custom.duration%"
+messages:
+  cast: "&5[Domínio do Crepúsculo] Raio Crepuscular lançado."

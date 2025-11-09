@@ -1,0 +1,40 @@
+name: Coroa do Campeao
+type: ultimate
+max-level: 4
+requires:
+  subclass: cleric_war
+description:
+  - "Concede aura ofensiva por 12s: ataques aliados causam +50% dano radiante e curam 5%."
+  - "Cooldown 210s, respeitando limites de cura PvP."
+icon: GOLDEN_HELMET
+mana:
+  base: 70
+  scale: 18
+cooldown:
+  base: 210
+  scale: 0
+custom:
+  duration: 12
+  damage-bonus: 0.50
+  heal-percent: 0.05
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: 8
+        targets: allies
+        indicator: crown
+      - type: buff
+        key: coroa_dano
+        stat: radiant-damage
+        value: "%custom.damage-bonus%"
+        duration: "%custom.duration%"
+      - type: buff
+        key: coroa_roubo
+        stat: lifesteal
+        value: "%custom.heal-percent%"
+        duration: "%custom.duration%"
+      - type: message
+        text: "&c[Domínio da Guerra] Coroa do Campeão abençoa sua lâmina!"
+messages:
+  cast: "&c[Domínio da Guerra] Aura ofensiva ativa por 12s."

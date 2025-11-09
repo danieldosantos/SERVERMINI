@@ -1,0 +1,41 @@
+name: Escudo de Fe
+type: active
+max-level: 4
+requires:
+  subclass: cleric_life
+description:
+  - "Concede um escudo de 150 pontos + 15% resistência por 8s."
+  - "Combina com outras fontes respeitando o cap de 45%."
+icon: TOTEM_OF_UNDYING
+mana:
+  base: 55
+  scale: 15
+cooldown:
+  base: 60
+  scale: -4
+  minimum: 48
+range:
+  base: 8
+  scale: 1
+custom:
+  shield: 150
+  mitigation: 0.15
+  duration: 8
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%range%"
+        targets: allies
+        indicator: burst
+      - type: absorb
+        amount: "%custom.shield%"
+        duration: "%custom.duration%"
+      - type: buff
+        key: escudo_fe_resistencia
+        stat: damage-reduction
+        value: "%custom.mitigation%"
+        duration: "%custom.duration%"
+        diminishing-cap: 0.45
+messages:
+  cast: "&a[Domínio da Vida] Escudo de Fé protege aliados por 8s."

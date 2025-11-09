@@ -1,0 +1,45 @@
+name: Aura de Fe
+type: active
+max-level: 4
+requires:
+  class: cleric
+description:
+  - "Ativa uma aura divina por 12s, concedendo mitigação aos aliados próximos."
+  - "Uptime máximo 12s a cada 90s, dentro do limite de 60%."
+  - "Aplica diminishing returns quando combinado com bônus raciais de resistência."
+icon: BEACON
+mana:
+  base: 55
+  scale: 15
+cooldown:
+  base: 105
+  scale: -5
+  minimum: 90
+radius:
+  base: 6
+  scale: 1
+custom:
+  mitigation:
+    tier1: 0.10
+    tier2: 0.12
+    tier3: 0.14
+    tier4: 0.15
+  duration: 12
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        targets: allies
+        indicator: ring
+      - type: buff
+        key: aura_fe_mitigacao
+        stat: damage-reduction
+        value: "%custom.mitigation%"
+        duration: "%custom.duration%"
+        diminishing-cap: 0.45
+      - type: message
+        text: "&e[Clérigo] Aura de Fé protege aliados por %custom.duration%s!"
+  end:
+    - type: message
+      text: "&7[Aura] Aura de Fé se dissipa." 

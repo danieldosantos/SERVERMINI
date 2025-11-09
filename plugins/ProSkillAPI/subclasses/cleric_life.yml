@@ -1,0 +1,38 @@
+# Domínio da Vida - Subclasse do Clérigo
+name: "Clérigo - Vida"
+key: cleric_life
+parent: cleric
+description:
+  - "Guardião da vitalidade que protege aliados com milagres de cura."
+  - "Ênfase em recuperação e mitigação preventiva."
+attributes:
+  health:
+    base: 30
+    scale: 8
+  defense:
+    base: 14
+    scale: 5
+  skill-defense:
+    base: 8
+    scale: 3
+  mana:
+    base: 50
+    scale: 20
+skills:
+  - name: Fonte Restauradora
+    level: 1
+  - name: Escudo de Fe
+    level: 1
+  - name: Toque Purificador
+    level: 2
+  - name: Bencao Abundante
+    level: 3
+  - name: Milagre Vital
+    level: 4
+channel-options:
+  - id: vida_curacao
+    skill: Fonte Restauradora
+    description: "Converter Canalizar Divindade em cura de emergência."
+notes:
+  - "Milagre Vital bloqueado em PvP através do script de canalização."
+  - "A sinergia com raças que já possuem resistência aplica diminishing returns (cap 45%)."

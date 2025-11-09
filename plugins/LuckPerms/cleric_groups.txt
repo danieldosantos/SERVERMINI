@@ -1,0 +1,72 @@
+# Grupos LuckPerms para a classe Clérigo
+lp creategroup class_cleric
+lp creategroup class_cleric.life
+lp creategroup class_cleric.war
+lp creategroup class_cleric.twilight
+
+# Herdar classe base para os domínios
+lp group class_cleric.life parent add class_cleric
+lp group class_cleric.war parent add class_cleric
+lp group class_cleric.twilight parent add class_cleric
+
+# Permissões gerais da classe
+lp group class_cleric permission set skillapi.class.cleric true
+lp group class_cleric permission set skillapi.skill.palavra_curativa true
+lp group class_cleric permission set skillapi.skill.protecao_sagrada true
+lp group class_cleric permission set skillapi.skill.aura_de_fe true
+lp group class_cleric permission set skillapi.skill.canalizar_divindade true
+lp group class_cleric permission set skript.command.cura true
+lp group class_cleric permission set skript.command.escudo true
+lp group class_cleric permission set skript.command.aura true
+lp group class_cleric permission set skript.command.canalizar true
+lp group class_cleric permission set skript.command.kit_clerigo true
+lp group class_cleric permission set mythicmobs.pickup.cleric_items true
+lp group class_cleric permission set placeholderapi.see.cleric true
+
+# Domínio da Vida
+lp group class_cleric.life permission set skillapi.subclass.cleric_life true
+lp group class_cleric.life permission set skillapi.skill.fonte_restauradora true
+lp group class_cleric.life permission set skillapi.skill.escudo_de_fe true
+lp group class_cleric.life permission set skillapi.skill.toque_purificador true
+lp group class_cleric.life permission set skillapi.skill.bencao_abundante true
+lp group class_cleric.life permission set skillapi.skill.milagre_vital true
+lp group class_cleric.life permission set class_cleric.life true
+lp group class_cleric.life permission set mythicmobs.item.use.LifeHolySymbol true
+lp group class_cleric.life permission set mythicmobs.item.use.LifeGuardianMace true
+lp group class_cleric.life permission set mythicmobs.item.use.LifePrayerBeads true
+lp group class_cleric.life permission set mythicmobs.item.use.LifeSanctuaryUrn true
+lp group class_cleric.life permission set mythicmobs.item.use.LifeDivineRelic true
+
+# Domínio da Guerra
+lp group class_cleric.war permission set skillapi.subclass.cleric_war true
+lp group class_cleric.war permission set skillapi.skill.golpe_divinamente_guiado true
+lp group class_cleric.war permission set skillapi.skill.estilhaco_consagrado true
+lp group class_cleric.war permission set skillapi.skill.estandarte_sagrado true
+lp group class_cleric.war permission set skillapi.skill.marcha_do_zelote true
+lp group class_cleric.war permission set skillapi.skill.coroa_do_campeao true
+lp group class_cleric.war permission set class_cleric.war true
+lp group class_cleric.war permission set mythicmobs.item.use.WarSacredHammer true
+lp group class_cleric.war permission set mythicmobs.item.use.WarHolySpear true
+lp group class_cleric.war permission set mythicmobs.item.use.WarBattleBanner true
+lp group class_cleric.war permission set mythicmobs.item.use.WarWarhorn true
+lp group class_cleric.war permission set mythicmobs.item.use.WarCelestialCrown true
+
+# Domínio do Crepúsculo
+lp group class_cleric.twilight permission set skillapi.subclass.cleric_twilight true
+lp group class_cleric.twilight permission set skillapi.skill.manto_do_poente true
+lp group class_cleric.twilight permission set skillapi.skill.raio_crepuscular true
+lp group class_cleric.twilight permission set skillapi.skill.refugio_noturno true
+lp group class_cleric.twilight permission set skillapi.skill.bruma_reconfortante true
+lp group class_cleric.twilight permission set skillapi.skill.eclipse_sagrado true
+lp group class_cleric.twilight permission set class_cleric.twilight true
+lp group class_cleric.twilight permission set mythicmobs.item.use.TwilightLantern true
+lp group class_cleric.twilight permission set mythicmobs.item.use.TwilightOrb true
+lp group class_cleric.twilight permission set mythicmobs.item.use.TwilightSanctum true
+lp group class_cleric.twilight permission set mythicmobs.item.use.TwilightCenser true
+lp group class_cleric.twilight permission set mythicmobs.item.use.TwilightDiadem true
+
+# Integração com RacesEffects - flags de sinergia
+lp group class_cleric permission set raceseffects.flag.cleric_slowregen true
+lp group class_cleric.life permission set raceseffects.compat.resilience_diminish true
+lp group class_cleric.war permission set raceseffects.compat.berserker_cap true
+lp group class_cleric.twilight permission set raceseffects.compat.shadowvision true
