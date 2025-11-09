@@ -1,0 +1,22 @@
+name: druid_wildsenses
+display: "§aSentidos Selvagens"
+type: passive
+max-level: 4
+description:
+  - "§7Concede visão noturna intermitente (12s ativos / 12s inativos) e detecção de invisíveis a 8 blocos."
+  - "§aEm Forma Selvagem, revela rastros inimigos no HUD via PlaceholderAPI."
+icon: ECHO_SHARD
+custom:
+  reveal-radius: 8
+components:
+  passive:
+    sequence:
+      - type: periodic
+        interval: 24
+      - type: buff
+        key: druid_wildsense_nightvision
+        stat: night_vision
+        duration: 12
+      - type: command
+        async: true
+        text: "placeholderapi refresh %player% skills_wildsense_tracking"

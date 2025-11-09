@@ -1,0 +1,38 @@
+# Subclasse Druida - Círculo do Pastor
+name: Druid_Shepherd
+display: "§aCírculo do Pastor"
+description:
+  - "§7Invocador espiritual que protege aliados com espíritos ancestrais."
+  - "§aFornece cura sustentada, escudos compartilhados e familiares temporários."
+options:
+  needs-permission: true
+  parent: Druid
+  mana-name: "Essência"
+  spirit-focus: conduit
+skills:
+  tier1:
+    active:
+      - druid_shepherd_wolf_call
+      - druid_shepherd_ancestral_shield
+    passive: []
+  tier2:
+    active:
+      - druid_shepherd_wolf_call
+      - druid_shepherd_ancestral_shield
+      - druid_shepherd_harmonious_bond
+    passive: []
+  tier3:
+    active:
+      - druid_shepherd_wolf_call
+      - druid_shepherd_ancestral_shield
+      - druid_shepherd_harmonious_bond
+      - druid_shepherd_revitalizing_rain
+    passive: []
+  tier4:
+    active:
+      - druid_shepherd_wolf_call
+      - druid_shepherd_ancestral_shield
+      - druid_shepherd_harmonious_bond
+      - druid_shepherd_revitalizing_rain
+      - druid_shepherd_primal_conclave
+    passive: []

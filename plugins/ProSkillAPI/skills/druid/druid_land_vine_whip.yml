@@ -1,0 +1,43 @@
+name: druid_land_vine_whip
+display: "§2Chicote de Vinhas"
+type: active
+max-level: 4
+description:
+  - "§7Dispara vinhas que puxam alvo em até 6 blocos causando sangramento de 5% da vida por 6s."
+  - "§2Aplicável apenas a inimigos até tamanho médio; chefes recebem metade do puxão e dano."
+  - "§7Cooldown 55s."
+icon: VINE
+mana:
+  base: 20
+  scale: 6
+cooldown:
+  base: 55
+  scale: -5
+range:
+  base: 15
+  scale: 2
+duration:
+  base: 6
+  scale: 0
+custom:
+  pull-distance: 6
+  bleed-percent: 0.05
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        filter: enemies
+      - type: pull
+        distance: "%custom.pull-distance%"
+      - type: damage
+        percent: "%custom.bleed-percent%"
+        interval: 1
+        duration: "%duration%"
+        element: nature
+      - type: message
+        targets: target
+        text: "&2[Vinhas] Você é arrastado pelas vinhas entrançadas!"
+messages:
+  cast: "&2[Vinhas] O chicote prende seu inimigo."

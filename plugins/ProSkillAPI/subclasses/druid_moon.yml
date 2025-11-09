@@ -1,0 +1,38 @@
+# Subclasse Druida - Círculo da Lua
+name: Druid_Moon
+display: "§bCírculo da Lua"
+description:
+  - "§7Especialista em formas bestiais reforçadas pelo ciclo lunar."
+  - "§bAlterna entre formas com bônus situacionais e controle através de medo."
+options:
+  needs-permission: true
+  parent: Druid
+  mana-name: "Essência"
+  wildshape-focus: lunar
+skills:
+  tier1:
+    active:
+      - druid_moon_primal_bear
+      - druid_moon_feline_form
+    passive: []
+  tier2:
+    active:
+      - druid_moon_primal_bear
+      - druid_moon_feline_form
+      - druid_moon_lunar_roar
+    passive: []
+  tier3:
+    active:
+      - druid_moon_primal_bear
+      - druid_moon_feline_form
+      - druid_moon_lunar_roar
+      - druid_moon_natural_reversal
+    passive: []
+  tier4:
+    active:
+      - druid_moon_primal_bear
+      - druid_moon_feline_form
+      - druid_moon_lunar_roar
+      - druid_moon_natural_reversal
+      - druid_moon_avatar
+    passive: []

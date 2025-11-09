@@ -1,0 +1,59 @@
+name: druid_shepherd_primal_conclave
+display: "§dConclave Primal"
+type: ultimate
+max-level: 4
+description:
+  - "§7Invoca urso, águia e cervo espirituais por 16s com efeitos combinados."
+  - "§dUrso: +15% resistência aliados; Águia: +15% velocidade (cap +0.05); Cervo: +12% cura recebida."
+  - "§7Cooldown 240s."
+icon: TOTEM_OF_UNDYING
+mana:
+  base: 60
+  scale: 15
+cooldown:
+  base: 240
+  scale: 0
+duration:
+  base: 16
+  scale: 1
+custom:
+  resist: 0.15
+  speed: 0.03
+  heal: 0.12
+components:
+  cast:
+    sequence:
+      - type: summon
+        mob: ShepherdBearSpirit
+        duration: "%duration%"
+      - type: summon
+        mob: ShepherdEagleSpirit
+        duration: "%duration%"
+      - type: summon
+        mob: ShepherdStagSpirit
+        duration: "%duration%"
+      - type: area
+        radius: 10
+        duration: "%duration%"
+        filter: allies
+      - type: buff
+        key: druid_shepherd_conclave_resist
+        stat: damage_reduction
+        amount: "%custom.resist%"
+        duration: "%duration%"
+      - type: buff
+        key: druid_shepherd_conclave_speed
+        stat: walk_speed
+        amount: "%custom.speed%"
+        duration: "%duration%"
+        limit: 0.05
+      - type: buff
+        key: druid_shepherd_conclave_heal
+        stat: healing_received
+        amount: "%custom.heal%"
+        duration: "%duration%"
+      - type: message
+        targets: area
+        text: "&d[Conclave] Espíritos maiores lutam ao seu lado."
+messages:
+  cast: "&d[Conclave Primal] Os espíritos ancestrais atendem ao chamado."

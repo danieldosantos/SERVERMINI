@@ -1,0 +1,31 @@
+name: druid_shepherd_wolf_call
+display: "§fChamado do Lobo Espiritual"
+type: active
+max-level: 4
+description:
+  - "§7Invoca lobo espiritual por 12s causando 80% dano a cada 2s ao alvo atual."
+  - "§fO espírito herda 25% da cura recebida pelo Druida."
+icon: WOLF_SPAWN_EGG
+mana:
+  base: 28
+  scale: 7
+cooldown:
+  base: 60
+  scale: -5
+custom:
+  duration: 12
+  interval: 2
+  damage-multiplier: 0.80
+components:
+  cast:
+    sequence:
+      - type: summon
+        mob: ShepherdWolfSpirit
+        duration: "%custom.duration%"
+      - type: command
+        text: "mythicmobs signal ShepherdWolfSpirit %player%"
+      - type: message
+        targets: self
+        text: "&f[Pastor] Um lobo espiritual atende ao seu chamado."
+messages:
+  cooldown: "&cO espírito lupino precisa descansar."

@@ -1,0 +1,49 @@
+name: druid_moon_feline_form
+display: "§bForma Felina"
+type: active
+max-level: 4
+description:
+  - "§7Assume forma felina por 10s: +0.05 velocidade (cap global) e acerto crítico garantido em alvos isolados."
+  - "§bSe não houver aliados em 8 blocos, ataques básicos ganham +25% dano crítico."
+  - "§7Cooldown 75s."
+icon: CAT_SPAWN_EGG
+mana:
+  base: 22
+  scale: 6
+cooldown:
+  base: 75
+  scale: -5
+resource:
+  wildshape_charges:
+    cost: 1
+    minimum: 0
+duration:
+  base: 10
+  scale: 1
+custom:
+  speed-bonus: 0.05
+  crit-bonus: 0.25
+components:
+  cast:
+    sequence:
+      - type: buff
+        key: druid_moon_cat_speed
+        stat: walk_speed
+        amount: "%custom.speed-bonus%"
+        duration: "%duration%"
+        limit: 0.05
+      - type: buff
+        key: druid_moon_cat_crit
+        stat: critical_chance
+        amount: 1.0
+        duration: "%duration%"
+      - type: buff
+        key: druid_moon_cat_crit_damage
+        stat: critical_damage
+        amount: "%custom.crit-bonus%"
+        duration: "%duration%"
+      - type: message
+        targets: self
+        text: "&b[Lua] Você se move como um felino lunar."
+messages:
+  cooldown: "&cA Forma Felina está em descanso."

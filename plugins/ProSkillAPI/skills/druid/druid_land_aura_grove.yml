@@ -1,0 +1,49 @@
+name: druid_land_aura_grove
+display: "§2Aura do Bosque"
+type: active
+max-level: 4
+description:
+  - "§7Cria aura de 8 blocos por 12s fornecendo +20% regeneração natural e +50% resistência a veneno."
+  - "§2Aliados recebem 2% de cura imediata ao entrar na aura (cap 6%/s em combinação)."
+  - "§7Cooldown 90s. Bonus reduzido a 1,25x quando combinado com raças élficas."
+icon: FLOWERING_AZALEA
+mana:
+  base: 30
+  scale: 8
+cooldown:
+  base: 90
+  scale: -10
+radius:
+  base: 8
+  scale: 1
+duration:
+  base: 12
+  scale: 1
+custom:
+  regen-percent: 0.20
+  poison-resist: 0.50
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        duration: "%duration%"
+        filter: allies
+      - type: buff
+        key: druid_land_aura_regen
+        stat: regeneration
+        amount: "%custom.regen-percent%"
+        duration: "%duration%"
+      - type: buff
+        key: druid_land_aura_poison
+        stat: poison_resist
+        amount: "%custom.poison-resist%"
+        duration: "%duration%"
+      - type: heal
+        percent: 0.02
+        targets: area
+      - type: message
+        targets: area
+        text: "&2[Aura] A energia do bosque o revitaliza."
+messages:
+  cast: "&2[Aura do Bosque] O terreno floresce ao seu redor."

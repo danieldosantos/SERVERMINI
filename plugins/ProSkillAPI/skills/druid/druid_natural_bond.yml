@@ -1,0 +1,50 @@
+name: druid_natural_bond
+display: "§aVínculo Natural"
+type: active
+max-level: 4
+description:
+  - "§7Canaliza energia vital em um aliado curando 3% da vida por segundo durante 4s."
+  - "§aRemove efeitos de queimadura e aplica resistência leve a veneno (25%) enquanto durar."
+  - "§7Cooldown 45s. Em Forma Selvagem, o efeito dobra o alcance mas mantém o cap de cura em 6%/s."
+icon: GLOW_BERRIES
+mana:
+  base: 18
+  scale: 6
+cooldown:
+  base: 45
+  scale: -5
+range:
+  base: 12
+  scale: 2
+duration:
+  base: 4
+  scale: 0
+custom:
+  heal-percent: 0.03
+  poison-reduction: 0.25
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        filter: allies
+      - type: heal
+        percent: "%custom.heal-percent%"
+        interval: 1
+        duration: "%duration%"
+      - type: buff
+        key: druid_natural_bond_poison
+        stat: poison_resist
+        amount: "%custom.poison-reduction%"
+        duration: "%duration%"
+      - type: cleanse
+        effects:
+          - FIRE
+          - BURNING
+      - type: message
+        targets: target
+        text: "&a[Vínculo] Você recebe cura natural contínua."
+messages:
+  cast: "&a[Natureza] Vínculo Natural conectado em %target%."
+  fail-target: "&cNecessário aliado em até %range% blocos."

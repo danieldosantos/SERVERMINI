@@ -1,0 +1,38 @@
+# Subclasse Druida - Círculo da Terra
+name: Druid_Land
+display: "§2Círculo da Terra"
+description:
+  - "§7Foca em moldar o terreno com pedra, vinhas e solo entrópico."
+  - "§aPrioriza sustentação, redução de veneno e zonas de controle."
+options:
+  needs-permission: true
+  parent: Druid
+  mana-name: "Essência"
+  terrain-specialization: stonework
+skills:
+  tier1:
+    active:
+      - druid_land_stone_pillars
+      - druid_land_aura_grove
+    passive: []
+  tier2:
+    active:
+      - druid_land_stone_pillars
+      - druid_land_aura_grove
+      - druid_land_entropy_soil
+    passive: []
+  tier3:
+    active:
+      - druid_land_stone_pillars
+      - druid_land_aura_grove
+      - druid_land_entropy_soil
+      - druid_land_vine_whip
+    passive: []
+  tier4:
+    active:
+      - druid_land_stone_pillars
+      - druid_land_aura_grove
+      - druid_land_entropy_soil
+      - druid_land_vine_whip
+      - druid_land_heart_of_world
+    passive: []

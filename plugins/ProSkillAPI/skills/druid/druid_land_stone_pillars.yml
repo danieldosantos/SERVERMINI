@@ -1,0 +1,48 @@
+name: druid_land_stone_pillars
+display: "§7Pilares de Pedra"
+type: active
+max-level: 4
+description:
+  - "§7Ergue 3 pilares em linha reta que empurram inimigos 3 blocos causando 120% do dano da arma."
+  - "§2Inimigos atingidos recebem -20% velocidade por 4s."
+  - "§7Cooldown 60s. Interage com Forma Selvagem adicionando 10% resistência adicional ao Druida durante o efeito."
+icon: STONE_BRICKS
+mana:
+  base: 24
+  scale: 6
+cooldown:
+  base: 60
+  scale: -5
+range:
+  base: 10
+  scale: 2
+custom:
+  knockback: 3
+  damage-multiplier: 1.20
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        filter: enemies
+      - type: damage
+        multiplier: "%custom.damage-multiplier%"
+        element: earth
+      - type: knockback
+        distance: "%custom.knockback%"
+      - type: buff
+        key: druid_land_pillar_slow
+        stat: slow
+        amount: 0.20
+        duration: 4
+      - type: effect
+        particle: BLOCK_CRACK
+        material: STONE
+        radius: 3
+        duration: 1
+      - type: message
+        targets: target
+        text: "&7[Pilares] Rochas o empurram para trás!"
+messages:
+  cast: "&7[Pilares de Pedra] Rochas emergem do solo!"

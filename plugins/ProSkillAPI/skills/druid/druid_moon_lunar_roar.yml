@@ -1,0 +1,43 @@
+name: druid_moon_lunar_roar
+display: "§dRugido Lunar"
+type: active
+max-level: 4
+description:
+  - "§7Libera rugido que causa medo por 3s em inimigos a 6 blocos e reduz dano causado em 15% por 8s."
+  - "§dResistências fortes aplicam diminishing returns para duração do medo (mínimo 1.5s)."
+icon: AMETHYST_SHARD
+mana:
+  base: 24
+  scale: 6
+cooldown:
+  base: 90
+  scale: -10
+radius:
+  base: 6
+  scale: 1
+duration:
+  base: 8
+  scale: 1
+custom:
+  fear-duration: 3
+  damage-reduction: 0.15
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        filter: enemies
+      - type: debuff
+        key: druid_moon_roar_fear
+        effect: fear
+        duration: "%custom.fear-duration%"
+      - type: buff
+        key: druid_moon_roar_weaken
+        stat: damage_dealt
+        amount: -"%custom.damage-reduction%"
+        duration: "%duration%"
+      - type: effect
+        particle: SONIC_BOOM
+        radius: "%radius%"
+messages:
+  cast: "&d[Rugido Lunar] Seus inimigos tremem!"

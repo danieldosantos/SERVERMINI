@@ -1,0 +1,146 @@
+# Itens focais do Druida e Círculos
+items:
+  DruidicFocusStone:
+    Id: HEART_OF_THE_SEA
+    Display: '&2Pedra do Véu Verde'
+    Lore:
+      - '&7Canaliza &bForma Selvagem&7 (60s / CD 180s).'
+      - '&8Requer grupo: class_druid.'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_druid'
+      skill: 'druid_wildshape'
+    Skills:
+      - skill{s=druid_wildshape} @self ~onUse
+  DruidicEssenceStaff:
+    Id: MANGROVE_ROOTS
+    Display: '&aCajado de Essência'
+    Lore:
+      - '&7Ativa &aVínculo Natural&7 e monitora HUD PlaceholderAPI.'
+      - '&8Requer grupo: class_druid.'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid'
+      skill: 'druid_natural_bond'
+    Skills:
+      - skill{s=druid_natural_bond} @self ~onRightClick
+  LandStoneStaff:
+    Id: COBBLED_DEEPSLATE_WALL
+    Display: '&2Cajado Litopedra'
+    Lore:
+      - '&7Invoca &7Pilares de Pedra&7 (CD 60s).'
+      - '&8Requer grupo: class_druid.land'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid.land'
+      skill: 'druid_land_stone_pillars'
+    Skills:
+      - skill{s=druid_land_stone_pillars} @self ~onUse
+  LandEmeraldCharm:
+    Id: EMERALD
+    Display: '&aAmuleto do Bosque'
+    Lore:
+      - '&7Gera &2Aura do Bosque&7 (12s).'
+      - '&8Requer: class_druid.land'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid.land'
+      skill: 'druid_land_aura_grove'
+    Skills:
+      - skill{s=druid_land_aura_grove} @self ~onRightClick
+  LandTotem:
+    Id: FERN
+    Display: '&6Totem Primal do Solo'
+    Lore:
+      - '&7Ativa &6Coração do Mundo&7 (CD 240s).'
+      - '&8Requer: class_druid.land'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid.land'
+      skill: 'druid_land_heart_of_world'
+    Skills:
+      - skill{s=druid_land_heart_of_world} @self ~onUse
+  MoonTotem:
+    Id: MOON_TURTLE_HELMET
+    Display: '&bTotem do Luar'
+    Lore:
+      - '&7Transforma em &6Forma Ursina Primordial&7 ou ativa Forma Selvagem avançada.'
+      - '&8Requer: class_druid.moon'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid.moon'
+      skill: 'druid_moon_primal_bear'
+    Skills:
+      - skill{s=druid_moon_primal_bear} @self ~onUse
+  MoonClawRing:
+    Id: AMETHYST_CLUSTER
+    Display: '&dAnel Garra Lunar'
+    Lore:
+      - '&7Aciona &bForma Felina&7 (10s velocidade extra).'
+      - '&8Requer: class_druid.moon'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid.moon'
+      skill: 'druid_moon_feline_form'
+    Skills:
+      - skill{s=druid_moon_feline_form} @self ~onRightClick
+  MoonCelestialOrb:
+    Id: ENDER_PEARL
+    Display: '&dOrbe Celestial'
+    Lore:
+      - '&7Invoca &dAvatar da Lua&7 (18s).'
+      - '&8Requer: class_druid.moon'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid.moon'
+      skill: 'druid_moon_avatar'
+    Skills:
+      - skill{s=druid_moon_avatar} @self ~onUse
+  ShepherdTotem:
+    Id: BREEZE_ROD
+    Display: '&fTotem dos Espíritos Guardiões'
+    Lore:
+      - '&7Evoca &fChamado do Lobo Espiritual&7 (12s).'
+      - '&8Requer: class_druid.shepherd'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid.shepherd'
+      skill: 'druid_shepherd_wolf_call'
+    Skills:
+      - skill{s=druid_shepherd_wolf_call} @self ~onUse
+  ShepherdCharm:
+    Id: GOAT_HORN
+    Display: '&eBerrante Ancestral'
+    Lore:
+      - '&7Ativa &eEscudo Ancestral&7 (8s).'
+      - '&8Requer: class_druid.shepherd'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid.shepherd'
+      skill: 'druid_shepherd_ancestral_shield'
+    Skills:
+      - skill{s=druid_shepherd_ancestral_shield} @self ~onUse
+  ShepherdCircleStone:
+    Id: ECHO_SHARD
+    Display: '&dPedra do Conclave'
+    Lore:
+      - '&7Convoca &dConclave Primal&7 (16s de espíritos).'
+      - '&8Requer: class_druid.shepherd'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_druid.shepherd'
+      skill: 'druid_shepherd_primal_conclave'
+    Skills:
+      - skill{s=druid_shepherd_primal_conclave} @self ~onUse
