@@ -1,0 +1,68 @@
+options:
+  group-base: "class_druid"
+  resource-essencia: "nature_essence"
+  resource-mana: "mana"
+  skill-forma: "Druid_Wildshape"
+  skill-raizes: "Druid_EntanglingRoots"
+  skill-terra: "Druid_Circle_Land"
+  skill-lua: "Druid_Circle_Moon"
+  skill-pastor: "Druid_Circle_Shepherd"
+  skill-ultimate: "Druid_Ultimate"
+  cost-forma: 1
+  cost-raizes: 20
+  cost-circulo: 30
+  cost-ultimate: 2
+  cd-forma: 180
+  cd-raizes: 60
+  cd-circulo: 90
+  cd-ultimate: 240
+
+command /formaselvagem:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Druida") is false:
+      stop
+    if classes_cooldown_ready(player, "druid_forma", {@cd-forma}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-essencia}, {@cost-forma}) is false:
+      stop
+    execute console command "mm skills cast {@skill-forma} target=%player%"
+    classes_play_feedback(player, "&2Forma Selvagem ativada!", "entity.fox.ambient", 0.9)
+
+command /raizes:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Druida") is false:
+      stop
+    if classes_cooldown_ready(player, "druid_raizes", {@cd-raizes}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-mana}, {@cost-raizes}) is false:
+      stop
+    execute console command "mm skills cast {@skill-raizes} target=%player%"
+    classes_play_feedback(player, "&2Raízes conjuradas!", "block.grass.place", 0.8)
+
+command /circulo <text>:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Druida") is false:
+      stop
+    set {_arg} to lowercase arg-1
+    if classes_cooldown_ready(player, "druid_circulo_%{_arg}%", {@cd-circulo}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-mana}, {@cost-circulo}) is false:
+      stop
+    set {_skill} to {@skill-terra}
+    if {_arg} is "lua":
+      set {_skill} to {@skill-lua}
+    else if {_arg} is "pastor":
+      set {_skill} to {@skill-pastor}
+    execute console command "mm skills cast %{_skill}% target=%player%"
+    classes_play_feedback(player, "&2Círculo %{_arg}% invocado.", "entity.parrot.imitate_evoker", 1.1)
+
+command /ultimate_drd:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Druida") is false:
+      stop
+    if classes_cooldown_ready(player, "druid_ultimate", {@cd-ultimate}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-essencia}, {@cost-ultimate}) is false:
+      stop
+    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    classes_play_feedback(player, "&aAvatar primordial manifestado!", "entity.sniffer.happy", 0.7)

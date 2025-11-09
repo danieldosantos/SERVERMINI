@@ -1,0 +1,77 @@
+options:
+  group-base: "class_bard"
+  resource-inspirar: "focus"
+  resource-cancao: "mana"
+  skill-inspirar: "Bard_Inspiration"
+  skill-cancao: "Bard_Song"
+  skill-lore: "Bard_College_Lore"
+  skill-valor: "Bard_College_Valor"
+  skill-glamour: "Bard_College_Glamour"
+  skill-ultimate: "Bard_Ultimate"
+  cost-inspirar: 1
+  cost-cancao: 25
+  cost-collegio: 30
+  cost-ultimate: 45
+  cd-inspirar: 60
+  cd-cancao: 75
+  cd-collegio: 90
+  cd-ultimate: 240
+
+command /inspirar [<player>]:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Bardo") is false:
+      stop
+    if classes_cooldown_ready(player, "bard_inspirar", {@cd-inspirar}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-inspirar}, {@cost-inspirar}) is false:
+      stop
+    set {_target} to player
+    if arg is set:
+      set {_target} to arg
+    execute console command "mm skills cast {@skill-inspirar} target=%{_target}% caster=%player%"
+    classes_play_feedback(player, "&bInspiração musical concedida!", "block.note_block.harp", 1.0)
+
+command /cancao:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Bardo") is false:
+      stop
+    if classes_cooldown_ready(player, "bard_cancao", {@cd-cancao}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-cancao}, {@cost-cancao}) is false:
+      stop
+    execute console command "mm skills cast {@skill-cancao} target=%player%"
+    classes_play_feedback(player, "&bCanção heroica ecoa pelo campo!", "block.note_block.guitar", 1.2)
+
+command /collegio <text>:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Bardo") is false:
+      stop
+    set {_choice} to lowercase arg-1
+    set {_id} to "lore"
+    set {_display} to "conhecimento"
+    set {_skill} to {@skill-lore}
+    if {_choice} is "valor" or {_choice} is "valoroso":
+      set {_id} to "valor"
+      set {_display} to "valor"
+      set {_skill} to {@skill-valor}
+    else if {_choice} is "glamour" or {_choice} is "glamor":
+      set {_id} to "glamour"
+      set {_display} to "glamour"
+      set {_skill} to {@skill-glamour}
+    if classes_cooldown_ready(player, "bard_collegio_%{_id}%", {@cd-collegio}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-cancao}, {@cost-collegio}) is false:
+      stop
+    execute console command "mm skills cast %{_skill}% target=%player%"
+    classes_play_feedback(player, "&bHabilidade de colégio %{_display}% ativada.", "block.note_block.bell", 1.3)
+
+command /ultimate_brd:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Bardo") is false:
+      stop
+    if classes_cooldown_ready(player, "bard_ultimate", {@cd-ultimate}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-cancao}, {@cost-ultimate}) is false:
+      stop
+    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    classes_play_feedback(player, "&dSinfonia sublime inicia!", "block.note_block.chime", 0.8)

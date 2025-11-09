@@ -1,0 +1,88 @@
+options:
+  group-base: "class_sorcerer"
+  resource-mana: "mana"
+  resource-sorcery: "sorcery_points"
+  skill-rajada: "Sorcerer_ElementalBurst"
+  skill-metamagia-acelerar: "Sorcerer_Metamagic_Quickened"
+  skill-metamagia-gemea: "Sorcerer_Metamagic_Twinned"
+  skill-metamagia-potente: "Sorcerer_Metamagic_Empowered"
+  skill-linhagem-draconica: "Sorcerer_Lineage_Draconic"
+  skill-linhagem-tempestade: "Sorcerer_Lineage_Storm"
+  skill-linhagem-selvagem: "Sorcerer_Lineage_Wild"
+  skill-ultimate: "Sorcerer_Ultimate"
+  cost-rajada: 25
+  cost-metamagia: 2
+  cost-linhagem: 1
+  cost-ultimate: 3
+  cd-rajada: 30
+  cd-metamagia: 45
+  cd-linhagem: 90
+  cd-ultimate: 240
+
+command /rajadaarcana:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Feiticeiro") is false:
+      stop
+    if classes_cooldown_ready(player, "sorcerer_rajada", {@cd-rajada}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-mana}, {@cost-rajada}) is false:
+      stop
+    execute console command "mm skills cast {@skill-rajada} target=%player%"
+    classes_play_feedback(player, "&cRajada elemental liberada!", "entity.firework_rocket.blast", 1.0)
+
+command /metamagia <text>:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Feiticeiro") is false:
+      stop
+    set {_choice} to lowercase arg-1
+    set {_id} to "quickened"
+    set {_display} to "acelerar"
+    set {_skill} to {@skill-metamagia-acelerar}
+    if {_choice} is "gemea" or {_choice} is "gêmea" or {_choice} is "twinned":
+      set {_id} to "twinned"
+      set {_display} to "gêmea"
+      set {_skill} to {@skill-metamagia-gemea}
+    else if {_choice} is "potente" or {_choice} is "empowered":
+      set {_id} to "empowered"
+      set {_display} to "potente"
+      set {_skill} to {@skill-metamagia-potente}
+    if classes_cooldown_ready(player, "sorcerer_metamagia_%{_id}%", {@cd-metamagia}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-sorcery}, {@cost-metamagia}) is false:
+      stop
+    execute console command "mm skills cast %{_skill}% target=%player%"
+    classes_play_feedback(player, "&cMetamagia %{_display}% aplicada.", "entity.enchanting_table.use", 1.2)
+
+command /linhagem <text>:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Feiticeiro") is false:
+      stop
+    set {_choice} to lowercase arg-1
+    set {_id} to "draconic"
+    set {_display} to "dracônica"
+    set {_skill} to {@skill-linhagem-draconica}
+    if {_choice} is "tempestade" or {_choice} is "storm":
+      set {_id} to "storm"
+      set {_display} to "tempestade"
+      set {_skill} to {@skill-linhagem-tempestade}
+    else if {_choice} is "selvagem" or {_choice} is "wild":
+      set {_id} to "wild"
+      set {_display} to "selvagem"
+      set {_skill} to {@skill-linhagem-selvagem}
+    if classes_cooldown_ready(player, "sorcerer_linhagem_%{_id}%", {@cd-linhagem}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-sorcery}, {@cost-linhagem}) is false:
+      stop
+    execute console command "mm skills cast %{_skill}% target=%player%"
+    classes_play_feedback(player, "&cPoder da linhagem %{_display}% desperto!", "entity.ender_dragon.flap", 0.8)
+
+command /ultimate_src:
+  trigger:
+    if classes_has_group(player, {@group-base}, "Feiticeiro") is false:
+      stop
+    if classes_cooldown_ready(player, "sorcerer_ultimate", {@cd-ultimate}) is false:
+      stop
+    if classes_consume_resource(player, {@resource-sorcery}, {@cost-ultimate}) is false:
+      stop
+    execute console command "mm skills cast {@skill-ultimate} target=%player%"
+    classes_play_feedback(player, "&cTempestade arcana desencadeada!", "entity.lightning_bolt.thunder", 0.6)
