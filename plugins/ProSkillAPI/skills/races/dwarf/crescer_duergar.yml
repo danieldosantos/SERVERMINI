@@ -1,0 +1,37 @@
+# ProSkillAPI skill: Crescer Duergar
+skills:
+  CrescerDuergar:
+    display: "&8Crescer Duergar"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Canaliza rituais cinzentos, aumentando o tamanho e o poder corpo-a-corpo por 15s.
+      Falha se usado sob luz solar direta.
+    tiers:
+      T1: { cooldown: 90, duration: 15, melee_bonus: 0.15, damage_reduction: 0.1, reach_bonus: 1 }
+      T2: { cooldown: 90, duration: 15, melee_bonus: 0.17, damage_reduction: 0.12, reach_bonus: 1 }
+      T3: { cooldown: 90, duration: 15, melee_bonus: 0.18, damage_reduction: 0.13, reach_bonus: 1 }
+      T4: { cooldown: 90, duration: 15, melee_bonus: 0.2, damage_reduction: 0.15, reach_bonus: 1 }
+    cost:
+      resource: stamina
+      amount: 15
+    conditions:
+      - type: environment
+        key: sunlight
+        allow: false
+    effects:
+      - target: self
+        type: damage_bonus
+        category: melee
+        value: { tier: melee_bonus }
+      - target: self
+        type: damage_reduction
+        value: { tier: damage_reduction }
+      - target: self
+        type: reach_modifier
+        value: { tier: reach_bonus }
+      - target: self
+        type: visual
+        id: duergar_growth
+        duration: { tier: duration }
+    notes: "Mitigação extra respeita cap global. Use MythicMobs para FX adicionais."

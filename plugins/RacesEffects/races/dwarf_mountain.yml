@@ -1,0 +1,55 @@
+# Subrace: Mountain Dwarf
+race_id: dwarf_mountain
+name: "Anão da Montanha"
+identity: "Veteranos marcados por batalhas que endureceram pele e espírito."
+luckperms:
+  required: "race_dwarf.mountain"
+  inherit: "race_dwarf"
+tags:
+  - dwarf
+placeholders:
+  racial_cd_main: "{cooldown:skill_postura_de_pedra}"
+passives:
+  rigidez_granitica:
+    name: "Rigidez Granítica"
+    type: timed_attribute
+    trigger: combo_hits:3
+    duration: 8
+    cooldown: 45
+    uptime_cap: 0.18
+    attributes:
+      mitigation_physical: 0.13
+    diminishing_returns: physical
+    description: "Após receber 3 golpes rápidos ganha 13% de mitigação física por 8s."
+  ancoragem:
+    name: "Ancoragem"
+    type: timed_attribute
+    trigger: health_below:0.4
+    duration: 6
+    cooldown: 60
+    uptime_cap: 0.1
+    attributes:
+      knockback_resist: 0.4
+    description: "Ao cair abaixo de 40% de vida reduz empurrões em 40% por 6s."
+actives:
+  postura_de_pedra:
+    name: "Postura de Pedra"
+    skill: PosturaDePedra
+    cooldown: 90
+    charges: 1
+    description: "Reduz em 25% o dano recebido mas reduz velocidade em 15% por 8s."
+resistances:
+  physical:
+    base: 0.08
+    max: 0.45
+    notes: "Aplicar DR com escudos, mantendo mitigação global ≤45%."
+synergy_notes:
+  - "Ideal para tanques que absorvem rajadas de dano físico."
+  - "Velocidade reduzida evita quebrar o cap global de +0.05 com buffs externos."
+tests:
+  pve:
+    - "Simular chefe com ataques rápidos acionando Rigidez 1 vez por minuto."
+    - "Verificar Postura de Pedra absorvendo 25% por 8s (CD 90s)."
+  pvp:
+    - "Arena em terreno elevado garantindo que Ancoragem evite knockback fatal."
+    - "Batalha de objetivos ativando Postura antes de burst adversário."

@@ -1,0 +1,8 @@
+Aspecto,Base,Hill,Mountain,Deep,Notas
+HP Bonus,+2%/+2.5%/+3%/+4%,+2% herdado,+2% herdado,+2% herdado,Escala por tier (T1–T4)
+Mitigação Passiva,Resiliência Anã 25% veneno (12s/36s),Vigor regen 1%/s 6s/45s,Rigidez 13% física 8s/45s,Resistência psíquica 12% 12s/36s,DR total ≤45%
+Knockback,Treinamento de Forja -10% 6s/40s,Sem mudança,Ancoragem -40% 6s/60s,Sensibilidade +5% projéteis sob sol,Controla posicionamento
+Ativos Principais,Fortitude 120-180 escudo 8s/90s,Fortitude Profunda 150-215 + cura 6%,Postura de Pedra -25% dano 8s/90s,Crescer Duergar +15% dano 15s/90s e Invisibilidade 8s/90s,Cooldowns ≥90s
+Restrições,Uptime 33% veneno,Regen <25% total,Frenagem de velocidade -15%,Bloqueio solar (skills falham),Todos respeitam caps globais
+Mobilidade,Normal,Normal,Velocidade -15% durante postura,+0.02 mov. invis (cap +0.05),Nenhum bônus permanente
+Sinergia Classe,Combate veneno/Tanque,Suporte defensivo,Tanque físico/Burst,Assassino subterrâneo,Aplicar diminishing returns com itens

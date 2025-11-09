@@ -1,0 +1,62 @@
+# Itens raciais focais dos anões e sub-raças.
+items:
+  DwarvenRunestone:
+    Id: DEEPSLATE_TILE_STAIRS
+    Display: '&6Runa da Forja Anã'
+    Lore:
+      - '&7Fragmento ressonante com o pulsar das cavernas.'
+      - '&eClique direito:&f ativa Fortitude Anã.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    Enchantments:
+      - DURABILITY:5
+    NBT:
+      race-lock: 'race_dwarf'
+      skill: 'FortitudeAnaBase'
+  HillDwarfHeartstone:
+    Id: GLOWSTONE_DUST
+    Display: '&eCoração da Colina'
+    Lore:
+      - '&eLateja com calor constante.'
+      - '&eClique direito:&f Fortitude Profunda.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_dwarf.hill'
+      skill: 'FortitudeProfunda'
+  MountainDwarfRunicBuckle:
+    Id: NETHERITE_SCRAP
+    Display: '&7Fivela Rúnica de Pedra'
+    Lore:
+      - '&7Trava o corpo ao solo firme.'
+      - '&eClique direito:&f Postura de Pedra.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_dwarf.mountain'
+      skill: 'PosturaDePedra'
+  DuergarIronSigil:
+    Id: RAW_IRON_BLOCK
+    Display: '&8Sigilo de Ferro Duergar'
+    Lore:
+      - '&8Exala runas de crescimento sombrias.'
+      - '&eClique direito:&f Crescer Duergar.'
+      - '&7Inoperante sob luz solar direta.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_dwarf.deep'
+      skill: 'CrescerDuergar'
+  DuergarGloomRing:
+    Id: WITHER_ROSE
+    Display: '&5Anel da Penumbra'
+    Lore:
+      - '&5Bebe a luz do ambiente.'
+      - '&eClique direito:&f Invisibilidade Cinzenta.'
+      - '&7Inoperante sob luz solar direta.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_dwarf.deep'
+      skill: 'InvisibilidadeCinzenta'

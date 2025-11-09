@@ -1,0 +1,27 @@
+# ProSkillAPI skill: Fortitude Anã (base)
+skills:
+  FortitudeAnaBase:
+    display: "&6Fortitude Anã"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Convoca disciplina ancestral, criando um escudo pessoal de 8s.
+      Absorve dano físico/venenoso e concede tenacidade momentânea.
+    tiers:
+      T1: { cooldown: 90, duration: 8, shield_amount: 120 }
+      T2: { cooldown: 90, duration: 8, shield_amount: 135 }
+      T3: { cooldown: 90, duration: 8, shield_amount: 155 }
+      T4: { cooldown: 90, duration: 8, shield_amount: 180 }
+    cost:
+      resource: stamina
+      amount: 0
+    effects:
+      - target: self
+        type: shield
+        scaling: flat
+        value: { tier: shield_amount }
+      - target: self
+        type: status
+        id: tenacity_minor
+        duration: 8
+    notes: "Escudo respeita caps de mitigação. Sincronizar com itens via MythicMobs."

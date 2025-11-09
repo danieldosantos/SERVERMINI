@@ -1,0 +1,28 @@
+# ProSkillAPI skill: Fortitude Profunda
+skills:
+  FortitudeProfunda:
+    display: "&6Fortitude Profunda"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Escudo reforçado pela terra. Ao expirar ou quebrar, devolve 6% da vida máxima.
+    tiers:
+      T1: { cooldown: 105, duration: 8, shield_amount: 150 }
+      T2: { cooldown: 105, duration: 8, shield_amount: 170 }
+      T3: { cooldown: 105, duration: 8, shield_amount: 190 }
+      T4: { cooldown: 105, duration: 8, shield_amount: 215 }
+    cost:
+      resource: stamina
+      amount: 5
+    effects:
+      - target: self
+        type: shield
+        scaling: flat
+        value: { tier: shield_amount }
+        break_actions:
+          - type: heal_percent
+            value: 0.06
+        expire_actions:
+          - type: heal_percent
+            value: 0.06
+    notes: "Cura final não excede 25% por golpe e respeita caps globais."

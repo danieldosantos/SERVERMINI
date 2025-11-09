@@ -1,0 +1,148 @@
+# races_dwarf_cmds.sk — Integração completa da raça Anão e sub-raças.
+options:
+  skillcmd: psa cast
+  runestone_name: "&6Runa da Forja Anã"
+  heartstone_name: "&eCoração da Colina"
+  buckle_name: "&7Fivela Rúnica de Pedra"
+  sigil_name: "&8Sigilo de Ferro Duergar"
+  ring_name: "&5Anel da Penumbra"
+
+function dwarfHasPerm(p: player, group: text) :: boolean:
+  set {_perm1} to "group.%{_group}%"
+  set {_perm2} to "lp.%{_group}%"
+  if {_p} has permission {_perm1}:
+    return true
+  if {_p} has permission {_perm2}:
+    return true
+  return false
+
+function dwarfInSunlight(p: player) :: boolean:
+  set {_loc} to location of {_p}
+  set {_sky} to light level at {_loc}
+  set {_time} to time of world of {_p}
+  if {_sky} >= 14 and {_time} < 12000:
+    set {_b1} to block 1 above {_loc}
+    set {_b2} to block 2 above {_loc}
+    if {_b1} is air and {_b2} is air:
+      return true
+  return false
+
+function dwarfShowHud(p: player, label: text):
+  send action bar "&6%{_label}%&7 acionada." to {_p}
+
+function dwarfCastFortitude(p: player):
+  if dwarfHasPerm({_p}, "race_dwarf.hill"):
+    execute console command "{@skillcmd} %player% FortitudeProfunda"
+    dwarfShowHud({_p}, "Fortitude Profunda")
+  else if dwarfHasPerm({_p}, "race_dwarf"):
+    execute console command "{@skillcmd} %player% FortitudeAnaBase"
+    dwarfShowHud({_p}, "Fortitude Anã")
+  else:
+    send "&cVocê precisa ser um anão." to {_p}
+
+function dwarfCastStonePosture(p: player):
+  if dwarfHasPerm({_p}, "race_dwarf.mountain"):
+    execute console command "{@skillcmd} %player% PosturaDePedra"
+    dwarfShowHud({_p}, "Postura de Pedra")
+  else:
+    send "&cSomente anões da montanha." to {_p}
+
+function dwarfCastDuergarGrowth(p: player):
+  if dwarfHasPerm({_p}, "race_dwarf.deep"):
+    if dwarfInSunlight({_p}) is true:
+      send "&cA luz solar enfraquece o sigilo. Procure abrigo." to {_p}
+      stop
+    execute console command "{@skillcmd} %player% CrescerDuergar"
+    dwarfShowHud({_p}, "Crescer Duergar")
+  else:
+    send "&cSomente duergar." to {_p}
+
+function dwarfCastDuergarInvis(p: player):
+  if dwarfHasPerm({_p}, "race_dwarf.deep"):
+    if dwarfInSunlight({_p}) is true:
+      send "&cA luz solar dissipa a invisibilidade cinzenta." to {_p}
+      stop
+    execute console command "{@skillcmd} %player% InvisibilidadeCinzenta"
+    dwarfShowHud({_p}, "Invisibilidade Cinzenta")
+  else:
+    send "&cSomente duergar." to {_p}
+
+command /racial [<text>]:
+  description: "Dispara habilidade racial ou lista atalhos."
+  permission: race.core
+  trigger:
+    if arg-1 is set:
+      set {_key} to lowercase arg-1
+      if {_key} is "fortitude_anao":
+        dwarfCastFortitude(player)
+      else if {_key} is "postura_pedra":
+        dwarfCastStonePosture(player)
+      else if {_key} is "crescer_duergar":
+        dwarfCastDuergarGrowth(player)
+      else if {_key} is "invis_duergar":
+        dwarfCastDuergarInvis(player)
+      else:
+        execute console command "{@skillcmd} %player% %arg-1%"
+    else:
+      send "&6Raciais disponíveis:&f fortitude_anao, postura_pedra, crescer_duergar, invis_duergar, sopro_draco, truque_arcano, passos_faes, luzes_feericas, manto_sombras, canto_cativante, engenho_gnomesco, passos_silenciosos, fortalecer_familia, investida_coord, talento_variavel, harmonia_hibrida, tenacidade_implacavel, toque_igneo, lamina_das_chamas"
+      send "&7Use /racial <nome> para disparar via SkillAPI."
+
+command /fortitude_anao:
+  trigger:
+    dwarfCastFortitude(player)
+
+command /postura_pedra:
+  trigger:
+    dwarfCastStonePosture(player)
+
+command /crescer_duergar:
+  trigger:
+    dwarfCastDuergarGrowth(player)
+
+command /invis_duergar:
+  trigger:
+    dwarfCastDuergarInvis(player)
+
+command /kit_racial_anao [<player>] [<text>]:
+  description: "Entrega itens raciais de QA (base/hill/mountain/deep/all)."
+  permission: op
+  trigger:
+    if arg-1 is set:
+      set {_target} to arg-1
+    else if sender is player:
+      set {_target} to player
+    else:
+      send "&cUso: /kit_racial_anao <jogador> [modo]" to sender
+      stop
+    set {_mode} to "all"
+    if arg-2 is set:
+      set {_mode} to lowercase arg-2
+    if {_mode} is "base" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% DwarvenRunestone 1"
+    if {_mode} is "hill" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% HillDwarfHeartstone 1"
+    if {_mode} is "mountain" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% MountainDwarfRunicBuckle 1"
+    if {_mode} is "deep" or {_mode} is "duergar" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% DuergarIronSigil 1"
+      execute console command "mm items give %name of {_target}% DuergarGloomRing 1"
+    send "&aItens raciais entregues (%{_mode}% )." to {_target}
+
+on right click:
+  if player's tool is not air:
+    set {_name} to display name of player's tool
+    if {_name} is colored {@runestone_name}:
+      cancel event
+      dwarfCastFortitude(player)
+    else if {_name} is colored {@heartstone_name}:
+      cancel event
+      dwarfCastFortitude(player)
+    else if {_name} is colored {@buckle_name}:
+      cancel event
+      dwarfCastStonePosture(player)
+    else if {_name} is colored {@sigil_name}:
+      cancel event
+      dwarfCastDuergarGrowth(player)
+    else if {_name} is colored {@ring_name}:
+      cancel event
+      dwarfCastDuergarInvis(player)

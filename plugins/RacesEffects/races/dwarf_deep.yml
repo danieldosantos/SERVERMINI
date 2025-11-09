@@ -1,0 +1,62 @@
+# Subrace: Deep Dwarf / Duergar
+race_id: dwarf_deep
+name: "Anão das Profundezas"
+identity: "Duergar disciplinados por rituais rúnicos e segredos do Subterrâneo."
+luckperms:
+  required: "race_dwarf.deep"
+  inherit: "race_dwarf"
+tags:
+  - dwarf
+placeholders:
+  racial_cd_main: "{cooldown:skill_crescer_duergar}"
+passives:
+  resistencia_psiquica:
+    name: "Resistência Psíquica"
+    type: timed_attribute
+    trigger: psychic_damage
+    duration: 12
+    cooldown: 36
+    uptime_cap: 0.33
+    attributes:
+      mitigation_psychic: 0.12
+    diminishing_returns: psychic
+    description: "Após sofrer dano psíquico reduz 12% desse tipo por 12s (DR cumulativa)."
+  sensibilidade_luz_solar:
+    name: "Sensibilidade à Luz Solar"
+    type: environmental_debuff
+    trigger: exposure:sunlight
+    duration: 5
+    cooldown: 0
+    uptime_cap: 0.6
+    attributes:
+      accuracy_modifier: -0.05
+      projectile_damage_taken: 0.05
+    description: "Sob céu aberto perde 5% de precisão e recebe +5% de dano de projéteis."
+actives:
+  crescer_duergar:
+    name: "Crescer Duergar"
+    skill: CrescerDuergar
+    cooldown: 90
+    charges: 1
+    description: "Aumenta tamanho, +15% dano corpo-a-corpo e +10% resistência por 15s (não ativa sob sol)."
+  invisibilidade_cinzenta:
+    name: "Invisibilidade Cinzenta"
+    skill: InvisibilidadeCinzenta
+    cooldown: 90
+    charges: 1
+    description: "Concede invisibilidade por 8s (+0.02 velocidade) se longe de luz solar direta."
+resistances:
+  psychic:
+    base: 0.1
+    max: 0.45
+    notes: "Aplicar DR com classes mentais."
+synergy_notes:
+  - "Crescer Duergar fornece burst físico controlado respeitando caps de mitigação."
+  - "Sensibilidade à luz força jogo subterrâneo, contrabalançando invisibilidade."
+tests:
+  pve:
+    - "Boss psíquico subterrâneo verificando uptime da resistência ≤33%."
+    - "Combate externo confirmando penalidades de luz ativa por pelo menos 5s a cada exposição."
+  pvp:
+    - "Duelo na superfície garantindo que skills falhem sob luz solar direta."
+    - "Arena subterrânea validando rotação Crescer + Invisibilidade (CD 90s cada)."
