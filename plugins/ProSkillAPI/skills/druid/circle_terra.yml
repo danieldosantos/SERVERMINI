@@ -1,0 +1,254 @@
+# Círculo da Terra - foco em defesa e controle
+tags:
+  circle: terra
+T1:
+  Escudo_de_Pedra:
+    display: "§6Escudo de Pedra"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 25
+    cooldown: 60
+    target:
+      range: 12
+      filter: ally
+    effects:
+      shield:
+        amount: 160
+        duration: 8
+    tags: [escudo, defesa]
+    notes: "Mitigação direta sem ultrapassar limite global."
+  Chao_Grudento:
+    display: "§2Chão Grudento"
+    type: active
+    trigger: ground
+    cost:
+      mana: 20
+    cooldown: 45
+    area:
+      radius: 6
+      duration: 6
+    effects:
+      slow:
+        amount: 0.20
+    tags: [controle, terreno]
+    notes: "Reduz velocidade inimiga em 20% por 6s."
+  Lancar_Rocha:
+    display: "§6Lançar Rocha"
+    type: active
+    trigger: projectile
+    cost:
+      mana: 25
+    cooldown: 50
+    projectile:
+      speed: 1.2
+      max_distance: 18
+      hitbox: 0.7
+    effects:
+      damage:
+        amount: "1.3*spellpower"
+        type: fisico_natureza
+    tags: [dano]
+    notes: "Projétil híbrido físico/natureza."
+  Pulso_Terrestre:
+    display: "§6Pulso Terrestre"
+    type: active
+    trigger: ground
+    cost:
+      mana: 20
+    cooldown: 60
+    area:
+      radius: 4
+    effects:
+      knockdown:
+        duration: 0.5
+        diminishing: true
+      damage:
+        amount: "0.6*spellpower"
+        type: natureza
+    tags: [controle, dano]
+    notes: "Derruba por 0.5s respeitando DR."
+T2:
+  Guardiao_Musgoso:
+    display: "§2Guardião Musgoso"
+    type: active
+    trigger: summon
+    cost:
+      mana: 35
+    cooldown: 120
+    summon:
+      mob: terra_guardian
+      amount: 1
+      duration: 12
+    effects:
+      aura_thorns:
+        amount: 0.10
+        radius: 4
+    tags: [sumonio, defesa]
+    notes: "Familiar tanque que provoca e reflete dano leve."
+  Terra_Abencoada:
+    display: "§6Terra Abençoada"
+    type: active
+    trigger: aura
+    cost:
+      mana: 30
+    cooldown: 90
+    duration: 8
+    area:
+      radius: 6
+    effects:
+      mitigation:
+        amount: 0.12
+    tags: [aura, suporte]
+    notes: "+12% mitigação aliados."
+  Deslocamento_Rochoso:
+    display: "§6Deslocamento Rochoso"
+    type: active
+    trigger: dash
+    cost:
+      mana: 25
+    cooldown: 60
+    dash:
+      distance: 4
+      ignore_knockback: true
+    tags: [mobilidade, defesa]
+    notes: "Deslocamento curto ignorando empurrões."
+  Vulto_de_Pedra:
+    display: "§6Vulto de Pedra"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 75
+    duration: 10
+    effects:
+      physical_resist:
+        amount: 0.10
+    tags: [buff, defesa]
+    notes: "+10% resistência a dano físico por 10s."
+T3:
+  Parede_de_Terra:
+    display: "§6Parede de Terra"
+    type: active
+    trigger: ground
+    cost:
+      mana: 40
+    cooldown: 120
+    wall:
+      length: 6
+      height: 3
+      duration: 8
+    effects:
+      projectile_block: true
+    tags: [terreno, defesa]
+    notes: "Bloqueia projéteis por 8s."
+  Ruptura:
+    display: "§6Ruptura"
+    type: active
+    trigger: line
+    cost:
+      mana: 35
+    cooldown: 90
+    line:
+      range: 6
+      width: 1
+    effects:
+      damage:
+        amount: "1.5*spellpower"
+        type: terra
+      stun:
+        duration: 1.5
+        diminishing: true
+    tags: [dano, controle]
+    notes: "Atordoamento 1.5s respeitando DR."
+  Couraca_Ancestral:
+    display: "§6Couraça Ancestral"
+    type: active
+    trigger: self
+    cost:
+      mana: 40
+    cooldown: 105
+    duration: 6
+    effects:
+      mitigation:
+        amount: 0.20
+    tags: [buff, defesa]
+    notes: "+20% mitigação por 6s sem exceder 45% global."
+  Eco_da_Pedra_Viva:
+    display: "§6Eco da Pedra Viva"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 90
+    duration: 8
+    effects:
+      thorns:
+        amount: 0.15
+        cap: 0.45
+    tags: [defesa]
+    notes: "Reflete 15% do dano recebido (cap global 45%)."
+T4:
+  Trono_de_Basalto:
+    display: "§6Trono de Basalto"
+    type: active
+    trigger: aura
+    cost:
+      mana: 50
+    cooldown: 240
+    duration: 10
+    area:
+      radius: 8
+    effects:
+      mitigation:
+        amount: 0.25
+    tags: [ult, aura]
+    notes: "Ult defensiva: +25% mitigação em domo 8 blocos."
+  Tremor_da_Montanha:
+    display: "§6Tremor da Montanha"
+    type: active
+    trigger: ground
+    cost:
+      mana: 45
+    cooldown: 120
+    area:
+      radius: 6
+    effects:
+      damage:
+        amount: "1.6*spellpower"
+        type: terra
+      knockdown:
+        duration: 1
+        diminishing: true
+    tags: [dano, controle]
+    notes: "Dano em área e derruba respeitando DR."
+  Ritos_de_Endurecimento:
+    display: "§6Ritos de Endurecimento"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 45
+    cooldown: 105
+    duration: 10
+    target:
+      range: 12
+      filter: ally
+    effects:
+      max_health:
+        amount: 0.20
+    tags: [buff, suporte]
+    notes: "+20% HP máximo temporário."
+  Carapaca_Profunda:
+    display: "§6Carapaça Profunda"
+    type: active
+    trigger: self
+    cost:
+      mana: 40
+    cooldown: 120
+    duration: 8
+    effects:
+      damage_reduction:
+        amount: 0.25
+        stacking: exclusive
+    tags: [defesa]
+    notes: "Reduz dano recebido em 25% por 8s (não acumula com grandes auras)."

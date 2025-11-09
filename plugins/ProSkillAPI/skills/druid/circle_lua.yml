@@ -1,0 +1,249 @@
+# Círculo da Lua - foco em Forma Selvagem ofensiva
+tags:
+  circle: lua
+T1:
+  Forma_Selvagem:
+    display: "§dForma Selvagem"
+    type: active
+    trigger: self
+    cost:
+      mana: 0
+      charge: 1
+    cooldown: 60
+    duration: 18
+    effects:
+      shapeshift:
+        form: lunar_basic
+        cleave: 3
+        wildshape_charges:
+          tier1: 2
+          tier2: 3
+          tier3: 4
+          tier4: 5
+    tags: [forma, mobilidade]
+    notes: "Consome 1 charge (HUD PlaceholderAPI). Duração máxima 18s."
+  Uivo_Lunar:
+    display: "§dUivo Lunar"
+    type: active
+    trigger: self
+    cost:
+      mana: 25
+    cooldown: 60
+    duration: 8
+    effects:
+      speed:
+        amount: 0.03
+      melee_damage:
+        amount: 0.15
+    tags: [buff, ofensivo]
+    notes: "Respeita cap de velocidade global +0.05."
+  Presas_da_Lua:
+    display: "§dPresas da Lua"
+    type: active
+    trigger: self
+    cost:
+      mana: 20
+    cooldown: 45
+    effects:
+      damage:
+        amount: "1.3*attackpower"
+        type: fisico
+      bleed:
+        duration: 4
+        amount: "0.05*attackpower"
+    tags: [dano, sangramento]
+    notes: "Ataque 130% com sangramento 4s."
+  Instinto_Bestial:
+    display: "§dInstinto Bestial"
+    type: active
+    trigger: self
+    cost:
+      mana: 20
+    cooldown: 45
+    duration: 6
+    effects:
+      dodge:
+        amount: 0.15
+    tags: [buff, defesa]
+    notes: "+15% esquiva por 6s."
+T2:
+  Forma_Selvagem_Avancada:
+    display: "§dForma Selvagem Avançada"
+    type: active
+    trigger: self
+    cost:
+      mana: 0
+    cooldown: 90
+    duration: 0
+    effects:
+      wildshape_charge_bonus: 1
+      mitigation_bonus:
+        amount: 0.10
+        condition: in_wildshape
+    tags: [forma, suporte]
+    notes: "+1 charge máximo e +10% mitigação durante a Forma. Usar fora de combate."
+  Rasgar_e_Dilacerar:
+    display: "§dRasgar e Dilacerar"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 60
+    effects:
+      damage:
+        amount: "1.5*attackpower"
+        type: fisico
+      bleed:
+        duration: 6
+        amount: "0.06*attackpower"
+    tags: [dano, sangramento]
+    notes: "Aplica sangramento forte por 6s."
+  Salto_Predatorio:
+    display: "§dSalto Predatório"
+    type: active
+    trigger: dash
+    cost:
+      mana: 25
+    cooldown: 45
+    dash:
+      distance: 6
+      damage: "1.2*attackpower"
+      cleave: 3
+    tags: [mobilidade, dano]
+    notes: "Dash ofensivo 120% dano."
+  Instinto_Curativo:
+    display: "§dInstinto Curativo"
+    type: passive
+    trigger: passive
+    cost:
+      mana: 0
+    cooldown: 0
+    effects:
+      exit_heal:
+        amount: 0.16
+        scaling: max-health
+        internal_cd: 60
+    tags: [cura, passiva]
+    notes: "Cura 16% ao deixar Forma Selvagem (CD interno 60s)."
+T3:
+  Forma_Selvagem_Apex:
+    display: "§dForma Selvagem Apex"
+    type: active
+    trigger: self
+    cost:
+      mana: 40
+      charge: 1
+    cooldown: 120
+    duration: 18
+    effects:
+      lifesteal:
+        amount: 0.06
+        cap: 0.25
+      cleave_bonus:
+        amount: 1
+    tags: [forma, ofensivo]
+    notes: "Ataques curam 6% do dano causado (cap 25%)."
+  Frenesi_Lunar:
+    display: "§dFrenesi Lunar"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 90
+    duration: 10
+    effects:
+      attack_speed:
+        amount: 0.25
+    tags: [buff, ofensivo]
+    notes: "+25% velocidade de ataque por 10s."
+  Aspecto_do_Grande_Predador:
+    display: "§dAspecto do Grande Predador"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 60
+    duration: 10
+    effects:
+      reveal_bleeding:
+        radius: 10
+    tags: [utilidade]
+    notes: "Revela inimigos sangrando num raio de 10 blocos."
+  Mordida_Destrutiva:
+    display: "§dMordida Destrutiva"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 90
+    effects:
+      damage:
+        amount: "1.8*attackpower"
+        type: fisico
+      shred:
+        amount: -0.10
+        duration: 8
+    tags: [dano, debuff]
+    notes: "Reduz resistência do alvo em 10% por 8s."
+T4:
+  Avatar_Lunar:
+    display: "§dAvatar Lunar"
+    type: active
+    trigger: self
+    cost:
+      mana: 50
+      charge: 1
+    cooldown: 240
+    duration: 20
+    effects:
+      shapeshift:
+        form: lunar_avatar
+        mitigation: 0.15
+        cleave: 4
+    tags: [ult, forma]
+    notes: "Forma suprema 20s com +15% mitigação."
+  Rugido_Primevo:
+    display: "§dRugido Primevo"
+    type: active
+    trigger: cone
+    cost:
+      mana: 45
+    cooldown: 120
+    cone:
+      range: 6
+      angle: 70
+    effects:
+      fear:
+        duration: 2
+        diminishing: true
+      debuff_damage:
+        amount: -0.10
+        duration: 8
+    tags: [controle, debuff]
+    notes: "Medo 2s (DR) e -10% dano inimigo 8s."
+  Garras_Estelares:
+    display: "§dGarras Estelares"
+    type: active
+    trigger: self
+    cost:
+      mana: 40
+    cooldown: 105
+    duration: 12
+    effects:
+      astral_bonus:
+        amount: 0.10
+    tags: [buff, dano]
+    notes: "Golpes aplicam +10% dano astral."
+  Pele_do_Grande_Urso:
+    display: "§dPele do Grande Urso"
+    type: active
+    trigger: self
+    cost:
+      mana: 45
+    cooldown: 120
+    duration: 12
+    effects:
+      max_health:
+        amount: 0.25
+    tags: [buff, defesa]
+    notes: "+25% HP máximo por 12s."
