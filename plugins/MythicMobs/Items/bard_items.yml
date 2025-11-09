@@ -1,117 +1,266 @@
-# Itens focais do Bardo (base e colégios)
+# Itens focais do Bardo - Tiers dinâmicos
 items:
-  BardLute:
-    Id: MUSIC_DISC_CAT
-    Display: '&dAlaúde de Inspiração'
-    Lore:
-      - '&7Clique direito: ativa §dInspiração Bardica§7.'
-      - '&8Requer permissão LuckPerms: class_bard.'
-      - '&7Integração via Skript /inspirar.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_bard'
-  BardLoreBook:
-    Id: BOOK
-    Display: '&dCancioneiro de Descanso'
-    Lore:
-      - '&7Clique direito: ativa §dCanção de Descanso§7.'
-      - '&8Requer permissão LuckPerms: class_bard.'
-      - '&7Sinergiza com /cancao para recarregar Inspiração.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_bard'
-  LoreSongbook:
+  Bard_Knowledge_T1_Focus:
     Id: WRITABLE_BOOK
-    Display: '&bLivro dos Segredos'
+    Display: '&bCancioneiro Analítico'
     Lore:
-      - '&7Habilidade: §bVerso Analisador/Balada dos Segredos§7.'
-      - '&8Usável apenas por: class_bard.lore.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_bard.lore'
-  LoreRelicHarp:
-    Id: AMETHYST_SHARD
-    Display: '&bHarpa Onisciente'
-    Lore:
-      - '&7Ultimate: §bSinfonia Onisciente§7.'
-      - '&8Requer classe: class_bard.lore.'
-      - '&7Canalização 2s - CD 240s.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_bard.lore'
-  LoreFocusQuill:
-    Id: FEATHER
-    Display: '&bPena Disruptiva'
-    Lore:
-      - '&7Habilidade: §bPalavra Desconcertante§7.'
-      - '&8Requer classe: class_bard.lore.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_bard.lore'
-  ValorWarDrum:
-    Id: GOAT_HORN
-    Display: '&6Tambor da Coragem'
-    Lore:
-      - '&7Habilidade: §6Hino da Coragem§7.'
-      - '&8Requer classe: class_bard.valor.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_bard.valor'
-  ValorWarHorn:
-    Id: HORN_CORAL
-    Display: '&6Berrante de Batalha'
-    Lore:
-      - '&7Habilidade: §6Ritmo de Batalha§7.'
-      - '&8Requer classe: class_bard.valor.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_bard.valor'
-  ValorSacredLute:
-    Id: MUSIC_DISC_BLOCKS
-    Display: '&6Alaúde Sagrado'
-    Lore:
-      - '&7Ultimate: §6Cantiga dos Heróis§7.'
-      - '&8Requer classe: class_bard.valor.'
-      - '&7Checagem de PvP feita via Skript.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_bard.valor'
-  GlamourTiara:
-    Id: GOLDEN_HELMET
-    Display: '&5Tiara Hipnótica'
-    Lore:
-      - '&7Habilidade: §5Encanto Hipnótico§7.'
-      - '&8Requer classe: class_bard.glamour.'
+      - '&7Tier 1 - Conhecimento'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.knowledge.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
     Options:
       Unbreakable: true
       HideFlags: true
-    NBT:
-      class-lock: 'class_bard.glamour'
-  GlamourFaerieCharm:
+    PersistentData:
+      classlock: 'class_bard.knowledge'
+      bard_tier: '1'
+      bard_college: 'knowledge'
+    Skills:
+      - command{c="skript run bard_focus_cycle knowledge 1 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle knowledge 1 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast knowledge 1 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info knowledge 1 %player%";delay=1} @self ~onSneakRightClick
+  Bard_Valor_T1_Focus:
+    Id: GOAT_HORN
+    Display: '&6Tambor de Guerra Inicial'
+    Lore:
+      - '&7Tier 1 - Valor'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.valor.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    PersistentData:
+      classlock: 'class_bard.valor'
+      bard_tier: '1'
+      bard_college: 'valor'
+    Skills:
+      - command{c="skript run bard_focus_cycle valor 1 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle valor 1 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast valor 1 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info valor 1 %player%";delay=1} @self ~onSneakRightClick
+  Bard_Glamour_T1_Focus:
+    Id: GOLDEN_HELMET
+    Display: '&5Tiara da Inspiração'
+    Lore:
+      - '&7Tier 1 - Glamour'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.glamour.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    PersistentData:
+      classlock: 'class_bard.glamour'
+      bard_tier: '1'
+      bard_college: 'glamour'
+    Skills:
+      - command{c="skript run bard_focus_cycle glamour 1 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle glamour 1 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast glamour 1 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info glamour 1 %player%";delay=1} @self ~onSneakRightClick
+  Bard_Knowledge_T2_Focus:
+    Id: ENCHANTED_BOOK
+    Display: '&bTratado dos Segredos'
+    Lore:
+      - '&7Tier 2 - Conhecimento'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.knowledge.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    PersistentData:
+      classlock: 'class_bard.knowledge'
+      bard_tier: '2'
+      bard_college: 'knowledge'
+    Skills:
+      - command{c="skript run bard_focus_cycle knowledge 2 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle knowledge 2 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast knowledge 2 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info knowledge 2 %player%";delay=1} @self ~onSneakRightClick
+  Bard_Valor_T2_Focus:
+    Id: BANNER
+    Display: '&6Estandarte de Batalha'
+    Lore:
+      - '&7Tier 2 - Valor'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.valor.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    PersistentData:
+      classlock: 'class_bard.valor'
+      bard_tier: '2'
+      bard_college: 'valor'
+    Skills:
+      - command{c="skript run bard_focus_cycle valor 2 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle valor 2 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast valor 2 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info valor 2 %player%";delay=1} @self ~onSneakRightClick
+  Bard_Glamour_T2_Focus:
     Id: AMETHYST_CLUSTER
-    Display: '&5Amuleto Férico'
+    Display: '&5Diadema das Luzes'
     Lore:
-      - '&7Habilidade: §5Passo Férico§7.'
-      - '&8Requer classe: class_bard.glamour.'
+      - '&7Tier 2 - Glamour'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.glamour.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
     Options:
       Unbreakable: true
-    NBT:
-      class-lock: 'class_bard.glamour'
-  GlamourStarLyre:
-    Id: MUSIC_DISC_CHIRP
-    Display: '&5Lira Estelar'
+      HideFlags: true
+    PersistentData:
+      classlock: 'class_bard.glamour'
+      bard_tier: '2'
+      bard_college: 'glamour'
+    Skills:
+      - command{c="skript run bard_focus_cycle glamour 2 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle glamour 2 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast glamour 2 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info glamour 2 %player%";delay=1} @self ~onSneakRightClick
+  Bard_Knowledge_T3_Focus:
+    Id: ENDER_EYE
+    Display: '&bOrbe da Onisciência'
     Lore:
-      - '&7Ultimate: §5Refrão Sublime§7.'
-      - '&8Requer classe: class_bard.glamour.'
+      - '&7Tier 3 - Conhecimento'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.knowledge.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
     Options:
       Unbreakable: true
-    NBT:
-      class-lock: 'class_bard.glamour'
+      HideFlags: true
+    PersistentData:
+      classlock: 'class_bard.knowledge'
+      bard_tier: '3'
+      bard_college: 'knowledge'
+    Skills:
+      - command{c="skript run bard_focus_cycle knowledge 3 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle knowledge 3 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast knowledge 3 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info knowledge 3 %player%";delay=1} @self ~onSneakRightClick
+  Bard_Valor_T3_Focus:
+    Id: NETHERITE_AXE
+    Display: '&6Estandarte do Campeão'
+    Lore:
+      - '&7Tier 3 - Valor'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.valor.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    PersistentData:
+      classlock: 'class_bard.valor'
+      bard_tier: '3'
+      bard_college: 'valor'
+    Skills:
+      - command{c="skript run bard_focus_cycle valor 3 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle valor 3 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast valor 3 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info valor 3 %player%";delay=1} @self ~onSneakRightClick
+  Bard_Glamour_T3_Focus:
+    Id: ALLIUM
+    Display: '&5Lira Sublime'
+    Lore:
+      - '&7Tier 3 - Glamour'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.glamour.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    PersistentData:
+      classlock: 'class_bard.glamour'
+      bard_tier: '3'
+      bard_college: 'glamour'
+    Skills:
+      - command{c="skript run bard_focus_cycle glamour 3 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle glamour 3 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast glamour 3 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info glamour 3 %player%";delay=1} @self ~onSneakRightClick
+  Bard_Knowledge_T4_Focus:
+    Id: HEART_OF_THE_SEA
+    Display: '&bRelíquia Onisciente'
+    Lore:
+      - '&7Tier 4 - Conhecimento'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.knowledge.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    PersistentData:
+      classlock: 'class_bard.knowledge'
+      bard_tier: '4'
+      bard_college: 'knowledge'
+    Skills:
+      - command{c="skript run bard_focus_cycle knowledge 4 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle knowledge 4 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast knowledge 4 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info knowledge 4 %player%";delay=1} @self ~onSneakRightClick
+  Bard_Valor_T4_Focus:
+    Id: TOTEM_OF_UNDYING
+    Display: '&6Estandarte dos Heróis'
+    Lore:
+      - '&7Tier 4 - Valor'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.valor.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    PersistentData:
+      classlock: 'class_bard.valor'
+      bard_tier: '4'
+      bard_college: 'valor'
+    Skills:
+      - command{c="skript run bard_focus_cycle valor 4 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle valor 4 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast valor 4 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info valor 4 %player%";delay=1} @self ~onSneakRightClick
+  Bard_Glamour_T4_Focus:
+    Id: DRAGON_BREATH
+    Display: '&5Coroa Cintilante'
+    Lore:
+      - '&7Tier 4 - Glamour'
+      - '&7Esquerdo: alterna slot'
+      - '&7Direito: conjura skill selecionada.'
+      - '&8Requer LuckPerms: class_bard.glamour.'
+      - '&8Alternar: clique esquerdo / Sneak-esquerdo.'
+      - '&8Conjurar: clique direito.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    PersistentData:
+      classlock: 'class_bard.glamour'
+      bard_tier: '4'
+      bard_college: 'glamour'
+    Skills:
+      - command{c="skript run bard_focus_cycle glamour 4 forward %player%";delay=1} @self ~onLeftClick
+      - command{c="skript run bard_focus_cycle glamour 4 backward %player%";delay=1} @self ~onSneakLeftClick
+      - command{c="skript run bard_focus_cast glamour 4 %player%";delay=1} @self ~onRightClick
+      - command{c="skript run bard_focus_info glamour 4 %player%";delay=1} @self ~onSneakRightClick

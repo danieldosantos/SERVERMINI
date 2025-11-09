@@ -1,43 +1,213 @@
-# Skript - Comandos, HUD e integrações da classe Bardo
+# Skript - Gerenciamento de magias do Bardo (comum + colégios)
 options:
   prefix: &d[Bardo]&f
 
+function bard_debug(msg: text):
+  broadcast "&8[BardoDebug] %{msg}%" to console
+
 function bard_update_hud(p: player):
-  set {_pl} to {_p}
-  set {_name} to name of {_pl}
-  set {_charges} to placeholder "skills_inspiration_charges" for {_pl}
+  set {_name} to name of {_p}
+  set {_charges} to placeholder "skills_inspiration_charges" for {_p}
   if {_charges} is not set:
     set {_charges} to 0
   execute console command "scoreboard players set %{_name}% bard_inspiration %{_charges}%"
-  set {_song} to placeholder "skills_bard_song_timer" for {_pl}
+  set {_song} to placeholder "skills_bard_song_timer" for {_p}
   if {_song} is not set:
     set {_song} to 0
   execute console command "scoreboard players set %{_name}% bard_song_duration %{_song}%"
-  set {_cd} to placeholder "skills_bard_major_cd" for {_pl}
+  set {_cd} to placeholder "skills_bard_major_cd" for {_p}
   if {_cd} is not set:
     set {_cd} to 0
   execute console command "scoreboard players set %{_name}% bard_major_cd %{_cd}%"
-  if difference between now and {bard.lastCombat.%{_pl}%} > 10 seconds:
+  if difference between now and {bard.lastCombat.%{_p}%} > 10 seconds:
     execute console command "scoreboard players set %{_name}% bard_ooc 1"
   else:
     execute console command "scoreboard players set %{_name}% bard_ooc 0"
 
+function bard_register_focus_data():
+  delete {bard.focus.skills::*}
+  delete {bard.skill.display::*}
+  # Registrar nomes das magias comuns
+  set {bard.skill.display::bard_common_inspiracao_menor} to "Inspiração Menor"
+  set {bard.skill.display::bard_common_cancao_de_descanso} to "Canção de Descanso"
+  set {bard.skill.display::bard_common_ritmo_agil} to "Ritmo Ágil"
+  set {bard.skill.display::bard_common_nota_dispersante} to "Nota Dispersante"
+  set {bard.skill.display::bard_common_inspiracao_de_batalha} to "Inspiração de Batalha"
+  set {bard.skill.display::bard_common_cadencia_harmoniosa} to "Cadência Harmoniosa"
+  set {bard.skill.display::bard_common_contratempo} to "Contratempo"
+  set {bard.skill.display::bard_common_hino_de_foco} to "Hino de Foco"
+  set {bard.skill.display::bard_common_coro_fortificante} to "Coro Fortificante"
+  set {bard.skill.display::bard_common_cantilena_celere} to "Cantilena Célere"
+  set {bard.skill.display::bard_common_ostinato_revelador} to "Ostinato Revelador"
+  set {bard.skill.display::bard_common_arpejo_vinculante} to "Arpejo Vinculante"
+  set {bard.skill.display::bard_common_sinfonia_maior} to "Sinfonia Maior"
+  set {bard.skill.display::bard_common_coda_restauradora} to "Coda Restauradora"
+  set {bard.skill.display::bard_common_finale_retumbante} to "Finale Retumbante"
+  set {bard.skill.display::bard_common_maestro_do_campo} to "Maestro do Campo"
+  # Conhecimento
+  set {bard.skill.display::bard_knowledge_verso_analisador} to "Verso Analisador"
+  set {bard.skill.display::bard_knowledge_palavra_desconcertante} to "Palavra Desconcertante"
+  set {bard.skill.display::bard_knowledge_eco_de_estudo} to "Eco de Estudo"
+  set {bard.skill.display::bard_knowledge_nota_precisa} to "Nota Precisa"
+  set {bard.skill.display::bard_knowledge_balada_dos_segredos} to "Balada dos Segredos"
+  set {bard.skill.display::bard_knowledge_ritmo_da_razao} to "Ritmo da Razão"
+  set {bard.skill.display::bard_knowledge_marcacao_sapiente} to "Marcação Sapiente"
+  set {bard.skill.display::bard_knowledge_glosa_arcana} to "Glosa Arcana"
+  set {bard.skill.display::bard_knowledge_orquestracao_perfeita} to "Orquestração Perfeita"
+  set {bard.skill.display::bard_knowledge_estudo_debilitante} to "Estudo Debilitante"
+  set {bard.skill.display::bard_knowledge_crescendo_runico} to "Crescendo Rúnico"
+  set {bard.skill.display::bard_knowledge_cadencia_antimagia} to "Cadência Antimagia"
+  set {bard.skill.display::bard_knowledge_sinfonia_onisciente} to "Sinfonia Onisciente"
+  set {bard.skill.display::bard_knowledge_estro_fulgente} to "Estro Fulgente"
+  set {bard.skill.display::bard_knowledge_quebra_encanto} to "Quebra-Encanto"
+  set {bard.skill.display::bard_knowledge_tessitura_intelectual} to "Tessitura Intelectual"
+  # Valor
+  set {bard.skill.display::bard_valor_hino_da_coragem} to "Hino da Coragem"
+  set {bard.skill.display::bard_valor_ritmo_de_batalha} to "Ritmo de Batalha"
+  set {bard.skill.display::bard_valor_marcha_estoica} to "Marcha Estóica"
+  set {bard.skill.display::bard_valor_toque_de_vitoria} to "Toque de Vitória"
+  set {bard.skill.display::bard_valor_coda_inspirador} to "Coda Inspirador"
+  set {bard.skill.display::bard_valor_posto_de_comando} to "Posto de Comando"
+  set {bard.skill.display::bard_valor_recuo_tatico} to "Recuo Tático"
+  set {bard.skill.display::bard_valor_foco_do_duelista} to "Foco do Duelista"
+  set {bard.skill.display::bard_valor_trombeta_da_guerra} to "Trombeta da Guerra"
+  set {bard.skill.display::bard_valor_grito_de_reunir} to "Grito de Reunir"
+  set {bard.skill.display::bard_valor_estro_marcial} to "Estro Marcial"
+  set {bard.skill.display::bard_valor_compasso_de_ferro} to "Compasso de Ferro"
+  set {bard.skill.display::bard_valor_cantiga_dos_herois} to "Cantiga dos Heróis"
+  set {bard.skill.display::bard_valor_estancia_do_campeao} to "Estância do Campeão"
+  set {bard.skill.display::bard_valor_baluarte_sonoro} to "Baluarte Sonoro"
+  set {bard.skill.display::bard_valor_climax_de_aco} to "Clímax de Aço"
+  # Glamour
+  set {bard.skill.display::bard_glamour_encanto_hipnotico} to "Encanto Hipnótico"
+  set {bard.skill.display::bard_glamour_brilho_deslumbrante} to "Brilho Deslumbrante"
+  set {bard.skill.display::bard_glamour_veu_elegante} to "Véu Elegante"
+  set {bard.skill.display::bard_glamour_palavra_calma} to "Palavra Calma"
+  set {bard.skill.display::bard_glamour_manto_de_inspiracao} to "Manto de Inspiração"
+  set {bard.skill.display::bard_glamour_passo_ferico} to "Passo Férico"
+  set {bard.skill.display::bard_glamour_rosa_enfeiticada} to "Rosa Enfeitiçada"
+  set {bard.skill.display::bard_glamour_danca_das_lampadas} to "Dança das Lâmpadas"
+  set {bard.skill.display::bard_glamour_chacona_sublime} to "Chacona Sublime"
+  set {bard.skill.display::bard_glamour_cantilena_do_desapego} to "Cantilena do Desapego"
+  set {bard.skill.display::bard_glamour_ritornelo_sombra_luz} to "Ritornelo Sombra-Luz"
+  set {bard.skill.display::bard_glamour_arauto_do_glamour} to "Arauto do Glamour"
+  set {bard.skill.display::bard_glamour_refrao_sublime} to "Refrão Sublime"
+  set {bard.skill.display::bard_glamour_mascara_irresistivel} to "Máscara Irresistível"
+  set {bard.skill.display::bard_glamour_coroa_cintilante} to "Coroa Cintilante"
+  set {bard.skill.display::bard_glamour_crescendo_etereo} to "Crescendo Etéreo"
+
+  # Listas de rotação por colégio/tier (inclui magias comuns do tier)
+  set {bard.focus.skills::knowledge::1::*} to "bard_common_inspiracao_menor", "bard_common_cancao_de_descanso", "bard_knowledge_verso_analisador", "bard_knowledge_palavra_desconcertante", "bard_knowledge_eco_de_estudo", "bard_knowledge_nota_precisa"
+  set {bard.focus.skills::valor::1::*} to "bard_common_inspiracao_menor", "bard_common_nota_dispersante", "bard_valor_hino_da_coragem", "bard_valor_ritmo_de_batalha", "bard_valor_marcha_estoica", "bard_valor_toque_de_vitoria"
+  set {bard.focus.skills::glamour::1::*} to "bard_common_cancao_de_descanso", "bard_common_ritmo_agil", "bard_glamour_encanto_hipnotico", "bard_glamour_brilho_deslumbrante", "bard_glamour_veu_elegante", "bard_glamour_palavra_calma"
+
+  set {bard.focus.skills::knowledge::2::*} to "bard_common_inspiracao_de_batalha", "bard_common_cadencia_harmoniosa", "bard_common_contratempo", "bard_common_hino_de_foco", "bard_knowledge_balada_dos_segredos", "bard_knowledge_ritmo_da_razao", "bard_knowledge_marcacao_sapiente", "bard_knowledge_glosa_arcana"
+  set {bard.focus.skills::valor::2::*} to "bard_common_inspiracao_de_batalha", "bard_common_hino_de_foco", "bard_valor_coda_inspirador", "bard_valor_posto_de_comando", "bard_valor_recuo_tatico", "bard_valor_foco_do_duelista"
+  set {bard.focus.skills::glamour::2::*} to "bard_common_cadencia_harmoniosa", "bard_common_contratempo", "bard_glamour_manto_de_inspiracao", "bard_glamour_passo_ferico", "bard_glamour_rosa_enfeiticada", "bard_glamour_danca_das_lampadas"
+
+  set {bard.focus.skills::knowledge::3::*} to "bard_common_coro_fortificante", "bard_common_cantilena_celere", "bard_common_ostinato_revelador", "bard_common_arpejo_vinculante", "bard_knowledge_orquestracao_perfeita", "bard_knowledge_estudo_debilitante", "bard_knowledge_crescendo_runico", "bard_knowledge_cadencia_antimagia"
+  set {bard.focus.skills::valor::3::*} to "bard_common_coro_fortificante", "bard_common_arpejo_vinculante", "bard_valor_trombeta_da_guerra", "bard_valor_grito_de_reunir", "bard_valor_estro_marcial", "bard_valor_compasso_de_ferro"
+  set {bard.focus.skills::glamour::3::*} to "bard_common_cantilena_celere", "bard_common_ostinato_revelador", "bard_glamour_chacona_sublime", "bard_glamour_cantilena_do_desapego", "bard_glamour_ritornelo_sombra_luz", "bard_glamour_arauto_do_glamour"
+
+  set {bard.focus.skills::knowledge::4::*} to "bard_common_sinfonia_maior", "bard_common_coda_restauradora", "bard_common_finale_retumbante", "bard_common_maestro_do_campo", "bard_knowledge_sinfonia_onisciente", "bard_knowledge_estro_fulgente", "bard_knowledge_quebra_encanto", "bard_knowledge_tessitura_intelectual"
+  set {bard.focus.skills::valor::4::*} to "bard_common_sinfonia_maior", "bard_common_finale_retumbante", "bard_valor_cantiga_dos_herois", "bard_valor_estancia_do_campeao", "bard_valor_baluarte_sonoro", "bard_valor_climax_de_aco"
+  set {bard.focus.skills::glamour::4::*} to "bard_common_coda_restauradora", "bard_common_maestro_do_campo", "bard_glamour_refrao_sublime", "bard_glamour_mascara_irresistivel", "bard_glamour_coroa_cintilante", "bard_glamour_crescendo_etereo"
+
+function bard_focus_list(college: text, tier: number) :: objects:
+  set {_skills::*} to {bard.focus.skills::%{_college}%::%{_tier}%::*}
+  return {_skills::*}
+
+function bard_focus_cycle(college: text, tier: number, direction: text, raw: text):
+  set {_p} to player named {_raw}
+  if {_p} is not set:
+    stop
+  set {_skills::*} to bard_focus_list({_college}, {_tier})
+  if size of {_skills::*} is 0:
+    stop
+  set {_key} to "%{_college}%:%{_tier}%:%uuid of {_p}%"
+  set {_current} to {bard.focus.selected::%{_key}%}
+  if {_current} is not set or {_current} is not in {_skills::*}:
+    set {_current} to {_skills::1}
+  set {_index} to index of {_current} in {_skills::*}
+  if {_index} <= 0:
+    set {_index} to 1
+  if {_direction} is "backward":
+    remove 1 from {_index}
+  else:
+    add 1 to {_index}
+  if {_index} < 1:
+    set {_index} to size of {_skills::*}
+  if {_index} > size of {_skills::*}:
+    set {_index} to 1
+  set {_next} to {_skills::%{_index}%}
+  set {bard.focus.selected::%{_key}%} to {_next}
+  set {_name} to {bard.skill.display::%{_next}%}
+  if {_name} is not set:
+    set {_name} to {_next}
+  send "{@prefix} &7Skill ativa (Tier %{_tier}%) &f%{_name}%&7." to {_p}
+
+function bard_focus_cast(college: text, tier: number, raw: text):
+  set {_p} to player named {_raw}
+  if {_p} is not set:
+    stop
+  set {_skills::*} to bard_focus_list({_college}, {_tier})
+  if size of {_skills::*} is 0:
+    stop
+  set {_key} to "%{_college}%:%{_tier}%:%uuid of {_p}%"
+  set {_selected} to {bard.focus.selected::%{_key}%}
+  if {_selected} is not set:
+    set {_selected} to {_skills::1}
+    set {bard.focus.selected::%{_key}%} to {_selected}
+  execute console command "skillapi cast %{_selected}% %{_p}%"
+  bard_update_hud({_p})
+
+function bard_focus_info(college: text, tier: number, raw: text):
+  set {_p} to player named {_raw}
+  if {_p} is not set:
+    stop
+  set {_skills::*} to bard_focus_list({_college}, {_tier})
+  if size of {_skills::*} is 0:
+    send "{@prefix} &cNenhuma skill cadastrada para o Tier %{_tier}%/ %{_college}%" to {_p}
+    stop
+  set {_key} to "%{_college}%:%{_tier}%:%uuid of {_p}%"
+  set {_selected} to {bard.focus.selected::%{_key}%}
+  send "{@prefix} &fTier %{_tier}% &8(%{_college}%):" to {_p}
+  loop {_skills::*}:
+    set {_name} to {bard.skill.display::%loop-value%}
+    if {_name} is not set:
+      set {_name} to loop-value
+    if loop-value = {_selected}:
+      send " &a➤ %{_name}%"
+    else:
+      send " &7- %{_name}%"
+
+function bard_skill(skill: text, casterRaw: text, targetRaw: text=""):
+  set {_caster} to player named {_casterRaw}
+  if {_caster} is set:
+    set {bard.lastCombat.%{_caster}%} to now
+    bard_update_hud({_caster})
+  # Placeholder para efeitos específicos. Integrações detalhadas devem ser tratadas em scripts especializados.
+
 on load:
-  broadcast "&7Skript bard_cmds.sk carregado." to console
+  bard_register_focus_data()
   execute console command "scoreboard objectives add bard_inspiration dummy"
   execute console command "scoreboard objectives add bard_song_duration dummy"
   execute console command "scoreboard objectives add bard_major_cd dummy"
   execute console command "scoreboard objectives add bard_ooc dummy"
+  broadcast "&7Skript bard_cmds.sk (bardo rework) carregado." to console
 
 command /kit_bardo:
   permission: group.class_bard
   trigger:
     clear player's inventory
-    execute console command "mm items give %player% BardLute"
-    execute console command "mm items give %player% BardLoreBook"
-    execute console command "mm items give %player% LoreSongbook"
-    execute console command "mm items give %player% ValorWarDrum"
-    execute console command "mm items give %player% GlamourTiara"
+    loop 4 times:
+      set {_tier} to loop-number
+      if player has permission "class_bard.knowledge":
+        execute console command "mm items give %player% Bard_Knowledge_T%{_tier}%_Focus"
+      if player has permission "class_bard.valor":
+        execute console command "mm items give %player% Bard_Valor_T%{_tier}%_Focus"
+      if player has permission "class_bard.glamour":
+        execute console command "mm items give %player% Bard_Glamour_T%{_tier}%_Focus"
     execute console command "scoreboard players set %player% bard_inspiration 0"
     execute console command "scoreboard players set %player% bard_song_duration 0"
     execute console command "scoreboard players set %player% bard_major_cd 0"
@@ -45,185 +215,39 @@ command /kit_bardo:
     delete {bard.lastCombat.%player%}
     send "{@prefix} &7Kit de teste do Bardo entregue."
 
-command /inspirar [<player>]:
-  aliases: /bard_inspire
+command /inspire [<text>] [<text>]:
+  aliases: /song
   permission: group.class_bard
   trigger:
-    set {_target} to player
+    set {_tier} to 1
     if arg-1 is set:
-      set {_target} to arg-1
-    execute console command "skillapi cast bard_inspiration %player%"
-    bard_update_hud(player)
+      set {_tier} to arg-1 parsed as number
+    if {_tier} is not between 1 and 4:
+      set {_tier} to 1
+    bard_focus_info("knowledge", {_tier}, player)
+    bard_focus_info("valor", {_tier}, player)
+    bard_focus_info("glamour", {_tier}, player)
 
-command /cancao:
-  aliases: /bard_song
-  permission: group.class_bard
+command /college_knowledge [<number>]:
+  permission: group.class_bard.knowledge
   trigger:
-    execute console command "skillapi cast bard_song_of_rest %player%"
-    bard_update_hud(player)
+    set {_tier} to 1
+    if arg-1 is set:
+      set {_tier} to arg-1
+    bard_focus_info("knowledge", {_tier}, player)
 
-command /lore_verso:
-  permission: group.class_bard.lore
-  trigger:
-    execute console command "skillapi cast bard_lore_verso_analisador %player%"
-    bard_update_hud(player)
-
-command /lore_balada:
-  permission: group.class_bard.lore
-  trigger:
-    execute console command "skillapi cast bard_lore_balada_dos_segredos %player%"
-    bard_update_hud(player)
-
-command /lore_palavra:
-  permission: group.class_bard.lore
-  trigger:
-    execute console command "skillapi cast bard_lore_palavra_desconcertante %player%"
-    bard_update_hud(player)
-
-command /lore_orquestra:
-  permission: group.class_bard.lore
-  trigger:
-    execute console command "skillapi cast bard_lore_orquestracao_perfeita %player%"
-    bard_update_hud(player)
-
-command /lore_sinfonia:
-  permission: group.class_bard.lore
-  trigger:
-    execute console command "skillapi cast bard_lore_sinfonia_onisciente %player%"
-    bard_update_hud(player)
-
-command /valor_hino:
+command /college_valor [<number>]:
   permission: group.class_bard.valor
   trigger:
-    execute console command "skillapi cast bard_valor_hino_da_coragem %player%"
-    bard_update_hud(player)
+    set {_tier} to 1
+    if arg-1 is set:
+      set {_tier} to arg-1
+    bard_focus_info("valor", {_tier}, player)
 
-command /valor_ritmo:
-  permission: group.class_bard.valor
-  trigger:
-    execute console command "skillapi cast bard_valor_ritmo_de_batalha %player%"
-    bard_update_hud(player)
-
-command /valor_coda:
-  permission: group.class_bard.valor
-  trigger:
-    execute console command "skillapi cast bard_valor_coda_inspirador %player%"
-    bard_update_hud(player)
-
-command /valor_marcha:
-  permission: group.class_bard.valor
-  trigger:
-    execute console command "skillapi cast bard_valor_marcha_recuada %player%"
-    bard_update_hud(player)
-
-command /valor_cantiga:
-  permission: group.class_bard.valor
-  trigger:
-    if {bard.arena_block.%player%} is true:
-      send "{@prefix} &cCantiga bloqueada em arenas ranqueadas."
-      stop
-    execute console command "skillapi cast bard_valor_cantiga_dos_herois %player%"
-    bard_update_hud(player)
-
-command /glamour_encanto:
+command /college_glamour [<number>]:
   permission: group.class_bard.glamour
   trigger:
-    execute console command "skillapi cast bard_glamour_encanto_hipnotico %player%"
-    bard_update_hud(player)
-
-command /glamour_manto:
-  permission: group.class_bard.glamour
-  trigger:
-    execute console command "skillapi cast bard_glamour_manto_de_inspiracao %player%"
-    bard_update_hud(player)
-
-command /glamour_brilho:
-  permission: group.class_bard.glamour
-  trigger:
-    execute console command "skillapi cast bard_glamour_brilho_deslumbrante %player%"
-    bard_update_hud(player)
-
-command /glamour_passo:
-  permission: group.class_bard.glamour
-  trigger:
-    execute console command "skillapi cast bard_glamour_passo_ferico %player%"
-    bard_update_hud(player)
-
-command /glamour_refrao:
-  permission: group.class_bard.glamour
-  trigger:
-    execute console command "skillapi cast bard_glamour_refrao_sublime %player%"
-    bard_update_hud(player)
-
-# Glue: itens de MythicMobs acionando skills
-on rightclick:
-  if player's tool is not set:
-    stop
-  set {_item} to name of player's tool
-  if {_item} = "§dAlaúde de Inspiração":
-    if player has permission "group.class_bard":
-      execute console command "skillapi cast bard_inspiration %player%"
-      bard_update_hud(player)
-    else:
-      send "{@prefix} &cApenas bardos podem usar este alaúde."
-  else if {_item} = "§dCancioneiro de Descanso":
-    if player has permission "group.class_bard":
-      execute console command "skillapi cast bard_song_of_rest %player%"
-      bard_update_hud(player)
-    else:
-      send "{@prefix} &cPermissão insuficiente."
-  else if {_item} = "§bLivro dos Segredos":
-    if player has permission "group.class_bard.lore":
-      execute console command "skillapi cast bard_lore_balada_dos_segredos %player%"
-      bard_update_hud(player)
-  else if {_item} = "§bHarpa Onisciente":
-    if player has permission "group.class_bard.lore":
-      execute console command "skillapi cast bard_lore_sinfonia_onisciente %player%"
-      bard_update_hud(player)
-  else if {_item} = "§bPena Disruptiva":
-    if player has permission "group.class_bard.lore":
-      execute console command "skillapi cast bard_lore_palavra_desconcertante %player%"
-      bard_update_hud(player)
-  else if {_item} = "§6Tambor da Coragem":
-    if player has permission "group.class_bard.valor":
-      execute console command "skillapi cast bard_valor_hino_da_coragem %player%"
-      bard_update_hud(player)
-  else if {_item} = "§6Berrante de Batalha":
-    if player has permission "group.class_bard.valor":
-      execute console command "skillapi cast bard_valor_ritmo_de_batalha %player%"
-      bard_update_hud(player)
-  else if {_item} = "§6Alaúde Sagrado":
-    if player has permission "group.class_bard.valor":
-      if {bard.arena_block.%player%} is true:
-        send "{@prefix} &cUltimate bloqueada nesta arena."
-        stop
-      execute console command "skillapi cast bard_valor_cantiga_dos_herois %player%"
-      bard_update_hud(player)
-  else if {_item} = "§5Tiara Hipnótica":
-    if player has permission "group.class_bard.glamour":
-      execute console command "skillapi cast bard_glamour_encanto_hipnotico %player%"
-      bard_update_hud(player)
-  else if {_item} = "§5Amuleto Férico":
-    if player has permission "group.class_bard.glamour":
-      execute console command "skillapi cast bard_glamour_passo_ferico %player%"
-      bard_update_hud(player)
-  else if {_item} = "§5Lira Estelar":
-    if player has permission "group.class_bard.glamour":
-      execute console command "skillapi cast bard_glamour_refrao_sublime %player%"
-      bard_update_hud(player)
-
-on damage:
-  if victim is a player:
-    set {bard.lastCombat.%victim%} to now
-  if attacker is a player:
-    set {bard.lastCombat.%attacker%} to now
-
-on death:
-  if victim is a player:
-    delete {bard.lastCombat.%victim%}
-    execute console command "scoreboard players set %victim% bard_ooc 0"
-
-every 5 seconds:
-  loop all players:
-    if loop-player has permission "group.class_bard" or loop-player has permission "group.class_bard.lore" or loop-player has permission "group.class_bard.valor" or loop-player has permission "group.class_bard.glamour":
-      bard_update_hud(loop-player)
+    set {_tier} to 1
+    if arg-1 is set:
+      set {_tier} to arg-1
+    bard_focus_info("glamour", {_tier}, player)

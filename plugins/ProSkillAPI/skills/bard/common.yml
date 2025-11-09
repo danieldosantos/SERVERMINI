@@ -1,0 +1,729 @@
+# Bardo - Magias Comuns
+name: bard_common_inspiracao_menor
+display: "§dInspiração Menor"
+icon: MUSIC_DISC_FAR
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 10
+  range-scale: 0
+description:
+- "§7Tier 1 · Buff flexível"
+- "§fEscolhe entre §a+10% dano§f ou §b+10% cura§f por 10s conforme\
+  \ postura do lançador (agachar = cura)."
+- "§7Atualiza HUD de Inspiração e aplica DR de buffs."
+- "§8PvP: aplica imunidade compartilhada de buff ofensivo 20s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Ally
+          range-base: 10
+          range-scale: 0
+          self: true
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill inspiracao_menor %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_common_cancao_de_descanso
+display: "§dCanção de Descanso"
+icon: GOAT_HORN
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 1 · Cura sustentada"
+- "§fCura aliados em 6 blocos em §a4% HP/s por 6s§f e remove 1 debuff leve."
+- "§7Aplica DR em curas sobrepostas para evitar empilhamento."
+- "§8PvP: remove apenas lentidão/bleed leves."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill cancao_de_descanso %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_common_ritmo_agil
+display: "§dRitmo Ágil"
+icon: RABBIT_FOOT
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 12
+  range-scale: 0
+description:
+- "§7Tier 1 · Mobilidade utilitária"
+- "§f+0.03 velocidade de movimento e §a-15% recarga de habilidades§f por\
+  \ 8s."
+- "§7Não acumula com bônus superiores de velocidade."
+- "§8PvP: aplica DR de Haste."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Ally
+          range-base: 12
+          range-scale: 0
+          self: true
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill ritmo_agil %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_common_nota_dispersante
+display: "§dNota Dispersante"
+icon: COPPER_HORN
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 50
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  radius-base: 5
+  radius-scale: 0
+description:
+- "§7Tier 1 · Pequeno controle"
+- "§fExplosão sonora de §c120% dano mágico§f, empurrando 2 blocos."
+- "§7Empurrão respeita limite de 2 blocos e aplica DR."
+- "§8PvP: sem dano crítico."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 5
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill nota_dispersante %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_common_inspiracao_de_batalha
+display: "§dInspiração de Batalha"
+icon: MUSIC_DISC_BLOCKS
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  range-base: 10
+  range-scale: 0
+description:
+- "§7Tier 2 · Buff defensivo/ofensivo"
+- "§fConcede §b120 pts de escudo§f por 8s ou §a+15% penetração§\
+  f (agachar = escudo)."
+- "§7Aplica HUD de escudo e rastreia carga."
+- "§8PvP: escudo respeita mitigação máxima global."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Ally
+          range-base: 10
+          range-scale: 0
+          self: true
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill inspiracao_de_batalha %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_common_cadencia_harmoniosa
+display: "§dCadência Harmoniosa"
+icon: NOTE_BLOCK
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 2 · Redução de recarga"
+- "§fAliados em 6 blocos ganham §a-12% tempo de recarga§f por 8s."
+- "§7Integra com PlaceholderAPI para HUD de tempo restante."
+- "§8PvP: aplica DR compartilhado entre suportes."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill cadencia_harmoniosa %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_common_contratempo
+display: "§dContratempo"
+icon: ECHO_SHARD
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  range-base: 15
+  range-scale: 0
+description:
+- "§7Tier 2 · Interrupção"
+- "§fInterrompe e silencia o próximo lançamento por 2s."
+- "§7Respeita imunidade decrescente de controle."
+- "§8PvP: silêncio não afeta chefes maiores."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Enemy
+          range-base: 15
+          range-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill contratempo %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_common_hino_de_foco
+display: "§dHino de Foco"
+icon: SPYGLASS
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 2 · Estabilidade ofensiva"
+- "§fReduz recuo em 20% e concede §a+10% precisão§f por 10s."
+- "§7Ideal para arqueiros e conjuradores."
+- "§8PvP: precisão converte em redução de spread."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill hino_de_foco %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_common_coro_fortificante
+display: "§dCoro Fortificante"
+icon: SHIELD
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 40
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 3 · Mitigação de dano"
+- "§fAliados em 6 blocos recebem §b+15% mitigação§f por 8s."
+- "§7Não acumula com auras superiores; atualiza scoreboard."
+- "§8PvP: respeita limite global de 45% mitigação."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill coro_fortificante %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_common_cantilena_celere
+display: "§dCantilena Célere"
+icon: FEATHER
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 3 · Aceleração ofensiva"
+- "§f+20% velocidade de ataque e conjuração por 10s."
+- "§7Exibe partículas leves de nota musical."
+- "§8PvP: aplica DR com outros buffs de haste."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill cantilena_celere %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_common_ostinato_revelador
+display: "§dOstinato Revelador"
+icon: GLOW_INK_SAC
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 10
+  radius-scale: 0
+description:
+- "§7Tier 3 · Detecção"
+- "§fRevela furtivos e invisíveis em 10 blocos por 8s."
+- "§7Aplica brilho e remove efeitos de invisibilidade."
+- "§8PvP: aplica DR em 45s para reuso no mesmo alvo."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 10
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill ostinato_revelador %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_common_arpejo_vinculante
+display: "§dArpejo Vinculante"
+icon: TRIPWIRE_HOOK
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  range-base: 5
+  range-scale: 0
+description:
+- "§7Tier 3 · Controle rápido"
+- "§fEmite cone de 5 blocos que enraíza inimigos por 2s."
+- "§7Aplica imunidade decrescente de raiz 30s."
+- "§8PvP: raiz é cancelada por dano forte."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Cone
+          angle-base: 70
+          angle-scale: 0
+          range-base: 5
+          range-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill arpejo_vinculante %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_common_sinfonia_maior
+display: "§dSinfonia Maior"
+icon: MUSIC_DISC_OTHERSIDE
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+- "§7Tier 4 · Aura suprema"
+- "§fAtiva aura de 8 blocos por 12s: +15% dano e cura aliados."
+- "§7Consome 1 carga de Inspiração; HUD mostra duração."
+- "§8PvP: uptime máximo 50%."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CallSkript:
+        type: mechanic
+        data:
+          command: skript run bard_skill sinfonia_maior %caster% %target%
+          caster: true
+          async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_common_coda_restauradora
+display: "§dCoda Restauradora"
+icon: GOLDEN_APPLE
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 40
+  mana-cost-scale: 0
+  range-base: 12
+  range-scale: 0
+description:
+- "§7Tier 4 · Burst de cura"
+- "§fRemove 2 debuffs e cura §a18% HP instantâneo§f."
+- "§7Respeita DR de cura por golpe (25%)."
+- "§8PvP: prioriza debuffs de controle leves."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Ally
+          range-base: 12
+          range-scale: 0
+          self: true
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill coda_restauradora %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_common_finale_retumbante
+display: "§dFinale Retumbante"
+icon: TNT
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 4 · Explosão híbrida"
+- "§fExplosão sonora causa §c160% dano mágico§f e aplica -10% resistê\
+  ncia por 8s."
+- "§7Interage com MythicMobs para partículas simples."
+- "§8PvP: debuff segue DR de resistência."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill finale_retumbante %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_common_maestro_do_campo
+display: "§dMaestro do Campo"
+icon: MUSIC_DISC_5
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 40
+  mana-cost-scale: 0
+description:
+- "§7Tier 4 · Suporte estratégico"
+- "§fPor 10s, cada skill comum conjurada reduz 2s do CD das magias comuns dos aliados\
+  \ (1x/3s)."
+- "§7Atualiza HUD de redução de tempo."
+- "§8PvP: redução não acumula com Cadência Harmoniosa."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CallSkript:
+        type: mechanic
+        data:
+          command: skript run bard_skill maestro_do_campo %caster% %target%
+          caster: true
+          async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []

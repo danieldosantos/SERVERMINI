@@ -1,0 +1,711 @@
+# Bardo - Colégio do Conhecimento
+name: bard_knowledge_verso_analisador
+display: "§bVerso Analisador"
+icon: BOOK
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+description:
+- "§7Tier 1 · Debuff informativo"
+- "§fRevela HP/buffs e aplica §c-8% resistência mágica§f por 6s."
+- "§7Mostra dados via PlaceholderAPI HUD."
+- "§8PvP: revela apenas buffs não ocultos."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Enemy
+          range-base: 18
+          range-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill verso_analisador %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_knowledge_palavra_desconcertante
+display: "§bPalavra Desconcertante"
+icon: ECHO_SHARD
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  range-base: 16
+  range-scale: 0
+description:
+- "§7Tier 1 · Silêncio rápido"
+- "§fSilencia alvo por 2s e cancela casts ativos."
+- "§7Aplica DR de silêncio 45s."
+- "§8PvP: não afeta bosses imunes."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Enemy
+          range-base: 16
+          range-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill palavra_desconcertante %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_knowledge_eco_de_estudo
+display: "§bEco de Estudo"
+icon: SCULK_SENSOR
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+description:
+- "§7Tier 1 · Amplificação mágica"
+- "§fPróximo dano mágico aliado no alvo recebe §a+12% dano§f (8s)."
+- "§7Marca com partículas azuis."
+- "§8PvP: DR compartilhada com Marcação Sapiente."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Enemy
+          range-base: 18
+          range-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill eco_de_estudo %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_knowledge_nota_precisa
+display: "§bNota Precisa"
+icon: AMETHYST_SHARD
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 15
+  range-scale: 0
+description:
+- "§7Tier 1 · Crit buff"
+- "§fPróximo feitiço do aliado ganha §a+15% chance de crítico§f\
+  \ (8s)."
+- "§7Integrado ao HUD de crítico."
+- "§8PvP: crítico limitado aos caps do servidor."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Ally
+          range-base: 15
+          range-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill nota_precisa %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_knowledge_balada_dos_segredos
+display: "§bBalada dos Segredos"
+icon: MUSIC_DISC_MALL
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 2 · Dispel ofensivo"
+- "§fRemove 1 buff aleatório de inimigos em 6 blocos."
+- "§7Prioriza buffs de mitigação."
+- "§8PvP: não remove imunidades totais."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill balada_dos_segredos %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_knowledge_ritmo_da_razao
+display: "§bRitmo da Razão"
+icon: CLOCK
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 2 · Penetração mágica"
+- "§fAliados em 6 blocos recebem §a+15% penetração mágica§f por\
+  \ 10s."
+- "§7Não acumula com buffs similares."
+- "§8PvP: aplica DR 30s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill ritmo_da_razao %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_knowledge_marcacao_sapiente
+display: "§bMarcação Sapiente"
+icon: TARGET
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+description:
+- "§7Tier 2 · Debuff progressivo"
+- "§fMarca alvo para receber §a+10% dano§f nos próximos 3 acertos aliados\
+  \ (10s)."
+- "§7Marca aparece no HUD de prioridade."
+- "§8PvP: compartilha DR com Eco de Estudo."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Enemy
+          range-base: 18
+          range-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill marcacao_sapiente %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_knowledge_glosa_arcana
+display: "§bGlosa Arcana"
+icon: LAPIS_LAZULI
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+description:
+- "§7Tier 2 · Eficiência de mana"
+- "§fReduz em 20% o custo de mana das magias comuns por 10s."
+- "§7Aplica marcador visual roxo no bardo."
+- "§8PvP: não afeta ultimates."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CallSkript:
+        type: mechanic
+        data:
+          command: skript run bard_skill glosa_arcana %caster% %target%
+          caster: true
+          async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_knowledge_orquestracao_perfeita
+display: "§bOrquestração Perfeita"
+icon: MUSIC_DISC_WAIT
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 40
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+- "§7Tier 3 · Macro redução de CD"
+- "§fAliados em 8 blocos recebem §a-20% CD§f por 10s."
+- "§7Atualiza scoreboard dedicado."
+- "§8PvP: não acumula com Cadência Harmoniosa."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill orquestracao_perfeita %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_knowledge_estudo_debilitante
+display: "§bEstudo Debilitante"
+icon: FERMENTED_SPIDER_EYE
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+description:
+- "§7Tier 3 · Debuff ofensivo"
+- "§fAplica §c-15% dano§f e §c-10% velocidade§f por 8s."
+- "§7Respeita DR de lentidão."
+- "§8PvP: sem stack com controles fortes."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Enemy
+          range-base: 18
+          range-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill estudo_debilitante %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_knowledge_crescendo_runico
+display: "§bCrescendo Rúnico"
+icon: ENDER_PEARL
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  radius-base: 5
+  radius-scale: 0
+description:
+- "§7Tier 3 · Detonação tática"
+- "§fDetona marcações ativas causando §c140% dano mágico§f em 5\
+  \ blocos."
+- "§7Remove marcas de Eco/Marcação."
+- "§8PvP: dano mitigado por resistência mágica."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 5
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill crescendo_runico %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_knowledge_cadencia_antimagia
+display: "§bCadência Antimagia"
+icon: AMETHYST_CLUSTER
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 3 · Defesa mágica"
+- "§fAliados recebem §b-25% dano mágico§f por 8s."
+- "§7Aplica DR com outras conchas mágicas."
+- "§8PvP: não reduz dano verdadeiro."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill cadencia_antimagia %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_knowledge_sinfonia_onisciente
+display: "§bSinfonia Onisciente"
+icon: SPYGLASS
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 50
+  mana-cost-scale: 0
+description:
+- "§7Tier 4 · Ultimate de visão"
+- "§fRevela todos inimigos por 10s e concede §a+15% dano/§b+15% cura§\
+  f a aliados próximos por 15s."
+- "§7Ativa HUD global e partículas."
+- "§8PvP: revela apenas jogadores em combate."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CallSkript:
+        type: mechanic
+        data:
+          command: skript run bard_skill sinfonia_onisciente %caster% %target%
+          caster: true
+          async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_knowledge_estro_fulgente
+display: "§bEstro Fulgente"
+icon: LIGHT
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 4 · Amplificador de buffs"
+- "§fAmplia em 20% a força dos buffs ativos dos aliados por 8s."
+- "§7Não ultrapassa caps globais."
+- "§8PvP: ignora imunidades totais."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill estro_fulgente %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_knowledge_quebra_encanto
+display: "§bQuebra-Encanto"
+icon: MUSIC_DISC_PIGSTEP
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 4 · Counter em área"
+- "§fSilencia inimigos por 2s e remove 1 buff leve em 6 blocos."
+- "§7Aplica DR forte contra silêncios."
+- "§8PvP: não remove imunidades pesadas."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill quebra_encanto %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_knowledge_tessitura_intelectual
+display: "§bTessitura Intelectual"
+icon: MUSIC_DISC_CHIRP
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 40
+  mana-cost-scale: 0
+description:
+- "§7Tier 4 · Debuff progressivo"
+- "§fPor 12s, cada magia aplica §c-5% resistência§f (acumula até -15%)."
+- "§7Aplica marcador de acúmulo por PlaceholderAPI."
+- "§8PvP: stacks expiram em 4s sem hits."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CallSkript:
+        type: mechanic
+        data:
+          command: skript run bard_skill tessitura_intelectual %caster% %target%
+          caster: true
+          async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
