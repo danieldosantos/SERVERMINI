@@ -1,0 +1,265 @@
+# Escola de Evocação - magias focadas em dano direto e explosões
+T1:
+  Wizard_Evocation_T1_ScorchingRay:
+    display: "Raio Abrasador"
+    type: active
+    trigger: beam
+    cost:
+      mana: 25
+    cooldown: 45
+    beam:
+      count: 2
+      damage: "0.8*spellpower"
+      element: fogo
+      pierce: false
+    tags: [dano]
+    notes: "Dois raios em linha causando 80% cada."
+  Wizard_Evocation_T1_FlameOrb:
+    display: "Orbe Flamejante"
+    type: active
+    trigger: projectile
+    cost:
+      mana: 30
+    cooldown: 60
+    projectile:
+      amount: 1
+      speed: 1.2
+      damage: "1.6*spellpower"
+      element: fogo
+    area:
+      radius: 6
+      duration: 6
+      tick: 2
+      damage: "0.4*spellpower"
+    tags: [dano, area]
+    notes: "Campo ardente com redução suave caso alvo possua resistência racial."
+  Wizard_Evocation_T1_ChainSpark:
+    display: "Faísca em Cadeia"
+    type: active
+    trigger: chain
+    cost:
+      mana: 25
+    cooldown: 60
+    chain:
+      jumps: 3
+      range: 5
+      damage: "0.6*spellpower"
+      element: eletrico
+    tags: [dano, controleleve]
+    notes: "Salta entre até três alvos a 5 blocos."
+  Wizard_Evocation_T1_FrostShard:
+    display: "Estilhaço Gélido"
+    type: active
+    trigger: cone
+    cost:
+      mana: 25
+    cooldown: 50
+    cone:
+      angle: 60
+      range: 5
+      damage: "1.2*spellpower"
+      element: gelo
+    effects:
+      debuff:
+        move_speed: -0.20
+        duration: 3
+    tags: [dano, controleleve]
+    notes: "Dano de frio e redução de velocidade por 3s."
+T2:
+  Wizard_Evocation_T2_ArcaneExplosion:
+    display: "Explosão Arcana"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 75
+    area:
+      radius: 6
+    effects:
+      damage:
+        amount: "1.4*spellpower"
+        type: arcano
+    tags: [dano, area]
+    notes: "Explosão centrada no mago."
+  Wizard_Evocation_T2_EtherealLance:
+    display: "Lança Etérea"
+    type: active
+    trigger: projectile
+    cost:
+      mana: 30
+    cooldown: 60
+    projectile:
+      amount: 1
+      speed: 1.6
+      pierce: 3
+      damage: "1.5*spellpower"
+      element: arcano
+    tags: [dano]
+    notes: "Perfura até 3 alvos em linha."
+  Wizard_Evocation_T2_PowerCatalyst:
+    display: "Catalisador de Poder"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 105
+    duration: 12
+    effects:
+      buff:
+        spell_damage: 0.18
+    tags: [buff]
+    notes: "Aumento de dano de feitiços por 12s."
+  Wizard_Evocation_T2_FirePulse:
+    display: "Pulso Ígneo"
+    type: active
+    trigger: ring
+    cost:
+      mana: 30
+    cooldown: 90
+    area:
+      inner_radius: 4
+      outer_radius: 6
+    effects:
+      damage:
+        amount: "1.0*spellpower"
+        type: fogo
+      burn:
+        duration: 6
+        tick: 1
+        percent: 0.06
+      knockback: 2
+    tags: [dano, area]
+    notes: "Anel expansivo que empurra e aplica queimadura."
+T3:
+  Wizard_Evocation_T3_LightningStorm:
+    display: "Tormenta de Raios"
+    type: active
+    trigger: channeled
+    cost:
+      mana: 40
+    cooldown: 90
+    channel:
+      duration: 8
+      tick: 2.5
+      bolts: 3
+      damage: "1.1*spellpower"
+      element: eletrico
+    tags: [dano, controleleve]
+    notes: "Três descargas dirigidas ao longo da canalização."
+  Wizard_Evocation_T3_FrozenComet:
+    display: "Cometa Congelante"
+    type: active
+    trigger: ground
+    cost:
+      mana: 40
+    cooldown: 105
+    area:
+      radius: 6
+    effects:
+      damage:
+        amount: "1.6*spellpower"
+        type: gelo
+      root:
+        duration: 2
+        diminishing: true
+    tags: [dano, controle]
+    notes: "Enraiza por 2s com imunidade decrescente."
+  Wizard_Evocation_T3_VoltaicFocus:
+    display: "Foco Voltaico"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 90
+    duration: 10
+    effects:
+      buff:
+        penetration: 0.20
+        element: elemental
+    tags: [buff]
+    notes: "+20% penetração elemental."
+  Wizard_Evocation_T3_SyncDetonation:
+    display: "Detonação Sincronizada"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 90
+    duration: 6
+    effects:
+      buff:
+        next_aoe_double: 0.60
+    tags: [buff, area]
+    notes: "Próxima magia AE detona duas vezes com 2ª instância a 60%."
+T4:
+  Wizard_Evocation_T4_ControlledCataclysm:
+    display: "Cataclismo Controlado"
+    type: active
+    trigger: ground
+    cost:
+      mana: 50
+    cooldown: 240
+    area:
+      radius: 8
+      meteors: 5
+      damage: "1.2*spellpower"
+      type: fogo
+    effects:
+      debuff:
+        resist_reduction: 0.10
+        duration: 8
+    tags: [dano, ultimate]
+    notes: "Ultimate de Evocação."
+  Wizard_Evocation_T4_FireTempest:
+    display: "Tempestade de Fogo"
+    type: active
+    trigger: ground
+    cost:
+      mana: 45
+    cooldown: 210
+    area:
+      radius: 8
+      duration: 10
+      tick: 2
+    effects:
+      damage_over_time:
+        amount: "0.8*spellpower"
+        type: fogo
+      fear:
+        duration: 2
+        bosses: false
+    tags: [dano, controle]
+    notes: "Aplica medo 2s na entrada (não afeta chefes)."
+  Wizard_Evocation_T4_ElementalSobriety:
+    display: "Sobrário Elemental"
+    type: active
+    trigger: self
+    cost:
+      mana: 40
+    cooldown: 120
+    duration: 10
+    effects:
+      buff:
+        mana_return: 0.25
+        mana_cap: 30
+    tags: [recuperacao]
+    notes: "Converte 25% do dano elemental em mana (máx 30)."
+  Wizard_Evocation_T4_Epicenter:
+    display: "Epicentro"
+    type: active
+    trigger: self
+    cost:
+      mana: 45
+    cooldown: 120
+    area:
+      radius: 6
+    effects:
+      damage:
+        amount: "1.8*spellpower"
+        type: arcano
+      knockback: 4
+      buff:
+        mitigation: 0.20
+        duration: 4
+    tags: [dano, defesa]
+    notes: "Explosão centrada no mago com mitigação temporária de 20%."

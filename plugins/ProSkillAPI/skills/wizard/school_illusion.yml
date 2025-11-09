@@ -1,0 +1,250 @@
+# Escola de Ilusão - engano, controle leve e reposicionamento
+T1:
+  Wizard_Illusion_T1_MirrorImage:
+    display: "Imagem Múltipla"
+    type: active
+    trigger: self
+    cost:
+      mana: 25
+    cooldown: 45
+    duration: 6
+    effects:
+      clones: 3
+      first_hit_miss: true
+    tags: [defesa]
+    notes: "Cria 2-3 cópias ilusórias. Primeiro golpe falha."
+  Wizard_Illusion_T1_InvisibleVeil:
+    display: "Véu Invisível"
+    type: active
+    trigger: self
+    cost:
+      mana: 25
+    cooldown: 60
+    duration: 6
+    effects:
+      invisibility: true
+      speed: 0.02
+    tags: [mobilidade]
+    notes: "Concede invisibilidade e +0.02 velocidade."
+  Wizard_Illusion_T1_DancingLights:
+    display: "Luzes Dançantes"
+    type: active
+    trigger: ground
+    cost:
+      mana: 20
+    cooldown: 60
+    area:
+      radius: 6
+      duration: 6
+    effects:
+      debuff:
+        vision_penalty: true
+    tags: [controle]
+    notes: "Reduz visão inimiga com neblina leve."
+  Wizard_Illusion_T1_EchoBrand:
+    display: "Eco Ilusório"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 20
+    cooldown: 45
+    target:
+      range: 18
+      filter: enemy
+    duration: 8
+    effects:
+      mark:
+        crit_bonus: 0.15
+    tags: [marcador]
+    notes: "Próximo golpe aliado ganha +15% crit."
+T2:
+  Wizard_Illusion_T2_MentalLabyrinth:
+    display: "Labirinto Mental"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 30
+    cooldown: 75
+    target:
+      range: 18
+      filter: enemy
+    duration: 3
+    effects:
+      immobilize: true
+      diminishing: true
+      accuracy_penalty:
+        duration: 8
+        amount: 0.10
+    tags: [controle]
+    notes: "Imobiliza por 3s (imunidade decrescente) e reduz precisão em 10% por 8s."
+  Wizard_Illusion_T2_FalseMirror:
+    display: "Espelho Falso"
+    type: active
+    trigger: self
+    cost:
+      mana: 25
+    cooldown: 60
+    duration: 8
+    effects:
+      decoy:
+        hit_cap: 150
+    tags: [defesa]
+    notes: "Duplicata absorve um golpe de até 150 dano."
+  Wizard_Illusion_T2_SmokeCurtain:
+    display: "Cortina de Fumaça Arcana"
+    type: active
+    trigger: ground
+    cost:
+      mana: 30
+    cooldown: 90
+    area:
+      radius: 6
+      duration: 6
+    effects:
+      reveal_cancel: true
+      camo_allies: true
+      target_drop: 3
+    tags: [controle, suporte]
+    notes: "Remove marcações inimigas e concede camuflagem leve aos aliados."
+  Wizard_Illusion_T2_MindMask:
+    display: "Máscara da Mente"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 30
+    cooldown: 75
+    target:
+      range: 18
+      filter: enemy
+    duration: 8
+    effects:
+      debuff:
+        damage: -0.15
+    tags: [controle]
+    notes: "Reduz dano causado pelo alvo dominante em 15%."
+T3:
+  Wizard_Illusion_T3_PhantomStep:
+    display: "Passo Fantasma"
+    type: active
+    trigger: blink
+    cost:
+      mana: 30
+    cooldown: 75
+    blink:
+      distance: 8
+      phantom_explosion:
+        delay: 1
+        damage: "0.8*spellpower"
+        radius: 4
+    tags: [mobilidade, dano]
+    notes: "Deixa fantasma que explode após 1s em 80% dano."
+  Wizard_Illusion_T3_ShadowTheater:
+    display: "Teatro de Sombras"
+    type: active
+    trigger: ground
+    cost:
+      mana: 35
+    cooldown: 105
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      debuff:
+        accuracy: -0.15
+        move_speed: -0.15
+    tags: [controle]
+    notes: "Campo de sombras que reduz precisão e velocidade."
+  Wizard_Illusion_T3_DoubtVeil:
+    display: "Véu da Dúvida"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 35
+    cooldown: 90
+    target:
+      range: 18
+      filter: enemy
+    duration: 6
+    effects:
+      debuff:
+        miss_chance: 0.20
+    tags: [controle]
+    notes: "Ataques contra o alvo têm 20% de chance de errar."
+  Wizard_Illusion_T3_PerceptionRift:
+    display: "Ruptura Perceptiva"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 90
+    duration: 12
+    effects:
+      buff:
+        next_cc_bonus: 1
+        cap: 4
+    tags: [controle]
+    notes: "Próximo controle dura +1s até máximo de 4s."
+T4:
+  Wizard_Illusion_T4_MirroredWorld:
+    display: "Mundo Espelhado"
+    type: active
+    trigger: ground
+    cost:
+      mana: 50
+    cooldown: 240
+    area:
+      radius: 6
+      duration: 12
+    effects:
+      ally_images: true
+      absorb_hit: 1
+      disorient: true
+    tags: [ultimate, suporte]
+    notes: "Cria ilusões que absorvem 1 golpe e desorientam inimigos."
+  Wizard_Illusion_T4_DisorientationCrown:
+    display: "Coroa da Desorientação"
+    type: active
+    trigger: ground
+    cost:
+      mana: 45
+    cooldown: 120
+    area:
+      radius: 6
+      duration: 3
+    effects:
+      debuff:
+        inverse_controls: true
+        accuracy: -0.20
+      bosses: false
+    tags: [controle]
+    notes: "Inverte levemente o movimento por 3s e reduz precisão."
+  Wizard_Illusion_T4_DreamSnare:
+    display: "Cilada Onírica"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 40
+    cooldown: 120
+    target:
+      range: 18
+      filter: enemy
+    duration: 2.5
+    effects:
+      sleep: true
+      break_on_heavy_damage: true
+    tags: [controle]
+    notes: "Adormece inimigos isolados por 2.5s, quebra com dano alto."
+  Wizard_Illusion_T4_DeceptiveWeave:
+    display: "Tessitura Enganosa"
+    type: active
+    trigger: self
+    cost:
+      mana: 40
+    cooldown: 105
+    duration: 12
+    effects:
+      buff:
+        illusion_cd_reduction: 2
+        internal_cooldown: 3
+    tags: [utilidade]
+    notes: "Cada skill de Ilusão reduz 2s do CD de outra (1x a cada 3s)."

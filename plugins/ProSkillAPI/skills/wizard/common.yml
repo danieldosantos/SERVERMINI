@@ -1,0 +1,235 @@
+# Magias comuns do Mago - aplicáveis a todas as escolas
+T1:
+  Wizard_Common_T1_MagicMissiles:
+    display: "Mísseis Arcanos"
+    type: active
+    trigger: projectile
+    cost:
+      mana: 25
+    cooldown: 45
+    projectile:
+      amount: 3
+      speed: 1.4
+      homing: true
+      damage: "0.6*spellpower"
+    tags: [dano, controleleve]
+    notes: "Projéteis rastreiam o alvo prioritário do cursor. Cada projétil aplica 60% do poder mágico."
+  Wizard_Common_T1_ArcaneShield:
+    display: "Escudo Arcano Breve"
+    type: active
+    trigger: self
+    cost:
+      mana: 25
+    cooldown: 60
+    duration: 6
+    effects:
+      shield:
+        amount: 120
+        stacks: false
+    tags: [escudo]
+    notes: "Não acumula com escudos de valor maior. Cancelado ao receber dano letal."
+  Wizard_Common_T1_ShortStep:
+    display: "Passo Etéreo Curto"
+    type: active
+    trigger: blink
+    cost:
+      mana: 20
+    cooldown: 45
+    blink:
+      distance: 6
+      vertical_tolerance: 2
+    tags: [mobilidade]
+    notes: "Teleporta até 6 blocos na direção do olhar e aplica imunidade a empurrões por 1s."
+  Wizard_Common_T1_DetectMagic:
+    display: "Detectar Magia"
+    type: active
+    trigger: self
+    cost:
+      mana: 15
+    cooldown: 60
+    duration: 8
+    effects:
+      reveal:
+        radius: 8
+        includes_traps: true
+    tags: [utilidade, detecção]
+    notes: "Revela buffs ocultos e armadilhas mágicas num raio de 8 blocos."
+T2:
+  Wizard_Common_T2_KineticRupture:
+    display: "Ruptura Cinética"
+    type: active
+    trigger: ground
+    cost:
+      mana: 30
+    cooldown: 60
+    area:
+      radius: 5
+      knockback: 3
+    effects:
+      damage:
+        amount: "1.3*spellpower"
+        type: arcano
+    tags: [dano, area]
+    notes: "Explosão controlada que empurra inimigos 3 blocos."
+  Wizard_Common_T2_CooldownRune:
+    display: "Runa de Recarga"
+    type: active
+    trigger: ground
+    cost:
+      mana: 30
+    cooldown: 90
+    duration: 8
+    area:
+      radius: 4
+    effects:
+      buff:
+        target: self
+        cooldown_reduction: 0.15
+    tags: [buff]
+    notes: "Reduz recarga de todas as skills do mago em 15% por 8s."
+  Wizard_Common_T2_KnowledgeLens:
+    display: "Lente do Conhecimento"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 25
+    cooldown: 60
+    target:
+      range: 18
+      filter: enemy
+    duration: 10
+    effects:
+      debuff:
+        damage_taken_magical: 0.12
+    tags: [marcador]
+    notes: "Marca o alvo aumentando dano mágico recebido."
+  Wizard_Common_T2_LightPrismaticBarrier:
+    display: "Barreira Prismática Leve"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 75
+    duration: 8
+    effects:
+      buff:
+        elemental_reduction: 0.20
+    tags: [defesa]
+    notes: "Reduz dano elemental recebido em 20%."
+T3:
+  Wizard_Common_T3_ShortPortal:
+    display: "Portal Breve"
+    type: active
+    trigger: blink
+    cost:
+      mana: 30
+    cooldown: 75
+    blink:
+      distance: 8
+      leave_effect:
+        damage: "0.8*spellpower"
+        radius: 4
+    tags: [mobilidade, dano]
+    notes: "Teleporta 8 blocos e deixa explosão de 80% do poder mágico no ponto de saída."
+  Wizard_Common_T3_AmplifySpell:
+    display: "Amplificar Feitiço"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 60
+    duration: 10
+    effects:
+      buff:
+        next_spell_multiplier: 0.18
+    tags: [buff]
+    notes: "Próximo feitiço lançado recebe +18% de dano ou eficácia."
+  Wizard_Common_T3_ArcaneAnchor:
+    display: "Âncora Arcana"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 90
+    duration: 6
+    effects:
+      buff:
+        knockback_immunity: true
+        penetration_bonus: 0.10
+    tags: [buff, utilidade]
+    notes: "Fixa o mago no lugar e concede +10% penetração mágica."
+  Wizard_Common_T3_LightTimeWarp:
+    display: "Distorção Temporal Leve"
+    type: active
+    trigger: aura
+    cost:
+      mana: 30
+    cooldown: 90
+    duration: 8
+    area:
+      radius: 6
+    effects:
+      debuff:
+        move_speed: -0.15
+    tags: [controle]
+    notes: "Aplica -15% velocidade em inimigos próximos por 8s com queda gradual."
+T4:
+  Wizard_Common_T4_MysticStorm:
+    display: "Tempestade Mística"
+    type: active
+    trigger: ground
+    cost:
+      mana: 45
+    cooldown: 120
+    area:
+      radius: 7
+      duration: 10
+      tick: 2
+    effects:
+      damage_over_time:
+        amount: "0.7*spellpower"
+        type: arcano
+    tags: [dano, area]
+    notes: "Chuva arcana que causa 70% do poder mágico a cada 2s por 10s."
+  Wizard_Common_T4_DoubleSigil:
+    display: "Sigilo de Duplo Lançamento"
+    type: active
+    trigger: self
+    cost:
+      mana: 40
+    cooldown: 105
+    duration: 8
+    effects:
+      buff:
+        duplicate_next_common: 0.60
+    tags: [buff]
+    notes: "Duplicação do próximo feitiço comum em 60% da eficácia."
+  Wizard_Common_T4_AntimagicVeil:
+    display: "Velatura Antimagia"
+    type: active
+    trigger: aura
+    cost:
+      mana: 40
+    cooldown: 120
+    duration: 10
+    area:
+      radius: 6
+    effects:
+      buff:
+        magic_damage_reduction: 0.20
+    tags: [defesa, suporte]
+    notes: "Aliados próximos recebem -20% dano mágico."
+  Wizard_Common_T4_Reordering:
+    display: "Reordenação"
+    type: active
+    trigger: self
+    cost:
+      mana: 45
+    cooldown: 180
+    effects:
+      cooldown_reset:
+        min_cd: 30
+      fatigue:
+        added_cooldown: 10
+    tags: [controle_cd]
+    notes: "Reseta o menor CD ativo ≥30s e aplica fadiga de +10s na próxima skill que recarregar."
