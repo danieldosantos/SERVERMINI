@@ -3,7 +3,7 @@
 ## Visão Geral
 - **Função:** suporte/controle híbrido com gadgets e reforços mecano-mágicos.
 - **Recursos:**
-  - `Mana Arcana` (pool base 100, escalando até 220). Regeneração estável configurada no ProSkillAPI.
+  - `Mana Arcana` (pool base 100, escalando +25 por Tier até 200). Regeneração estável configurada no ProSkillAPI.
   - `Cargas de Infusão` (2 → 5 do T1 ao T4). Recuperação fora de combate a cada 45 s (passiva + Skript).
 - **Identidade:** alterna entre buffs de precisão, campos rúnicos, constructos e frascos alquímicos. Passivos garantem eficiência com itens focais e mitigam stacking excessivo via integração com RacesEffects (exaustão de resistência).
 - **Caps Respeitados:** velocidade adicional ≤ +0.05, mitigação total ≤45%, cura por golpe ≤25%, áreas padrão 6–8 blocos.
@@ -11,34 +11,38 @@
 ## Progressão por Tier
 | Tier | Nível aproximado | Vida média | Mana Arcana | Cargas | Ganhos chave |
 |------|------------------|------------|-------------|--------|--------------|
-| T1   | 1–4              | 28 HP      | 120         | 2      | Campo Rúnico, Sobrecarregar, Ferramentas de Tinker. |
-| T2   | 5–10             | 38 HP      | 150         | 3      | Recuperar Infusão, acesso inicial às subclasses. |
-| T3   | 11–16            | 50 HP      | 185         | 4      | Módulos reforçados, cooldowns otimizados, constructo com mais utilidade. |
-| T4   | 17–20            | 62 HP      | 220         | 5      | Ultimates das subclasses, uptime controlado de 15–20 min em infusões. |
+| T1   | 1–4              | 28 HP      | 125         | 2      | Campo Rúnico Menor, Sobrecarregar, Ferramentas de Tinker. |
+| T2   | 5–10             | 38 HP      | 150         | 3      | Campo Rúnico Estável, Bateria Arcana e desbloqueio das subclasses. |
+| T3   | 11–16            | 50 HP      | 175         | 4      | Campos superiores, redução de CDs, construtos aprimorados. |
+| T4   | 17–20            | 62 HP      | 200         | 5      | Ultimates de núcleo/reatores, uptime controlado <60%. |
 
 ## Árvores de Skills (Core)
-- **Infundir Item:** módulo temporário (12–20 min) aplicado via `/infundir` ou Chave de Infusão. CD 120 s; custo 1 carga.
-- **Campo Rúnico:** sigilo 6 blocos por 8–10 s com pulsos de dano PvE + cura leve aliada. Custo 25 Mana.
-- **Sobrecarregar:** buff de +15% velocidade de ataque/projétil por 12 s em 6 blocos. Custo 1 carga; CD 90 s.
-- **Ferramentas de Tinker (passivo):** +10–15% eficiência em skills/itens, -5% custo de Mana.
-- **Recuperar Infusão (passivo):** acelera recarga de cargas fora de combate (até +12%). Integrado ao Skript `artificer_register_regen`.
+- **Infundir Item:** módulo leve ativo por 12 s (buff de +10% dano, +10% mitigação ou +0.03 velocidade). Consome 1 carga, CD 60 s. Aplicado via `/infundir` e binds de itens focais.
+- **Campos Rúnicos:** progressões Menor/Estável/Superior cobrindo 5→7 blocos por 8–12 s, causando 25→40% dano/s. Custos 20/30/40 Mana, CDs 60/75/90 s, controlados pelo MythicMobs.
+- **Sobrecarregar & Sobrecarga Coordenada:** haste pessoal T1 (8 s, +15%, CD 75 s) evolui para versão em grupo T3 (10 s, +20%, CD 120 s). Ambas usam cargas de infusão.
+- **Ferramentas de Tinker (passivo):** +10% eficiência em itens/reatores, bônus aplicado direto nos focos do MythicMobs.
+- **Foco Estabilizado & Núcleo Excedente:** redução global de CD (10% por 12 s, CD 90 s) e ultimate que reduz custos em 20% e remove gasto de cargas por 15 s (CD 210 s).
+- **Bateria Arcana:** recuperação automática de 1 carga após 45 s fora de combate via Skript.
+
+> **Tabela completa de magias:** ver [READMESKILLS_ARTIFICE](READMESKILLS_ARTIFICE.md) para detalhes de custo, duração, área, integrações com plugins e observações PvP.
 
 ## Subclasses
 ### Armeiro (Armorer)
-- Modos Guardião/Infiltrador alternados com custo de carga (`Mudar Modo`).
-- Guardião: `Punho Trovão`, `Campo Repulsor`, ultimate `Núcleo Arcano` (pulsos 60%/2s, +20% DR por 15s).
-- Infiltrador: `Descarga Silenciosa`, `Passo Amplificado` (+0.05 velocidade, invis curta).
-- Itens foco: Núcleo ArcArmor, Manopla de Trovão, Botas Faseadas.
+- Modos Guardiã/Infiltradora alternados com custo de carga (`/modo`). Guardiã recebe controle de área (Punho Trovão, Campo Repulsor, Núcleo Arcano) enquanto Infiltradora foca em debuffs e mobilidade (Descarga Silenciosa, Manto de Fase, Passo Amplificado).
+- Sobrecarga Total (ult T4) ativa todos módulos simultaneamente por 12 s; combos com Sobrecarga Final respeitam cap de velocidade.
+- Itens foco: Núcleo ArcArmor, Manopla de Trovão, Botas Faseadas, estabilizador prismático.
 
 ### Ferreiro de Batalha (Battle Smith)
-- Pet `Defensor de Aço` (MythicMobs) com skills `Bash`/`Guard Stance`, sincronizado com HUD `{defender_hp}`.
-- Buffs: `Sintonizar Arma`, `Comando Reparar`, `Interferência` (cone debuff), ultimate `Protocolo Guardião`.
-- Itens: Martelo da Forja, Kit de Sintonização, Console do Defensor.
+- Pet `Defensor de Aço` (MythicMobs) com barra dedicada e comandos `/defensor` para reparar, sincronizar mitigação e ativar guardas.
+- Buffs chave: `Sintonizar Arma`, `Comando Reparar`, `Sincronia Defensiva`, `Interferência`, `Golpe de Fornalha`, `Lança-Calor`.
+- Ultimates e Tier 4: `Protocolo Guardião`, `Golpe Titânico`, `Ferrita Arcana`, `Núcleo Blindado`.
+- Itens: Martelo da Forja, Kit de Sintonização, Console do Defensor, Reator Guardião.
 
 ### Alquimista (Alchemist)
-- Controle em área e suporte através de frascos/elixires.
-- Skills: `Frasco Explosivo` (projétil + DoT via Skript), `Elixir de Vitalidade`, `Nuvem Corrosiva`, `Tônico Acelerante`, ultimate `Panaceia`.
-- Itens: Kit Alquímico, Bolsa de Elixires, Cajado Catalisador.
+- Controle em área e suporte através de frascos/elixires com cargas e mana escalando por Tier.
+- Destaques: `Frasco Explosivo`, `Tônico Vivificante`, `Névoa Corrosiva`, `Frasco Mutagênico`, `Perfusão Vital` (revive), `Panaceia Suprema` (ultimate).
+- Tier 4 inclui `Gás de Dissolução`, `Tônico de Ascensão` e `Frasco Final` para burst controlado.
+- Itens: Kit Alquímico, Bolsa de Elixires, Cajado Catalisador, Reator de Panaceia.
 
 ## Integrações
 - **MythicMobs:** itens focais (`artificer_items.yml`) e mob `SteelDefender` (`artificer_constructs.yml`). Skills simples em `artificer_skills.yml`.
@@ -53,7 +57,7 @@
 - Cooldowns longos (90–210 s) sinalizados com mensagens e refresh automático de placeholders.
 
 ## Considerações de Balanceamento
-- Uptime passivos ≤60% (Infundir 12–20 min com CD 120 s + custo/cargas limitadas).
-- Constructo possui escalonamento moderado e sem DPS infinito (skills simples, TTK controlado).
-- Todas as fontes de mitigação/resistência aplicam exaustão quando raça fornece bônus similar.
-- PvP seguro: DoTs e execuções exigem alvo abaixo de 30% HP; nenhum golpe individual excede limites de servidor.
+- Uptime de buffs ≤60%: infusões duram 12 s com CD 60 s e dependem de `infusoes_charges`, campos e sobrecargas mantêm janelas curtas.
+- Constructo (Ferreiro de Batalha) escala moderadamente, sem DPS infinito: pulsos e feixes respeitam caps de área (6–8 blocos) e CDs ≥75 s.
+- Mitigações se acumulam com cautela: Contramedida Técnica, Reforço Estrutural, Núcleo Arcano e Sincronia Defensiva obedecem limite global 45% + exaustão via RacesEffects.
+- PvP seguro: DoTs (Frasco Explosivo, Golpe de Fornalha) e debuffs respeitam DR; nenhuma habilidade isolada excede os caps de velocidade/cura/dano estabelecidos.
