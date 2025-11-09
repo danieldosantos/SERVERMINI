@@ -4,19 +4,68 @@
 options:
   skillcmd: psa cast
 
-command /truque_arcano:
+# ---------------------------------------
+# Comandos de ajuda e atalhos raciais
+# ---------------------------------------
+
+command /racial:
+  trigger:
+    if player has permission "lp.race_elfo":
+      send "&a[Racial Élfica] /fae_passos para deslocar-se 5 blocos (CD 45s)."
+      if player has permission "lp.race_elfo.alto":
+        send "&d[Alto Elfo] /truque_arcano <seta|barreira|piscar> para selecionar e usar o truque."
+      if player has permission "lp.race_elfo.drow":
+        send "&5[Drow] /luzes_feericas e /passo_umbratico disponíveis. Evite luz solar direta!"
+      if player has permission "lp.race_elfo.floresta":
+        send "&a[Elfo da Floresta] /marca_bosque e /salto_galho prontos para emboscar."
+    else:
+      send "&7Nenhum traço elfo encontrado."
+
+command /sopro_draco:
+  trigger:
+    if player has permission "lp.race_draconato":
+      execute console command "{@skillcmd} %player% SoproDraconico"
+    else:
+      send "&cRequer sangue dracônico."
+
+command /fae_passos:
+  trigger:
+    if player has permission "lp.race_elfo":
+      execute console command "{@skillcmd} %player% FaePassos"
+    else:
+      send "&cSomente elfos."
+
+command /truque_arcano [<text>]:
   trigger:
     if player has permission "lp.race_elfo.alto":
-      execute console command "{@skillcmd} %player% TruqueArcano"
+      if arg-1 is set:
+        set {_choice} to lowercase of arg-1
+        if {_choice} is "seta" or "seta_arcana":
+          set {race.truque_arcano.%player%} to "seta"
+          send "&dTruque configurado para Seta Arcana."
+          stop
+        else if {_choice} is "barreira" or "barreira_cintilante":
+          set {race.truque_arcano.%player%} to "barreira"
+          send "&dTruque configurado para Barreira Cintilante."
+          stop
+        else if {_choice} is "piscar" or "piscar_breve":
+          set {race.truque_arcano.%player%} to "piscar"
+          send "&dTruque configurado para Piscar Breve."
+          stop
+        else:
+          send "&cOpção inválida. Use seta, barreira ou piscar."
+          stop
+      set {_mode} to {race.truque_arcano.%player%}
+      if {_mode} is not set:
+        set {_mode} to "seta"
+      if {_mode} is "barreira":
+        execute console command "{@skillcmd} %player% TruqueArcanoBarreira"
+      else if {_mode} is "piscar":
+        execute console command "{@skillcmd} %player% TruqueArcanoPiscar"
+      else:
+        execute console command "{@skillcmd} %player% TruqueArcanoSeta"
     else:
       send "&cSomente altos elfos."
-
-command /passos_faes:
-  trigger:
-    if player has permission "lp.race_elfo.floresta":
-      execute console command "{@skillcmd} %player% PassosFaes"
-    else:
-      send "&cSomente elfos da floresta."
 
 command /luzes_feericas:
   trigger:
@@ -25,12 +74,26 @@ command /luzes_feericas:
     else:
       send "&cSomente drows."
 
-command /manto_sombras:
+command /passo_umbratico:
   trigger:
     if player has permission "lp.race_elfo.drow":
-      execute console command "{@skillcmd} %player% MantoSombras"
+      execute console command "{@skillcmd} %player% PassoUmbratico"
     else:
       send "&cSomente drows."
+
+command /marca_bosque:
+  trigger:
+    if player has permission "lp.race_elfo.floresta":
+      execute console command "{@skillcmd} %player% MarcaBosque"
+    else:
+      send "&cSomente elfos da floresta."
+
+command /salto_galho:
+  trigger:
+    if player has permission "lp.race_elfo.floresta":
+      execute console command "{@skillcmd} %player% SaltoGalho"
+    else:
+      send "&cSomente elfos da floresta."
 
 command /canto_cativante:
   trigger:
@@ -102,39 +165,51 @@ command /lamina_das_chamas:
     else:
       send "&cSomente tieflings."
 
+# ---------------------------------------
+# Função para entregar kits raciais (QA)
+# ---------------------------------------
+
 function give_race_kit(p: player, raceKey: text):
+  # Normaliza parâmetros
+  set {_p} to {_p} # garante referência ao parâmetro player
+  set {_racekey} to lowercase of {_racekey}
+
   delete {_kit::*}
-  if {_raceKey} is "anao_colina":
+
+  if {_racekey} is "anao_colina":
     add "DwarvenFortitudeStone" to {_kit::*}
-  else if {_raceKey} is "anao_montanha":
+  else if {_racekey} is "anao_montanha":
     add "MountainBastionCharm" to {_kit::*}
-  else if {_raceKey} is "draconato":
+  else if {_racekey} is "draconato":
     add "DraconicCharm" to {_kit::*}
-  else if {_raceKey} is "elfo_alto":
-    add "HighElfFoci" to {_kit::*}
-  else if {_raceKey} is "elfo_floresta":
-    add "ForestElfQuiver" to {_kit::*}
-  else if {_raceKey} is "elfo_drow":
+  else if {_racekey} is "elfo":
+    add "ElvenMoonbrooch" to {_kit::*}
+  else if {_racekey} is "elfo_alto":
+    add "HighElfCrystal" to {_kit::*}
+  else if {_racekey} is "elfo_floresta":
+    add "ForestLeafCharm" to {_kit::*}
+  else if {_racekey} is "elfo_drow":
     add "DrowMoonbrooch" to {_kit::*}
-  else if {_raceKey} is "gnomo_floresta":
+  else if {_racekey} is "gnomo_floresta":
     add "GnomeWhistle" to {_kit::*}
-  else if {_raceKey} is "gnomo_rocha":
+  else if {_racekey} is "gnomo_rocha":
     add "GnomeGyroCore" to {_kit::*}
-  else if {_raceKey} is "halfling_pesleves":
+  else if {_racekey} is "halfling_pesleves":
     add "HalflingLuckyCoin" to {_kit::*}
-  else if {_raceKey} is "halfling_robusto":
+  else if {_racekey} is "halfling_robusto":
     add "HalflingHearthLadle" to {_kit::*}
-  else if {_raceKey} is "humano":
+  else if {_racekey} is "humano":
     add "HumanBannerSigil" to {_kit::*}
-  else if {_raceKey} is "humano_variante":
+  else if {_racekey} is "humano_variante":
     add "HumanVariantMedal" to {_kit::*}
-  else if {_raceKey} is "meio_elfo":
+  else if {_racekey} is "meio_elfo":
     add "HalfElfHarmonyOrb" to {_kit::*}
-  else if {_raceKey} is "meio_orc":
+  else if {_racekey} is "meio_orc":
     add "HalfOrcBattleBrand" to {_kit::*}
-  else if {_raceKey} is "tiefling":
+  else if {_racekey} is "tiefling":
     add "TieflingHellbrand" to {_kit::*}
     add "TieflingSparkGlove" to {_kit::*}
+
   if {_kit::*} is set:
     loop {_kit::*}:
       give {_p} mythicitem:%loop-value%
@@ -143,6 +218,7 @@ function give_race_kit(p: player, raceKey: text):
   else:
     send "&cRaça desconhecida." to {_p}
 
+# Atalhos de QA para kits
 command /kit_racial_anao_colina:
   trigger:
     give_race_kit(player, "anao_colina")
@@ -152,6 +228,9 @@ command /kit_racial_anao_montanha:
 command /kit_racial_draconato:
   trigger:
     give_race_kit(player, "draconato")
+command /kit_racial_elfo:
+  trigger:
+    give_race_kit(player, "elfo")
 command /kit_racial_elfo_alto:
   trigger:
     give_race_kit(player, "elfo_alto")
@@ -189,11 +268,15 @@ command /kit_racial_tiefling:
   trigger:
     give_race_kit(player, "tiefling")
 
+# ---------------------------------------
+# Gestão simples de combate/cargas
+# ---------------------------------------
+
 on damage:
   if attacker is a player:
     set {racial.combat.%attacker%} to now
 
-on any move:
+on move:
   if {racial.combat.%player%} is set:
     if difference between now and {racial.combat.%player%} > 15 seconds:
       delete {racial.combat.%player%}

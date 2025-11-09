@@ -1,0 +1,30 @@
+# ProSkillAPI - Passo Umbrático dos Drow
+skills:
+  PassoUmbratico:
+    display: "&8Passo Umbrático"
+    type: ACTIVE
+    skill_class: racial
+    description: "Teleporta até 6 blocos entre sombras e concede invisibilidade parcial por 2s."
+    tiers:
+      T1: { cooldown: 60, distance: 6, invis_duration: 2, evasion_bonus: 0.1 }
+      T2: { cooldown: 60, distance: 6, invis_duration: 2, evasion_bonus: 0.12 }
+      T3: { cooldown: 60, distance: 6, invis_duration: 2.5, evasion_bonus: 0.12 }
+      T4: { cooldown: 60, distance: 7, invis_duration: 2.5, evasion_bonus: 0.15 }
+    cost:
+      resource: mana
+      amount: 18
+    effects:
+      - target: self
+        type: teleport
+        distance: { tier: distance }
+        condition: light_level_low
+      - target: self
+        type: status
+        id: invisibility_partial
+        duration: { tier: invis_duration }
+      - target: self
+        type: status
+        id: evasion
+        duration: { tier: invis_duration }
+        value: { tier: evasion_bonus }
+    notes: "Só pode ser usado em sombras (nível de luz ≤7)."

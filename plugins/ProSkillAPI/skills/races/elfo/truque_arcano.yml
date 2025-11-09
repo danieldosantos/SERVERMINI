@@ -1,0 +1,76 @@
+# ProSkillAPI - Truques Arcanos dos Altos Elfos
+skills:
+  TruqueArcanoSeta:
+    display: "&dSeta Arcana"
+    type: ACTIVE
+    skill_class: racial
+    description: "Projétil arcano de 120% do dano de arma que desacelera levemente o alvo."
+    tiers:
+      T1: { cooldown: 45, damage_multiplier: 1.2, slow: 0.2, slow_duration: 3, range: 18 }
+      T2: { cooldown: 45, damage_multiplier: 1.25, slow: 0.25, slow_duration: 3, range: 18 }
+      T3: { cooldown: 45, damage_multiplier: 1.3, slow: 0.25, slow_duration: 4, range: 20 }
+      T4: { cooldown: 45, damage_multiplier: 1.35, slow: 0.3, slow_duration: 4, range: 20 }
+    cost:
+      resource: mana
+      amount: 18
+    effects:
+      - target: enemy_single
+        type: projectile
+        range: { tier: range }
+        damage_multiplier: { tier: damage_multiplier }
+        element: arcane
+      - target: enemy_single
+        type: debuff
+        id: slow
+        value: { tier: slow }
+        duration: { tier: slow_duration }
+  TruqueArcanoBarreira:
+    display: "&dBarreira Cintilante"
+    type: ACTIVE
+    skill_class: racial
+    description: "Escudo arcano que absorve dano e concede leve resistência mágica por 6s."
+    tiers:
+      T1: { cooldown: 75, shield_amount: 120, mitigation_magic: 0.08, duration: 6 }
+      T2: { cooldown: 75, shield_amount: 140, mitigation_magic: 0.1, duration: 6 }
+      T3: { cooldown: 75, shield_amount: 160, mitigation_magic: 0.12, duration: 6 }
+      T4: { cooldown: 75, shield_amount: 190, mitigation_magic: 0.12, duration: 6 }
+    cost:
+      resource: mana
+      amount: 20
+    effects:
+      - target: self
+        type: shield
+        value: { tier: shield_amount }
+        duration: { tier: duration }
+      - target: self
+        type: status
+        id: mitigation_magic
+        duration: { tier: duration }
+        value: { tier: mitigation_magic }
+  TruqueArcanoPiscar:
+    display: "&dPiscar Breve"
+    type: ACTIVE
+    skill_class: racial
+    description: "Teleporta até 6 blocos e concede resistência a quedas por 2s."
+    tiers:
+      T1: { cooldown: 60, distance: 6, fall_resist: 0.5, safeguard: 1.0 }
+      T2: { cooldown: 60, distance: 6, fall_resist: 0.6, safeguard: 1.5 }
+      T3: { cooldown: 60, distance: 7, fall_resist: 0.7, safeguard: 1.5 }
+      T4: { cooldown: 60, distance: 7, fall_resist: 0.8, safeguard: 2.0 }
+    cost:
+      resource: mana
+      amount: 16
+    effects:
+      - target: self
+        type: teleport
+        distance: { tier: distance }
+      - target: self
+        type: status
+        id: fall_resistance
+        duration: 2
+        value: { tier: fall_resist }
+      - target: self
+        type: status
+        id: blink_safeguard
+        duration: 2
+        value: { tier: safeguard }

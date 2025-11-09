@@ -1,54 +1,51 @@
 # Raça: Alto Elfo
-# Fantasia: eruditos arcanos com precisão sobrenatural.
 race_id: elfo_alto
 name: "Alto Elfo"
-identity: "Magos aristocráticos que dominam truques arcanos sutis e tiro certeiro."
+identity: "Eruditos arcanos disciplinados que traduzem teoria em precisão mágica."
 luckperms:
   required: "race_elfo.alto"
   inherit: "race_elfo"
 tags:
   - elf
 placeholders:
-  racial_cd_main: "{cooldown:skill_truque_arcano}"
+  racial_cd_main: "{cooldown:skill_truque_arcanoseta}"
+  racial_buff_disciplina: "{status:disciplina_mistica}"
 passives:
-  disciplina_arcanista:
-    name: "Disciplina Arcanista"
+  erudicao_arcana:
+    name: "Erudição Arcana"
     type: timed_attribute
+    trigger: wield_focus
+    duration: 0
+    cooldown: 0
+    uptime_cap: 0.6
+    attributes:
+      focus_efficiency: 0.05
+    description: "+5% de eficiência com focos mágicos (varinhas/cajados)."
+  disciplina_mistica:
+    name: "Disciplina Mística"
+    type: cooldown_shave
     trigger: cast_spell
     duration: 12
-    cooldown: 45
-    uptime_cap: 0.5
-    attributes:
-      mana_regen_percent: 0.08
-      projectile_accuracy: 0.12
-    description: "Após lançar skill, aumenta regen de mana em 8% e precisão de projéteis em 12% por 12s."
-  memoria_ancestral:
-    name: "Memória Ancestral"
-    type: utility
-    trigger: out_of_combat
-    duration: 18
-    cooldown: 90
+    cooldown: 60
     uptime_cap: 0.2
-    description: "Permite reconfigurar o Truque Arcano escolhido fora de combate (via comando /racial)."
+    reduction_percent: 0.05
+    scope: utility
+    description: "Ao conjurar magia reduz em 5% o CD da próxima habilidade de utilidade por 12s (CD interno 60s)."
 actives:
   truque_arcano:
     name: "Truque Arcano"
-    skill: TruqueArcano
-    cooldown: 60
-    charges: 2
-    description: "Escolha entre Raio Gélido, Orbe de Força ou Lâmina Mental. Cada opção escalona por tier." 
-resistances:
-  psychic:
-    base: 0.1
-    max: 0.35
-    notes: "Aplicar DR junto de classes mentais; mantém vulnerabilidade física."
+    skill: TruqueArcanoSeta
+    cooldown: 45
+    charges: 1
+    description: "Usa o truque selecionado (Seta Arcana, Barreira Cintilante ou Piscar Breve)."
+resistances: {}
 synergy_notes:
-  - "Build saudável: Mago de controle T3 usando Truque Arcano para preencher janelas sem quebrar rotações."
-  - "Restrição: proíbe stacking de precisão acima de +20% com itens; excedente converte em alcance."
+  - "Construção típica: mago controlador usando Disciplina para alinhar utilidades de teleporte/escudo."
+  - "Uptime controlado evita abuso de reset de cooldowns em combos PvP."
 tests:
   pve:
-    - "Executar rotação arcana completa em boss arcano (DPS alvo 115% baseline)."
-    - "Defender evento de arqueiros (verificar bônus de precisão em tiros a 25 blocos)."
+    - "Boss arcano: garantir redução de CD não supera 5% médio e que escolha de truque respeita caps."
+    - "Simular rotação longa alternando truques para validar consumo de mana."
   pvp:
-    - "Arena 2v2 com arqueiro aliado; assegurar uptime combinado de precisão ≤55%."
-    - "Skirmish vs assassino furtivo, usar Truque Arcano → Lâmina Mental para punir (CD 60s)."
+    - "Duelo contra assassino: Piscar Breve deve manter janela de vulnerabilidade ≥3s entre usos."
+    - "Arena 3v3: Barreira Cintilante absorve burst sem exceder mitigação global."

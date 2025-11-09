@@ -37,24 +37,41 @@ items:
     NBT:
       race-lock: 'race_draconato'
       skill: 'SoproDraconico'
-  HighElfFoci:
-    Id: ENDER_EYE
-    Display: '&dFoco Arcano Élfico'
+  ElvenMoonbrooch:
+    Id: ECHO_SHARD
+    Display: '&bBroche da Lua Élfica'
     Lore:
-      - '&dPermite canalizar Truques Arcanos.'
-      - '&eClique:&f lança Truque Arcano.'
+      - '&bCanaliza a graça ancestral.'
+      - '&eClique direito:&f ativa Fae Passos.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    NBT:
+      race-lock: 'race_elfo'
+      skill: 'FaePassos'
+  HighElfCrystal:
+    Id: ENDER_EYE
+    Display: '&dCristal Arcano Alto-Elfo'
+    Lore:
+      - '&dFoco calibrado para Truques Arcanos.'
+      - '&eClique:&f lança o truque selecionado.'
+      - '&7Use /truque_arcano <opção> para alternar.'
+    Options:
+      Unbreakable: true
     NBT:
       race-lock: 'race_elfo.alto'
-      skill: 'TruqueArcano'
-  ForestElfQuiver:
+      skill: 'TruqueArcanoSeta'
+  ForestLeafCharm:
     Id: FEATHER
-    Display: '&aPluma dos Bosques'
+    Display: '&aAmuleto Folha Silvestre'
     Lore:
-      - '&7Cheira a folhas úmidas.'
-      - '&eSneak + clique:&f Passos Feéricos.'
+      - '&7Exala cheiro de musgo fresco.'
+      - '&eSneak + clique:&f Salto de Galho.'
+    Options:
+      Unbreakable: true
     NBT:
       race-lock: 'race_elfo.floresta'
-      skill: 'PassosFaes'
+      skill: 'SaltoGalho'
   DrowMoonbrooch:
     Id: AMETHYST_SHARD
     Display: '&5Broche da Lua Profunda'
