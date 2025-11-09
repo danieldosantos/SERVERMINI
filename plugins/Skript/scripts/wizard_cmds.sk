@@ -7,9 +7,84 @@ options:
   objective-mana: "wizard_mana"
   objective-prep: "wizard_prep"
   objective-cd: "wizard_cd"
-  prepared-list: "wizard_arcane_wall,wizard_evocation_flame_orb,wizard_abjuration_counterspell,wizard_illusion_mirror_image"
-  menu-title: "&9Preparação Arcana"
+  prepared-skills: "Wizard_Common_T4_MysticStorm,Wizard_Common_T4_Reordering,Wizard_Evocation_T4_ControlledCataclysm,Wizard_Abjuration_T2_Counterspell,Wizard_Abjuration_T4_ArcaneFortress,Wizard_Illusion_T4_MirroredWorld"
   ooc-delay: 8
+
+function wizard_register_skill(school: text, tier: text, id: text, display: text, type: text):
+  add {_id} to {wizard.skills.%{_school}%.%{_tier}%.order::*}
+  set {wizard.skills.%{_school}%.%{_tier}%.display.%{_id}%} to {_display}
+  set {wizard.skills.%{_school}%.%{_tier}%.type.%{_id}%} to {_type}
+
+function wizard_init_lists():
+  delete {wizard.skills::*}
+  wizard_register_skill("common", "T1", "Wizard_Common_T1_MagicMissiles", "Mísseis Arcanos", "Ativa")
+  wizard_register_skill("common", "T1", "Wizard_Common_T1_ArcaneShield", "Escudo Arcano Breve", "Ativa")
+  wizard_register_skill("common", "T1", "Wizard_Common_T1_ShortStep", "Passo Etéreo Curto", "Ativa")
+  wizard_register_skill("common", "T1", "Wizard_Common_T1_DetectMagic", "Detectar Magia", "Ativa")
+  wizard_register_skill("common", "T2", "Wizard_Common_T2_KineticRupture", "Ruptura Cinética", "Ativa")
+  wizard_register_skill("common", "T2", "Wizard_Common_T2_CooldownRune", "Runa de Recarga", "Ativa")
+  wizard_register_skill("common", "T2", "Wizard_Common_T2_KnowledgeLens", "Lente do Conhecimento", "Ativa")
+  wizard_register_skill("common", "T2", "Wizard_Common_T2_LightPrismaticBarrier", "Barreira Prismática Leve", "Ativa")
+  wizard_register_skill("common", "T3", "Wizard_Common_T3_ShortPortal", "Portal Breve", "Ativa")
+  wizard_register_skill("common", "T3", "Wizard_Common_T3_AmplifySpell", "Amplificar Feitiço", "Ativa")
+  wizard_register_skill("common", "T3", "Wizard_Common_T3_ArcaneAnchor", "Âncora Arcana", "Ativa")
+  wizard_register_skill("common", "T3", "Wizard_Common_T3_LightTimeWarp", "Distorção Temporal Leve", "Ativa")
+  wizard_register_skill("common", "T4", "Wizard_Common_T4_MysticStorm", "Tempestade Mística", "Ativa")
+  wizard_register_skill("common", "T4", "Wizard_Common_T4_DoubleSigil", "Sigilo de Duplo Lançamento", "Ativa")
+  wizard_register_skill("common", "T4", "Wizard_Common_T4_AntimagicVeil", "Velatura Antimagia", "Ativa")
+  wizard_register_skill("common", "T4", "Wizard_Common_T4_Reordering", "Reordenação", "Ativa")
+  wizard_register_skill("evocation", "T1", "Wizard_Evocation_T1_ScorchingRay", "Raio Abrasador", "Ativa")
+  wizard_register_skill("evocation", "T1", "Wizard_Evocation_T1_FlameOrb", "Orbe Flamejante", "Ativa")
+  wizard_register_skill("evocation", "T1", "Wizard_Evocation_T1_ChainSpark", "Faísca em Cadeia", "Ativa")
+  wizard_register_skill("evocation", "T1", "Wizard_Evocation_T1_FrostShard", "Estilhaço Gélido", "Ativa")
+  wizard_register_skill("evocation", "T2", "Wizard_Evocation_T2_ArcaneExplosion", "Explosão Arcana", "Ativa")
+  wizard_register_skill("evocation", "T2", "Wizard_Evocation_T2_EtherealLance", "Lança Etérea", "Ativa")
+  wizard_register_skill("evocation", "T2", "Wizard_Evocation_T2_PowerCatalyst", "Catalisador de Poder", "Ativa")
+  wizard_register_skill("evocation", "T2", "Wizard_Evocation_T2_FirePulse", "Pulso Ígneo", "Ativa")
+  wizard_register_skill("evocation", "T3", "Wizard_Evocation_T3_LightningStorm", "Tormenta de Raios", "Ativa")
+  wizard_register_skill("evocation", "T3", "Wizard_Evocation_T3_FrozenComet", "Cometa Congelante", "Ativa")
+  wizard_register_skill("evocation", "T3", "Wizard_Evocation_T3_VoltaicFocus", "Foco Voltaico", "Ativa")
+  wizard_register_skill("evocation", "T3", "Wizard_Evocation_T3_SyncDetonation", "Detonação Sincronizada", "Ativa")
+  wizard_register_skill("evocation", "T4", "Wizard_Evocation_T4_ControlledCataclysm", "Cataclismo Controlado", "Ultimate")
+  wizard_register_skill("evocation", "T4", "Wizard_Evocation_T4_FireTempest", "Tempestade de Fogo", "Ativa")
+  wizard_register_skill("evocation", "T4", "Wizard_Evocation_T4_ElementalSobriety", "Sobrário Elemental", "Ativa")
+  wizard_register_skill("evocation", "T4", "Wizard_Evocation_T4_Epicenter", "Epicentro", "Ativa")
+  wizard_register_skill("abjuration", "T1", "Wizard_Abjuration_T1_ProtectiveBarrier", "Barreira Protetora", "Ativa")
+  wizard_register_skill("abjuration", "T1", "Wizard_Abjuration_T1_RunicSeal", "Selo Rúnico", "Ativa")
+  wizard_register_skill("abjuration", "T1", "Wizard_Abjuration_T1_ArcaneReflect", "Reflexo Arcano", "Ativa")
+  wizard_register_skill("abjuration", "T1", "Wizard_Abjuration_T1_DampenBlow", "Amortecer Golpe", "Ativa")
+  wizard_register_skill("abjuration", "T2", "Wizard_Abjuration_T2_Counterspell", "Contra-Feitiço", "Reação")
+  wizard_register_skill("abjuration", "T2", "Wizard_Abjuration_T2_PrismaticGuardian", "Guardião Prismático", "Ativa")
+  wizard_register_skill("abjuration", "T2", "Wizard_Abjuration_T2_WardingRing", "Anel de Warding", "Ativa")
+  wizard_register_skill("abjuration", "T2", "Wizard_Abjuration_T2_StoneSkin", "Pele de Pedra", "Ativa")
+  wizard_register_skill("abjuration", "T3", "Wizard_Abjuration_T3_SealBreaker", "Quebra-Selo", "Ativa")
+  wizard_register_skill("abjuration", "T3", "Wizard_Abjuration_T3_DefenseResonance", "Ressonância de Defesa", "Ativa")
+  wizard_register_skill("abjuration", "T3", "Wizard_Abjuration_T3_MobileBulwark", "Baluarte Móvel", "Ativa")
+  wizard_register_skill("abjuration", "T3", "Wizard_Abjuration_T3_AntimagicShackle", "Grilhão Antimágico", "Ativa")
+  wizard_register_skill("abjuration", "T4", "Wizard_Abjuration_T4_ArcaneFortress", "Fortaleza Arcana", "Ultimate")
+  wizard_register_skill("abjuration", "T4", "Wizard_Abjuration_T4_InterdictionVow", "Voto de Interdição", "Ativa")
+  wizard_register_skill("abjuration", "T4", "Wizard_Abjuration_T4_GreaterPrismaticReflect", "Reflexo Prismático Maior", "Ativa")
+  wizard_register_skill("abjuration", "T4", "Wizard_Abjuration_T4_SafeguardSeal", "Selo de Salvaguarda", "Ativa")
+  wizard_register_skill("illusion", "T1", "Wizard_Illusion_T1_MirrorImage", "Imagem Múltipla", "Ativa")
+  wizard_register_skill("illusion", "T1", "Wizard_Illusion_T1_InvisibleVeil", "Véu Invisível", "Ativa")
+  wizard_register_skill("illusion", "T1", "Wizard_Illusion_T1_DancingLights", "Luzes Dançantes", "Ativa")
+  wizard_register_skill("illusion", "T1", "Wizard_Illusion_T1_EchoBrand", "Eco Ilusório", "Ativa")
+  wizard_register_skill("illusion", "T2", "Wizard_Illusion_T2_MentalLabyrinth", "Labirinto Mental", "Ativa")
+  wizard_register_skill("illusion", "T2", "Wizard_Illusion_T2_FalseMirror", "Espelho Falso", "Ativa")
+  wizard_register_skill("illusion", "T2", "Wizard_Illusion_T2_SmokeCurtain", "Cortina de Fumaça Arcana", "Ativa")
+  wizard_register_skill("illusion", "T2", "Wizard_Illusion_T2_MindMask", "Máscara da Mente", "Ativa")
+  wizard_register_skill("illusion", "T3", "Wizard_Illusion_T3_PhantomStep", "Passo Fantasma", "Ativa")
+  wizard_register_skill("illusion", "T3", "Wizard_Illusion_T3_ShadowTheater", "Teatro de Sombras", "Ativa")
+  wizard_register_skill("illusion", "T3", "Wizard_Illusion_T3_DoubtVeil", "Véu da Dúvida", "Ativa")
+  wizard_register_skill("illusion", "T3", "Wizard_Illusion_T3_PerceptionRift", "Ruptura Perceptiva", "Ativa")
+  wizard_register_skill("illusion", "T4", "Wizard_Illusion_T4_MirroredWorld", "Mundo Espelhado", "Ultimate")
+  wizard_register_skill("illusion", "T4", "Wizard_Illusion_T4_DisorientationCrown", "Coroa da Desorientação", "Ativa")
+  wizard_register_skill("illusion", "T4", "Wizard_Illusion_T4_DreamSnare", "Cilada Onírica", "Ativa")
+  wizard_register_skill("illusion", "T4", "Wizard_Illusion_T4_DeceptiveWeave", "Tessitura Enganosa", "Ativa")
+
+on script load:
+  wizard_init_lists()
+  broadcast "{@prefix} &7Listas de magias do Mago carregadas."
 
 function wizard_has_group(p: player, perm: text, label: text) :: boolean:
   if {_p} is not set:
@@ -21,75 +96,61 @@ function wizard_has_group(p: player, perm: text, label: text) :: boolean:
   send "{@prefix} &cAcesso negado (%label%)." to {_p}
   return false
 
+function wizard_schools_for(p: player) :: objects:
+  set {_schools::*} to "common"
+  if wizard_has_group(p, {@lp-evocation}, "Evocação"):
+    add "evocation" to {_schools::*}
+  if wizard_has_group(p, {@lp-abjuration}, "Abjuração"):
+    add "abjuration" to {_schools::*}
+  if wizard_has_group(p, {@lp-illusion}, "Ilusão"):
+    add "illusion" to {_schools::*}
+  return {_schools::*}
+
 function wizard_prepared_list(p: player) :: objects:
-  set {_u} to uuid of p
-  set {_list::*} to {wizard.prepared.%{_u}%::*}
-  return {_list::*}
+  return {wizard.prepared.%uuid of p%::*}
 
 function wizard_skill_requires_preparation(skill: text) :: boolean:
-  set {_skills::*} to split {@prepared-list} at ","
+  set {_skills::*} to split {@prepared-skills} at ","
   loop {_skills::*}:
     if loop-value is skill:
       return true
   return false
 
-function wizard_skill_display(skill: text) :: text:
-  set {_name} to skill
-  if skill is "wizard_arcane_wall":
-    set {_name} to "Parede Arcana"
-  else if skill is "wizard_short_blink":
-    set {_name} to "Teleporte Curto"
-  else if skill is "wizard_arcane_preparation":
-    set {_name} to "Preparação Arcana"
-  else if skill is "wizard_evocation_flame_orb":
-    set {_name} to "Orbe Flamejante"
-  else if skill is "wizard_evocation_arcane_nova":
-    set {_name} to "Nova Arcana"
-  else if skill is "wizard_evocation_ethereal_lance":
-    set {_name} to "Lança Etérea"
-  else if skill is "wizard_evocation_power_catalyst":
-    set {_name} to "Catalisador de Poder"
-  else if skill is "wizard_evocation_controlled_cataclysm":
-    set {_name} to "Cataclismo Controlado"
-  else if skill is "wizard_abjuration_protective_barrier":
-    set {_name} to "Barreira Protetora"
-  else if skill is "wizard_abjuration_counterspell":
-    set {_name} to "Contra-Feitiço"
-  else if skill is "wizard_abjuration_runic_seal":
-    set {_name} to "Selo Rúnico"
-  else if skill is "wizard_abjuration_prismatic_reflect":
-    set {_name} to "Reflexo Prismático"
-  else if skill is "wizard_abjuration_arcane_fortress":
-    set {_name} to "Fortaleza Arcana"
-  else if skill is "wizard_illusion_mirror_image":
-    set {_name} to "Imagem Múltipla"
-  else if skill is "wizard_illusion_invisible_veil":
-    set {_name} to "Véu Invisível"
-  else if skill is "wizard_illusion_mental_maze":
-    set {_name} to "Labirinto Mental"
-  else if skill is "wizard_illusion_phantasmagoria":
-    set {_name} to "Fantasmagoria"
-  else if skill is "wizard_illusion_mirrored_world":
-    set {_name} to "Mundo Espelhado"
-  else if skill is "wizard_rigorous_study":
-    set {_name} to "Estudo Rigoroso"
-  else if skill is "wizard_mental_focus":
-    set {_name} to "Foco Mental"
-  return {_name}
+function wizard_skill_meta(skill: text) :: texts:
+  loop "common", "evocation", "abjuration", "illusion":
+    set {_school} to loop-value
+    loop "T1", "T2", "T3", "T4":
+      set {_tier} to loop-value
+      if {wizard.skills.%{_school}%.%{_tier}%.display.%{skill}%} is set:
+        set {_display} to {wizard.skills.%{_school}%.%{_tier}%.display.%{skill}%}
+        set {_type} to {wizard.skills.%{_school}%.%{_tier}%.type.%{skill}%}
+        return {_display} and {_type} and {_school} and {_tier}
+  set {_fallback::*} to "%skill%" and "Ativa" and "common" and "T1"
+  return {_fallback::*}
 
-function wizard_has_prepared(p: player, skill: text) :: boolean:
-  if wizard_skill_requires_preparation(skill) is false:
-    return true
-  set {_u} to uuid of p
-  if {wizard.prepared.%{_u}%::*} contains skill:
-    return true
-  return false
-
-function wizard_is_prepared(p: player, skill: text) :: boolean:
-  if wizard_has_prepared(p, skill):
-    return true
-  send "{@prefix} &e%wizard_skill_display(skill)% &fnão está preparado hoje." to p
-  return false
+function wizard_refresh_hud(p: player):
+  if p is not online:
+    stop
+  set {_manaRaw} to placeholderapi "%skills_mana_percent%" with p
+  if {_manaRaw} is "" or {_manaRaw} is not a number:
+    set {_manaRaw} to "0"
+  set {_manaNum} to {_manaRaw} parsed as number
+  set {_manaInt} to floor({_manaNum})
+  set {_prepUsed} to size of wizard_prepared_list(p)
+  set {_prepMaxRaw} to placeholderapi "%skills_wizard_prep_max%" with p
+  if {_prepMaxRaw} is "" or {_prepMaxRaw} is not a number:
+    set {_prepMaxRaw} to "0"
+  set {_prepMax} to {_prepMaxRaw} parsed as number
+  set {_cdRaw} to placeholderapi "%skills_wizard_next_cd%" with p
+  if {_cdRaw} is "" or {_cdRaw} is not a number:
+    set {_cdRaw} to "0"
+  set {_cdNum} to {_cdRaw} parsed as number
+  set {_cdInt} to floor({_cdNum})
+  send action bar "&9Mana: %{_manaNum}% &7| &bPreparados: %{_prepUsed}%/%{_prepMax}% &7| &dPróx. CD: %{_cdNum}%s" to p
+  set {_name} to name of p
+  execute console command "scoreboard players set %{_name}% {@objective-mana} %{_manaInt}%"
+  execute console command "scoreboard players set %{_name}% {@objective-prep} %{_prepUsed}%"
+  execute console command "scoreboard players set %{_name}% {@objective-cd} %{_cdInt}%"
 
 function wizard_out_of_combat(p: player) :: boolean:
   if {wizard.combat.%uuid of p%} is not set:
@@ -101,230 +162,138 @@ function wizard_out_of_combat(p: player) :: boolean:
 function wizard_set_combat(p: player):
   set {wizard.combat.%uuid of p%} to now
 
-function wizard_max_prepared(p: player) :: number:
-  set {_placeholder} to placeholderapi "%skills_wizard_prep_max%" with p
-  if {_placeholder} is "":
-    return 0
-  return {_placeholder} parsed as number
-
-function wizard_refresh_hud(p: player):
-  if p is not online:
-    stop
-  set {_manaRaw} to placeholderapi "%skills_mana_percent%" with p
-  if {_manaRaw} is "" or {_manaRaw} is not a number:
-    set {_manaRaw} to "0"
-  set {_manaNum} to {_manaRaw} parsed as number
-  set {_prepUsed} to size of wizard_prepared_list(p)
-  set {_prepMax} to wizard_max_prepared(p)
-  set {_cooldownRaw} to placeholderapi "%skills_wizard_next_cd%" with p
-  if {_cooldownRaw} is "" or {_cooldownRaw} is not a number:
-    set {_cooldownRaw} to "0"
-  set {_cooldownNum} to {_cooldownRaw} parsed as number
-  set {_manaScore} to {_manaNum} rounded down
-  set {_cooldownScore} to {_cooldownNum} rounded down
-  send action bar "&9Mana: %{_manaNum}% &7| &bPreparados: %{_prepUsed}%/%{_prepMax}% &7| &dPróx. CD: %{_cooldownNum}%s" to p
-  set {_name} to name of p
-  execute console command "scoreboard players set %{_name}% {@objective-mana} %{_manaScore}%"
-  execute console command "scoreboard players set %{_name}% {@objective-prep} %{_prepUsed}%"
-  execute console command "scoreboard players set %{_name}% {@objective-cd} %{_cooldownScore}%"
-
 function wizard_toggle_prepared(p: player, skill: text):
   if wizard_skill_requires_preparation(skill) is false:
     send "{@prefix} &7%skill% não exige preparação." to p
     stop
-  set {_u} to uuid of p
-  set {_list::*} to {wizard.prepared.%{_u}%::*}
+  set {_list::*} to wizard_prepared_list(p)
   if {_list::*} contains skill:
-    remove skill from {wizard.prepared.%{_u}%::*}
-    send "{@prefix} &7Skill &c%wizard_skill_display(skill)% &7despreparada." to p
+    remove skill from {wizard.prepared.%uuid of p%::*}
+    send "{@prefix} &7Skill &c%skill% &7despreparada." to p
   else:
     if wizard_out_of_combat(p) is false:
       send "{@prefix} &cNão é possível preparar em combate." to p
       stop
-    set {_cap} to wizard_max_prepared(p)
-    if {_cap} <= size of {_list::*}:
-      send "{@prefix} &cLimite de slots preparados atingido (%{_cap}%)." to p
+    set {_capRaw} to placeholderapi "%skills_wizard_prep_max%" with p
+    if {_capRaw} is "" or {_capRaw} is not a number:
+      set {_capRaw} to "0"
+    if {_capRaw} parsed as number <= size of {_list::*}:
+      send "{@prefix} &cLimite de slots preparados atingido (%{_capRaw}%)." to p
       stop
-    add skill to {wizard.prepared.%{_u}%::*}
-    send "{@prefix} &aSkill &b%wizard_skill_display(skill)% &apreparada." to p
+    add skill to {wizard.prepared.%uuid of p%::*}
+    send "{@prefix} &aSkill &b%skill% &apreparada." to p
   wizard_refresh_hud(p)
 
-function wizard_menu_item(p: player, skill: text) :: item:
-  set {_item} to paper named "&f%skill%"
-  if wizard_skill_requires_preparation(skill):
-    set {_item}'s lore to "&7Clique para alternar preparação."
-    if wizard_has_prepared(p, skill):
-      set {_item}'s type to lime stained glass pane
-      set {_item}'s name to "&a%skill%"
-      set {_item}'s lore to "&7Preparado. Clique para remover."
-    else:
-      set {_item}'s type to red stained glass pane
-  return {_item}
+function wizard_entries_for(school: text, tier: text) :: objects:
+  return {wizard.skills.%{_school}%.%{_tier}%.order::*}
 
-function wizard_open_menu(p: player):
-  if wizard_has_group(p, {@lp-class}, "Classe Mago") is false:
-    stop
-  if wizard_out_of_combat(p) is false:
-    send "{@prefix} &cEspere sair de combate para preparar." to p
-    stop
-  set {_inv} to chest inventory with 9 slots named {@menu-title}
-  set {_skills::*} to split {@prepared-list} at ","
-  loop {_skills::*}:
-    set {_slot} to loop-index - 1
-    if {_slot} < 0:
-      set {_slot} to 0
-    set slot {_slot} of {_inv} to wizard_menu_item(p, loop-value)
-  open {_inv} for p
+function wizard_list_tier(p: player, tier: text):
+  set {_schools::*} to wizard_schools_for(p)
+  set {_tierArg} to tier
+  send "{@prefix} &fMagias disponíveis no &e%{_tierArg}%&f:" to p
+  loop {_schools::*}:
+    set {_school} to loop-value
+    loop wizard_entries_for({_school}, {_tierArg}):
+      set {_skill} to loop-value
+      if {_skill} is not set:
+        next loop
+      set {_meta::*} to wizard_skill_meta({_skill})
+      send " &7- [&b%{_meta::3}%&7] &f%{_meta::1}% &8(%{_skill}% | %{_meta::2}%)" to p
 
-function wizard_cast(p: player, skill: text):
-  if wizard_has_group(p, {@lp-class}, "Classe Mago") is false:
-    stop
-  if wizard_is_prepared(p, skill) is false:
-    stop
-  set {_name} to name of p
-  execute console command "skillapi cast %skill% %{_name}%"
-  wizard_refresh_hud(p)
+function wizard_list_school(p: player, school: text):
+  set {_schoolArg} to school
+  send "{@prefix} &fMagias de &b%{_schoolArg}%&f:" to p
+  loop "T1", "T2", "T3", "T4":
+    set {_tier} to loop-value
+    loop wizard_entries_for({_schoolArg}, {_tier}):
+      set {_skill} to loop-value
+      if {_skill} is not set:
+        next loop
+      set {_meta::*} to wizard_skill_meta({_skill})
+      send " &7[%{_tier}%] &f%{_meta::1}% &8(%{_skill}% | %{_meta::2}%)" to p
 
-function wizard_trigger_item(p: player, i: item):
-  if {_i} is air:
-    stop
-  set {_lock} to nbt data "class-lock" of {_i}
-  if {_lock} is not set:
-    stop
-  set {_perm} to "group.%{_lock}%"
-  if p has permission {_perm}:
-    set {_skill} to nbt data "psapi-skill" of {_i}
-    if {_skill} is set:
-      wizard_cast(p, {_skill})
-    wizard_refresh_hud(p)
-  else:
-    send "{@prefix} &cVocê não tem afinidade com este foco." to p
-
-on load:
-  broadcast "wizard_cmds.sk carregado." to console
-  execute console command "scoreboard objectives add {@objective-mana} dummy"
-  execute console command "scoreboard objectives add {@objective-prep} dummy"
-  execute console command "scoreboard objectives add {@objective-cd} dummy"
-
-on unload:
-  broadcast "wizard_cmds.sk descarregado." to console
-
-on right click:
-  wizard_trigger_item(player, player's tool)
-
-on left click:
-  wizard_trigger_item(player, player's tool)
-
-on damage:
-  if attacker is player:
-    wizard_set_combat(attacker)
-  if victim is player:
-    wizard_set_combat(victim)
-
-on inventory click:
-  if name of event-inventory is {@menu-title}:
-    cancel event
-    if clicked item is air:
+command /preparar <text>:
+  permission: {@lp-class}
+  trigger:
+    set {_skill} to arg-1
+    replace all " " in {_skill} with "_"
+    set {_skill} to trim({_skill})
+    if {_skill} is "":
+      send "{@prefix} &7Informe o identificador da skill."
       stop
-    set {_skill} to uncoloured name of clicked item
     wizard_toggle_prepared(player, {_skill})
 
-command /preparar:
-  aliases: /prepare
+command /magia_t1:
   permission: {@lp-class}
   trigger:
-    wizard_open_menu(player)
+    wizard_list_tier(player, "T1")
 
-command /teleporte:
+command /magia_t2:
   permission: {@lp-class}
   trigger:
-    wizard_cast(player, "wizard_short_blink")
+    wizard_list_tier(player, "T2")
 
-command /parede:
+command /magia_t3:
   permission: {@lp-class}
   trigger:
-    wizard_cast(player, "wizard_arcane_wall")
+    wizard_list_tier(player, "T3")
+
+command /magia_t4:
+  permission: {@lp-class}
+  trigger:
+    wizard_list_tier(player, "T4")
 
 command /escola_evocacao:
-  permission: {@lp-class}
+  permission: {@lp-evocation}
   trigger:
-    execute console command "lp user %player% parent add class_wizard.evocation"
-    send "{@prefix} &7Afinidade com &cEvocação &7registrada." to player
+    wizard_list_school(player, "evocation")
 
 command /escola_abjuracao:
-  permission: {@lp-class}
+  permission: {@lp-abjuration}
   trigger:
-    execute console command "lp user %player% parent add class_wizard.abjuration"
-    send "{@prefix} &7Afinidade com &bAbjuração &7registrada." to player
+    wizard_list_school(player, "abjuration")
 
 command /escola_ilusao:
-  permission: {@lp-class}
+  permission: {@lp-illusion}
   trigger:
-    execute console command "lp user %player% parent add class_wizard.illusion"
-    send "{@prefix} &7Afinidade com &dIlusão &7registrada." to player
+    wizard_list_school(player, "illusion")
 
 command /kit_mago:
   permission: {@lp-class}
   trigger:
-    clear player's inventory
-    execute console command "mm items give %player% WizardBlinkRune"
-    execute console command "mm items give %player% WizardBarrierSigil"
-    execute console command "mm items give %player% WizardPreparationGrimoire"
-    execute console command "mm items give %player% EvocationStaff"
-    execute console command "mm items give %player% EvocationFocus"
-    execute console command "mm items give %player% AbjurationShield"
-    execute console command "mm items give %player% IllusionDeck"
-    execute console command "mm items give %player% IllusionCloak"
-    send "{@prefix} &7Kit de testes do mago entregue." to player
+    execute console command "mm items give %player% Wizard_T1_Common_Grimoire 1"
+    execute console command "mm items give %player% Wizard_T1_Evocation_Staff 1"
+    execute console command "mm items give %player% Wizard_T1_Abjuration_Talisman 1"
+    execute console command "mm items give %player% Wizard_T1_Illusion_Focus 1"
+    execute console command "mm items give %player% Wizard_T2_Common_Focus 1"
+    execute console command "mm items give %player% Wizard_T2_Evocation_Focus 1"
+    execute console command "mm items give %player% Wizard_T2_Abjuration_Signet 1"
+    execute console command "mm items give %player% Wizard_T2_Illusion_Orb 1"
+    execute console command "mm items give %player% Wizard_T3_Common_Focus 1"
+    execute console command "mm items give %player% Wizard_T3_Evocation_Crystal 1"
+    execute console command "mm items give %player% Wizard_T3_Abjuration_Wardstone 1"
+    execute console command "mm items give %player% Wizard_T3_Illusion_Charm 1"
+    execute console command "mm items give %player% Wizard_T4_Common_Relic 1"
+    execute console command "mm items give %player% Wizard_T4_Evocation_Relic 1"
+    execute console command "mm items give %player% Wizard_T4_Abjuration_Relic 1"
+    execute console command "mm items give %player% Wizard_T4_Illusion_Relic 1"
+    clear all potion effects of player
+    heal player
+    feed player
     wizard_refresh_hud(player)
+    send "{@prefix} &aKit de teste entregue." to player
 
-function wizard_evocation_field(p: player):
-  wizard_refresh_hud(p)
+on damage of player:
+  wizard_set_combat(victim)
+  wizard_refresh_hud(victim)
 
-function wizard_evocation_mark(p: player):
-  wizard_refresh_hud(p)
+on damage:
+  if attacker is a player:
+    wizard_set_combat(attacker)
+    wizard_refresh_hud(attacker)
 
-function wizard_evocation_cataclysm_start(p: player):
-  send title "&cCataclismo Controlado" with subtitle "&7Círculos de aviso no solo!" to p
+on right click:
+  wizard_refresh_hud(player)
 
-function wizard_evocation_cataclysm_mark(p: player):
-  wizard_refresh_hud(p)
-
-function wizard_abjuration_barrier(p: player):
-  wizard_refresh_hud(p)
-
-function wizard_abjuration_counter(p: player):
-  send action bar "&bContra-Feitiço ativo!" to p
-
-function wizard_abjuration_seal(p: player):
-  wizard_refresh_hud(p)
-
-function wizard_abjuration_reflect(p: player):
-  wizard_refresh_hud(p)
-
-function wizard_abjuration_fortress(p: player):
-  send title "&bFortaleza Arcana" with subtitle "&7Dentro do domo: regen 5%/s" to p
-
-function wizard_illusion_images(p: player):
-  wizard_refresh_hud(p)
-
-function wizard_illusion_veil(p: player):
-  send action bar "&dVéu Invisível ativo." to p
-
-function wizard_illusion_maze(p: player):
-  send action bar "&dLabirinto Mental conectando." to p
-
-function wizard_illusion_phantasm(p: player):
-  wizard_refresh_hud(p)
-
-function wizard_illusion_world(p: player):
-  send title "&5Mundo Espelhado" with subtitle "&7Ilusões protegem aliados." to p
-
-every 5 seconds:
-  loop all players:
-    if loop-player has permission {@lp-class}:
-      wizard_refresh_hud(loop-player)
-      if wizard_out_of_combat(loop-player):
-        execute console command "skillapi resource add %loop-player% mana 4"
-      else:
-        execute console command "skillapi resource add %loop-player% mana 2"
+on left click:
+  wizard_refresh_hud(player)

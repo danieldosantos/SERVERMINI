@@ -1,0 +1,241 @@
+# Escola de Abjuração - proteção, negação e contra-feitiço
+T1:
+  Wizard_Abjuration_T1_ProtectiveBarrier:
+    display: "Barreira Protetora"
+    type: active
+    trigger: self
+    cost:
+      mana: 25
+    cooldown: 45
+    duration: 8
+    effects:
+      shield:
+        amount: 200
+    tags: [escudo]
+    notes: "Escudo pessoal de 200 pontos."
+  Wizard_Abjuration_T1_RunicSeal:
+    display: "Selo Rúnico"
+    type: active
+    trigger: aura
+    cost:
+      mana: 25
+    cooldown: 60
+    duration: 8
+    area:
+      radius: 6
+    effects:
+      buff:
+        elemental_reduction: 0.20
+    tags: [defesa, suporte]
+    notes: "Reduz dano elemental a aliados próximos."
+  Wizard_Abjuration_T1_ArcaneReflect:
+    display: "Reflexo Arcano"
+    type: active
+    trigger: self
+    cost:
+      mana: 25
+    cooldown: 60
+    duration: 6
+    effects:
+      reflect:
+        magic_damage: 0.20
+    tags: [defesa]
+    notes: "Devolve 20% do dano mágico recebido por 6s."
+  Wizard_Abjuration_T1_DampenBlow:
+    display: "Amortecer Golpe"
+    type: active
+    trigger: self
+    cost:
+      mana: 20
+    cooldown: 45
+    duration: 6
+    effects:
+      absorb_next_hit:
+        percent: 0.30
+        cap: 150
+    tags: [defesa]
+    notes: "Reduz o próximo golpe em 30% até 150 pontos."
+T2:
+  Wizard_Abjuration_T2_Counterspell:
+    display: "Contra-Feitiço"
+    type: active
+    trigger: reaction
+    cost:
+      mana: 35
+    cooldown: 90
+    window: 2
+    effects:
+      interrupt: true
+      silence:
+        duration: 2
+    tags: [controle, negação]
+    notes: "Cancela 1 habilidade inimiga e silencia por 2s."
+  Wizard_Abjuration_T2_PrismaticGuardian:
+    display: "Guardião Prismático"
+    type: active
+    trigger: ground
+    cost:
+      mana: 35
+    cooldown: 90
+    area:
+      radius: 5
+      duration: 6
+    effects:
+      projectile_reduction: 0.60
+    tags: [defesa]
+    notes: "Cúpula que reduz dano de projéteis em 60%."
+  Wizard_Abjuration_T2_WardingRing:
+    display: "Anel de Warding"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 75
+    duration: 8
+    effects:
+      buff:
+        mitigation: 0.10
+        cc_resistance: 0.10
+    tags: [buff, defesa]
+    notes: "Mitigação e resistência a controle por 8s."
+  Wizard_Abjuration_T2_StoneSkin:
+    display: "Pele de Pedra"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 90
+    duration: 8
+    effects:
+      buff:
+        physical_reduction: 0.25
+    tags: [defesa]
+    notes: "Reduz dano físico em 25%."
+T3:
+  Wizard_Abjuration_T3_SealBreaker:
+    display: "Quebra-Selo"
+    type: active
+    trigger: aura
+    cost:
+      mana: 40
+    cooldown: 105
+    area:
+      radius: 6
+    effects:
+      dispel:
+        max_targets: 5
+        priority: alto
+    tags: [negação]
+    notes: "Remove 1 buff ou escudo forte de até 5 inimigos."
+  Wizard_Abjuration_T3_DefenseResonance:
+    display: "Ressonância de Defesa"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 90
+    duration: 8
+    effects:
+      buff:
+        shield_conversion: 0.30
+        cap: 180
+    tags: [escudo]
+    notes: "Converte 30% do dano bloqueado em escudo temporário (máx 180)."
+  Wizard_Abjuration_T3_MobileBulwark:
+    display: "Baluarte Móvel"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 90
+    duration: 10
+    effects:
+      orbit_shield:
+        absorb: 40
+        cap: 200
+    tags: [defesa]
+    notes: "Orbe defensivo que absorve até 40 por golpe (cap 200)."
+  Wizard_Abjuration_T3_AntimagicShackle:
+    display: "Grilhão Antimágico"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 35
+    cooldown: 90
+    target:
+      range: 18
+      filter: enemy
+    duration: 8
+    effects:
+      debuff:
+        spell_power: -0.20
+        move_speed: -0.15
+    tags: [controle]
+    notes: "Reduz poder mágico em 20% e velocidade em 15%."
+T4:
+  Wizard_Abjuration_T4_ArcaneFortress:
+    display: "Fortaleza Arcana"
+    type: active
+    trigger: ground
+    cost:
+      mana: 50
+    cooldown: 240
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      ally_immunity:
+        type: magic
+      regen:
+        percent_per_second: 0.05
+    tags: [ultimate, defesa]
+    notes: "Ultimate defensivo: imunidade a dano mágico e regen 5%/s."
+  Wizard_Abjuration_T4_InterdictionVow:
+    display: "Voto de Interdição"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 45
+    cooldown: 120
+    target:
+      range: 18
+      filter: enemy
+    duration: 10
+    effects:
+      debuff:
+        shield_block: true
+        magic_damage: -0.10
+    tags: [controle]
+    notes: "Impede escudos no alvo e reduz dano mágico causado em 10%."
+  Wizard_Abjuration_T4_GreaterPrismaticReflect:
+    display: "Reflexo Prismático Maior"
+    type: active
+    trigger: self
+    cost:
+      mana: 45
+    cooldown: 120
+    duration: 8
+    effects:
+      reflect:
+        magic_damage: 0.35
+    tags: [defesa]
+    notes: "Devolve 35% do dano mágico recebido por 8s."
+  Wizard_Abjuration_T4_SafeguardSeal:
+    display: "Selo de Salvaguarda"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 40
+    cooldown: 105
+    target:
+      range: 18
+      filter: allies
+      max_targets: 3
+    duration: 6
+    effects:
+      shield:
+        amount: 180
+      buff:
+        cc_resistance: 0.20
+    tags: [escudo, suporte]
+    notes: "Aplica escudo de 180 e +20% resistência a controle a até 3 aliados."

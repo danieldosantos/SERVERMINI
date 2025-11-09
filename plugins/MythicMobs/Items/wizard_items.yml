@@ -1,222 +1,240 @@
-# Itens focais do Mago e Escolas
-items:
-  WizardBlinkRune:
-    Id: ENDER_EYE
-    Display: '&9Runa de Translação'
-    Lore:
-      - '&7Clique direito: §9Teleporte Curto§7.'
-      - '&8Requer permissão: class_wizard.'
-      - '&7Integra PlaceholderAPI {mana_pct} e {cooldown_next}.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard'
-      psapi-skill: 'wizard_short_blink'
-  WizardBarrierSigil:
-    Id: BLUE_GLAZED_TERRACOTTA
-    Display: '&9Sigilo de Parede Arcana'
-    Lore:
-      - '&7Clique direito: §9Parede Arcana§7 (Preparável).'
-      - '&8Consome slot preparado registrado.'
-      - '&7Permissão: class_wizard.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard'
-      psapi-skill: 'wizard_arcane_wall'
-  WizardPreparationGrimoire:
-    Id: WRITABLE_BOOK
-    Display: '&9Grimório de Preparação'
-    Lore:
-      - '&7Clique direito: §9Preparação Arcana§7.'
-      - '&8Somente fora de combate.'
-      - '&7Permissão: class_wizard.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard'
-      psapi-skill: 'wizard_arcane_preparation'
+# Focos de Mago por TIER com binds para ProSkillAPI
+Wizard_T1_Common_Grimoire:
+  Id: WRITABLE_BOOK
+  Display: '&9Grimório Aprendiz do Arcanista'
+  Lore:
+  - '&7Classe: Mago'
+  - '&eClique direito:&7 Mísseis Arcanos'
+  - '&eClique esquerdo:&7 Escudo Arcano Breve'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard'
+  Skills:
+  - skill{s=Wizard_Common_T1_MagicMissiles} @target ~onRightClick
+  - skill{s=Wizard_Common_T1_ArcaneShield} @self ~onLeftClick
 
-  EvocationStaff:
-    Id: BLAZE_ROD
-    Display: '&cCajado de Evocação Controlada'
-    Lore:
-      - '&7Clique direito: §cOrbe Flamejante§7.'
-      - '&8Campo ardente reduz sinergia com resistências raciais.'
-      - '&7Permissão: class_wizard.evocation.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.evocation'
-      psapi-skill: 'wizard_evocation_flame_orb'
-  EvocationFocus:
-    Id: ECHO_SHARD
-    Display: '&cFoco de Nova Arcana'
-    Lore:
-      - '&7Clique direito: §cNova Arcana§7 (explosão 6 blocos).'
-      - '&8Telegráfica para PvP justo.'
-      - '&7Permissão: class_wizard.evocation.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.evocation'
-      psapi-skill: 'wizard_evocation_arcane_nova'
-  EvocationSpear:
-    Id: TRIDENT
-    Display: '&cLança Etérea Canalizada'
-    Lore:
-      - '&7Clique direito: §cLança Etérea§7.'
-      - '&8Perfurar até 3 alvos com aviso visual.'
-      - '&7Permissão: class_wizard.evocation.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.evocation'
-      psapi-skill: 'wizard_evocation_ethereal_lance'
-  EvocationCrystal:
-    Id: NETHER_STAR
-    Display: '&cCristal Catalisador'
-    Lore:
-      - '&7Clique direito: §cCatalisador de Poder§7.'
-      - '&8Aplica marca Instabilidade para próxima skill.'
-      - '&7Permissão: class_wizard.evocation.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.evocation'
-      psapi-skill: 'wizard_evocation_power_catalyst'
-  EvocationGrimoire:
-    Id: ENCHANTED_BOOK
-    Display: '&4Grimório do Cataclismo'
-    Lore:
-      - '&7Clique direito: §4Cataclismo Controlado§7 (Ultimate).'
-      - '&8CD 240s com meteoros sequenciais.'
-      - '&7Permissão: class_wizard.evocation.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.evocation'
-      psapi-skill: 'wizard_evocation_controlled_cataclysm'
+Wizard_T1_Evocation_Staff:
+  Id: BLAZE_ROD
+  Display: '&cCajado das Faíscas'
+  Lore:
+  - '&7Escola: Evocação'
+  - '&eClique direito:&7 Orbe Flamejante'
+  - '&eClique esquerdo:&7 Raio Abrasador'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.evocation'
+  Skills:
+  - skill{s=Wizard_Evocation_T1_FlameOrb} @target ~onRightClick
+  - skill{s=Wizard_Evocation_T1_ScorchingRay} @target ~onLeftClick
 
-  AbjurationShield:
-    Id: SHIELD
-    Display: '&bEscudo Arcano de Guarda'
-    Lore:
-      - '&7Clique direito: §bBarreira Protetora§7.'
-      - '&8Absorve 200 dano mágico/projéteis.'
-      - '&7Permissão: class_wizard.abjuration.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.abjuration'
-      psapi-skill: 'wizard_abjuration_protective_barrier'
-  AbjurationTalisman:
-    Id: TURTLE_HELMET
-    Display: '&bTalismã de Contra-Feitiço'
-    Lore:
-      - '&7Clique direito: §bContra-Feitiço§7 (Preparável).'
-      - '&8Janela de 3s para negar habilidades.'
-      - '&7Permissão: class_wizard.abjuration.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.abjuration'
-      psapi-skill: 'wizard_abjuration_counterspell'
-  AbjurationRune:
-    Id: LAPIS_LAZULI
-    Display: '&bRuna de Selo Guardião'
-    Lore:
-      - '&7Clique direito: §bSelo Rúnico§7.'
-      - '&8Reduz dano elemental aliado em 25%.'
-      - '&7Permissão: class_wizard.abjuration.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.abjuration'
-      psapi-skill: 'wizard_abjuration_runic_seal'
-  AbjurationMirror:
-    Id: GLASS_PANE
-    Display: '&bEspelho Prismático'
-    Lore:
-      - '&7Clique direito: §bReflexo Prismático§7.'
-      - '&8Devolve 30% do dano mágico recebido.'
-      - '&7Permissão: class_wizard.abjuration.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.abjuration'
-      psapi-skill: 'wizard_abjuration_prismatic_reflect'
-  AbjurationCodex:
-    Id: WRITTEN_BOOK
-    Display: '&3Códice da Fortaleza'
-    Lore:
-      - '&7Clique direito: §3Fortaleza Arcana§7 (Ultimate).'
-      - '&8Domo 6 blocos, regen 5%/s.'
-      - '&7Permissão: class_wizard.abjuration.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.abjuration'
-      psapi-skill: 'wizard_abjuration_arcane_fortress'
+Wizard_T1_Abjuration_Talisman:
+  Id: HEART_OF_THE_SEA
+  Display: '&bTalismã do Guardião Rúnico'
+  Lore:
+  - '&7Escola: Abjuração'
+  - '&eClique direito:&7 Barreira Protetora'
+  - '&eClique esquerdo:&7 Selo Rúnico'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.abjuration'
+  Skills:
+  - skill{s=Wizard_Abjuration_T1_ProtectiveBarrier} @self ~onRightClick
+  - skill{s=Wizard_Abjuration_T1_RunicSeal} @self ~onLeftClick
 
-  IllusionDeck:
-    Id: PAPER
-    Display: '&dBaralho de Imagens'
-    Lore:
-      - '&7Clique direito: §dImagem Múltipla§7 (Preparável).'
-      - '&8Cria cópias ilusórias que absorvem golpes.'
-      - '&7Permissão: class_wizard.illusion.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.illusion'
-      psapi-skill: 'wizard_illusion_mirror_image'
-  IllusionCloak:
-    Id: LEATHER_CHESTPLATE
-    Display: '&dManto do Véu Invisível'
-    Lore:
-      - '&7Clique direito: §dVéu Invisível§7.'
-      - '&8Invisibilidade 8s, +20% velocidade.'
-      - '&7Permissão: class_wizard.illusion.'
-    Options:
-      Unbreakable: true
-      Dye: 170,0,200
-    NBT:
-      class-lock: 'class_wizard.illusion'
-      psapi-skill: 'wizard_illusion_invisible_veil'
-  IllusionSphere:
-    Id: AMETHYST_SHARD
-    Display: '&dEsfera de Labirinto Mental'
-    Lore:
-      - '&7Clique direito: §dLabirinto Mental§7.'
-      - '&8Imobiliza 4s com aviso visual.'
-      - '&7Permissão: class_wizard.illusion.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.illusion'
-      psapi-skill: 'wizard_illusion_mental_maze'
-  IllusionLantern:
-    Id: SOUL_LANTERN
-    Display: '&dLanterna Fantasmagórica'
-    Lore:
-      - '&7Clique direito: §dFantasmagoria§7.'
-      - '&8Medo em área e -15% precisão.'
-      - '&7Permissão: class_wizard.illusion.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.illusion'
-      psapi-skill: 'wizard_illusion_phantasmagoria'
-  IllusionGrimoire:
-    Id: GLASS_BOTTLE
-    Display: '&5Grimório do Mundo Espelhado'
-    Lore:
-      - '&7Clique direito: §5Mundo Espelhado§7 (Ultimate).'
-      - '&8Duplica aliados com ilusões absorventes.'
-      - '&7Permissão: class_wizard.illusion.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_wizard.illusion'
-      psapi-skill: 'wizard_illusion_mirrored_world'
+Wizard_T1_Illusion_Focus:
+  Id: AMETHYST_SHARD
+  Display: '&dFoco de Miragens'
+  Lore:
+  - '&7Escola: Ilusão'
+  - '&eClique direito:&7 Imagem Múltipla'
+  - '&eClique esquerdo:&7 Véu Invisível'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.illusion'
+  Skills:
+  - skill{s=Wizard_Illusion_T1_MirrorImage} @self ~onRightClick
+  - skill{s=Wizard_Illusion_T1_InvisibleVeil} @self ~onLeftClick
+
+Wizard_T2_Common_Focus:
+  Id: ENCHANTED_BOOK
+  Display: '&9Compêndio de Rituais'
+  Lore:
+  - '&7Classe: Mago'
+  - '&eClique direito:&7 Runa de Recarga'
+  - '&eSneak+Clique:&7 Lente do Conhecimento'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard'
+  Skills:
+  - skill{s=Wizard_Common_T2_CooldownRune} @location ~onRightClick
+  - skill{s=Wizard_Common_T2_KnowledgeLens} @target ~onRightClickSneak
+
+Wizard_T2_Evocation_Focus:
+  Id: ECHO_SHARD
+  Display: '&cCondutor de Explosões'
+  Lore:
+  - '&7Escola: Evocação'
+  - '&eClique direito:&7 Explosão Arcana'
+  - '&eClique esquerdo:&7 Lança Etérea'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.evocation'
+  Skills:
+  - skill{s=Wizard_Evocation_T2_ArcaneExplosion} @self ~onRightClick
+  - skill{s=Wizard_Evocation_T2_EtherealLance} @target ~onLeftClick
+
+Wizard_T2_Abjuration_Signet:
+  Id: PRISMARINE_CRYSTALS
+  Display: '&bSinete da Guarda Arcana'
+  Lore:
+  - '&7Escola: Abjuração'
+  - '&eClique direito:&7 Contra-Feitiço'
+  - '&eSneak+Clique:&7 Guardião Prismático'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.abjuration'
+  Skills:
+  - skill{s=Wizard_Abjuration_T2_Counterspell} @target ~onRightClick
+  - skill{s=Wizard_Abjuration_T2_PrismaticGuardian} @location ~onRightClickSneak
+
+Wizard_T2_Illusion_Orb:
+  Id: ENDER_EYE
+  Display: '&dOrbe das Sombras'
+  Lore:
+  - '&7Escola: Ilusão'
+  - '&eClique direito:&7 Labirinto Mental'
+  - '&eClique esquerdo:&7 Cortina de Fumaça Arcana'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.illusion'
+  Skills:
+  - skill{s=Wizard_Illusion_T2_MentalLabyrinth} @target ~onRightClick
+  - skill{s=Wizard_Illusion_T2_SmokeCurtain} @location ~onLeftClick
+
+Wizard_T3_Common_Focus:
+  Id: LODESTONE
+  Display: '&9Âncora de Foco Arcano'
+  Lore:
+  - '&7Classe: Mago'
+  - '&eClique direito:&7 Âncora Arcana'
+  - '&eClique esquerdo:&7 Amplificar Feitiço'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard'
+  Skills:
+  - skill{s=Wizard_Common_T3_ArcaneAnchor} @self ~onRightClick
+  - skill{s=Wizard_Common_T3_AmplifySpell} @self ~onLeftClick
+
+Wizard_T3_Evocation_Crystal:
+  Id: NETHER_STAR
+  Display: '&cNúcleo Voltaico'
+  Lore:
+  - '&7Escola: Evocação'
+  - '&eClique direito:&7 Tormenta de Raios'
+  - '&eSneak+Clique:&7 Detonação Sincronizada'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.evocation'
+  Skills:
+  - skill{s=Wizard_Evocation_T3_LightningStorm} @location ~onRightClick
+  - skill{s=Wizard_Evocation_T3_SyncDetonation} @self ~onRightClickSneak
+
+Wizard_T3_Abjuration_Wardstone:
+  Id: TURTLE_HELMET
+  Display: '&bElmo do Baluarte Vivo'
+  Lore:
+  - '&7Escola: Abjuração'
+  - '&eClique direito:&7 Ressonância de Defesa'
+  - '&eClique esquerdo:&7 Grilhão Antimágico'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.abjuration'
+  Skills:
+  - skill{s=Wizard_Abjuration_T3_DefenseResonance} @self ~onRightClick
+  - skill{s=Wizard_Abjuration_T3_AntimagicShackle} @target ~onLeftClick
+
+Wizard_T3_Illusion_Charm:
+  Id: MUSIC_DISC_STRAD
+  Display: '&dCharme do Teatro Sombrio'
+  Lore:
+  - '&7Escola: Ilusão'
+  - '&eClique direito:&7 Teatro de Sombras'
+  - '&eClique esquerdo:&7 Passo Fantasma'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.illusion'
+  Skills:
+  - skill{s=Wizard_Illusion_T3_ShadowTheater} @location ~onRightClick
+  - skill{s=Wizard_Illusion_T3_PhantomStep} @self ~onLeftClick
+
+Wizard_T4_Common_Relic:
+  Id: RESPAWN_ANCHOR
+  Display: '&9Relíquia da Tempestade Mística'
+  Lore:
+  - '&7Classe: Mago'
+  - '&eClique direito:&7 Tempestade Mística'
+  - '&eSneak+Clique:&7 Reordenação'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard'
+  Skills:
+  - skill{s=Wizard_Common_T4_MysticStorm} @location ~onRightClick
+  - skill{s=Wizard_Common_T4_Reordering} @self ~onRightClickSneak
+
+Wizard_T4_Evocation_Relic:
+  Id: BLAZE_POWDER
+  Display: '&cRelicário do Cataclismo'
+  Lore:
+  - '&7Escola: Evocação'
+  - '&eClique direito:&7 Cataclismo Controlado'
+  - '&eClique esquerdo:&7 Tempestade de Fogo'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.evocation'
+  Skills:
+  - skill{s=Wizard_Evocation_T4_ControlledCataclysm} @location ~onRightClick
+  - skill{s=Wizard_Evocation_T4_FireTempest} @location ~onLeftClick
+
+Wizard_T4_Abjuration_Relic:
+  Id: BEACON
+  Display: '&bBastão da Fortaleza Arcana'
+  Lore:
+  - '&7Escola: Abjuração'
+  - '&eClique direito:&7 Fortaleza Arcana'
+  - '&eSneak+Clique:&7 Selo de Salvaguarda'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.abjuration'
+  Skills:
+  - skill{s=Wizard_Abjuration_T4_ArcaneFortress} @location ~onRightClick
+  - skill{s=Wizard_Abjuration_T4_SafeguardSeal} @target ~onRightClickSneak
+
+Wizard_T4_Illusion_Relic:
+  Id: DRAGON_EGG
+  Display: '&dNexo da Tessitura'
+  Lore:
+  - '&7Escola: Ilusão'
+  - '&eClique direito:&7 Mundo Espelhado'
+  - '&eClique esquerdo:&7 Tessitura Enganosa'
+  Options:
+    Unbreakable: true
+  NBT:
+    class_lock: 'class_wizard.illusion'
+  Skills:
+  - skill{s=Wizard_Illusion_T4_MirroredWorld} @location ~onRightClick
+  - skill{s=Wizard_Illusion_T4_DeceptiveWeave} @self ~onLeftClick
