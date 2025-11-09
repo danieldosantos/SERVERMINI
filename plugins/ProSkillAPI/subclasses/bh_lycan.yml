@@ -1,0 +1,46 @@
+# Ordem do Lícano - Subclasse Blood Hunter
+name: Blood_Hunter_Lycan
+display: "§4Ordem do Lícano"
+description:
+  - "§7Canaliza licantropia controlada para agressão corpo a corpo com risco calculado."
+  - "§4Alterna entre forma híbrida, efeitos de medo e perseguição sangrenta."
+options:
+  needs-permission: true
+  parent: Blood_Hunter
+attributes:
+  attack-damage:
+    base: 1.75
+    scale: 0.05
+  walk-speed:
+    base: 0.024
+    scale: 0.002
+skills:
+  tier1:
+    active:
+      - blood_hunter_lycan_form
+      - blood_hunter_lycan_frightful_howl
+    passive: []
+  tier2:
+    active:
+      - blood_hunter_lycan_form
+      - blood_hunter_lycan_frightful_howl
+      - blood_hunter_lycan_predatory_leap
+    passive: []
+  tier3:
+    active:
+      - blood_hunter_lycan_form
+      - blood_hunter_lycan_frightful_howl
+      - blood_hunter_lycan_predatory_leap
+      - blood_hunter_lycan_blood_track
+    passive: []
+  tier4:
+    active:
+      - blood_hunter_lycan_form
+      - blood_hunter_lycan_frightful_howl
+      - blood_hunter_lycan_predatory_leap
+      - blood_hunter_lycan_blood_track
+      - blood_hunter_lycan_crimson_moon
+    passive: []
+notes:
+  - "Forma do Caçador adiciona vulnerabilidade +10% dano recebido para respeitar risco/recompensa."
+  - "Rastreio Sanguíneo interage com sangramentos existentes e não ignora furtividade total."

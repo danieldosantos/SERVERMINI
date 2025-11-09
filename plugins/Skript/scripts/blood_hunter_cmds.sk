@@ -1,0 +1,425 @@
+# Blood Hunter - integração principal
+# Dependências: Skript, SkBee (PlaceholderAPI), ProSkillAPI compatível, MythicMobs, LuckPerms, RacesEffects
+
+options:
+  hemocraft-regen-delay: 8 seconds
+  hemocraft-regen-interval: 20 ticks
+  hemocraft-regen-amount: 5
+  mutagen-recharge: 90 seconds
+  rite-duration: 120 seconds
+  mark-duration: 10 seconds
+  focus-duration: 8 seconds
+  focus-fatigue: 6 seconds
+  ghost-rite-duration: 12 seconds
+  eldritch-rite-duration: 10 seconds
+  veil-duration: 10 seconds
+  anathema-duration: 12 seconds
+  abyssal-step-distance: 8
+  catalysis-duration: 15 seconds
+  crimson-moon-duration: 12 seconds
+  lycan-duration: 20 seconds
+  hallowed-radius: 6
+  anathema-radius: 8
+
+on load:
+  broadcast "&4[Blood Hunter] comandos carregados." to console
+  start blood_hunter_regen_task()
+  start blood_hunter_upkeep_task()
+
+function blood_hunter_is_class(p: player) :: boolean:
+  if {_p} has permission "class_blood_hunter" or {_p} has permission "class_blood_hunter.*":
+    return true
+  return false
+
+function blood_hunter_tier(p: player) :: number:
+  set {_tier} to placeholderapi parse "%skillapi_class_tier_blood_hunter%" for {_p}
+  if {_tier} is not set or {_tier} is "":
+    return 1
+  return {_tier} parsed as number
+
+function blood_hunter_max_hemo(p: player) :: number:
+  set {_tier} to blood_hunter_tier({_p})
+  set {_base} to 100
+  add (25 * ({_tier} - 1)) to {_base}
+  return {_base}
+
+function blood_hunter_refresh_hud(p: player):
+  placeholderapi refresh "%skills_blood_hemocraft%" for {_p}
+  placeholderapi refresh "%skills_blood_mark%" for {_p}
+  placeholderapi refresh "%skills_blood_focus%" for {_p}
+  placeholderapi refresh "%skills_blood_mutagen%" for {_p}
+  placeholderapi refresh "%skills_blood_lycan%" for {_p}
+  placeholderapi refresh "%skills_cooldown_next%" for {_p}
+
+function blood_hunter_init(p: player):
+  set {bloodhunter.hemo.%{_p}%} to blood_hunter_max_hemo({_p})
+  delete {bloodhunter.mark.%{_p}%}
+  delete {bloodhunter.mark.expire.%{_p}%}
+  delete {bloodhunter.focus.expire.%{_p}%}
+  delete {bloodhunter.mutagen.active.%{_p}%}
+  set {bloodhunter.mutagen.charges.%{_p}%} to 1
+  delete {bloodhunter.mutagen.timer.%{_p}%}
+  blood_hunter_refresh_hud({_p})
+
+on join:
+  if blood_hunter_is_class(player):
+    blood_hunter_init(player)
+
+on quit:
+  delete {bloodhunter::*%player%*}
+
+function blood_hunter_set_combat(p: player):
+  set {bloodhunter.combat.%{_p}%} to now
+
+on damage of player:
+  if victim is player and blood_hunter_is_class(victim):
+    blood_hunter_set_combat(victim)
+
+on damage by player:
+  if attacker is not a player:
+    stop
+  set {_p} to attacker
+  if not blood_hunter_is_class({_p}):
+    stop
+  blood_hunter_set_combat({_p})
+  blood_hunter_refresh_hud({_p})
+  if {bloodhunter.mark.%{_p}%} is set and {bloodhunter.mark.expire.%{_p}%} is set:
+    if difference between {bloodhunter.mark.expire.%{_p}%} and now > seconds 0:
+      if uuid of victim is {bloodhunter.mark.%{_p}%}:
+        add (event-damage * 0.15) to event-damage
+  if {bloodhunter.focus.expire.%{_p}%} is set and difference between {bloodhunter.focus.expire.%{_p}%} and now > seconds 0:
+    add (event-damage * 0.15) to event-damage
+  if {bloodhunter.focus.fatigue.%{_p}%} is set and difference between {bloodhunter.focus.fatigue.%{_p}%} and now > seconds 0:
+    remove (event-damage * 0.1) from event-damage
+  if {bloodhunter.rite.expire.%{_p}%} is set and difference between {bloodhunter.rite.expire.%{_p}%} and now > seconds 0:
+    add (event-damage * 0.12) to event-damage
+    set {_element} to {bloodhunter.rite.element.%{_p}%}
+    if {_element} is "frio":
+      apply slowness 1 to victim for 2 seconds
+    else if {_element} is "raio":
+      strike lightning effect at victim
+    else:
+      set victim on fire for 2 seconds
+  if {bloodhunter.ghostrite.expire.%{_p}%} is set and difference between {bloodhunter.ghostrite.expire.%{_p}%} and now > seconds 0:
+    add (event-damage * 0.1) to event-damage
+  if {bloodhunter.eldritch.expire.%{_p}%} is set and difference between {bloodhunter.eldritch.expire.%{_p}%} and now > seconds 0:
+    if {bloodhunter.eldritch.charges.%{_p}%} > 0:
+      remove 1 from {bloodhunter.eldritch.charges.%{_p}%}
+      wait 5 ticks
+      if victim is alive:
+        damage victim by (event-damage * 0.6) with cause magic
+  if {bloodhunter.catalysis.expire.%{_p}%} is set and difference between {bloodhunter.catalysis.expire.%{_p}%} and now > seconds 0:
+    wait 2 seconds
+    if victim is alive:
+      damage victim by (event-damage * 0.3) with cause magic
+  if {bloodhunter.lycan.form.%{_p}%} is set and difference between {bloodhunter.lycan.form.%{_p}%} and now > seconds 0:
+    set {_heal} to event-damage * 0.15
+    heal {_p} by {_heal}
+
+function blood_hunter_self_damage(p: player, percent: number):
+  if {_percent} <= 0:
+    return
+  set {_tier} to blood_hunter_tier({_p})
+  set {_cap} to 12
+  if {_tier} >= 3:
+    set {_cap} to 15
+  if {_percent} > {_cap}:
+    set {_percent} to {_cap}
+  set {_max} to max health of {_p}
+  set {_hp} to health of {_p}
+  set {_damage} to {_max} * {_percent} / 100
+  if {_hp} - {_damage} < 1:
+    set {_damage} to {_hp} - 1
+  if {_damage} <= 0:
+    return
+  set health of {_p} to {_hp} - {_damage}
+
+function blood_hunter_spend(p: player, hemocraft: number, percent: number, reason: text) :: boolean:
+  set {_cap} to blood_hunter_max_hemo({_p})
+  if {bloodhunter.hemo.%{_p}%} is not set:
+    set {bloodhunter.hemo.%{_p}%} to {_cap}
+  if {bloodhunter.hemo.%{_p}%} < {_hemocraft}:
+    send "&cHemocraft insuficiente." to {_p}
+    execute console command "skillapi cancel %{_p}%"
+    return false
+  remove {_hemocraft} from {bloodhunter.hemo.%{_p}%}
+  blood_hunter_self_damage({_p}, {_percent})
+  send action bar "&4- %{_hemocraft}% Hemocraft &7(${_reason})" to {_p}
+  blood_hunter_refresh_hud({_p})
+  return true
+
+function blood_hunter_cycle_rite(p: player) :: text:
+  set {_current} to {bloodhunter.rite.element.%{_p}%}
+  if {_current} is "fogo":
+    set {_next} to "frio"
+  else if {_current} is "frio":
+    set {_next} to "raio"
+  else:
+    set {_next} to "fogo"
+  set {bloodhunter.rite.element.%{_p}%} to {_next}
+  return {_next}
+
+function blood_hunter_apply_mark(p: player, target: entity):
+  if {_target} is not set:
+    return
+  set {bloodhunter.mark.%{_p}%} to uuid of {_target}
+  set {bloodhunter.mark.expire.%{_p}%} to now + {@mark-duration}
+  apply glowing 1 to {_target} for 3 seconds
+  send "&4Você marcou %name of {_target}% por {@mark-duration}." to {_p}
+  blood_hunter_refresh_hud({_p})
+
+function blood_hunter_check_race_resistance(p: player, tag: text):
+  set {_flag} to placeholderapi parse "%raceseffects_resistance_${tag}%" for {_p}
+  if {_flag} is "true":
+    send "&eResistência racial detectada: aplicando exaustão." to {_p}
+    apply mining fatigue 1 to {_p} for 5 seconds
+
+function blood_hunter_cast(p: player, ability: text, target: entity=none):
+  if not blood_hunter_is_class({_p}):
+    send "&cSomente Caçadores de Sangue." to {_p}
+    execute console command "skillapi cancel %{_p}%"
+    return
+  set {_tier} to blood_hunter_tier({_p})
+  if {_ability} is "crimson_rite":
+    if {_tier} <= 2:
+      set {_percent} to 8
+    else:
+      set {_percent} to 10
+    if blood_hunter_spend({_p}, 30, {_percent}, "Rito Carmesim") is false:
+      return
+    set {bloodhunter.rite.expire.%{_p}%} to now + {@rite-duration}
+    set {_element} to blood_hunter_cycle_rite({_p})
+    send title "&cRito Carmesim" subtitle "&7Elemento ativo: %{_element}%" to {_p}
+  else if {_ability} is "mark_prey":
+    if {_target} is not set:
+      send "&cSelecione um alvo." to {_p}
+      execute console command "skillapi cancel %{_p}%"
+      return
+    if blood_hunter_spend({_p}, 20, 0, "Marca de Presa") is false:
+      return
+    blood_hunter_apply_mark({_p}, {_target})
+  else if {_ability} is "blood_focus":
+    if blood_hunter_spend({_p}, 20, 0, "Concentração de Sangue") is false:
+      return
+    set {bloodhunter.focus.expire.%{_p}%} to now + {@focus-duration}
+    set {bloodhunter.focus.fatigue.%{_p}%} to now + {@focus-duration} + {@focus-fatigue}
+    apply resistance 1 to {_p} for {@focus-duration}
+    apply slow falling 1 to {_p} for {@focus-duration}
+  else if {_ability} is "ghost_rite":
+    if blood_hunter_spend({_p}, 25, 8, "Rito do Espectro") is false:
+      return
+    set {bloodhunter.ghostrite.expire.%{_p}%} to now + {@ghost-rite-duration}
+    blood_hunter_check_race_resistance({_p}, "holy")
+    send title "&fRito do Espectro" subtitle "&7Dano radiante ativado." to {_p}
+  else if {_ability} is "purifying_strike":
+    if blood_hunter_spend({_p}, 20, 0, "Golpe Purificador") is false:
+      return
+    if {_target} is set:
+      set {_base} to placeholderapi parse "%generic_attack_damage%" for {_p}
+      if {_base} is "" or {_base} is not a number:
+        set {_base} to 7
+      damage {_target} by ({_base} * 1.5) with cause magic
+      remove speed from {_target}
+  else if {_ability} is "hallowed_veil":
+    if blood_hunter_spend({_p}, 30, 0, "Véu Consagrado") is false:
+      return
+    set {bloodhunter.veil.expire.%{_p}%} to now + {@veil-duration}
+    blood_hunter_check_race_resistance({_p}, "dark")
+  else if {_ability} is "spectral_stake":
+    if blood_hunter_spend({_p}, 25, 0, "Estaca Espectral") is false:
+      return
+    launch arrow from {_p}
+  else if {_ability} is "anathema":
+    if blood_hunter_spend({_p}, 40, 0, "Anátema dos Mortos") is false:
+      return
+    set {bloodhunter.anathema.expire.%{_p}%} to now + {@anathema-duration}
+  else if {_ability} is "eldritch_rite":
+    if blood_hunter_spend({_p}, 25, 8, "Rito Eldritch") is false:
+      return
+    set {bloodhunter.eldritch.expire.%{_p}%} to now + {@eldritch-rite-duration}
+    set {bloodhunter.eldritch.charges.%{_p}%} to 3
+    blood_hunter_check_race_resistance({_p}, "arcane")
+  else if {_ability} is "patron_curse":
+    if blood_hunter_spend({_p}, 30, 0, "Maldição do Patrono") is false:
+      return
+    if {_target} is set:
+      apply weakness 1 to {_target} for 10 seconds
+  else if {_ability} is "counterspell":
+    if blood_hunter_spend({_p}, 25, 0, "Contrafeitiço") is false:
+      return
+    set {bloodhunter.counter.%{_p}%} to now + 2 seconds
+  else if {_ability} is "abyssal_step":
+    if blood_hunter_spend({_p}, 20, 0, "Passo Abissal") is false:
+      return
+    execute console command "execute as %name of {_p}% at @s run tp @s ^ ^ ^{@abyssal-step-distance}"
+    set {bloodhunter.abyssal.expire.%{_p}%} to now + 4 seconds
+  else if {_ability} is "void_rend":
+    if blood_hunter_spend({_p}, 40, 0, "Rasgo do Vazio") is false:
+      return
+    set {bloodhunter.void.expire.%{_p}%} to now + {@eldritch-rite-duration}
+  else if {_ability} is "mutagen":
+    if {bloodhunter.mutagen.charges.%{_p}%} <= 0:
+      send "&cSem cargas mutagênicas." to {_p}
+      execute console command "skillapi cancel %{_p}%"
+      return
+    remove 1 from {bloodhunter.mutagen.charges.%{_p}%}
+    set {bloodhunter.mutagen.timer.%{_p}%} to now + {@mutagen-recharge}
+    set {_current} to {bloodhunter.mutagen.active.%{_p}%}
+    if {_current} is "ferro":
+      set {_next} to "olho"
+    else if {_current} is "olho":
+      set {_next} to "sombra"
+    else:
+      set {_next} to "ferro"
+    blood_hunter_apply_mutagen({_p}, {_next})
+  else if {_ability} is "coagulant":
+    heal {_p} by (max health of {_p} * 0.15)
+    remove poison from {_p}
+  else if {_ability} is "hematic_burst":
+    if blood_hunter_spend({_p}, 25, 0, "Explosão Hemática") is false:
+      return
+    execute console command "execute as %name of {_p}% at @s run particle minecraft:soul_fire_flame ^ ^1 ^ 0 0 0 0 10"
+  else if {_ability} is "quick_bind":
+    apply resistance 1 to {_p} for 6 seconds
+    delete {bloodhunter.mutagen.penalty.%{_p}%}
+  else if {_ability} is "supreme_catalysis":
+    if blood_hunter_spend({_p}, 40, 0, "Catalise Suprema") is false:
+      return
+    set {bloodhunter.catalysis.expire.%{_p}%} to now + {@catalysis-duration}
+  else if {_ability} is "lycan_form":
+    if blood_hunter_spend({_p}, 25, 10, "Forma do Caçador") is false:
+      return
+    set {bloodhunter.lycan.form.%{_p}%} to now + {@lycan-duration}
+    apply strength 1 to {_p} for {@lycan-duration}
+    apply speed 1 to {_p} for {@lycan-duration}
+  else if {_ability} is "frightful_howl":
+    loop all players in radius 6 around {_p}:
+      if loop-player is not {_p}:
+        apply slowness 2 to loop-player for 2 seconds
+        send "&4Você sente medo!" to loop-player
+  else if {_ability} is "predatory_leap":
+    execute console command "execute as %name of {_p}% at @s run tp @s ^ ^ ^3"
+  else if {_ability} is "blood_track":
+    apply speed 1 to {_p} for 6 seconds
+  else if {_ability} is "crimson_moon":
+    if blood_hunter_spend({_p}, 35, 0, "Luar Carmesim") is false:
+      return
+    set {bloodhunter.moon.expire.%{_p}%} to now + {@crimson-moon-duration}
+  else:
+    send "&cHabilidade desconhecida: %{_ability}%" to {_p}
+
+function blood_hunter_apply_mutagen(p: player, id: text):
+  set {bloodhunter.mutagen.active.%{_p}%} to {_id}
+  set {bloodhunter.mutagen.expire.%{_p}%} to now + 90 seconds
+  if {_id} is "ferro":
+    apply resistance 2 to {_p} for 90 seconds
+    set {bloodhunter.mutagen.penalty.%{_p}%} to "slow"
+    apply slowness 1 to {_p} for 90 seconds
+  else if {_id} is "olho":
+    apply strength 2 to {_p} for 90 seconds
+    set {bloodhunter.mutagen.penalty.%{_p}%} to "control"
+    apply weakness 1 to {_p} for 90 seconds
+  else:
+    apply speed 2 to {_p} for 90 seconds
+    set {bloodhunter.mutagen.penalty.%{_p}%} to "vida"
+    apply wither 1 to {_p} for 5 seconds
+  blood_hunter_refresh_hud({_p})
+
+function start blood_hunter_regen_task():
+  every {@hemocraft-regen-interval}:
+    loop all players:
+      if blood_hunter_is_class(loop-player):
+        set {_cap} to blood_hunter_max_hemo(loop-player)
+        if {bloodhunter.hemo.%loop-player%} is not set:
+          set {bloodhunter.hemo.%loop-player%} to {_cap}
+        if {bloodhunter.combat.%loop-player%} is set:
+          if difference between now and {bloodhunter.combat.%loop-player%} < {@hemocraft-regen-delay}:
+            continue
+        if {bloodhunter.hemo.%loop-player%} < {_cap}:
+          add {@hemocraft-regen-amount} to {bloodhunter.hemo.%loop-player%}
+          if {bloodhunter.hemo.%loop-player%} > {_cap}:
+            set {bloodhunter.hemo.%loop-player%} to {_cap}
+          blood_hunter_refresh_hud(loop-player)
+        if {bloodhunter.mutagen.charges.%loop-player%} < 1 and {bloodhunter.mutagen.timer.%loop-player%} is set:
+          if difference between {bloodhunter.mutagen.timer.%loop-player%} and now <= seconds 0:
+            set {bloodhunter.mutagen.charges.%loop-player%} to 1
+            delete {bloodhunter.mutagen.timer.%loop-player%}
+            send "&6Carga mutagênica restaurada." to loop-player
+
+function start blood_hunter_upkeep_task():
+  every 10 ticks:
+    loop all players:
+      if blood_hunter_is_class(loop-player):
+        if {bloodhunter.mark.expire.%loop-player%} is set and difference between {bloodhunter.mark.expire.%loop-player%} and now <= seconds 0:
+          delete {bloodhunter.mark.%loop-player%}
+          delete {bloodhunter.mark.expire.%loop-player%}
+        if {bloodhunter.focus.expire.%loop-player%} is set and difference between {bloodhunter.focus.expire.%loop-player%} and now <= seconds 0:
+          delete {bloodhunter.focus.expire.%loop-player%}
+        if {bloodhunter.rite.expire.%loop-player%} is set and difference between {bloodhunter.rite.expire.%loop-player%} and now <= seconds 0:
+          delete {bloodhunter.rite.expire.%loop-player%}
+        if {bloodhunter.ghostrite.expire.%loop-player%} is set and difference between {bloodhunter.ghostrite.expire.%loop-player%} and now <= seconds 0:
+          delete {bloodhunter.ghostrite.expire.%loop-player%}
+        if {bloodhunter.eldritch.expire.%loop-player%} is set and difference between {bloodhunter.eldritch.expire.%loop-player%} and now <= seconds 0:
+          delete {bloodhunter.eldritch.expire.%loop-player%}
+          delete {bloodhunter.eldritch.charges.%loop-player%}
+        if {bloodhunter.mutagen.expire.%loop-player%} is set and difference between {bloodhunter.mutagen.expire.%loop-player%} and now <= seconds 0:
+          delete {bloodhunter.mutagen.active.%loop-player%}
+          delete {bloodhunter.mutagen.expire.%loop-player%}
+        if {bloodhunter.catalysis.expire.%loop-player%} is set and difference between {bloodhunter.catalysis.expire.%loop-player%} and now <= seconds 0:
+          delete {bloodhunter.catalysis.expire.%loop-player%}
+        if {bloodhunter.lycan.form.%loop-player%} is set and difference between {bloodhunter.lycan.form.%loop-player%} and now <= seconds 0:
+          delete {bloodhunter.lycan.form.%loop-player%}
+        if {bloodhunter.moon.expire.%loop-player%} is set and difference between {bloodhunter.moon.expire.%loop-player%} and now <= seconds 0:
+          delete {bloodhunter.moon.expire.%loop-player%}
+        blood_hunter_refresh_hud(loop-player)
+
+command /rito:
+  permission: class_blood_hunter.command
+  trigger:
+    execute console command "skillapi cast %player% blood_hunter_crimson_rite"
+
+command /maldicao:
+  permission: class_blood_hunter.command
+  trigger:
+    execute console command "skillapi cast %player% blood_hunter_mark_of_the_prey"
+
+command /concentrar:
+  permission: class_blood_hunter.command
+  trigger:
+    execute console command "skillapi cast %player% blood_hunter_blood_focus"
+
+command /mutageno:
+  permission: class_blood_hunter.mutant
+  trigger:
+    execute console command "skillapi cast %player% blood_hunter_mutant_mutagen"
+
+command /lycan:
+  permission: class_blood_hunter.lycan
+  trigger:
+    execute console command "skillapi cast %player% blood_hunter_lycan_form"
+
+command /kit_blood:
+  permission: class_blood_hunter.command
+  trigger:
+    clear player's inventory
+    execute console command "mm items give %player% CrimsonRiteBlade"
+    execute console command "mm items give %player% BloodMarkCharm"
+    execute console command "mm items give %player% BloodFocusVial"
+    if player has permission "class_blood_hunter.ghostslayer":
+      execute console command "mm items give %player% GhostRitualDagger"
+      execute console command "mm items give %player% SanctifiedVial"
+      execute console command "mm items give %player% GravewardCharm"
+    if player has permission "class_blood_hunter.profanesoul":
+      execute console command "mm items give %player% ProfaneTome"
+      execute console command "mm items give %player% HexBrandSigil"
+      execute console command "mm items give %player% EldritchNeedle"
+    if player has permission "class_blood_hunter.mutant":
+      execute console command "mm items give %player% MutagenKit"
+      execute console command "mm items give %player% CoagulantVial"
+      execute console command "mm items give %player% CatalystInjector"
+    if player has permission "class_blood_hunter.lycan":
+      execute console command "mm items give %player% LycanMoonTalisman"
+      execute console command "mm items give %player% LycanClaw"
+      execute console command "mm items give %player% HunterFetters"
+    blood_hunter_init(player)
+    send "&4Kit Blood Hunter entregue." to player

@@ -1,0 +1,27 @@
+# Skill: Mutágeno - Mutant
+name: blood_hunter_mutant_mutagen
+display: "§6Mutágeno"
+icon: POTION
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+description:
+  - "§fEscolhe uma de três fórmulas (Ferro-Sangue, Olho Carmesim, Sombra Veloz) por 90s."
+  - "§7Consome 1 Carga Mutágena (regenera a cada 90s fora de combate)."
+  - "§8Penalidades aplicadas são rastreadas no HUD {mutagen_active}."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§6Mutágeno"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% mutagen"
+          caster: true
+          async: false

@@ -1,0 +1,26 @@
+# Skill: Véu Consagrado - Ghostslayer
+name: blood_hunter_ghostslayer_hallowed_veil
+display: "§fVéu Consagrado"
+icon: GHAST_TEAR
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+description:
+  - "§fAura de 6 blocos por 10s que reduz 25% do dano necrótico/obscuro em aliados."
+  - "§7Custo: 30 Hemocraft; uptime ≤60%."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§fVéu Consagrado"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% hallowed_veil"
+          caster: true
+          async: false

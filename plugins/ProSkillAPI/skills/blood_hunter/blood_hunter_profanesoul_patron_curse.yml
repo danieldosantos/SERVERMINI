@@ -1,0 +1,33 @@
+# Skill: Maldição do Patrono - Profane Soul
+name: blood_hunter_profanesoul_patron_curse
+display: "§5Maldição do Patrono"
+icon: WITHER_ROSE
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+description:
+  - "§fReduz resistência do alvo marcado em -12% por 10s (tipo conforme patrono)."
+  - "§7Custo: 30 Hemocraft; aplica imunidade decrescente a reaplicações." 
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§5Maldição"
+    children:
+      TargetMarked:
+        type: target
+        data:
+          type: Single
+          range-base: 25
+          range-scale: 0
+        children:
+          RunSkript:
+            type: mechanic
+            data:
+              command: "skript run blood_hunter_cast %caster% patron_curse %target%"
+              caster: true
+              async: false

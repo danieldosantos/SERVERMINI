@@ -1,0 +1,33 @@
+# Skill: Concentração de Sangue - ativa base Blood Hunter
+name: blood_hunter_blood_focus
+display: "§cConcentração de Sangue"
+icon: REDSTONE
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cost-base: 0
+  cost-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fConcede janela de 8s com +15% penetração e resistência a empurrões."
+  - "§7Ao expirar aplica fatiga: -10% dano por 6s. Custo: 20 Hemocraft."
+  - "§8Atualiza placeholders {hemocraft} e {cooldown_next}."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§cConcentração"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% blood_focus"
+          caster: true
+          async: false

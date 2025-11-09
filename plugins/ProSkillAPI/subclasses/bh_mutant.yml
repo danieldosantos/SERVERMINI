@@ -1,0 +1,46 @@
+# Ordem do Mutante - Subclasse Blood Hunter
+name: Blood_Hunter_Mutant
+display: "§6Ordem do Mutante"
+description:
+  - "§7Manipula frascos mutagênicos para buffs poderosos e penalidades calculadas."
+  - "§6Gira entre fórmulas adaptativas, controle hemático e suporte tático."
+options:
+  needs-permission: true
+  parent: Blood_Hunter
+attributes:
+  attack-damage:
+    base: 1.68
+    scale: 0.045
+  skill-damage:
+    base: 0.16
+    scale: 0.02
+skills:
+  tier1:
+    active:
+      - blood_hunter_mutant_mutagen
+      - blood_hunter_mutant_coagulant
+    passive: []
+  tier2:
+    active:
+      - blood_hunter_mutant_mutagen
+      - blood_hunter_mutant_coagulant
+      - blood_hunter_mutant_hematic_burst
+    passive: []
+  tier3:
+    active:
+      - blood_hunter_mutant_mutagen
+      - blood_hunter_mutant_coagulant
+      - blood_hunter_mutant_hematic_burst
+      - blood_hunter_mutant_quick_bind
+    passive: []
+  tier4:
+    active:
+      - blood_hunter_mutant_mutagen
+      - blood_hunter_mutant_coagulant
+      - blood_hunter_mutant_hematic_burst
+      - blood_hunter_mutant_quick_bind
+      - blood_hunter_mutant_supreme_catalysis
+    passive: []
+notes:
+  - "Mutágenos possuem uptime máximo de 60% via cargas e penalidades rastreadas em HUD."
+  - "Ligadura Rápida remove apenas uma penalidade ativa por uso (prioridade: velocidade > controle > vida)."

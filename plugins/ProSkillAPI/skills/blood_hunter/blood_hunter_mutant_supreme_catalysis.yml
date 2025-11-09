@@ -1,0 +1,26 @@
+# Skill: Catalise Suprema - Mutant ULT
+name: blood_hunter_mutant_supreme_catalysis
+display: "§6Catalise Suprema"
+icon: DRAGON_BREATH
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+description:
+  - "§fPor 15s ataques aplicam sangramento extra (30%/2s) e reduzem CD da Explosão em 1s ao atingir marcado."
+  - "§7Custo: 40 Hemocraft."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§6Catalise"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% supreme_catalysis"
+          caster: true
+          async: false

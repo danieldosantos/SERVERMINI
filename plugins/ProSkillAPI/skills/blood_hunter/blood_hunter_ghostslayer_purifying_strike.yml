@@ -1,0 +1,33 @@
+# Skill: Golpe Purificador - Ghostslayer
+name: blood_hunter_ghostslayer_purifying_strike
+display: "§fGolpe Purificador"
+icon: GOLDEN_SWORD
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+description:
+  - "§fDesfere golpe radiante 150% e remove 1 buff do alvo marcado."
+  - "§7Custo: 20 Hemocraft."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§fGolpe Purificador"
+    children:
+      TargetMarked:
+        type: target
+        data:
+          type: Single
+          range-base: 5
+          range-scale: 0
+        children:
+          RunSkript:
+            type: mechanic
+            data:
+              command: "skript run blood_hunter_cast %caster% purifying_strike %target%"
+              caster: true
+              async: false

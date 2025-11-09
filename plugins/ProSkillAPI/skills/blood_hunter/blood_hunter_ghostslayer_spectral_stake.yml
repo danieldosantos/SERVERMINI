@@ -1,0 +1,26 @@
+# Skill: Estaca Espectral - Ghostslayer
+name: blood_hunter_ghostslayer_spectral_stake
+display: "§fEstaca Espectral"
+icon: ARROW
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§fProjétil perfurante 140% dano que enraíza espíritos por 2.5s (outros recebem Lentidão II)."
+  - "§7Custo: 25 Hemocraft."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§fEstaca Espectral"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% spectral_stake"
+          caster: true
+          async: false

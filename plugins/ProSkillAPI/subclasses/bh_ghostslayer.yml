@@ -1,0 +1,46 @@
+# Ordem do Matador de Espectros - Subclasse Blood Hunter
+name: Blood_Hunter_Ghostslayer
+display: "§fOrdem do Matador de Espectros"
+description:
+  - "§7Especialista em erradicar mortos-vivos e espíritos com radiança e anti-maldições."
+  - "§fSinergia forte com Rito Carmesim convertido para dano radiante e controle spectral."
+options:
+  needs-permission: true
+  parent: Blood_Hunter
+attributes:
+  attack-damage:
+    base: 1.7
+    scale: 0.05
+  skill-damage:
+    base: 0.18
+    scale: 0.02
+skills:
+  tier1:
+    active:
+      - blood_hunter_ghostslayer_rite
+      - blood_hunter_ghostslayer_purifying_strike
+    passive: []
+  tier2:
+    active:
+      - blood_hunter_ghostslayer_rite
+      - blood_hunter_ghostslayer_purifying_strike
+      - blood_hunter_ghostslayer_hallowed_veil
+    passive: []
+  tier3:
+    active:
+      - blood_hunter_ghostslayer_rite
+      - blood_hunter_ghostslayer_purifying_strike
+      - blood_hunter_ghostslayer_hallowed_veil
+      - blood_hunter_ghostslayer_spectral_stake
+    passive: []
+  tier4:
+    active:
+      - blood_hunter_ghostslayer_rite
+      - blood_hunter_ghostslayer_purifying_strike
+      - blood_hunter_ghostslayer_hallowed_veil
+      - blood_hunter_ghostslayer_spectral_stake
+      - blood_hunter_ghostslayer_anathema
+    passive: []
+notes:
+  - "Conversão radiante aplica diminuição de resistência espectral via MythicMobs tag."
+  - "Estaca Espectral só enraíza espíritos; outros alvos recebem lentidão curta."

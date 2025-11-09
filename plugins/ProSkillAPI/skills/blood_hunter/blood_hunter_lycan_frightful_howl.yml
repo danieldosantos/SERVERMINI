@@ -1,0 +1,26 @@
+# Skill: Uivo Aterrador - Lycan
+name: blood_hunter_lycan_frightful_howl
+display: "§4Uivo Aterrador"
+icon: GOAT_HORN
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§fAterroriza inimigos próximos (medo 2s com imunidade decrescente) e -10% dano por 8s."
+  - "§7Sem custo de Hemocraft; respeita regras PvP."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§4Uivo"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% frightful_howl"
+          caster: true
+          async: false

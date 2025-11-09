@@ -1,0 +1,21 @@
+# Skill: Sangue Frio - passiva Blood Hunter
+name: blood_hunter_cold_blood
+display: "§bSangue Frio"
+icon: BLUE_ICE
+type: Passive
+max-level: 1
+needs-permission: true
+description:
+  - "§fAo cair abaixo de 35% de HP ganha 10% mitigação por 6s (CD interno 45s)."
+  - "§7Gerenciado via Skript para respeitar limite global de mitigação."
+components:
+  Passive:
+    type: trigger
+    data: {}
+    children:
+      Register:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_passive %caster% cold_blood"
+          caster: true
+          async: false

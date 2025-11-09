@@ -1,0 +1,198 @@
+# Itens focais da classe Blood Hunter para MythicMobs
+items:
+  CrimsonRiteBlade:
+    Id: IRON_SWORD
+    Display: '&cLâmina do Rito Carmesim'
+    Lore:
+      - '&7Clique direito: ativa §cRito Carmesim§7.'
+      - '&8Requer grupo: class_blood_hunter'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_blood_hunter'
+      skill: 'blood_hunter_crimson_rite'
+    Skills:
+      - skill{s=blood_hunter_crimson_rite} @self ~onUse
+  BloodMarkCharm:
+    Id: ENDER_EYE
+    Display: '&4Talismã da Presa'
+    Lore:
+      - '&7Clique direito: aplica §4Marca de Presa§7.'
+      - '&8Requer grupo: class_blood_hunter'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter'
+      skill: 'blood_hunter_mark_of_the_prey'
+    Skills:
+      - skill{s=blood_hunter_mark_of_the_prey} @self ~onUse
+  BloodFocusVial:
+    Id: REDSTONE
+    Display: '&cFrasco de Concentração'
+    Lore:
+      - '&7Clique direito: ativa §cConcentração de Sangue§7.'
+      - '&8Requer grupo: class_blood_hunter'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter'
+      skill: 'blood_hunter_blood_focus'
+    Skills:
+      - skill{s=blood_hunter_blood_focus} @self ~onUse
+  GhostRitualDagger:
+    Id: DIAMOND_SWORD
+    Display: '&fPunhal Espectral'
+    Lore:
+      - '&7Canaliza §fRito do Espectro§7.'
+      - '&8Grupo: class_blood_hunter.ghostslayer'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.ghostslayer'
+      skill: 'blood_hunter_ghostslayer_rite'
+    Skills:
+      - skill{s=blood_hunter_ghostslayer_rite} @self ~onUse
+  SanctifiedVial:
+    Id: HONEY_BOTTLE
+    Display: '&fVial Consagrado'
+    Lore:
+      - '&7Ativa §fVéu Consagrado§7 para proteger aliados.'
+      - '&8Grupo: class_blood_hunter.ghostslayer'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.ghostslayer'
+      skill: 'blood_hunter_ghostslayer_hallowed_veil'
+    Skills:
+      - skill{s=blood_hunter_ghostslayer_hallowed_veil} @self ~onUse
+  GravewardCharm:
+    Id: TOTEM_OF_UNDYING
+    Display: '&fTalismã Tumba-Selada'
+    Lore:
+      - '&7Ultimate §fAnátema dos Mortos§7.'
+      - '&8Grupo: class_blood_hunter.ghostslayer'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.ghostslayer'
+      skill: 'blood_hunter_ghostslayer_anathema'
+    Skills:
+      - skill{s=blood_hunter_ghostslayer_anathema} @self ~onSneakRightClick
+  ProfaneTome:
+    Id: WRITABLE_BOOK
+    Display: '&5Grimório Profano'
+    Lore:
+      - '&7Clique direito: ativa §5Rito Eldritch§7.'
+      - '&8Grupo: class_blood_hunter.profanesoul'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.profanesoul'
+      skill: 'blood_hunter_profanesoul_rite'
+    Skills:
+      - skill{s=blood_hunter_profanesoul_rite} @self ~onUse
+  HexBrandSigil:
+    Id: ECHO_SHARD
+    Display: '&5Selo do Patrono'
+    Lore:
+      - '&7Aplica §5Maldição do Patrono§7 no alvo marcado.'
+      - '&8Grupo: class_blood_hunter.profanesoul'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.profanesoul'
+      skill: 'blood_hunter_profanesoul_patron_curse'
+    Skills:
+      - skill{s=blood_hunter_profanesoul_patron_curse} @self ~onUse
+  EldritchNeedle:
+    Id: TRIDENT
+    Display: '&5Agulha Abissal'
+    Lore:
+      - '&7Ultimate §5Rasgo do Vazio§7.'
+      - '&8Grupo: class_blood_hunter.profanesoul'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.profanesoul'
+      skill: 'blood_hunter_profanesoul_void_rend'
+    Skills:
+      - skill{s=blood_hunter_profanesoul_void_rend} @self ~onSneakRightClick
+  MutagenKit:
+    Id: BREWING_STAND
+    Display: '&6Kit Mutagênico'
+    Lore:
+      - '&7Clique direito: abre seleção §6Mutágeno§7.'
+      - '&8Grupo: class_blood_hunter.mutant'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.mutant'
+      skill: 'blood_hunter_mutant_mutagen'
+    Skills:
+      - skill{s=blood_hunter_mutant_mutagen} @self ~onUse
+  CoagulantVial:
+    Id: GLASS_BOTTLE
+    Display: '&6Frasco Coagulante'
+    Lore:
+      - '&7Clique direito: ativa §6Coágulo Alquímico§7.'
+      - '&8Grupo: class_blood_hunter.mutant'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.mutant'
+      skill: 'blood_hunter_mutant_coagulant'
+    Skills:
+      - skill{s=blood_hunter_mutant_coagulant} @self ~onUse
+  CatalystInjector:
+    Id: BLAZE_ROD
+    Display: '&6Injetor Catalítico'
+    Lore:
+      - '&7Ultimate §6Catalise Suprema§7.'
+      - '&8Grupo: class_blood_hunter.mutant'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.mutant'
+      skill: 'blood_hunter_mutant_supreme_catalysis'
+    Skills:
+      - skill{s=blood_hunter_mutant_supreme_catalysis} @self ~onSneakRightClick
+  LycanMoonTalisman:
+    Id: PRISMARINE_CRYSTALS
+    Display: '&4Talismã Lunar'
+    Lore:
+      - '&7Clique direito: ativa §4Forma do Caçador§7.'
+      - '&8Grupo: class_blood_hunter.lycan'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.lycan'
+      skill: 'blood_hunter_lycan_form'
+    Skills:
+      - skill{s=blood_hunter_lycan_form} @self ~onUse
+  LycanClaw:
+    Id: NETHERITE_SCRAP
+    Display: '&4Garra Licana'
+    Lore:
+      - '&7Clique direito: §4Investida Predatória§7.'
+      - '&8Grupo: class_blood_hunter.lycan'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.lycan'
+      skill: 'blood_hunter_lycan_predatory_leap'
+    Skills:
+      - skill{s=blood_hunter_lycan_predatory_leap} @self ~onUse
+  HunterFetters:
+    Id: CHAIN
+    Display: '&4Grilhões do Caçador'
+    Lore:
+      - '&7Ultimate §4Luar Carmesim§7.'
+      - '&8Grupo: class_blood_hunter.lycan'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_blood_hunter.lycan'
+      skill: 'blood_hunter_lycan_crimson_moon'
+    Skills:
+      - skill{s=blood_hunter_lycan_crimson_moon} @self ~onSneakRightClick

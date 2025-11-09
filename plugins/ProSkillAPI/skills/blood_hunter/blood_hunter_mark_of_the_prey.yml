@@ -1,0 +1,42 @@
+# Skill: Marca de Presa - ativa base Blood Hunter
+name: blood_hunter_mark_of_the_prey
+display: "§4Marca de Presa"
+icon: ENDER_EYE
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cost-base: 0
+  cost-scale: 0
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fMarca um alvo, revelando-o e amplificando seu dano recebido do Blood Hunter em +15% por 10s."
+  - "§7Custo: 20 Hemocraft."
+  - "§8Reaplicar substitui marca anterior e envia atualização para {mark_time_left}."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§4Marca de Presa"
+    children:
+      TargetForward:
+        type: target
+        data:
+          type: Single
+          range-base: 20
+          range-scale: 0
+          tolerance-base: 12
+          tolerance-scale: 0
+        children:
+          RunSkript:
+            type: mechanic
+            data:
+              command: "skript run blood_hunter_cast %caster% mark_prey %target%"
+              caster: true
+              async: false
