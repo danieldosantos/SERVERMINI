@@ -1,0 +1,118 @@
+# races_tiefling.sk — Integração da raça Tiefling (Infernal, Abissal, Sombrio).
+# Depende de: Skript, SkBee (PlaceholderAPI), ProSkillAPI, MythicMobs, LuckPerms.
+
+options:
+  skillcmd: psa cast
+  infernal_item: "&cAmuleto Infernus"
+  abissal_item: "&5Sigilo Abissal"
+  umbral_item: "&8Véu Umbral"
+
+function tieflingHasGroup(p: player, group: text) :: boolean:
+  set {_perm1} to "group.%{_group}%"
+  set {_perm2} to "lp.%{_group}%"
+  if {_p} has permission {_perm1} or {_p} has permission {_perm2}:
+    return true
+  return false
+
+function tieflingCastSkill(p: player, group: text, skill: text, label: text):
+  if tieflingHasGroup({_p}, {_group}):
+    set {_name} to name of {_p}
+    execute console command "{@skillcmd} %{_name}% %{_skill}%"
+    tieflingShowHud({_p}, {_label})
+  else:
+    send "&cPermissão racial insuficiente." to {_p}
+
+function tieflingShowHud(p: player, label: text):
+  set {_cd} to placeholderapi parse "%raceseffects_racial_cd_main%" for {_p}
+  set {_res} to placeholderapi parse "%raceseffects_racial_resistencia_temporaria%" for {_p}
+  set {_pen} to placeholderapi parse "%raceseffects_racial_penalidade_luz%" for {_p}
+  if {_cd} is "" or {_cd} is "null":
+    set {_cd} to "-"
+  if {_res} is "" or {_res} is "null":
+    set {_res} to "-"
+  if {_pen} is "" or {_pen} is "null":
+    set {_pen} to "-"
+  send action bar "&5Racial:&f %{_label}% &8| &cCD:&f %{_cd}% &8| &6Res:&f %{_res}% &8| &7Luz:&f %{_pen}%" to {_p}
+
+function tieflingRacialHelp(p: player) :: boolean:
+  set {_shown} to false
+  if tieflingHasGroup({_p}, "race_tiefling"):
+    send "&5[Tiefling] /racial mostra comandos e cooldowns da linhagem." to {_p}
+    set {_shown} to true
+    if tieflingHasGroup({_p}, "race_tiefling.infernal"):
+      send "&c[Infernal] Use /fogo_infernal (CD 60s) e /kit_racial_tiefling infernal." to {_p}
+    if tieflingHasGroup({_p}, "race_tiefling.abissal"):
+      send "&5[Abissal] Use /abismo (CD 75s) para Explosão Abissal." to {_p}
+    if tieflingHasGroup({_p}, "race_tiefling.sombrio"):
+      send "&8[Sombrio] /sombra (CD 90s) cria área de evasão sombria." to {_p}
+  return {_shown}
+
+command /racial_tiefling:
+  trigger:
+    if tieflingHasGroup(player, "race_tiefling"):
+      send "&5Comandos rápidos Tiefling:" to player
+      if tieflingHasGroup(player, "race_tiefling.infernal"):
+        send "&c• /fogo_infernal — Chama Infernal (cone 6b, penalidade -8% dano por 6s)." to player
+      if tieflingHasGroup(player, "race_tiefling.abissal"):
+        send "&5• /abismo — Explosão Abissal (6b, desorientação 2s)." to player
+      if tieflingHasGroup(player, "race_tiefling.sombrio"):
+        send "&8• /sombra — Escuridão Umbral (6b, aliados +10% esquiva)." to player
+      send "&7• /kit_racial_tiefling [jogador] [infernal|abissal|sombrio|all]" to player
+    else:
+      send "&cSomente tieflings podem usar este comando." to player
+
+command /fogo_infernal:
+  trigger:
+    tieflingCastSkill(player, "race_tiefling.infernal", "Tiefling_ChamaInfernal", "Chama Infernal")
+
+command /abismo:
+  trigger:
+    tieflingCastSkill(player, "race_tiefling.abissal", "Tiefling_ExplosaoAbissal", "Explosão Abissal")
+
+command /sombra:
+  trigger:
+    tieflingCastSkill(player, "race_tiefling.sombrio", "Tiefling_EscuridaoUmbral", "Escuridão Umbral")
+
+command /kit_racial_tiefling [<player>] [<text>]:
+  permission: op
+  trigger:
+    set {_target} to tieflingResolveTarget(sender, arg-1)
+    if {_target} is not set:
+      stop
+    set {_mode} to "base"
+    if arg-2 is set:
+      set {_mode} to lowercase arg-2
+    if {_mode} is "infernal" or {_mode} is "base" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% AmuletoInfernus 1"
+    if {_mode} is "abissal" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% SigiloAbissal 1"
+    if {_mode} is "sombrio" or {_mode} is "umbral" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% VeloUmbral 1"
+    send "&aItens tiefling (%{_mode}%) entregues." to {_target}
+
+function tieflingResolveTarget(sender: command sender, raw: object) :: player:
+  if {_raw} is set:
+    if {_raw} is player:
+      return {_raw}
+    set {_maybe} to player named {_raw}
+    if {_maybe} is set:
+      return {_maybe}
+    send "&cJogador inválido." to {_sender}
+    return null
+  if {_sender} is player:
+    return {_sender}
+  send "&cInforme um jogador." to {_sender}
+  return null
+
+on right click:
+  if event-item is not air:
+    set {_name} to display name of event-item
+    if {_name} is colored {@infernal_item}:
+      cancel event
+      tieflingCastSkill(player, "race_tiefling.infernal", "Tiefling_ChamaInfernal", "Chama Infernal")
+    else if {_name} is colored {@abissal_item}:
+      cancel event
+      tieflingCastSkill(player, "race_tiefling.abissal", "Tiefling_ExplosaoAbissal", "Explosão Abissal")
+    else if {_name} is colored {@umbral_item}:
+      cancel event
+      tieflingCastSkill(player, "race_tiefling.sombrio", "Tiefling_EscuridaoUmbral", "Escuridão Umbral")

@@ -1,0 +1,44 @@
+# Skill racial — Escuridão Umbral
+skills:
+  Tiefling_EscuridaoUmbral:
+    display: "&8Escuridão Umbral"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Invoca névoa sombria por 8s cobrindo raio de 6 blocos.
+      Inimigos na área perdem 15% de precisão enquanto aliados recebem +10% esquiva.
+      Cooldown de 90s garante janela de suporte controlada (<60% uptime).
+    tiers:
+      T1: { cooldown: 90, duration: 8, enemy_accuracy: -0.15, ally_evasion: 0.10 }
+      T2: { cooldown: 90, duration: 8, enemy_accuracy: -0.15, ally_evasion: 0.11 }
+      T3: { cooldown: 90, duration: 8, enemy_accuracy: -0.15, ally_evasion: 0.12 }
+      T4: { cooldown: 90, duration: 8, enemy_accuracy: -0.15, ally_evasion: 0.13 }
+    cost:
+      resource: stamina
+      amount: 0
+    effects:
+      - target: ground_target
+        type: field
+        radius: 6
+        duration: { tier: duration }
+        affects:
+          enemies:
+            modifiers:
+              accuracy: { tier: enemy_accuracy }
+          allies:
+            modifiers:
+              evasion: { tier: ally_evasion }
+        particles: umbral_mist
+      - target: self
+        type: placeholder_update
+        keys:
+          - racial_cd_main
+          - racial_penalidade_luz
+      - target: self
+        type: status
+        id: tiefling_cd_main
+        duration: { tier: cooldown }
+    notes: |
+      • Bônus/penalidades respeitam caps globais (evasion total e precisão mínima definidos pelo servidor).
+      • Campo aplica partículas discretas `umbral_mist` para feedback visual, sem reduzir FPS. 
+      • Mantém utilidade defensiva em PvP e PvE sem conceder invisibilidade permanente.

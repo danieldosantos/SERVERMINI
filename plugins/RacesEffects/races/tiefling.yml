@@ -1,60 +1,27 @@
-# Raça: Tiefling
-# Fantasia: descendentes infernais com chamas controladas.
+# Raça Base: Tiefling
 race_id: tiefling
 name: "Tiefling"
-identity: "Feiticeiros infernais que alternam fogo e astúcia sombria."
+identity: "Descendentes infernais que canalizam fogo, caos e sombras conforme sua linhagem."
 luckperms:
   required: "race_tiefling"
   inherit: null
 tags:
   - tiefling
 placeholders:
-  racial_cd_main: "{cooldown:skill_toque_igneo}"
-passives:
-  resistencia_infernal:
-    name: "Resistência Infernal"
-    type: timed_attribute
-    trigger: fire_damage
-    duration: 10
-    cooldown: 45
-    uptime_cap: 0.5
-    attributes:
-      mitigation_fire: 0.25
-    diminishing_returns: fire
-    description: "Ao sofrer fogo, reduz 25% do dano por 10s (DR com itens/warlocks)."
-  heranca_sombria:
-    name: "Herança Sombria"
-    type: darkvision
-    trigger: time:night
-    duration: 20
-    cooldown: 60
-    uptime_cap: 0.5
-    range: 20
-    description: "Visão no escuro avermelhada de 20 blocos + percepção de calor leve."
-actives:
-  toque_igneo:
-    name: "Toque Ígneo"
-    skill: ToqueIgneo
-    cooldown: 60
-    charges: 2
-    description: "Golpe corpo-a-corpo que causa 140% dano de fogo + aplica queimadura 6s."
-  lamina_das_chamas:
-    name: "Lâmina das Chamas"
-    skill: LaminaDasChamas
-    cooldown: 120
-    charges: 1
-    description: "Evoca espada de fogo por 12s, ataques aplicam +10% dano fogo (PvP +6%)."
-resistances:
-  fire:
-    base: 0.2
-    max: 0.45
+  racial_cd_main: "{status:tiefling_cd_main}"
+  racial_charges: "{status:tiefling_charges}"
+  racial_resistencia_temporaria: "{status:tiefling_res_temp}"
+  racial_penalidade_luz: "{status:tiefling_penalidade_luz}"
+passives: {}
+actives: {}
+resistances: {}
+weaknesses: []
 synergy_notes:
-  - "Build saudável: Warlock/Feiticeiro usa Lâmina para bursts situacionais mantendo DR compartilhado."
-  - "Restrição: se classe concede resistência fogo, bônus adicional converte em absorção de 10% ao invés de stack."
+  - "Respeita caps globais de velocidade (+0.05), mitigação (45%) e cura (25%) compartilhando DR com classes/items."
+  - "Integração com Warlock/Blood Hunter considera drenagem de resistência via marcador `tiefling_res_temp`."
 tests:
   pve:
-    - "Dungeon infernal: Resistência + Lâmina mantêm sobrevivência sem exceder 45% mitigação."
-    - "Evento de fogo cruzado testando uptime de Toque (CD 60s, charges 2)."
+    - "Verificar placeholders `%raceseffects_racial_cd_main%` e `%raceseffects_racial_resistencia_temporaria%` atualizando após cada skill."
+    - "Confirmar que jogadores sem subgrupo ativo mantêm apenas efeitos base/nenhum buff direto."
   pvp:
-    - "Arena 1v1 vs paladino fogo; verificar DR acumulada ≤45%."
-    - "Teamfight 4v4 usando Lâmina como ultimate (CD 120s) para pressão controlada."
+    - "Garantir que HUD racial mostra cooldown/penalidades corretas após trocas rápidas de sub-raça."

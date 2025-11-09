@@ -1,0 +1,50 @@
+# Itens raciais Tiefling — ativações para habilidades de cada linhagem.
+items:
+  AmuletoInfernus:
+    Id: BLAZE_POWDER
+    Display: '&cAmuleto Infernus'
+    Lore:
+      - '&7Talismã incandescente ligado às chamas de Asmodeus.'
+      - '&eClique direito:&f ativa Chama Infernal (60s).'
+      - '&8Somente tieflings infernais podem sintonizar.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    Enchantments:
+      - FIRE_ASPECT:2
+    NBT:
+      race-lock: 'race_tiefling.infernal'
+      skill: 'Tiefling_ChamaInfernal'
+      skript-bind: 'fogo_infernal'
+  SigiloAbissal:
+    Id: WITHER_ROSE
+    Display: '&5Sigilo Abissal'
+    Lore:
+      - '&7Marca do caos que pulsa com energia demoniaca.'
+      - '&eClique direito:&f ativa Explosão Abissal (75s).'
+      - '&8Restrito aos tieflings abissais.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    Enchantments:
+      - SOUL_SPEED:1
+    NBT:
+      race-lock: 'race_tiefling.abissal'
+      skill: 'Tiefling_ExplosaoAbissal'
+      skript-bind: 'abismo'
+  VeloUmbral:
+    Id: BLACK_CARPET
+    Display: '&8Véu Umbral'
+    Lore:
+      - '&7Tecidos que absorvem luz e guiam as sombras.'
+      - '&eClique direito:&f ativa Escuridão Umbral (90s).'
+      - '&8Somente tieflings sombrios podem utilizá-lo.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    Enchantments:
+      - SWIFT_SNEAK:3
+    NBT:
+      race-lock: 'race_tiefling.sombrio'
+      skill: 'Tiefling_EscuridaoUmbral'
+      skript-bind: 'sombra'

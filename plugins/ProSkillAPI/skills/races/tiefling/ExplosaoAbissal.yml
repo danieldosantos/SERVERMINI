@@ -1,0 +1,48 @@
+# Skill racial — Explosão Abissal
+skills:
+  Tiefling_ExplosaoAbissal:
+    display: "&5Explosão Abissal"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Detona energia sombria em área de 6 blocos causando 140% do dano base.
+      Inimigos afetados sofrem Desorientação (leve deslocamento de FOV e instabilidade) por 2s.
+      Cooldown de 75s mantém uptime reduzido conforme diretrizes de burst abissal.
+    tiers:
+      T1: { cooldown: 75, damage_multiplier: 1.40, disorient_duration: 2 }
+      T2: { cooldown: 75, damage_multiplier: 1.45, disorient_duration: 2 }
+      T3: { cooldown: 75, damage_multiplier: 1.50, disorient_duration: 2 }
+      T4: { cooldown: 75, damage_multiplier: 1.55, disorient_duration: 2 }
+    cost:
+      resource: stamina
+      amount: 0
+    effects:
+      - target: sphere
+        radius: 6
+        max_targets: 8
+        type: damage
+        scaling: percent
+        value: { tier: damage_multiplier }
+        element: shadow
+      - target: sphere
+        radius: 6
+        max_targets: 8
+        type: status
+        id: tiefling_desorientacao
+        duration: { tier: disorient_duration }
+        modifiers:
+          view_offset: 0.15
+          sensitivity_noise: 0.25
+      - target: self
+        type: placeholder_update
+        keys:
+          - racial_cd_main
+          - racial_charges
+      - target: self
+        type: status
+        id: tiefling_cd_main
+        duration: { tier: cooldown }
+    notes: |
+      • Desorientação utiliza efeito visual leve sem cegueira, evitando punições extremas.
+      • Elemento sombrio respeita DR de trevas compartilhada com Warlock/itens.
+      • Ideal para abrir lutas quando alvos já estão debilitados, sinergizando com Afinidade Abissal.
