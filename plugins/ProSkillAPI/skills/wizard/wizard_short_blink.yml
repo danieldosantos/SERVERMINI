@@ -1,0 +1,57 @@
+# Skill ativa: Teleporte Curto do Mago
+name: wizard_short_blink
+display: "§9Teleporte Curto"
+icon: ENDER_PEARL
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 15
+  mana-cost-scale: 0
+  range-base: 8
+  range-scale: 0
+  cast-time-base: 0.4
+  cast-time-scale: 0
+  prepared-slot: false
+  tags:
+    - mobility
+    - blink
+description:
+  - "§7Teleporta o mago até 8 blocos para frente, atravessando pequenas lacunas."
+  - "§9Consome 15 de mana e respeita limites de velocidade globais."
+  - "§7Skript verifica flag fora de combate para reduzir desgaste." 
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      FacingTarget:
+        type: target
+        data:
+          range-base: 8
+          range-scale: 0
+          ground: true
+        children:
+          Teleport:
+            type: mechanic
+            data:
+              relative: true
+              forward-base: 8
+              upward-base: 0
+              check-passable: true
+              ignore-clipping: true
+          Particles:
+            type: mechanic
+            data:
+              effect: PORTAL
+              amount-base: 24
+              amount-scale: 0
+              radius-base: 0.5
+              radius-scale: 0
+          SkriptHook:
+            type: mechanic
+            data:
+              command: "skript run wizard_blink_notify %caster%"
+              silent: true

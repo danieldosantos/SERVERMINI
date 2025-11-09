@@ -1,0 +1,80 @@
+# Evocação - Orbe Flamejante
+name: wizard_evocation_flame_orb
+display: "§cOrbe Flamejante"
+icon: BLAZE_POWDER
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_evocation
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 22
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+  prepared-slot: true
+  tags:
+    - damage
+    - fire
+    - prepared
+description:
+  - "§6Dispara orbe flamejante com 160% do poder mágico e deixa campo ardente por 6s."
+  - "§7Campo causa 40% dano de fogo a cada 2s em 6 blocos."
+  - "§cSinergiza com marca Instabilidade e aplica exaustão se raça já for resistente a fogo."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CheckPrepared:
+        type: mechanic
+        data:
+          command: "skript run wizard_check_prepared %caster% wizard_evocation_flame_orb"
+          silent: false
+      Projectile:
+        type: mechanic
+        data:
+          group: enemy
+          amount-base: 1
+          amount-scale: 0
+          range-base: 18
+          range-scale: 0
+          forward-base: 1
+          upward-base: 0
+          speed-base: 32
+          gravity: 0
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.6
+              value-scale: 0
+              classifier: skill
+              type: damage
+              element: fire
+          IgniteField:
+            type: mechanic
+            data:
+              radius-base: 6
+              radius-scale: 0
+              duration-base: 6
+              duration-scale: 0
+              period: 40
+              damage-base: 0.4
+              damage-scale: 0
+              element: fire
+      ParticleTrail:
+        type: mechanic
+        data:
+          effect: FLAME
+          amount-base: 16
+          amount-scale: 0
+          radius-base: 0.3
+          radius-scale: 0
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_evocation_field %caster%"
+          silent: true

@@ -1,0 +1,22 @@
+# Passiva: Estudo Rigoroso
+name: wizard_rigorous_study
+display: "§9Estudo Rigoroso"
+icon: KNOWLEDGE_BOOK
+type: Passive
+max-level: 1
+attributes:
+  cooldown-base: 0
+  cooldown-scale: 0
+description:
+  - "§7Reduz em 10% o tempo de recarga de habilidades marcadas como Preparadas."
+  - "§7Aplicado via Skript ao marcar/desmarcar feitiços no menu de preparação."
+  - "§9Mantém uptime controlado pois depende da flag prepared_slots ativa."
+components:
+  Passive:
+    type: trigger
+    children:
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_apply_study %caster%"
+          silent: true

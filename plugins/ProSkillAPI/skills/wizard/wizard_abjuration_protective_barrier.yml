@@ -1,0 +1,51 @@
+# Abjuração - Barreira Protetora
+name: wizard_abjuration_protective_barrier
+display: "§bBarreira Protetora"
+icon: SHIELD
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_abjuration
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  duration-base: 10
+  duration-scale: 0
+  absorb-base: 200
+  absorb-scale: 0
+  tags:
+    - shield
+    - mitigation
+description:
+  - "§bInvoca escudo de 200 pontos por 10s que absorve projéteis e dano mágico."
+  - "§7Não remove fraquezas raciais e respeita cap de mitigação 45%."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Shield:
+        type: mechanic
+        data:
+          key: wizard_barrier
+          absorb-base: 200
+          absorb-scale: 0
+          duration-base: 10
+          duration-scale: 0
+          types:
+            - magic
+            - projectile
+      Particle:
+        type: mechanic
+        data:
+          effect: BUBBLE_COLUMN_UP
+          amount-base: 20
+          radius-base: 0.8
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_abjuration_barrier %caster%"
+          silent: true

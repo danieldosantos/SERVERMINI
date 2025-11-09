@@ -1,0 +1,47 @@
+# Evocação - Catalisador de Poder
+name: wizard_evocation_power_catalyst
+display: "§cCatalisador de Poder"
+icon: NETHER_STAR
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_evocation
+attributes:
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  duration-base: 12
+  duration-scale: 0
+  tags:
+    - buff
+    - setup
+description:
+  - "§6Aumenta dano de feitiços em 18% por 12s."
+  - "§7Próxima skill acerta marca Instabilidade reduzindo resistência mágica em 10%."
+  - "§cRespeita uptime passivo ≤60% e comunica Skript para registrar buff."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      SelfBuff:
+        type: mechanic
+        data:
+          key: wizard_evocation_power
+          duration-base: 12
+          duration-scale: 0
+          multiplier-base: 0.18
+          attribute: skill-damage
+      NextSkillMark:
+        type: mechanic
+        data:
+          command: "skript run wizard_evocation_prepare_mark %caster%"
+          silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: SPELL_WITCH
+          amount-base: 30
+          radius-base: 1.0

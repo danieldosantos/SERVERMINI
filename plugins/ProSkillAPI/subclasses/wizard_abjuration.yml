@@ -1,0 +1,39 @@
+# Escola de Abjuração - Subclasse do Mago
+name: "Mago - Abjuração"
+key: wizard_abjuration
+parent: wizard
+description:
+  - "Especialista em proteções, negações e devolução de energia mágica."
+  - "Sincroniza escudos com limites globais de mitigação e efeitos de raças."
+attributes:
+  health:
+    base: 30
+    scale: 8
+  defense:
+    base: 12
+    scale: 4
+  skill-damage:
+    base: 8
+    scale: 3
+  mana:
+    base: 50
+    scale: 22
+skills:
+  - name: Barreira Protetora
+    level: 1
+  - name: Contra-Feitiço
+    level: 2
+  - name: Selo Rúnico
+    level: 3
+  - name: Reflexo Prismático
+    level: 3
+  - name: Fortaleza Arcana
+    level: 4
+channel-options:
+  - id: abjuracao_domus
+    skill: Fortaleza Arcana
+    description: "Canaliza cúpula defensiva com limites de mitigação e cura controlada."
+notes:
+  - "Escudos respeitam cap de mitigação total 45% e não removem fraquezas raciais existentes."
+  - "Contra-Feitiço depende de timing curto via comando/item, evitando one-shots."
+  - "Itens focais exigem grupo LuckPerms class_wizard.abjuration."

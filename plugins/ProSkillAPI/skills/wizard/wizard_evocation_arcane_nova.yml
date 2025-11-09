@@ -1,0 +1,60 @@
+# Evocação - Nova Arcana
+name: wizard_evocation_arcane_nova
+display: "§cNova Arcana"
+icon: HEART_OF_THE_SEA
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_evocation
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 28
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+  tags:
+    - damage
+    - aoe
+description:
+  - "§6Explosão arcana de 6 blocos que causa 140% do poder mágico."
+  - "§7Aplica knockback moderado e ativa marca Instabilidade se alvo estiver marcado."
+  - "§cGerenciada via Skript para placeholder de cooldown alto."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Area:
+        type: mechanic
+        data:
+          radius-base: 6
+          radius-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.4
+              classifier: skill
+              type: damage
+              element: arcane
+          Knockback:
+            type: mechanic
+            data:
+              horizontal-base: 0.6
+              vertical-base: 0.2
+          Instability:
+            type: mechanic
+            data:
+              command: "skript run wizard_evocation_mark %target%"
+              silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: EXPLOSION
+          amount-base: 40
+          amount-scale: 0
+          radius-base: 1.0
+          radius-scale: 0

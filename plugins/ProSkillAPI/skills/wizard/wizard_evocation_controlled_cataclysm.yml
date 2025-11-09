@@ -1,0 +1,76 @@
+# Evocação - Cataclismo Controlado (Ultimate)
+name: wizard_evocation_controlled_cataclysm
+display: "§4Cataclismo Controlado"
+icon: FIRE_CHARGE
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_evocation
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 60
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+  tags:
+    - ultimate
+    - damage
+    - aoe
+description:
+  - "§4Invoca 5 meteoros sequenciais, cada um causando 120% do poder mágico em área de 6 blocos."
+  - "§7Janela telegráfica via MythicMobs projeta círculos de aviso antes do impacto."
+  - "§cRespeita caps globais e aplica exaustão em raças resistentes ao elemento."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Sequence:
+        type: mechanic
+        data:
+          repetitions: 5
+          period: 20
+        children:
+          TargetGround:
+            type: target
+            data:
+              range-base: 24
+              range-scale: 0
+              ground: true
+            children:
+              MeteorWarning:
+                type: mechanic
+                data:
+                  effect: LAVA
+                  amount-base: 30
+                  radius-base: 1.2
+              DelayImpact:
+                type: mechanic
+                data:
+                  delay: 15
+                children:
+                  AreaDamage:
+                    type: mechanic
+                    data:
+                      radius-base: 6
+                      group: enemy
+                    children:
+                      Damage:
+                        type: mechanic
+                        data:
+                          value-base: 1.2
+                          classifier: skill
+                          type: damage
+                          element: fire
+                      Instability:
+                        type: mechanic
+                        data:
+                          command: "skript run wizard_evocation_cataclysm_mark %target%"
+                          silent: true
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_evocation_cataclysm_start %caster%"
+          silent: true

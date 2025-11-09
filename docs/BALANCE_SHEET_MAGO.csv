@@ -1,0 +1,21 @@
+Skill,Tipo,Custo(Mana/Slot),Duração,CD,Dano/Redução,Área,Notas PvP,Preparável,Tier
+Teleporte Curto,Ativa,"15/-","Instantâneo",45,"Reposicionamento",Self,"Mobilidade limitada, sem invulnerabilidade",Não,T1
+Parede Arcana,Ativa,"25/1",6,90,"Bloqueia projéteis","5 blocos","Necessita preparo, controla avanço",Sim,T1
+Preparação Arcana,Ativa,"5/-","Menu",30,"--",Self,"Somente fora de combate",Não,T1
+Estudo Rigoroso,Passiva,"0/-","Sempre","--","-10% CD habilidades preparadas","--","Ativo enquanto houver skills preparadas",N/A,T1
+Foco Mental,Passiva,"0/-","Mana>80%","--","+5% poder mágico","--","Vulnerável a bursts mana drain",N/A,T1
+Orbe Flamejante,Ativa,"22/1",6,45,"160% + 40%/tick fogo","6 blocos","Aplica exaustão se alvo resistente a fogo",Sim,T2
+Nova Arcana,Ativa,"28/-","Instantâneo",75,"140% arcano","6 blocos","Explosão telegráfica, aplica knockback moderado",Não,T2
+Lança Etérea,Ativa,"24/-","Instantâneo",60,"150% arcano","Linha 3 alvos","Requer alinhamento, marca último alvo",Não,T2
+Catalisador de Poder,Ativa,"20/-",12,105,"+18% dano","Self","Próxima skill reduz 10% resistência mágica",Não,T3
+Cataclismo Controlado,Ultimate,"60/-","5 impactos",240,"5x120% fogo","6 blocos","Telemetria clara, evita one-shot",Não,T4
+Barreira Protetora,Ativa,"20/-",10,45,"200 absorção","Self","Limitada ao cap 45% mitigação",Não,T2
+Contra-Feitiço,Ativa,"28/1","Janela 3s",75,"Silêncio 2s","Alvo único","Falha se usado fora do tempo",Sim,T2
+Selo Rúnico,Ativa,"25/-",12,90,"-25% dano elemental","6 blocos","Não remove fraquezas raciais",Não,T3
+Reflexo Prismático,Ativa,"24/-",8,105,"Devolve 30% dano mágico","Self","Sem acumular com refletivas raciais",Não,T3
+Fortaleza Arcana,Ultimate,"60/-",8,240,"Domo + regen 5%/s","6 blocos","Não bloqueia dano verdadeiro",Não,T4
+Imagem Múltipla,Ativa,"18/1",6,45,"Absorve 1 hit/cópia","Ao redor","Clones desaparecem com dano pesado",Sim,T2
+Véu Invisível,Ativa,"24/-",8,75,"+20% speed & invis","Self","Sai ao causar dano pesado",Não,T2
+Labirinto Mental,Ativa,"26/-",4,90,"Imobiliza","Alvo único","Quebra com dano alto",Não,T3
+Fantasmagoria,Ativa,"22/-",10,105,"Medo 3s e -15% precisão","6 blocos","Telegráfica; evita stacking com outros medos",Não,T3
+Mundo Espelhado,Ultimate,"55/-",12,240,"Duplica aliados (absorve 1 hit)","8 blocos","Desorienta sem controlar forte",Não,T4

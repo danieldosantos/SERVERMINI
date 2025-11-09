@@ -1,0 +1,50 @@
+# Ilusão - Véu Invisível
+name: wizard_illusion_invisible_veil
+display: "§dVéu Invisível"
+icon: PHANTOM_MEMBRANE
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_illusion
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 24
+  mana-cost-scale: 0
+  duration-base: 8
+  duration-scale: 0
+  speed-base: 0.2
+  speed-scale: 0
+  tags:
+    - stealth
+    - mobility
+description:
+  - "§dAplica invisibilidade por 8s e +20% velocidade; termina ao causar dano pesado."
+  - "§7Respeita caps globais de velocidade e integra com PlaceholderAPI para HUD."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Invisibility:
+        type: mechanic
+        data:
+          duration-base: 8
+      Speed:
+        type: mechanic
+        data:
+          attribute: walk-speed
+          multiplier-base: 0.2
+          duration-base: 8
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_illusion_veil %caster%"
+          silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: SPELL_INSTANT
+          amount-base: 15
+          radius-base: 0.6

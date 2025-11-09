@@ -1,0 +1,21 @@
+# Passiva: Foco Mental
+name: wizard_mental_focus
+display: "§9Foco Mental"
+icon: LAPIS_LAZULI
+type: Passive
+max-level: 1
+attributes:
+  cooldown-base: 0
+  cooldown-scale: 0
+description:
+  - "§7Concede +5% de poder mágico enquanto a mana estiver acima de 80%."
+  - "§9Monitora recursos via PlaceholderAPI para atualizar HUD automaticamente."
+components:
+  Passive:
+    type: trigger
+    children:
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_apply_focus %caster%"
+          silent: true

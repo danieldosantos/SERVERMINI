@@ -1,0 +1,53 @@
+# Abjuração - Selo Rúnico
+name: wizard_abjuration_runic_seal
+display: "§bSelo Rúnico"
+icon: ENCHANTED_BOOK
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_abjuration
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  duration-base: 12
+  duration-scale: 0
+  radius-base: 6
+  radius-scale: 0
+  tags:
+    - mitigation
+    - support
+description:
+  - "§bProjeta selo no solo reduzindo dano elemental em 25% a aliados em 6 blocos por 12s."
+  - "§7Não remove fraquezas raciais e é rastreado pelo Skript para exaustão."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      GroundTarget:
+        type: target
+        data:
+          range-base: 16
+          ground: true
+        children:
+          AreaBuff:
+            type: mechanic
+            data:
+              radius-base: 6
+              duration-base: 12
+              attribute: elemental-damage-reduction
+              value-base: 0.25
+          Particles:
+            type: mechanic
+            data:
+              effect: ENCHANTMENT_TABLE
+              amount-base: 25
+              radius-base: 2.0
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_abjuration_seal %caster%"
+          silent: true

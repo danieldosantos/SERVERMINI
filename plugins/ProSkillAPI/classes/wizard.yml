@@ -1,0 +1,137 @@
+# Classe base Mago para ProSkillAPI
+name: Wizard
+prefix: "Wizard"
+display: "§9Mago"
+main-class: true
+description:
+  - "§7Conjurador acadêmico focado em controle, utilidade e explosões situacionais."
+  - "§9Gerencia Mana regenerativa e slots de preparação diária para selecionar feitiços."
+  - "§7Prioriza posicionamento e recursos ao invés de mitigação direta."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Mana"
+  mana-regen: 4
+  max-level: 60
+  exp-source: quest
+  attributes-scaled: true
+  needs-race: false
+  resources:
+    # Recurso de Mana regenerativa, com regeneração diferenciada via Skript
+    mana:
+      key: mana
+      display: "Mana"
+      min: 0
+      max: 100
+      scaling:
+        tier1: 150
+        tier2: 190
+        tier3: 230
+        tier4: 270
+      regen-out-of-combat:
+        delay: 8
+        interval: 5
+        amount: 0.04
+      regen-in-combat:
+        delay: 10
+        interval: 5
+        amount: 0.02
+    # Slots de preparação diária de feitiços
+    prepared_slots:
+      key: prepared_slots
+      display: "Slots Preparados"
+      min: 0
+      max: 9
+      scaling:
+        tier1: 3
+        tier2: 5
+        tier3: 7
+        tier4: 9
+  scoreboard:
+    mana: "wizard_mana"
+    preparation: "wizard_prep"
+    cooldowns: "wizard_cd"
+    placeholders:
+      mana_pct: "%skills_mana_percent%"
+      prepared_slots_used: "%skills_wizard_prep_used%"
+      prepared_slots_max: "%skills_wizard_prep_max%"
+      cooldown_next: "%skills_wizard_next_cd%"
+attributes:
+  health-base: 24
+  health-scale: 2.2
+  mana-base: 150
+  mana-scale: 24
+  walk-speed-base: 0.02
+  walk-speed-scale: 0.004
+  physical-defense-base: 2
+  physical-defense-scale: 0.6
+  magical-defense-base: 4
+  magical-defense-scale: 1.0
+  skill-damage: 6.0
+  attack-damage: 1.0
+  level-bonus:
+    1:
+      health: 24
+      mana: 150
+      prepared_slots: 3
+      speed: 0.0
+    5:
+      health: 34
+      mana: 190
+      prepared_slots: 5
+      speed: 0.01
+    11:
+      health: 46
+      mana: 230
+      prepared_slots: 7
+      speed: 0.03
+    17:
+      health: 58
+      mana: 270
+      prepared_slots: 9
+      speed: 0.05
+mana:
+  regen-combat: 6
+  regen-out: 12
+exp:
+  kill-multiplier: 0.8
+  quest-multiplier: 1.1
+  pvp-multiplier: 1.0
+skills:
+  tier1:
+    active:
+      - wizard_short_blink
+      - wizard_arcane_wall
+      - wizard_arcane_preparation
+    passive:
+      - wizard_rigorous_study
+      - wizard_mental_focus
+  tier2:
+    active:
+      - wizard_short_blink
+      - wizard_arcane_wall
+      - wizard_arcane_preparation
+    passive:
+      - wizard_rigorous_study
+      - wizard_mental_focus
+  tier3:
+    active:
+      - wizard_short_blink
+      - wizard_arcane_wall
+      - wizard_arcane_preparation
+    passive:
+      - wizard_rigorous_study
+      - wizard_mental_focus
+  tier4:
+    active:
+      - wizard_short_blink
+      - wizard_arcane_wall
+      - wizard_arcane_preparation
+    passive:
+      - wizard_rigorous_study
+      - wizard_mental_focus
+notes:
+  - "Cooldowns de controle respeitam limite ≥90s, mobilidade em 45s e ultimates >180s."
+  - "Slots preparados só podem ser reconfigurados via comando Skript em descanso longo."
+  - "Exaustão de resistência é aplicada se buffs sobrepuserem resistências raciais." 
