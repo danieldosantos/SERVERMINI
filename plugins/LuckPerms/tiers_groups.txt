@@ -1,0 +1,9 @@
+# Comandos LuckPerms para configuração das hierarquias de Tier
+lp creategroup tier_t1
+lp creategroup tier_t2
+lp creategroup tier_t3
+lp creategroup tier_t4
+
+lp parent set tier_t2 tier_t1
+lp parent set tier_t3 tier_t2
+lp parent set tier_t4 tier_t3
