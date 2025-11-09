@@ -1,79 +1,90 @@
 # Diretrizes de Balanceamento — Raças e Classes
 
-Este documento define limites obrigatórios para desenvolvimento de raças, classes e habilidades no
-servidor. Toda mudança deve ser validada aqui antes de ir para produção.
+Este documento define limites obrigatórios para desenvolvimento de raças e classes no servidor. Toda
+mudança deve ser validada aqui antes de ir para produção. Os valores consideram Paper 1.21.x com os
+plugins LuckPerms, RacesEffects, AuraSkills, MythicMobs e Skript.
 
-## Regras Globais
-- **Uptime Máximo**: qualquer passivo automático deve permanecer ativo no máximo 60 % do tempo em combate.
-Use janelas mortas claras (ex.: 24 s ativos, 16 s inativos).
-- **Cooldowns**
-  - Habilidades chave: ≥45 s entre usos.
-  - Habilidades situacionais: ≥90 s.
-  - Ultimates / transformações maiores: 180–240 s.
-- **Caps Numéricos**
-  - Velocidade adicional permanente ≤ +0,02 (≈+10 %). Buffs temporários podem atingir +0,05 desde que
-durem ≤15 s e respeitem cooldown ≥90 s.
-  - Redução de dano/resistência plana ≤60 %; imunidades completas apenas em cenários de nicho com janela
-morta ≥30 s.
-  - Chance crítica ofensiva ≤25 % extra além do equipamento; dano crítico adicional limitado a +50 %.
-  - Cura direta não pode exceder 35 % da vida máxima por cast; efeitos de HoT limitados a 6 %/s.
+## Caps Globais
+- **Velocidade**: bônus permanente ≤ +0,02 (`GENERIC_MOVEMENT_SPEED`). Buffs temporários podem chegar a
++0,05 por ≤15 s com cooldown ≥90 s.
+- **Resistência**: redução plana ≤60 %. Combinações raça+classe devem multiplicar (não somar) para evitar
+imunidades. Imunidade total somente com janela morta ≥30 s.
+- **Crítico**: chance extra ≤25 % além do equipamento; dano crítico adicional ≤+50 %.
+- **Cura**: cura instantânea ≤35 % da vida máxima; HoTs ≤6 %/s; escudos ≤25 % da vida máxima.
+- **Burst ofensivo**: habilidades não-ultimates limitadas a 220 % do dano base em uma janela de 3 s;
+ultimates podem chegar a 300 % desde que respeitem cooldown ≥180 s.
 
-## Orientações por Sistema
+## Limites de Uptime
+- Passivos automáticos devem manter **≤60 %** de tempo ativo. Configure janelas claras (ex.: 24 s on /
+16 s off).
+- Buffs de grupo e auras devem compartilhar janelas mortas sincronizadas para impedir empilhamento
+indefinido.
+
+## Tiers de Cooldown
+| Tipo de habilidade | Cooldown mínimo | Observações |
+| --- | --- | --- |
+| Chave (rotações principais) | ≥45 s | inclui Fúria, Inspiração, Marca do Caçador |
+| Situacional (controle/defesa forte) | ≥90 s | ex.: Totens defensivos, Trombeta Halfling |
+| Ultimate / transformação | 180 s – 240 s | permite burst de 12–18 s |
+
+## Parâmetros por Sistema
 ### Raças
-- **Empilhamento de Resistências**: não acumular mais de duas resistências >40 % na mesma raça. Se um
-jogador somar raça + classe, aplicar multiplicador de 0,8 para evitar imunidades totais.
-- **Itens Raciais**: teleportes/escape ≥240 s; controle de grupo ≥120 s; sopros elementais padronizados
-em 45 s com dano escalado por AuraSkills.
-- **Atributos Bônus**: distribua +2/+1 ou +1/+1/+1 ao aplicar pontos no AuraSkills. Variações fora desse
-formato devem ser compensadas com desvantagem passiva.
+- **Empilhamento de resistências**: máximo de duas fontes >40 %; aplicar multiplicador 0,8 quando raça e
+classe oferecem a mesma resistência.
+- **Itens raciais**: teleportes/escape ≥240 s; controles em área ≥120 s; sopros elementais padronizados
+em 45 s com dano escalado por AuraSkills (STR ou CHA).
+- **Atributos bônus**: padrão +2/+1 ou +1/+1/+1. Qualquer exceção deve adicionar desvantagem explícita
+(penalidade de atributo ou vulnerabilidade condicional).
+- **Cooldown compartilhado**: itens com efeitos similares (ex.: Trombeta Halfling) devem usar o mesmo
+cooldown global via Skript para impedir combinação de sub-raças.
 
 ### Classes
-- **Recursos**: regen base de mana = 5 %/5 s; fury/ki/divinity recuperam 1 carga a cada 30 s fora de
-combate. Bloquear regen enquanto estiver sob efeitos de controle forte.
-- **Buffs de Grupo**: somatórios máximos de +15 % dano/cura. Buffs iguais não acumulam; manter apenas o
-mais forte ativo.
-- **Habilidades de Sobrevivência**: efeitos como Relentless, Second Wind, Lay on Hands compartilham
-cooldown global de 300 s para evitar “cadeia de vida”.
-- **Pets e Invocações**: vida escalonada em 50 % da vida do invocador e recebem 200 % de dano de área para
-impedir bloqueio permanente.
+- **Recursos**: regen base `mana` 5 %/5 s; `fury`, `ki`, `divinity`, `battle_focus`, `sorcery_points`
+regeneram 1 carga a cada 30 s fora de combate. Bloqueie regen sob atordoamento ou prisão.
+- **Buffs de grupo**: somatório máximo +15 % dano/cura. Se múltiplos buffs ativos, mantenha somente o
+mais forte.
+- **Habilidades de sobrevivência**: Second Wind, Lay on Hands, Relentless, etc., compartilham cooldown
+interno de 300 s.
+- **Pets e invocações**: vida máxima = 50 % do invocador, dano em área recebido = 200 % para evitar
+bloqueio permanente.
+- **Integração AuraSkills**: cada comando deve verificar recurso disponível antes de disparar MythicMobs
+(implementado em `classes_core.sk`). Ajuste custos para que a barra de recursos esgote em ~3 rotações.
 
-## Comparativo e Ajustes Recomendados
-### Raças
-| Raça/Subtipo | Pontos Fortes | Ajuste Necessário | Observação |
-| --- | --- | --- | --- |
-| Alto Elfo | Retaliação automatizada | Aplicar intervalo interno 5 s e limitar dano a 2,0 | Evita burst infinito |
-| Elfo da Floresta | Mobilidade + invisibilidade | Garantir requisito de ambiente (tronos com folhas) | Ajustar Skript para checar bloco |
-| Drow | Teleporte + debuffs em profundidade | Bloquear teleporte se recebeu dano nos últimos 3 s | Mantém identidade sem fuga infinita |
-| Anão Profundezas | Cegueira automática | Limitar a 10 s e adicionar cooldown interno 20 s | Reduz frustração |
-| Gnomo Floresta | Invisibilidade condicional | Aumentar cooldown do item para 420 s (já aplicado) | Monitorar abuso em PvP |
-| Halfling | Controle em área (trombeta) | Compartilhar cooldown 120 s entre raças | Evita stack |
-| Meio-Orc | Relentless Endurance | Definir cooldown global 300 s + exibir mensagem de recarga | Transparência |
-| Humano | Regeneração | Aplicar janela morta 20 s após cada ativação | Evita looping |
-| Tiefling | Resistência a fogo + velocidade | Introduzir “exaustão de resistência” após 3 hits fortes | Já mapeado no Skript |
-| Dragonborn | Sopro elemental | Padronizar dano por nível e recarga 45 s | Escala com AuraSkills STR/CHA |
-
+## Comparativo de Papéis
 ### Classes
-| Classe | Pontos Fortes | Ajuste Necessário | Observação |
+| Papel | Objetivo DPS (PvE) | Mitigação alvo | Ferramentas chave |
 | --- | --- | --- | --- |
-| Bárbaro | Fúria alta + redução | Associar custo de `fury` por ativação e limitar 3 usos consecutivos | Evita uptime >60 % |
-| Bardo | Cadeia de buffs | Limitar Inspiração a 3 alvos e Canção em 30 s duração | Controla empilhamento |
-| Bruxo | Controle + dano em área | Adicionar cooldown global 10 s por alvo para Hex/rajada | Evita spam |
-| Clérigo | Cura explosiva | Forçar cap 35 % de cura por cast e HoT 6 %/s | Mantém risco |
-| Druida | Controle de terreno | Formas fortes ≤60 s com recarga 180 s | Segue regra global |
-| Feiticeiro | Burst elemental | Metamagia consome 1–2 `sorcery_points`; regen apenas fora de combate | Impede loops |
-| Guerreiro | Action Surge + manobras | Cooldown 120 s e custo de `battle_focus` | Balanceia burst |
-| Ladino | Ataque furtivo | Reaplicar cooldown 6 s via scoreboard global | Impede reset via logout |
-| Mago | Controle massivo | Aplicar diminishing returns (−30 % duração por reaplicação) | Evita CC infinito |
-| Monge | Mobilidade constante | Regeneração de Ki pausada em combate | Mantém mobilidade situacional |
-| Paladino | Aura permanente | Uptime 60 % com custo de `divinity` por 10 s de aura | Evita invulnerabilidade |
-| Patrulheiro | Marca + pet | Compartilhar cooldown de pet 90 s e vulnerabilidade a dano em área | Ajuste PvP |
+| Tanque | 55–65 % do DPS topo | 40–50 % DR média | Bárbaro, Paladino, Guerreiro (Champion) |
+| Dano | 100 % base | ≤15 % DR | Ladino, Feiticeiro, Guerreiro (Battlemaster), Patrulheiro |
+| Suporte | 60–70 % DPS | 20–30 % DR | Bardo, Clérigo, Paladino |
+| Controle | 70–80 % DPS | 15–25 % DR | Druida, Mago, Bruxo |
+
+### Raças
+| Raça/Subtipo | Força principal | Ajuste recomendado |
+| --- | --- | --- |
+| Alto Elfo | Retaliação elemental | Verificar danos ≤2,0 e intervalo interno 5 s |
+| Elfo da Floresta | Mobilidade + invisibilidade | Exigir tronco com folhas para camuflagem |
+| Drow | Teleporte + veneno | Bloquear uso se recebeu dano nos últimos 3 s |
+| Anão Profundezas | Cegueira automática | Cooldown interno 20 s, duração máx. 10 s |
+| Gnomo Floresta | Invisibilidade condicional | Item com cooldown 420 s compartilhado |
+| Halfling | Trombeta de controle | Cooldown global 120 s entre subtipos |
+| Meio-Orc | Relentless Endurance | Mensagem clara + cooldown 300 s |
+| Humano | Regeneração condicional | Janela morta 20 s após cada ativação |
+| Tiefling | Resistência a fogo + velocidade | Exaustão após 3 hits fortes (30 s sem buff) |
+| Dragonborn | Sopro elemental | Dano escalado por STR/CHA, cooldown 45 s |
+
+## Ajuste Incremental
+- Aplique mudanças graduais de **±5 %** por patch em dano, cura ou mitigação. Valores maiores exigem
+testes dedicados e comunicação com a comunidade.
+- Sempre registrar métricas antes/depois (DPS médio, HPS, tempo de sobrevivência) em arenas PvE/PvP.
 
 ## Checklist de Teste
 1. Validar logs de MythicMobs e Skript para confirmar cooldowns reais.
 2. Medir dano/cura médio em arenas PvE e PvP a cada atualização major.
-3. Atualizar este documento sempre que introduzir nova subclasse ou raça experimental.
+3. Garantir que AuraSkills reflita custos definidos nos Skripts (usar `/auraskills player <nick> info`).
+4. Atualizar este documento sempre que introduzir nova subclasse ou raça experimental.
 
 ## Procedimento de Revisão
 - Revisão cruzada mensal entre equipe de desenvolvimento e staff de eventos.
-- Registrar ajustes aplicados no changelog interno e anexar métricas (uptime, DPS, HPS).
-- Se a regra for violada em produção, priorizar hotfix e informar jogadores no Discord oficial.
+- Registrar ajustes aplicados no changelog interno com métricas de uptime, DPS, HPS e taxa de vitória.
+- Em caso de violação dos limites em produção, priorizar hotfix e comunicar jogadores no Discord oficial.
