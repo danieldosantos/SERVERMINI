@@ -1,39 +1,42 @@
-# Subclasse Monge - Caminho da Sombra
-name: Monk_Shadow
+# Subclasse: Caminho da Sombra
+name: Monk_WayOfShadow
 display: "§8Caminho da Sombra"
 description:
-  - "§7Especialistas em furtividade e emboscadas com controle de visão."
-  - "§8Limita o burst por janelas e exige gerenciamento de Ki e iluminação."
+  - "§7Saltos entre penumbras, cegueira tática e mitigação via furtividade."
+  - "§8Combina teleporte curto, redução de agro e debuffs que drenam resistência inimiga."
 options:
   needs-permission: true
   parent: Monk
   mana-name: "Ki"
-  ki-tags:
+  tags:
     focus: stealth
 skills:
   tier1:
     active:
-      - monk_shadow_step
-      - monk_shadow_slash
+      - monk_shadow_shadow_step
+      - monk_shadow_darkening_strike
     passive: []
   tier2:
     active:
-      - monk_shadow_step
-      - monk_shadow_slash
-      - monk_shadow_silent_mist
+      - monk_shadow_shadow_step
+      - monk_shadow_darkening_strike
+      - monk_shadow_smoke_pellet
     passive: []
   tier3:
     active:
-      - monk_shadow_step
-      - monk_shadow_slash
-      - monk_shadow_silent_mist
-      - monk_shadow_umbric_chains
+      - monk_shadow_shadow_step
+      - monk_shadow_darkening_strike
+      - monk_shadow_smoke_pellet
+      - monk_shadow_silent_veil
     passive: []
   tier4:
     active:
-      - monk_shadow_step
-      - monk_shadow_slash
-      - monk_shadow_silent_mist
-      - monk_shadow_umbric_chains
-      - monk_shadow_penumbra_dominion
+      - monk_shadow_shadow_step
+      - monk_shadow_darkening_strike
+      - monk_shadow_smoke_pellet
+      - monk_shadow_silent_veil
+      - monk_shadow_binding_shroud
     passive: []
+notes:
+  - "Passo das Sombras exige blocos com luz ≤7; Skript cancela em áreas iluminadas."
+  - "Sombra Vinculante acumula até -24% resistência e ativa exaustão se o alvo já sofrer debuff racial similar."

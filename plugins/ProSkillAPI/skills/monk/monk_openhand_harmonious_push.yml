@@ -1,0 +1,70 @@
+# Skill: Empurrão Harmonioso
+name: monk_openhand_harmonious_push
+display: "§aEmpurrão Harmonioso"
+icon: GREEN_CARPET
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§7Cone 5 blocos que empurra 3 blocos e interrompe conjuração."
+  - "§aConsome 1 Ki e aplica exaustão se alvo tiver resistência racial a empurrão."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      KiCheck:
+        type: condition
+        data:
+          key: ki_charges
+          min-value: 1
+          fail-message: "§cVocê precisa de Ki para Empurrão Harmonioso."
+        children:
+          ConsumeKi:
+            type: mechanic
+            data:
+              key: ki_charges
+              amount-base: 1
+              indicator: "§a-1 Ki"
+      Cone:
+        type: target
+        data:
+          shape: cone
+          range-base: 5
+          range-scale: 0
+          angle-base: 60
+          angle-scale: 0
+          group: enemy
+        children:
+          Knockback:
+            type: mechanic
+            data:
+              speed-base: 0.8
+              speed-scale: 0
+              direction: caster
+              type: velocity
+          Interrupt:
+            type: mechanic
+            data:
+              command: "skript run monk_interrupt %target%"
+              silent: true
+          ExhaustionCheck:
+            type: mechanic
+            data:
+              command: "skript run monk_push_resistance %target%"
+              silent: true
+      ParticleWave:
+        type: mechanic
+        data:
+          effect: SWEEP_ATTACK
+          radius-base: 3
+          particles-base: 24
+          arrangement: circle
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% monk_ki"
+          silent: true

@@ -1,0 +1,36 @@
+# Skill: Pelota de Fumaça
+name: monk_shadow_smoke_pellet
+display: "§8Pelota de Fumaça"
+icon: COAL
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+description:
+  - "§7Cria neblina de 6 blocos por 5s que cega inimigos por 2s na entrada."
+  - "§8Area-of-effect controlado via MythicMobs e Skript."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      SmokeCloud:
+        type: mechanic
+        data:
+          command: "skript run monk_smoke_pellet %caster% 6 5 2"
+          silent: true
+      Sound:
+        type: mechanic
+        data:
+          sound: ENTITY_GHAST_SHOOT
+          volume-base: 0.7
+          pitch-base: 1.4
+      Actionbar:
+        type: mechanic
+        data:
+          message: "§8Pelota de Fumaça lançada"
+          targets: self

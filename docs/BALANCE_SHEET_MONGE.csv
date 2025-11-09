@@ -1,22 +1,22 @@
-Skill,Tipo,Custo (Ki/Mana),Duração,CD,Dano/Redução,Área,Notas PvP,Tier
-Rajada de Golpes,Ativa,1 Ki,4s,45s,+12% dano & 2 ataques extras,Self buff,Burst controlado com limite,Todos
-Passo do Vento,Ativa,1 Ki,4s,45s,+0.05 vel / queda lenta,Dash linear,Escapar sem romper caps,Todos
-Mãos Curativas,Ativa,1 Ki,Instantâneo,60s,10% HP + cleanse,Alvo único,Suporte sem overheal,Todos
-Disciplina Desarmada,Passiva,0,6s reaplicados,N/A,+12% mitigação comb. máx,Self,Dependente de armadura leve,Todos
-Redirecionar Projéteis,Passiva,0,3s a cada 20s,N/A,20% resistência projétil,Sphere 0,Uptime 15%,Todos
-Equilíbrio de Ki,Passiva,0,HUD,5s ping,Sincronização HUD,Self,Regen via Skript,Todos
-Palmada Desestabilizadora,Ativa,1 Ki,Instantâneo,30s,130% dano / -10% dano alvo,Alvo único,Empurra 4 blocos,T2+
-Onda Interior,Ativa,1 Ki,8s,45s,-15% dano inimigo,Cone 6b,Não acumula,T2+
-Ritmo Harmonioso,Ativa,0,6s,75s,+2 Ki / cura 6%,Self,Janela segura,T2+
-Caminho do Zéfiro,Ativa,1 Ki,4s,60s,+0.05 vel + salto,Jogador,Respeita DR racial,T3+
-Sopro Tranquilo,Ativa,3 Ki,10s,210s,-40% dano aliados + 5%/s,Aura 6b,Não stacka com ultimates,T4
-Passo das Sombras,Ativa,1 Ki,Instantâneo,35s,Teleporte 12b,Self,Exige baixa luz,T2+
-Cutilada Sombria,Ativa,1 Ki,Instantâneo,40s,150% dano + cegueira,Alvo único,Burst contido,T2+
-Névoa Silenciosa,Ativa,1 Ki,4s invis,60s,Cegueira 4s + invis,Área 5b,Define zona de sombras,T2+
-Correntes Umbráticas,Ativa,2 Ki,3s root,75s,-10% mitigação,Alvo único,Set-up de kill,T3+
-Domínio da Penumbra,Ativa,3 Ki (fallback 2),12s ou 8s,210s,+70% dano sombra,Self + clone,Req. janelas controladas,T4
-Rajada Flamejante,Ativa,1 Ki,Instantâneo,40s,130% dano + queimadura,Linha 8b,Burst linear,T2+
-Muralha Aquática,Ativa,1 Ki,8s,60s,-60% projéteis,Aura 6b,Semi-estática,T2+
-Salto do Vendaval,Ativa,1 Ki,6s queda,50s,Impulso 10b,Semi-linha,Movimento evasivo,T2+
-Punho Terrano,Ativa,2 Ki,Instantâneo,75s,160% dano + stun 2s,Alvo único,Controle curto,T3+
-Avatar Elemental,Ativa,3 Ki,15s,240s,+20% dano→+20% mitig→cura 4%/s,Aura curta,Rotação previsível,T4
+Skill,Tipo,Custo(Stamina/Ki),Duração,CD,Dano/Redução,Área,Notas PvP,Tier
+Rajada de Golpes,Ativa,Ki 1,3s,45s,2 golpes extras 80%,Alvo único,Janela curta evita one-shot,Todos
+Passo do Vento,Ativa,30 Estamina,6s,45s,+0.05 vel / queda 70% menos,Self,Stack DR velocidade global,T1+
+Defletir Projéteis,Ativa,25 Estamina,3s,60s,-60% projéteis + refletir 120%,Self cone frontal,Somente 1 reflexo por uso,Todos
+Postura de Foco,Ativa toggle,0,9s uptime,6s,+10% mitig / precisão,Self,Uptime limitado a ≤60%,Todos
+Defesa sem Armadura,Passiva,0,Permanente,0,+0-15% mitig baseado em atributos,Self,Capada para respeitar 45%,Todos
+Disciplina,Passiva,0,Permanente (proc 12s),0,+10 Estamina por esquiva,N/A,Proc só quando dano cancelado,Todos
+Palmada Tranquilizante,Ativa,20 Estamina,3s tropeço,45s,140% dano,Cone 4 blocos,Tropeço com imunidade decrescente,Open Hand
+Empurrão Harmonioso,Ativa,Ki 1,Instantâneo,60s,Knock 3 blocos + interrupção,Cone 5 blocos,Aplica exaustão se resistência presente,Open Hand
+Queda Suave,Ativa,20 Estamina,8s,60s,-80% dano de queda,+0.02 vel Self,Sinergia segura com Passo do Vento,Open Hand
+Mão que Cura,Ativa,Ki 1,Instantâneo,90s,Cura 18% HP,Alvo único,Cura ≤25% do alvo,Open Hand
+Palma Retumbante,Ultimate,Ki 2,6s,210s,70%/s + root 2s,Círculo 6 blocos,Imunidade DR após entrada,Open Hand
+Passo das Sombras,Ativa,Ki 1,Instantâneo,60s,Teleporte 8 blocos,Self,Requer luz ≤7,Shadow
+Pelota de Fumaça,Ativa,25 Estamina,5s,75s,Cegueira 2s na entrada,Círculo 6 blocos,Aplicar DR de cegueira compartilhada,Shadow
+Golpe Escurecedor,Ativa,20 Estamina,2s cegueira,45s,130% dano,Alvo único,Diminishing cego 2s,Shadow
+Véu Silencioso,Ativa,Ki 1,6s,90s,+15% esquiva & redução agro,Self,Não concede invis total,Shadow
+Sombra Vinculante,Ultimate,Ki 2,12s,210s,-12% resistência por hit (máx -24%),Alvo marcado,Remove marca ao sair da linha de visão,Shadow
+Punho Ígneo,Ativa,Ki 1,4s queimadura,60s,150% + 6%/s fogo,Alvo único,Queimadura respeita DR cura,Elements
+Onda de Gelo,Ativa,30 Estamina,4s slow,60s,100% dano base,Cone 5 blocos,+20% dano se alvo molhado,Elements
+Passo do Vórtice,Ativa,Ki 1,3s trilha,75s,40%/s rastro,Trilha 6 blocos,Dash sem hard CC,Elements
+Pele de Pedra,Ativa,Ki 1,8s,90s,+25% mitig (capado),Self,Aplica Exaustão Resistência,Elements
+Tormenta dos Quatro,Ultimate,Ki 2,10s,240s,60%/pulso a cada 2s,Zona 8 blocos,Puxão leve sem enraizar,Elements

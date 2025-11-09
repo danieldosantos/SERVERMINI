@@ -1,0 +1,45 @@
+# Skill: Queda Suave
+name: monk_openhand_soft_fall
+display: "§aQueda Suave"
+icon: WHITE_WOOL
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+description:
+  - "§78s de redução de 80% do dano de queda e +0.02 velocidade."
+  - "§aIdeal para reposicionamento vertical sem violar limite global de velocidade."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      SpeedBuff:
+        type: mechanic
+        data:
+          potion: SPEED
+          seconds-base: 8
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      ScriptHook:
+        type: mechanic
+        data:
+          command: "skript run monk_soft_fall %caster% 8 0.8"
+          silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: CLOUD
+          radius-base: 1.5
+          particles-base: 14
+          arrangement: sphere
+      Actionbar:
+        type: mechanic
+        data:
+          message: "§aQueda Suave ativa"
+          targets: self

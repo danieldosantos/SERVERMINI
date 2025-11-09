@@ -1,0 +1,56 @@
+# Skill: Onda de Gelo
+name: monk_elements_frost_wave
+display: "§bOnda de Gelo"
+icon: PACKED_ICE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+description:
+  - "§7Cone 5 blocos reduzindo velocidade em 40% por 4s."
+  - "§bSe o alvo estiver molhado, recebe +20% de dano adicional."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Cone:
+        type: target
+        data:
+          shape: cone
+          range-base: 5
+          range-scale: 0
+          angle-base: 60
+          angle-scale: 0
+          group: enemy
+        children:
+          Slow:
+            type: mechanic
+            data:
+              potion: SLOW
+              seconds-base: 4
+              seconds-scale: 0
+              amplifier-base: 1
+              amplifier-scale: 0
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.0
+              value-scale: 0
+              classifier: skill
+          WetCheck:
+            type: mechanic
+            data:
+              command: "skript run monk_frost_bonus %caster% %target% 0.2"
+              silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: SNOWBALL
+          radius-base: 2.5
+          particles-base: 30
+          arrangement: cone

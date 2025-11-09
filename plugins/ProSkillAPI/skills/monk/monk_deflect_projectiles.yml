@@ -1,0 +1,44 @@
+# Skill: Defletir Projéteis
+name: monk_deflect_projectiles
+display: "§bDefletir Projéteis"
+icon: SHIELD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+description:
+  - "§7Abre uma janela de 3s que reduz em 60% o dano de projéteis recebidos."
+  - "§bSe refletir, devolve 1 projétil com 120% do dano ao atacante."
+  - "§7Duração e rebound gerenciados pelo Skript para respeitar controles PvP."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      GuardStance:
+        type: mechanic
+        data:
+          command: "skript run monk_deflect_window %caster% 3 0.6 1.2"
+          silent: true
+      SoundCue:
+        type: mechanic
+        data:
+          sound: BLOCK_ANVIL_PLACE
+          volume-base: 0.7
+          pitch-base: 1.2
+      Actionbar:
+        type: mechanic
+        data:
+          message: "§bPostura defensiva ativa — 3s"
+          targets: self
+      ParticleRing:
+        type: mechanic
+        data:
+          effect: CRIT
+          radius-base: 2
+          particles-base: 18
+          arrangement: circle

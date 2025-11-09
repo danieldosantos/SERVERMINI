@@ -1,82 +1,112 @@
-# Classe base Monge para ProSkillAPI
+# Classe base: Monge
 name: Monk
 prefix: "Monk"
 display: "§eMonge"
 main-class: true
+key: monk
+# Visão geral e integrações
 description:
-  - "§7Adeptos da harmonia corporal com foco em controle e mobilidade."
-  - "§eGerenciam pontos de Ki para disparar janelas de dano e suporte pontuais."
-  - "§7Bônus raciais de esquiva/velocidade respeitam retornos decrescentes impostos pela classe."
+  - "§7Lutador ágil que alterna entre mobilidade, controle leve e defesa reativa."
+  - "§eAdministra §6Estamina§e (pool + regeneração) e cargas de Ki para explosões pontuais."
+  - "§7Integra HUD de PlaceholderAPI para Estamina, Ki, Postura e stacks de combo."
 options:
   needs-permission: true
   tree: requirement
   reset-on-death: false
-  mana-name: "Ki"
+  mana-name: "Estamina"
   mana-regen: 0
   max-level: 60
   exp-source: kill
   attributes-scaled: true
   needs-race: false
-  ki-resource:
-    key: ki_points
-    display: "Ki"
-    min: 0
-    max: 10
-    scaling:
-      tier1: 4
-      tier2: 6
-      tier3: 8
-      tier4: 10
-    regen-out-of-combat:
-      delay: 10
-      interval: 30
-      amount: 1
-    hud:
-      placeholder: "%skills_ki_points%"
-      scoreboard-objective: "monk_ki"
+  resources:
+    stamina:
+      key: stamina
+      display: "Estamina"
+      min: 0
+      max: 130
+      scaling:
+        tier1: 100
+        tier2: 110
+        tier3: 120
+        tier4: 130
+      regen-in-combat:
+        delay: 1
+        interval: 1
+        amount: 2
+      regen-out-of-combat:
+        delay: 1
+        interval: 1
+        amount: 6
+    ki:
+      key: ki_charges
+      display: "Ki"
+      min: 0
+      max: 5
+      scaling:
+        tier1: 2
+        tier2: 3
+        tier3: 4
+        tier4: 5
+      regen-out-of-combat:
+        delay: 45
+        interval: 45
+        amount: 1
+      hud:
+        placeholder: "%skills_monk_ki%"
+        scoreboard-objective: "monk_ki"
   scoreboard:
+    stamina: "monk_stamina"
     ki: "monk_ki"
-    dash: "monk_dash_cd"
-    utility: "monk_utility_cd"
-    states: "monk_states"
+    combo: "monk_combo"
+    posture: "monk_posture"
+    cooldown: "monk_cooldowns"
     placeholders:
-      ki: "%skills_ki_points%/%skills_ki_cap%"
-      dash: "%skills_step_wind_cd%"
-      utility: "%skills_monk_major_cd%"
-      states: "%skills_monk_states%"
+      stamina: "%skills_monk_stamina%"
+      stamina_regen: "%skills_monk_stamina_regen%"
+      ki_charges: "%skills_monk_ki%/%skills_monk_ki_cap%"
+      combo_stacks: "%skills_monk_combo%"
+      posture_active: "%skills_monk_posture%"
+      cooldown_next: "%skills_monk_next_cd%"
+  combat-state-placeholder: "%skills_combat_state%"
 attributes:
-  health-base: 30
-  health-scale: 2.2
-  mana-base: 0
+  health-base: 32
+  health-scale: 2.1
+  mana-base: 100
   mana-scale: 0
-  walk-speed-base: 0.015
+  walk-speed-base: 0.022
   walk-speed-scale: 0.003
-  physical-defense-base: 2
+  physical-defense-base: 3
   physical-defense-scale: 0.9
   projectile-defense-base: 4
-  projectile-defense-scale: 1.2
-  skill-damage: 0.0
-  attack-damage: 1.6
+  projectile-defense-scale: 1.0
+  attack-damage: 1.5
+  knockback-resist-base: 0.02
+  knockback-resist-scale: 0.01
   level-bonus:
     1:
       health: 32
+      mana: 100
       defense: 4
       speed: 0.0
     5:
-      health: 54
-      defense: 6
+      health: 56
+      mana: 110
+      defense: 5
       speed: 0.01
     11:
-      health: 86
-      defense: 8
+      health: 84
+      mana: 120
+      defense: 6
       speed: 0.015
     17:
-      health: 118
-      defense: 10
+      health: 112
+      mana: 130
+      defense: 7
       speed: 0.02
 mana:
-  regen-combat: 0
-  regen-out: 0
+  regen-combat: 2
+  regen-out: 6
 exp:
   kill-multiplier: 1.0
   quest-multiplier: 1.0
@@ -86,44 +116,50 @@ skills:
     active:
       - monk_flurry_of_blows
       - monk_step_of_the_wind
-      - monk_hand_of_healing
+      - monk_deflect_projectiles
+      - monk_focus_stance
     passive:
       - monk_unarmored_defense
-      - monk_projectile_deflection
+      - monk_discipline
   tier2:
     active:
       - monk_flurry_of_blows
       - monk_step_of_the_wind
-      - monk_hand_of_healing
+      - monk_deflect_projectiles
+      - monk_focus_stance
     passive:
       - monk_unarmored_defense
-      - monk_projectile_deflection
-      - monk_ki_balance
+      - monk_discipline
   tier3:
     active:
       - monk_flurry_of_blows
       - monk_step_of_the_wind
-      - monk_hand_of_healing
+      - monk_deflect_projectiles
+      - monk_focus_stance
     passive:
       - monk_unarmored_defense
-      - monk_projectile_deflection
-      - monk_ki_balance
+      - monk_discipline
   tier4:
     active:
       - monk_flurry_of_blows
       - monk_step_of_the_wind
-      - monk_hand_of_healing
+      - monk_deflect_projectiles
+      - monk_focus_stance
     passive:
       - monk_unarmored_defense
-      - monk_projectile_deflection
-      - monk_ki_balance
+      - monk_discipline
 subclasses:
-  open_hand:
+  openhand:
     display: "§aCaminho da Mão Aberta"
-    file: monk_open_hand.yml
+    file: monk_openhand.yml
   shadow:
     display: "§8Caminho da Sombra"
     file: monk_shadow.yml
   elements:
     display: "§bCaminho dos Quatro Elementos"
     file: monk_elements.yml
+notes:
+  - "Postura de Foco drena regeneração e respeita uptime ≤60%, controlado via monk_cmds.sk."
+  - "Mitigação somada com Postura + efeitos raciais respeita o teto global de 45%."
+  - "Velocidade bônus total travada em +0.05 somando Passo do Vento e efeitos raciais (Skript aplica DR)."
+  - "Disciplina concede estalo de Estamina apenas uma vez a cada 12s por jogador."

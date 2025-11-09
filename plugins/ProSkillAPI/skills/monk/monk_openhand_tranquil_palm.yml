@@ -1,0 +1,56 @@
+# Skill: Palmada Tranquilizante
+name: monk_openhand_tranquil_palm
+display: "§aPalmada Tranquilizante"
+icon: LIME_DYE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 4
+  range-scale: 0
+description:
+  - "§7140% de dano e aplica tropeço (-40% velocidade) por 3s."
+  - "§aTropeço respeita imunidade decrescente controlada por Skript."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Target:
+        type: target
+        data:
+          shape: single
+          range-base: 4
+          range-scale: 0
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              value-base: 1.4
+              value-scale: 0
+              classifier: skill
+          Slow:
+            type: mechanic
+            data:
+              potion: SLOW
+              seconds-base: 3
+              seconds-scale: 0
+              amplifier-base: 1
+              amplifier-scale: 0
+          ScriptHook:
+            type: mechanic
+            data:
+              command: "skript run monk_apply_tropeco %target% 3"
+              silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: CRIT_MAGIC
+          radius-base: 1.5
+          particles-base: 18
+          arrangement: circle

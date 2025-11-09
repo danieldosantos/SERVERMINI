@@ -1,44 +1,33 @@
-# Test Plan - Classe Monge
+# Plano de Testes – Classe Monge
 
-Este plano cobre 10 cenários PvE e 10 cenários PvP para validar balanceamento, consumo de Ki, cooldowns e integração com sistemas externos.
+## Cenários PvE (10 casos)
+1. **T1 – Tutorial de Rajada:** medir DPS médio durante Rajada de Golpes em boneco (HP 200). Registre dano total, tempo para consumir 2 hits e Estamina restante.
+2. **T1 – Mobilidade Passo do Vento:** cronometrar deslocamento em circuito 40 blocos com e sem skill; validar redução de dano de queda de 12 blocos (esperado ≤30% do dano base).
+3. **T2 – Cavernas Rasas:** enfrentar 6 zumbis em corredor usando Defletir Projéteis vs esqueletos; avaliar dano mitigado (%) e número de reflexões bem-sucedidas.
+4. **T2 – Queda Controlada (Open Hand):** saltar de 30 blocos com Queda Suave ativo; validar redução 80% e bônus de velocidade +0.02 sem romper cap global (+0.05 total com Passo do Vento).
+5. **T2 – Passo das Sombras em penumbra:** teleporte entre pontos iluminância 0–7; garantir falha com mensagem se lux >7 e sucesso quando válido.
+6. **T3 – Combo Sustentado:** simular rotação 60s alternando Rajada/Passo do Vento com disciplina ativa; capturar uptime de combo médio (alvo 4–6 stacks) e consumo total de Estamina/Ki.
+7. **T3 – Controle em cone (Open Hand):** usar Empurrão Harmonioso contra mobs conjuradores (Evoker). Verificar interrupção da magia e empurrão 3 blocos.
+8. **T3 – Pele de Pedra + Postura:** ativar ambos contra boss com dano constante. Garantir mitigação total ≤45% e aplicar exaustão caso raça tenha resistência nativa.
+9. **T4 – Tormenta dos Quatro:** medir dano médio por pulso em 8 mobs (zumbis/pillagers), tempo de permanência e integridade do puxão leve. Checar cooldown (240s).
+10. **T4 – Palma Retumbante:** avaliar dano acumulado (70%/s por 6s) e root de entrada 2s respeitando imunidade decrescente. Monitorar uptime total da aura ≤6s.
 
-## Métricas Gerais
-- **Tempo para matar (TTK):** medido em segundos ou número de rotações de habilidades.
-- **Dano Médio por Segundo (DPS):** observado em alvo de treinamento MythicMobs com log do ProSkillAPI.
-- **Mitigação Efetiva (ME%):** comparar dano recebido com/sem habilidades ativas.
-- **Ki Consumido/Regenerado:** registrar pontos gastos/ganhos por rotação.
-- **Controle:** duração efetiva de CC (empurrões, cegueira, imobilização).
+## Cenários PvP (10 casos)
+1. **Duelos espelhados T1:** Monge vs Monge (sem subclasse) – registrar TTK, Estamina final e número de Rajadas por duelo.
+2. **Defletir vs Arqueiro:** medir taxa de acertos refletidos e dano recebido com janela de 3s. Garantir que apenas um projétil retorna por ativação.
+3. **Open Hand – Palmada + Empurrão:** testar combo para derrubar alvo de penhasco (6 blocos). Checar que controle total ≤4s e aplica DR subsequente.
+4. **Shadow – Passo + Golpe:** avaliar burst ao teleportar atrás de oponente. Verificar cegueira 2s e respeito a cooldowns (60s / 45s).
+5. **Elements – Punho Ígneo + Onda de Gelo:** testar sinergia contra alvo “molhado” (efeito chuva). Confirmar bônus +20% dano e queimadura 6%/s (cap de cura ≤25% do dano).
+6. **Shadow – Véu Silencioso:** medir redução de agro/ruído vs mobs neutros durante PvP organizado; checar +15% chance de esquiva (logs de hits anulados).
+7. **Open Hand – Cura aliada:** avaliar Mão que Cura em aliado 40% HP. Confirmar cura 18% e respeito ao cap (≤25%) sem overheal.
+8. **Elements – Pele de Pedra em PvP:** combinar com Postura + raça resistente (ex.: Anão). Garantir mitigação ≤45% e aplicação de Exaustão de Resistência.
+9. **Tormenta dos Quatro vs grupo:** medir DPS em 3 jogadores defensores. Confirmar pulso a cada 2s (10s totais) e puxão leve sem hard CC.
+10. **Sombra Vinculante:** marcar alvo, contabilizar redução de resistência (–12% por acerto, máximo –24%) e tempo de expiração (12s). Validar remoção ao sair do range/combo.
 
-## PvE Scenarios
-| # | Tier | Local/Teste | Passos Principais | Métricas Esperadas |
-|---|------|-------------|-------------------|--------------------|
-| 1 | T1 | Campo de treino (dummy 500 HP) | Usar `/rajada` + auto ataques. | DPS 15–18, consumo 1 Ki, cooldown 45s respeitado. |
-| 2 | T1 | Arena goblin arqueiro | Alternar Passo do Vento para evitar flechas. | Mitigação projétil ~20% via passivo, cap de velocidade mantido. |
-| 3 | T1 | Suporte aliado NPC | `/maos_curativas` em aliado ferido 50%. | Cura 10% + remoção debuff, cd individual 60s. |
-| 4 | T2 | Mini-chefe humanoide | Abrir com Palmada Desestabilizadora → Onda Interior. | Brecha -10% e redução 15% confirmadas, Ki restante ≥3. |
-| 5 | T2 | Evento defesa aldeia | Ativar Ritmo Harmonioso durante pausa. | +2 Ki em 6s, cura 6%, sem ultrapassar Ki cap. |
-| 6 | T3 | Caverna com mobs rápidos | Usar Caminho do Zéfiro e Salto do Vendaval para reposicionar. | Velocidade <= cap +0.05, sem ignorar limites raciais. |
-| 7 | T3 | Magus Elemental (projéteis) | Invocar Muralha Aquática para proteger grupo. | Redução projétil ~60% por 8s, sem bloquear corpo a corpo. |
-| 8 | T3 | Caçada furtiva | Passo das Sombras + Névoa Silenciosa. | Teleporte 12 blocos somente em baixa luz, invis 4s, cd respeitado. |
-| 9 | T4 | Chefe dragão | Sopro Tranquilo durante rajada de fogo. | Aura 6 blocos, ME total aliados ≤45%, cura 5%/s, consumo 3 Ki. |
-|10 | T4 | Cerco elemental | Avatar Elemental ciclo completo. | Fases 5s dano→5s defesa→5 ticks cura 4%/s, cd 240s.
-
-## PvP Scenarios
-| # | Tier | Setup | Passos Principais | Métricas Esperadas |
-|---|------|-------|-------------------|--------------------|
-| 1 | T1 | Duelo vs Guerreiro | Abrir com Rajada + esquiva. | Burst <= 45% HP alvo, controle moderado. |
-| 2 | T1 | 2v2 suporte | Alternar Mãos Curativas entre aliados. | Cura média 10% por uso, sem spam (cd 60s). |
-| 3 | T2 | Duelo vs Ladino rápido | Uso defensivo de Passo do Vento + Palmada. | Knockback 4 blocos, reduz dano ladino 10%. |
-| 4 | T2 | Controle de ponto | Onda Interior em área. | Redução dano inimigo 15% por 8s sem stack. |
-| 5 | T3 | Emboscada Monge Sombra vs Mago | Passo das Sombras → Cutilada Sombria. | DPS burst não finaliza alvo full HP; cegueira 3s confirmada. |
-| 6 | T3 | Defesa bandeira | Correntes Umbráticas em portador. | Imobiliza 3s, mitigação -10%, cd 75s. |
-| 7 | T3 | Mobilidade Elemental | Salto do Vendaval em parkour PvP. | Distância 10 blocos, queda lenta 6s, sem ultrapassar cap. |
-| 8 | T4 | Teamfight 4v4 | Sopro Tranquilo vs ultimates inimigas. | Mitigação ≤40%, cura 5%/s, consumo 3 Ki; medir ME% agregado. |
-| 9 | T4 | Dupla Sombra | Domínio da Penumbra + aliado. | Sombra viva +70% dano, duração 12s (ou 8s com 2 Ki fallback). |
-|10 | T4 | Conflito Elemental | Avatar Elemental vs Paladino. | Sequência completa sem ultrapassar 45% mitigação total; curas 4%/s. |
-
-## Validações Adicionais
-- **Integração LuckPerms:** aplicar `/lp user <player> parent add class_monk.shadow` e verificar acesso apenas às skills correspondentes.
-- **Itens:** tentar usar itens focais sem permissão para confirmar bloqueio via MythicMobs.
-- **Regen de Ki:** sair de combate e medir 1 Ki a cada 30s; receber dano reinicia delay de 10s.
-- **Placeholder/HUD:** confirmar actionbar exibindo `{Ki}/{KiMax}` e cooldowns atualizados.
+### Métricas a capturar
+- DPS médio e dano evitado (%).
+- Tempo para matar (TTK) / sobreviver.
+- Consumo de Estamina (gasto total e Estamina mínima atingida).
+- Consumo e recarga de Ki (cargas usadas, tempo para recuperar).
+- Uptime de Postura de Foco (%), combos médios (stacks) e cooldowns críticos.
+- Eventos de exaustão de resistência disparados.
