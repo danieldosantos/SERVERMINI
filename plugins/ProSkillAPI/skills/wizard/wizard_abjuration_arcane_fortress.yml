@@ -1,0 +1,55 @@
+# Abjuração - Fortaleza Arcana (Ultimate)
+name: wizard_abjuration_arcane_fortress
+display: "§3Fortaleza Arcana"
+icon: BEACON
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_abjuration
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 60
+  mana-cost-scale: 0
+  duration-base: 8
+  duration-scale: 0
+  radius-base: 6
+  radius-scale: 0
+  tags:
+    - ultimate
+    - mitigation
+    - support
+description:
+  - "§3Ergue domo de 6 blocos invulnerável a projéteis/controle por 8s e regenera 5% de vida/s."
+  - "§7Não bloqueia dano verdadeiro e respeita limite de mitigação global."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Dome:
+        type: mechanic
+        data:
+          radius-base: 6
+          duration-base: 8
+          block: LIGHT_BLUE_STAINED_GLASS
+          passable: true
+      AllyRegen:
+        type: mechanic
+        data:
+          radius-base: 6
+          period: 20
+          duration-base: 8
+          heal-percent-base: 0.05
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_abjuration_fortress %caster%"
+          silent: true
+      Particle:
+        type: mechanic
+        data:
+          effect: SPELL_MOB_AMBIENT
+          amount-base: 40
+          radius-base: 2.5

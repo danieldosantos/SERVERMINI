@@ -1,0 +1,46 @@
+# Ilusão - Mundo Espelhado (Ultimate)
+name: wizard_illusion_mirrored_world
+display: "§5Mundo Espelhado"
+icon: GLASS
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_illusion
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 55
+  mana-cost-scale: 0
+  duration-base: 12
+  duration-scale: 0
+  tags:
+    - ultimate
+    - support
+    - deception
+description:
+  - "§5Duplica aliados próximos em ilusões que absorvem 1 golpe e desorientam inimigos por 12s."
+  - "§7Ilusões herdam caps de velocidade e duração limitada para evitar abusos."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      AllyDuplicates:
+        type: mechanic
+        data:
+          radius-base: 8
+          duration-base: 12
+          absorb-base: 80
+          confuse: true
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_illusion_world %caster%"
+          silent: true
+      Particles:
+        type: mechanic
+        data:
+          effect: DRAGON_BREATH
+          amount-base: 40
+          radius-base: 2.0

@@ -1,0 +1,42 @@
+# Abjuração - Contra-Feitiço
+name: wizard_abjuration_counterspell
+display: "§bContra-Feitiço"
+icon: GHAST_TEAR
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_abjuration
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 28
+  mana-cost-scale: 0
+  prepared-slot: true
+  tags:
+    - control
+    - interrupt
+description:
+  - "§bAnula habilidade inimiga se acionada até 3s após a ativação e aplica silêncio 2s."
+  - "§7Requer preparação e timing; via Skript verifica janela temporal."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CheckPrepared:
+        type: mechanic
+        data:
+          command: "skript run wizard_check_prepared %caster% wizard_abjuration_counterspell"
+          silent: false
+      CounterHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_abjuration_counter %caster%"
+          silent: false
+      Particle:
+        type: mechanic
+        data:
+          effect: SPELL_INSTANT
+          amount-base: 20
+          radius-base: 0.6

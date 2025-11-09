@@ -1,0 +1,44 @@
+# Abjuração - Reflexo Prismático
+name: wizard_abjuration_prismatic_reflect
+display: "§bReflexo Prismático"
+icon: PRISMARINE_CRYSTALS
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_abjuration
+attributes:
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 24
+  mana-cost-scale: 0
+  duration-base: 8
+  duration-scale: 0
+  tags:
+    - reflect
+    - mitigation
+description:
+  - "§bDevolve 30% do dano mágico recebido por 8s ao remetente."
+  - "§7Limitado por caps globais e integra com RacesEffects para evitar abusos raciais."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Reflect:
+        type: mechanic
+        data:
+          key: wizard_reflect
+          duration-base: 8
+          amount-base: 0.3
+      Particles:
+        type: mechanic
+        data:
+          effect: CRIT_MAGIC
+          amount-base: 18
+          radius-base: 0.7
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_abjuration_reflect %caster%"
+          silent: true

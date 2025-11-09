@@ -1,0 +1,56 @@
+# Ilusão - Fantasmagoria
+name: wizard_illusion_phantasmagoria
+display: "§dFantasmagoria"
+icon: SOUL_LANTERN
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_illusion
+attributes:
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 22
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+  duration-base: 10
+  duration-scale: 0
+  tags:
+    - fear
+    - debuff
+description:
+  - "§dInduz medo em área e -15% precisão inimiga por 10s."
+  - "§7Telegráfica para PvP e interage com Placeholder de cooldown maior."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Area:
+        type: mechanic
+        data:
+          radius-base: 6
+          group: enemy
+        children:
+          Fear:
+            type: mechanic
+            data:
+              duration-base: 3
+          AccuracyDebuff:
+            type: mechanic
+            data:
+              duration-base: 10
+              attribute: accuracy
+              multiplier-base: -0.15
+      Particles:
+        type: mechanic
+        data:
+          effect: SOUL
+          amount-base: 30
+          radius-base: 1.5
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_illusion_phantasm %caster%"
+          silent: true

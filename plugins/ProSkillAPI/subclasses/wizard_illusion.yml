@@ -1,0 +1,39 @@
+# Escola de Ilusão - Subclasse do Mago
+name: "Mago - Ilusão"
+key: wizard_illusion
+parent: wizard
+description:
+  - "Especialista em enganar, dividir atenção inimiga e reposicionar aliados."
+  - "Mantém controle brando, stealth e mobilidade tática sem quebrar caps."
+attributes:
+  health:
+    base: 26
+    scale: 5
+  defense:
+    base: 6
+    scale: 2
+  skill-damage:
+    base: 10
+    scale: 4
+  mana:
+    base: 48
+    scale: 18
+skills:
+  - name: Imagem Múltipla
+    level: 1
+  - name: Véu Invisível
+    level: 2
+  - name: Labirinto Mental
+    level: 3
+  - name: Fantasmagoria
+    level: 3
+  - name: Mundo Espelhado
+    level: 4
+channel-options:
+  - id: ilusao_dobra
+    skill: Mundo Espelhado
+    description: "Amplifica ilusões para duplicar aliados e desorientar inimigos por 12s."
+notes:
+  - "Stealth não ultrapassa limites de velocidade globais e interage com HUD de mana."
+  - "Controle brando respeita CDs ≥90s e telegráficos para PvP justo."
+  - "Itens focais exigem grupo LuckPerms class_wizard.illusion."

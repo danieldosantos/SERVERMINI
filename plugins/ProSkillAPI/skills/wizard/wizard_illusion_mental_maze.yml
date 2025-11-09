@@ -1,0 +1,55 @@
+# Ilusão - Labirinto Mental
+name: wizard_illusion_mental_maze
+display: "§dLabirinto Mental"
+icon: AMETHYST_CLUSTER
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_illusion
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 26
+  mana-cost-scale: 0
+  duration-base: 4
+  duration-scale: 0
+  tags:
+    - control
+    - stun
+description:
+  - "§dImobiliza o alvo por 4s com telemetria telegráfica; quebra com dano alto."
+  - "§7Skript cria efeito visual de espirais e respeita limites PvP."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      TargetSingle:
+        type: target
+        data:
+          range-base: 16
+          range-scale: 0
+          ground: false
+        children:
+          DelayTelegraph:
+            type: mechanic
+            data:
+              delay: 10
+            children:
+              Immobilize:
+                type: mechanic
+                data:
+                  duration-base: 4
+                  break-on-damage: true
+              Particles:
+                type: mechanic
+                data:
+                  effect: ENDER_SIGNAL
+                  amount-base: 20
+                  radius-base: 0.5
+          SkriptHook:
+            type: mechanic
+            data:
+              command: "skript run wizard_illusion_maze %target%"
+              silent: true

@@ -1,0 +1,56 @@
+# Skill ativa: Parede Arcana do Mago
+name: wizard_arcane_wall
+display: "§9Parede Arcana"
+icon: BLUE_STAINED_GLASS
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  duration-base: 6
+  duration-scale: 0
+  prepared-slot: true
+  tags:
+    - control
+    - prepared
+description:
+  - "§7Cria barreira translúcida de 5 blocos que bloqueia projéteis por 6 segundos."
+  - "§9Requer slot preparado e pode ser recolocada apenas após descanso."
+  - "§7Aplicação respeita caps de empurrão e área padrão."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CheckPrepared:
+        type: mechanic
+        data:
+          command: "skript run wizard_check_prepared %caster% wizard_arcane_wall"
+          silent: false
+      WallSpawn:
+        type: mechanic
+        data:
+          structure: WALL
+          blocks: BLUE_STAINED_GLASS
+          length-base: 5
+          height-base: 3
+          duration-base: 6
+          duration-scale: 0
+          forward-base: 3
+          upward-base: 0
+      BarrierEffect:
+        type: mechanic
+        data:
+          effect: SPELL
+          amount-base: 20
+          amount-scale: 0
+          radius-base: 0.7
+          radius-scale: 0
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_wall_notify %caster%"
+          silent: true

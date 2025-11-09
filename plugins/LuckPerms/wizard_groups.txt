@@ -1,0 +1,67 @@
+# Grupos e comandos LuckPerms para a classe Mago
+lp creategroup class_wizard
+lp creategroup class_wizard.evocation
+lp creategroup class_wizard.abjuration
+lp creategroup class_wizard.illusion
+
+# Heranças
+lp parent add class_wizard.evocation class_wizard
+lp parent add class_wizard.abjuration class_wizard
+lp parent add class_wizard.illusion class_wizard
+
+# Permissões base da classe
+lp group class_wizard permission set class.command.preparar true
+lp group class_wizard permission set class.command.teleporte true
+lp group class_wizard permission set class.command.parede true
+lp group class_wizard permission set skillapi.cast.wizard_short_blink true
+lp group class_wizard permission set skillapi.cast.wizard_arcane_wall true
+lp group class_wizard permission set skillapi.cast.wizard_arcane_preparation true
+lp group class_wizard permission set mythicmobs.item.wizardblinkrune true
+lp group class_wizard permission set mythicmobs.item.wizardbarriersigil true
+lp group class_wizard permission set mythicmobs.item.wizardpreparationgrimoire true
+
+# Evocação
+lp group class_wizard.evocation permission set mythicmobs.item.evocationstaff true
+lp group class_wizard.evocation permission set mythicmobs.item.evocationfocus true
+lp group class_wizard.evocation permission set mythicmobs.item.evocationspear true
+lp group class_wizard.evocation permission set mythicmobs.item.evocationcrystal true
+lp group class_wizard.evocation permission set mythicmobs.item.evocationgrimoire true
+lp group class_wizard.evocation permission set skillapi.cast.wizard_evocation_flame_orb true
+lp group class_wizard.evocation permission set skillapi.cast.wizard_evocation_arcane_nova true
+lp group class_wizard.evocation permission set skillapi.cast.wizard_evocation_ethereal_lance true
+lp group class_wizard.evocation permission set skillapi.cast.wizard_evocation_power_catalyst true
+lp group class_wizard.evocation permission set skillapi.cast.wizard_evocation_controlled_cataclysm true
+
+# Abjuração
+lp group class_wizard.abjuration permission set mythicmobs.item.abjurationshield true
+lp group class_wizard.abjuration permission set mythicmobs.item.abjurationtalisman true
+lp group class_wizard.abjuration permission set mythicmobs.item.abjurationrune true
+lp group class_wizard.abjuration permission set mythicmobs.item.abjurationmirror true
+lp group class_wizard.abjuration permission set mythicmobs.item.abjurationcodex true
+lp group class_wizard.abjuration permission set skillapi.cast.wizard_abjuration_protective_barrier true
+lp group class_wizard.abjuration permission set skillapi.cast.wizard_abjuration_counterspell true
+lp group class_wizard.abjuration permission set skillapi.cast.wizard_abjuration_runic_seal true
+lp group class_wizard.abjuration permission set skillapi.cast.wizard_abjuration_prismatic_reflect true
+lp group class_wizard.abjuration permission set skillapi.cast.wizard_abjuration_arcane_fortress true
+
+# Ilusão
+lp group class_wizard.illusion permission set mythicmobs.item.illusiondeck true
+lp group class_wizard.illusion permission set mythicmobs.item.illusioncloak true
+lp group class_wizard.illusion permission set mythicmobs.item.illusionsphere true
+lp group class_wizard.illusion permission set mythicmobs.item.illusionlantern true
+lp group class_wizard.illusion permission set mythicmobs.item.illusiongrimoire true
+lp group class_wizard.illusion permission set skillapi.cast.wizard_illusion_mirror_image true
+lp group class_wizard.illusion permission set skillapi.cast.wizard_illusion_invisible_veil true
+lp group class_wizard.illusion permission set skillapi.cast.wizard_illusion_mental_maze true
+lp group class_wizard.illusion permission set skillapi.cast.wizard_illusion_phantasmagoria true
+lp group class_wizard.illusion permission set skillapi.cast.wizard_illusion_mirrored_world true
+
+# Comandos de teste adicionais
+lp group class_wizard permission set essentials.kit.mago true
+lp group class_wizard permission set skript.command.preparar true
+lp group class_wizard permission set skript.command.teleporte true
+lp group class_wizard permission set skript.command.parede true
+lp group class_wizard permission set skript.command.kit_mago true
+lp group class_wizard.evocation permission set skript.command.escola_evocacao true
+lp group class_wizard.abjuration permission set skript.command.escola_abjuracao true
+lp group class_wizard.illusion permission set skript.command.escola_ilusao true

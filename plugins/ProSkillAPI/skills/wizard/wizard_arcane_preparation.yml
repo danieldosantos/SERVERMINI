@@ -1,0 +1,29 @@
+# Skill utilitária: Preparação Arcana
+name: wizard_arcane_preparation
+display: "§9Preparação Arcana"
+icon: BOOK
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 30
+  cooldown-scale: 0
+  mana-cost-base: 5
+  mana-cost-scale: 0
+  cast-time-base: 0
+  cast-time-scale: 0
+  prepared-slot: false
+description:
+  - "§7Abre menu personalizado para preparar/desmarcar feitiços até o limite de slots."
+  - "§9Somente utilizável fora de combate e 1x por descanso longo para reset completo."
+  - "§7Integra com Skript para aplicar flag prepared_slots e atualizar HUD." 
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: false
+    children:
+      SkriptMenu:
+        type: mechanic
+        data:
+          command: "skript run wizard_open_preparation %caster%"
+          silent: false

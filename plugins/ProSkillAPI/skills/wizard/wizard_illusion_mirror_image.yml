@@ -1,0 +1,51 @@
+# Ilusão - Imagem Múltipla
+name: wizard_illusion_mirror_image
+display: "§dImagem Múltipla"
+icon: PLAYER_HEAD
+type: Active
+max-level: 1
+requires:
+  subclass: wizard_illusion
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 18
+  mana-cost-scale: 0
+  duration-base: 6
+  duration-scale: 0
+  prepared-slot: true
+  tags:
+    - defense
+    - prepared
+description:
+  - "§dCria 3 cópias ilusórias por 6s; cada uma absorve um golpe leve e confunde inimigos."
+  - "§7Skript gerencia absorção e aplica exaustão se combinado com buffs raciais de evasão."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CheckPrepared:
+        type: mechanic
+        data:
+          command: "skript run wizard_check_prepared %caster% wizard_illusion_mirror_image"
+          silent: false
+      SpawnIllusions:
+        type: mechanic
+        data:
+          amount-base: 3
+          duration-base: 6
+          absorb-base: 40
+          confuse: true
+      Particles:
+        type: mechanic
+        data:
+          effect: CLOUD
+          amount-base: 20
+          radius-base: 1.0
+      SkriptHook:
+        type: mechanic
+        data:
+          command: "skript run wizard_illusion_images %caster%"
+          silent: true

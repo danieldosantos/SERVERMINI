@@ -1,0 +1,39 @@
+# Escola de Evocação - Subclasse do Mago
+name: "Mago - Evocação"
+key: wizard_evocation
+parent: wizard
+description:
+  - "Manipula energia bruta em explosões controladas e projéteis arcanos."
+  - "Favorece dano elemental e marcas de Instabilidade para combos."
+attributes:
+  health:
+    base: 28
+    scale: 6
+  defense:
+    base: 8
+    scale: 2
+  skill-damage:
+    base: 14
+    scale: 6
+  mana:
+    base: 45
+    scale: 20
+skills:
+  - name: Orbe Flamejante
+    level: 1
+  - name: Nova Arcana
+    level: 2
+  - name: Lança Etérea
+    level: 3
+  - name: Catalisador de Poder
+    level: 4
+  - name: Cataclismo Controlado
+    level: 4
+channel-options:
+  - id: evocacao_meteor
+    skill: Cataclismo Controlado
+    description: "Canaliza energia elemental em 5 meteoros sequenciais com janela telegráfica."
+notes:
+  - "Evocação respeita limites de área 6-8 blocos e requer marca Instabilidade para burst máximo."
+  - "Ao detectar resistências raciais Elemento, aplica exaustão adicional via Skript para evitar abuso."
+  - "Itens focais exigem grupo LuckPerms class_wizard.evocation."
