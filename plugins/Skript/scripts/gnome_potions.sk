@@ -1,0 +1,59 @@
+# gnome_potions.sk — Engrenagem Gnômica (gera poções aleatórias com cargas)
+
+options:
+    gnome_item_name: "&6Engrenagem Gnomica &8(Racial)"
+    gnome_charges: 5
+    gnome_cool_minutes: 7
+    give_amount: 1
+
+# Variáveis:
+# {gnome.cog.charges.<uuid>} — cargas restantes
+# {gnome.cog.ready.<uuid>} — timestamp texto de quando pode recarregar (informativo)
+
+function gnomeEnsureCharges(p: player):
+    if {gnome.cog.charges.%uuid of {_p}%} is not set:
+        set {gnome.cog.charges.%uuid of {_p}%} to {@gnome_charges}
+
+on right click:
+    if player's tool is not air:
+        set {_n} to display name of player's tool
+        if {_n} is colored {@gnome_item_name}:
+            cancel event
+            gnomeEnsureCharges(player)
+            set {_u} to uuid of player
+            set {_c} to {gnome.cog.charges.%{_u}%}
+            if {_c} <= 0:
+                send "&cA Engrenagem está descarregada. Aguarde {@gnome_cool_minutes} minutos para recarregar." to player
+                stop
+            # Monta a lista de poções possíveis (itens prontos)
+            clear {_pool::*}
+            add potion of speed to {_pool::*}
+            add potion of healing to {_pool::*}
+            add potion of strength to {_pool::*}
+            add potion of weakness to {_pool::*}
+            add potion of harming to {_pool::*}
+            add potion of invisibility to {_pool::*}
+            add potion of slowness to {_pool::*}
+            add potion of slow falling to {_pool::*}
+            add potion of regeneration to {_pool::*}
+            add potion of fire resistance to {_pool::*}
+            add potion of water breathing to {_pool::*}
+            add potion of leaping to {_pool::*}
+            add potion of luck to {_pool::*}
+            add potion of poison to {_pool::*}
+            add potion of turtle master to {_pool::*}
+            add potion of night vision to {_pool::*}
+            set {_pt} to random element out of {_pool::*}
+            set {_amt} to {@give_amount}
+            if {_amt} < 1:
+                set {_amt} to 1
+            give {_amt} of {_pt} to player
+            set {gnome.cog.charges.%{_u}%} to {_c} - 1
+            set {_left} to {gnome.cog.charges.%{_u}%}
+            send "&aGerada: &e%{_amt}%x poção de %{_pt}%&a. Cargas restantes: &e%{_left}%&a." to player
+            if {_left} <= 0:
+                # Iniciar recarga assíncrona simples
+                send "&eRecarregando Engrenagem por {@gnome_cool_minutes} minutos..." to player
+                wait {@gnome_cool_minutes} minutes
+                set {gnome.cog.charges.%{_u}%} to {@gnome_charges}
+                send "&aEngrenagem reabastecida (cargas: {@gnome_charges})." to player

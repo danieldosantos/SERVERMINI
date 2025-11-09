@@ -1,0 +1,17 @@
+command /picareta [<player>]:
+    description: Da uma picareta de diamante com Eficiencia V
+    usage: /picareta [jogador]
+    permission: custom.give.pickaxe
+    permission message: &cVoce nao tem permissao para usar este comando.
+    executable by: players and console
+    trigger:
+        set {_target} to player
+        if arg-1 is set:
+            set {_target} to arg-1
+        set {_item} to diamond pickaxe
+        enchant {_item} with efficiency 5
+        give {_item} to {_target}
+        send "&aPicareta de diamante (Eficiencia V) entregue a &e%name of {_target}%&a." to sender
+        if {_target} is not sender:
+            send "&aVoce recebeu uma picareta de diamante (Eficiencia V)." to {_target}
+

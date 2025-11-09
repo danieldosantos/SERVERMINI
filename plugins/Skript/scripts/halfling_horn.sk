@@ -1,0 +1,30 @@
+# halfling_horn.sk — Trombeta Halfling (paralisa inimigos)
+
+options:
+    horn_name: "&eTrombeta Halfling &8(Racial)"
+    horn_radius: 10
+    horn_max_targets: 5
+    horn_seconds: 7
+    horn_cooldown_seconds: 120
+
+on right click:
+    if player's tool is not air:
+        set {_n} to display name of player's tool
+        if {_n} is colored {@horn_name}:
+            cancel event
+            set {_u} to uuid of player
+            if {halfling.horn.cd.%{_u}%} is true:
+                send "&cA Trombeta esta em recarga. Aguarde alguns instantes." to player
+                stop
+            # Silencia o som vanilla do chifre e toca apenas o nosso
+            wait 1 tick
+            execute console command "stopsound %name of player%"
+            play sound "item.goat_horn.sound.0" to player
+            # Aplica efeitos via comando nativo (atinge ate 5 entidades proximas, exclui o proprio)
+            set {_name} to name of player
+            execute console command "execute as %name of player% at @s run effect give @e[distance=..{@horn_radius},sort=nearest,limit={@horn_max_targets},name=!%{_name}%] minecraft:slowness {@horn_seconds} 10 true"
+            execute console command "execute as %name of player% at @s run effect give @e[distance=..{@horn_radius},sort=nearest,limit={@horn_max_targets},name=!%{_name}%] minecraft:mining_fatigue {@horn_seconds} 3 true"
+            send "&eTrombeta: &fparalisando alvos proximos por {@horn_seconds}s." to player
+            set {halfling.horn.cd.%{_u}%} to true
+            wait {@horn_cooldown_seconds} seconds
+            delete {halfling.horn.cd.%{_u}%}

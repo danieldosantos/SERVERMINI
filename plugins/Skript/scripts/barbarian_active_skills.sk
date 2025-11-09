@@ -1,0 +1,201 @@
+### barbarian_active_skills.sk – Habilidades ativas do Bárbaro (gatilhadas por MythicMobs)
+
+function _barb_uuid(p: player) :: text:
+    return "%uuid of {_p}%"
+
+function _barb_has_rage(p: player) :: boolean:
+    if {rage_secs.%_barb_uuid({_p})%} is set:
+        return true
+    # fallback: aceitar tag scoreboard 'barbarian_rage' como indicativo de furia ativa
+    if {_p} has scoreboard tag "barbarian_rage":
+        return true
+    return false
+
+function _barb_cost_rage(p: player, secs: number):
+    if {rage_secs.%_barb_uuid({_p})%} is set:
+        set {rage_secs.%_barb_uuid({_p})%} to {rage_secs.%_barb_uuid({_p})%} - floor({_secs})
+        if {rage_secs.%_barb_uuid({_p})%} < 0:
+            set {rage_secs.%_barb_uuid({_p})%} to 0
+
+# Util: aliados por scoreboard tag (party:/guild:)
+function _is_ally(p1: player, p2: player) :: boolean:
+    set {_ally} to false
+    set {_tags::*} to scoreboard tags of {_p1}
+    loop {_tags::*}:
+        if loop-value starts with "party:":
+            if {_p2} has scoreboard tag loop-value:
+                set {_ally} to true
+                stop
+        else if loop-value starts with "guild:":
+            if {_p2} has scoreboard tag loop-value:
+                set {_ally} to true
+                stop
+    return {_ally}
+
+# 1) Grito Bestial – Weakness I (12s) em r=6; custo ~20s de Furia; ignora aliados por tag
+command /mmbarb_warhorn <text>:
+    permission: op
+    trigger:
+        set {_p} to none
+        loop all players:
+            if name of loop-player is argument 1:
+                set {_p} to loop-player
+                stop loop
+        if {_p} is none:
+            stop
+        if _barb_has_rage({_p}) is false:
+            stop
+        loop entities in radius 6 around {_p}:
+            if loop-entity is a living entity:
+                if loop-entity is not {_p}:
+                    if loop-entity is a player:
+                        if _is_ally({_p}, loop-entity) is false:
+                            apply weakness 0 to loop-entity for 12 seconds
+                    else:
+                        apply weakness 0 to loop-entity for 12 seconds
+        _barb_cost_rage({_p}, 20)
+        send "&6Grito Bestial &7(-1 carga de Furia)" to {_p}
+
+# 2) Investida Sanguinaria – golpe em r=3; se acertar, DR 20% por 6s
+command /mmbarb_battleaxe <text>:
+    permission: op
+    trigger:
+        set {_p} to none
+        loop all players:
+            if name of loop-player is argument 1:
+                set {_p} to loop-player
+                stop loop
+        if {_p} is none:
+            stop
+        if _barb_has_rage({_p}) is false:
+            stop
+        set {_hit} to false
+        loop entities in radius 3 around {_p}:
+            if loop-entity is a living entity:
+                if loop-entity is not {_p}:
+                    damage loop-entity by 8
+                    set {_hit} to true
+        if {_hit} is true:
+            apply damage resistance 0 to {_p} for 6 seconds
+        send "&6Investida Sanguinaria" to {_p}
+
+# Marca janela para Investida (usada pelo MM para versão 100% Mythic)
+command /mmbarb_baxe_mark <text>:
+    permission: op
+    trigger:
+        set {_p} to none
+        loop all players:
+            if name of loop-player is argument 1:
+                set {_p} to loop-player
+                stop loop
+        if {_p} is none:
+            stop
+        if _barb_has_rage({_p}) is false:
+            stop
+        set {barb.baxe.until.%_barb_uuid({_p})%} to now
+        add 2 seconds to {barb.baxe.until.%_barb_uuid({_p})%}
+
+# 3) Retaliacao Frenetica – ativa por 8s se vida < 50%; reflete 30% do dano
+command /mmbarb_shield <text>:
+    permission: op
+    trigger:
+        set {_p} to none
+        loop all players:
+            if name of loop-player is argument 1:
+                set {_p} to loop-player
+                stop loop
+        if {_p} is none:
+            stop
+        if _barb_has_rage({_p}) is false:
+            stop
+        set {_max} to maximum health of {_p}
+        if health of {_p} >= {_max} / 2:
+            send "&cRetaliacao apenas abaixo de 50 por cento de vida." to {_p}
+            stop
+        set {barb.retaliate.until.%_barb_uuid({_p})%} to now
+        add 8 seconds to {barb.retaliate.until.%_barb_uuid({_p})%}
+        send "&6Retaliacao Frenetica ativa (8s)." to {_p}
+
+on damage of player:
+    set {_u} to "%uuid of victim%"
+    if {barb.retaliate.until.%{_u}%} is set:
+        set {_rem} to difference between {barb.retaliate.until.%{_u}%} and now
+        if {_rem} > 0 seconds:
+            if attacker is set:
+                set {_rdmg} to damage * 0.3
+                damage attacker by {_rdmg}
+        if {_rem} <= 0 seconds:
+            delete {barb.retaliate.until.%{_u}%}
+
+# Filtro de aliados e DR 6s condicionado para Investida (versão MM)
+on damage:
+    if attacker is a player:
+        set {_p} to attacker
+        set {_pu} to "%uuid of {_p}%"
+        # Se a janela da Investida estiver ativa, bloquear dano em aliados e conceder DR ao primeiro acerto
+        if {barb.baxe.until.%{_pu}%} is set:
+            if victim is a player:
+                if _is_ally({_p}, victim) is true:
+                    set damage to 0
+                    stop
+            # Conceder DR 6s e fechar janela
+            apply damage resistance 0 to {_p} for 6 seconds
+            delete {barb.baxe.until.%{_pu}%}
+
+# 4) Impetus Irrefreavel – remove lentidao e da velocidade 10s
+command /mmbarb_boots <text>:
+    permission: op
+    trigger:
+        set {_p} to none
+        loop all players:
+            if name of loop-player is argument 1:
+                set {_p} to loop-player
+                stop loop
+        if {_p} is none:
+            stop
+        if _barb_has_rage({_p}) is false:
+            stop
+        remove slowness from {_p}
+        apply speed 0 to {_p} for 10 seconds
+        send "&6Impetus Irrefreavel" to {_p}
+
+# 5) Ultimate – canaliza 3s e ativa 15s de cleave (3 blocos) + roubo de vida 25%
+command /mmbarb_ultimate <text>:
+    permission: op
+    trigger:
+        set {_p} to none
+        loop all players:
+            if name of loop-player is argument 1:
+                set {_p} to loop-player
+                stop loop
+        if {_p} is none:
+            stop
+        if _barb_has_rage({_p}) is false:
+            stop
+        send "&eCanalizando Carnificina (3s)..." to {_p}
+        wait 3 seconds
+        set {barb.ult.until.%_barb_uuid({_p})%} to now
+        add 15 seconds to {barb.ult.until.%_barb_uuid({_p})%}
+        send "&6Carnificina Implacavel ativa por 15s!" to {_p}
+
+# Cleave + Lifesteal enquanto ultimate ativo
+on damage by player:
+    set {_p} to attacker
+    if {_p} is a player:
+        set {_u} to "%uuid of {_p}%"
+        if {barb.ult.until.%{_u}%} is set:
+            set {_rem} to difference between {barb.ult.until.%{_u}%} and now
+            if {_rem} > 0 seconds:
+                set {_d} to damage
+                loop entities in radius 3 around victim:
+                    if loop-entity is a living entity:
+                        if loop-entity is not victim:
+                            if loop-entity is not {_p}:
+                                if loop-entity is a player:
+                                    if _is_ally({_p}, loop-entity) is false:
+                                        damage loop-entity by {_d}
+                                else:
+                                    damage loop-entity by {_d}
+                heal {_p} by {_d} * 0.25
+            if {_rem} <= 0 seconds:
+                delete {barb.ult.until.%{_u}%}

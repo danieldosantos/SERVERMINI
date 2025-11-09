@@ -1,0 +1,253 @@
+function _class_norm(t: text) :: text:
+    set {_x} to lowercase {_t}
+    if {_x} is "barbaro":
+        set {_x} to "barbarian"
+    if {_x} is "bardo":
+        set {_x} to "bard"
+    if {_x} is "bruxo":
+        set {_x} to "warlock"
+    if {_x} is "clerigo":
+        set {_x} to "cleric"
+    if {_x} is "druida":
+        set {_x} to "druid"
+    if {_x} is "guerreiro":
+        set {_x} to "fighter"
+    if {_x} is "monge":
+        set {_x} to "monk"
+    if {_x} is "paladino":
+        set {_x} to "paladin"
+    if {_x} is "patrulheiro":
+        set {_x} to "ranger"
+    if {_x} is "ladino":
+        set {_x} to "rogue"
+    if {_x} is "feiticeiro":
+        set {_x} to "sorcerer"
+    if {_x} is "mago":
+        set {_x} to "wizard"
+    # Guardiao Totemico: normaliza varios apelidos para "totemic"
+    if {_x} is "urso":
+        set {_x} to "totemic"
+    if {_x} is "aguia":
+        set {_x} to "totemic"
+    if {_x} is "lobo":
+        set {_x} to "totemic"
+    if {_x} is "tigre":
+        set {_x} to "totemic"
+    if {_x} is "fenix":
+        set {_x} to "totemic"
+    if {_x} is "bear":
+        set {_x} to "totemic"
+    if {_x} is "eagle":
+        set {_x} to "totemic"
+    if {_x} is "wolf":
+        set {_x} to "totemic"
+    if {_x} is "totem_bear":
+        set {_x} to "totemic"
+    if {_x} is "totem_eagle":
+        set {_x} to "totemic"
+    if {_x} is "totem_wolf":
+        set {_x} to "totemic"
+    if {_x} is "tempestade":
+        set {_x} to "storm"
+    if {_x} is "storm_herald":
+        set {_x} to "storm"
+    if {_x} is "saber":
+        set {_x} to "lore"
+    if {_x} is "arquifada":
+        set {_x} to "archfey"
+    if {_x} is "diabolico":
+        set {_x} to "fiend"
+    if {_x} is "ancestral":
+        set {_x} to "oldone"
+    if {_x} is "vida":
+        set {_x} to "life"
+    if {_x} is "luz":
+        set {_x} to "light"
+    if {_x} is "guerra":
+        set {_x} to "war"
+    if {_x} is "terra":
+        set {_x} to "land"
+    if {_x} is "lua":
+        set {_x} to "moon"
+    if {_x} is "esporos":
+        set {_x} to "spores"
+    if {_x} is "campeao":
+        set {_x} to "champion"
+    if {_x} is "mestrearmas":
+        set {_x} to "battlemaster"
+    if {_x} is "arcano":
+        set {_x} to "eldritch"
+    if {_x} is "maosabertas":
+        set {_x} to "openhand"
+    if {_x} is "sombra":
+        set {_x} to "shadow"
+    if {_x} is "elementos":
+        set {_x} to "elements"
+    if {_x} is "devocao":
+        set {_x} to "devotion"
+    if {_x} is "ancioes":
+        set {_x} to "ancients"
+    if {_x} is "vinganca":
+        set {_x} to "vengeance"
+    if {_x} is "cacador":
+        set {_x} to "hunter"
+    if {_x} is "bestas":
+        set {_x} to "beast"
+    if {_x} is "trevas":
+        set {_x} to "gloom"
+    if {_x} is "ladrao":
+        set {_x} to "thief"
+    if {_x} is "assassino":
+        set {_x} to "assassin"
+    if {_x} is "draconica":
+        set {_x} to "draconic"
+    if {_x} is "selvagem":
+        set {_x} to "wild"
+    if {_x} is "tempestade":
+        set {_x} to "storm"
+    if {_x} is "evocacao":
+        set {_x} to "evocation"
+    if {_x} is "abjuracao":
+        set {_x} to "abjuration"
+    if {_x} is "adivinhacao":
+        set {_x} to "divination"
+    return {_x}
+
+function _lp_clear_all(pname: text):
+    set {_base} to "class_barbarian,class_bard,class_warlock,class_cleric,class_druid,class_fighter,class_monk,class_paladin,class_ranger,class_rogue,class_sorcerer,class_wizard"
+    loop {_base} split at ",":
+        execute console command "lp user %{_pname}% parent remove %loop-value%"
+    set {_subs} to "class_barbarian_berserker,class_barbarian_totemic,class_barbarian_totem_bear,class_barbarian_totem_eagle,class_barbarian_totem_wolf,class_bard_lore,class_bard_valor,class_warlock_archfey,class_warlock_fiend,class_warlock_oldone,class_cleric_life,class_cleric_light,class_cleric_war,class_druid_land,class_druid_moon,class_druid_spores,class_fighter_champion,class_fighter_battlemaster,class_fighter_eldritch,class_monk_openhand,class_monk_shadow,class_monk_elements,class_paladin_devotion,class_paladin_ancients,class_paladin_vengeance,class_ranger_hunter,class_ranger_beast,class_ranger_gloom,class_rogue_thief,class_rogue_assassin,class_rogue_arcane,class_sorcerer_draconic,class_sorcerer_wild,class_sorcerer_storm,class_wizard_evocation,class_wizard_abjuration,class_wizard_divination"
+    loop {_subs} split at ",":
+        execute console command "lp user %{_pname}% parent remove %loop-value%"
+    # Novos subgrupos do Barbaro (remover tambem)
+    execute console command "lp user %{_pname}% parent remove class_barbarian_totemic_bear"
+    execute console command "lp user %{_pname}% parent remove class_barbarian_totemic_eagle"
+    execute console command "lp user %{_pname}% parent remove class_barbarian_totemic_wolf"
+    execute console command "lp user %{_pname}% parent remove class_barbarian_totemic_tiger"
+    execute console command "lp user %{_pname}% parent remove class_barbarian_totemic_phoenix"
+    execute console command "lp user %{_pname}% parent remove class_barbarian_storm"
+
+function _lp_apply(pname: text, base: text, sub: text = ""):
+    _lp_clear_all({_pname})
+    if {_base} is not "":
+        execute console command "lp user %{_pname}% parent add %{_base}%"
+    if {_sub} is not "":
+        execute console command "lp user %{_pname}% parent add %{_sub}%"
+
+function _apply_and_items_by_name(pname: text, base: text, sub: text = ""):
+    _lp_apply({_pname}, {_base}, {_sub})
+    # Disparar entrega via comandos (compatível com versões antigas)
+    execute console command "forcegiveitems %{_pname}%"
+    execute console command "classextragive %{_pname}%"
+
+# sem fila offline neste modo; entrega é disparada por comandos acima
+
+command /setclass <text> <text> [<text>]:
+    permission: op
+    usage: /setclass <jogador> <classe> [subclasse]
+    trigger:
+        set {_name} to argument 1
+        set {_base} to _class_norm(argument 2)
+        if argument 3 is set:
+            set {_sub} to _class_norm(argument 3)
+        else:
+            set {_sub} to ""
+        set {_valid} to false
+        loop "barbarian,bard,warlock,cleric,druid,fighter,monk,paladin,ranger,rogue,sorcerer,wizard" split at ",":
+            if {_base} is loop-value:
+                set {_valid} to true
+        if {_valid} is false:
+            send "&cClasse invalida. Use: barbarian|bard|warlock|cleric|druid|fighter|monk|paladin|ranger|rogue|sorcerer|wizard" to sender
+            stop
+        set {_subgroup} to ""
+        if {_base} is "barbarian":
+            # mapear somente tokens normalizados (sem else/sem or)
+            if {_sub} is "berserker":
+                set {_subgroup} to "class_barbarian_berserker"
+            if {_sub} is "totemic":
+                set {_subgroup} to "class_barbarian_totemic"
+            if {_sub} is "storm":
+                set {_subgroup} to "class_barbarian_storm"
+        if {_base} is "bard":
+            if {_sub} is "lore":
+                set {_subgroup} to "class_bard_lore"
+            if {_sub} is "valor":
+                set {_subgroup} to "class_bard_valor"
+        if {_base} is "warlock":
+            if {_sub} is "archfey":
+                set {_subgroup} to "class_warlock_archfey"
+            if {_sub} is "fiend":
+                set {_subgroup} to "class_warlock_fiend"
+            if {_sub} is "oldone":
+                set {_subgroup} to "class_warlock_oldone"
+        if {_base} is "cleric":
+            if {_sub} is "life":
+                set {_subgroup} to "class_cleric_life"
+            if {_sub} is "light":
+                set {_subgroup} to "class_cleric_light"
+            if {_sub} is "war":
+                set {_subgroup} to "class_cleric_war"
+        if {_base} is "druid":
+            if {_sub} is "land":
+                set {_subgroup} to "class_druid_land"
+            if {_sub} is "moon":
+                set {_subgroup} to "class_druid_moon"
+            if {_sub} is "spores":
+                set {_subgroup} to "class_druid_spores"
+        if {_base} is "fighter":
+            if {_sub} is "champion":
+                set {_subgroup} to "class_fighter_champion"
+            if {_sub} is "battlemaster":
+                set {_subgroup} to "class_fighter_battlemaster"
+            if {_sub} is "eldritch":
+                set {_subgroup} to "class_fighter_eldritch"
+        if {_base} is "monk":
+            if {_sub} is "openhand":
+                set {_subgroup} to "class_monk_openhand"
+            if {_sub} is "shadow":
+                set {_subgroup} to "class_monk_shadow"
+            if {_sub} is "elements":
+                set {_subgroup} to "class_monk_elements"
+        if {_base} is "paladin":
+            if {_sub} is "devotion":
+                set {_subgroup} to "class_paladin_devotion"
+            if {_sub} is "ancients":
+                set {_subgroup} to "class_paladin_ancients"
+            if {_sub} is "vengeance":
+                set {_subgroup} to "class_paladin_vengeance"
+        if {_base} is "ranger":
+            if {_sub} is "hunter":
+                set {_subgroup} to "class_ranger_hunter"
+            if {_sub} is "beast":
+                set {_subgroup} to "class_ranger_beast"
+            if {_sub} is "gloom":
+                set {_subgroup} to "class_ranger_gloom"
+        if {_base} is "rogue":
+            if {_sub} is "thief":
+                set {_subgroup} to "class_rogue_thief"
+            if {_sub} is "assassin":
+                set {_subgroup} to "class_rogue_assassin"
+            if {_sub} is "arcane":
+                set {_subgroup} to "class_rogue_arcane"
+        if {_base} is "sorcerer":
+            if {_sub} is "draconic":
+                set {_subgroup} to "class_sorcerer_draconic"
+            if {_sub} is "wild":
+                set {_subgroup} to "class_sorcerer_wild"
+            if {_sub} is "storm":
+                set {_subgroup} to "class_sorcerer_storm"
+        if {_base} is "wizard":
+            if {_sub} is "evocation":
+                set {_subgroup} to "class_wizard_evocation"
+            if {_sub} is "abjuration":
+                set {_subgroup} to "class_wizard_abjuration"
+            if {_sub} is "divination":
+                set {_subgroup} to "class_wizard_divination"
+
+        set {_basegroup} to "class_%{_base}%"
+        _apply_and_items_by_name({_name}, {_basegroup}, {_subgroup})
+        if {_subgroup} is not "":
+            send "&aClasse aplicada para &e%{_name}%&a: &f%{_base}% + %{_subgroup}%" to sender
+        else:
+            send "&aClasse aplicada para &e%{_name}%&a: &f%{_base}%" to sender

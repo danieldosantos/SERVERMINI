@@ -1,0 +1,35 @@
+### tiefling_soulspeed.sk - Velocidade no Nether (Tiefling)
+# Tiefling recebe Velocidade II enquanto estiver no Nether.
+# Ao sair do Nether, remove imediatamente o efeito.
+# ASCII-only para evitar problemas de encoding.
+
+options:
+    nether_check_ticks: 1   # 1 = every tick (recomendado para resposta imediata)
+    speed_amp: 1            # 0=Speed I, 1=Speed II
+    speed_seconds: 3        # dura alguns segundos; reaplica continuamente
+
+every {@nether_check_ticks} ticks:
+    loop all players:
+        set {_u} to "%uuid of loop-player%"
+        set {_isTiefling} to false
+        if loop-player has permission "group.race_tiefling":
+            set {_isTiefling} to true
+        else if {races.tiefling.%{_u}%} is set:
+            set {_isTiefling} to true
+        if {_isTiefling} is true:
+            # Detecta Nether por nome do mundo (compatibilidade ampla)
+            set {_w} to "%world of loop-player%"
+            if {_w} is "world_nether":
+                apply speed {@speed_amp} to loop-player for {@speed_seconds} seconds
+                set {tiefling.nether.speed.%{_u}%} to true
+            else if {_w} contains "_nether":
+                apply speed {@speed_amp} to loop-player for {@speed_seconds} seconds
+                set {tiefling.nether.speed.%{_u}%} to true
+            else:
+                if {tiefling.nether.speed.%{_u}%} is set:
+                    remove speed from loop-player
+                    delete {tiefling.nether.speed.%{_u}%}
+        else:
+            if {tiefling.nether.speed.%{_u}%} is set:
+                remove speed from loop-player
+                delete {tiefling.nether.speed.%{_u}%}

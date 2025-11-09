@@ -1,0 +1,12 @@
+function ensureElfWoodBrooch2(p: player):
+    # Tenta via MythicMobs; se faltar, cria vanilla; sem checar 'inventory is full'
+    if hasItemNamed({_p}, colored {@elf_wood_brooch}) is false:
+        execute console command "mm items give %name of {_p}% ElfWoodBrooch"
+        wait 1 tick
+        if hasItemNamed({_p}, colored {@elf_wood_brooch}) is false:
+            set {_it} to oak_leaves named colored {@elf_wood_brooch}
+            set lore of {_it} to "&7Um broche feito de folhas e cipas."
+            give {_it} to {_p}
+            wait 1 tick
+            if hasItemNamed({_p}, colored {@elf_wood_brooch}) is false:
+                send "&eSem espaco no inventario. Libere 1 slot e use /fixelfwood." to {_p}

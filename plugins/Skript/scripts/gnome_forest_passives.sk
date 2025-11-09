@@ -1,0 +1,29 @@
+# gnome_forest_passives.sk — Gnomo da Floresta
+# Efeitos: Speed III quando <50% da vida; 35% de chance de Invisibilidade 10s ao sofrer dano
+
+options:
+    forest_speed_amp: 3          # Speed III
+    forest_check_seconds: 2      # intervalo do monitoramento
+    forest_invis_chance: 35      # %
+    forest_invis_seconds: 10
+
+# Speed III sempre que estiver abaixo de 50% da vida maxima
+every {@forest_check_seconds} seconds:
+    loop all players:
+        if loop-player has permission "group.race_gnome_forest":
+            set {_half} to max health of loop-player / 2
+            if health of loop-player <= {_half}:
+                apply speed {@forest_speed_amp} to loop-player for {@forest_check_seconds} seconds
+
+# Chance de Invisibilidade ao sofrer dano quando estiver <50% de vida
+on damage:
+    if victim is a player:
+        if victim has permission "group.race_gnome_forest":
+            # avalia apos o dano
+            wait 1 tick
+            set {_half} to max health of victim / 2
+            if health of victim <= {_half}:
+                set {_roll} to random integer between 1 and 100
+                if {_roll} <= {@forest_invis_chance}:
+                    apply invisibility 1 to victim for {@forest_invis_seconds} seconds
+

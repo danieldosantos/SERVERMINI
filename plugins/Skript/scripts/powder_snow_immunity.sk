@@ -1,0 +1,28 @@
+options:
+  check_ticks: 1
+
+# Dragonborn Cold immunity to powder snow freezing
+# Resets TicksFrozen so the player does not get slowed/damaged or see the full freeze overlay build up.
+
+every {@check_ticks} ticks:
+  loop all players:
+    set {_p} to loop-player
+    # Elegibilidade: grupo OU tag
+    if {_p} has permission "group.race_dragonborn_cold":
+      # Pés e cabeça: só dentro da neve fofa
+      execute console command "execute as %name of {_p}% if block ~ ~ ~ minecraft:powder_snow run data merge entity @s {TicksFrozen:0}"
+      execute console command "execute as %name of {_p}% if block ~ ~1 ~ minecraft:powder_snow run data merge entity @s {TicksFrozen:0}"
+      # Não usamos Resistance pois não zera 100% do dano em versões modernas
+    else:
+      # Via tag db_cold
+      execute console command "execute as %name of {_p}% if entity @s[tag=db_cold] if block ~ ~ ~ minecraft:powder_snow run data merge entity @s {TicksFrozen:0}"
+      execute console command "execute as %name of {_p}% if entity @s[tag=db_cold] if block ~ ~1 ~ minecraft:powder_snow run data merge entity @s {TicksFrozen:0}"
+
+on damage:
+  if victim is a player:
+    set {_p} to victim
+    # Cancela dano de congelamento (FREEZE) para Draconato de Gelo
+    if {_p} has permission "group.race_dragonborn_cold":
+      if damage cause is freeze:
+        cancel event
+        execute console command "execute as %name of {_p}% run data merge entity @s {TicksFrozen:0}"

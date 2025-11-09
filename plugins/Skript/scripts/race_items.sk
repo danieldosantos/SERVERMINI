@@ -1,0 +1,669 @@
+# race_items.sk — Itens para aplicar racas
+# Comando console/jogador: /raceitem give <jogador> <tipo>
+# Tipos: highelf | elf_high | alto | elfwood | elf_wood | floresta | halfelf | half_elf | meioelfo | meio-elfo | halforc | half_orc | meioorc | meio-orc | tiefling | human | humano
+
+options:
+    # Nomes dos itens (usar apenas ASCII aqui)
+    item_name_highelf: "&b&lRaca: Alto Elfo"
+    item_name_elfwood: "&a&lRaca: Elfo da Floresta"
+    item_name_halfelf: "&d&lRaca: Meio-Elfo"
+    item_name_halforc: "&2&lRaca: Meio-Orc"
+    item_name_tiefling: "&5&lRaca: Tiefling"
+    item_name_human: "&f&lRaca: Humano"
+    item_name_drow: "&8&lRaca: Drow"
+    item_name_halfelf_feather: "&e&lPena do Meio-Elfo"
+    item_name_gnome: "&6&lRaca: Gnomo"
+    item_name_gnome_forest: "&6&lRaca: Gnomo da Floresta"
+    item_name_gnome_rock: "&6&lRaca: Gnomo das Rochas"
+    item_name_halfling_lightfoot: "&e&lRaca: Halfling Pes-Leves"
+    item_name_halfling_stout: "&e&lRaca: Halfling Robusto"
+    item_name_dwarf: "&6&lRaca: Anao"
+    item_name_dwarf_hill: "&6&lRaca: Anao da Colina"
+    item_name_dwarf_mountain: "&6&lRaca: Anao da Montanha"
+    item_name_dwarf_deep: "&6&lRaca: Anao das Profundezas"
+    # Nomes dos itens raciais (para limpeza ao trocar de raca)
+    racial_name_elfwood_brooch: "&aBroche da Floresta &8(Racial)"
+    racial_name_drow_web: "&8Teia de Drow &8(Racial)"
+    racial_name_halfelf_feather: "&bPena de Meio-Elfo &8(Racial)"
+    racial_name_halforc_tusk: "&fPresa de Meio-Orc &8(Racial)"
+    racial_name_halforc_berserk: "&6Talisma Berserk &8(Racial)"
+    racial_name_tiefling_sigil: "&cSigilo Infernal &8(Racial)"
+    racial_name_human_medal: "&fMedalha Humana &8(Racial)"
+    racial_name_dragonborn_scale: "&bEscama de Dragonborn &8(Racial)"
+    racial_name_dwarf_pick: "&7Picareta Anao &8(Racial)"
+    racial_name_gnome_cog: "&6Engrenagem Gnomica &8(Racial)"
+    racial_name_halfling_horn: "&eTrombeta Halfling &8(Racial)"
+
+command /raceitem give <player> <text>:
+    permission: op
+    permission message: &cApenas operadores podem usar este comando.
+    trigger:
+        set {_p} to argument 1
+        set {_t} to argument 2
+        set {_t} to lowercase {_t}
+        if {_t} is "highelf":
+            set {_it} to book named colored {@item_name_highelf}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Retaliacao (espinhos/veneno/nausea/nada)"
+            give {_it} to {_p}
+            send "&aItem de raca (Alto Elfo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "elf_high":
+            set {_it} to book named colored {@item_name_highelf}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Retaliacao (espinhos/veneno/nausea/nada)"
+            give {_it} to {_p}
+            send "&aItem de raca (Alto Elfo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "alto":
+            set {_it} to book named colored {@item_name_highelf}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Retaliacao (espinhos/veneno/nausea/nada)"
+            give {_it} to {_p}
+            send "&aItem de raca (Alto Elfo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "elfwood":
+            set {_it} to book named colored {@item_name_elfwood}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision + Velocidade +0.50; Camuflagem nas florestas"
+            give {_it} to {_p}
+            send "&aItem de raca (Elfo da Floresta) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "elf_wood":
+            set {_it} to book named colored {@item_name_elfwood}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision + Velocidade +0.50; Camuflagem nas florestas"
+            give {_it} to {_p}
+            send "&aItem de raca (Elfo da Floresta) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "floresta":
+            set {_it} to book named colored {@item_name_elfwood}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision + Velocidade +0.50; Camuflagem nas florestas"
+            give {_it} to {_p}
+            send "&aItem de raca (Elfo da Floresta) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "drow":
+            set {_it} to book named colored {@item_name_drow}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision + Teia Sombria (3 cargas; recarga 4m)"
+            give {_it} to {_p}
+            send "&aItem de raca (Drow) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "elf_drow":
+            set {_it} to book named colored {@item_name_drow}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision + Teia Sombria (3 cargas; recarga 4m)"
+            give {_it} to {_p}
+            send "&aItem de raca (Drow) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "darkelf":
+            set {_it} to book named colored {@item_name_drow}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision + Teia Sombria (3 cargas; recarga 4m)"
+            give {_it} to {_p}
+            send "&aItem de raca (Drow) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "halfelf":
+            set {_it} to book named colored {@item_name_halfelf}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision+Graca Marinha; recebe Pena p/ Queda Lenta"
+            give {_it} to {_p}
+            send "&aItem de raca (Meio-Elfo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "half_elf":
+            set {_it} to book named colored {@item_name_halfelf}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision+Graca Marinha; recebe Pena p/ Queda Lenta"
+            give {_it} to {_p}
+            send "&aItem de raca (Meio-Elfo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "meioelfo":
+            set {_it} to book named colored {@item_name_halfelf}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision+Graca Marinha; recebe Pena p/ Queda Lenta"
+            give {_it} to {_p}
+            send "&aItem de raca (Meio-Elfo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "meio-elfo":
+            set {_it} to book named colored {@item_name_halfelf}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision+Graca Marinha; recebe Pena p/ Queda Lenta"
+            give {_it} to {_p}
+            send "&aItem de raca (Meio-Elfo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "halforc":
+            set {_it} to book named colored {@item_name_halforc}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision + Relentless Endurance (cd)"
+            give {_it} to {_p}
+            send "&aItem de raca (Meio-Orc) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "half_orc":
+            set {_it} to book named colored {@item_name_halforc}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision + Relentless Endurance (cd)"
+            give {_it} to {_p}
+            send "&aItem de raca (Meio-Orc) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "meioorc":
+            set {_it} to book named colored {@item_name_halforc}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision + Relentless Endurance (cd)"
+            give {_it} to {_p}
+            send "&aItem de raca (Meio-Orc) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "meio-orc":
+            set {_it} to book named colored {@item_name_halforc}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision + Relentless Endurance (cd)"
+            give {_it} to {_p}
+            send "&aItem de raca (Meio-Orc) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "tiefling":
+            set {_it} to book named colored {@item_name_tiefling}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision+Resistencia ao Fogo; Velocidade II no Nether"
+            give {_it} to {_p}
+            send "&aItem de raca (Tiefling) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "human":
+            set {_it} to book named colored {@item_name_human}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8/abilities habilitado; regen condicional"
+            give {_it} to {_p}
+            send "&aItem de raca (Humano) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "humano":
+            set {_it} to book named colored {@item_name_human}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8/abilities habilitado; regen condicional"
+            give {_it} to {_p}
+            send "&aItem de raca (Humano) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "gnome" or "gnomo":
+            set {_it} to book named colored {@item_name_gnome}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision; item: Engrenagem Gnomica"
+            give {_it} to {_p}
+            send "&aItem de raca (Gnomo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "gnome_forest" or "gnomo_floresta":
+            set {_it} to book named colored {@item_name_gnome_forest}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Velocidade III <50%% HP; chance Invis 10s"
+            give {_it} to {_p}
+            send "&aItem de raca (Gnomo da Floresta) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "gnome_rock" or "gnomo_rochas":
+            set {_it} to book named colored {@item_name_gnome_rock}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Forca II e Repulsao ao atingir"
+            give {_it} to {_p}
+            send "&aItem de raca (Gnomo das Rochas) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "halfling_lightfoot" or "pes-leves" or "lightfoot":
+            set {_it} to book named colored {@item_name_halfling_lightfoot}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Supersalto + Sorte II"
+            give {_it} to {_p}
+            send "&aItem de raca (Halfling Pes-Leves) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "halfling_stout" or "robusto" or "stout":
+            set {_it} to book named colored {@item_name_halfling_stout}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Pressa I e Sorte II"
+            give {_it} to {_p}
+            send "&aItem de raca (Halfling Robusto) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dwarf" or "anao":
+            set {_it} to book named colored {@item_name_dwarf}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Darkvision + Resistencia a veneno (-50%%)"
+            give {_it} to {_p}
+            send "&aItem de raca (Anao) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dwarf_hill" or "anao_colina":
+            set {_it} to book named colored {@item_name_dwarf_hill}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8+6.0 Vida Max; Darkvision; Res. a veneno"
+            give {_it} to {_p}
+            send "&aItem de raca (Anao da Colina) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dwarf_mountain" or "anao_montanha":
+            set {_it} to book named colored {@item_name_dwarf_mountain}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Forca I (curto); Darkvision; Res. a veneno"
+            give {_it} to {_p}
+            send "&aItem de raca (Anao da Montanha) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dwarf_deep" or "anao_profundezas":
+            set {_it} to book named colored {@item_name_dwarf_deep}
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Cegueira 45%% no atacante; herda Anao"
+            give {_it} to {_p}
+            send "&aItem de raca (Anao das Profundezas) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn":
+            set {_it} to book named colored "&b&lRaca: Dragonborn"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Vida Max +1.0; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn_fire":
+            set {_it} to book named colored "&c&lRaca: Dragonborn (Fogo)"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Sopro de Fogo; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn Fogo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn_cold":
+            set {_it} to book named colored "&f&lRaca: Dragonborn (Gelo)"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Sopro Gelido; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn Gelo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn_lightning":
+            set {_it} to book named colored "&e&lRaca: Dragonborn (Raio)"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Sopro Eletrico; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn Raio) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn_acid":
+            set {_it} to book named colored "&a&lRaca: Dragonborn (Acido)"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Sopro Acido; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn Acido) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn_poison":
+            set {_it} to book named colored "&2&lRaca: Dragonborn (Veneno)"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Sopro Venenoso; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn Veneno) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn":
+            set {_it} to book named colored "&b&lRaca: Dragonborn"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Vida Max +1.0; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn_fire":
+            set {_it} to book named colored "&c&lRaca: Dragonborn (Fogo)"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Sopro de Fogo; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn Fogo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn_cold":
+            set {_it} to book named colored "&f&lRaca: Dragonborn (Gelo)"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Sopro Gelido; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn Gelo) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn_lightning":
+            set {_it} to book named colored "&e&lRaca: Dragonborn (Raio)"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Sopro Eletrico; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn Raio) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn_acid":
+            set {_it} to book named colored "&a&lRaca: Dragonborn (Acido)"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Sopro Acido; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn Acido) entregue a &e%name of {_p}%&a." to sender
+        else if {_t} is "dragonborn_poison":
+            set {_it} to book named colored "&2&lRaca: Dragonborn (Veneno)"
+            set lore of {_it} to colored "&7Clique para aplicar a raca." and colored "&8Sopro Venenoso; alias /breath"
+            give {_it} to {_p}
+            send "&aItem de raca (Dragonborn Veneno) entregue a &e%name of {_p}%&a." to sender
+        else:
+            send "&cTipo desconhecido. Use: highelf|halfelf|halforc|tiefling|human|dragonborn_*" to sender
+
+function giveNamedBook(p: player, name: text, lore1: text = "", lore2: text = ""):
+    set {_it} to book named colored {_name}
+    if {_lore1} is not "":
+        set lore of {_it} to colored {_lore1} and colored {_lore2}
+    give {_it} to {_p}
+
+function giveHighelf(p: player):
+    giveNamedBook({_p}, {@item_name_highelf}, "&7Clique para aplicar a raca.", "&8Retaliacao passiva (espinhos/veneno/nausea/nada)")
+
+function giveHalfelf(p: player):
+    giveNamedBook({_p}, {@item_name_halfelf}, "&7Clique para aplicar a raca.", "&8Darkvision+Graca Marinha; recebe Pena p/ Queda Lenta")
+
+function giveHalforc(p: player):
+    giveNamedBook({_p}, {@item_name_halforc}, "&7Clique para aplicar a raca.", "&8Darkvision + Relentless Endurance (cd)")
+
+function giveTiefling(p: player):
+    giveNamedBook({_p}, {@item_name_tiefling}, "&7Clique para aplicar a raca.", "&8Darkvision+Resistencia ao Fogo; Velocidade II no Nether")
+
+function giveHuman(p: player):
+    giveNamedBook({_p}, {@item_name_human}, "&7Clique para aplicar a raca.", "&8/abilities habilitado; regen condicional")
+
+on right click:
+    if player's tool is not air:
+        set {_n} to display name of player's tool
+        # Se for um LIVRO DE RACA, limpar qualquer raca anterior (grupos, tags e itens raciais)
+        # Nota: construa um flag em vez de encadear muitos ORs (mais compativel)
+        set {_racebook} to false
+        if {_n} is {@item_name_highelf}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_elfwood}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_halfelf}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_halforc}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_tiefling}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_human}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_drow}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_dwarf}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_dwarf_hill}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_dwarf_mountain}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_dwarf_deep}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_gnome}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_gnome_forest}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_gnome_rock}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_halfling_lightfoot}:
+            set {_racebook} to true
+        else if {_n} is {@item_name_halfling_stout}:
+            set {_racebook} to true
+        else if "%{_n}%" contains "Raca: Dragonborn":
+            set {_racebook} to true
+        if {_racebook} is true:
+            # Remover grupos LuckPerms de racas conhecidas
+            execute console command "lp user %name of player% parent remove race_elf_wood"
+            execute console command "lp user %name of player% parent remove race_elf_high"
+            execute console command "lp user %name of player% parent remove race_half_elf"
+            execute console command "lp user %name of player% parent remove race_half_orc"
+            execute console command "lp user %name of player% parent remove race_tiefling"
+            execute console command "lp user %name of player% parent remove race_human"
+            execute console command "lp user %name of player% parent remove race_elf_drow"
+            execute console command "lp user %name of player% parent remove race_dwarf"
+            execute console command "lp user %name of player% parent remove race_dwarf_hill"
+            execute console command "lp user %name of player% parent remove race_dwarf_mountain"
+            execute console command "lp user %name of player% parent remove race_dwarf_deep"
+            execute console command "lp user %name of player% parent remove race_gnome"
+            execute console command "lp user %name of player% parent remove race_gnome_forest"
+            execute console command "lp user %name of player% parent remove race_gnome_rock"
+            execute console command "lp user %name of player% parent remove race_halfling"
+            execute console command "lp user %name of player% parent remove race_halfling_lightfoot"
+            execute console command "lp user %name of player% parent remove race_halfling_stout"
+            execute console command "lp user %name of player% parent remove race_dragonborn"
+            execute console command "lp user %name of player% parent remove race_dragonborn_fire"
+            execute console command "lp user %name of player% parent remove race_dragonborn_cold"
+            execute console command "lp user %name of player% parent remove race_dragonborn_lightning"
+            execute console command "lp user %name of player% parent remove race_dragonborn_acid"
+            execute console command "lp user %name of player% parent remove race_dragonborn_poison"
+            # Remover tags raciais
+            execute console command "tag %name of player% remove race_darkvision"
+            execute console command "tag %name of player% remove trait_dolphin_halfelf"
+            execute console command "tag %name of player% remove trait_relentless"
+            execute console command "tag %name of player% remove trait_poison_resist"
+            execute console command "tag %name of player% remove trait_hp_hilldwarf"
+            execute console command "tag %name of player% remove resist_fire"
+            execute console command "tag %name of player% remove db_fire"
+            execute console command "tag %name of player% remove db_cold"
+            execute console command "tag %name of player% remove db_lightning"
+            execute console command "tag %name of player% remove db_acid"
+            execute console command "tag %name of player% remove db_poison"
+            execute console command "tag %name of player% remove trait_hp_dragonborn"
+            execute console command "tag %name of player% remove trait_haste_forestgnome"
+            execute console command "tag %name of player% remove trait_absorb_rockgnome"
+            execute console command "tag %name of player% remove trait_jump_lightfoot"
+            execute console command "tag %name of player% remove trait_saturation_stout"
+            execute console command "tag %name of player% remove halfling_lucky"
+            # Limpar variaveis e cooldowns conhecidos
+            delete {race.elf_wood.%uuid of player%}
+            delete {race.half_elf.%uuid of player%}
+            delete {player.race.%uuid of player%}
+            delete {drow.web.charges.%uuid of player%}
+            delete {drow.web.cool.%uuid of player%}
+            delete {elfwood.invis.%uuid of player%}
+            delete {elfwood.brooch_invis.%uuid of player%}
+            # Remover itens raciais antigos do inventario
+            loop all items in player's inventory:
+                if loop-item is not air:
+                    set {_dn} to display name of loop-item
+                    set {_remove} to false
+                    if {_dn} is {@racial_name_elfwood_brooch}:
+                        set {_remove} to true
+                    else if {_dn} is {@racial_name_drow_web}:
+                        set {_remove} to true
+                    else if {_dn} is {@racial_name_halfelf_feather}:
+                        set {_remove} to true
+                    else if {_dn} is {@racial_name_halforc_tusk}:
+                        set {_remove} to true
+                    else if {_dn} is {@racial_name_halforc_berserk}:
+                        set {_remove} to true
+                    else if {_dn} is {@racial_name_tiefling_sigil}:
+                        set {_remove} to true
+                    else if {_dn} is {@racial_name_human_medal}:
+                        set {_remove} to true
+                    else if {_dn} is {@racial_name_dragonborn_scale}:
+                        set {_remove} to true
+                    else if {_dn} is {@racial_name_dwarf_pick}:
+                        set {_remove} to true
+                    else if {_dn} is {@racial_name_gnome_cog}:
+                        set {_remove} to true
+                    else if {_dn} is {@racial_name_halfling_horn}:
+                        set {_remove} to true
+                    if {_remove} is true:
+                        remove loop-item from player's inventory
+        if {_n} is colored {@item_name_highelf}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_elf_high"
+            set {player.race.%uuid of player%} to "elf_high"
+            # Aplicar tags imediatamente (o plugin tambem vai sincronizar via enforceGroupTags)
+            execute console command "tag %name of player% add race_darkvision"
+            # Item racial Alto Elfo (placeholder vanilla)
+            set {_ch} to paper named colored "&bAmuleto Alto Elfo &8(Racial)"
+            set lore of {_ch} to "&7Ornamento ancestral dos Altos Elfos."
+            give {_ch} to player
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Alto Elfo. (aguarde 1s pros efeitos)" to player
+        else if {_n} is colored {@item_name_halfelf}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_half_elf"
+            set {player.race.%uuid of player%} to "half_elf"
+            execute console command "tag %name of player% add race_darkvision"
+            execute console command "tag %name of player% add trait_dolphin_halfelf"
+            # Dar a pena via MythicMobs (se existir)
+            execute console command "mm items give %name of player% HalfElfFeather"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Meio-Elfo. (aguarde 1s pros efeitos)" to player
+        else if {_n} is colored {@item_name_halforc}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_half_orc"
+            set {player.race.%uuid of player%} to "half_orc"
+            execute console command "tag %name of player% add race_darkvision"
+            execute console command "tag %name of player% add trait_relentless"
+            # Itens raciais do Meio-Orc (MythicMobs)
+            execute console command "mm items give %name of player% HalfOrcTusk"
+            execute console command "mm items give %name of player% HalfOrcBerserkCharm"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Meio-Orc. (aguarde 1s pros efeitos)" to player
+        else if {_n} is colored {@item_name_tiefling}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_tiefling"
+            set {player.race.%uuid of player%} to "tiefling"
+            execute console command "tag %name of player% add race_darkvision"
+            execute console command "tag %name of player% add resist_fire"
+            # Item racial Tiefling (se existir)
+            execute console command "mm items give %name of player% TieflingSigil"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Tiefling. (aguarde 1s pros efeitos)" to player
+        else if {_n} is colored {@item_name_human}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_human"
+            set {player.race.%uuid of player%} to "human"
+            # Habilitar /abilities (opcional)
+            execute console command "lp user %name of player% permission set raceseffects.abilities true"
+            # Item racial do Humano (MythicMobs)
+            execute console command "mm items give %name of player% HumanMedal"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Humano. (/abilities habilitado; aguarde 1s pros efeitos)" to player
+
+        # Pena do Meio-Elfo: Queda Lenta by use
+        else if {_n} is colored {@item_name_halfelf_feather}:
+            cancel event
+            apply slow falling 1 to player for 7 seconds
+            play sound "entity.phantom.flap" to player
+            send "&bQueda Lenta aplicada por 7s." to player
+
+        # Aplicacao da raca: Elfo da Floresta
+        else if {_n} is colored {@item_name_elfwood}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_elf_wood"
+            set {race.elf_wood.%uuid of player%} to true
+            set {player.race.%uuid of player%} to "elf_wood"
+            execute console command "tag %name of player% add race_darkvision"
+            # Opcional: marcador de velocidade (atributo via RacesEffects/config)
+            # Item racial simples (ornamento)
+            execute console command "mm items give %name of player% ElfWoodBrooch"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Elfo da Floresta. (aguarde 1s pros efeitos)" to player
+
+        # Aplicacao da raca: Anao (base)
+        else if {_n} is colored {@item_name_dwarf}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_dwarf"
+            set {player.race.%uuid of player%} to "dwarf"
+            execute console command "tag %name of player% add race_darkvision"
+            execute console command "tag %name of player% add trait_poison_resist"
+            execute console command "mm items give %name of player% DwarfRacialPick"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Anao. (aguarde 1s pros efeitos)" to player
+
+        # Aplicacao da raca: Anao da Colina
+        else if {_n} is colored {@item_name_dwarf_hill}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_dwarf_hill"
+            set {player.race.%uuid of player%} to "dwarf"
+            execute console command "tag %name of player% add race_darkvision"
+            execute console command "tag %name of player% add trait_poison_resist"
+            execute console command "tag %name of player% add trait_hp_hilldwarf"
+            execute console command "mm items give %name of player% DwarfRacialPick"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Anao da Colina. (aguarde 1s pros efeitos)" to player
+
+        # Aplicacao da raca: Anao da Montanha
+        else if {_n} is colored {@item_name_dwarf_mountain}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_dwarf_mountain"
+            set {player.race.%uuid of player%} to "dwarf"
+            execute console command "tag %name of player% add race_darkvision"
+            execute console command "tag %name of player% add trait_poison_resist"
+            execute console command "mm items give %name of player% DwarfRacialPick"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Anao da Montanha. (aguarde 1s pros efeitos)" to player
+
+        # Aplicacao da raca: Anao das Profundezas
+        else if {_n} is colored {@item_name_dwarf_deep}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_dwarf_deep"
+            set {player.race.%uuid of player%} to "dwarf"
+            execute console command "tag %name of player% add race_darkvision"
+            execute console command "tag %name of player% add trait_poison_resist"
+            execute console command "mm items give %name of player% DwarfRacialPick"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Anao das Profundezas. (aguarde 1s pros efeitos)" to player
+
+        # Aplicacao da raca: Drow
+        else if {_n} is colored {@item_name_drow}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_elf_drow"
+            set {player.race.%uuid of player%} to "elf_drow"
+            execute console command "tag %name of player% add race_darkvision"
+            execute console command "mm items give %name of player% DrowWeb"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Drow. (aguarde 1s pros efeitos)" to player
+
+        # Gnomo (base)
+        else if {_n} is colored {@item_name_gnome}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_gnome"
+            set {player.race.%uuid of player%} to "gnome"
+            execute console command "tag %name of player% add race_darkvision"
+            execute console command "mm items give %name of player% GnomeCog"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Gnomo. (aguarde 1s pros efeitos)" to player
+
+        # Gnomo da Floresta
+        else if {_n} is colored {@item_name_gnome_forest}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_gnome_forest"
+            set {player.race.%uuid of player%} to "gnome"
+            execute console command "tag %name of player% add race_darkvision"
+            execute console command "mm items give %name of player% GnomeCog"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Gnomo da Floresta. (aguarde 1s pros efeitos)" to player
+
+        # Gnomo das Rochas
+        else if {_n} is colored {@item_name_gnome_rock}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_gnome_rock"
+            set {player.race.%uuid of player%} to "gnome"
+            execute console command "tag %name of player% add race_darkvision"
+            execute console command "mm items give %name of player% GnomeCog"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Gnomo das Rochas. (aguarde 1s pros efeitos)" to player
+
+        # Halfling Pés-Leves
+        else if {_n} is colored {@item_name_halfling_lightfoot}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_halfling_lightfoot"
+            set {player.race.%uuid of player%} to "halfling"
+            execute console command "mm items give %name of player% HalflingHorn"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Halfling Pes-Leves. (aguarde 1s pros efeitos)" to player
+
+        # Halfling Robusto
+        else if {_n} is colored {@item_name_halfling_stout}:
+            cancel event
+            execute console command "lp user %name of player% parent set race_halfling_stout"
+            set {player.race.%uuid of player%} to "halfling"
+            execute console command "mm items give %name of player% HalflingHorn"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Halfling Robusto. (aguarde 1s pros efeitos)" to player
+        # Dragonborn books
+        else if {_n} is colored "&b&lRaca: Dragonborn":
+            cancel event
+            execute console command "lp user %name of player% parent set race_dragonborn"
+            set {player.race.%uuid of player%} to "dragonborn"
+            execute console command "tag %name of player% add trait_hp_dragonborn"
+            execute console command "mm items give %name of player% DragonbornScale"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Dragonborn (base)." to player
+        else if {_n} is colored "&c&lRaca: Dragonborn (Fogo)":
+            cancel event
+            execute console command "lp user %name of player% parent set race_dragonborn_fire"
+            set {player.race.%uuid of player%} to "dragonborn"
+            execute console command "tag %name of player% add trait_hp_dragonborn"
+            execute console command "tag %name of player% remove db_fire"
+            execute console command "tag %name of player% remove db_cold"
+            execute console command "tag %name of player% remove db_lightning"
+            execute console command "tag %name of player% remove db_acid"
+            execute console command "tag %name of player% remove db_poison"
+            execute console command "tag %name of player% add db_fire"
+            execute console command "mm items give %name of player% DragonbornScale"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Dragonborn (Fogo)." to player
+        else if {_n} is colored "&f&lRaca: Dragonborn (Gelo)":
+            cancel event
+            execute console command "lp user %name of player% parent set race_dragonborn_cold"
+            set {player.race.%uuid of player%} to "dragonborn"
+            execute console command "tag %name of player% add trait_hp_dragonborn"
+            execute console command "tag %name of player% remove db_fire"
+            execute console command "tag %name of player% remove db_cold"
+            execute console command "tag %name of player% remove db_lightning"
+            execute console command "tag %name of player% remove db_acid"
+            execute console command "tag %name of player% remove db_poison"
+            execute console command "tag %name of player% add db_cold"
+            execute console command "mm items give %name of player% DragonbornScale"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Dragonborn (Gelo)." to player
+        else if {_n} is colored "&e&lRaca: Dragonborn (Raio)":
+            cancel event
+            execute console command "lp user %name of player% parent set race_dragonborn_lightning"
+            set {player.race.%uuid of player%} to "dragonborn"
+            execute console command "tag %name of player% add trait_hp_dragonborn"
+            execute console command "tag %name of player% remove db_fire"
+            execute console command "tag %name of player% remove db_cold"
+            execute console command "tag %name of player% remove db_lightning"
+            execute console command "tag %name of player% remove db_acid"
+            execute console command "tag %name of player% remove db_poison"
+            execute console command "tag %name of player% add db_lightning"
+            execute console command "mm items give %name of player% DragonbornScale"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Dragonborn (Raio)." to player
+        else if {_n} is colored "&a&lRaca: Dragonborn (Acido)":
+            cancel event
+            execute console command "lp user %name of player% parent set race_dragonborn_acid"
+            set {player.race.%uuid of player%} to "dragonborn"
+            execute console command "tag %name of player% add trait_hp_dragonborn"
+            execute console command "tag %name of player% remove db_fire"
+            execute console command "tag %name of player% remove db_cold"
+            execute console command "tag %name of player% remove db_lightning"
+            execute console command "tag %name of player% remove db_acid"
+            execute console command "tag %name of player% remove db_poison"
+            execute console command "tag %name of player% add db_acid"
+            execute console command "mm items give %name of player% DragonbornScale"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Dragonborn (Acido)." to player
+        else if {_n} is colored "&2&lRaca: Dragonborn (Veneno)":
+            cancel event
+            execute console command "lp user %name of player% parent set race_dragonborn_poison"
+            set {player.race.%uuid of player%} to "dragonborn"
+            execute console command "tag %name of player% add trait_hp_dragonborn"
+            execute console command "tag %name of player% remove db_fire"
+            execute console command "tag %name of player% remove db_cold"
+            execute console command "tag %name of player% remove db_lightning"
+            execute console command "tag %name of player% remove db_acid"
+            execute console command "tag %name of player% remove db_poison"
+            execute console command "tag %name of player% add db_poison"
+            execute console command "mm items give %name of player% DragonbornScale"
+            remove 1 of player's tool from player's inventory
+            play sound "ui.toast.challenge_complete" to player
+            send "&aRaca aplicada: Dragonborn (Veneno)." to player

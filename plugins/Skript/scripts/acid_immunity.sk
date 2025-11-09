@@ -1,0 +1,14 @@
+options:
+  check_ticks: 2
+
+# Imunidade a Decomposição (Wither) para Draconato de Ácido
+# Critérios: grupo race_dragonborn_acid ou tag db_acid
+
+every {@check_ticks} ticks:
+  loop all players:
+    set {_p} to loop-player
+    if {_p} has permission "group.race_dragonborn_acid":
+      execute console command "execute as %name of {_p}% run effect clear @s minecraft:wither"
+    else:
+      execute console command "execute as %name of {_p}% if entity @s[tag=db_acid] run effect clear @s minecraft:wither"
+

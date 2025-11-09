@@ -1,0 +1,22 @@
+# dwarf_deep_blind.sk — Cegueira (45%) no atacante ao bater no Anão das Profundezas
+
+options:
+    deep_blind_chance: 45         # chance (%) por acerto
+    deep_blind_seconds: 5         # duração da cegueira
+
+# Melee e outras fontes com atacante vivo (não-projétil)
+on damage:
+    if victim is a player:
+        if victim has permission "group.race_dwarf_deep":
+            if attacker is a living entity:
+                set {_roll} to random integer between 1 and 100
+                if {_roll} <= {@deep_blind_chance}:
+                    apply blindness 1 to attacker for {@deep_blind_seconds} seconds
+
+# Dano causado por projétil (usa a expressão própria deste evento)
+on damage of player by projectile:
+    if victim has permission "group.race_dwarf_deep":
+        if attacker is a living entity:
+            set {_roll} to random integer between 1 and 100
+            if {_roll} <= {@deep_blind_chance}:
+                apply blindness 1 to attacker for {@deep_blind_seconds} seconds

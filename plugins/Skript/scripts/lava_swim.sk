@@ -1,0 +1,109 @@
+### lava_swim.sk - Lava breath + swim assist (ASCII)
+# Regras:
+# - Jogadores com Resistência ao Fogo (efeito de poção) OU Tiefling
+#   ganham “fôlego na lava” (15s por padrão) enquanto estiverem imersos.
+# - O fôlego desce na lava. Ao zerar, aplica dano de sufocamento (não dano de lava).
+# - Ao sair da lava, o fôlego é restaurado e a UI limpa.
+
+options:
+    lava_breath_seconds: 60     # folego total na lava
+    check_ticks: 1              # frequencia de checagem (1 = every tick)
+    suffo_damage: 2             # dano por tique de sufocamento (2 = 1 coracao)
+    lava_vision_enable: true    # aplica visao na lava para qualificados
+    lava_vision_seconds: 5      # duracao da visao aplicada (reaplica enquanto submerso)
+
+# Util: detecta se o jogador qualifica (Tiefling ou com Resistência ao Fogo)
+function _lavaQualified(p: player) :: boolean:
+    # Somente RAÇA/CLASSE qualificam; poção de Resistência ao Fogo NÃO conta
+    if {_p} has permission "group.race_tiefling":
+        return true
+    # Adicione aqui outras racas/classes que concedem resistencia “inata”
+    # if {_p} has permission "group.class_alguma_classe_com_resist_fire":
+    #     return true
+    # Dragonborn Fire e tag de imunidade
+    if {_p} has permission "group.race_dragonborn_fire":
+        return true
+    if {_p} has scoreboard tag "db_fire":
+        return true
+    return false
+
+# Loop principal de controle do fôlego na lava
+every {@check_ticks} ticks:
+    set {_max} to {@lava_breath_seconds} * 20
+    loop all players:
+        set {_u} to "%uuid of loop-player%"
+        if _lavaQualified(loop-player) is true:
+            # Checa se está imerso em lava (pés ou cabeça)
+            set {_tFeet} to block at loop-player
+            set {_tEye} to block at eye location of loop-player
+            # Conta folego apenas se estiver 100% coberto (pes e cabeca em lava)
+            if {_tFeet} is lava block:
+                if {_tEye} is lava block:
+                    if {lava.air.%{_u}%} is not set:
+                        set {lava.air.%{_u}%} to {_max}
+                    else:
+                        set {lava.air.%{_u}%} to {lava.air.%{_u}%} - {@check_ticks}
+                        if {lava.air.%{_u}%} < 0:
+                            set {lava.air.%{_u}%} to 0
+                    # UI: barra de 10 segmentos
+                    set {_seg} to ( {lava.air.%{_u}%} * 10 ) / {_max}
+                    set {_ui} to ""
+                    loop 10 times:
+                        if loop-number <= {_seg}:
+                            set {_ui} to "%{_ui}%="
+                        else:
+                            set {_ui} to "%{_ui}%-"
+                    set {_secsLeft} to round({lava.air.%{_u}%} / 20)
+                    send action bar "&6Lava &7[&e%{_ui}%&7] &f%{_secsLeft}%s" to loop-player
+                    # Visao em lava: aplica enquanto totalmente coberto
+                    if {@lava_vision_enable} is true:
+                        apply night vision 1 to loop-player for {@lava_vision_seconds} seconds
+                        set {lava.nv.%{_u}%} to true
+                    # Sufocamento quando zera
+                    if {lava.air.%{_u}%} <= 0:
+                        if {lava.suffo.%{_u}%} is not set:
+                            set {lava.suffo.%{_u}%} to now
+                        if difference between now and {lava.suffo.%{_u}%} >= 1 seconds:
+                            damage loop-player by {@suffo_damage}
+                            set {lava.suffo.%{_u}%} to now
+                    else:
+                        delete {lava.suffo.%{_u}%}
+                else:
+                    # Nao totalmente coberto: para contagem e recarrega gradualmente o folego
+                    if {lava.air.%{_u}%} is set:
+                        set {lava.air.%{_u}%} to {lava.air.%{_u}%} + 4
+                        if {lava.air.%{_u}%} > {_max}:
+                            set {lava.air.%{_u}%} to {_max}
+                        delete {lava.suffo.%{_u}%}
+                        send action bar "" to loop-player
+                        if {lava.air.%{_u}%} >= {_max}:
+                            delete {lava.air.%{_u}%}
+                    # Saiu da submersao total: remove NV aplicada por este script
+                    if {lava.nv.%{_u}%} is set:
+                        remove night vision from loop-player
+                        delete {lava.nv.%{_u}%}
+            else:
+                # Fora da lava: recarrega gradualmente; ao encher, limpa variaveis
+                if {lava.air.%{_u}%} is set:
+                    set {lava.air.%{_u}%} to {lava.air.%{_u}%} + 4
+                    if {lava.air.%{_u}%} > {_max}:
+                        set {lava.air.%{_u}%} to {_max}
+                    delete {lava.suffo.%{_u}%}
+                    send action bar "" to loop-player
+                    if {lava.air.%{_u}%} >= {_max}:
+                        delete {lava.air.%{_u}%}
+                if {lava.nv.%{_u}%} is set:
+                    remove night vision from loop-player
+                    delete {lava.nv.%{_u}%}
+        else:
+            # Não qualifica: limpa se houver restos
+            if {lava.air.%{_u}%} is set:
+                delete {lava.air.%{_u}%}
+                delete {lava.suffo.%{_u}%}
+                send action bar "" to loop-player
+
+# Limpa variáveis ao sair do servidor
+on quit:
+    set {_u} to "%uuid of player%"
+    delete {lava.air.%{_u}%}
+    delete {lava.suffo.%{_u}%}

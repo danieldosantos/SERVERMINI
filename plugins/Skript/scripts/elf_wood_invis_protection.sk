@@ -1,0 +1,13 @@
+# Proteção extra: enquanto o Elfo da Floresta estiver invisível, impedir que mobs adquiram alvo
+
+on target:
+  if target entity is a player:
+    set {_p} to target entity
+    if {_p} has permission "group.race_elf_wood":
+      # Invisibilidade via efeito ou flags dos scripts
+      if {_p} has potion effect invisibility:
+        cancel event
+      else if {elfwood.invis.%uuid of {_p}%} is set:
+        cancel event
+      else if {elfwood.brooch_invis.%uuid of {_p}%} is set:
+        cancel event

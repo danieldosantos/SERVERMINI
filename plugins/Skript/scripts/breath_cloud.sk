@@ -1,0 +1,285 @@
+options:
+  cooldown: 10 seconds
+
+# Dragonborn breaths via Skript only
+# - Right-click the breath item to cast
+# - Cooldown: 10s per player
+# - Immunities by scoreboard tags: db_fire, db_cold, db_lightning, db_acid, db_poison
+# - Prevents vanilla item consumption (snowball) even when clicking entities
+
+function breath_cast(p: player):
+  set {_item} to tool of {_p}
+  if {_item} is air:
+    stop
+  # sub-raça define o tipo; não verificamos nome do item
+
+  set {_uuid} to "%uuid of {_p}%"
+  if {breath.last.%{_uuid}%} is set:
+    set {_elapsed} to difference between now and {breath.last.%{_uuid}%}
+    if {_elapsed} < {@cooldown}:
+      set {_left} to round(({@cooldown} - {_elapsed}) / 1 second)
+      send "&cSopro em recarga (&f%{_left}%s&c)." to {_p}
+      stop
+
+  # Detecta o tipo pela sub-raça (permissão)
+  set {_type} to ""
+  if {_p} has permission "group.race_dragonborn_lightning":
+    set {_type} to "lightning"
+  else if {_p} has permission "group.race_dragonborn_acid":
+    set {_type} to "acid"
+  else if {_p} has permission "group.race_dragonborn_cold":
+    set {_type} to "cold"
+  else if {_p} has permission "group.race_dragonborn_fire":
+    set {_type} to "fire"
+  else if {_p} has permission "group.race_dragonborn_poison":
+    set {_type} to "poison"
+  else:
+    stop
+
+  set {breath.last.%{_uuid}%} to now
+  send "&e[DBG] tipo detectado: %{_type}%" to {_p}
+
+  # FIRE: Cone sample; ignite entities; show flame
+  if {_type} is "fire":
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^2 run particle minecraft:flame ~ ~ ~ 0.3 0.1 0.3 0 12"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^2 run execute as @e[distance=..1,tag=!db_fire] at @s run data merge entity @s {Fire:100}"
+    execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^3 run particle minecraft:flame ~ ~ ~ 0.3 0.1 0.3 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^3 run execute as @e[distance=..1,tag=!db_fire] at @s run data merge entity @s {Fire:100}"
+    execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^3 run particle minecraft:flame ~ ~ ~ 0.3 0.1 0.3 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^3 run execute as @e[distance=..1,tag=!db_fire] at @s run data merge entity @s {Fire:100}"
+    execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^4 run particle minecraft:flame ~ ~ ~ 0.3 0.1 0.3 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^4 run execute as @e[distance=..1,tag=!db_fire] at @s run data merge entity @s {Fire:100}"
+    execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^4 run particle minecraft:flame ~ ~ ~ 0.3 0.1 0.3 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^4 run execute as @e[distance=..1,tag=!db_fire] at @s run data merge entity @s {Fire:100}"
+    execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^5 run particle minecraft:flame ~ ~ ~ 0.3 0.1 0.3 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^5 run execute as @e[distance=..1,tag=!db_fire] at @s run data merge entity @s {Fire:100}"
+    execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^5 run particle minecraft:flame ~ ~ ~ 0.3 0.1 0.3 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^5 run execute as @e[distance=..1,tag=!db_fire] at @s run data merge entity @s {Fire:100}"
+    execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^6 run particle minecraft:flame ~ ~ ~ 0.3 0.1 0.3 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^6 run execute as @e[distance=..1,tag=!db_fire] at @s run data merge entity @s {Fire:100}"
+    execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^6 run particle minecraft:flame ~ ~ ~ 0.3 0.1 0.3 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^6 run execute as @e[distance=..1,tag=!db_fire] at @s run data merge entity @s {Fire:100}"
+    execute console command "execute as %name of {_p}% at @s positioned ^-3 ^0 ^7 run particle minecraft:flame ~ ~ ~ 0.3 0.1 0.3 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^-3 ^0 ^7 run execute as @e[distance=..1,tag=!db_fire] at @s run data merge entity @s {Fire:100}"
+    execute console command "execute as %name of {_p}% at @s positioned ^3 ^0 ^7 run particle minecraft:flame ~ ~ ~ 0.3 0.1 0.3 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^3 ^0 ^7 run execute as @e[distance=..1,tag=!db_fire] at @s run data merge entity @s {Fire:100}"
+
+  # COLD: 5x5 square sample; apply Slowness; show snowflake
+  else if {_type} is "cold":
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^2 run particle minecraft:snowflake ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^2 run effect give @e[distance=..1,tag=!db_cold] minecraft:slowness 6 1 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run particle minecraft:snowflake ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run effect give @e[distance=..1,tag=!db_cold] minecraft:slowness 6 1 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^4 run particle minecraft:snowflake ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^4 run effect give @e[distance=..1,tag=!db_cold] minecraft:slowness 6 1 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^3 run particle minecraft:snowflake ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^3 run effect give @e[distance=..1,tag=!db_cold] minecraft:slowness 6 1 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^3 run particle minecraft:snowflake ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^3 run effect give @e[distance=..1,tag=!db_cold] minecraft:slowness 6 1 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^4 run particle minecraft:snowflake ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^4 run effect give @e[distance=..1,tag=!db_cold] minecraft:slowness 6 1 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^4 run particle minecraft:snowflake ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^4 run effect give @e[distance=..1,tag=!db_cold] minecraft:slowness 6 1 true"
+
+  # LIGHTNING: line of strikes ahead
+  else if {_type} is "lightning":
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^2 run summon lightning_bolt ~ ~ ~"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run summon lightning_bolt ~ ~ ~"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^4 run summon lightning_bolt ~ ~ ~"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^5 run summon lightning_bolt ~ ~ ~"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^6 run summon lightning_bolt ~ ~ ~"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^7 run summon lightning_bolt ~ ~ ~"
+
+  # ACID: diamond sample; apply Wither; particles
+  else if {_type} is "acid":
+    send "&e[DBG] executando chuva ácida" to {_p}
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run particle minecraft:entity_effect ~ ~ ~ 0.3 0.1 0.3 0 8"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run effect give @e[distance=..1,tag=!db_acid] minecraft:wither 6 0 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^4 run particle minecraft:entity_effect ~ ~ ~ 0.3 0.1 0.3 0 8"
+    execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^4 run effect give @e[distance=..1,tag=!db_acid] minecraft:wither 6 0 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^4 run particle minecraft:entity_effect ~ ~ ~ 0.3 0.1 0.3 0 8"
+    execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^4 run effect give @e[distance=..1,tag=!db_acid] minecraft:wither 6 0 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^5 run particle minecraft:entity_effect ~ ~ ~ 0.3 0.1 0.3 0 8"
+    execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^5 run effect give @e[distance=..1,tag=!db_acid] minecraft:wither 6 0 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^5 run particle minecraft:entity_effect ~ ~ ~ 0.3 0.1 0.3 0 8"
+    execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^5 run effect give @e[distance=..1,tag=!db_acid] minecraft:wither 6 0 true"
+
+  # POISON: 6x6 area sample; apply Poison
+  else if {_type} is "poison":
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run particle minecraft:dripping_honey ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^3 run particle minecraft:dripping_honey ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^3 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^3 run particle minecraft:dripping_honey ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^3 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^4 run particle minecraft:dripping_honey ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^4 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^4 run particle minecraft:dripping_honey ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^4 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+    execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^4 run particle minecraft:dripping_honey ~ ~ ~ 0.5 0.1 0.5 0 10"
+    execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^4 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+
+on right click:
+  # Bloqueia consumo do item e dispara sempre pela sub-raça
+  set {_item} to player's tool
+  if {_item} is air:
+    stop
+  # Garante que só itens de sopro disparem
+  set {_n} to uncolored name of {_item}
+  if "%{_n}%" is not set:
+    stop
+  if "%{_n}%" does not contain "Sopro":
+    stop
+  cancel event
+  send "&e[DBG] right-click detectado" to player
+  make player execute command "/breath"
+
+# Comando opcional para ativar sopro sem item
+command /breath:
+  trigger:
+    set {_p} to player
+    set {_uuid} to "%uuid of {_p}%"
+    if {breath.last.%{_uuid}%} is set:
+      set {_elapsed} to difference between now and {breath.last.%{_uuid}%}
+      if {_elapsed} < {@cooldown}:
+        set {_left} to round(({@cooldown} - {_elapsed}) / 1 second)
+        send "&cSopro em recarga (&f%{_left}%s&c)." to {_p}
+        stop
+    # Sopro de Raio: requer grupo da sub-raça
+    if {_p} has permission "group.race_dragonborn_lightning":
+      set {breath.last.%{_uuid}%} to now
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^2 run summon lightning_bolt ~ ~ ~"
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run summon lightning_bolt ~ ~ ~"
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^4 run summon lightning_bolt ~ ~ ~"
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^5 run summon lightning_bolt ~ ~ ~"
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^6 run summon lightning_bolt ~ ~ ~"
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^7 run summon lightning_bolt ~ ~ ~"
+      stop
+    # Sopro Ácido: nuvem de Decomposição I à frente; imune via tag db_acid
+    else if {_p} has permission "group.race_dragonborn_acid":
+      set {breath.last.%{_uuid}%} to now
+      # Chuva Ácida (Ruptura simulada): 5x5 por 6s, 1 de dano/seg, ignora db_acid
+      loop 6 times:
+        # z = 3..7; x = -2..2
+        # z=3
+        execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^3 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^3 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^3 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^3 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 8"
+        execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^3 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^3 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^3 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^3 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        # z=4
+        execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^4 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^4 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^4 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^4 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^4 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 8"
+        execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^4 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^4 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^4 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^4 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^4 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        # z=5
+        execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^5 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^5 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^5 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^5 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^5 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 8"
+        execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^5 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^5 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^5 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^5 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^5 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        # z=6
+        execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^6 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^6 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^6 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^6 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^6 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 8"
+        execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^6 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^6 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^6 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^6 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^6 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        # z=7
+        execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^7 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^7 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^7 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^7 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^7 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 8"
+        execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^7 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^7 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^7 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^7 run particle minecraft:splash ~ ~ ~ 0.3 0.5 0.3 0 6"
+        execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^7 run execute as @e[distance=..1,tag=!db_acid] at @s run damage @s 1"
+        wait 1 second
+      stop
+    # Sopro Venenoso: área 6x3 com Poison; imune via tag db_poison
+    else if {_p} has permission "group.race_dragonborn_poison":
+      set {breath.last.%{_uuid}%} to now
+      # z = 3..5 ; x = -3..2 (6x3)
+      # z=3
+      execute console command "execute as %name of {_p}% at @s positioned ^-3 ^0 ^3 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^-3 ^0 ^3 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^3 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^3 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^3 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^3 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 10"
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^3 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^3 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^3 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^3 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^3 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      # z=4
+      execute console command "execute as %name of {_p}% at @s positioned ^-3 ^0 ^4 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^-3 ^0 ^4 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^4 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^4 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^4 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^4 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^4 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 10"
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^4 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^4 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^4 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^4 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^4 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      # z=5
+      execute console command "execute as %name of {_p}% at @s positioned ^-3 ^0 ^5 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^-3 ^0 ^5 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^5 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^-2 ^0 ^5 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^5 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^-1 ^0 ^5 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^5 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 10"
+      execute console command "execute as %name of {_p}% at @s positioned ^0 ^0 ^5 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^5 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^1 ^0 ^5 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^5 run particle minecraft:witch ~ ~ ~ 0.5 0.2 0.5 0 8"
+      execute console command "execute as %name of {_p}% at @s positioned ^2 ^0 ^5 run effect give @e[distance=..1,tag=!db_poison] minecraft:poison 6 0 true"
+      stop
+    else:
+      send "&cVoce nao possui sopro disponível." to {_p}
+
+on right click on entity:
+  # Também cancela consumo ao clicar em entidades; ativa pela sub-raça
+  set {_item} to player's tool
+  if {_item} is air:
+    stop
+  # Garante que só itens de sopro disparem
+  set {_n} to uncolored name of {_item}
+  if "%{_n}%" is not set:
+    stop
+  if "%{_n}%" does not contain "Sopro":
+    stop
+  cancel event
+  send "&e[DBG] right-click em entidade" to player
+  make player execute command "/breath"
+
+## Clique em bloco é tratado pelo próprio 'on right click'
+
+# Removido o bloqueio global de snowball; o cancel acontece no clique

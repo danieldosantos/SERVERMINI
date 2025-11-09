@@ -1,0 +1,30 @@
+options:
+  deadly_chance: 45            # chance (%) de aplicar o efeito
+  poison_seconds: 6            # duracao do Poison (segundos)
+  wither_seconds: 3            # duracao do Wither (segundos) - torna "mortal"
+
+# Veneno Mortal do Drow nas profundidades
+# - Ativa ao causar dano
+# - Requisitos: atacante eh Drow, Overworld, camada Y <= -39
+# - Alvo: qualquer entidade viva (mobs ou jogadores)
+on damage:
+  attacker is a player
+  set {_p} to attacker
+  set {_v} to victim
+  if {_v} is not a living entity:
+    stop
+  # Detecta raca Drow (variavel canonica ou grupo LuckPerms)
+  set {_isDrow} to false
+  if getPlayerRace({_p}) is "elf_drow":
+    set {_isDrow} to true
+  else if {_p} has permission "group.race_elf_drow":
+    set {_isDrow} to true
+  if {_isDrow} is true:
+    if environment of world of {_p} is normal:
+      set {_y} to y-coordinate of {_p}
+      if {_y} <= -39:
+        if chance of {@deadly_chance}%:
+          # Aplica veneno mortal (Poison + Wither) no alvo atingido
+          apply poison 1 to {_v} for {@poison_seconds} seconds
+          apply wither 1 to {_v} for {@wither_seconds} seconds
+

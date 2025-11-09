@@ -1,0 +1,15 @@
+# gnome_rock_combat.sk — Gnomo das Rochas: Força II e Repulsão ao causar dano
+
+options:
+    rock_strength_seconds: 6
+    rock_knockback_speed: 1.2
+
+on damage:
+    if attacker is a player:
+        if attacker has permission "group.race_gnome_rock":
+            # Força II por alguns segundos no atacante
+            apply strength 2 to attacker for {@rock_strength_seconds} seconds
+            # Repulsão: empurra o alvo para longe do atacante
+            if victim is a living entity:
+                push victim away from attacker with speed {@rock_knockback_speed}
+

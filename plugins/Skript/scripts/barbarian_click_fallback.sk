@@ -1,0 +1,74 @@
+### barbarian_click_fallback.sk – Fallback de clique direito para itens sem MythicMobs
+# Ativa as habilidades do Berserker ao clicar com itens vanilla com os nomes corretos
+# Só dispara se o item NÃO tiver a marca "&8[MM]" na lore (para evitar duplicar com MM)
+
+options:
+    berserker_warhorn: "&6Grito Bestial &8(Berserker)"
+    berserker_battleaxe: "&6Investida Sanguinaria &8(Berserker)"
+    berserker_spikedshield: "&6Retaliacao Frenetica &8(Berserker)"
+    berserker_boots: "&6Impetus Irrefreavel &8(Berserker)"
+    berserker_totem: "&6Carnificina Implacavel &8(Berserker)"
+    mm_marker: "&8[MM]"
+
+function _coolReady(u: text, key: text, sec: number) :: boolean:
+    if {cool.expiry.%{_u}%.%{_key}%} is set:
+        set {_rem} to difference between {cool.expiry.%{_u}%.%{_key}%} and now
+        if {_rem} > 0 seconds:
+            return false
+    return true
+
+function _coolStart(u: text, key: text, sec: number):
+    set {cool.expiry.%{_u}%.%{_key}%} to now
+    set {_i} to 0
+    loop {_sec} times:
+        add 1 second to {cool.expiry.%{_u}%.%{_key}%}
+
+on right click:
+    if player's tool is not air:
+        set {_it} to player's tool
+        set {_n} to display name of {_it}
+        set {_lore::*} to lore of {_it}
+        # Evita duplicar se for item oficial do MM (tem marcador)
+        if {_lore::*} contains colored {@mm_marker}:
+            stop
+        set {_u} to "%uuid of player%"
+        # WarHorn – cd 75s
+        if {_n} is colored {@berserker_warhorn}:
+            if _coolReady({_u}, "warhorn", 75) is false:
+                send "&cGrito Bestial em recarga." to player
+                stop
+            execute console command "mmbarb_warhorn %name of player%"
+            _coolStart({_u}, "warhorn", 75)
+            stop
+        # BattleAxe – cd 45s
+        if {_n} is colored {@berserker_battleaxe}:
+            if _coolReady({_u}, "battleaxe", 45) is false:
+                send "&cInvestida em recarga." to player
+                stop
+            execute console command "mmbarb_battleaxe %name of player%"
+            _coolStart({_u}, "battleaxe", 45)
+            stop
+        # SpikedShield – cd 90s
+        if {_n} is colored {@berserker_spikedshield}:
+            if _coolReady({_u}, "shield", 90) is false:
+                send "&cRetaliacao em recarga." to player
+                stop
+            execute console command "mmbarb_shield %name of player%"
+            _coolStart({_u}, "shield", 90)
+            stop
+        # Boots – cd 60s
+        if {_n} is colored {@berserker_boots}:
+            if _coolReady({_u}, "boots", 60) is false:
+                send "&cImpetus em recarga." to player
+                stop
+            execute console command "mmbarb_boots %name of player%"
+            _coolStart({_u}, "boots", 60)
+            stop
+        # Totem – cd 210s
+        if {_n} is colored {@berserker_totem}:
+            if _coolReady({_u}, "ult", 210) is false:
+                send "&cCarnificina em recarga." to player
+                stop
+            execute console command "mmbarb_ultimate %name of player%"
+            _coolStart({_u}, "ult", 210)
+            stop

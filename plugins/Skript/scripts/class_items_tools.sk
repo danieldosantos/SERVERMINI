@@ -1,0 +1,163 @@
+# Utilitários de depuração para itens de classe/raça
+
+command /checkitemsdebug [<player>]:
+    permission: op
+    trigger:
+        if arg 1 is set:
+            set {_p} to arg 1
+        else:
+            set {_p} to player
+        send "[Debug] Checando permissoes para %name of {_p}%..." to sender
+        if {_p} has permission "group.class_warlock":
+            send " - OK: group.class_warlock" to sender
+        else:
+            send " - NAO: group.class_warlock" to sender
+        if {_p} has permission "group.race_half_elf":
+            send " - OK: group.race_half_elf" to sender
+        else:
+            send " - NAO: group.race_half_elf" to sender
+        if {_p} has permission "group.race_tiefling":
+            send " - OK: group.race_tiefling" to sender
+        else:
+            send " - NAO: group.race_tiefling" to sender
+        if {_p} has permission "group.class_barbarian":
+            send " - OK: group.class_barbarian" to sender
+        else:
+            send " - NAO: group.class_barbarian" to sender
+        if {_p} has permission "group.class_barbarian_totem_bear":
+            send " - OK: group.class_barbarian_totem_bear" to sender
+        else:
+            send " - NAO: group.class_barbarian_totem_bear" to sender
+        if {_p} has permission "group.class_warlock_fiend":
+            send " - OK: group.class_warlock_fiend" to sender
+        else if {_p} has permission "group.class_warlock_archfey":
+            send " - OK: group.class_warlock_archfey" to sender
+        else if {_p} has permission "group.class_warlock_oldone":
+            send " - OK: group.class_warlock_oldone" to sender
+        else:
+            send " - NAO: subclasse de warlock" to sender
+        if {_p} has permission "group.race_human":
+            send " - OK: group.race_human" to sender
+        else:
+            send " - NAO: group.race_human" to sender
+
+command /forcegiveitems <player>:
+    permission: op
+    trigger:
+        set {_p} to arg 1
+        send "[Force] Dando itens para %name of {_p}% (conforme permissoes)" to sender
+        if {_p} has permission "group.class_warlock":
+            execute console command "mm items give %name of {_p}% EldritchWand"
+            execute console command "mm items give %name of {_p}% HexTalisman"
+        if {_p} has permission "group.race_half_elf":
+            execute console command "mm items give %name of {_p}% HalfElfFeather"
+        if {_p} has permission "group.class_warlock_fiend":
+            execute console command "mm items give %name of {_p}% FiendMark"
+        else if {_p} has permission "group.class_warlock_archfey":
+            execute console command "mm items give %name of {_p}% FeyCharm"
+        else if {_p} has permission "group.class_warlock_oldone":
+            execute console command "mm items give %name of {_p}% EldritchMark"
+        # Barbaro
+        if {_p} has permission "group.class_barbarian":
+            execute console command "mm items give %name of {_p}% BarbarianRageCharm"
+            execute console command "mm items give %name of {_p}% BarbarianRecklessCharm"
+        if {_p} has permission "group.class_barbarian_berserker":
+            execute console command "mm items give %name of {_p}% BarbarianBerserkerCharm"
+        if {_p} has permission "group.class_barbarian_totem_bear":
+            execute console command "mm items give %name of {_p}% TotemBearCharm"
+        if {_p} has permission "group.class_barbarian_totem_eagle":
+            execute console command "mm items give %name of {_p}% TotemEagleCharm"
+        if {_p} has permission "group.class_barbarian_totem_wolf":
+            execute console command "mm items give %name of {_p}% TotemWolfCharm"
+        # Tiefling
+        if {_p} has permission "group.race_tiefling":
+            execute console command "mm items give %name of {_p}% TieflingSigil"
+        # Dwarves (deliver once based on highest‑priority subrace)
+        set {_gave_dwarf} to false
+        if {_p} has permission "group.race_dwarf_deep":
+            set {_gave_dwarf} to true
+        else if {_p} has permission "group.race_dwarf_mountain":
+            set {_gave_dwarf} to true
+        else if {_p} has permission "group.race_dwarf_hill":
+            set {_gave_dwarf} to true
+        else if {_p} has permission "group.race_dwarf":
+            set {_gave_dwarf} to true
+        if {_gave_dwarf} is true:
+            execute console command "mm items give %name of {_p}% DwarfRacialPick"
+        # Gnomes (deliver once based on subrace)
+        set {_gave_gnome} to false
+        if {_p} has permission "group.race_gnome_forest":
+            set {_gave_gnome} to true
+        else if {_p} has permission "group.race_gnome_rock":
+            set {_gave_gnome} to true
+        else if {_p} has permission "group.race_gnome":
+            set {_gave_gnome} to true
+        if {_gave_gnome} is true:
+            execute console command "mm items give %name of {_p}% GnomeCog"
+        # Halflings: entregar a Trombeta racial
+        set {_gave_halfling} to false
+        if {_p} has permission "group.race_halfling_lightfoot":
+            set {_gave_halfling} to true
+        else if {_p} has permission "group.race_halfling_stout":
+            set {_gave_halfling} to true
+        else if {_p} has permission "group.race_halfling":
+            set {_gave_halfling} to true
+        if {_gave_halfling} is true:
+            execute console command "mm items give %name of {_p}% HalflingHorn"
+        # Dragonborn (tipos): item base + tag de imunidade e itens de sopro
+        if {_p} has permission "group.race_dragonborn_fire":
+            execute console command "tag %name of {_p}% remove db_fire"
+            execute console command "tag %name of {_p}% remove db_cold"
+            execute console command "tag %name of {_p}% remove db_lightning"
+            execute console command "tag %name of {_p}% remove db_acid"
+            execute console command "tag %name of {_p}% remove db_poison"
+            execute console command "tag %name of {_p}% add db_fire"
+            execute console command "mm items give %name of {_p}% DragonbornScale"
+            execute console command "mm items give %name of {_p}% DragonbornBreathFire"
+        else if {_p} has permission "group.race_dragonborn_cold":
+            execute console command "tag %name of {_p}% remove db_fire"
+            execute console command "tag %name of {_p}% remove db_cold"
+            execute console command "tag %name of {_p}% remove db_lightning"
+            execute console command "tag %name of {_p}% remove db_acid"
+            execute console command "tag %name of {_p}% remove db_poison"
+            execute console command "tag %name of {_p}% add db_cold"
+            execute console command "mm items give %name of {_p}% DragonbornScale"
+            execute console command "mm items give %name of {_p}% DragonbornBreathCold"
+        else if {_p} has permission "group.race_dragonborn_lightning":
+            execute console command "tag %name of {_p}% remove db_fire"
+            execute console command "tag %name of {_p}% remove db_cold"
+            execute console command "tag %name of {_p}% remove db_lightning"
+            execute console command "tag %name of {_p}% remove db_acid"
+            execute console command "tag %name of {_p}% remove db_poison"
+            execute console command "tag %name of {_p}% add db_lightning"
+            execute console command "mm items give %name of {_p}% DragonbornScale"
+            execute console command "mm items give %name of {_p}% DragonbornBreathLightning"
+        else if {_p} has permission "group.race_dragonborn_acid":
+            execute console command "tag %name of {_p}% remove db_fire"
+            execute console command "tag %name of {_p}% remove db_cold"
+            execute console command "tag %name of {_p}% remove db_lightning"
+            execute console command "tag %name of {_p}% remove db_acid"
+            execute console command "tag %name of {_p}% remove db_poison"
+            execute console command "tag %name of {_p}% add db_acid"
+            execute console command "mm items give %name of {_p}% DragonbornScale"
+            execute console command "mm items give %name of {_p}% DragonbornBreathAcid"
+        else if {_p} has permission "group.race_dragonborn_poison":
+            execute console command "tag %name of {_p}% remove db_fire"
+            execute console command "tag %name of {_p}% remove db_cold"
+            execute console command "tag %name of {_p}% remove db_lightning"
+            execute console command "tag %name of {_p}% remove db_acid"
+            execute console command "tag %name of {_p}% remove db_poison"
+            execute console command "tag %name of {_p}% add db_poison"
+            execute console command "mm items give %name of {_p}% DragonbornScale"
+            execute console command "mm items give %name of {_p}% DragonbornBreathPoison"
+        # Meio-Orc
+        if {_p} has permission "group.race_half_orc":
+            execute console command "mm items give %name of {_p}% HalfOrcTusk"
+            execute console command "mm items give %name of {_p}% HalfOrcBerserkCharm"
+        if {_p} has permission "group.race_human":
+            execute console command "mm items give %name of {_p}% HumanMedal"
+        send "[Force] Concluido." to sender
+
+on respawn:
+    wait 20 ticks
+    execute console command "forcegiveitems %name of player%"

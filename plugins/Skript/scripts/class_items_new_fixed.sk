@@ -1,0 +1,595 @@
+options:
+    warlock_wand: "&5Varinha Eldritch &8(Bruxo)"
+    warlock_talisman: "&6Talisma do Hex &8(Bruxo)"
+    halfelf_feather: "&bPena de Meio-Elfo &8(Racial)"
+    bard_lute: "&dAlaude do Bardo &8(Classe)"
+    bard_lore_book: "&aLivro do Conhecimento &8(Subclasse)"
+    bard_valor_medal: "&aMedalha do Valor &8(Subclasse)"
+    barb_berserker: "&6Talisma do Berserker &8(Subclasse)"
+    barb_totem_bear: "&6Totem do Urso &8(Subclasse)"
+    barb_totem_eagle: "&6Totem da Aguia &8(Subclasse)"
+    barb_totem_wolf: "&6Totem do Lobo &8(Subclasse)"
+    barbarian_reckless: "&6Talisma Temerario &8(Classe)"
+    barbarian_rage: "&6Talisma da Furia &8(Classe)"
+    half_orc_berserk: "&6Talisma Berserk &8(Racial)"
+    half_orc_tusk: "&fPresa de Meio-Orc &8(Racial)"
+    tiefling_sigil: "&cSigilo Infernal &8(Racial)"
+    human_medal: "&fMedalha Humana &8(Racial)"
+    archfey_charm: "&aAmuleto da Arquifada &8(Subclasse)"
+    fiend_mark: "&cMarca do Diabolico &8(Subclasse)"
+    oldone_mark: "&5Marca do Ancestral &8(Subclasse)"
+    elf_wood_brooch: "&aBroche da Floresta &8(Racial)"
+    drow_web: "&8Teia de Drow &8(Racial)"
+on load:
+    delete {bound_names::*}
+    add colored {@warlock_wand} to {bound_names::*}
+    add colored {@warlock_talisman} to {bound_names::*}
+    add colored {@halfelf_feather} to {bound_names::*}
+    add colored {@bard_lute} to {bound_names::*}
+    add colored {@bard_lore_book} to {bound_names::*}
+    add colored {@bard_valor_medal} to {bound_names::*}
+    add colored {@barb_berserker} to {bound_names::*}
+    add colored {@barb_totem_bear} to {bound_names::*}
+    add colored {@barb_totem_eagle} to {bound_names::*}
+    add colored {@barb_totem_wolf} to {bound_names::*}
+    add colored {@barbarian_reckless} to {bound_names::*}
+    add colored {@barbarian_rage} to {bound_names::*}
+    add colored {@half_orc_berserk} to {bound_names::*}
+    add colored {@half_orc_tusk} to {bound_names::*}
+    add colored {@tiefling_sigil} to {bound_names::*}
+    add colored {@human_medal} to {bound_names::*}
+    add colored {@elf_wood_brooch} to {bound_names::*}
+    add colored {@drow_web} to {bound_names::*}
+    set {name.warlock_wand} to colored {@warlock_wand}
+    set {name.warlock_talisman} to colored {@warlock_talisman}
+    set {name.bard_lute} to colored {@bard_lute}
+    set {name.bard_lore_book} to colored {@bard_lore_book}
+    set {name.bard_valor_medal} to colored {@bard_valor_medal}
+    set {name.barbarian_reckless} to colored {@barbarian_reckless}
+    set {name.barbarian_rage} to colored {@barbarian_rage}
+    set {name.half_orc_berserk} to colored {@half_orc_berserk}
+    set {name.half_orc_tusk} to colored {@half_orc_tusk}
+    set {name.tiefling_sigil} to colored {@tiefling_sigil}
+    set {name.human_medal} to colored {@human_medal}
+    set {name.elf_wood_brooch} to colored {@elf_wood_brooch}
+    set {name.drow_web} to colored {@drow_web}
+function hasItemNamed(p: player, n: text) :: boolean:
+    set {_found} to false
+    loop all items in {_p}'s inventory:
+        if loop-item is not air:
+            if display name of loop-item is {_n}:
+                set {_found} to true
+                stop
+    return {_found}
+function getPlayerRace(p: player) :: text:
+    set {_race} to "none"
+    # Preferir variavel canonica, definida pelos livros de raça
+    if {player.race.%uuid of {_p}%} is set:
+        set {_race} to {player.race.%uuid of {_p}%}
+        return {_race}
+    # Checagem por grupos LuckPerms em ordem
+    if {_p} has permission "group.race_elf_wood":
+        set {_race} to "elf_wood"
+        return {_race}
+    if {_p} has permission "group.race_elf_drow":
+        set {_race} to "elf_drow"
+        return {_race}
+    if {_p} has permission "group.race_half_elf":
+        set {_race} to "half_elf"
+        return {_race}
+    if {_p} has permission "group.race_half_orc":
+        set {_race} to "half_orc"
+        return {_race}
+    if {_p} has permission "group.race_tiefling":
+        set {_race} to "tiefling"
+        return {_race}
+    if {_p} has permission "group.race_human":
+        set {_race} to "human"
+        return {_race}
+    # Dragonborn (qualquer subtipo)
+    if {_p} has permission "group.race_dragonborn":
+        set {_race} to "dragonborn"
+        return {_race}
+    if {_p} has permission "group.race_dragonborn_fire":
+        set {_race} to "dragonborn"
+        return {_race}
+    if {_p} has permission "group.race_dragonborn_cold":
+        set {_race} to "dragonborn"
+        return {_race}
+    if {_p} has permission "group.race_dragonborn_lightning":
+        set {_race} to "dragonborn"
+        return {_race}
+    if {_p} has permission "group.race_dragonborn_acid":
+        set {_race} to "dragonborn"
+        return {_race}
+    if {_p} has permission "group.race_dragonborn_poison":
+        set {_race} to "dragonborn"
+        return {_race}
+    return {_race}
+# Sincroniza variavel canonica {player.race.%uuid%} a partir dos grupos do LuckPerms
+function syncPlayerRaceLP(p: player):
+    delete {player.race.%uuid of {_p}%}
+    if {_p} has permission "group.race_elf_wood":
+        set {player.race.%uuid of {_p}%} to "elf_wood"
+    if {_p} has permission "group.race_elf_drow":
+        set {player.race.%uuid of {_p}%} to "elf_drow"
+    if {_p} has permission "group.race_half_elf":
+        set {player.race.%uuid of {_p}%} to "half_elf"
+    if {_p} has permission "group.race_half_orc":
+        set {player.race.%uuid of {_p}%} to "half_orc"
+    if {_p} has permission "group.race_tiefling":
+        set {player.race.%uuid of {_p}%} to "tiefling"
+    if {_p} has permission "group.race_human":
+        set {player.race.%uuid of {_p}%} to "human"
+    if {_p} has permission "group.race_dragonborn":
+        set {player.race.%uuid of {_p}%} to "dragonborn"
+    else if {_p} has permission "group.race_dragonborn_fire":
+        set {player.race.%uuid of {_p}%} to "dragonborn"
+    else if {_p} has permission "group.race_dragonborn_cold":
+        set {player.race.%uuid of {_p}%} to "dragonborn"
+    else if {_p} has permission "group.race_dragonborn_lightning":
+        set {player.race.%uuid of {_p}%} to "dragonborn"
+    else if {_p} has permission "group.race_dragonborn_acid":
+        set {player.race.%uuid of {_p}%} to "dragonborn"
+    else if {_p} has permission "group.race_dragonborn_poison":
+        set {player.race.%uuid of {_p}%} to "dragonborn"
+function racialItemRace(n: text) :: text:
+    set {_r} to ""
+    if {_n} is colored {@elf_wood_brooch}:
+        set {_r} to "elf_wood"
+        return {_r}
+    if {_n} is colored {@drow_web}:
+        set {_r} to "elf_drow"
+        return {_r}
+    if {_n} is colored {@halfelf_feather}:
+        set {_r} to "half_elf"
+        return {_r}
+    if {_n} is {name.half_orc_tusk}:
+        set {_r} to "half_orc"
+        return {_r}
+    if {_n} is {name.half_orc_berserk}:
+        set {_r} to "half_orc"
+        return {_r}
+    if {_n} is colored {@tiefling_sigil}:
+        set {_r} to "tiefling"
+        return {_r}
+    if {_n} is colored {@human_medal}:
+        set {_r} to "human"
+        return {_r}
+    return {_r}
+function ensureElfWoodBrooch(p: player):
+    if hasItemNamed({_p}, colored {@elf_wood_brooch}) is false:
+        set {_it} to oak_leaves named colored {@elf_wood_brooch}
+        set lore of {_it} to "&7Um broche feito de folhas e cipas."
+        # if false:
+            # add {_it} to {_p}'s ender chest
+#             send "&eSeu inventário está cheio. O broche foi enviado ao seu Ender Chest." to {_p}
+        # else:
+            # give {_it} to {_p}
+command /fixelfwood:
+    permission: op
+    trigger:
+        execute console command "mm items give %name of player% ElfWoodBrooch"
+        wait 1 tick
+        if hasItemNamed(player, colored {@elf_wood_brooch}) is false:
+            set {_it} to oak_leaves named colored {@elf_wood_brooch}
+            set lore of {_it} to "&7Um broche feito de folhas e cipas."
+            give {_it} to player
+        send "&aVerifique seu inventario e Ender Chest para o broche." to player
+function giveClassItems(p: player):
+    # Warlock base
+    if {_p} has permission "group.class_warlock":
+        if hasItemNamed({_p}, colored {@warlock_wand}) is false:
+            execute console command "mm items give %name of {_p}% EldritchWand"
+        if hasItemNamed({_p}, colored {@warlock_talisman}) is false:
+            execute console command "mm items give %name of {_p}% HexTalisman"
+    # Warlock patrons
+    if {_p} has permission "group.class_warlock_archfey":
+        if hasItemNamed({_p}, colored {@archfey_charm}) is false:
+            execute console command "mm items give %name of {_p}% FeyCharm"
+    if {_p} has permission "group.class_warlock_fiend":
+        if hasItemNamed({_p}, colored {@fiend_mark}) is false:
+            execute console command "mm items give %name of {_p}% FiendMark"
+    if {_p} has permission "group.class_warlock_oldone":
+        if hasItemNamed({_p}, colored {@oldone_mark}) is false:
+            execute console command "mm items give %name of {_p}% EldritchMark"
+    # Barbarian base
+    if {_p} has permission "group.class_barbarian":
+        if hasItemNamed({_p}, colored {@barbarian_rage}) is false:
+            execute console command "mm items give %name of {_p}% BarbarianRageCharm"
+        if hasItemNamed({_p}, colored {@barbarian_reckless}) is false:
+            execute console command "mm items give %name of {_p}% BarbarianRecklessCharm"
+    # Barbarian paths
+    if {_p} has permission "group.class_barbarian_berserker":
+        if hasItemNamed({_p}, colored {@barb_berserker}) is false:
+            execute console command "mm items give %name of {_p}% BarbarianBerserkerCharm"
+    if {_p} has permission "group.class_barbarian_totem_bear":
+        if hasItemNamed({_p}, colored {@barb_totem_bear}) is false:
+            execute console command "mm items give %name of {_p}% TotemBearCharm"
+    if {_p} has permission "group.class_barbarian_totem_eagle":
+        if hasItemNamed({_p}, colored {@barb_totem_eagle}) is false:
+            execute console command "mm items give %name of {_p}% TotemEagleCharm"
+    if {_p} has permission "group.class_barbarian_totem_wolf":
+        if hasItemNamed({_p}, colored {@barb_totem_wolf}) is false:
+            execute console command "mm items give %name of {_p}% TotemWolfCharm"
+    # Bard
+    if {_p} has permission "group.class_bard":
+        if hasItemNamed({_p}, colored {@bard_lute}) is false:
+            execute console command "mm items give %name of {_p}% BardLute"
+    if {_p} has permission "group.class_bard_lore":
+        if hasItemNamed({_p}, colored {@bard_lore_book}) is false:
+            execute console command "mm items give %name of {_p}% BardLoreBook"
+    if {_p} has permission "group.class_bard_valor":
+        if hasItemNamed({_p}, colored {@bard_valor_medal}) is false:
+            execute console command "mm items give %name of {_p}% BardValorMedal"
+    # Races - entregar apenas da raca atual
+    set {_race} to getPlayerRace({_p})
+    if {_race} is "half_elf":
+        if hasItemNamed({_p}, colored {@halfelf_feather}) is false:
+            execute console command "mm items give %name of {_p}% HalfElfFeather"
+    if {_race} is "elf_wood":
+        if hasItemNamed({_p}, colored {@elf_wood_brooch}) is false:
+            execute console command "mm items give %name of {_p}% ElfWoodBrooch"
+            if hasItemNamed({_p}, colored {@elf_wood_brooch}) is false:
+                execute console command "mm items give %name of {_p}% ElfWoodBrooch"
+                wait 1 tick
+                if hasItemNamed({_p}, colored {@elf_wood_brooch}) is false:
+                    set {_it} to oak_leaves named colored {@elf_wood_brooch}
+                    set lore of {_it} to "&7Um broche feito de folhas e cipas."
+                    give {_it} to {_p}
+    # Drow
+    if {_race} is "elf_drow":
+        if hasItemNamed({_p}, colored {@drow_web}) is false:
+            execute console command "mm items give %name of {_p}% DrowWeb"
+    if {_race} is "half_orc":
+        if hasItemNamed({_p}, colored {@half_orc_tusk}) is false:
+            execute console command "mm items give %name of {_p}% HalfOrcTusk"
+        if hasItemNamed({_p}, colored {@half_orc_berserk}) is false:
+            execute console command "mm items give %name of {_p}% HalfOrcBerserkCharm"
+    if {_race} is "tiefling":
+        if hasItemNamed({_p}, colored {@tiefling_sigil}) is false:
+            execute console command "mm items give %name of {_p}% TieflingSigil"
+    if {_race} is "human":
+        if hasItemNamed({_p}, colored {@human_medal}) is false:
+            execute console command "mm items give %name of {_p}% HumanMedal"
+# Entrega automatica nos momentos chaves
+on join:
+    wait 2 seconds
+    syncPlayerRaceLP(player)
+    giveClassItems(player)
+    bindOwner(player)
+    # Sincroniza flags de raça (migração para quem já tinha a raça antes desta mudança)
+    if player has permission "group.race_elf_wood":
+        set {race.elf_wood.%uuid of player%} to true
+    if player has permission "group.race_half_elf":
+        set {race.half_elf.%uuid of player%} to true
+on respawn:
+    wait 20 ticks
+    syncPlayerRaceLP(player)
+    giveClassItems(player)
+    bindOwner(player)
+    # Garante flag de raça após respawn (caso LP demore a aplicar parent)
+    if player has permission "group.race_elf_wood":
+        set {race.elf_wood.%uuid of player%} to true
+    if player has permission "group.race_half_elf":
+        set {race.half_elf.%uuid of player%} to true
+    # Fallback 5s depois: apenas vincula dono; NUNCA reentrega itens aqui
+    wait 100 ticks
+    bindOwner(player)
+on right click:
+    if player's tool is not air:
+        set {_it} to player's tool
+        set {_n} to display name of {_it}
+        # Regra: quem ja tem uma raca so pode usar itens raciais da sua raca
+        set {_itemRace} to racialItemRace({_n})
+        if {_itemRace} is not "":
+            set {_playerRace} to getPlayerRace(player)
+            if {_playerRace} is not "none":
+                if {_playerRace} is not {_itemRace}:
+                    cancel event
+                    send "&cVoce nao pode usar itens raciais de outra raca (&f%{_itemRace}%&c)." to player
+                    stop
+        # Barbaro - Furia (bonus por 120s, cd 180s)
+        if {_n} is {name.barbarian_rage}:
+            cancel event
+            if {cd.%uuid of player%.rage} is set:
+                if difference between now and {cd.%uuid of player%.rage} < 180 seconds:
+                    send "&cFuria em recarga." to player
+                    stop
+            set {cd.%uuid of player%.rage} to now
+            apply strength 1 to player for 120 seconds
+            apply damage resistance 0 to player for 120 seconds
+            if player has permission "group.class_barbarian_berserker":
+                play sound "entity.player.hurt" to player
+            set {status.%uuid of player%.rage} to true
+            if player has permission "group.class_barbarian_totem_bear":
+                play sound "entity.polar_bear.warning" to player
+            else if player has permission "group.class_barbarian_totem_eagle":
+                play sound "entity.phantom.swoop" to player
+            else if player has permission "group.class_barbarian_totem_wolf":
+                play sound "entity.wolf.howl" to player
+            execute console command "tag %name of player% add barbarian_rage"
+            send "&aVoce entrou em Furia!" to player
+            wait 120 seconds
+            execute console command "tag %name of player% remove barbarian_rage"
+            delete {status.%uuid of player%.rage}
+            stop
+        else if {_n} is {name.barbarian_reckless}:
+            cancel event
+            if {cd.%uuid of player%.reckless} is set:
+                if difference between now and {cd.%uuid of player%.reckless} < 30 seconds:
+                    send "&cAtaque Temerario em recarga." to player
+                    stop
+            set {cd.%uuid of player%.reckless} to now
+            set {status.%uuid of player%.reckless} to true
+            apply strength 1 to player for 10 seconds
+            send "&6Ataque Temerario ativado por 10s." to player
+            wait 10 seconds
+            delete {status.%uuid of player%.reckless}
+            send "&eAtaque Temerario terminou." to player
+            stop
+        else if {_n} is {name.half_orc_berserk}:
+            cancel event
+            if {cd.%uuid of player%.half_orc_berserk} is set:
+                if difference between now and {cd.%uuid of player%.half_orc_berserk} < 5 minutes:
+                    send "&cBerserk em recarga (5 minutos)." to player
+                    stop
+            set {cd.%uuid of player%.half_orc_berserk} to now
+            apply strength 1 to player for 10 seconds
+            apply damage resistance 1 to player for 10 seconds
+            send "&6Berserk ativado por 10s!" to player
+            wait 10 seconds
+            apply slowness 1 to player for 5 seconds
+            send "&eEsgotamento: Lentidao por 5s." to player
+            stop
+        else if {_n} is colored {@halfelf_feather}:
+            cancel event
+            if {cd.%uuid of player%.halfelf_feather} is set:
+                if difference between now and {cd.%uuid of player%.halfelf_feather} < 3 minutes:
+                    send "&cPena em recarga. Aguarde 3 minutos." to player
+                    stop
+            set {cd.%uuid of player%.halfelf_feather} to now
+            apply slow falling 1 to player for 7 seconds
+            send "&bQueda Lenta ativada por 7s." to player
+            stop
+        # Elfo da Floresta - Broche (invisibilidade 10s, cooldown 3min)
+        else if {_n} is colored {@elf_wood_brooch}:
+            cancel event
+            if {cd.%uuid of player%.elf_wood_brooch} is set:
+                if difference between now and {cd.%uuid of player%.elf_wood_brooch} < 3 minutes:
+                    set {_left} to round((3 minutes - difference between now and {cd.%uuid of player%.elf_wood_brooch}) / 1 second)
+                    send "&cBroche em recarga (&f%{_left}%s&c)." to player
+                    stop
+            set {cd.%uuid of player%.elf_wood_brooch} to now
+            apply invisibility 1 to player for 10 seconds
+            play sound "item.armor.equip_leather" to player
+            send "&aCamuflagem ativada por 10s." to player
+            # Marca janela de invisibilidade do broche para integracao com protecao de alvo
+            set {elfwood.brooch_invis.%uuid of player%} to now
+            wait 10 seconds
+            delete {elfwood.brooch_invis.%uuid of player%}
+            stop
+        # Drow - Teia Sombria (agora aceita ESQUERDO ou DIREITO)
+        else if {_n} is colored {@drow_web}:
+            cancel event
+            drowTeleport(player)
+            stop
+# Drow - Teia Sombria: ativa com clique ESQUERDO
+on left click:
+    if player's tool is not air:
+        set {_n} to display name of player's tool
+        if {_n} is colored {@drow_web}:
+            cancel event
+            send "&7Use o botao direito para ativar a Teia de Drow." to player
+            stop
+# Drow - impedir colocacao da teia no mundo
+on block place:
+    if event-item is not air:
+        set {_n} to display name of event-item
+        # Cancelar e teleportar se for a Teia de Drow (comparacao exata ou por substring)
+        if {_n} is colored {@drow_web}:
+            cancel event
+            if getPlayerRace(player) is "elf_drow":
+                drowTeleport(player)
+            else:
+                send "&cVoce nao pode usar itens raciais de outra raca (Drow)." to player
+        else if event-item is cobweb:
+            set {_s} to "%{_n}%"
+            if {_s} contains "Teia de Drow":
+                cancel event
+                if getPlayerRace(player) is "elf_drow":
+                    drowTeleport(player)
+                else:
+                    send "&cVoce nao pode usar itens raciais de outra raca (Drow)." to player
+# Função: teleporte do Drow com cargas e cooldown total
+function drowTeleport(p: player):
+    set {_u} to "%uuid of {_p}%"
+    # recarga total se expirou
+    if {drow.web.cool.%{_u}%} is set:
+        if difference between now and {drow.web.cool.%{_u}%} >= 4 minutes:
+            delete {drow.web.cool.%{_u}%}
+            set {drow.web.charges.%{_u}%} to 3
+    if {drow.web.charges.%{_u}%} is not set:
+        set {drow.web.charges.%{_u}%} to 3
+    if {drow.web.charges.%{_u}%} <= 0:
+        set {_left} to round((4 minutes - difference between now and {drow.web.cool.%{_u}%}) / 1 second)
+        if {_left} < 0:
+            set {_left} to 0
+        send "&cTeia em recarga (&f%{_left}%s&c)." to {_p}
+        stop
+    # teleporte seguro via spreadplayers (raio 7, separação mínima 4)
+    execute console command "execute as %name of {_p}% at @s run spreadplayers ~ ~ 4 7 false @s"
+    subtract 1 from {drow.web.charges.%{_u}%}
+    send "&7Teia usada. Cargas restantes: &f%{drow.web.charges.%{_u}%}%." to {_p}
+    if {drow.web.charges.%{_u}%} <= 0:
+        set {drow.web.cool.%{_u}%} to now
+        send "&eTeia esgotada. Recarga total em 4 minutos." to {_p}
+function bindOwner(p: player):
+    set {_owner} to "Vinculada a: %name of {_p}%"
+    loop all items in {_p}'s inventory:
+        if loop-item is not air:
+            set {_n} to display name of loop-item
+            if {_n} is in {bound_names::*}:
+                if lore of loop-item does not contain {_owner}:
+                    set lore of loop-item to lore of loop-item and "&7%{_owner}%"
+# Anti-drop e sem queda na morte usando a lista
+on drop:
+    if event-item is not air:
+        set {_n} to display name of event-item
+        if {_n} is in {bound_names::*}:
+            cancel event
+            send "&cEste item e vinculado e nao pode ser dropado." to player
+        else if lore of event-item contains "Vinculada a: ":
+            cancel event
+            send "&cEste item e vinculado e nao pode ser dropado." to player
+on death of player:
+    # Marca necessidade de reentrega APENAS se realmente for Elfo da Floresta
+    if victim has permission "group.race_elf_wood":
+        set {need_regive.elf_wood.%uuid of victim%} to true
+    # Marca necessidade de reentrega da Pena do Meio-Elfo
+    set {_wasHalfElf} to false
+    if victim has permission "group.race_half_elf":
+        set {_wasHalfElf} to true
+    else if {race.half_elf.%uuid of victim%} is set:
+        set {_wasHalfElf} to true
+    if {_wasHalfElf} is true:
+        set {need_regive.half_elf.%uuid of victim%} to true
+    loop drops:
+        if loop-value is not air:
+            set {_n} to display name of loop-value
+            if {_n} is in {bound_names::*}:
+                remove loop-value from drops
+            else if lore of loop-value contains "Vinculada a: ":
+                remove loop-value from drops
+on respawn:
+    wait 20 ticks
+    giveClassItems(player)
+    bindOwner(player)
+    # Reentrega garantida do item racial do Elfo da Floresta se marcado e SE ainda for Elfo da Floresta
+    if {need_regive.elf_wood.%uuid of player%} is true:
+        if getPlayerRace(player) is "elf_wood":
+            execute console command "mm items give %name of player% ElfWoodBrooch"
+            wait 1 tick
+            if hasItemNamed(player, colored {@elf_wood_brooch}) is false:
+                set {_it} to oak_leaves named colored {@elf_wood_brooch}
+                set lore of {_it} to "&7Um broche feito de folhas e cipas."
+                give {_it} to player
+        delete {need_regive.elf_wood.%uuid of player%}
+    # Reentrega garantida da Pena do Meio-Elfo se marcado na morte
+    if {need_regive.half_elf.%uuid of player%} is true:
+        delete {need_regive.half_elf.%uuid of player%}
+        if hasItemNamed(player, colored {@halfelf_feather}) is false:
+            execute console command "mm items give %name of player% HalfElfFeather"
+    # Fallback: alguns plugins limpam/alteram inventario apos o respawn.
+    # Rechecar apos 5s para garantir itens raciais/subclasse reconcedidos.
+    # Fallback desativado: nao reentregar itens aqui
+    bindOwner(player)
+# Atualizacao visual da furia: bossbar e particulas leves por caminho
+every 1 second:
+    loop all players:
+        set {_u} to "%uuid of loop-player%"
+        if {rage_secs.%{_u}%} is set:
+            subtract 1 from {rage_secs.%{_u}%}
+            set {_bbid} to "custom:rage_%{_u}%"
+            set {_secs} to {rage_secs.%{_u}%}
+            if {_secs} >= 0:
+                execute console command "bossbar set %{_bbid}% value %{_secs}%"
+                # Atualizar o nome com Caminho + tempo restante
+                set {_label} to "Barbaro"
+                if loop-player has permission "group.class_barbarian_berserker":
+                    set {_label} to "Berserker"
+                else if loop-player has permission "group.class_barbarian_totem_eagle":
+                    set {_label} to "Aguia"
+                else if loop-player has permission "group.class_barbarian_totem_bear":
+                    set {_label} to "Urso"
+                else if loop-player has permission "group.class_barbarian_totem_wolf":
+                    set {_label} to "Lobo"
+                execute console command "bossbar set %{_bbid}% name {""text"":""Furia - %{_label}% (%{_secs}%s)""}"
+                # Particulas por caminho
+                if loop-player has permission "group.class_barbarian_totem_eagle":
+                    execute console command "execute as %name of loop-player% at @s run particle minecraft:cloud ~ ~1 ~ 0.15 0.15 0.15 0.0 6 force"
+                else if loop-player has permission "group.class_barbarian_totem_bear":
+                    execute console command "execute as %name of loop-player% at @s run particle minecraft:poof ~ ~1 ~ 0.15 0.15 0.15 0.0 6 force"
+                else if loop-player has permission "group.class_barbarian_totem_wolf":
+                    execute console command "execute as %name of loop-player% at @s run particle minecraft:smoke ~ ~1 ~ 0.15 0.15 0.15 0.0 6 force"
+            if {_secs} <= 0:
+                execute console command "bossbar remove %{_bbid}%"
+                delete {rage_secs.%{_u}%}
+# Anti-transferência: impedir mover para baús/outros inventários
+on inventory click:
+    if event-item is not air:
+        set {_n} to display name of event-item
+        if {_n} is in {bound_names::*}:
+            if event-inventory is not player's inventory:
+                cancel event
+                send "&cEste item e vinculado e nao pode ser transferido." to player
+            else if "%click type%" contains "DROP":
+                cancel event
+                send "&cEste item e vinculado e nao pode ser dropado." to player
+        else if lore of event-item contains "Vinculada a: ":
+            if event-inventory is not player's inventory:
+                cancel event
+                send "&cEste item e vinculado e nao pode ser transferido." to player
+            else if "%click type%" contains "DROP":
+                cancel event
+                send "&cEste item e vinculado e nao pode ser dropado." to player
+# Blindagem: impedir pickup por terceiros (somente dono)
+on pickup:
+    if event-item is not air:
+        set {_n} to display name of event-item
+        if {_n} is in {bound_names::*}:
+            set {_me} to name of player
+            set {_hasOwner} to false
+            loop lore of event-item:
+                if loop-value contains "Vinculada a: ":
+                    set {_hasOwner} to true
+                    if loop-value does not contain {_me}:
+                        cancel event
+                        stop
+            if {_hasOwner} is false:
+                cancel event
+on craft:
+    set {_blocked} to false
+    loop all items in event-inventory:
+        if loop-item is not air:
+            set {_dn} to display name of loop-item
+            if {_dn} is in {bound_names::*}:
+                set {_blocked} to true
+                stop
+    if {_blocked} is true:
+        cancel event
+        send "&cItens vinculados nao podem ser usados em crafting." to player
+# Bloquear arrastar itens vinculados para outros inventarios
+on inventory drag:
+    if event-item is not air:
+        set {_n} to display name of event-item
+        if {_n} is in {bound_names::*}:
+            cancel event
+        else if lore of event-item contains "Vinculada a: ":
+            cancel event
+command /checkitems:
+    permission: op
+    trigger:
+        giveClassItems(player)
+        send "&aVerificando seus itens de classe/raca..." to player
+# Comando removido aqui para evitar conflito; 
+# a versao oficial de /forcegiveitems esta em class_items_tools.sk
+on damage of player:
+    # Meio-Orc — Relentless Endurance (passivo, sem item)
+    if victim has permission "group.race_half_orc":
+        if {relentless.cd.%uuid of victim%} is set:
+            set {_elapsed} to difference between now and {relentless.cd.%uuid of victim%}
+        else:
+            set {_elapsed} to 999 hours
+        # Se o dano seria letal e cooldown >= 30 minutos
+        if damage >= victim's health:
+            if {_elapsed} >= 30 minutes:
+                cancel event
+                set {relentless.cd.%uuid of victim%} to now
+                clear all potion effects of victim
+                set victim's health to 1
+                send "&6Resistencia Implacavel ativada! (&730min de recarga&)" to victim
+    # Vulnerabilidade do Reckless (+25% apenas para ataques/projéteis)
+    if {status.%uuid of victim%.reckless} is set:
+        if attacker is set:
+            set damage to damage * 1.25

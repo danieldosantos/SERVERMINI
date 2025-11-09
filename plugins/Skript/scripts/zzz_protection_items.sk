@@ -1,0 +1,82 @@
+### zzz_protection_items.sk — Proteções de itens vinculados (compatível Skript 2.13.1)
+
+# Anti-drop e sem queda na morte
+on drop:
+    if event-item is not air:
+        set {_n} to display name of event-item
+        if {_n} is in {bound_names::*}:
+            cancel event
+            send "&cEste item e vinculado e nao pode ser dropado." to player
+        else if lore of event-item contains "Vinculada a: ":
+            cancel event
+            send "&cEste item e vinculado e nao pode ser dropado." to player
+
+on death of player:
+    loop drops:
+        if loop-value is not air:
+            set {_n} to display name of loop-value
+            if {_n} is in {bound_names::*}:
+                remove loop-value from drops
+            else if lore of loop-value contains "Vinculada a: ":
+                remove loop-value from drops
+
+# Bloquear mover/guardar em baus e dropar via GUI
+on inventory click:
+    if event-item is not air:
+        set {_n} to display name of event-item
+        if {_n} is in {bound_names::*}:
+            if event-inventory is not player's inventory:
+                cancel event
+                send "&cEste item e vinculado e nao pode ser transferido." to player
+            else if "%click type%" contains "DROP":
+                cancel event
+                send "&cEste item e vinculado e nao pode ser dropado." to player
+        else if lore of event-item contains "Vinculada a: ":
+            if event-inventory is not player's inventory:
+                cancel event
+                send "&cEste item e vinculado e nao pode ser transferido." to player
+            else if "%click type%" contains "DROP":
+                cancel event
+                send "&cEste item e vinculado e nao pode ser dropado." to player
+
+# Bloquear arrastar itens vinculados para outras GUIs
+on inventory drag:
+    if event-item is not air:
+        set {_n} to display name of event-item
+        if {_n} is in {bound_names::*}:
+            cancel event
+        else if lore of event-item contains "Vinculada a: ":
+            cancel event
+
+# Bloquear crafting com itens vinculados
+on craft:
+    set {_blocked} to false
+    loop all items in event-inventory:
+        if loop-item is not air:
+            set {_dn} to display name of loop-item
+            if {_dn} is in {bound_names::*}:
+                set {_blocked} to true
+                stop
+            else if lore of loop-item contains "Vinculada a: ":
+                set {_blocked} to true
+                stop
+    if {_blocked} is true:
+        cancel event
+        send "&cItens vinculados nao podem ser usados em crafting." to player
+
+# Impedir espalhar/colocar itens vinculados no mundo (ex.: redstone)
+on right click:
+    if player's tool is not air:
+        set {_n} to display name of player's tool
+        if {_n} is in {bound_names::*}:
+            cancel event
+        else if lore of player's tool contains "Vinculada a: ":
+            cancel event
+
+on block place:
+    if event-item is not air:
+        set {_n} to display name of event-item
+        if {_n} is in {bound_names::*}:
+            cancel event
+        else if lore of event-item contains "Vinculada a: ":
+            cancel event

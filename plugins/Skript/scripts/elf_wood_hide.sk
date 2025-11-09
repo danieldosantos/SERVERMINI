@@ -1,0 +1,68 @@
+options:
+  check_ticks: 40        # 2s
+  stand_seconds: 30      # 30 segundos parado
+  logs: oak log, birch log, spruce log, jungle log, acacia log, dark oak log, mangrove log, cherry log, warped stem, crimson stem
+  leaves: oak leaves, birch leaves, spruce leaves, jungle leaves, acacia leaves, dark oak leaves, mangrove leaves, cherry leaves
+
+# Elfo da Floresta: invisibilidade se ficar imóvel 30s ao lado de tronco (raio 1 bloco)
+
+every {@check_ticks} ticks:
+  loop all players:
+    set {_p} to loop-player
+    if {_p} has permission "group.race_elf_wood":
+      set {_u} to "%uuid of {_p}%"
+      set {_here} to location of {_p}
+      if {elfwood.anchor.%{_u}%} is not set:
+        set {elfwood.anchor.%{_u}%} to {_here}
+        set {elfwood.since.%{_u}%} to now
+        delete {elfwood.invis.%{_u}%}
+      else:
+        set {_dist} to distance between {elfwood.anchor.%{_u}%} and {_here}
+
+        # Se moveu, limpa estado e reinicia contagem
+        if {_dist} > 0.1:
+          # So remova invisibilidade se foi este script que aplicou anteriormente
+          if {elfwood.invis.%{_u}%} is set:
+            remove invisibility from {_p}
+          set {elfwood.anchor.%{_u}%} to {_here}
+          set {elfwood.since.%{_u}%} to now
+          delete {elfwood.invis.%{_u}%}
+        else:
+          # 1) Checa folhas próximas (raio 2) para validar ambiente de árvore
+          set {_hasLeaves} to false
+          loop blocks in radius 2 around {_p}:
+            if loop-block is any of {@leaves}:
+              set {_hasLeaves} to true
+              stop loop
+
+          if {_hasLeaves} is true:
+            # 2) Checa tronco próximo (raio 1)
+            set {_nearLog} to false
+            loop blocks in radius 1 around {_p}:
+              if loop-block is any of {@logs}:
+                set {_nearLog} to true
+                stop loop
+
+            if {_nearLog} is true:
+              if {elfwood.invis.%{_u}%} is not set:
+                if difference between now and {elfwood.since.%{_u}%} >= {@stand_seconds} seconds:
+                  apply invisibility 1 to {_p} for 6 seconds
+                  set {elfwood.invis.%{_u}%} to true
+              else:
+                apply invisibility 1 to {_p} for 6 seconds
+            else:
+              # Próximo de folhas, mas sem tronco: não ativa invisibilidade
+              if {elfwood.invis.%{_u}%} is set:
+                remove invisibility from {_p}
+              set {elfwood.since.%{_u}%} to now
+              delete {elfwood.invis.%{_u}%}
+          else:
+            # Sem folhas próximas: não ativa invisibilidade
+            if {elfwood.invis.%{_u}%} is set:
+              remove invisibility from {_p}
+    else:
+      # Não é elfo da floresta: limpa estados
+      set {_u} to "%uuid of {_p}%"
+      delete {elfwood.anchor.%{_u}%}
+      delete {elfwood.since.%{_u}%}
+      delete {elfwood.invis.%{_u}%}

@@ -1,0 +1,25 @@
+options:
+  window_seconds: 2
+
+# Imunidade a dano de raio para Draconato de Raio
+# Estrategia robusta:
+# - Quando um relampago cai, marcamos os draconatos de raio proximos com uma janela de imunidade.
+# - Durante essa janela, qualquer dano recebido e cancelado.
+
+on lightning strike:
+  set {_loc} to event-location
+  loop all players:
+    set {_p} to loop-player
+    if {_p} has permission "group.race_dragonborn_lightning":
+      if distance between location of {_p} and {_loc} <= 3:
+        set {light.immu.%uuid of {_p}%} to now
+
+on damage:
+  if victim is a player:
+    set {_p} to victim
+    if {_p} has permission "group.race_dragonborn_lightning":
+      if {light.immu.%uuid of {_p}%} is set:
+        if difference between now and {light.immu.%uuid of {_p}%} <= {@window_seconds} seconds:
+          cancel event
+          extinguish {_p}
+          execute console command "execute as %name of {_p}% run data merge entity @s {Fire:0}"

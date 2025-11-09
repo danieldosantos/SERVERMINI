@@ -1,0 +1,25 @@
+# Protege o uso da Teia de Drow para sempre teleportar no clique direito
+# e impedir colocacao do bloco caso o nome do item varie levemente.
+
+on right click:
+  if player's tool is not air:
+    set {_n} to display name of player's tool
+    # Caso 1: nome exatamente igual ao configurado
+    if {_n} is colored {@drow_web}:
+      cancel event
+      if getPlayerRace(player) is "elf_drow":
+        drowTeleport(player)
+      else:
+        send "&cVoce nao pode usar itens raciais de outra raca (Drow)." to player
+      stop
+    # Caso 2: fallback por substring no item cobweb
+    else if player's tool is cobweb:
+      set {_s} to "%{_n}%"
+      if {_s} contains "Teia de Drow":
+        cancel event
+        if getPlayerRace(player) is "elf_drow":
+          drowTeleport(player)
+        else:
+          send "&cVoce nao pode usar itens raciais de outra raca (Drow)." to player
+        stop
+

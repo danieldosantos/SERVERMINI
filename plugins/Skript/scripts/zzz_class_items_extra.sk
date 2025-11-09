@@ -1,0 +1,289 @@
+options:
+    paladin_emblem: "&bEmblema do Paladino &8(Classe)"
+    paladin_devotion: "&bJuramento da Devocao &8(Subclasse)"
+    paladin_ancients: "&bJuramento dos Ancioes &8(Subclasse)"
+    paladin_vengeance: "&bJuramento da Vinganca &8(Subclasse)"
+
+    cleric_symbol: "&fSimbolo Sagrado &8(Clerigo)"
+    cleric_life: "&fDominio da Vida &8(Subclasse)"
+    cleric_light: "&fDominio da Luz &8(Subclasse)"
+    cleric_war: "&fDominio da Guerra &8(Subclasse)"
+
+    druid_token: "&2Totem do Druida &8(Classe)"
+    druid_land: "&2Circulo da Terra &8(Subclasse)"
+    druid_moon: "&2Circulo da Lua &8(Subclasse)"
+    druid_spores: "&2Circulo dos Esporos &8(Subclasse)"
+
+    fighter_insignia: "&7Insignia do Guerreiro &8(Classe)"
+    fighter_champion: "&7Arquetipo Campeao &8(Subclasse)"
+    fighter_battlemaster: "&7Arquetipo Mestre de Armas &8(Subclasse)"
+    fighter_eldritch: "&7Arquetipo Cavaleiro Arcano &8(Subclasse)"
+
+    monk_band: "&eFaixa do Monge &8(Classe)"
+    monk_openhand: "&eTrilha das Maos Abertas &8(Subclasse)"
+    monk_shadow: "&eTrilha da Sombra &8(Subclasse)"
+    monk_elements: "&eTrilha dos Elementos &8(Subclasse)"
+
+    ranger_token: "&aTalismã do Patrulheiro &8(Classe)"
+    ranger_hunter: "&aConclave do Cacador &8(Subclasse)"
+    ranger_beast: "&aConclave Mestre das Bestas &8(Subclasse)"
+    ranger_gloom: "&aConclave Errante Sombrio &8(Subclasse)"
+
+    rogue_token: "&8Insignia do Ladino &8(Classe)"
+    rogue_thief: "&8Arquetipo Ladrao &8(Subclasse)"
+    rogue_assassin: "&8Arquetipo Assassino &8(Subclasse)"
+    rogue_arcane: "&8Arquetipo Trapaceiro Arcano &8(Subclasse)"
+
+    sorcerer_focus: "&cFoco do Feiticeiro &8(Classe)"
+    sorcerer_draconic: "&cLinhagem Draconica &8(Subclasse)"
+    sorcerer_wild: "&cLinhagem Magia Selvagem &8(Subclasse)"
+    sorcerer_storm: "&cLinhagem da Tempestade &8(Subclasse)"
+
+    wizard_tome: "&9Tomo do Mago &8(Classe)"
+    wizard_evocation: "&9Escola de Evocacao &8(Subclasse)"
+    wizard_abjuration: "&9Escola de Abjuracao &8(Subclasse)"
+    wizard_divination: "&9Escola de Adivinhacao &8(Subclasse)"
+    mm_marker: "&8[MM]"
+    # Totens base (compatibilidade e totemico unificado)
+    barb_totem_bear: "&6Totem do Urso &8(Subclasse)"
+    barb_totem_eagle: "&6Totem da Aguia &8(Subclasse)"
+    barb_totem_wolf: "&6Totem do Lobo &8(Subclasse)"
+    # --- Barbaro reformulado ---
+    barb_totemic_tiger: "&6Totem do Tigre &8(Subclasse)"
+    barb_totemic_phoenix: "&6Totem da Fenix &8(Subclasse)"
+    barb_storm: "&6Arauto da Tempestade &8(Subclasse)"
+    # Berserker novas manobras
+    berserker_warhorn: "&6Grito Bestial &8(Berserker)"
+    berserker_battleaxe: "&6Investida Sanguinaria &8(Berserker)"
+    berserker_spikedshield: "&6Retaliacao Frenetica &8(Berserker)"
+    berserker_boots: "&6Impetus Irrefreavel &8(Berserker)"
+    berserker_totem: "&6Carnificina Implacavel &8(Berserker)"
+    # Storm Herald manobras
+    storm_warhammer: "&6Martelo do Trovao &8(Tempestade)"
+    storm_gauntlet: "&6Surto Galvanico &8(Tempestade)"
+    storm_mantle: "&6Capa de Ventos &8(Tempestade)"
+    storm_drum: "&6Caldeirao da Tempestade &8(Tempestade)"
+    storm_eye: "&6Olho do Furacao &8(Tempestade)"
+
+on load:
+    # Acrescenta nomes para vinculo e anti-transferencia
+    add colored {@paladin_emblem} to {bound_names::*}
+    add colored {@paladin_devotion} to {bound_names::*}
+    add colored {@paladin_ancients} to {bound_names::*}
+    add colored {@paladin_vengeance} to {bound_names::*}
+    add colored {@cleric_symbol} to {bound_names::*}
+    add colored {@cleric_life} to {bound_names::*}
+    add colored {@cleric_light} to {bound_names::*}
+    add colored {@cleric_war} to {bound_names::*}
+    add colored {@druid_token} to {bound_names::*}
+    add colored {@druid_land} to {bound_names::*}
+    add colored {@druid_moon} to {bound_names::*}
+    add colored {@druid_spores} to {bound_names::*}
+    add colored {@fighter_insignia} to {bound_names::*}
+    add colored {@fighter_champion} to {bound_names::*}
+    add colored {@fighter_battlemaster} to {bound_names::*}
+    add colored {@fighter_eldritch} to {bound_names::*}
+    add colored {@monk_band} to {bound_names::*}
+    add colored {@monk_openhand} to {bound_names::*}
+    add colored {@monk_shadow} to {bound_names::*}
+    add colored {@monk_elements} to {bound_names::*}
+    add colored {@ranger_token} to {bound_names::*}
+    add colored {@ranger_hunter} to {bound_names::*}
+    add colored {@ranger_beast} to {bound_names::*}
+    add colored {@ranger_gloom} to {bound_names::*}
+    add colored {@rogue_token} to {bound_names::*}
+    add colored {@rogue_thief} to {bound_names::*}
+    add colored {@rogue_assassin} to {bound_names::*}
+    add colored {@rogue_arcane} to {bound_names::*}
+    add colored {@sorcerer_focus} to {bound_names::*}
+    add colored {@sorcerer_draconic} to {bound_names::*}
+    add colored {@sorcerer_wild} to {bound_names::*}
+    add colored {@sorcerer_storm} to {bound_names::*}
+    add colored {@wizard_tome} to {bound_names::*}
+    add colored {@wizard_evocation} to {bound_names::*}
+    add colored {@wizard_abjuration} to {bound_names::*}
+    add colored {@wizard_divination} to {bound_names::*}
+    # Novos nomes vinculados do Barbaro
+    add colored {@barb_totemic_tiger} to {bound_names::*}
+    add colored {@barb_totemic_phoenix} to {bound_names::*}
+    add colored {@barb_storm} to {bound_names::*}
+    add colored {@berserker_warhorn} to {bound_names::*}
+    add colored {@berserker_battleaxe} to {bound_names::*}
+    add colored {@berserker_spikedshield} to {bound_names::*}
+    add colored {@berserker_boots} to {bound_names::*}
+    add colored {@berserker_totem} to {bound_names::*}
+    add colored {@storm_warhammer} to {bound_names::*}
+    add colored {@storm_gauntlet} to {bound_names::*}
+    add colored {@storm_mantle} to {bound_names::*}
+    add colored {@storm_drum} to {bound_names::*}
+    add colored {@storm_eye} to {bound_names::*}
+
+function _giveOrFallback(p: player, itemName: text, mm: text, mat: itemtype, lore: text = ""):
+    # Remover placeholders (mesmo nome, sem marcador MM)
+    loop all items in {_p}'s inventory:
+        if loop-item is not air:
+            if display name of loop-item is colored {_itemName}:
+                if lore of loop-item does not contain {@mm_marker}:
+                    remove loop-item from {_p}'s inventory
+    # Tentar dar item MythicMobs
+    if {_mm} is not "":
+        execute console command "mm items give %name of {_p}% %{_mm}%"
+        wait 1 tick
+        # Se ainda não tem o item (pode ter falhado o MM), cai no placeholder
+    set {_has} to false
+    loop all items in {_p}'s inventory:
+        if loop-item is not air:
+            if display name of loop-item is colored {_itemName}:
+                set {_has} to true
+                stop loop
+    if {_has} is false:
+        set {_it} to {_mat} named colored {_itemName}
+        if {_lore} is not "":
+            set lore of {_it} to colored {_lore} and {@mm_marker}
+        else:
+            set lore of {_it} to {@mm_marker}
+        give {_it} to {_p}
+
+function giveClassItems_extra(p: player):
+    # Paladino
+    if {_p} has permission "group.class_paladin":
+        _giveOrFallback({_p}, {@paladin_emblem}, "PaladinEmblem", shield, "&7Emblema sagrado do paladino.")
+    if {_p} has permission "group.class_paladin_devotion":
+        _giveOrFallback({_p}, {@paladin_devotion}, "OathDevotion", gold_ingot, "&7Juramento da Devocao.")
+    if {_p} has permission "group.class_paladin_ancients":
+        _giveOrFallback({_p}, {@paladin_ancients}, "OathAncients", emerald, "&7Juramento dos Ancioes.")
+    if {_p} has permission "group.class_paladin_vengeance":
+        _giveOrFallback({_p}, {@paladin_vengeance}, "OathVengeance", iron_ingot, "&7Juramento da Vinganca.")
+
+    # Clerigo
+    if {_p} has permission "group.class_cleric":
+        _giveOrFallback({_p}, {@cleric_symbol}, "ClericHolySymbol", sunflower, "&7Simbolo sagrado do clerigo.")
+    if {_p} has permission "group.class_cleric_life":
+        _giveOrFallback({_p}, {@cleric_life}, "DomainLifeCharm", honeycomb, "&7Dominio da Vida.")
+    if {_p} has permission "group.class_cleric_light":
+        _giveOrFallback({_p}, {@cleric_light}, "DomainLightCharm", glowstone_dust, "&7Dominio da Luz.")
+    if {_p} has permission "group.class_cleric_war":
+        _giveOrFallback({_p}, {@cleric_war}, "DomainWarCharm", iron_nugget, "&7Dominio da Guerra.")
+
+    # Druida
+    if {_p} has permission "group.class_druid":
+        _giveOrFallback({_p}, {@druid_token}, "DruidTotem", oak_sapling, "&7Totem druida.")
+    if {_p} has permission "group.class_druid_land":
+        _giveOrFallback({_p}, {@druid_land}, "CircleLandToken", moss_block, "&7Circulo da Terra.")
+    if {_p} has permission "group.class_druid_moon":
+        _giveOrFallback({_p}, {@druid_moon}, "CircleMoonToken", rabbit_foot, "&7Circulo da Lua.")
+    if {_p} has permission "group.class_druid_spores":
+        _giveOrFallback({_p}, {@druid_spores}, "CircleSporesToken", brown_mushroom, "&7Circulo dos Esporos.")
+
+    # Guerreiro
+    if {_p} has permission "group.class_fighter":
+        _giveOrFallback({_p}, {@fighter_insignia}, "FighterInsignia", iron_ingot, "&7Insignia do Guerreiro.")
+    if {_p} has permission "group.class_fighter_champion":
+        _giveOrFallback({_p}, {@fighter_champion}, "FighterChampionToken", shield, "&7Arquetipo Campeao.")
+    if {_p} has permission "group.class_fighter_battlemaster":
+        _giveOrFallback({_p}, {@fighter_battlemaster}, "FighterBattlemasterToken", paper, "&7Arquetipo Mestre de Armas.")
+    if {_p} has permission "group.class_fighter_eldritch":
+        _giveOrFallback({_p}, {@fighter_eldritch}, "FighterEldritchToken", amethyst_shard, "&7Cavaleiro Arcano.")
+
+    # Monge
+    if {_p} has permission "group.class_monk":
+        _giveOrFallback({_p}, {@monk_band}, "MonkBand", leather, "&7Faixa do Monge.")
+    if {_p} has permission "group.class_monk_openhand":
+        _giveOrFallback({_p}, {@monk_openhand}, "MonkOpenHandToken", leather, "&7Trilha Maos Abertas.")
+    if {_p} has permission "group.class_monk_shadow":
+        _giveOrFallback({_p}, {@monk_shadow}, "MonkShadowToken", black_dye, "&7Trilha da Sombra.")
+    if {_p} has permission "group.class_monk_elements":
+        _giveOrFallback({_p}, {@monk_elements}, "MonkElementsToken", fire_charge, "&7Trilha dos Elementos.")
+
+    # Patrulheiro
+    if {_p} has permission "group.class_ranger":
+        _giveOrFallback({_p}, {@ranger_token}, "RangerToken", compass, "&7Talismã do Patrulheiro.")
+    if {_p} has permission "group.class_ranger_hunter":
+        _giveOrFallback({_p}, {@ranger_hunter}, "RangerHunterToken", arrow, "&7Conclave do Cacador.")
+    if {_p} has permission "group.class_ranger_beast":
+        _giveOrFallback({_p}, {@ranger_beast}, "RangerBeastToken", bone, "&7Mestre das Bestas.")
+    if {_p} has permission "group.class_ranger_gloom":
+        _giveOrFallback({_p}, {@ranger_gloom}, "RangerGloomToken", black_dye, "&7Errante Sombrio.")
+
+    # Ladino
+    if {_p} has permission "group.class_rogue":
+        _giveOrFallback({_p}, {@rogue_token}, "RogueToken", gray_dye, "&7Insignia do Ladino.")
+    if {_p} has permission "group.class_rogue_thief":
+        _giveOrFallback({_p}, {@rogue_thief}, "RogueThiefToken", tripwire_hook, "&7Ladrao.")
+    if {_p} has permission "group.class_rogue_assassin":
+        _giveOrFallback({_p}, {@rogue_assassin}, "RogueAssassinToken", spider_eye, "&7Assassino.")
+    if {_p} has permission "group.class_rogue_arcane":
+        _giveOrFallback({_p}, {@rogue_arcane}, "RogueArcaneToken", enchanted_book, "&7Trapaceiro Arcano.")
+
+    # Feiticeiro
+    if {_p} has permission "group.class_sorcerer":
+        _giveOrFallback({_p}, {@sorcerer_focus}, "SorcererFocus", amethyst_shard, "&7Foco do Feiticeiro.")
+    if {_p} has permission "group.class_sorcerer_draconic":
+        _giveOrFallback({_p}, {@sorcerer_draconic}, "SorcererDraconicToken", blaze_rod, "&7Linhagem Draconica.")
+    if {_p} has permission "group.class_sorcerer_wild":
+        _giveOrFallback({_p}, {@sorcerer_wild}, "SorcererWildToken", ender_pearl, "&7Magia Selvagem.")
+    if {_p} has permission "group.class_sorcerer_storm":
+        _giveOrFallback({_p}, {@sorcerer_storm}, "SorcererStormToken", prismarine_crystals, "&7Linhagem da Tempestade.")
+
+    # Mago
+    if {_p} has permission "group.class_wizard":
+        _giveOrFallback({_p}, {@wizard_tome}, "WizardTome", book, "&7Tomo do mago.")
+    if {_p} has permission "group.class_wizard_evocation":
+        _giveOrFallback({_p}, {@wizard_evocation}, "WizardEvocationToken", blaze_powder, "&7Evocacao.")
+    if {_p} has permission "group.class_wizard_abjuration":
+        _giveOrFallback({_p}, {@wizard_abjuration}, "WizardAbjurationToken", shield, "&7Abjuracao.")
+    if {_p} has permission "group.class_wizard_divination":
+        _giveOrFallback({_p}, {@wizard_divination}, "WizardDivinationToken", spyglass, "&7Adivinhacao.")
+
+    # --- Barbaro: novos grupos/subclasses ---
+    # (Base do Barbaro continua entregue no script principal via Rage/Temerario)
+    # Berserker: novas manobras (entrega dos itens de skill)
+    if {_p} has permission "group.class_barbarian_berserker":
+        _giveOrFallback({_p}, {@berserker_warhorn}, "BerserkerWarHorn", goat_horn, "&7Grito Bestial.")
+        _giveOrFallback({_p}, {@berserker_battleaxe}, "BerserkerBattleAxe", iron_axe, "&7Investida Sanguinaria.")
+        _giveOrFallback({_p}, {@berserker_spikedshield}, "BerserkerSpikedShield", shield, "&7Retaliacao Frenetica.")
+        _giveOrFallback({_p}, {@berserker_boots}, "BerserkerBoots", leather_boots, "&7Impetus Irrefreavel.")
+
+    # Guardiao Totemico: um unico grupo agora concede todos os totens (sem usar 'or')
+    set {_hasTotemic} to false
+    if {_p} has permission "group.class_barbarian_totemic":
+        set {_hasTotemic} to true
+    if {_p} has permission "group.class_barbarian_totem_bear":
+        set {_hasTotemic} to true
+    if {_p} has permission "group.class_barbarian_totem_eagle":
+        set {_hasTotemic} to true
+    if {_p} has permission "group.class_barbarian_totem_wolf":
+        set {_hasTotemic} to true
+    if {_hasTotemic} is true:
+        _giveOrFallback({_p}, {@barb_totem_bear}, "TotemBearCharm", honeycomb, "&7Totem do Urso.")
+        _giveOrFallback({_p}, {@barb_totem_eagle}, "TotemEagleCharm", feather, "&7Totem da Aguia.")
+        _giveOrFallback({_p}, {@barb_totem_wolf}, "TotemWolfCharm", bone, "&7Totem do Lobo.")
+        _giveOrFallback({_p}, {@barb_totemic_tiger}, "TotemTigerCharm", orange_dye, "&7Totem do Tigre.")
+        _giveOrFallback({_p}, {@barb_totemic_phoenix}, "TotemPhoenixCharm", blaze_powder, "&7Totem da Fenix.")
+
+    # Arauto da Tempestade (Storm Herald)
+    if {_p} has permission "group.class_barbarian_storm":
+        _giveOrFallback({_p}, {@barb_storm}, "StormHeraldToken", prismarine_crystals, "&7Arauto da Tempestade.")
+        _giveOrFallback({_p}, {@storm_warhammer}, "StormWarHammer", iron_axe, "&7Martelo do Trovao.")
+        _giveOrFallback({_p}, {@storm_gauntlet}, "StormChargeGauntlet", iron_ingot, "&7Surto Galvanico.")
+        _giveOrFallback({_p}, {@storm_mantle}, "StormMantle", chainmail_chestplate, "&7Capa de Ventos.")
+        _giveOrFallback({_p}, {@storm_drum}, "StormDrum", note_block, "&7Caldeirao da Tempestade.")
+        _giveOrFallback({_p}, {@storm_eye}, "StormEyeTotem", ender_eye, "&7Olho do Furacao.")
+
+# Integracoes: garantir entrega adicional nos momentos chave
+on join:
+    wait 2 seconds
+    giveClassItems_extra(player)
+    bindOwner(player)
+
+on respawn:
+    wait 20 ticks
+    giveClassItems_extra(player)
+    bindOwner(player)
+
+# Utilitario: permitir que o console force a entrega dos itens extras
+command /classextragive <player>:
+    permission: op
+    trigger:
+        set {_p} to arg 1
+        giveClassItems_extra({_p})

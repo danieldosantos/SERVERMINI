@@ -1,0 +1,49 @@
+### human_regen.sk — Regeneracao condicional para Humanos (ASCII)
+# Regras:
+# - Apenas jogadores com a permissao de raca Humano (group.race_human).
+# - Ativa Regeneration II por 15s quando a vida cair abaixo de 50% do maximo.
+# - Enquanto estiver com <= 50% de vida reativa automaticamente a cada 15s
+#   (nao empilha; reativa somente quando a janela atual termina).
+# - Implementacao sem 'wait' (usa timestamps) para evitar intermitencias.
+
+options:
+  check_ticks: 2               # frequencia de checagem (~0.1s)
+  human_regen_seconds: 15      # duracao do buff
+  human_regen_amp: 1           # 0=Reg I, 1=Reg II
+
+every {@check_ticks} ticks:
+  loop all players:
+    if loop-player has permission "group.race_human":
+      set {_u} to "%uuid of loop-player%"
+      set {_hp} to health of loop-player
+      set {_max} to max health of loop-player
+      set {_th} to {_max} * 0.5
+
+      # finaliza janela ativa por tempo decorrido
+      if {human.regen.active.%{_u}%} is set:
+        if difference between now and {human.regen.starts.%{_u}%} >= {@human_regen_seconds} seconds:
+          delete {human.regen.active.%{_u}%}
+          delete {human.regen.starts.%{_u}%}
+
+      # aplica sempre que estiver <= 50% e NAO estiver ativo
+      if {_hp} <= {_th}:
+        if {human.regen.active.%{_u}%} is not set:
+          apply regeneration {@human_regen_amp} to loop-player for {@human_regen_seconds} seconds
+          set {human.regen.active.%{_u}%} to true
+          set {human.regen.starts.%{_u}%} to now
+
+on quit:
+  set {_u} to "%uuid of player%"
+  delete {human.regen.active.%{_u}%}
+  delete {human.regen.starts.%{_u}%}
+
+# Garante estado consistente em login/respawn
+on join:
+  set {_u} to "%uuid of player%"
+  delete {human.regen.active.%{_u}%}
+  delete {human.regen.starts.%{_u}%}
+
+on respawn:
+  set {_u} to "%uuid of player%"
+  delete {human.regen.active.%{_u}%}
+  delete {human.regen.starts.%{_u}%}

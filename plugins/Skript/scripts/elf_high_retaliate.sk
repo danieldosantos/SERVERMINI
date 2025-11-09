@@ -1,0 +1,48 @@
+# elf_high_retaliate.sk — Retaliação do Alto Elfo (Skript)
+# Aumenta a chance de ativar efeitos ao sofrer dano.
+
+options:
+    # Probabilidades (em %). Somam 100.
+    prob_none: 35
+    prob_thorns: 25
+    prob_poison: 25
+    prob_nausea: 15
+    # Dano de espinhos (corações = valor * 1.0)
+    thorns_damage: 2
+    # Duração dos efeitos (segundos)
+    effect_seconds: 5
+    # Cooldown por vítima (segundos)
+    cd_seconds: 3
+
+on damage:
+    victim is a player
+    set {_v} to victim
+    # Requer raça Alto Elfo (LuckPerms)
+    if {_v} does not have permission "group.race_elf_high":
+        stop
+    # Cooldown por jogador
+    set {_u} to "%uuid of {_v}%"
+    if {elfhigh.cd.%{_u}%} is set:
+        if difference between now and {elfhigh.cd.%{_u}%} < {@cd_seconds} seconds:
+            stop
+    set {elfhigh.cd.%{_u}%} to now
+    # Determinar agressor (se houver)
+    set {_a} to attacker
+    # Se não houver agressor (queda/fogo), não aplicar nada
+    if {_a} is not set:
+        stop
+    # Sorteio ponderado
+    set {_r} to random integer between 1 and 100
+    set {_tNone} to {@prob_none}
+    set {_tThorns} to {@prob_none} + {@prob_thorns}
+    set {_tPoison} to {@prob_none} + {@prob_thorns} + {@prob_poison}
+    if {_r} <= {_tNone}:
+        stop
+    else if {_r} <= {_tThorns}:
+        damage {_a} by {@thorns_damage}
+    else if {_r} <= {_tPoison}:
+        apply poison 1 to {_a} for {@effect_seconds} seconds
+    else:
+        apply nausea 1 to {_a} for {@effect_seconds} seconds
+    # Opcional: feedback leve ao alto elfo
+    send "&7[Alto Elfo] &aRetaliacao ativada.&r" to {_v}
