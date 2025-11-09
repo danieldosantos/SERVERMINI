@@ -1,0 +1,160 @@
+# races_halfling_cmds.sk — Integração da raça Halfling (base, Pés-Leves, Robusto).
+# Depende de: Skript, SkBee (PlaceholderAPI), ProSkillAPI compatível, MythicMobs, LuckPerms.
+
+options:
+  skillcmd: psa cast
+  coin_name: "&eMoeda da Sorte Halfling"
+  cloak_name: "&aManto dos Pés-Leves"
+  charm_name: "&6Amuleto de Pedra Robusta"
+
+function halflingHasGroup(p: player, group: text) :: boolean:
+  set {_perm1} to "group.%{_group}%"
+  set {_perm2} to "lp.%{_group}%"
+  if {_p} has permission {_perm1} or {_p} has permission {_perm2}:
+    return true
+  return false
+
+function halflingCastSkill(p: player, group: text, skill: text, label: text):
+  if halflingHasGroup({_p}, {_group}):
+    set {_name} to name of {_p}
+    execute console command "{@skillcmd} %{_name}% %{_skill}%"
+    halflingShowHud({_p}, {_label})
+  else:
+    send "&cPermissão racial insuficiente." to {_p}
+
+function halflingShowHud(p: player, label: text):
+  send action bar "&aRacial:&f %{_label}%" to {_p}
+
+function halflingRacialHelp(p: player) :: boolean:
+  set {_shown} to false
+  if halflingHasGroup({_p}, "race_halfling"):
+    send "&a[Halfling] Use /racial_halfling para detalhes rápidos e /sortes para HUD." to {_p}
+    set {_shown} to true
+    if halflingHasGroup({_p}, "race_halfling.lightfoot"):
+      send "&7[Pés-Leves] /esquiva_halfling, /passo_silencioso e /sorte_dobrada (ult 210s)." to {_p}
+    if halflingHasGroup({_p}, "race_halfling.stout"):
+      send "&6[Robusto] /forte_como_pedra, /respirar_fundo e /imutavel (ult 210s)." to {_p}
+  return {_shown}
+
+command /racial_halfling:
+  trigger:
+    if halflingHasGroup(player, "race_halfling"):
+      send "&a/Racial base:&f ativa Iniciativa Íntima." to player
+      send "&a/Sortes:&f mostra chance atual do traço Sortudo." to player
+      if halflingHasGroup(player, "race_halfling.lightfoot"):
+        send "&7/Sub (Pés-Leves):&f /esquiva_halfling, /passo_silencioso, /sorte_dobrada." to player
+      if halflingHasGroup(player, "race_halfling.stout"):
+        send "&6/Sub (Robusto):&f /forte_como_pedra, /respirar_fundo, /imutavel." to player
+    else:
+      send "&cSomente halflings podem usar este comando." to player
+
+command /sortes:
+  trigger:
+    if halflingHasGroup(player, "race_halfling"):
+      set {_cd} to placeholderapi parse "%raceseffects_racial_cd_main%" for player
+      set {_luck} to placeholderapi parse "%raceseffects_racial_sorte%" for player
+      set {_esq} to placeholderapi parse "%raceseffects_racial_esquiva%" for player
+      set {_res} to placeholderapi parse "%raceseffects_racial_resistencia_veneno%" for player
+      if {_cd} is "" or {_cd} is "null":
+        set {_cd} to "-"
+      if {_luck} is "" or {_luck} is "null":
+        set {_luck} to "-"
+      if {_esq} is "" or {_esq} is "null":
+        set {_esq} to "-"
+      if {_res} is "" or {_res} is "null":
+        set {_res} to "-"
+      send "&aHalfling HUD:" to player
+      send "&7• CD principal:&f %{_cd}%" to player
+      send "&7• Chance de sorte:&f %{_luck}%" to player
+      send "&7• Status de esquiva:&f %{_esq}%" to player
+      send "&7• Resistência veneno:&f %{_res}%" to player
+    else:
+      send "&cSomente halflings podem ver esses valores." to player
+
+command /esquiva_halfling:
+  trigger:
+    halflingCastSkill(player, "race_halfling.lightfoot", "Halfling_EsquivaHalfling", "Esquiva Halfling")
+
+command /passo_silencioso:
+  trigger:
+    halflingCastSkill(player, "race_halfling.lightfoot", "Halfling_PassoSilencioso", "Passo Silencioso")
+
+command /sorte_dobrada:
+  trigger:
+    halflingCastSkill(player, "race_halfling.lightfoot", "Halfling_SorteEmDobro", "Sorte em Dobro")
+
+command /forte_como_pedra:
+  trigger:
+    halflingCastSkill(player, "race_halfling.stout", "Halfling_ForteComoPedra", "Forte Como Pedra")
+
+command /respirar_fundo:
+  trigger:
+    halflingCastSkill(player, "race_halfling.stout", "Halfling_RespirarFundo", "Respirar Fundo")
+
+command /imutavel:
+  trigger:
+    halflingCastSkill(player, "race_halfling.stout", "Halfling_Imutavel", "Imutável")
+
+command /kit_racial_halfling [<player>] [<text>]:
+  permission: op
+  trigger:
+    set {_target} to halflingResolveTarget(sender, arg-1)
+    if {_target} is not set:
+      stop
+    set {_mode} to "base"
+    if arg-2 is set:
+      set {_mode} to lowercase arg-2
+    if {_mode} is "base" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% HalflingLuckyCoin 1"
+    if {_mode} is "lightfoot" or {_mode} is "pesleves" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% LightfootCloak 1"
+    if {_mode} is "stout" or {_mode} is "robusto" or {_mode} is "all":
+      execute console command "mm items give %name of {_target}% StoutStoneCharm 1"
+    send "&aItens raciais halfling entregues (%{_mode}%)." to {_target}
+
+command /kit_racial_halfling_lightfoot [<player>]:
+  permission: op
+  trigger:
+    set {_target} to halflingResolveTarget(sender, arg-1)
+    if {_target} is not set:
+      stop
+    execute console command "mm items give %name of {_target}% HalflingLuckyCoin 1"
+    execute console command "mm items give %name of {_target}% LightfootCloak 1"
+    send "&aKit de QA Pés-Leves entregue." to {_target}
+
+command /kit_racial_halfling_stout [<player>]:
+  permission: op
+  trigger:
+    set {_target} to halflingResolveTarget(sender, arg-1)
+    if {_target} is not set:
+      stop
+    execute console command "mm items give %name of {_target}% HalflingLuckyCoin 1"
+    execute console command "mm items give %name of {_target}% StoutStoneCharm 1"
+    send "&aKit de QA Robusto entregue." to {_target}
+
+function halflingResolveTarget(sender: command sender, raw: object) :: player:
+  if {_raw} is set:
+    if {_raw} is player:
+      return {_raw}
+    set {_maybe} to player named {_raw}
+    if {_maybe} is set:
+      return {_maybe}
+    send "&cJogador inválido." to {_sender}
+    return null
+  if {_sender} is player:
+    return {_sender}
+  send "&cInforme um jogador." to {_sender}
+  return null
+
+on right click:
+  if event-item is not air:
+    set {_name} to display name of event-item
+    if {_name} is colored {@coin_name}:
+      cancel event
+      halflingCastSkill(player, "race_halfling", "Halfling_IniciativaIntima", "Iniciativa Íntima")
+    else if {_name} is colored {@cloak_name}:
+      cancel event
+      halflingCastSkill(player, "race_halfling.lightfoot", "Halfling_PassoSilencioso", "Passo Silencioso")
+    else if {_name} is colored {@charm_name}:
+      cancel event
+      halflingCastSkill(player, "race_halfling.stout", "Halfling_ForteComoPedra", "Forte Como Pedra")

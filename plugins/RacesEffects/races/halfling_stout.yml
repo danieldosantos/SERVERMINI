@@ -1,0 +1,70 @@
+# Sub-raça: Halfling Robusto
+race_id: halfling_stout
+name: "Halfling Robusto"
+identity: "Halflings mais resistentes, firmes e difíceis de derrubar."
+luckperms:
+  required: "race_halfling.stout"
+  inherit: "race_halfling"
+tags:
+  - halfling
+placeholders:
+  racial_cd_main: "{cooldown:skill_halfling_forte_como_pedra}"
+  racial_resistencia_veneno: "{status:halfling_stout_poison}" 
+  racial_esquiva: "{status:halfling_stout_knockback}"
+passives:
+  robustez_stout:
+    name: "Robustez Stout"
+    type: timed_attribute
+    trigger: poison_damage
+    duration: 10
+    cooldown: 40
+    uptime_cap: 0.5
+    attributes:
+      mitigation_poison: 0.12
+    diminishing_returns: poison
+    notes: "Escala internamente para 10/12/14/15% conforme tier; DR evita ultrapassar 45% mitigação total."
+    description: "Ao receber dano de veneno reduz 10–15% (dependendo do tier) por 10s."
+  resiliencia_compacta:
+    name: "Resiliência Compacta"
+    type: knockback_resist
+    trigger: combat_uptime_window
+    duration: 8
+    cooldown: 30
+    uptime_cap: 0.6
+    knockback_reduction: 0.1
+    notes: "Aplica DR com classes tanque e não gera imunidade."
+    description: "Durante combates prolongados reduz knockback recebido em 10% por 8s (ICD 30s)."
+actives:
+  forte_como_pedra:
+    name: "Forte Como Pedra"
+    skill: Halfling_ForteComoPedra
+    cooldown: 90
+    charges: 1
+    description: "+20% mitigação por 6s (respeita cap global de 45%)."
+  respirar_fundo:
+    name: "Respirar Fundo"
+    skill: Halfling_RespirarFundo
+    cooldown: 75
+    charges: 1
+    description: "Remove veneno/queimadura e cura 12% da vida máxima."
+  imutavel:
+    name: "Imutável"
+    skill: Halfling_Imutavel
+    cooldown: 210
+    charges: 1
+    description: "Ultimate: 8s de imunidade a empurrões + 15% mitigação (cap DR aplicado)."
+resistances:
+  poison:
+    base: 0.08
+    max: 0.45
+    notes: "Acumula com Robustez Stout usando DR para evitar ultrapassar 45% de mitigação global."
+synergy_notes:
+  - "Projetado para tanques leves: uptime de Resiliência ≤60% garante combate saudável."
+  - "Mitigação extra do ultimate respeita caps e combina com classes suporte sem invencibilidade."
+tests:
+  pve:
+    - "Encontro com veneno persistente verificando DR combinado ≤45%."
+    - "Simulação de chefes com knockback para validar uptime de Resiliência Compacta."
+  pvp:
+    - "Duelos em ponte com /imutavel mantendo imunidade a empurrões apenas 8s a cada 210s."
+    - "Arena controle ativando Forte Como Pedra e monitorando mitigação total ≤45%."

@@ -1,0 +1,34 @@
+# ProSkillAPI: Sorte em Dobro — ultimate Pés-Leves
+skills:
+  Halfling_SorteEmDobro:
+    display: "&eSorte em Dobro"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Convoca espíritos da sorte por 10s.
+      Enquanto ativo, dobra a chance do traço Sortudo porém reduz o dano causado em 10%.
+    tiers:
+      T1: { cooldown: 210, duration: 10, luck_multiplier: 2.0, damage_multiplier: 0.90 }
+      T2: { cooldown: 210, duration: 10, luck_multiplier: 2.0, damage_multiplier: 0.90 }
+      T3: { cooldown: 210, duration: 10, luck_multiplier: 2.0, damage_multiplier: 0.90 }
+      T4: { cooldown: 210, duration: 10, luck_multiplier: 2.0, damage_multiplier: 0.90 }
+    cost:
+      resource: none
+      amount: 0
+    effects:
+      - target: self
+        type: status
+        id: halfling_sorte_dobrada
+        duration: { tier: duration }
+        modifiers:
+          lucky_trait_multiplier: { tier: luck_multiplier }
+          damage_multiplier: { tier: damage_multiplier }
+      - target: self
+        type: placeholder
+        id: racial_sorte
+        value: "{status:halfling_lightfoot_luck}"
+      - target: self
+        type: title
+        title: "&eSorte em Dobro!"
+        subtitle: "&7Chance dobrada, dano -10%"
+    notes: "Multiplica chance de Sortudo somente enquanto efeito durar, respeitando ICD de 60s."

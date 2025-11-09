@@ -1,0 +1,32 @@
+# ProSkillAPI: Forte Como Pedra — sub-raça Robusto
+skills:
+  Halfling_ForteComoPedra:
+    display: "&6Forte Como Pedra"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Ergue a postura firme reduzindo o dano recebido em 20% por 6s.
+      Compartilha DR com outras fontes de mitigação para manter o teto de 45%.
+    tiers:
+      T1: { cooldown: 90, duration: 6, mitigation: 0.20 }
+      T2: { cooldown: 90, duration: 6, mitigation: 0.22 }
+      T3: { cooldown: 90, duration: 6, mitigation: 0.23 }
+      T4: { cooldown: 90, duration: 6, mitigation: 0.25 }
+    cost:
+      resource: stamina
+      amount: 12
+    effects:
+      - target: self
+        type: status
+        id: halfling_pedra_mitigacao
+        duration: { tier: duration }
+        modifiers:
+          mitigation_all: { tier: mitigation }
+      - target: self
+        type: placeholder
+        id: racial_cd_main
+        value: "{cooldown:skill_halfling_forte_como_pedra}"
+      - target: self
+        type: action_bar
+        text: "&6Mitigação ativa ({tier:mitigation:percent}%)"
+    notes: "Mitigação aplica DR global: valores acima de 45% convertem em redução efetiva proporcional."

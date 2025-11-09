@@ -13,8 +13,8 @@ lp creategroup race_gnomo
 lp creategroup race_gnomo.floresta
 lp creategroup race_gnomo.rocha
 lp creategroup race_halfling
-lp creategroup race_halfling.pesleves
-lp creategroup race_halfling.robusto
+lp creategroup race_halfling.lightfoot
+lp creategroup race_halfling.stout
 lp creategroup race_humano
 lp creategroup race_humano.variante
 lp creategroup race_meioelfo
@@ -29,8 +29,8 @@ lp group race_elfo.floresta parent add race_elfo
 lp group race_elfo.drow parent add race_elfo
 lp group race_gnomo.floresta parent add race_gnomo
 lp group race_gnomo.rocha parent add race_gnomo
-lp group race_halfling.pesleves parent add race_halfling
-lp group race_halfling.robusto parent add race_halfling
+lp group race_halfling.lightfoot parent add race_halfling
+lp group race_halfling.stout parent add race_halfling
 lp group race_humano.variante parent add race_humano
 
 # Permissões para habilidades (SkillAPI) e itens (MythicMobs)
@@ -65,10 +65,16 @@ lp group race_gnomo.rocha permission set psa.skill.EngenhoGnomesco true
 lp group race_gnomo.rocha permission set mythicmobs.item.GnomeGyroCore true
 
 # Halflings
-lp group race_halfling.pesleves permission set psa.skill.PassosSilenciosos true
-lp group race_halfling.pesleves permission set mythicmobs.item.HalflingLuckyCoin true
-lp group race_halfling.robusto permission set psa.skill.FortalecerFamilia true
-lp group race_halfling.robusto permission set mythicmobs.item.HalflingHearthLadle true
+lp group race_halfling permission set psa.skill.Halfling_IniciativaIntima true
+lp group race_halfling permission set mythicmobs.item.HalflingLuckyCoin true
+lp group race_halfling.lightfoot permission set psa.skill.Halfling_EsquivaHalfling true
+lp group race_halfling.lightfoot permission set psa.skill.Halfling_PassoSilencioso true
+lp group race_halfling.lightfoot permission set psa.skill.Halfling_SorteEmDobro true
+lp group race_halfling.lightfoot permission set mythicmobs.item.LightfootCloak true
+lp group race_halfling.stout permission set psa.skill.Halfling_ForteComoPedra true
+lp group race_halfling.stout permission set psa.skill.Halfling_RespirarFundo true
+lp group race_halfling.stout permission set psa.skill.Halfling_Imutavel true
+lp group race_halfling.stout permission set mythicmobs.item.StoutStoneCharm true
 
 # Humanos
 lp group race_humano permission set psa.skill.InvestidaCoordenada true
@@ -103,8 +109,17 @@ lp group race_elfo.floresta permission set skript.command.marca_bosque true
 lp group race_elfo.floresta permission set skript.command.salto_galho true
 lp group race_gnomo.floresta permission set skript.command.canto_cativante true
 lp group race_gnomo.rocha permission set skript.command.engenho_gnomesco true
-lp group race_halfling.pesleves permission set skript.command.passos_silenciosos true
-lp group race_halfling.robusto permission set skript.command.fortalecer_familia true
+lp group race_halfling permission set skript.command.racial_halfling true
+lp group race_halfling permission set skript.command.sortes true
+lp group race_halfling.lightfoot permission set skript.command.esquiva_halfling true
+lp group race_halfling.lightfoot permission set skript.command.passo_silencioso true
+lp group race_halfling.lightfoot permission set skript.command.sorte_dobrada true
+lp group race_halfling.stout permission set skript.command.forte_como_pedra true
+lp group race_halfling.stout permission set skript.command.respirar_fundo true
+lp group race_halfling.stout permission set skript.command.imutavel true
+lp group race_halfling permission set skript.command.kit_racial_halfling true
+lp group race_halfling.lightfoot permission set skript.command.kit_racial_halfling_lightfoot true
+lp group race_halfling.stout permission set skript.command.kit_racial_halfling_stout true
 lp group race_humano permission set skript.command.investida_coord true
 lp group race_humano.variante permission set skript.command.talento_variavel true
 lp group race_meioelfo permission set skript.command.harmonia_hibrida true

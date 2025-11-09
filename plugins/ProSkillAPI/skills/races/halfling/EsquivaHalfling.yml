@@ -1,0 +1,32 @@
+# ProSkillAPI: Esquiva Halfling — sub-raça Pés-Leves
+skills:
+  Halfling_EsquivaHalfling:
+    display: "&fEsquiva Halfling"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Lança um salto lateral curtíssimo deixando o próximo ataque físico errar.
+      A janela de esquiva dura 2s e não bloqueia habilidades imunes a falha.
+    tiers:
+      T1: { cooldown: 75, window: 2.0 }
+      T2: { cooldown: 75, window: 2.0 }
+      T3: { cooldown: 75, window: 2.0 }
+      T4: { cooldown: 75, window: 2.0 }
+    cost:
+      resource: stamina
+      amount: 10
+    effects:
+      - target: self
+        type: status
+        id: halfling_esquiva_janela
+        duration: { tier: window }
+        modifiers:
+          dodge_next_hit: true
+      - target: self
+        type: placeholder
+        id: racial_esquiva
+        value: "{cooldown:skill_halfling_esquiva}"
+      - target: self
+        type: action_bar
+        text: "&fJanela de esquiva ativa!"
+    notes: "Ignora apenas dano físico direto; não cancela ultimates nem dano verdadeiro."
