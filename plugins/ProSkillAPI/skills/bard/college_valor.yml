@@ -1,0 +1,714 @@
+# Bardo - Colégio do Valor
+name: bard_valor_hino_da_coragem
+display: "§cHino da Coragem"
+icon: BANNER_PATTERN
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 1 · Mitigação inicial"
+- "§fConcede §b+10% mitigação§f e imunidade a medo por 10s."
+- "§7Respeita teto de mitigação global."
+- "§8PvP: imunidade a medo dura 12s de DR."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill hino_da_coragem %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_valor_ritmo_de_batalha
+display: "§cRitmo de Batalha"
+icon: MUSIC_DISC_STRAD
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 1 · Buff ofensivo"
+- "§f+15% velocidade de ataque por 8s; arqueiros recebem +2 projéteis no pró\
+  ximo disparo."
+- "§7Aplica marcador MythicMobs para projéteis extras."
+- "§8PvP: projéteis extras não critam automaticamente."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill ritmo_de_batalha %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_valor_marcha_estoica
+display: "§cMarcha Estóica"
+icon: IRON_BOOTS
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 1 · Mobilidade defensiva"
+- "§f+0.03 velocidade e resistência a empurrão por 8s."
+- "§7Não acumula com buffs superiores de velocidade."
+- "§8PvP: empurrão reduzido ao mínimo de 0.5 blocos."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill marcha_estoica %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_valor_toque_de_vitoria
+display: "§cToque de Vitória"
+icon: GOLD_NUGGET
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  range-base: 15
+  range-scale: 0
+description:
+- "§7Tier 1 · Recompensa de abate"
+- "§fAliado recebe escudo de 80 pts ao abater inimigo nos próximos 8s."
+- "§7Escudo dura 10s após ativado."
+- "§8PvP: só ativa contra jogadores hostis."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Ally
+          range-base: 15
+          range-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill toque_de_vitoria %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_valor_coda_inspirador
+display: "§cCoda Inspirador"
+icon: COPPER_BLOCK
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 2 · Escudos em massa"
+- "§fConcede §b120 pts de escudo§f a aliados próximos."
+- "§7Escudos respeitam DR global."
+- "§8PvP: escudos expiram em 8s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill coda_inspirador %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_valor_posto_de_comando
+display: "§cPosto de Comando"
+icon: RED_BANNER
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+- "§7Tier 2 · Estandarte tático"
+- "§fInvoca estandarte por 10s concedendo §a+10% dano§f e §b-10% dano\
+  \ recebido§f."
+- "§7Estandarte usa MythicMobs para efeito visual."
+- "§8PvP: bônus cai para 6% contra chefes."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CallSkript:
+        type: mechanic
+        data:
+          command: skript run bard_skill posto_de_comando %caster% %target%
+          caster: true
+          async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_valor_recuo_tatico
+display: "§cRecuo Tático"
+icon: SHIELD
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+- "§7Tier 2 · Reposicionamento"
+- "§fReposiciona aliados 6 blocos para trás e concede +0.03 velocidade por 6s."
+- "§7Checa colisão para evitar travamento."
+- "§8PvP: aplica DR em 20s para novo empurrão."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill recuo_tatico %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_valor_foco_do_duelista
+display: "§cFoco do Duelista"
+icon: NETHERITE_SWORD
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  range-base: 12
+  range-scale: 0
+description:
+- "§7Tier 2 · Buff ofensivo dirigido"
+- "§fPróximo ataque corpo-a-corpo recebe §a+30% dano§f e §a+20% penetraç\
+  ão§f."
+- "§7Marca alvo com partículas vermelhas."
+- "§8PvP: aplica DR com buffs similares."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Ally
+          range-base: 12
+          range-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill foco_do_duelista %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_valor_trombeta_da_guerra
+display: "§cTrombeta da Guerra"
+icon: GOAT_HORN
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 3 · Controle de massa"
+- "§fCausa medo por 2s (DR) e aplica §c-10% dano§f por 8s."
+- "§7Fear força recuo de 3 blocos."
+- "§8PvP: fear não afeta chefes."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill trombeta_da_guerra %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_valor_grito_de_reunir
+display: "§cGrito de Reunir"
+icon: BELL
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+- "§7Tier 3 · Agrupamento defensivo"
+- "§fPuxa aliados para perto (2 blocos) e concede §b+10% mitigação§\
+  f por 6s."
+- "§7Atualiza HUD defensiva."
+- "§8PvP: não puxa inimigos."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill grito_de_reunir %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_valor_estro_marcial
+display: "§cEstro Marcial"
+icon: IRON_SWORD
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 3 · Alcance ofensivo"
+- "§fAumenta alcance melee dos aliados em 1 bloco por 8s."
+- "§7Integra com MythicMobs para partículas."
+- "§8PvP: alcance extra respeita limites anti-exploit."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill estro_marcial %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_valor_compasso_de_ferro
+display: "§cCompasso de Ferro"
+icon: IRON_BLOCK
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 3 · Reflexão defensiva"
+- "§fReflete 15% do dano recebido por aliados por 8s."
+- "§7Reflexo não pode critar."
+- "§8PvP: reflexão limitada a 50 de dano total."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill compasso_de_ferro %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_valor_cantiga_dos_herois
+display: "§cCantiga dos Heróis"
+icon: TOTEM_OF_UNDYING
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 50
+  mana-cost-scale: 0
+description:
+- "§7Tier 4 · Ultimate de reviver"
+- "§fRevive aliados caídos nos últimos 10s com 35% HP e 3s de invulnerabilidade."
+- "§7Consome todas as cargas de Inspiração."
+- "§8PvP: não funciona em áreas anti-revive."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CallSkript:
+        type: mechanic
+        data:
+          command: skript run bard_skill cantiga_dos_herois %caster% %target%
+          caster: true
+          async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_valor_estancia_do_campeao
+display: "§cEstância do Campeão"
+icon: NETHERITE_HELMET
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 4 · Buff ofensivo pesado"
+- "§f+25% velocidade de ataque e +15% penetração por 10s."
+- "§7Aplica partículas douradas."
+- "§8PvP: haste sofre DR."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill estancia_do_campeao %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_valor_baluarte_sonoro
+display: "§cBaluarte Sonoro"
+icon: GLASS
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 4 · Proteção contra projéteis"
+- "§fCria domo de 6 blocos que bloqueia projéteis por 8s."
+- "§7Utiliza MythicMobs para barragem visual."
+- "§8PvP: não bloqueia feitiços de chão."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CallSkript:
+        type: mechanic
+        data:
+          command: skript run bard_skill baluarte_sonoro %caster% %target%
+          caster: true
+          async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_valor_climax_de_aco
+display: "§cClímax de Aço"
+icon: DIAMOND_SWORD
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 40
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 4 · Sustentação ofensiva"
+- "§fAtaques aliados curam 5% do dano causado por 10s."
+- "§7Respeita limite global de 25%."
+- "§8PvP: cura reduzida em 25% contra jogadores."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill climax_de_aco %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []

@@ -1,0 +1,710 @@
+# Bardo - Colégio do Glamour
+name: bard_glamour_encanto_hipnotico
+display: "§dEncanto Hipnótico"
+icon: PURPLE_DYE
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 1 · Controle brando"
+- "§fImobiliza inimigos por 3s (DR) com partículas cintilantes."
+- "§7Aplica imunidade decrescente de charme."
+- "§8PvP: sem efeito em bosses imunes."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill encanto_hipnotico %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_glamour_brilho_deslumbrante
+display: "§dBrilho Deslumbrante"
+icon: GLOWSTONE_DUST
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  range-base: 16
+  range-scale: 0
+description:
+- "§7Tier 1 · Cegueira leve"
+- "§fCega alvo por 3s e aplica §c-10% precisão§f."
+- "§7Atualiza HUD de precisão."
+- "§8PvP: cegueira se converte em ofuscação."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Enemy
+          range-base: 16
+          range-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill brilho_deslumbrante %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_glamour_veu_elegante
+display: "§dVéu Elegante"
+icon: PINK_CARPET
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 1 · Evasão tática"
+- "§fConcede §a+15% esquiva§f e §a+0.02 velocidade§f por 8s."
+- "§7Não acumula com buffs superiores."
+- "§8PvP: esquiva respeita caps."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill veu_elegante %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_glamour_palavra_calma
+display: "§dPalavra Calma"
+icon: BLUE_ORCHID
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+- "§7Tier 1 · Dissuasão PvE"
+- "§fReduz agressividade de mobs próximos por 6s."
+- "§7Não afeta jogadores."
+- "§8PvP: efeito mínimo, só reduz foco de pets."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill palavra_calma %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 1
+  college: common
+  tags: []
+---
+name: bard_glamour_manto_de_inspiracao
+display: "§dManto de Inspiração"
+icon: MAGENTA_GLAZED_TERRACOTTA
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 75
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 2 · Escudos móveis"
+- "§fDistribui 60 pts de escudo a até 5 aliados e permite deslocamento livre\
+  \ por 3s."
+- "§7Mantém HUD de cargas."
+- "§8PvP: escudos expiram em 6s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill manto_de_inspiracao %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_glamour_passo_ferico
+display: "§dPasso Férico"
+icon: ENDER_PEARL
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+- "§7Tier 2 · Mobilidade em grupo"
+- "§fTeleporta o bardo e até 2 aliados visíveis para até 12 blocos."
+- "§7Checa linha de visão e colisão."
+- "§8PvP: aplica DR de teleporte 45s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill passo_ferico %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_glamour_rosa_enfeiticada
+display: "§dRosa Enfeitiçada"
+icon: ROSE_BUSH
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+description:
+- "§7Tier 2 · Debuff ofensivo"
+- "§fMarca inimigo; primeiros 3 hits aliados causam §a+12% dano§f."
+- "§7Marca aparece no HUD."
+- "§8PvP: compartilha DR com buffs de marcação."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Enemy
+          range-base: 18
+          range-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill rosa_enfeiticada %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_glamour_danca_das_lampadas
+display: "§dDança das Lâmpadas"
+icon: SEA_LANTERN
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 2 · Controle visual"
+- "§fReduz visão dos inimigos próximos por 6s com neblina leve."
+- "§7Usa partículas MythicMobs."
+- "§8PvP: reduz alcance de projéteis em 10%."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill danca_das_lampadas %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 2
+  college: common
+  tags: []
+---
+name: bard_glamour_chacona_sublime
+display: "§dChacona Sublime"
+icon: MUSIC_DISC_MELLOHI
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 3 · Purificação contínua"
+- "§fAura de 10s removendo 1 debuff de aliados a cada 3s."
+- "§7Atualiza HUD de debuffs."
+- "§8PvP: remove apenas controles leves."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill chacona_sublime %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_glamour_cantilena_do_desapego
+display: "§dCantilena do Desapego"
+icon: POPPY
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+- "§7Tier 3 · Mitigação ofensiva"
+- "§fSeleciona inimigo dominante na área aplicando §c-20% dano§f por 8s."
+- "§7Marca alvo prioritário."
+- "§8PvP: aplica DR compartilhado 30s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill cantilena_do_desapego %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_glamour_ritornelo_sombra_luz
+display: "§dRitornelo Sombra-Luz"
+icon: TWISTING_VINES
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+description:
+- "§7Tier 3 · Bônus alternado"
+- "§fAlterna 5s de §a+15% velocidade§f e 5s de §b+15% mitigação§\
+  f."
+- "§7Exibe partículas alternadas."
+- "§8PvP: uptime limitado a 50%."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CallSkript:
+        type: mechanic
+        data:
+          command: skript run bard_skill ritornelo_sombra_luz %caster% %target%
+          caster: true
+          async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_glamour_arauto_do_glamour
+display: "§dArauto do Glamour"
+icon: ALLAY_SPAWN_EGG
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  range-base: 15
+  range-scale: 0
+description:
+- "§7Tier 3 · Companheiro curativo"
+- "§fConjura sprite que segue aliado curando §a4% HP/s§f por 6s."
+- "§7Sprite se dissipa ao trocar de alvo."
+- "§8PvP: cura reduzida em 25% contra jogadores."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          type: Ally
+          range-base: 15
+          range-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill arauto_do_glamour %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 3
+  college: common
+  tags: []
+---
+name: bard_glamour_refrao_sublime
+display: "§dRefrão Sublime"
+icon: HEART_OF_THE_SEA
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 50
+  mana-cost-scale: 0
+description:
+- "§7Tier 4 · Ultimate de cura"
+- "§fCria zona de 7 blocos por 12s curando §a6% HP/s§f e removendo debuffs\
+  \ continuamente."
+- "§7Atualiza HUD e partículas douradas."
+- "§8PvP: cura reduzida em 30% em arenas."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CallSkript:
+        type: mechanic
+        data:
+          command: skript run bard_skill refrao_sublime %caster% %target%
+          caster: true
+          async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_glamour_mascara_irresistivel
+display: "§dMáscara Irresistível"
+icon: PLAYER_HEAD
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 4 · Charme em área"
+- "§fEncanta inimigos por 2.5s (DR), forçando-os a parar."
+- "§7Não funciona em bosses maiores."
+- "§8PvP: aplica imunidade 45s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: enemy
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill mascara_irresistivel %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_glamour_coroa_cintilante
+display: "§dCoroa Cintilante"
+icon: GOLDEN_HELMET
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 45
+  mana-cost-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+- "§7Tier 4 · Buff crítico"
+- "§fAliados recebem §a+20% crítico§f e §a+10% velocidade§f por\
+  \ 10s."
+- "§7Integra com HUD de crítico."
+- "§8PvP: críticos respeitam caps."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: ally
+        children:
+          CallSkript:
+            type: mechanic
+            data:
+              command: skript run bard_skill coroa_cintilante %caster% %target%
+              caster: true
+              async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
+---
+name: bard_glamour_crescendo_etereo
+display: "§dCrescendo Etéreo"
+icon: PHANTOM_MEMBRANE
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 105
+  cooldown-scale: 0
+  mana-cost-base: 40
+  mana-cost-scale: 0
+description:
+- "§7Tier 4 · Recarga interna"
+- "§fPor 12s, cada magia de Glamour reduz 2s do CD de outra magia de Glamour (1x/3s)."
+- "§7Sincroniza com HUD de recargas."
+- "§8PvP: não reduz ultimates."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CallSkript:
+        type: mechanic
+        data:
+          command: skript run bard_skill crescendo_etereo %caster% %target%
+          caster: true
+          async: false
+metadata:
+  tier: 4
+  college: common
+  tags: []
