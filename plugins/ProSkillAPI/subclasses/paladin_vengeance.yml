@@ -1,0 +1,38 @@
+# Juramento da Vingança - Subclasse do Paladino
+name: "Paladino - Vingança"
+key: paladin_vengeance
+parent: paladin
+description:
+  - "Caçador implacável que marca o inimigo e o persegue sem descanso."
+  - "Converte Fé em explosões ofensivas mantendo controle único em alvo único."
+attributes:
+  health:
+    base: 42
+    scale: 8
+  defense:
+    base: 14
+    scale: 4
+  attack-damage:
+    base: 1.4
+    scale: 0.12
+  holy-damage:
+    base: 0.08
+    scale: 0.05
+skills:
+  - name: Juramento de Inimizade
+    level: 1
+  - name: Passo do Redentor
+    level: 2
+  - name: Cadeia do Pecado
+    level: 3
+  - name: Furia Celestial
+    level: 4
+  - name: Execucao Divina
+    level: 5
+channel-options:
+  - id: vinganca_inimizade
+    skill: Juramento de Inimizade
+    description: "Canalizar Voto converte aura base em marca ofensiva quando ativa."
+notes:
+  - "Execução Divina exige alvo abaixo de 25% de vida para o finisher e é limitada em arenas."
+  - "Passo do Redentor respeita limite de velocidade global (+0.05) somando bônus transitórios."

@@ -1,0 +1,38 @@
+name: Aura de Pureza
+type: active
+max-level: 4
+requires:
+  subclass: paladin_devotion
+description:
+  - "Purifica doenças/charme e concede +20% resistência por 10s a aliados em 6 blocos."
+  - "Aplica diminishing returns quando combinado com resistências raciais."
+icon: BEACON
+cooldown:
+  base: 75
+  scale: -3
+  minimum: 60
+radius:
+  base: 6
+  scale: 1
+custom:
+  duration: 10
+  mitigation: 0.20
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        targets: allies
+        indicator: ring
+      - type: cleanse
+        level: 2
+      - type: buff
+        key: paladin_pureza_resist
+        stat: damage-reduction
+        value: "%custom.mitigation%"
+        duration: "%custom.duration%"
+        diminishing-cap: 0.45
+      - type: message
+        text: "&f[Devoção] Aura de Pureza protege aliados por %custom.duration%s."
+messages:
+  cooldown: "&eAura de Pureza estará pronta em %cooldown%s."

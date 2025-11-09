@@ -1,0 +1,21 @@
+Skill,Tipo,Custo(Fé),Duração,CD,Dano/Redução,Área,Notas PvP,Tier
+Golpe Divino,Ativa,1,12s,45s,+100%→140% dano radiante,1 alvo,"Marca alvo com brilho breve",T1-T4
+Imposicao de Maos,Ativa,0,Instantâneo,30s (carga),Cura 18%→25%,Aliado único,"2→3 cargas, recarga 180s",T1-T4
+Canalizar Voto,Ativa,1,30s,90s,+10% mitigação,6 blocos,"Compartilha cooldown com auras de juramento",T1-T4
+Aura de Protecao,Passiva,0,Ativo enquanto aura,Pas.,10% mitigação base,6 blocos,"Suprime empilhamento acima de 45%",T1-T4
+Resistencia ao Medo,Passiva,0,Permanente,Pas.,-30% duração medo,Self,"Interage com RacesEffects",T1-T4
+Golpe Sagrado,Ativa,1,12s,45s,+100%→140% dano radiante,1 alvo,"Boost single target, respeita custo",T2-T4
+Aura de Pureza,Ativa,0,10s,75s,+20% mitigação,6 blocos,"Remove doenças/charme; diminishing 45%",T2-T4
+Luz Orientadora,Ativa,0,8s,90s,+10% crítico,8 blocos,"Revela furtivos, aplica cegueira leve",T3-T4
+Escudo Devoto,Ativa,0,6s,105s,25% reflexo mágico,Self,"Aplica exaustão se resistência racial alta",T3-T4
+Milagre da Fe,Ultimate,0,6s,240s,Regen intensa + imunidade,8 blocos,"Bloqueado em arenas via Skript",T4
+Juramento de Inimizade,Ativa,1,12s,60s,+20% dano no alvo,1 alvo,"Marca PvP, sem one-shot",T2-T4
+Passo do Redentor,Ativa,0,2s,75s,Dash + imunidade controle,Self,"Velocidade extra limitada ao cap",T2-T4
+Cadeia do Pecado,Ativa,0,6s,80s,-40% velocidade,1 alvo,"Puxão 4 blocos + slow, respeita DR",T3-T4
+Furia Celestial,Ativa,0,10s,90s,+30% velocidade de ataque,Self,"Apenas dano corpo-a-corpo",T3-T4
+Execucao Divina,Ultimate,1,Instantâneo,240s,250% dano radiante,1 alvo,"Finisher exige alvo <25% HP",T4
+Vinha Restritiva,Ativa,0,3s raiz / 8s debuff,60s,-15% dano alvo,1 alvo,"Raiz curta, DR controle racial",T2-T4
+Aura da Natureza,Ativa,0,12s,90s,+15% resistência elemental,6 blocos,"Cap 45% com diminishing",T3-T4
+Luz Radiante,Ativa,0,5s,75s,+5% cura/s + cegueira,8 blocos,"Cega furtivos, regen leve",T3-T4
+Asas de Safira,Ativa,0,8s,105s,+0.05 velocidade + planar,Self,"Não ultrapassa limite global",T3-T4
+Harmonia Primordial,Ultimate,0,15s,240s,+25% cura recebida / -20% dano,8 blocos,"Zona de suporte 15s, uptime controlado",T4

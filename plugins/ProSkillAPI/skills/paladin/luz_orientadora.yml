@@ -1,0 +1,43 @@
+name: Luz Orientadora
+type: active
+max-level: 4
+requires:
+  subclass: paladin_devotion
+description:
+  - "Revela inimigos furtivos e concede +10% crítico por 8s a aliados iluminados."
+  - "Uptime controlado para evitar exceder 60%."
+icon: SEA_LANTERN
+cooldown:
+  base: 90
+  scale: -5
+  minimum: 75
+radius:
+  base: 8
+  scale: 1
+custom:
+  duration: 8
+  crit: 0.10
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        indicator: ring
+      - type: potion
+        targets: enemies
+        potion: GLOWING
+        amplifier: 0
+        duration: "%custom.duration%"
+      - type: debuff
+        targets: enemies
+        key: luz_orientadora_blind
+        stat: vision
+        value: -0.30
+        duration: "%custom.duration%"
+      - type: buff
+        targets: allies
+        stat: critical-chance
+        value: "%custom.crit%"
+        duration: "%custom.duration%"
+      - type: message
+        text: "&f[Devoção] Luz Orientadora revela inimigos por %custom.duration%s."

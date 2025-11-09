@@ -1,0 +1,13 @@
+name: Resistencia ao Medo
+type: passive
+max-level: 1
+description:
+  - "Reduz a duração de efeitos de medo em 30%."
+  - "Aciona scripts de exaustão caso a raça já forneça resistência similar."
+icon: TOTEM_OF_UNDYING
+components:
+  passive:
+    sequence:
+      - type: command
+        command: "raceeffects applyFearResist %player% 0.30"
+        async: true

@@ -1,0 +1,41 @@
+name: Golpe Divino
+type: active
+max-level: 4
+requires:
+  class: paladin
+description:
+  - "Gasta 1 carga de Fé para abençoar o próximo ataque corpo a corpo."
+  - "Adiciona dano radiante extra (100% → 140%) e aplica brilho breve ao alvo atingido."
+icon: DIAMOND_SWORD
+cooldown:
+  base: 45
+  scale: 0
+resource:
+  faith_charges:
+    cost: 1
+    minimum: 1
+custom:
+  buff-duration: 12
+  damage:
+    tier1: 1.0
+    tier2: 1.16
+    tier3: 1.28
+    tier4: 1.4
+components:
+  cast:
+    sequence:
+      - type: self
+      - type: buff
+        key: paladin_golpe_divino
+        triggers: next-hit
+        stat: damage
+        value: "%custom.damage%"
+        duration: "%custom.buff-duration%"
+      - type: command
+        command: "placeholderapi refresh %player% paladin_major_cd"
+        async: true
+      - type: message
+        text: "&e[Paladino] Golpe Divino preparado (%custom.damage%x)."
+messages:
+  fail-resource: "&cSem cargas de Fé suficientes."
+  cooldown: "&cGolpe Divino ainda recarregando (%cooldown%s)."

@@ -1,0 +1,42 @@
+name: Canalizar Voto
+type: active
+max-level: 4
+requires:
+  class: paladin
+description:
+  - "Canaliza a aura do juramento por 30s, concedendo +10% mitigação em 6 blocos."
+  - "Consome 1 carga de Fé e alterna para efeitos específicos da subclasse via Skript."
+icon: NETHER_STAR
+cooldown:
+  base: 90
+  scale: 0
+radius:
+  base: 6
+  scale: 1
+resource:
+  faith_charges:
+    cost: 1
+    minimum: 1
+custom:
+  duration: 30
+  mitigation: 0.10
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        targets: allies
+        indicator: ring
+      - type: buff
+        key: paladin_aura_base
+        stat: damage-reduction
+        value: "%custom.mitigation%"
+        duration: "%custom.duration%"
+        diminishing-cap: 0.45
+      - type: command
+        command: "skript run paladin_channel_override %player% %custom.duration%"
+        async: true
+      - type: message
+        text: "&b[Paladino] Aura canalizada por %custom.duration%s."
+messages:
+  fail-resource: "&cVocê precisa de 1 carga de Fé."

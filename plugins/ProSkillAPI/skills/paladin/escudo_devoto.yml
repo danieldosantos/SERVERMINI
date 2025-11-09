@@ -1,0 +1,29 @@
+name: Escudo Devoto
+type: active
+max-level: 4
+requires:
+  subclass: paladin_devotion
+description:
+  - "Ergue barreira por 6s refletindo 25% do dano mágico recebido."
+  - "Sinergia com resistências raciais aplica exaustão via Skript."
+icon: SHIELD
+cooldown:
+  base: 105
+  scale: -5
+  minimum: 90
+custom:
+  duration: 6
+  reflect: 0.25
+components:
+  cast:
+    sequence:
+      - type: buff
+        key: paladin_devocao_reflect
+        stat: magic-reflect
+        value: "%custom.reflect%"
+        duration: "%custom.duration%"
+      - type: command
+        command: "skript run paladin_devocao_exaustao %player% %custom.duration%"
+        async: true
+      - type: message
+        text: "&f[Devoção] Escudo Devoto ativo por %custom.duration%s."

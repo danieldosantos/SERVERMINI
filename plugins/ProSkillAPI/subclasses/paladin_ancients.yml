@@ -1,0 +1,38 @@
+# Juramento dos Anciões - Subclasse do Paladino
+name: "Paladino - Anciões"
+key: paladin_ancients
+parent: paladin
+description:
+  - "Guardião da luz primordial que protege aliados com forças naturais."
+  - "Controla o campo de batalha com mitigação elemental e curas sustentadas."
+attributes:
+  health:
+    base: 43
+    scale: 8
+  defense:
+    base: 15
+    scale: 4
+  skill-defense:
+    base: 9
+    scale: 3
+  holy-damage:
+    base: 0.09
+    scale: 0.04
+skills:
+  - name: Vinha Restritiva
+    level: 1
+  - name: Aura da Natureza
+    level: 2
+  - name: Luz Radiante
+    level: 3
+  - name: Asas de Safira
+    level: 4
+  - name: Harmonia Primordial
+    level: 5
+channel-options:
+  - id: ancients_nature
+    skill: Aura da Natureza
+    description: "Canalizar Voto troca Aura de Proteção pela Aura da Natureza quando equipada a coroa."
+notes:
+  - "Aura da Natureza aplica diminishing returns com resistências elementais raciais (cap 45%)."
+  - "Harmonia Primordial é ultimate defensivo de 240s com zona de 8 blocos por 15s (<=60% uptime)."

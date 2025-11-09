@@ -1,0 +1,40 @@
+name: Milagre da Fe
+type: ultimate
+max-level: 4
+requires:
+  subclass: paladin_devotion
+description:
+  - "Invoca luz sagrada por 6s, curando aliados em 20%/s e tornando-os imunes a medo/charme."
+  - "Cooldown 240s; bloqueado em arenas via Skript."
+icon: ENCHANTED_GOLDEN_APPLE
+cooldown:
+  base: 240
+  scale: 0
+radius:
+  base: 8
+  scale: 1
+custom:
+  duration: 6
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        targets: allies
+        indicator: ring
+      - type: potion
+        potion: REGENERATION
+        amplifier: 2
+        duration: 120
+      - type: buff
+        key: milagre_fear_immunity
+        stat: fear-immune
+        value: 1
+        duration: "%custom.duration%"
+      - type: buff
+        key: milagre_charm_immunity
+        stat: charm-immune
+        value: 1
+        duration: "%custom.duration%"
+      - type: message
+        text: "&f[Devoção] Milagre da Fé cura aliados por %custom.duration%s."

@@ -1,0 +1,43 @@
+name: Juramento de Inimizade
+type: active
+max-level: 4
+requires:
+  subclass: paladin_vengeance
+description:
+  - "Marca um alvo único por 12s, concedendo +20% dano do Paladino contra ele."
+  - "Consome 1 carga de Fé e sinaliza visualmente o inimigo."
+icon: WITHER_ROSE
+cooldown:
+  base: 60
+  scale: 0
+resource:
+  faith_charges:
+    cost: 1
+    minimum: 1
+range:
+  base: 16
+  scale: 2
+custom:
+  duration: 12
+  damage: 0.20
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        filter: enemies
+      - type: debuff
+        key: vinganca_marca
+        stat: damage-taken
+        value: "%custom.damage%"
+        duration: "%custom.duration%"
+      - type: particle
+        targets: target
+        effect: REDSTONE
+        amount: 40
+      - type: message
+        text: "&c[Vingança] Juramento de Inimizade focado em %target%."
+messages:
+  fail-target: "&cNecessário inimigo válido em até %range% blocos."
+  fail-resource: "&cSem cargas de Fé."

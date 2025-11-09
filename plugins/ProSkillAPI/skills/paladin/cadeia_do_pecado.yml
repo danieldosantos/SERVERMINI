@@ -1,0 +1,38 @@
+name: Cadeia do Pecado
+type: active
+max-level: 4
+requires:
+  subclass: paladin_vengeance
+description:
+  - "Puxa o alvo 4 blocos e aplica -40% velocidade por 6s."
+  - "Aplica exaustão se combinado com debuffs raciais equivalentes."
+icon: IRON_CHAIN
+cooldown:
+  base: 80
+  scale: -4
+  minimum: 64
+range:
+  base: 14
+  scale: 1
+custom:
+  pull: 4
+  slow: 0.40
+  duration: 6
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        filter: enemies
+      - type: command
+        command: "skript run paladin_vinganca_pull %player% %target% %custom.pull%"
+        async: true
+      - type: debuff
+        stat: movement-speed
+        value: "-%custom.slow%"
+        duration: "%custom.duration%"
+      - type: message
+        text: "&c[Vingança] Cadeia do Pecado enfraquece %target%."
+messages:
+  fail-target: "&cSem alvo em alcance."

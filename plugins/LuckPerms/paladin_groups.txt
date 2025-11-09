@@ -1,0 +1,73 @@
+# Grupos e permissões do Paladino
+lp creategroup class_paladin
+lp creategroup class_paladin.devotion
+lp creategroup class_paladin.vengeance
+lp creategroup class_paladin.ancients
+
+# Heranças
+lp parent add class_paladin.devotion class_paladin
+lp parent add class_paladin.vengeance class_paladin
+lp parent add class_paladin.ancients class_paladin
+
+# Permissões gerais da classe base
+lp group class_paladin permission set skillapi.class.paladin true
+lp group class_paladin permission set skillapi.cast.Golpe_Divino true
+lp group class_paladin permission set skillapi.cast.Imposicao_de_Maos true
+lp group class_paladin permission set skillapi.cast.Canalizar_Voto true
+lp group class_paladin permission set skript.command.golpe true
+lp group class_paladin permission set skript.command.imposicao true
+lp group class_paladin permission set skript.command.canalizar true
+lp group class_paladin permission set skript.command.kit_paladino true
+lp group class_paladin permission set paladin.items.access true
+
+# Permissões para itens base de teste
+lp group class_paladin permission set mythicmobs.item.DevotionBlade false
+lp group class_paladin permission set mythicmobs.item.DevotionRelic false
+lp group class_paladin permission set mythicmobs.item.VengeanceSigil false
+lp group class_paladin permission set mythicmobs.item.AncientsSpear false
+
+# Subclasse: Devoção
+lp group class_paladin.devotion permission set class_paladin.devotion true
+lp group class_paladin.devotion permission set skillapi.cast.Golpe_Sagrado true
+lp group class_paladin.devotion permission set skillapi.cast.Aura_de_Pureza true
+lp group class_paladin.devotion permission set skillapi.cast.Luz_Orientadora true
+lp group class_paladin.devotion permission set skillapi.cast.Escudo_Devoto true
+lp group class_paladin.devotion permission set skillapi.cast.Milagre_da_Fe true
+lp group class_paladin.devotion permission set skript.command.voto_devocao true
+lp group class_paladin.devotion permission set mythicmobs.item.DevotionBlade true
+lp group class_paladin.devotion permission set mythicmobs.item.DevotionRelic true
+lp group class_paladin.devotion permission set mythicmobs.item.DevotionLantern true
+lp group class_paladin.devotion permission set mythicmobs.item.DevotionShield true
+lp group class_paladin.devotion permission set mythicmobs.item.DevotionCodex true
+
+# Subclasse: Vingança
+lp group class_paladin.vengeance permission set class_paladin.vengeance true
+lp group class_paladin.vengeance permission set skillapi.cast.Juramento_de_Inimizade true
+lp group class_paladin.vengeance permission set skillapi.cast.Passo_do_Redentor true
+lp group class_paladin.vengeance permission set skillapi.cast.Cadeia_do_Pecado true
+lp group class_paladin.vengeance permission set skillapi.cast.Furia_Celestial true
+lp group class_paladin.vengeance permission set skillapi.cast.Execucao_Divina true
+lp group class_paladin.vengeance permission set skript.command.voto_vinganca true
+lp group class_paladin.vengeance permission set mythicmobs.item.VengeanceSigil true
+lp group class_paladin.vengeance permission set mythicmobs.item.VengeanceBlade true
+lp group class_paladin.vengeance permission set mythicmobs.item.VengeanceBoots true
+lp group class_paladin.vengeance permission set mythicmobs.item.VengeanceChain true
+lp group class_paladin.vengeance permission set mythicmobs.item.VengeanceRelic true
+
+# Subclasse: Anciões
+lp group class_paladin.ancients permission set class_paladin.ancients true
+lp group class_paladin.ancients permission set skillapi.cast.Vinha_Restritiva true
+lp group class_paladin.ancients permission set skillapi.cast.Aura_da_Natureza true
+lp group class_paladin.ancients permission set skillapi.cast.Luz_Radiante true
+lp group class_paladin.ancients permission set skillapi.cast.Asas_de_Safira true
+lp group class_paladin.ancients permission set skillapi.cast.Harmonia_Primordial true
+lp group class_paladin.ancients permission set skript.command.voto_ancoes true
+lp group class_paladin.ancients permission set mythicmobs.item.AncientsSpear true
+lp group class_paladin.ancients permission set mythicmobs.item.AncientsCrown true
+lp group class_paladin.ancients permission set mythicmobs.item.AncientsLantern true
+lp group class_paladin.ancients permission set mythicmobs.item.AncientsMantle true
+lp group class_paladin.ancients permission set mythicmobs.item.AncientsTotem true
+
+# Proteções adicionais
+lp group class_paladin permission set skript.command.paladin_cast true
+lp group class_paladin permission set placeholderapi.placeholder.skills_paladin true

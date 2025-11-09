@@ -1,0 +1,40 @@
+name: Execucao Divina
+type: ultimate
+max-level: 4
+requires:
+  subclass: paladin_vengeance
+description:
+  - "Golpe devastador (250% radiante) que executa alvos abaixo de 25% HP."
+  - "Cooldown 240s; respeita políticas de arena."
+icon: NETHERITE_SWORD
+cooldown:
+  base: 240
+  scale: 0
+resource:
+  faith_charges:
+    cost: 1
+    minimum: 1
+range:
+  base: 6
+  scale: 1
+custom:
+  damage: 2.5
+  threshold: 0.25
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        filter: enemies
+      - type: damage
+        modifier: "%custom.damage%"
+        element: holy
+      - type: command
+        command: "skript run paladin_vinganca_exec %player% %target% %custom.threshold%"
+        async: true
+      - type: message
+        text: "&c[Vingança] Execução Divina desencadeada!"
+messages:
+  fail-target: "&cNecessário inimigo corpo a corpo."
+  fail-resource: "&cSem cargas de Fé."

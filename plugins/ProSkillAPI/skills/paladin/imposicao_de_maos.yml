@@ -1,0 +1,39 @@
+name: Imposicao de Maos
+type: active
+max-level: 4
+requires:
+  class: paladin
+description:
+  - "Cura um aliado em 18% → 25% da vida máxima e remove 1 debuff leve."
+  - "Possui 2 → 3 cargas internas com recarga individual de 180s."
+icon: GHAST_TEAR
+cooldown:
+  base: 30
+  scale: 0
+range:
+  base: 10
+  scale: 1
+custom:
+  heal:
+    tier1: 0.18
+    tier2: 0.20
+    tier3: 0.23
+    tier4: 0.25
+  cleanse-level: 1
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        filter: allies
+      - type: heal
+        value: "%custom.heal%"
+        scaling: max-health
+      - type: cleanse
+        level: "%custom.cleanse-level%"
+      - type: message
+        targets: target
+        text: "&a[Paladino] Imposição de Mãos cura %custom.heal%% da sua vida."
+messages:
+  fail: "&cNecessário um aliado em até %range% blocos."
