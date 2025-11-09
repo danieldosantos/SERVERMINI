@@ -1,0 +1,50 @@
+# Skill Valor: Coda Inspirador
+name: bard_valor_coda_inspirador
+display: "§6Coda Inspirador"
+icon: SHIELD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+  - "§6Aplica escudo de 120 pontos aos aliados próximos. Dura 15s ou até ser consumido."
+  - "§7Escudos respeitam limite global de mitigação 45%."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Allies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: ally
+        children:
+          Shield:
+            type: mechanic
+            data:
+              shield-base: 120
+              shield-scale: 0
+              seconds-base: 15
+              seconds-scale: 0
+              indicator: "§6Escudo 120"
+          Message:
+            type: mechanic
+            data:
+              message: "§6Coda Inspirador protege você com 120 de escudo!"
+              targets: target
+      Visual:
+        type: mechanic
+        data:
+          effect: BARRIER
+          amount-base: 20
+          radius-base: 4
+          target: caster

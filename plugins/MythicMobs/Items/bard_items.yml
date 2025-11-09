@@ -1,0 +1,117 @@
+# Itens focais do Bardo (base e colégios)
+items:
+  BardLute:
+    Id: MUSIC_DISC_CAT
+    Display: '&dAlaúde de Inspiração'
+    Lore:
+      - '&7Clique direito: ativa §dInspiração Bardica§7.'
+      - '&8Requer permissão LuckPerms: class_bard.'
+      - '&7Integração via Skript /inspirar.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_bard'
+  BardLoreBook:
+    Id: BOOK
+    Display: '&dCancioneiro de Descanso'
+    Lore:
+      - '&7Clique direito: ativa §dCanção de Descanso§7.'
+      - '&8Requer permissão LuckPerms: class_bard.'
+      - '&7Sinergiza com /cancao para recarregar Inspiração.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_bard'
+  LoreSongbook:
+    Id: WRITABLE_BOOK
+    Display: '&bLivro dos Segredos'
+    Lore:
+      - '&7Habilidade: §bVerso Analisador/Balada dos Segredos§7.'
+      - '&8Usável apenas por: class_bard.lore.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_bard.lore'
+  LoreRelicHarp:
+    Id: AMETHYST_SHARD
+    Display: '&bHarpa Onisciente'
+    Lore:
+      - '&7Ultimate: §bSinfonia Onisciente§7.'
+      - '&8Requer classe: class_bard.lore.'
+      - '&7Canalização 2s - CD 240s.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_bard.lore'
+  LoreFocusQuill:
+    Id: FEATHER
+    Display: '&bPena Disruptiva'
+    Lore:
+      - '&7Habilidade: §bPalavra Desconcertante§7.'
+      - '&8Requer classe: class_bard.lore.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_bard.lore'
+  ValorWarDrum:
+    Id: GOAT_HORN
+    Display: '&6Tambor da Coragem'
+    Lore:
+      - '&7Habilidade: §6Hino da Coragem§7.'
+      - '&8Requer classe: class_bard.valor.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_bard.valor'
+  ValorWarHorn:
+    Id: HORN_CORAL
+    Display: '&6Berrante de Batalha'
+    Lore:
+      - '&7Habilidade: §6Ritmo de Batalha§7.'
+      - '&8Requer classe: class_bard.valor.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_bard.valor'
+  ValorSacredLute:
+    Id: MUSIC_DISC_BLOCKS
+    Display: '&6Alaúde Sagrado'
+    Lore:
+      - '&7Ultimate: §6Cantiga dos Heróis§7.'
+      - '&8Requer classe: class_bard.valor.'
+      - '&7Checagem de PvP feita via Skript.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_bard.valor'
+  GlamourTiara:
+    Id: GOLDEN_HELMET
+    Display: '&5Tiara Hipnótica'
+    Lore:
+      - '&7Habilidade: §5Encanto Hipnótico§7.'
+      - '&8Requer classe: class_bard.glamour.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    NBT:
+      class-lock: 'class_bard.glamour'
+  GlamourFaerieCharm:
+    Id: AMETHYST_CLUSTER
+    Display: '&5Amuleto Férico'
+    Lore:
+      - '&7Habilidade: §5Passo Férico§7.'
+      - '&8Requer classe: class_bard.glamour.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_bard.glamour'
+  GlamourStarLyre:
+    Id: MUSIC_DISC_CHIRP
+    Display: '&5Lira Estelar'
+    Lore:
+      - '&7Ultimate: §5Refrão Sublime§7.'
+      - '&8Requer classe: class_bard.glamour.'
+    Options:
+      Unbreakable: true
+    NBT:
+      class-lock: 'class_bard.glamour'

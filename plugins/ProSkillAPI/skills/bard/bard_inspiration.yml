@@ -1,0 +1,81 @@
+# Skill: Inspiração Bardica (base)
+name: bard_inspiration
+display: "§dInspiração"
+icon: MUSIC_DISC_OTHERSIDE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 0
+  mana-cost-scale: 0
+  range-base: 15
+  range-scale: 0
+  radius-base: 0
+  radius-scale: 0
+description:
+  - "§dConcede +8% dano, +5% chance crítica e +5% precisão ao aliado por 20s."
+  - "§7Consome 1 carga de Inspiração. Não acumula consigo mesmo."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CheckCharges:
+        type: condition
+        data:
+          key: inspiration_charges
+          min-value: 1
+          fail-message: "§cVocê não possui cargas de Inspiração disponíveis."
+        children:
+          ConsumeCharge:
+            type: mechanic
+            data:
+              key: inspiration_charges
+              amount-base: 1
+              amount-scale: 0
+              indicator: "§d-1 Inspiração"
+          TargetAlly:
+            type: target
+            data:
+              range-base: 15
+              range-scale: 0
+              group: ally
+              max: 1
+            children:
+              BuffDamage:
+                type: mechanic
+                data:
+                  potion: STRENGTH
+                  seconds-base: 20
+                  seconds-scale: 0
+                  amplifier-base: 0
+                  amplifier-scale: 0
+              BuffPrecision:
+                type: mechanic
+                data:
+                  potion: LUCK
+                  seconds-base: 20
+                  seconds-scale: 0
+                  amplifier-base: 0
+                  amplifier-scale: 0
+              Visual:
+                type: mechanic
+                data:
+                  effect: NOTE
+                  amount-base: 12
+                  amount-scale: 0
+                  radius-base: 1.5
+                  radius-scale: 0
+                  target: both
+          MessageCaster:
+            type: mechanic
+            data:
+              message: "§dVocê inspira seus aliados com um verso heroico!"
+              targets: self
+          MessageTarget:
+            type: mechanic
+            data:
+              message: "§dVocê recebe Inspiração: +dano/+crit por 20s."
+              targets: target

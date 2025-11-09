@@ -1,0 +1,229 @@
+# Skript - Comandos, HUD e integrações da classe Bardo
+options:
+  prefix: &d[Bardo]&f
+
+function bard_update_hud(p: player):
+  set {_pl} to {_p}
+  set {_name} to name of {_pl}
+  set {_charges} to placeholder "skills_inspiration_charges" for {_pl}
+  if {_charges} is not set:
+    set {_charges} to 0
+  execute console command "scoreboard players set %{_name}% bard_inspiration %{_charges}%"
+  set {_song} to placeholder "skills_bard_song_timer" for {_pl}
+  if {_song} is not set:
+    set {_song} to 0
+  execute console command "scoreboard players set %{_name}% bard_song_duration %{_song}%"
+  set {_cd} to placeholder "skills_bard_major_cd" for {_pl}
+  if {_cd} is not set:
+    set {_cd} to 0
+  execute console command "scoreboard players set %{_name}% bard_major_cd %{_cd}%"
+  if difference between now and {bard.lastCombat.%{_pl}%} > 10 seconds:
+    execute console command "scoreboard players set %{_name}% bard_ooc 1"
+  else:
+    execute console command "scoreboard players set %{_name}% bard_ooc 0"
+
+on load:
+  broadcast "&7Skript bard_cmds.sk carregado." to console
+  execute console command "scoreboard objectives add bard_inspiration dummy"
+  execute console command "scoreboard objectives add bard_song_duration dummy"
+  execute console command "scoreboard objectives add bard_major_cd dummy"
+  execute console command "scoreboard objectives add bard_ooc dummy"
+
+command /kit_bardo:
+  permission: group.class_bard
+  trigger:
+    clear player's inventory
+    execute console command "mm items give %player% BardLute"
+    execute console command "mm items give %player% BardLoreBook"
+    execute console command "mm items give %player% LoreSongbook"
+    execute console command "mm items give %player% ValorWarDrum"
+    execute console command "mm items give %player% GlamourTiara"
+    execute console command "scoreboard players set %player% bard_inspiration 0"
+    execute console command "scoreboard players set %player% bard_song_duration 0"
+    execute console command "scoreboard players set %player% bard_major_cd 0"
+    execute console command "scoreboard players set %player% bard_ooc 1"
+    delete {bard.lastCombat.%player%}
+    send "{@prefix} &7Kit de teste do Bardo entregue."
+
+command /inspirar [<player>]:
+  aliases: /bard_inspire
+  permission: group.class_bard
+  trigger:
+    set {_target} to player
+    if arg-1 is set:
+      set {_target} to arg-1
+    execute console command "skillapi cast bard_inspiration %player%"
+    bard_update_hud(player)
+
+command /cancao:
+  aliases: /bard_song
+  permission: group.class_bard
+  trigger:
+    execute console command "skillapi cast bard_song_of_rest %player%"
+    bard_update_hud(player)
+
+command /lore_verso:
+  permission: group.class_bard.lore
+  trigger:
+    execute console command "skillapi cast bard_lore_verso_analisador %player%"
+    bard_update_hud(player)
+
+command /lore_balada:
+  permission: group.class_bard.lore
+  trigger:
+    execute console command "skillapi cast bard_lore_balada_dos_segredos %player%"
+    bard_update_hud(player)
+
+command /lore_palavra:
+  permission: group.class_bard.lore
+  trigger:
+    execute console command "skillapi cast bard_lore_palavra_desconcertante %player%"
+    bard_update_hud(player)
+
+command /lore_orquestra:
+  permission: group.class_bard.lore
+  trigger:
+    execute console command "skillapi cast bard_lore_orquestracao_perfeita %player%"
+    bard_update_hud(player)
+
+command /lore_sinfonia:
+  permission: group.class_bard.lore
+  trigger:
+    execute console command "skillapi cast bard_lore_sinfonia_onisciente %player%"
+    bard_update_hud(player)
+
+command /valor_hino:
+  permission: group.class_bard.valor
+  trigger:
+    execute console command "skillapi cast bard_valor_hino_da_coragem %player%"
+    bard_update_hud(player)
+
+command /valor_ritmo:
+  permission: group.class_bard.valor
+  trigger:
+    execute console command "skillapi cast bard_valor_ritmo_de_batalha %player%"
+    bard_update_hud(player)
+
+command /valor_coda:
+  permission: group.class_bard.valor
+  trigger:
+    execute console command "skillapi cast bard_valor_coda_inspirador %player%"
+    bard_update_hud(player)
+
+command /valor_marcha:
+  permission: group.class_bard.valor
+  trigger:
+    execute console command "skillapi cast bard_valor_marcha_recuada %player%"
+    bard_update_hud(player)
+
+command /valor_cantiga:
+  permission: group.class_bard.valor
+  trigger:
+    if {bard.arena_block.%player%} is true:
+      send "{@prefix} &cCantiga bloqueada em arenas ranqueadas."
+      stop
+    execute console command "skillapi cast bard_valor_cantiga_dos_herois %player%"
+    bard_update_hud(player)
+
+command /glamour_encanto:
+  permission: group.class_bard.glamour
+  trigger:
+    execute console command "skillapi cast bard_glamour_encanto_hipnotico %player%"
+    bard_update_hud(player)
+
+command /glamour_manto:
+  permission: group.class_bard.glamour
+  trigger:
+    execute console command "skillapi cast bard_glamour_manto_de_inspiracao %player%"
+    bard_update_hud(player)
+
+command /glamour_brilho:
+  permission: group.class_bard.glamour
+  trigger:
+    execute console command "skillapi cast bard_glamour_brilho_deslumbrante %player%"
+    bard_update_hud(player)
+
+command /glamour_passo:
+  permission: group.class_bard.glamour
+  trigger:
+    execute console command "skillapi cast bard_glamour_passo_ferico %player%"
+    bard_update_hud(player)
+
+command /glamour_refrao:
+  permission: group.class_bard.glamour
+  trigger:
+    execute console command "skillapi cast bard_glamour_refrao_sublime %player%"
+    bard_update_hud(player)
+
+# Glue: itens de MythicMobs acionando skills
+on rightclick:
+  if player's tool is not set:
+    stop
+  set {_item} to name of player's tool
+  if {_item} = "§dAlaúde de Inspiração":
+    if player has permission "group.class_bard":
+      execute console command "skillapi cast bard_inspiration %player%"
+      bard_update_hud(player)
+    else:
+      send "{@prefix} &cApenas bardos podem usar este alaúde."
+  else if {_item} = "§dCancioneiro de Descanso":
+    if player has permission "group.class_bard":
+      execute console command "skillapi cast bard_song_of_rest %player%"
+      bard_update_hud(player)
+    else:
+      send "{@prefix} &cPermissão insuficiente."
+  else if {_item} = "§bLivro dos Segredos":
+    if player has permission "group.class_bard.lore":
+      execute console command "skillapi cast bard_lore_balada_dos_segredos %player%"
+      bard_update_hud(player)
+  else if {_item} = "§bHarpa Onisciente":
+    if player has permission "group.class_bard.lore":
+      execute console command "skillapi cast bard_lore_sinfonia_onisciente %player%"
+      bard_update_hud(player)
+  else if {_item} = "§bPena Disruptiva":
+    if player has permission "group.class_bard.lore":
+      execute console command "skillapi cast bard_lore_palavra_desconcertante %player%"
+      bard_update_hud(player)
+  else if {_item} = "§6Tambor da Coragem":
+    if player has permission "group.class_bard.valor":
+      execute console command "skillapi cast bard_valor_hino_da_coragem %player%"
+      bard_update_hud(player)
+  else if {_item} = "§6Berrante de Batalha":
+    if player has permission "group.class_bard.valor":
+      execute console command "skillapi cast bard_valor_ritmo_de_batalha %player%"
+      bard_update_hud(player)
+  else if {_item} = "§6Alaúde Sagrado":
+    if player has permission "group.class_bard.valor":
+      if {bard.arena_block.%player%} is true:
+        send "{@prefix} &cUltimate bloqueada nesta arena."
+        stop
+      execute console command "skillapi cast bard_valor_cantiga_dos_herois %player%"
+      bard_update_hud(player)
+  else if {_item} = "§5Tiara Hipnótica":
+    if player has permission "group.class_bard.glamour":
+      execute console command "skillapi cast bard_glamour_encanto_hipnotico %player%"
+      bard_update_hud(player)
+  else if {_item} = "§5Amuleto Férico":
+    if player has permission "group.class_bard.glamour":
+      execute console command "skillapi cast bard_glamour_passo_ferico %player%"
+      bard_update_hud(player)
+  else if {_item} = "§5Lira Estelar":
+    if player has permission "group.class_bard.glamour":
+      execute console command "skillapi cast bard_glamour_refrao_sublime %player%"
+      bard_update_hud(player)
+
+on damage:
+  if victim is a player:
+    set {bard.lastCombat.%victim%} to now
+  if attacker is a player:
+    set {bard.lastCombat.%attacker%} to now
+
+on death:
+  if victim is a player:
+    delete {bard.lastCombat.%victim%}
+    execute console command "scoreboard players set %victim% bard_ooc 0"
+
+every 5 seconds:
+  loop all players:
+    if loop-player has permission "group.class_bard" or loop-player has permission "group.class_bard.lore" or loop-player has permission "group.class_bard.valor" or loop-player has permission "group.class_bard.glamour":
+      bard_update_hud(loop-player)

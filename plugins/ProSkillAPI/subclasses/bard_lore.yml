@@ -1,0 +1,37 @@
+# Subclasse Colégio do Conhecimento
+name: Bard_Lore
+display: "§bColégio do Conhecimento"
+description:
+  - "§7Especialistas em desmontar buffs inimigos e revelar informações táticas."
+  - "§bReforçam recargas da equipe com controle leve e precisão arcana."
+options:
+  needs-permission: true
+  parent: Bard
+  mana-name: "Foco"
+skills:
+  tier1:
+    active:
+      - bard_lore_verso_analisador
+      - bard_lore_balada_dos_segredos
+    passive: []
+  tier2:
+    active:
+      - bard_lore_verso_analisador
+      - bard_lore_balada_dos_segredos
+      - bard_lore_palavra_desconcertante
+    passive: []
+  tier3:
+    active:
+      - bard_lore_verso_analisador
+      - bard_lore_balada_dos_segredos
+      - bard_lore_palavra_desconcertante
+      - bard_lore_orquestracao_perfeita
+    passive: []
+  tier4:
+    active:
+      - bard_lore_verso_analisador
+      - bard_lore_balada_dos_segredos
+      - bard_lore_palavra_desconcertante
+      - bard_lore_orquestracao_perfeita
+      - bard_lore_sinfonia_onisciente
+    passive: []

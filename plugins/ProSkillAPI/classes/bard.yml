@@ -1,0 +1,119 @@
+# Classe base Bardo para ProSkillAPI
+name: Bard
+prefix: "Bard"
+display: "§dBardo"
+main-class: true
+description:
+  - "§7Artista arcano focado em suporte híbrido, alternando entre buffs e debuffs."
+  - "§dGasta cargas de Inspiração para reforçar aliados e manipular ritmos de combate."
+  - "§7Sinergiza com raças sociais sem ultrapassar limites de resistência do projeto."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Foco"
+  mana-regen: 3
+  max-level: 60
+  exp-source: quest
+  attributes-scaled: true
+  needs-race: false
+  inspiration-resource:
+    key: inspiration_charges
+    display: "Inspiração"
+    min: 0
+    max: 3
+    scaling:
+      tier1: 1
+      tier2: 2
+      tier3: 3
+      tier4: 3
+    regen-out-of-combat:
+      delay: 10
+      interval: 8
+      amount: 1
+  scoreboard:
+    inspiration: "bard_inspiration"
+    song-duration: "bard_song_duration"
+    major-cd: "bard_major_cd"
+    placeholders:
+      inspiration: "%skills_inspiration_charges%"
+      song-time: "%skills_bard_song_timer%"
+      major-cd: "%skills_bard_major_cd%"
+attributes:
+  health-base: 28
+  health-scale: 2.0
+  mana-base: 120
+  mana-scale: 18
+  walk-speed-base: 0.02
+  walk-speed-scale: 0.003
+  physical-defense-base: 2
+  physical-defense-scale: 0.7
+  magical-defense-base: 2
+  magical-defense-scale: 0.7
+  skill-damage: 0.0
+  attack-damage: 1.2
+  level-bonus:
+    1:
+      health: 28
+      defense: 3
+      speed: 0.0
+    5:
+      health: 42
+      defense: 5
+      speed: 0.01
+    11:
+      health: 64
+      defense: 7
+      speed: 0.015
+    17:
+      health: 86
+      defense: 9
+      speed: 0.02
+mana:
+  regen-combat: 6
+  regen-out: 10
+exp:
+  kill-multiplier: 0.9
+  quest-multiplier: 1.2
+  pvp-multiplier: 1.0
+skills:
+  tier1:
+    active:
+      - bard_inspiration
+      - bard_song_of_rest
+    passive:
+      - bard_virtuoso
+      - bard_talento_versatil
+  tier2:
+    active:
+      - bard_inspiration
+      - bard_song_of_rest
+    passive:
+      - bard_virtuoso
+      - bard_talento_versatil
+  tier3:
+    active:
+      - bard_inspiration
+      - bard_song_of_rest
+    passive:
+      - bard_virtuoso
+      - bard_talento_versatil
+      - bard_maestro_da_cadencia
+  tier4:
+    active:
+      - bard_inspiration
+      - bard_song_of_rest
+    passive:
+      - bard_virtuoso
+      - bard_talento_versatil
+      - bard_maestro_da_cadencia
+subclasses:
+  lore:
+    display: "§bColégio do Conhecimento"
+    file: bard_lore.yml
+  valor:
+    display: "§6Colégio do Valor"
+    file: bard_valor.yml
+  glamour:
+    display: "§5Colégio do Glamour"
+    file: bard_glamour.yml

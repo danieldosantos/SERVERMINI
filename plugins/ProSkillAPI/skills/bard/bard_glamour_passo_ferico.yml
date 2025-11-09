@@ -1,0 +1,55 @@
+# Skill Glamour: Passo Férico
+name: bard_glamour_passo_ferico
+display: "§5Passo Férico"
+icon: ELYTRA
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  range-base: 12
+  range-scale: 0
+description:
+  - "§5Teleporta o bardo e até 2 aliados em 12 blocos para frente."
+  - "§7Ferramenta de rotação com cooldown longo para evitar abuso."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      TeleportSelf:
+        type: mechanic
+        data:
+          teleport-forward-base: 12
+          teleport-forward-scale: 0
+          indicator: "§5Passo Férico"
+      Allies:
+        type: target
+        data:
+          group: ally
+          range-base: 10
+          range-scale: 0
+          max: 2
+        children:
+          TeleportAlly:
+            type: mechanic
+            data:
+              teleport-to-caster: true
+              indicator: "§5Transposição Feérica"
+          SpeedBuff:
+            type: mechanic
+            data:
+              potion: SPEED
+              seconds-base: 6
+              seconds-scale: 0
+              amplifier-base: 0
+      Visual:
+        type: mechanic
+        data:
+          effect: PORTAL
+          amount-base: 40
+          radius-base: 3
+          target: caster

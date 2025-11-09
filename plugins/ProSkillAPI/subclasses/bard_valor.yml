@@ -1,0 +1,37 @@
+# Subclasse Colégio do Valor
+name: Bard_Valor
+display: "§6Colégio do Valor"
+description:
+  - "§7Comandantes de linha de frente que distribuem escudos e reforçam a ofensiva."
+  - "§6Favorecem rotações rápidas sem ultrapassar mitigações máximas do servidor."
+options:
+  needs-permission: true
+  parent: Bard
+  mana-name: "Foco"
+skills:
+  tier1:
+    active:
+      - bard_valor_hino_da_coragem
+      - bard_valor_ritmo_de_batalha
+    passive: []
+  tier2:
+    active:
+      - bard_valor_hino_da_coragem
+      - bard_valor_ritmo_de_batalha
+      - bard_valor_coda_inspirador
+    passive: []
+  tier3:
+    active:
+      - bard_valor_hino_da_coragem
+      - bard_valor_ritmo_de_batalha
+      - bard_valor_coda_inspirador
+      - bard_valor_marcha_recuada
+    passive: []
+  tier4:
+    active:
+      - bard_valor_hino_da_coragem
+      - bard_valor_ritmo_de_batalha
+      - bard_valor_coda_inspirador
+      - bard_valor_marcha_recuada
+      - bard_valor_cantiga_dos_herois
+    passive: []

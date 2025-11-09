@@ -1,0 +1,55 @@
+# Skill Valor: Hino da Coragem
+name: bard_valor_hino_da_coragem
+display: "§6Hino da Coragem"
+icon: GOAT_HORN
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 20
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+  - "§6Aliados próximos recebem +10% mitigação e imunidade a medo por 12s."
+  - "§7Respeita limite de mitigação total de 45% somando com raças."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Allies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: ally
+        children:
+          Mitigate:
+            type: mechanic
+            data:
+              potion: DAMAGE_RESISTANCE
+              seconds-base: 12
+              seconds-scale: 0
+              amplifier-base: 0
+          FearImmunity:
+            type: mechanic
+            data:
+              immunity: FEAR
+              seconds-base: 12
+              seconds-scale: 0
+          Message:
+            type: mechanic
+            data:
+              message: "§6Hino da Coragem reforça sua determinação!"
+              targets: target
+      Visual:
+        type: mechanic
+        data:
+          effect: SONIC_BOOM
+          amount-base: 1
+          radius-base: 8
+          target: caster

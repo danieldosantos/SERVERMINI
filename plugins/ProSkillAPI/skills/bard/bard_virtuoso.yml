@@ -1,0 +1,23 @@
+# Passive: Virtuose (redução de custo)
+name: bard_virtuoso
+display: "§dVirtuose"
+icon: AMETHYST_SHARD
+type: Passive
+max-level: 1
+description:
+  - "§7Instrumentos do bardo consomem 10% menos mana e recursos vinculados."
+  - "§8Aplicado via modificador contínuo respeitando limites de uptime."
+components:
+  Sustain:
+    type: trigger
+    data:
+      interval: 20
+    children:
+      Discount:
+        type: mechanic
+        data:
+          attribute: skill_cost
+          amount-base: -0.10
+          amount-scale: 0
+          min-value: -0.20
+          indicator: "§dVirtuose (-10% custo)"

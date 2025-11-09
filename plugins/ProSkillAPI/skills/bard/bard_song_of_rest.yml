@@ -1,0 +1,73 @@
+# Skill: Canção de Descanso (base)
+name: bard_song_of_rest
+display: "§dCanção de Descanso"
+icon: MUSIC_DISC_FAR
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 25
+  mana-cost-scale: 0
+  radius-base: 8
+  radius-scale: 0
+  duration-base: 30
+  duration-scale: 0
+description:
+  - "§dMantém aura de 8 blocos por 30s: Regeneração leve e 5% CDR."
+  - "§7No final, restaura 1 carga de Inspiração se houver espaço."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      AuraAllies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          radius-scale: 0
+          group: ally
+          duration-base: 30
+          duration-scale: 0
+          repeat: 20
+        children:
+          ApplyRegen:
+            type: mechanic
+            data:
+              potion: REGENERATION
+              seconds-base: 4
+              seconds-scale: 0
+              amplifier-base: 0
+              amplifier-scale: 0
+          ApplyTempo:
+            type: mechanic
+            data:
+              potion: HASTE
+              seconds-base: 4
+              seconds-scale: 0
+              amplifier-base: 0
+              amplifier-scale: 0
+      PulseVisual:
+        type: mechanic
+        data:
+          effect: NOTE
+          amount-base: 6
+          amount-scale: 0
+          radius-base: 4
+          radius-scale: 0
+          target: caster
+      RestoreCharge:
+        type: mechanic
+        data:
+          key: inspiration_charges
+          amount-base: 1
+          amount-scale: 0
+          max-value: 3
+          indicator: "§d+1 Inspiração (Canção)"
+      Message:
+        type: mechanic
+        data:
+          message: "§dA Canção de Descanso acalma os corações próximos."
+          targets: self
