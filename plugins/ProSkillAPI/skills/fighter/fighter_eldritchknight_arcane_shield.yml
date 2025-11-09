@@ -1,0 +1,39 @@
+# Skill: Escudo Arcano
+name: fighter_eldritchknight_arcane_shield
+display: "§bEscudo Arcano"
+icon: AMETHYST_SHARD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§7Absorve 150 de dano mágico por 8s."
+  - "§8Checa resistências raciais e aplica exaustão se necessário."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      RaceCheck:
+        type: condition
+        data:
+          placeholder: "%raceseffects_magical_resist%"
+          compare: "<0.30"
+        children:
+          ApplyShield:
+            type: mechanic
+            data:
+              command: "skript run fighter_arcane_shield %caster% 150 8"
+              silent: true
+      Exhaustion:
+        type: mechanic
+        data:
+          command: "skript run fighter_resist_diminish %caster%"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§bEscudo arcano se ergue em sua volta."
+          targets: self

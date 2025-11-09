@@ -1,0 +1,47 @@
+# Subclasse Cavaleiro Élfico do Guerreiro
+name: Fighter_EldritchKnight
+display: "§bCavaleiro Élfico"
+description:
+  - "§7Mistura combate marcial com magia elemental controlada."
+  - "§bAcesso a mana padrão fora de combate e mitigação elemental coordenada."
+options:
+  needs-permission: true
+  parent: Fighter
+  focus: hybrid
+  mana-name: "Mana"
+  mana-regen: 12
+  mana-max: 160
+skills:
+  tier1:
+    active:
+      - fighter_eldritchknight_arcane_blade
+      - fighter_eldritchknight_arcane_shield
+    passive:
+      - fighter_martial_training
+  tier2:
+    active:
+      - fighter_eldritchknight_arcane_blade
+      - fighter_eldritchknight_arcane_shield
+      - fighter_eldritchknight_tactical_teleport
+    passive:
+      - fighter_martial_training
+  tier3:
+    active:
+      - fighter_eldritchknight_arcane_blade
+      - fighter_eldritchknight_arcane_shield
+      - fighter_eldritchknight_tactical_teleport
+      - fighter_eldritchknight_energy_bulwark
+    passive:
+      - fighter_martial_training
+  tier4:
+    active:
+      - fighter_eldritchknight_arcane_blade
+      - fighter_eldritchknight_arcane_shield
+      - fighter_eldritchknight_tactical_teleport
+      - fighter_eldritchknight_energy_bulwark
+      - fighter_eldritchknight_blade_storm
+    passive:
+      - fighter_martial_training
+notes:
+  - "Escudo Arcano consulta resistências raciais via PlaceholderAPI antes de aplicar." 
+  - "Baluarte de Energia aplica retornos decrescentes se a raça já possui resistência elementar >25%."

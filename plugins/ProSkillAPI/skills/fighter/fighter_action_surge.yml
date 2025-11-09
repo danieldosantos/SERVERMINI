@@ -1,0 +1,57 @@
+# Skill: Surto de Ação
+name: fighter_action_surge
+display: "§eSurto de Ação"
+icon: NETHER_STAR
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cost-base: 0
+  cost-scale: 0
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§eReseta recargas menores e concede +15% velocidade de ataque por 6s."
+  - "§7Não afeta ultimates ou habilidades de CD ≥180s."
+  - "§8Ativa mensagem temática e atualiza HUD via PlaceholderAPI."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      ResetMinor:
+        type: mechanic
+        data:
+          command: "skillapi resetcd %caster% minor"
+          caster: true
+          async: false
+          indicator: "§eCDs menores resetados"
+      ApplyHaste:
+        type: mechanic
+        data:
+          potion: HASTE
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 1
+          amplifier-scale: 0
+      ApplySpeedCap:
+        type: mechanic
+        data:
+          command: "skript run fighter_speed_cap %caster%"
+          silent: true
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_fighter_action_surge_cd"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§eVocê canaliza um Surto de Ação!"
+          targets: self

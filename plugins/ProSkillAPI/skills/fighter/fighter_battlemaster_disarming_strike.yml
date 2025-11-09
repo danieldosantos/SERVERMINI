@@ -1,0 +1,40 @@
+# Skill: Golpe Desarmante
+name: fighter_battlemaster_disarming_strike
+display: "§cGolpe Desarmante"
+icon: TRIPWIRE_HOOK
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  range-base: 6
+  range-scale: 0
+description:
+  - "§7Aplica -40% dano ao alvo por 6s e remove arma temporariamente."
+  - "§8Afeta apenas entidades PvE/PvP que possam ser desarmadas."
+components:
+  Cast:
+    type: trigger
+    children:
+      TargetEnemy:
+        type: target
+        data:
+          range-base: 6
+          group: enemy
+        children:
+          Weaken:
+            type: mechanic
+            data:
+              potion: WEAKNESS
+              seconds-base: 6
+              amplifier-base: 2
+          DisarmCommand:
+            type: mechanic
+            data:
+              command: "skript run fighter_disarm %caster% %target% 6"
+              silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§cVocê desarma o inimigo!"
+          targets: self

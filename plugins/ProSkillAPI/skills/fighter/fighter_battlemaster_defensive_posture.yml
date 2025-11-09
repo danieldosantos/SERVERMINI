@@ -1,0 +1,40 @@
+# Skill: Postura Defensiva
+name: fighter_battlemaster_defensive_posture
+display: "§cPostura Defensiva"
+icon: SHIELD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+description:
+  - "§7Reduz dano recebido em 30% por 10s."
+  - "§8Verifica limite global de resistência (45%)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      ResistCheck:
+        type: condition
+        data:
+          placeholder: "%raceseffects_physical_resist%"
+          compare: "<0.35"
+        children:
+          ApplyMitigation:
+            type: mechanic
+            data:
+              potion: DAMAGE_RESISTANCE
+              seconds-base: 10
+              amplifier-base: 1
+      Exhaustion:
+        type: mechanic
+        data:
+          command: "skript run fighter_resist_diminish %caster%"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§cVocê assume uma postura defensiva."
+          targets: self

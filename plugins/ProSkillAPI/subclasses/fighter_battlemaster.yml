@@ -1,0 +1,47 @@
+# Subclasse Mestre de Batalha do Guerreiro
+name: Fighter_Battlemaster
+display: "§cMestre de Batalha"
+description:
+  - "§7Especialista em manobras táticas e suporte situacional."
+  - "§cAplica debuffs sem exceder caps globais de resistência."
+options:
+  needs-permission: true
+  parent: Fighter
+  focus: control
+  cooldown-profile:
+    burst-window: 45
+    support-window: 90
+skills:
+  tier1:
+    active:
+      - fighter_battlemaster_disarming_strike
+      - fighter_battlemaster_precise_maneuver
+    passive:
+      - fighter_solid_stance
+  tier2:
+    active:
+      - fighter_battlemaster_disarming_strike
+      - fighter_battlemaster_precise_maneuver
+      - fighter_battlemaster_defensive_posture
+    passive:
+      - fighter_solid_stance
+  tier3:
+    active:
+      - fighter_battlemaster_disarming_strike
+      - fighter_battlemaster_precise_maneuver
+      - fighter_battlemaster_defensive_posture
+      - fighter_battlemaster_tactical_command
+    passive:
+      - fighter_solid_stance
+  tier4:
+    active:
+      - fighter_battlemaster_disarming_strike
+      - fighter_battlemaster_precise_maneuver
+      - fighter_battlemaster_defensive_posture
+      - fighter_battlemaster_tactical_command
+      - fighter_battlemaster_victory_spin
+    passive:
+      - fighter_solid_stance
+notes:
+  - "Manobra Precisa respeita limite de perfuração <35% para PvP balanceado."
+  - "Comando Tático reduz CDs aliados em 15% por 8s com CD 90s."

@@ -1,0 +1,29 @@
+# Passiva: Treinamento Marcial
+name: fighter_martial_training
+display: "§7Treinamento Marcial"
+icon: IRON_SWORD
+type: Passive
+max-level: 1
+description:
+  - "§7Ataques básicos aplicam 12% de penetração de armadura por 4s."
+  - "§8Tempo interno de 8s para manter uptime abaixo de 60%."
+components:
+  BasicAttack:
+    type: trigger
+    data:
+      group: enemy
+      cooldown: 8
+      damage-type: MELEE
+    children:
+      ApplyPenetration:
+        type: mechanic
+        data:
+          command: "skript run fighter_penetration %caster% %target%"
+          silent: true
+      Indicator:
+        type: mechanic
+        data:
+          effect: CRIT
+          amount-base: 4
+          radius-base: 0.5
+          target: target

@@ -1,0 +1,62 @@
+# Skill: Segundo Fôlego
+name: fighter_second_wind
+display: "§aSegundo Fôlego"
+icon: GHAST_TEAR
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cooldown-base: 180
+  cooldown-scale: 0
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§aRecupera 12% da vida máxima instantaneamente e mais 8% ao longo de 6s."
+  - "§7Não ultrapassa o limite de cura por golpe (25%)."
+  - "§8Atualiza HUD e checa sinergia racial antes de aplicar."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      HealBurst:
+        type: mechanic
+        data:
+          heal-percent-base: 0.12
+          heal-percent-scale: 0
+      RegenLoop:
+        type: target
+        data:
+          shape: self
+          duration-base: 6
+          duration-scale: 0
+          repeat: 20
+        children:
+          HealTick:
+            type: mechanic
+            data:
+              heal-percent-base: 0.0133
+              heal-percent-scale: 0
+          RaceCheck:
+            type: condition
+            data:
+              placeholder: "%raceseffects_regen_penalty%"
+              compare: "<0.5"
+          ExhaustionTag:
+            type: mechanic
+            data:
+              command: "skript run fighter_resistance_exhaust %caster%"
+              silent: true
+      UpdateHUD:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_fighter_second_wind_cd"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§aVocê respira fundo e se cura."
+          targets: self

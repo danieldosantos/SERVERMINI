@@ -1,0 +1,50 @@
+# Ultimate: Giro da Vitória
+name: fighter_battlemaster_victory_spin
+display: "§cGiro da Vitória"
+icon: IRON_AXE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+  radius-base: 5
+  radius-scale: 0
+description:
+  - "§7200% dano em área de 5 blocos e aplica vulnerabilidade de 15% por 10s."
+  - "§8Respeita limite de mitigação global e aplica exaustão caso empilhe."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Enemies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 5
+          group: enemy
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 2.0
+              damage-scale: 0
+              indicator: "§cGiro"
+          Vulnerability:
+            type: mechanic
+            data:
+              command: "skript run fighter_vulnerability %caster% %target% 10 0.15"
+              silent: true
+      Visual:
+        type: mechanic
+        data:
+          effect: SWEEP_ATTACK
+          amount-base: 40
+          radius-base: 5
+          target: caster
+      Message:
+        type: mechanic
+        data:
+          message: "§cGiro da Vitória devastador!"
+          targets: self

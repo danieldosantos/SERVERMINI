@@ -1,0 +1,44 @@
+# Skill: Desafio do Gladiador
+name: fighter_champion_gladiator_challenge
+display: "§eDesafio do Gladiador"
+icon: BANNER_PATTERN
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  radius-base: 6
+  radius-scale: 0
+description:
+  - "§7Provoca inimigos em 6 blocos a focarem o Guerreiro por 6s."
+  - "§8Não ignora imunidades raciais a controle; respeita caps de mitigação."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Targets:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          group: enemy
+        children:
+          Taunt:
+            type: mechanic
+            data:
+              command: "skript run fighter_taunt %caster% %target%"
+              silent: true
+          Visual:
+            type: mechanic
+            data:
+              effect: ANGRY_VILLAGER
+              amount-base: 12
+              radius-base: 0.2
+              target: target
+      Message:
+        type: mechanic
+        data:
+          message: "§eVocê desafia todos a encará-lo!"
+          targets: self

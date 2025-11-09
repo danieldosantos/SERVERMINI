@@ -1,0 +1,52 @@
+# Ultimate: Triunfo Inesquecível
+name: fighter_champion_unforgettable_triumph
+display: "§6Triunfo Inesquecível"
+icon: GOLDEN_HELMET
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+  duration-base: 15
+  duration-scale: 0
+description:
+  - "§7Por 15s: +40% chance crítica e +25% velocidade de ataque."
+  - "§8Aplica título temático e respeita limites globais de velocidade."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CritWindow:
+        type: mechanic
+        data:
+          command: "skript run fighter_crit_window %caster% 0.4 15"
+          silent: true
+      AttackSpeed:
+        type: mechanic
+        data:
+          potion: HASTE
+          seconds-base: 15
+          amplifier-base: 2
+          amplifier-scale: 0
+      SpeedCap:
+        type: mechanic
+        data:
+          command: "skript run fighter_speed_cap %caster%"
+          silent: true
+      UpdateMajor:
+        type: mechanic
+        data:
+          command: "placeholderapi refresh %caster% skills_fighter_major_cd"
+          silent: true
+      Title:
+        type: mechanic
+        data:
+          command: "title %caster% title {\"text\":\"Triunfo!\",\"color\":\"gold\"}"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§6Triunfo Inesquecível ativa!"
+          targets: self

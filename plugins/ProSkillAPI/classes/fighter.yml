@@ -1,0 +1,113 @@
+# Classe base Guerreiro para ProSkillAPI
+name: Fighter
+prefix: "Guer"
+display: "§eGuerreiro"
+main-class: true
+key: fighter
+description:
+  - "§7Combatente versátil focado em DPS sustentado e offtank."
+  - "§eMantém janelas de poder curtas através de Surto de Ação e Segundo Fôlego."
+  - "§7Integra limites globais de mitigação (45%) e velocidade (+0.05)."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Vigor"
+  mana-regen: 0
+  max-level: 60
+  exp-source: kill
+  attributes-scaled: true
+  needs-race: false
+  scoreboard:
+    action-surge: "fighter_action_surge_cd"
+    second-wind: "fighter_second_wind_cd"
+    major: "fighter_major_cd"
+    placeholders:
+      action-surge: "%skills_fighter_action_surge_cd%"
+      second-wind: "%skills_fighter_second_wind_cd%"
+      major: "%skills_fighter_major_cd%"
+  combat-state-placeholder: "%skills_combat_state%"
+attributes:
+  health-base: 34
+  health-scale: 2.2
+  mana-base: 0
+  mana-scale: 0
+  physical-defense-base: 4
+  physical-defense-scale: 1.1
+  skill-damage: 0.0
+  attack-damage: 1.5
+  knockback-resist-base: 0.05
+  knockback-resist-scale: 0.01
+  walk-speed-base: 0.02
+  walk-speed-scale: 0.002
+  level-bonus:
+    1:
+      health: 34
+      defense: 6
+      knockback: 0.05
+      speed: 0.0
+    5:
+      health: 58
+      defense: 9
+      knockback: 0.07
+      speed: 0.01
+    11:
+      health: 92
+      defense: 13
+      knockback: 0.09
+      speed: 0.015
+    17:
+      health: 126
+      defense: 16
+      knockback: 0.1
+      speed: 0.02
+mana:
+  regen-combat: 0
+  regen-out: 0
+exp:
+  kill-multiplier: 1.0
+  quest-multiplier: 1.0
+  pvp-multiplier: 1.0
+skills:
+  tier1:
+    active:
+      - fighter_action_surge
+      - fighter_second_wind
+    passive:
+      - fighter_martial_training
+      - fighter_solid_stance
+  tier2:
+    active:
+      - fighter_action_surge
+      - fighter_second_wind
+    passive:
+      - fighter_martial_training
+      - fighter_solid_stance
+  tier3:
+    active:
+      - fighter_action_surge
+      - fighter_second_wind
+    passive:
+      - fighter_martial_training
+      - fighter_solid_stance
+  tier4:
+    active:
+      - fighter_action_surge
+      - fighter_second_wind
+    passive:
+      - fighter_martial_training
+      - fighter_solid_stance
+subclasses:
+  champion:
+    display: "§6Campeão"
+    file: fighter_champion.yml
+  battlemaster:
+    display: "§cMestre de Batalha"
+    file: fighter_battlemaster.yml
+  eldritchknight:
+    display: "§bCavaleiro Élfico"
+    file: fighter_eldritchknight.yml
+notes:
+  - "Postura Sólida possui uptime máximo de 6s a cada 12s (50%)."
+  - "Segundo Fôlego respeita limite de cura por golpe (<25% do dano causado)."
+  - "Ao detectar resistências raciais superiores ao limite, as skills aplicam exaustão de resistência via Skript."

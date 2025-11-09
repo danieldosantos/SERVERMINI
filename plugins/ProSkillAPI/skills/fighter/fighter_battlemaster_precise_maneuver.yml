@@ -1,0 +1,28 @@
+# Skill: Manobra Precisa
+name: fighter_battlemaster_precise_maneuver
+display: "§cManobra Precisa"
+icon: BOOK
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 40
+  cooldown-scale: 0
+description:
+  - "§7Próximo ataque ganha +35% penetração de armadura."
+  - "§8Expira após 8s se não for consumido."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      ApplyBuff:
+        type: mechanic
+        data:
+          command: "skript run fighter_precise %caster% 8"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§cVocê prepara uma manobra precisa!"
+          targets: self

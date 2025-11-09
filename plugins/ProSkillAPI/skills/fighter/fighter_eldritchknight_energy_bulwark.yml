@@ -1,0 +1,48 @@
+# Skill: Baluarte de Energia
+name: fighter_eldritchknight_energy_bulwark
+display: "§bBaluarte de Energia"
+icon: LAPIS_LAZULI
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  radius-base: 8
+  radius-scale: 0
+description:
+  - "§7Aliados em 8 blocos recebem -25% dano elemental por 10s."
+  - "§8Aplica retornos decrescentes se resistências raciais >25%."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Allies:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 8
+          group: ally
+        children:
+          ResistCheck:
+            type: condition
+            data:
+              placeholder: "%raceseffects_elemental_resist%"
+              compare: "<0.25"
+            children:
+              ApplyBuff:
+                type: mechanic
+                data:
+                  command: "skript run fighter_elemental_bulwark %target% 0.25 10"
+                  silent: true
+          Exhaustion:
+            type: mechanic
+            data:
+              command: "skript run fighter_resist_diminish %target%"
+              silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§bVocê ergue um baluarte energético."
+          targets: self
