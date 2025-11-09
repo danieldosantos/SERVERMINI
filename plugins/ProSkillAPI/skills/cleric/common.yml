@@ -1,0 +1,258 @@
+# Common cleric skills for all domains
+T1:
+  Palavra_Curativa:
+    display: "Palavra Curativa"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 25
+    cooldown: 30
+    target:
+      range: 16
+      filter: ally
+    effects:
+      heal:
+        amount: "0.14*target.max_health"
+      cleanse:
+        max_stacks: 1
+        priority: light
+    tags: [cura, suporte]
+    notes: "Cura instantânea e remove 1 debuff leve. CD individual por alvo mantido via tag per-target."
+  Selo_de_Protecao:
+    display: "Selo de Proteção"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 25
+    cooldown: 60
+    target:
+      range: 12
+      filter: ally
+    effects:
+      shield:
+        amount: 120
+        duration: 8
+    tags: [escudo]
+    notes: "Escudo único aliado."
+  Luz_Sagrada:
+    display: "Luz Sagrada"
+    type: active
+    trigger: projectile
+    cost:
+      mana: 20
+    cooldown: 45
+    projectile:
+      speed: 1.1
+      max_distance: 18
+      hitbox: 0.6
+    effects:
+      damage:
+        amount: "1.2*spellpower"
+        type: radiante
+      reveal:
+        duration: 3
+    tags: [dano, radiante]
+    notes: "Revela alvos invisíveis por 3s."
+  Bencao_Menor:
+    display: "Benção Menor"
+    type: active
+    trigger: self
+    cost:
+      mana: 20
+    cooldown: 60
+    duration: 10
+    choice:
+      options:
+        - buff_dano: "+10% dano"
+        - buff_cura: "+10% cura"
+    tags: [buff]
+    notes: "Escolhe entre aumentar dano ou cura por 10s."
+T2:
+  Circulo_de_Amparo:
+    display: "Círculo de Amparo"
+    type: active
+    trigger: ground
+    cost:
+      mana: 30
+    cooldown: 90
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      mitigation:
+        amount: 0.15
+    tags: [aura, mitigacao]
+  Dissipar_Impureza:
+    display: "Dissipar Impureza"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 75
+    area:
+      radius: 5
+    effects:
+      cleanse:
+        max_stacks: 1
+        priority: any
+    tags: [limpeza]
+  Luz_Guiadora:
+    display: "Luz Guiadora"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 25
+    cooldown: 60
+    target:
+      range: 20
+    effects:
+      mark:
+        duration: 10
+        stacks: 3
+        bonus_damage: 0.12
+    tags: [marcador]
+  Repreensao_Sagrada:
+    display: "Repreensão Sagrada"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 60
+    area:
+      radius: 4
+    effects:
+      damage:
+        amount: "1.3*spellpower"
+        type: radiante
+      debuff:
+        stat: precisao
+        amount: -0.10
+        duration: 6
+    tags: [dano, controle_leve]
+T3:
+  Aegis_Devota:
+    display: "Aegis Devota"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 35
+    cooldown: 90
+    target:
+      range: 14
+    effects:
+      shield:
+        amount: 180
+        duration: 8
+      mitigation:
+        amount: 0.10
+        duration: 8
+    tags: [escudo]
+  Salmo_de_Perseveranca:
+    display: "Salmo de Perseverança"
+    type: active
+    trigger: self
+    cost:
+      mana: 35
+    cooldown: 90
+    area:
+      radius: 6
+      duration: 6
+    effects:
+      immunity:
+        types: [medo, charme]
+    tags: [aura]
+  Luz_Punitiva:
+    display: "Luz Punitiva"
+    type: active
+    trigger: beam
+    cost:
+      mana: 35
+    cooldown: 75
+    beam:
+      length: 16
+      width: 1
+    effects:
+      damage:
+        amount: "1.5*spellpower"
+        type: radiante
+      debuff:
+        stat: resistencia
+        amount: -0.10
+        duration: 8
+    tags: [dano]
+  Remissao:
+    display: "Remissão"
+    type: active
+    trigger: self
+    cost:
+      mana: 30
+    cooldown: 90
+    duration: 6
+    effects:
+      convert_damage:
+        source: magico
+        ratio: 0.20
+    tags: [mitigacao]
+T4:
+  Sanctum:
+    display: "Sanctum"
+    type: active
+    trigger: ground
+    cost:
+      mana: 45
+    cooldown: 120
+    area:
+      radius: 6
+      duration: 8
+    effects:
+      projectile_block: true
+    tags: [defesa]
+  Milagre_Breve:
+    display: "Milagre Breve"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 40
+    cooldown: 90
+    target:
+      range: 16
+    effects:
+      heal:
+        amount: "0.22*target.max_health"
+      cleanse:
+        max_stacks: 2
+        priority: any
+    tags: [cura]
+  Coro_Resplandecente:
+    display: "Coro Resplandecente"
+    type: active
+    trigger: self
+    cost:
+      mana: 45
+    cooldown: 120
+    area:
+      radius: 8
+      duration: 12
+    effects:
+      buff_allies:
+        damage: 0.12
+        mitigation: 0.12
+    tags: [aura]
+  Exorcismo:
+    display: "Exorcismo"
+    type: active
+    trigger: targeted
+    cost:
+      mana: 40
+    cooldown: 105
+    target:
+      range: 14
+    effects:
+      damage:
+        amount: "1.4*spellpower"
+        type: radiante
+      silence:
+        duration: 2.5
+        diminishing: true
+      bonus_vs_undead: 0.25
+    tags: [controle]
