@@ -1,0 +1,32 @@
+# Archfey Skill: Laço Feérico
+name: warlock_archfey_laco_feerico
+display: "§aLaço Feérico"
+icon: VINE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+  mana-cost-base: 38
+  mana-cost-scale: 0
+  range-base: 18
+  range-scale: 0
+description:
+  - "§7Enraíza inimigos em 7 blocos por 5s, com partículas verdes."
+  - "§7Aplica redução de velocidade adicional de 30% pós-root por 3s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandRoot:
+        type: mechanic
+        data:
+          command: "skript run warlock_archfey_laco %caster%"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§aAs raízes feéricas prendem seus inimigos."
+          targets: self

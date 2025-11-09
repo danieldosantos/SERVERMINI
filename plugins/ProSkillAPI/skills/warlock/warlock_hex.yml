@@ -1,0 +1,55 @@
+# Skill ativa: Hex (marca por alvo)
+name: warlock_hex
+display: "§5Hex"
+icon: ENDER_EYE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 0
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  range-base: 22
+  range-scale: 0
+description:
+  - "§5Marca um alvo por 12s, aumentando o dano de suas habilidades em +18%."
+  - "§7CD individual de 45s por alvo, controlado via Skript e scoreboard Hex."
+  - "§7Concede visão temática e aplica anúncio no actionbar."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      TargetEnemy:
+        type: target
+        data:
+          range-base: 22
+          range-scale: 0
+          group: enemy
+          max: 1
+        children:
+          CommandApply:
+            type: mechanic
+            data:
+              command: "skript run warlock_hex_apply %caster% %target%"
+              silent: true
+          Particle:
+            type: mechanic
+            data:
+              effect: SPELL_WITCH
+              amount-base: 18
+              amount-scale: 0
+              radius-base: 1.1
+              radius-scale: 0
+              target: both
+          MessageCaster:
+            type: mechanic
+            data:
+              message: "§5Você amaldiçoa %target% com Hex!"
+              targets: self
+          MessageTarget:
+            type: mechanic
+            data:
+              message: "§5Um Hex te envolve, aumentando o dano recebido do Bruxo!"
+              targets: target

@@ -1,0 +1,42 @@
+# Passiva: Pacto Protetor
+name: warlock_pact_ward
+display: "§5Pacto Protetor"
+icon: AMETHYST_SHARD
+type: Passive
+max-level: 1
+description:
+  - "§7Concede +6% resistência mágica e +5% velocidade enquanto houver Hex ativo."
+  - "§7Verifica resistências raciais e aplica exaustão via Skript para respeitar o limite de 45%."
+components:
+  Tick:
+    type: trigger
+    data:
+      interval: 4
+    children:
+      CheckHex:
+        type: condition
+        data:
+          placeholder: "%skills_warlock_hex_stacks%"
+          compare: ">=1"
+        children:
+          ApplySpeed:
+            type: mechanic
+            data:
+              potion: SPEED
+              seconds-base: 4
+              seconds-scale: 0
+              amplifier-base: 0
+              amplifier-scale: 0
+          ApplyResistance:
+            type: mechanic
+            data:
+              potion: RESISTANCE
+              seconds-base: 4
+              seconds-scale: 0
+              amplifier-base: 0
+              amplifier-scale: 0
+      CapResistance:
+        type: mechanic
+        data:
+          command: "skript run warlock_resistance_cap %caster% base"
+          silent: true

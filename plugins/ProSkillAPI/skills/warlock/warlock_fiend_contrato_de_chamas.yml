@@ -1,0 +1,32 @@
+# Fiend Skill: Contrato de Chamas
+name: warlock_fiend_contrato_de_chamas
+display: "§cContrato de Chamas"
+icon: MAGMA_CREAM
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+  mana-cost-base: 35
+  mana-cost-scale: 0
+  range-base: 0
+  range-scale: 0
+description:
+  - "§cRoubo de vida de 12% por 10s em todas as habilidades de fogo."
+  - "§7Não ultrapassa o limite global de 25% de lifesteal (controlado via Skript)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandBuff:
+        type: mechanic
+        data:
+          command: "skript run warlock_fiend_contrato %caster%"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§cUm contrato ígneo sela sua alma temporariamente."
+          targets: self

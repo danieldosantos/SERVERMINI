@@ -1,0 +1,26 @@
+# Passiva: Reserva de Invocações
+name: warlock_invocation_reserve
+display: "§5Reserva de Invocações"
+icon: NETHER_STAR
+type: Passive
+max-level: 1
+description:
+  - "§7Regenera 1 Espaço de Pacto adicional a cada 45s fora de combate."
+  - "§7Mantém integração com LuckPerms para gating de invocações MythicMobs."
+components:
+  Tick:
+    type: trigger
+    data:
+      interval: 5
+    children:
+      OutCombat:
+        type: condition
+        data:
+          placeholder: "%skills_combat_state%"
+          compare: "==0"
+        children:
+          Regenerate:
+            type: mechanic
+            data:
+              command: "skript run warlock_regen_pact %caster%"
+              silent: true

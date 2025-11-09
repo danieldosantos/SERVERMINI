@@ -1,0 +1,38 @@
+# Fiend Skill: Chicote Infernal
+name: warlock_fiend_chicote_infernal
+display: "§cChicote Infernal"
+icon: FLINT_AND_STEEL
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+  mana-cost-base: 28
+  mana-cost-scale: 0
+  range-base: 5
+  range-scale: 0
+description:
+  - "§cVarre um cone de 5 blocos causando 180% de dano de fogo."
+  - "§7Aplica Calor Infernal: +5% dano recebido (máx. 3 stacks) por 10s."
+  - "§7Aciona verificação de resistência racial ao fogo para retorno decrescente."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandDamage:
+        type: mechanic
+        data:
+          command: "skript run warlock_fiend_chicote %caster%"
+          silent: true
+      ResistanceCheck:
+        type: mechanic
+        data:
+          command: "skript run warlock_resistance_cap %caster% fire"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§cVocê chicoteia seus inimigos com fogo infernal!"
+          targets: self

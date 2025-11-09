@@ -1,0 +1,32 @@
+# Archfey Skill: Passo Brumoso
+name: warlock_archfey_passo_brumoso
+display: "§aPasso Brumoso"
+icon: CHORUS_FRUIT
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 30
+  mana-cost-scale: 0
+  range-base: 10
+  range-scale: 0
+description:
+  - "§7Teleporta até 10 blocos e deixa clones que confundem inimigos por 2s."
+  - "§7Com telegraph de partículas para leitura adversária."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandTeleport:
+        type: mechanic
+        data:
+          command: "skript run warlock_archfey_passo %caster%"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§aVocê se dissipa em brumas feéricas."
+          targets: self

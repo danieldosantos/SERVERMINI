@@ -1,0 +1,37 @@
+# Subclasse Pacto da Arquifada
+name: Warlock_Archfey
+display: "§aPacto da Arquifada"
+description:
+  - "§7Explora ilusões e teletransporte para controlar o campo de batalha."
+  - "§aFornece suporte tático com janelas de mobilidade e redução de recarga em área."
+options:
+  needs-permission: true
+  parent: Warlock
+  mana-name: "Mana Pactual"
+skills:
+  tier1:
+    active:
+      - warlock_archfey_explosao_encantadora
+      - warlock_archfey_passo_brumoso
+    passive: []
+  tier2:
+    active:
+      - warlock_archfey_explosao_encantadora
+      - warlock_archfey_passo_brumoso
+      - warlock_archfey_dominio_do_sonho
+    passive: []
+  tier3:
+    active:
+      - warlock_archfey_explosao_encantadora
+      - warlock_archfey_passo_brumoso
+      - warlock_archfey_dominio_do_sonho
+      - warlock_archfey_laco_feerico
+    passive: []
+  tier4:
+    active:
+      - warlock_archfey_explosao_encantadora
+      - warlock_archfey_passo_brumoso
+      - warlock_archfey_dominio_do_sonho
+      - warlock_archfey_laco_feerico
+      - warlock_archfey_cortejo_da_rainha
+    passive: []

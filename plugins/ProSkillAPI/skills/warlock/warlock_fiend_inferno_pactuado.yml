@@ -1,0 +1,37 @@
+# Fiend Ultimate: Inferno Pactuado
+name: warlock_fiend_inferno_pactuado
+display: "§cInferno Pactuado"
+icon: NETHER_STAR
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 240
+  cooldown-scale: 0
+  mana-cost-base: 65
+  mana-cost-scale: 0
+  range-base: 20
+  range-scale: 0
+description:
+  - "§cConvoca meteoro de 6 blocos causando 250% dano e queimadura 8%/s por 8s."
+  - "§7Aciona limites de mitigação (≤45%) via checagem Skript/RacesEffects."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CommandMeteor:
+        type: mechanic
+        data:
+          command: "skript run warlock_fiend_inferno %caster%"
+          silent: true
+      ResistanceCheck:
+        type: mechanic
+        data:
+          command: "skript run warlock_resistance_cap %caster% fire"
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§cInferno pactuado desce sobre seus inimigos!"
+          targets: self
