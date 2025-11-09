@@ -1,0 +1,77 @@
+# Skill: Armadilha Tática - ativa de controle de terreno
+name: ranger_tactical_trap
+display: "§6Armadilha Tática"
+icon: TRIPWIRE_HOOK
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cost-base: 0
+  cost-scale: 0
+  cooldown-base: 90
+  cooldown-scale: -10
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fInstala armadilha visível por partículas com raio de 3.5 blocos por 10s."
+  - "§7Inimigos ativados sofrem 60% de dano + Lentidão II por 4s."
+  - "§7Custa 1 carga de §aFoco de Caça§7. Máximo 1 ativa (2 a partir do tier 3)."
+  - "§8Revela telegraph 1.5s antes de disparar via MythicMobs."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§6Armadilha preparada"
+    children:
+      SpendFocus:
+        type: mechanic
+        data:
+          command: "skript run ranger_spend_focus %caster% 1 trap"
+          caster: true
+          async: false
+      LimitTraps:
+        type: mechanic
+        data:
+          command: "skript run ranger_validate_trap %caster%"
+          caster: true
+          async: false
+      TargetGround:
+        type: target
+        data:
+          type: Ground
+          range-base: 12
+          range-scale: 1
+        children:
+          SpawnTrap:
+            type: mechanic
+            data:
+              command: "skript run ranger_spawn_trap %caster% %location%"
+              async: false
+          Particles:
+            type: mechanic
+            data:
+              particle: REDSTONE
+              arrangement: Circle
+              radius-base: 3.5
+              radius-scale: 0
+              amount-base: 40
+              amount-scale: 0
+              forward: 0
+              upward: 0.1
+              right: 0
+              speed-base: 0.02
+              speed-scale: 0
+              color: 64#FFB400
+          Message:
+            type: mechanic
+            data:
+              message: "§6Armadilha posicionada!"
+              targets: self
+          UpdateHUD:
+            type: mechanic
+            data:
+              command: "placeholderapi refresh %caster% skills_ranger_trap_cd"
+              silent: true

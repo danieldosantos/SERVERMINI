@@ -1,0 +1,59 @@
+# Grupos e permissões para Patrulheiro
+lp creategroup class_ranger
+lp group class_ranger permission set skillapi.class.ranger true
+lp group class_ranger permission set skillapi.cast.ranger_hunters_mark true
+lp group class_ranger permission set skillapi.cast.ranger_tactical_trap true
+lp group class_ranger permission set skillapi.cast.ranger_burst_shot true
+lp group class_ranger permission set skript.command.ranger true
+lp group class_ranger permission set mythicmobs.item.HunterMarkCharm true
+lp group class_ranger permission set mythicmobs.item.TrapKit true
+lp group class_ranger permission set mythicmobs.item.RangerQuiverCommand true
+lp group class_ranger permission set command.kit_ranger true
+
+lp creategroup class_ranger.hunter
+lp group class_ranger.hunter parent add class_ranger
+lp group class_ranger.hunter permission set skillapi.subclass.ranger_hunter true
+lp group class_ranger.hunter permission set skillapi.cast.ranger_hunter_predatory_volley true
+lp group class_ranger.hunter permission set skillapi.cast.ranger_hunter_entangling_net true
+lp group class_ranger.hunter permission set skillapi.cast.ranger_hunter_predators_eye true
+lp group class_ranger.hunter permission set skillapi.cast.ranger_hunter_wildstep true
+lp group class_ranger.hunter permission set skillapi.cast.ranger_hunter_arrow_storm true
+lp group class_ranger.hunter permission set mythicmobs.item.HunterBow true
+lp group class_ranger.hunter permission set mythicmobs.item.HunterNet true
+lp group class_ranger.hunter permission set mythicmobs.item.HunterScope true
+lp group class_ranger.hunter permission set mythicmobs.item.HunterBoots true
+lp group class_ranger.hunter permission set mythicmobs.item.HunterQuiver true
+
+lp creategroup class_ranger.beastmaster
+lp group class_ranger.beastmaster parent add class_ranger
+lp group class_ranger.beastmaster permission set skillapi.subclass.ranger_beastmaster true
+lp group class_ranger.beastmaster permission set skillapi.cast.ranger_beastmaster_alpha_call true
+lp group class_ranger.beastmaster permission set skillapi.cast.ranger_beastmaster_wild_sync true
+lp group class_ranger.beastmaster permission set skillapi.cast.ranger_beastmaster_coordinated_dash true
+lp group class_ranger.beastmaster permission set skillapi.cast.ranger_beastmaster_instinctive_guard true
+lp group class_ranger.beastmaster permission set skillapi.cast.ranger_beastmaster_primal_fury true
+lp group class_ranger.beastmaster permission set mythicmobs.item.BeastWhistle true
+lp group class_ranger.beastmaster permission set mythicmobs.item.BeastCharm true
+lp group class_ranger.beastmaster permission set mythicmobs.item.BeastHarness true
+lp group class_ranger.beastmaster permission set mythicmobs.item.BeastShield true
+lp group class_ranger.beastmaster permission set mythicmobs.item.BeastTotem true
+
+lp creategroup class_ranger.gloom
+lp group class_ranger.gloom parent add class_ranger
+lp group class_ranger.gloom permission set skillapi.subclass.ranger_gloom true
+lp group class_ranger.gloom permission set skillapi.cast.ranger_gloom_hunting_shadows true
+lp group class_ranger.gloom permission set skillapi.cast.ranger_gloom_shadow_step true
+lp group class_ranger.gloom permission set skillapi.cast.ranger_gloom_penumbra_cloak true
+lp group class_ranger.gloom permission set skillapi.cast.ranger_gloom_poisoned_shot true
+lp group class_ranger.gloom permission set skillapi.cast.ranger_gloom_shadow_hunt true
+lp group class_ranger.gloom permission set mythicmobs.item.GloomDagger true
+lp group class_ranger.gloom permission set mythicmobs.item.GloomCloak true
+lp group class_ranger.gloom permission set mythicmobs.item.GloomHood true
+lp group class_ranger.gloom permission set mythicmobs.item.GloomBow true
+lp group class_ranger.gloom permission set mythicmobs.item.GloomRelic true
+
+# PlaceholderAPI custom placeholders
+lp group class_ranger permission set placeholderapi.placeholder.skills_hunt_focus true
+lp group class_ranger permission set placeholderapi.placeholder.skills_ranger_mark_timer true
+lp group class_ranger permission set placeholderapi.placeholder.skills_ranger_trap_cd true
+lp group class_ranger permission set placeholderapi.placeholder.skills_ranger_pet_status true

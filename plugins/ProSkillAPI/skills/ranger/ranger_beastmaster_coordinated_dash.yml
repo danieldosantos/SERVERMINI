@@ -1,0 +1,54 @@
+# Skill: Investida Coordenada - Beast Master
+name: ranger_beastmaster_coordinated_dash
+display: "§6Investida Coordenada"
+icon: SADDLE
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 75
+  cooldown-scale: -5
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fPatrulheiro e pet avançam 5 blocos causando 120% dano cada."
+  - "§7Não habilita montaria em PvP ranqueado; usa deslocamento limitado."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      DashCaster:
+        type: mechanic
+        data:
+          command: "skript run ranger_dash %caster% 5"
+          caster: true
+          async: false
+      DashPet:
+        type: mechanic
+        data:
+          command: "skript run ranger_pet_dash %caster% 5"
+          caster: true
+          async: false
+      DamageCone:
+        type: target
+        data:
+          type: Cone
+          range-base: 5
+          range-scale: 0
+          angle-base: 40
+          angle-scale: 0
+        children:
+          Hit:
+            type: mechanic
+            data:
+              damage-base: 1.2
+              damage-scale: 0
+              true: false
+      Message:
+        type: mechanic
+        data:
+          message: "§6Você investe lado a lado com seu companheiro!"
+          targets: self

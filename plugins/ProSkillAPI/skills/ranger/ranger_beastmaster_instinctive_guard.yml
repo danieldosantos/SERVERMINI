@@ -1,0 +1,33 @@
+# Skill: Proteção Instintiva - Beast Master
+name: ranger_beastmaster_instinctive_guard
+display: "§eProteção Instintiva"
+icon: SHIELD
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 90
+  cooldown-scale: -10
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fDivide dano recebido entre Patrulheiro e pet (50/50) por 10s."
+  - "§7Encerrado se pet cair abaixo de 10% de vida."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      LinkGuard:
+        type: mechanic
+        data:
+          command: "skript run ranger_pet_guard %caster% 10"
+          caster: true
+          async: false
+      Message:
+        type: mechanic
+        data:
+          message: "§eVocê compartilha os ferimentos com seu companheiro."
+          targets: self

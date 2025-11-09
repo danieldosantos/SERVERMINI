@@ -1,0 +1,33 @@
+# Skill: Fúria Primal - Beast Master Ultimate
+name: ranger_beastmaster_primal_fury
+display: "§cFúria Primal"
+icon: TOTEM_OF_UNDYING
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 210
+  cooldown-scale: -15
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fO pet assume forma alfa, recebendo +35% dano e ataques em área por 15s."
+  - "§7Ultimate compartilhada com cooldown global de 210s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Transform:
+        type: mechanic
+        data:
+          command: "skript run ranger_pet_primal %caster% 15"
+          caster: true
+          async: false
+      Message:
+        type: mechanic
+        data:
+          message: "§cSeu companheiro ruge em fúria primal!"
+          targets: self

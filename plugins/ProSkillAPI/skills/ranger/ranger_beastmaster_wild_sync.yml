@@ -1,0 +1,33 @@
+# Skill: Sincronia Selvagem - Beast Master
+name: ranger_beastmaster_wild_sync
+display: "§aSincronia Selvagem"
+icon: HEART_OF_THE_SEA
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 45
+  cooldown-scale: -5
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fO próximo ataque do Patrulheiro é replicado pelo pet (100% dano extra)."
+  - "§7Expira após 8s se não for consumido."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Link:
+        type: mechanic
+        data:
+          command: "skript run ranger_pet_sync %caster% 8"
+          caster: true
+          async: false
+      Message:
+        type: mechanic
+        data:
+          message: "§aVocê sincroniza seu ataque com o companheiro."
+          targets: self

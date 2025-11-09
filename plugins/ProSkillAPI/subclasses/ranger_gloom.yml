@@ -1,0 +1,49 @@
+# Conclave do Espreitador Noturno - Subclasse do Patrulheiro
+name: Ranger_Gloom
+display: "§8Conclave do Espreitador Noturno"
+description:
+  - "§7Focado em emboscadas, mobilidade umbrática e controle leve de campo."
+  - "§8Opera em janelas curtas de burst sem comprometer integridade PvP."
+options:
+  needs-permission: true
+  parent: Ranger
+attributes:
+  attack-damage:
+    base: 1.5
+    scale: 0.035
+  crit-chance:
+    base: 0.1
+    scale: 0.015
+  move-speed:
+    base: 0.01
+    scale: 0.002
+skills:
+  tier1:
+    active:
+      - ranger_gloom_hunting_shadows
+      - ranger_gloom_shadow_step
+    passive: []
+  tier2:
+    active:
+      - ranger_gloom_hunting_shadows
+      - ranger_gloom_shadow_step
+      - ranger_gloom_penumbra_cloak
+    passive: []
+  tier3:
+    active:
+      - ranger_gloom_hunting_shadows
+      - ranger_gloom_shadow_step
+      - ranger_gloom_penumbra_cloak
+      - ranger_gloom_poisoned_shot
+    passive: []
+  tier4:
+    active:
+      - ranger_gloom_hunting_shadows
+      - ranger_gloom_shadow_step
+      - ranger_gloom_penumbra_cloak
+      - ranger_gloom_poisoned_shot
+      - ranger_gloom_shadow_hunt
+    passive: []
+notes:
+  - "Sombras Caçadoras compartilha lógica de marca com a skill base para evitar dupla marcação."
+  - "Caça Sombria gera zona escura com 1s de telegraph e limitações PvP no Skript."

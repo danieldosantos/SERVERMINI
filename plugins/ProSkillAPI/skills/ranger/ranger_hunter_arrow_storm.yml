@@ -1,0 +1,41 @@
+# Skill: Chuva de Flechas - Hunter Ultimate
+name: ranger_hunter_arrow_storm
+display: "§6Chuva de Flechas"
+icon: ARROW
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 210
+  cooldown-scale: -15
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fCria zona de 7 blocos que dispara flechas de 70% dano a cada 0.75s por 8s."
+  - "§7Alvos marcados recebem +15% dano dentro da área."
+  - "§8Ultimate com bloqueio em arenas PvP via Skript."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§6Setas chovem!"
+    children:
+      TargetGround:
+        type: target
+        data:
+          type: Ground
+          range-base: 18
+          range-scale: 1
+        children:
+          SpawnField:
+            type: mechanic
+            data:
+              command: "skript run ranger_arrow_storm %caster% %location%"
+              async: false
+          Sound:
+            type: mechanic
+            data:
+              command: "playsound minecraft:entity.arrow.hit_player master @a %location_x% %location_y% %location_z% 1 0.9"
+              caster: true

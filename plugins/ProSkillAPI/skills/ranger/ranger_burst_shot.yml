@@ -1,0 +1,56 @@
+# Skill: Comando de Disparo - burst controlado
+name: ranger_burst_shot
+display: "§2Comando de Disparo"
+icon: BOW
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cost-base: 0
+  cost-scale: 0
+  cooldown-base: 45
+  cooldown-scale: -5
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fDispara 3 projéteis rápidos com 75% do dano base cada."
+  - "§7Projéteis possuem pequeno spread controlado e priorizam alvo marcado."
+  - "§8Ajusta curva do projétil para trajetória estável."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§2Rajada!"
+    children:
+      LaunchVolley:
+        type: mechanic
+        data:
+          amount-base: 3
+          amount-scale: 0
+          spread-base: 6
+          spread-scale: 0
+          velocity-base: 1.2
+          velocity-scale: 0
+          angle-base: 0
+          angle-scale: 0
+          upward-base: 0.02
+          upward-scale: 0
+          gravity: 0.025
+          pierce: false
+          damage-base: 0.75
+          damage-scale: 0
+          track-target: true
+      Sound:
+        type: mechanic
+        data:
+          command: "playsound minecraft:entity.arrow.shoot master %caster% ~ ~ ~ 0.8 1.2"
+          caster: true
+          async: false
+      Message:
+        type: mechanic
+        data:
+          message: "§aVocê dispara uma rajada coordenada!"
+          targets: self

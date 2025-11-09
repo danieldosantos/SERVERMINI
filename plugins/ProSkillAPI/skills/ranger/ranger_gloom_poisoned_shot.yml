@@ -1,0 +1,46 @@
+# Skill: Disparo Envenenado - Gloom Stalker
+name: ranger_gloom_poisoned_shot
+display: "§2Disparo Envenenado"
+icon: TIPPED_ARROW
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 75
+  cooldown-scale: -5
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fAplica veneno das sombras causando 6% do dano do alvo por segundo (6s)."
+  - "§7Não acumula, renova duração."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      TargetSingle:
+        type: target
+        data:
+          type: Single
+          range-base: 18
+          range-scale: 1
+          tolerance-base: 8
+          tolerance-scale: 0
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 0.6
+              damage-scale: 0
+          Poison:
+            type: mechanic
+            data:
+              command: "skript run ranger_apply_poison %caster% %target% 0.06 6"
+              async: false
+          Message:
+            type: mechanic
+            data:
+              message: "§2Disparo envenena %target name%."
+              targets: self

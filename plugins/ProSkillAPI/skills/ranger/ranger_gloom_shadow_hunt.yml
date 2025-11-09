@@ -1,0 +1,39 @@
+# Skill: Caça Sombria - Gloom Stalker Ultimate
+name: ranger_gloom_shadow_hunt
+display: "§0Caça Sombria"
+icon: WITHER_ROSE
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 210
+  cooldown-scale: -15
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fErgue zona escura de 12s; aliados ficam invisíveis, inimigos sofrem 80% dano a cada 2s."
+  - "§7Área de 7 blocos; telegraph inicial de 1s."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      TargetGround:
+        type: target
+        data:
+          type: Ground
+          range-base: 16
+          range-scale: 1
+        children:
+          DeployDarkness:
+            type: mechanic
+            data:
+              command: "skript run ranger_shadow_hunt %caster% %location% 12"
+              async: false
+          Message:
+            type: mechanic
+            data:
+              message: "§0As sombras obedecem ao seu chamado."
+              targets: self

@@ -1,0 +1,51 @@
+# Skill: Sombras Caçadoras - Gloom Stalker
+name: ranger_gloom_hunting_shadows
+display: "§8Sombras Caçadoras"
+icon: IRON_SWORD
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 45
+  cooldown-scale: -5
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fGolpeia com lâmina umbrática, aplica medo por 2s e marca o alvo."
+  - "§7Medo cancela-se se alvo já estiver abaixo de 30% HP para evitar execuções fáceis."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      TargetCone:
+        type: target
+        data:
+          type: Cone
+          range-base: 4
+          range-scale: 0
+          angle-base: 60
+          angle-scale: 0
+        children:
+          Damage:
+            type: mechanic
+            data:
+              damage-base: 1.0
+              damage-scale: 0
+          Fear:
+            type: mechanic
+            data:
+              command: "skript run ranger_apply_fear %target% 2"
+              async: false
+          ApplyMark:
+            type: mechanic
+            data:
+              command: "skript run ranger_apply_mark %caster% %target%"
+              async: false
+          Message:
+            type: mechanic
+            data:
+              message: "§8Sombras abraçam %target name%."
+              targets: self

@@ -1,0 +1,49 @@
+# Conclave do Mestre das Feras - Subclasse do Patrulheiro
+name: Ranger_Beastmaster
+display: "§aConclave do Mestre das Feras"
+description:
+  - "§7Fortalece laço com companheiro único, alternando ordens e proteção compartilhada."
+  - "§aEnfatiza manejo de recursos para manter o pet ativo sem quebrar limites de PvP."
+options:
+  needs-permission: true
+  parent: Ranger
+attributes:
+  attack-damage:
+    base: 1.45
+    scale: 0.03
+  pet-damage:
+    base: 1.3
+    scale: 0.05
+  defense:
+    base: 4
+    scale: 1
+skills:
+  tier1:
+    active:
+      - ranger_beastmaster_alpha_call
+      - ranger_beastmaster_wild_sync
+    passive: []
+  tier2:
+    active:
+      - ranger_beastmaster_alpha_call
+      - ranger_beastmaster_wild_sync
+      - ranger_beastmaster_coordinated_dash
+    passive: []
+  tier3:
+    active:
+      - ranger_beastmaster_alpha_call
+      - ranger_beastmaster_wild_sync
+      - ranger_beastmaster_coordinated_dash
+      - ranger_beastmaster_instinctive_guard
+    passive: []
+  tier4:
+    active:
+      - ranger_beastmaster_alpha_call
+      - ranger_beastmaster_wild_sync
+      - ranger_beastmaster_coordinated_dash
+      - ranger_beastmaster_instinctive_guard
+      - ranger_beastmaster_primal_fury
+    passive: []
+notes:
+  - "Chamado Alpha sempre respeita limite de 1 pet ativo; reaplicar renova buff."
+  - "Proteção Instintiva remove vínculo se pet cair abaixo de 10% HP para evitar abusos."

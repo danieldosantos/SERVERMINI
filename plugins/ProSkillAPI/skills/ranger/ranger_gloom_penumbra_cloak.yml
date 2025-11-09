@@ -1,0 +1,41 @@
+# Skill: Manto Penumbra - Gloom Stalker
+name: ranger_gloom_penumbra_cloak
+display: "§8Manto Penumbra"
+icon: BLACK_CARPET
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 90
+  cooldown-scale: -10
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fReduz detecção e concede +20% dano em emboscada por 10s."
+  - "§7Garante que bônus encerre ao sair da sombra ou após ataque crítico."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Darkness:
+        type: mechanic
+        data:
+          potion: NIGHT_VISION
+          seconds-base: 10
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      DamageBuff:
+        type: mechanic
+        data:
+          command: "skript run ranger_gloom_ambush %caster% 0.2 10"
+          caster: true
+          async: false
+      Message:
+        type: mechanic
+        data:
+          message: "§8Você veste o Manto da Penumbra."
+          targets: self

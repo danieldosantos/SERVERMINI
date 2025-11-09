@@ -1,0 +1,46 @@
+# Skill: Olho do Predador - Hunter
+name: ranger_hunter_predators_eye
+display: "§eOlho do Predador"
+icon: SPYGLASS
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  cooldown-base: 90
+  cooldown-scale: -10
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fConcede +15% chance de crítico e revela pontos fracos por 10s."
+  - "§7Atualiza HUD com duração restante e compatibiliza com RacesEffects."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      Buff:
+        type: mechanic
+        data:
+          potion: STRENGTH
+          seconds-base: 10
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      CritBoost:
+        type: mechanic
+        data:
+          command: "skillapi attrib %caster% crit_temp 0.15 10"
+          async: false
+      Highlight:
+        type: mechanic
+        data:
+          command: "skript run ranger_hunter_highlight %caster% 10"
+          caster: true
+          async: false
+      Message:
+        type: mechanic
+        data:
+          message: "§eSeus olhos detectam os pontos fracos da presa."
+          targets: self
