@@ -1,7 +1,7 @@
 # Itens focais e ativadores do Monge (MythicMobs)
 # Cada item verifica o grupo LuckPerms associado antes de executar a skill SkillAPI.
 MonkPrayerBeads:
-  Id: "minecraft:ghast_tear"
+  Id: "ghast_tear"
   Display: "&eContas de Rajada"
   Lore:
     - "&7Canaliza Rajada de Golpes (/golpe_ki)."
@@ -18,7 +18,7 @@ MonkPrayerBeads:
     - command{c="skillapi cast monk_flurry_of_blows";delay=1} @self ~onLeftClick
 
 MonkWindWraps:
-  Id: "minecraft:leather_boots"
+  Id: "leather_boots"
   Display: "&bFaixas do Passo do Vento"
   Lore:
     - "&7Ativa Passo do Vento (/passo_vento)."
@@ -34,7 +34,7 @@ MonkWindWraps:
     - command{c="skillapi cast monk_step_of_the_wind";delay=1} @self ~onRightClick
 
 MonkFocusBand:
-  Id: "minecraft:player_head"
+  Id: "player_head"
   Display: "&6Diadema de Foco"
   Lore:
     - "&7Alterna Postura de Foco (/postura)."
@@ -51,7 +51,7 @@ MonkFocusBand:
 
 # Caminho da Mão Aberta
 OpenHandWraps:
-  Id: "minecraft:rabbit_hide"
+  Id: "rabbit_hide"
   Display: "&aFaixas da Mão Aberta"
   Lore:
     - "&7Palmada Tranquilizante ao clique."
@@ -67,7 +67,7 @@ OpenHandWraps:
     - command{c="skillapi cast monk_openhand_tranquil_palm";delay=1} @self ~onRightClick
 
 SereneSash:
-  Id: "minecraft:white_banner"
+  Id: "white_banner"
   Display: "&fFaixa Serena"
   Lore:
     - "&7Canaliza Queda Suave para o usuário."
@@ -82,7 +82,7 @@ SereneSash:
     - command{c="skillapi cast monk_openhand_soft_fall";delay=1} @self ~onRightClick
 
 PalmCharm:
-  Id: "minecraft:sea_lantern"
+  Id: "sea_lantern"
   Display: "&2Amuleto da Palma Retumbante"
   Lore:
     - "&7Ativa Palma Retumbante (ULT)."
@@ -99,7 +99,7 @@ PalmCharm:
 
 # Caminho da Sombra
 ShadowCowl:
-  Id: "minecraft:black_carpet"
+  Id: "black_carpet"
   Display: "&8Capuz da Sombra"
   Lore:
     - "&7Ativa Passo das Sombras."
@@ -114,7 +114,7 @@ ShadowCowl:
     - command{c="skillapi cast monk_shadow_shadow_step";delay=1} @self ~onRightClick
 
 SmokePellet:
-  Id: "minecraft:gunpowder"
+  Id: "gunpowder"
   Display: "&7Pelota de Fumaça"
   Lore:
     - "&7Cria névoa que cega inimigos."
@@ -129,7 +129,7 @@ SmokePellet:
     - command{c="skillapi cast monk_shadow_smoke_pellet";delay=1} @self ~onRightClick
 
 NightSilkBelt:
-  Id: "minecraft:lead"
+  Id: "lead"
   Display: "&5Cinturão de Seda Noturna"
   Lore:
     - "&7Invoca Sombra Vinculante (ULT)."
@@ -145,7 +145,7 @@ NightSilkBelt:
 
 # Caminho dos Quatro Elementos
 ElementScrollFire:
-  Id: "minecraft:paper"
+  Id: "paper"
   Display: "&cPergaminho das Chamas"
   Lore:
     - "&7Dispara Punho Ígneo."
@@ -160,7 +160,7 @@ ElementScrollFire:
     - command{c="skillapi cast monk_elements_flame_fist";delay=1} @self ~onRightClick
 
 ElementScrollFrost:
-  Id: "minecraft:blue_ice"
+  Id: "blue_ice"
   Display: "&bPergaminho da Geada"
   Lore:
     - "&7Libera Onda de Gelo."
@@ -175,7 +175,7 @@ ElementScrollFrost:
     - command{c="skillapi cast monk_elements_frost_wave";delay=1} @self ~onRightClick
 
 ElementScrollGale:
-  Id: "minecraft:map"
+  Id: "map"
   Display: "&aPergaminho dos Ventos"
   Lore:
     - "&7Dispara Passo do Vórtice."
@@ -190,7 +190,7 @@ ElementScrollGale:
     - command{c="skillapi cast monk_elements_vortex_step";delay=1} @self ~onRightClick
 
 ElementStoneBand:
-  Id: "minecraft:stone_button"
+  Id: "stone_button"
   Display: "&7Anel de Pedra"
   Lore:
     - "&7Ativa Pele de Pedra."
@@ -205,7 +205,7 @@ ElementStoneBand:
     - command{c="skillapi cast monk_elements_stone_skin";delay=1} @self ~onRightClick
 
 ElementStormFocus:
-  Id: "minecraft:heart_of_the_sea"
+  Id: "heart_of_the_sea"
   Display: "&dFoco da Tormenta"
   Lore:
     - "&7Canaliza Tormenta dos Quatro (ULT)."

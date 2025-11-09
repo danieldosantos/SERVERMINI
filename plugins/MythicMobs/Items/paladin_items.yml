@@ -1,6 +1,6 @@
 # Itens focais do Paladino alinhados aos tiers e juramentos.
 Paladin_T1_Blade:
-  Id: "minecraft:iron_sword"
+  Id: "iron_sword"
   Display: "&eLâmina do Voto"
   Lore:
     - "&7Dispara Golpe Divino (/golpe)."
@@ -20,7 +20,7 @@ Paladin_T1_Blade:
     - command{c="paladin_cast paladin_golpe_divino";delay=1} @self ~onLeftClick
 
 Paladin_T1_Talisman:
-  Id: "minecraft:prismarine_crystals"
+  Id: "prismarine_crystals"
   Display: "&aTalismã de Imposição"
   Lore:
     - "&7Canaliza Imposição Menor (/imposicao)."
@@ -39,7 +39,7 @@ Paladin_T1_Talisman:
     - command{c="paladin_cast paladin_imposicao_menor";delay=1} @self ~onRightClick
 
 Paladin_T1_Banner:
-  Id: "minecraft:white_banner"
+  Id: "white_banner"
   Display: "&bEstandarte Protetor"
   Lore:
     - "&7Ativa Selo Protetor."
@@ -58,7 +58,7 @@ Paladin_T1_Banner:
     - command{c="paladin_cast paladin_selo_protetor";delay=1} @self ~onRightClick
 
 Devotion_T2_Blade:
-  Id: "minecraft:diamond_sword"
+  Id: "diamond_sword"
   Display: "&fLâmina Consagrada"
   Lore:
     - "&7Golpe Sagrado focado em inimigos profanos."
@@ -77,7 +77,7 @@ Devotion_T2_Blade:
     - command{c="paladin_cast paladin_golpe_sagrado";delay=1} @self ~onRightClick
 
 Devotion_T2_Relic:
-  Id: "minecraft:heart_of_the_sea"
+  Id: "heart_of_the_sea"
   Display: "&bRelíquia da Pureza"
   Lore:
     - "&7Projeta Aura de Pureza (/voto_devocao)."
@@ -96,7 +96,7 @@ Devotion_T2_Relic:
     - command{c="paladin_cast paladin_aura_de_pureza";delay=1} @self ~onRightClick
 
 Devotion_T3_Banner:
-  Id: "minecraft:light_blue_banner"
+  Id: "light_blue_banner"
   Display: "&bEstandarte da Virtude"
   Lore:
     - "&7Ativa Estandarte da Virtude."
@@ -115,7 +115,7 @@ Devotion_T3_Banner:
     - command{c="paladin_cast paladin_estandarte_da_virtude";delay=1} @self ~onRightClick
 
 Devotion_T4_Relic:
-  Id: "minecraft:nether_star"
+  Id: "nether_star"
   Display: "&fCálice do Milagre"
   Lore:
     - "&7Canaliza Milagre da Fé."
@@ -134,7 +134,7 @@ Devotion_T4_Relic:
     - command{c="paladin_cast paladin_milagre_da_fe";delay=1} @self ~onRightClick
 
 Vengeance_T2_Chains:
-  Id: "minecraft:chain"
+  Id: "chain"
   Display: "&cCorrentes da Justiça"
   Lore:
     - "&7Dispara Cadeia do Pecado."
@@ -153,7 +153,7 @@ Vengeance_T2_Chains:
     - command{c="paladin_cast paladin_cadeia_do_pecado";delay=1} @self ~onRightClick
 
 Vengeance_T2_Sigil:
-  Id: "minecraft:lodestone"
+  Id: "lodestone"
   Display: "&cSelo do Predador"
   Lore:
     - "&7Marca inimigos com Juramento de Inimizade."
@@ -172,7 +172,7 @@ Vengeance_T2_Sigil:
     - command{c="paladin_cast paladin_juramento_de_inimizade";delay=1} @self ~onRightClick
 
 Vengeance_T3_Relic:
-  Id: "minecraft:netherite_scrap"
+  Id: "netherite_scrap"
   Display: "&4Fragmento da Caça"
   Lore:
     - "&7Canaliza Caça Sagrada."
@@ -191,7 +191,7 @@ Vengeance_T3_Relic:
     - command{c="paladin_cast paladin_caca_sagrada";delay=1} @self ~onRightClick
 
 Vengeance_T4_Greatsword:
-  Id: "minecraft:netherite_sword"
+  Id: "netherite_sword"
   Display: "&4Lâmina da Execução"
   Lore:
     - "&7Ativa Execução Divina."
@@ -210,7 +210,7 @@ Vengeance_T4_Greatsword:
     - command{c="paladin_cast paladin_execucao_divina";delay=1} @self ~onRightClick
 
 Ancients_T2_Bough:
-  Id: "minecraft:warped_fungus_on_a_stick"
+  Id: "warped_fungus_on_a_stick"
   Display: "&2Galho Ancestral"
   Lore:
     - "&7Invoca Vinha Restritiva."
@@ -229,7 +229,7 @@ Ancients_T2_Bough:
     - command{c="paladin_cast paladin_vinha_restritiva";delay=1} @self ~onRightClick
 
 Ancients_T3_Totem:
-  Id: "minecraft:flower_pot"
+  Id: "flower_pot"
   Display: "&2Totem Esmeralda"
   Lore:
     - "&7Semeia Chamado Silvestre."
@@ -248,7 +248,7 @@ Ancients_T3_Totem:
     - command{c="paladin_cast paladin_chamado_silvestre";delay=1} @self ~onRightClick
 
 Ancients_T4_Banner:
-  Id: "minecraft:green_banner"
+  Id: "green_banner"
   Display: "&2Estandarte Primordial"
   Lore:
     - "&7Desencadeia Harmonia Primordial."
