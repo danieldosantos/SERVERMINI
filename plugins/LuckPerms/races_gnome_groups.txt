@@ -1,0 +1,41 @@
+# LuckPerms script para raça Gnomo.
+# Executar no console em ordem para configurar heranças e permissões.
+lp creategroup race_gnome
+lp creategroup race_gnome.forest
+lp creategroup race_gnome.rock
+
+# Heranças
+lp parent add race_gnome.forest race_gnome
+lp parent add race_gnome.rock race_gnome
+
+# Permissões base (skills e comandos comuns)
+lp group race_gnome permission set psa.skill.EngenhoRapido true
+lp group race_gnome permission set psa.skill.IntuicaoArcana true
+lp group race_gnome permission set skript.command.engenho true
+lp group race_gnome permission set skript.command.intuicao true
+lp group race_gnome permission set mythicmobs.item.GnomeTinkerTools true
+
+# Sub-raça: Floresta
+lp group race_gnome.forest permission set psa.skill.SussurroAmigoDaFloresta true
+lp group race_gnome.forest permission set psa.skill.SaltoDeGalho true
+lp group race_gnome.forest permission set psa.skill.CirculoSilvestre true
+lp group race_gnome.forest permission set skript.command.sussurro true
+lp group race_gnome.forest permission set skript.command.salto_folhas true
+lp group race_gnome.forest permission set skript.command.silvestre true
+lp group race_gnome.forest permission set mythicmobs.item.ForestGnomeCharm true
+lp group race_gnome.forest permission set mythicmobs.item.LeafstepBoots true
+
+# Sub-raça: Rocha
+lp group race_gnome.rock permission set psa.skill.BaluarteImprovisado true
+lp group race_gnome.rock permission set psa.skill.GadgetEstatico true
+lp group race_gnome.rock permission set psa.skill.CupulaDeEngenho true
+lp group race_gnome.rock permission set skript.command.baluarte true
+lp group race_gnome.rock permission set skript.command.gadget true
+lp group race_gnome.rock permission set skript.command.cupula true
+lp group race_gnome.rock permission set mythicmobs.item.RockGnomeWrench true
+lp group race_gnome.rock permission set mythicmobs.item.StaticGadgetKit true
+
+# Kit de QA
+lp group race_gnome permission set skript.command.kit_racial_gnomo true
+lp group race_gnome.forest permission set skript.command.kit_racial_gnomo_floresta true
+lp group race_gnome.rock permission set skript.command.kit_racial_gnomo_rocha true

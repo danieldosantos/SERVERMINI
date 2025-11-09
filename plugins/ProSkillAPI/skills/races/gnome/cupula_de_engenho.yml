@@ -1,0 +1,30 @@
+# ProSkillAPI: Cúpula de Engenho (Ultimate)
+skills:
+  CupulaDeEngenho:
+    display: "&b&lCúpula de Engenho"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Ergue domo protetor de curto prazo que intercepta projéteis pesados e amortiza dano aliado.
+    tiers:
+      T1: { cooldown: 210, radius: 6, duration: 8, damage_reduction: 0.15, block_projectiles: 1 }
+      T2: { cooldown: 210, radius: 6, duration: 8, damage_reduction: 0.16, block_projectiles: 1 }
+      T3: { cooldown: 210, radius: 6, duration: 8, damage_reduction: 0.17, block_projectiles: 1 }
+      T4: { cooldown: 200, radius: 6, duration: 8, damage_reduction: 0.18, block_projectiles: 1 }
+    cost:
+      resource: gadget_charge
+      amount: 2
+    effects:
+      - target: area
+        radius: { tier: radius }
+        type: dome
+        duration: { tier: duration }
+        modifiers:
+          damage_taken: -{ tier: damage_reduction }
+          projectile_block: { tier: block_projectiles }
+        particles: arcane_shield
+      - target: self
+        type: placeholder
+        id: racial_cd_main
+        value: "{cooldown:skill_cupula_de_engenho}"
+    notes: "Ultimate racial com CD 210s. Bloqueio de projéteis é limitado a 1 por aliado por ativação."

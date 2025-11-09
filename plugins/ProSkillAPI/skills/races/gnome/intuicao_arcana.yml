@@ -1,0 +1,33 @@
+# ProSkillAPI: Intuição Arcana (racial base)
+skills:
+  IntuicaoArcana:
+    display: "&dIntuição Arcana"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Analisa tramas mágicas próximas, revelando buffs/debuffs e refrescando uma habilidade.
+      Reduz em 10% o cooldown da próxima skill usada em até 6s.
+    tiers:
+      T1: { cooldown: 90, reveal_radius: 8, cooldown_reduction: 0.10, duration: 6 }
+      T2: { cooldown: 90, reveal_radius: 9, cooldown_reduction: 0.10, duration: 6 }
+      T3: { cooldown: 85, reveal_radius: 10, cooldown_reduction: 0.12, duration: 6 }
+      T4: { cooldown: 80, reveal_radius: 10, cooldown_reduction: 0.12, duration: 6 }
+    cost:
+      resource: mana
+      amount: 20
+    effects:
+      - target: area
+        radius: { tier: reveal_radius }
+        type: reveal_status
+        max_entities: 8
+      - target: self
+        type: status
+        id: intuicao_arcana_window
+        duration: { tier: duration }
+        modifiers:
+          next_skill_cooldown_reduction: { tier: cooldown_reduction }
+      - target: self
+        type: placeholder
+        id: racial_cd_main
+        value: "{cooldown:skill_intuicao_arcana}"
+    notes: "Aplicar redução apenas na próxima habilidade do jogador; não afeta ultimates acima de 180s."

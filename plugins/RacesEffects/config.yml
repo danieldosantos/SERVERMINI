@@ -7,9 +7,10 @@ hud:
     title: "&6&lTraços Raciais"
     lines:
       - "&eRaça:&f {race_active}"
-      - "&ePassivo:&f {racial_uptime}"
-      - "&eResist:&f {racial_resist_x}"
-      - "&eCarga:&f {racial_charges}"
+      - "&eUptime:&f {racial_uptime}"
+      - "&eResist. Mental:&f {racial_resist_mental}"
+      - "&eEscudo:&f {racial_shield}"
+      - "&eCargas:&f {racial_charges}"
       - "&eCD Principal:&f {racial_cd_main}"
   actionbar:
     enabled: true
@@ -24,7 +25,8 @@ limits:
 placeholders:
   racial_cd_main: "Nenhum"
   racial_uptime: "0%"
-  racial_resist_x: "0%"
+  racial_resist_mental: "0%"
+  racial_shield: "0"
   racial_charges: "0"
 biome_affinity_check_interval: 10
 # As tags abaixo são usadas nos arquivos de raças individuais.

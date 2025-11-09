@@ -1,0 +1,82 @@
+# Raça Base: Gnomo
+# Identidade: engenhosos, curiosos e resilientes; afinidade com magia sutil.
+race_id: gnome_base
+name: "Gnomo"
+identity: "Mentes rápidas que mesclam artifícios mecânicos com instintos arcanos discretos."
+luckperms:
+  required: "race_gnome"
+  inherit: null
+placeholders:
+  racial_cd_main: "{cooldown:skill_engenho_rapido}"
+  racial_uptime: "{status:astucia_gnomesca}"
+  racial_resist_mental: "{status:astucia_gnomesca|dr}%"
+  racial_shield: "{status:gnome_shield}" # Placeholder reservado para sub-raças (escudos temporários)
+  racial_charges: "{resource:gnome_racial_charge}"
+hud:
+  scoreboard:
+    title: "&dGNOMO"
+    lines:
+      - "&eEngenho:&f {cooldown:skill_engenho_rapido}"
+      - "&bIntuição:&f {cooldown:skill_intuicao_arcana}"
+      - "&dAstúcia:&f {status:astucia_gnomesca}"
+      - "&7Cargas:&f {resource:gnome_racial_charge}/1"
+      - "&3Escudos:&f {status:gnome_shield}"
+passives:
+  astucia_gnomesca:
+    name: "Astúcia Gnomesca"
+    type: mental_resist
+    trigger: mental_effect_received
+    duration: 6
+    cooldown: 30
+    uptime_cap: 0.2
+    resistance: 0.12
+    diminishing_returns: mental
+    description: "Ao sofrer charme/medo/confusão, ativa DR mental de 12% por 6s (≤60% uptime)."
+  pequena_estatura:
+    name: "Pequena Estatura"
+    type: timed_attribute
+    trigger: combat_start
+    duration: 12
+    cooldown: 24
+    uptime_cap: 0.5
+    attributes:
+      knockback_taken: -0.12
+      hitbox_scale: 0.96
+    description: "Em combate, reduz empurrões em 12% e ajusta hitbox (uptime 50%, respeitando caps globais)."
+actives:
+  engenho_rapido:
+    name: "Engenho Rápido"
+    skill: EngenhoRapido
+    cooldown: 75
+    charges: 1
+    description: "Ferramenta temporária que acelera recarga de focos em 10% por até 10s. Consome 1 carga racial."
+  intuicao_arcana:
+    name: "Intuição Arcana"
+    skill: IntuicaoArcana
+    cooldown: 90
+    charges: 1
+    description: "Revela buffs/debuffs próximos e reduz em 10% o CD da próxima skill pessoal."
+resistances:
+  psychic:
+    base: 0.05
+    max: 0.3
+    diminishing: linear
+    notes: "DR mental adicional sofre exaustão ao acumular com classes/itens semelhantes."
+biome_affinity:
+  preferred:
+    - plains
+    - meadow
+  bonuses:
+    innovation_lab: "+5% duração em Engenho Rápido (apenas ambientes de teste controlado)."
+weaknesses:
+  - "Sofre +5% de dano de esmagamento quando pego por ataques de grande área (representa fragilidade física)."
+synergy_notes:
+  - "Bônus de recarga de Engenho Rápido entra na mesma categoria de Artífice/Alquimista; aplicar DR para não exceder +0.05 velocidade total de itens."
+  - "Astúcia Gnomesca compartilha a pilha 'mental' do sistema de resistências, respeitando caps globais de 45%."
+tests:
+  pve:
+    - "Chefe com fear/stun: confirmar ativação automática de Astúcia e uptime ≤20%."
+    - "Arena de projéteis: avaliar empurrão reduzido (Pequena Estatura ativo metade do combate)."
+  pvp:
+    - "Duelo vs. controlador mental: verificar DR mental sem ultrapassar caps de mitigação."
+    - "3v3 com foco em recargas: Engenho Rápido melhora uptime de focos sem exceder limite de +0.05 velocidade."

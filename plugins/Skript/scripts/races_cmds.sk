@@ -10,6 +10,7 @@ options:
 
 command /racial:
   trigger:
+    set {_sent} to false
     if player has permission "lp.race_elfo":
       send "&a[Racial Élfica] /fae_passos para deslocar-se 5 blocos (CD 45s)."
       if player has permission "lp.race_elfo.alto":
@@ -18,8 +19,16 @@ command /racial:
         send "&5[Drow] /luzes_feericas e /passo_umbratico disponíveis. Evite luz solar direta!"
       if player has permission "lp.race_elfo.floresta":
         send "&a[Elfo da Floresta] /marca_bosque e /salto_galho prontos para emboscar."
-    else:
-      send "&7Nenhum traço elfo encontrado."
+      set {_sent} to true
+    if player has permission "lp.race_gnomo":
+      send "&d[Gnomo] /engenho e /intuicao acionam os traços base (75s/90s)."
+      if player has permission "lp.race_gnomo.forest":
+        send "&a[Gnomo da Floresta] Use /sussurro, /salto_folhas e /silvestre (ultimate 210s)."
+      if player has permission "lp.race_gnomo.rock":
+        send "&7[Gnomo da Rocha] /baluarte, /gadget e /cupula protegem o grupo (ult 210s)."
+      set {_sent} to true
+    if {_sent} is false:
+      send "&7Nenhum traço racial detectado neste comando."
 
 command /sopro_draco:
   trigger:
@@ -94,20 +103,6 @@ command /salto_galho:
       execute console command "{@skillcmd} %player% SaltoGalho"
     else:
       send "&cSomente elfos da floresta."
-
-command /canto_cativante:
-  trigger:
-    if player has permission "lp.race_gnomo.floresta":
-      execute console command "{@skillcmd} %player% CantoCativante"
-    else:
-      send "&cSomente gnomos da floresta."
-
-command /engenho_gnomesco:
-  trigger:
-    if player has permission "lp.race_gnomo.rocha":
-      execute console command "{@skillcmd} %player% EngenhoGnomesco"
-    else:
-      send "&cSomente gnomos da rocha."
 
 command /passos_silenciosos:
   trigger:
@@ -190,10 +185,14 @@ function give_race_kit(p: player, raceKey: text):
     add "ForestLeafCharm" to {_kit::*}
   else if {_racekey} is "elfo_drow":
     add "DrowMoonbrooch" to {_kit::*}
+  else if {_racekey} is "gnomo":
+    add "GnomeTinkerTools" to {_kit::*}
   else if {_racekey} is "gnomo_floresta":
-    add "GnomeWhistle" to {_kit::*}
+    add "ForestGnomeCharm" to {_kit::*}
+    add "LeafstepBoots" to {_kit::*}
   else if {_racekey} is "gnomo_rocha":
-    add "GnomeGyroCore" to {_kit::*}
+    add "RockGnomeWrench" to {_kit::*}
+    add "StaticGadgetKit" to {_kit::*}
   else if {_racekey} is "halfling_pesleves":
     add "HalflingLuckyCoin" to {_kit::*}
   else if {_racekey} is "halfling_robusto":

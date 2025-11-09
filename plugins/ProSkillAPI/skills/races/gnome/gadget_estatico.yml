@@ -1,0 +1,26 @@
+# ProSkillAPI: Gadget Estático
+skills:
+  GadgetEstatico:
+    display: "&9Gadget Estático"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Instala totem eletromagnético que deflete projéteis em área por 8s.
+    tiers:
+      T1: { cooldown: 75, radius: 6, duration: 8, projectile_reduction: 0.30 }
+      T2: { cooldown: 75, radius: 6, duration: 8, projectile_reduction: 0.32 }
+      T3: { cooldown: 70, radius: 6, duration: 8, projectile_reduction: 0.33 }
+      T4: { cooldown: 70, radius: 6, duration: 8, projectile_reduction: 0.35 }
+    cost:
+      resource: gadget_charge
+      amount: 1
+    effects:
+      - target: ground_target
+        type: totem
+        radius: { tier: radius }
+        duration: { tier: duration }
+        modifiers:
+          projectile_damage_taken: -{ tier: projectile_reduction }
+        particles: spark_ring
+        max_totems: 1
+    notes: "Redução entra em DR com barreiras afins e nunca permite mitigação total >45%."

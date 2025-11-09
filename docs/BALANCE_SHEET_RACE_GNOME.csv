@@ -1,0 +1,15 @@
+Raça,Subraça,Traço,Tipo,Custo (Carga/Mana),Duração,CD,Área,Bônus/Redução,Notas PvP,Tier,Observações DR
+Gnomo,Base,Astúcia Gnomesca,Passivo,-,6s,30s,Self,-12% DR mental,Resistência compartilhada com efeitos mentais (ICD 30s),T1–T4,Entra em pool mental; DR adicional após 30%
+Gnomo,Base,Pequena Estatura,Passivo,-,12s,24s,Self,-12% knockback/hitbox 0.96,Sem impacto direto em controle, T1–T4,Respeita caps globais de mitigação
+Gnomo,Base,Engenho Rápido,Ativo,1 carga racial,8-10s,75s,Self,-10/12% recarga itens,Não acumula com artífice/alquimista além de +0.05,T1–T4,Aplicar DR de velocidade de recarga
+Gnomo,Base,Intuição Arcana,Ativo,20 mana,6s janela,90s,Raio 8-10,-10/12% CD próxima skill,Sem efeito em ultimates >180s,T1–T4,Redução única com marcador interno
+Gnomo,Gnomo da Floresta,Passos Silvestres,Passivo,-,10s,30s,Self,+0.02 velocidade,Inoperante fora de biomas floresta,T1–T4,DR compartilhada com bônus de velocidade
+Gnomo,Gnomo da Floresta,Camuflagem Natural,Passivo,-,8s,16s,Self,-15% detecção,Contra PvP aplica apenas se vegetação presente,T1–T4,DR com sombras/ilusão após 25%
+Gnomo,Gnomo da Floresta,Sussurro Amigo,Ativo,15 focus,6-7s,70-75s,Raio 6-7,Charm PvE (no PvP),Imune a jogadores/bosses,T1–T4,Sem DR adicional (aplica categoria charme PvE)
+Gnomo,Gnomo da Floresta,Salto de Galho,Ativo,10 stamina,Inst.,55-60s,Dash 5-6,Dash + Slow Fall 2-3s,Sem dano direto,T1–T4,Verificação de blocos impede abuso
+Gnomo,Gnomo da Floresta,Círculo Silvestre,Ativo Ultimate,30 focus,10s,200-210s,Raio 7,-10/12% precisão inimiga, +10/12% velocidade aliada,Aplicar DR com auras de velocidade,T1–T4,Velocidade total ≤ +0.05
+Gnomo,Gnomo da Rocha,Engenho Gnomesco,Passivo,-,6s,45s,Self,Escudo 60-100,Sem stack com escudos de classe,T1–T4,Substitui escudos existentes; respeita mitigação 45%
+Gnomo,Gnomo da Rocha,Resiliência a Toxinas,Passivo,-,8s,24s,Self,-15% dano veneno/ácido,Aplica DR com outras fontes,T1–T4,Compartilha categoria poison/acid
+Gnomo,Gnomo da Rocha,Baluarte Improvisado,Ativo,1 carga racial,6s,90s,Self,Escudo 120-180,Usar em janelas defensivas PvP,T1–T4,Refresh replace para evitar stacking
+Gnomo,Gnomo da Rocha,Gadget Estático,Ativo,1 carga gadget,8s,70-75s,Raio 6,-30/35% dano projétil,Aplica DR com paredes mágicas,T1–T4,Mitigação total ≤45%
+Gnomo,Gnomo da Rocha,Cúpula de Engenho,Ativo Ultimate,2 cargas gadget,8s,200-210s,Raio 6,-15/18% dano + bloqueio 1 projétil pesado/aliado,Sem empilhamento com barreiras de classe,T1–T4,Redução entra na mesma categoria defensiva (DR após 45%)
