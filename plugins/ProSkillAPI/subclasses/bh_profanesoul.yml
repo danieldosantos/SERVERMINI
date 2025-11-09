@@ -1,0 +1,46 @@
+# Ordem da Alma Profana - Subclasse Blood Hunter
+name: Blood_Hunter_ProfaneSoul
+display: "§5Ordem da Alma Profana"
+description:
+  - "§7Canaliza pactos arcanos através do Hemocraft para dano híbrido e controle de feitiços."
+  - "§5Ganha acesso a maldições de patrono, mobilidade abissal e projeções hemáticas."
+options:
+  needs-permission: true
+  parent: Blood_Hunter
+attributes:
+  attack-damage:
+    base: 1.6
+    scale: 0.04
+  skill-damage:
+    base: 0.2
+    scale: 0.025
+skills:
+  tier1:
+    active:
+      - blood_hunter_profanesoul_rite
+      - blood_hunter_profanesoul_patron_curse
+    passive: []
+  tier2:
+    active:
+      - blood_hunter_profanesoul_rite
+      - blood_hunter_profanesoul_patron_curse
+      - blood_hunter_profanesoul_counterspell
+    passive: []
+  tier3:
+    active:
+      - blood_hunter_profanesoul_rite
+      - blood_hunter_profanesoul_patron_curse
+      - blood_hunter_profanesoul_counterspell
+      - blood_hunter_profanesoul_abyssal_step
+    passive: []
+  tier4:
+    active:
+      - blood_hunter_profanesoul_rite
+      - blood_hunter_profanesoul_patron_curse
+      - blood_hunter_profanesoul_counterspell
+      - blood_hunter_profanesoul_abyssal_step
+      - blood_hunter_profanesoul_void_rend
+    passive: []
+notes:
+  - "Maldição do Patrono usa tags MythicMobs para variar vulnerabilidades conforme patrono escolhido."
+  - "Rasgo do Vazio respeita limites de puxão suave e aplica imunidade decrescente a controle."

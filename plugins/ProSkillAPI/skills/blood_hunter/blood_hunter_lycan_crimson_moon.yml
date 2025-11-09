@@ -1,0 +1,26 @@
+# Skill: Luar Carmesim - Lycan ULT
+name: blood_hunter_lycan_crimson_moon
+display: "§4Luar Carmesim"
+icon: REDSTONE_LAMP
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+description:
+  - "§fAura 8 blocos/12s: aplica sangramento 5%/s inimigos e +15% velocidade de ataque aliados."
+  - "§7Custo: 35 Hemocraft." 
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§4Luar Carmesim"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% crimson_moon"
+          caster: true
+          async: false

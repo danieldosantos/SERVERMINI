@@ -1,0 +1,21 @@
+# Skill: Técnica do Caçador - passiva Blood Hunter
+name: blood_hunter_hunter_technique
+display: "§eTécnica do Caçador"
+icon: COMPASS
+type: Passive
+max-level: 1
+needs-permission: true
+description:
+  - "§fTrocar alvo marcado concede +5-10% velocidade de troca (refresh interno 12s)."
+  - "§7Atualiza HUD {mark_time_left} e integra PlaceholderAPI."
+components:
+  Passive:
+    type: trigger
+    data: {}
+    children:
+      Register:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_passive %caster% hunter_technique"
+          caster: true
+          async: false

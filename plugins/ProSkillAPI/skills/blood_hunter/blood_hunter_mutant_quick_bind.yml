@@ -1,0 +1,26 @@
+# Skill: Ligadura Rápida - Mutant
+name: blood_hunter_mutant_quick_bind
+display: "§6Ligadura Rápida"
+icon: WHITE_WOOL
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+description:
+  - "§fConcede 20% redução de dano por 6s e remove uma penalidade de mutágeno ativa."
+  - "§7Sem custo de Hemocraft; aplica fatiga de 10s antes de reutilizar."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§6Ligadura"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% quick_bind"
+          caster: true
+          async: false

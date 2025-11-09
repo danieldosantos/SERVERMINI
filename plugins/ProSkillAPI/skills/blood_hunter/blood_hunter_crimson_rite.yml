@@ -1,0 +1,33 @@
+# Skill: Rito Carmesim - ativa base Blood Hunter
+name: blood_hunter_crimson_rite
+display: "§cRito Carmesim"
+icon: IRON_SWORD
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cost-base: 0
+  cost-scale: 0
+  cooldown-base: 60
+  cooldown-scale: 0
+  mana-cost-base: 0
+  mana-cost-scale: 0
+description:
+  - "§fImbuir arma com dano elemental adicional por 120s."
+  - "§7Custo: 30 Hemocraft + 8/10% vida conforme tier (auto-dano controlado)."
+  - "§8Ativa HUD {hemocraft} e {cooldown_next}; requer comando /rito ou lâmina ritual."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§cRito Carmesim"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% crimson_rite"
+          caster: true
+          async: false

@@ -1,0 +1,26 @@
+# Skill: Rito Eldritch - Profane Soul
+name: blood_hunter_profanesoul_rite
+display: "§5Rito Eldritch"
+icon: NETHERITE_SWORD
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§fConverte dano extra em arcano e concede 3 Projéteis Hemáticos (60% cada) por 10s."
+  - "§7Custo: 25 Hemocraft + 8% HP."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§5Rito Eldritch"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% eldritch_rite"
+          caster: true
+          async: false

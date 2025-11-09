@@ -1,0 +1,26 @@
+# Skill: Rito do Espectro - Ghostslayer
+name: blood_hunter_ghostslayer_rite
+display: "§fRito do Espectro"
+icon: DIAMOND_SWORD
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§fConverte dano extra do rito em radiante por 12s e ignora 50% redução espectral."
+  - "§7Custo: 25 Hemocraft + 8% HP (respeita limites por tier)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§fRito do Espectro"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% ghost_rite"
+          caster: true
+          async: false

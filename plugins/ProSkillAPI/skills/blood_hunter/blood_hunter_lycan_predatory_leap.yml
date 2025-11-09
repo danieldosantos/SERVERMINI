@@ -1,0 +1,26 @@
+# Skill: Investida Predatória - Lycan
+name: blood_hunter_lycan_predatory_leap
+display: "§4Investida Predatória"
+icon: LEATHER_BOOTS
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+description:
+  - "§fDash 6 blocos causando 150% dano; se atingir alvo marcado ganha 20% mitigação por 4s."
+  - "§7Sem custo de Hemocraft."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§4Investida"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% predatory_leap"
+          caster: true
+          async: false

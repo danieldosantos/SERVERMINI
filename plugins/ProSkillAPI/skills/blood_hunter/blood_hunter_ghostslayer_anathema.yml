@@ -1,0 +1,26 @@
+# Skill: Anátema dos Mortos - Ghostslayer ULT
+name: blood_hunter_ghostslayer_anathema
+display: "§fAnátema dos Mortos"
+icon: BEACON
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+description:
+  - "§fCria círculo 8 blocos/12s causando 70%/s radiante em mortos-vivos e medo 2s na entrada."
+  - "§7Custo: 40 Hemocraft."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§fAnátema"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% anathema"
+          caster: true
+          async: false

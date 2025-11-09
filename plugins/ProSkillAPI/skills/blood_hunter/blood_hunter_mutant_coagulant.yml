@@ -1,0 +1,26 @@
+# Skill: Coágulo Alquímico - Mutant
+name: blood_hunter_mutant_coagulant
+display: "§6Coágulo Alquímico"
+icon: HONEY_BOTTLE
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§fRemove sangramentos e cura 15% da vida atual respeitando cap de 25% do dano causado."
+  - "§7Sem custo de Hemocraft; respeita auto-dano acumulado."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§6Coágulo"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% coagulant"
+          caster: true
+          async: false

@@ -1,0 +1,26 @@
+# Skill: Rastreio Sanguíneo - Lycan
+name: blood_hunter_lycan_blood_track
+display: "§4Rastreio Sanguíneo"
+icon: COMPASS
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+description:
+  - "§fRevela inimigos sangrando em 12 blocos e concede +15% velocidade por 6s."
+  - "§7Sem custo de Hemocraft; respeita limite global de velocidade."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§4Rastreio"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% blood_track"
+          caster: true
+          async: false

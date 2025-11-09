@@ -1,0 +1,144 @@
+# Classe base Blood Hunter para ProSkillAPI
+name: Blood_Hunter
+prefix: "§4BH"
+display: "§4Caçador de Sangue"
+main-class: true
+key: blood_hunter
+description:
+  - "§7Especialista em DPS arriscado que converte o próprio sangue em poder."
+  - "§cGere §lHemocraft§r para ativar ritos, maldições e concentrar-se no alvo marcado."
+  - "§8Integra limites globais: mitigação total ≤45%, velocidade adicional ≤0.05, autocura ≤25% do dano."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Hemocraft"
+  mana-regen: 0
+  max-level: 60
+  exp-source: kill
+  attributes-scaled: true
+  needs-race: false
+  hemocraft-resource:
+    key: hemocraft
+    display: "Hemocraft"
+    min: 0
+    max: 100
+    scaling:
+      tier1: 100
+      tier2: 125
+      tier3: 150
+      tier4: 175
+    regen-out-of-combat:
+      delay: 8
+      interval: 20
+      amount: 5
+  marks-resource:
+    key: blood_mark
+    display: "Marca de Presa"
+    min: 0
+    max: 1
+  scoreboard:
+    hemocraft: "blood_hemocraft"
+    mark: "blood_mark"
+    focus: "blood_concentration"
+    mutagen: "blood_mutagen"
+    lycan: "blood_lycan"
+    placeholders:
+      hemocraft: "%skills_blood_hemocraft%"
+      mark: "%skills_blood_mark%"
+      focus: "%skills_blood_focus%"
+      mutagen: "%skills_blood_mutagen%"
+      lycan: "%skills_blood_lycan%"
+  combat-state-placeholder: "%skills_combat_state%"
+attributes:
+  health-base: 32
+  health-scale: 2.8
+  mana-base: 0
+  mana-scale: 0
+  walk-speed-base: 0.022
+  walk-speed-scale: 0.002
+  physical-defense-base: 3
+  physical-defense-scale: 0.8
+  magical-defense-base: 2
+  magical-defense-scale: 0.8
+  attack-damage: 1.65
+  skill-damage: 0.15
+  crit-chance-base: 0.07
+  crit-chance-scale: 0.015
+  level-bonus:
+    1:
+      health: 34
+      defense: 6
+      speed: 0.0
+      crit: 0.07
+    5:
+      health: 52
+      defense: 8
+      speed: 0.01
+      crit: 0.08
+    11:
+      health: 82
+      defense: 11
+      speed: 0.015
+      crit: 0.09
+    17:
+      health: 112
+      defense: 13
+      speed: 0.02
+      crit: 0.10
+mana:
+  regen-combat: 0
+  regen-out: 0
+exp:
+  kill-multiplier: 1.1
+  quest-multiplier: 1.05
+  pvp-multiplier: 1.05
+skills:
+  tier1:
+    active:
+      - blood_hunter_crimson_rite
+      - blood_hunter_mark_of_the_prey
+      - blood_hunter_blood_focus
+    passive:
+      - blood_hunter_cold_blood
+  tier2:
+    active:
+      - blood_hunter_crimson_rite
+      - blood_hunter_mark_of_the_prey
+      - blood_hunter_blood_focus
+    passive:
+      - blood_hunter_cold_blood
+      - blood_hunter_hunter_technique
+  tier3:
+    active:
+      - blood_hunter_crimson_rite
+      - blood_hunter_mark_of_the_prey
+      - blood_hunter_blood_focus
+    passive:
+      - blood_hunter_cold_blood
+      - blood_hunter_hunter_technique
+  tier4:
+    active:
+      - blood_hunter_crimson_rite
+      - blood_hunter_mark_of_the_prey
+      - blood_hunter_blood_focus
+    passive:
+      - blood_hunter_cold_blood
+      - blood_hunter_hunter_technique
+subclasses:
+  ghostslayer:
+    display: "§fOrdem do Matador de Espectros"
+    file: bh_ghostslayer.yml
+  profanesoul:
+    display: "§5Ordem da Alma Profana"
+    file: bh_profanesoul.yml
+  mutant:
+    display: "§6Ordem do Mutante"
+    file: bh_mutant.yml
+  lycan:
+    display: "§4Ordem do Lícano"
+    file: bh_lycan.yml
+notes:
+  - "Hemocraft regenera 5 por segundo após 8s fora de combate via Skript (placeholder blood_hemocraft)."
+  - "Auto-dano controlado limita-se a 12% nos tiers 1-2 e 15% nos tiers 3-4, nunca letal (mín. 1 HP)."
+  - "Integra RacesEffects para exaustão quando resistência racial coincide com ritos ou mutágenos."

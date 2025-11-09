@@ -1,0 +1,26 @@
+# Skill: Contrafeitiço Profano - Profane Soul
+name: blood_hunter_profanesoul_counterspell
+display: "§5Contrafeitiço Profano"
+icon: AMETHYST_SHARD
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+description:
+  - "§fCria janela de 2s para cancelar habilidade inimiga e aplicar silêncio 2s."
+  - "§7Custo: 25 Hemocraft."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§5Contrafeitiço"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% counterspell"
+          caster: true
+          async: false

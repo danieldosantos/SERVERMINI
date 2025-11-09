@@ -1,0 +1,26 @@
+# Skill: Passo Abissal - Profane Soul
+name: blood_hunter_profanesoul_abyssal_step
+display: "§5Passo Abissal"
+icon: CHORUS_FRUIT
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§fTeleporta 8 blocos e deixa rastro arcano de 40%/s por 4s."
+  - "§7Custo: 20 Hemocraft."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§5Passo Abissal"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% abyssal_step"
+          caster: true
+          async: false

@@ -1,0 +1,52 @@
+# Grupos LuckPerms para Blood Hunter
+lp creategroup class_blood_hunter
+lp creategroup class_blood_hunter.ghostslayer
+lp creategroup class_blood_hunter.profanesoul
+lp creategroup class_blood_hunter.mutant
+lp creategroup class_blood_hunter.lycan
+lp parent set class_blood_hunter.ghostslayer class_blood_hunter
+lp parent set class_blood_hunter.profanesoul class_blood_hunter
+lp parent set class_blood_hunter.mutant class_blood_hunter
+lp parent set class_blood_hunter.lycan class_blood_hunter
+lp group class_blood_hunter permission set skillapi.class.blood_hunter true
+lp group class_blood_hunter permission set skillapi.skill.blood_hunter_crimson_rite true
+lp group class_blood_hunter permission set skillapi.skill.blood_hunter_mark_of_the_prey true
+lp group class_blood_hunter permission set skillapi.skill.blood_hunter_blood_focus true
+lp group class_blood_hunter permission set skillapi.skill.blood_hunter_cold_blood true
+lp group class_blood_hunter permission set skillapi.skill.blood_hunter_hunter_technique true
+lp group class_blood_hunter permission set class_blood_hunter.command true
+lp group class_blood_hunter permission set mythicmobs.item.CrimsonRiteBlade true
+lp group class_blood_hunter permission set mythicmobs.item.BloodMarkCharm true
+lp group class_blood_hunter permission set mythicmobs.item.BloodFocusVial true
+lp group class_blood_hunter.ghostslayer permission set skillapi.skill.blood_hunter_ghostslayer_rite true
+lp group class_blood_hunter.ghostslayer permission set skillapi.skill.blood_hunter_ghostslayer_purifying_strike true
+lp group class_blood_hunter.ghostslayer permission set skillapi.skill.blood_hunter_ghostslayer_hallowed_veil true
+lp group class_blood_hunter.ghostslayer permission set skillapi.skill.blood_hunter_ghostslayer_spectral_stake true
+lp group class_blood_hunter.ghostslayer permission set skillapi.skill.blood_hunter_ghostslayer_anathema true
+lp group class_blood_hunter.ghostslayer permission set mythicmobs.item.GhostRitualDagger true
+lp group class_blood_hunter.ghostslayer permission set mythicmobs.item.SanctifiedVial true
+lp group class_blood_hunter.ghostslayer permission set mythicmobs.item.GravewardCharm true
+lp group class_blood_hunter.profanesoul permission set skillapi.skill.blood_hunter_profanesoul_rite true
+lp group class_blood_hunter.profanesoul permission set skillapi.skill.blood_hunter_profanesoul_patron_curse true
+lp group class_blood_hunter.profanesoul permission set skillapi.skill.blood_hunter_profanesoul_counterspell true
+lp group class_blood_hunter.profanesoul permission set skillapi.skill.blood_hunter_profanesoul_abyssal_step true
+lp group class_blood_hunter.profanesoul permission set skillapi.skill.blood_hunter_profanesoul_void_rend true
+lp group class_blood_hunter.profanesoul permission set mythicmobs.item.ProfaneTome true
+lp group class_blood_hunter.profanesoul permission set mythicmobs.item.HexBrandSigil true
+lp group class_blood_hunter.profanesoul permission set mythicmobs.item.EldritchNeedle true
+lp group class_blood_hunter.mutant permission set skillapi.skill.blood_hunter_mutant_mutagen true
+lp group class_blood_hunter.mutant permission set skillapi.skill.blood_hunter_mutant_coagulant true
+lp group class_blood_hunter.mutant permission set skillapi.skill.blood_hunter_mutant_hematic_burst true
+lp group class_blood_hunter.mutant permission set skillapi.skill.blood_hunter_mutant_quick_bind true
+lp group class_blood_hunter.mutant permission set skillapi.skill.blood_hunter_mutant_supreme_catalysis true
+lp group class_blood_hunter.mutant permission set mythicmobs.item.MutagenKit true
+lp group class_blood_hunter.mutant permission set mythicmobs.item.CoagulantVial true
+lp group class_blood_hunter.mutant permission set mythicmobs.item.CatalystInjector true
+lp group class_blood_hunter.lycan permission set skillapi.skill.blood_hunter_lycan_form true
+lp group class_blood_hunter.lycan permission set skillapi.skill.blood_hunter_lycan_frightful_howl true
+lp group class_blood_hunter.lycan permission set skillapi.skill.blood_hunter_lycan_predatory_leap true
+lp group class_blood_hunter.lycan permission set skillapi.skill.blood_hunter_lycan_blood_track true
+lp group class_blood_hunter.lycan permission set skillapi.skill.blood_hunter_lycan_crimson_moon true
+lp group class_blood_hunter.lycan permission set mythicmobs.item.LycanMoonTalisman true
+lp group class_blood_hunter.lycan permission set mythicmobs.item.LycanClaw true
+lp group class_blood_hunter.lycan permission set mythicmobs.item.HunterFetters true

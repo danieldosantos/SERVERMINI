@@ -1,0 +1,26 @@
+# Skill: Forma do Caçador - Lycan
+name: blood_hunter_lycan_form
+display: "§4Forma do Caçador"
+icon: NETHERITE_AXE
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+description:
+  - "§fTransforma-se por 20s: cleave 3 blocos, +0.03 velocidade, +15% roubo de vida, +10% dano recebido."
+  - "§7Custo: 25 Hemocraft + 10% HP."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§4Forma do Caçador"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% lycan_form"
+          caster: true
+          async: false

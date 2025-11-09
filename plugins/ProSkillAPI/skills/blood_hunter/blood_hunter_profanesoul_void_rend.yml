@@ -1,0 +1,26 @@
+# Skill: Rasgo do Vazio - Profane Soul ULT
+name: blood_hunter_profanesoul_void_rend
+display: "§5Rasgo do Vazio"
+icon: BLACK_CONCRETE
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+description:
+  - "§fAbre fenda 6 blocos/10s que puxa levemente, causa 100% dano inicial + 50% a cada 2s."
+  - "§7Custo: 40 Hemocraft."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§5Rasgo do Vazio"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% void_rend"
+          caster: true
+          async: false

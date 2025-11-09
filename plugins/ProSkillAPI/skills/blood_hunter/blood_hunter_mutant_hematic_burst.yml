@@ -1,0 +1,26 @@
+# Skill: Explosão Hemática - Mutant
+name: blood_hunter_mutant_hematic_burst
+display: "§6Explosão Hemática"
+icon: SPLASH_POTION
+type: Active
+max-level: 1
+needs-permission: true
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+description:
+  - "§fCone 5 blocos causando 140% dano e aplica sangramento 6%/s por 6s."
+  - "§7Custo: 25 Hemocraft; respeita limites de área padrão."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+      indicator: "§6Explosão"
+    children:
+      RunSkript:
+        type: mechanic
+        data:
+          command: "skript run blood_hunter_cast %caster% hematic_burst"
+          caster: true
+          async: false

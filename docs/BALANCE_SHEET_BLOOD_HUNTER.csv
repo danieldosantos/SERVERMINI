@@ -1,0 +1,26 @@
+Skill,Tipo,Custo(Hemocraft),Auto-Dano %,Duração,CD,Dano/Redução,Área,Notas PvP,Tier
+Rito Carmesim,Ativa,30,"8/10","120s",60,"+12% dano elemental","Arma corpo a corpo","Revela elemento ativo; sem stack múltiplo",T1
+Marca de Presa,Ativa,20,0,"10s",45,"+15% dano do caster",Alvo único,"Máx. um alvo, reaplicar substitui",T1
+Concentração de Sangue,Ativa,20,0,"8s",75,"+15% penetração / -10% dano (fatiga)",Self,"Uptime ≤60% devido a fatiga",T2
+Sangue Frio,Passiva,0,0,"6s",45,"+10% mitigação",Self,"Proc só abaixo de 35% HP",T1
+Técnica do Caçador,Passiva,0,0,"12s janela",0,"+5-10% troca alvo",Self,"Bonus somente após nova marca",T2
+Rito do Espectro,Ativa,25,8,"12s",60,"+10% dano radiante + ignore 50% redução",Self,"Aplicar exaustão se raça já tiver holy resist",T2
+Golpe Purificador,Ativa,20,0,Instantâneo,45,"150% dano radiante + dispel",Alvo marcado,"Execução apenas <30% HP para burst final",T2
+Véu Consagrado,Ativa,30,0,"10s",90,"-25% dano necro/obscuro",Raio 6,"Aura costeia Hemocraft, uptime 50% máx",T3
+Estaca Espectral,Ativa,25,0,Instantâneo,60,"140% dano perfurante",Linha 12,"Enraíza espectros 2.5s; outros recebem lentidão",T3
+Anátema dos Mortos,Ativa,40,0,"12s",210,"70%/s radiante vs undead",Raio 8,"Medo 2s (imunidade decrescente)",T4
+Rito Eldritch,Ativa,25,8,"10s",60,"+8% dano arcano + 3 projéteis",Self,"Projéteis consomem charges, dano dividido",T2
+Maldição do Patrono,Ativa,30,0,"10s",75,"-12% resistência alvo",Alvo marcado,"Aplica DR incremental para reuso",T3
+Contrafeitiço Profano,Ativa,25,0,"Janela 2s",90,"Silêncio 2s se sucesso",Self,"Sem efeito se usado atrasado",T3
+Passo Abissal,Ativa,20,0,Instantâneo,60,"Teleporte curto + trilha 40%/s",Linha 8,"Puxão leve apenas PvE",T3
+Rasgo do Vazio,Ativa,40,0,"10s",210,"100% inicial + 50%/2s",Raio 6,"Puxão leve, respeita controle",T4
+Mutágeno,Ativa,0,0,"90s",120,"Buff específico + penalidade",Self,"Consome 1 carga (regen 90s) - uptime 60%",T2
+Coágulo Alquímico,Ativa,0,0,Instantâneo,60,"Cura 15% + remove sangramento",Self,"Respeita limite de cura 25% dmg",T2
+Explosão Hemática,Ativa,25,0,Instantâneo,45,"140% + bleed 6%/s por 6s",Cone 5,"Bleed interrompível, aplica DR se alvo tem bleed racial",T2
+Ligadura Rápida,Ativa,0,0,"6s",75,"20% redução dano",Self,"Remove 1 penalidade ativa",T3
+Catalise Suprema,Ativa,40,0,"15s",210,"+30% dano retardado",Self,"Reduz CD de Explosão ao atingir marcado",T4
+Forma do Caçador,Ativa,25,10,"20s",120,"+15% lifesteal, +0.03 vel",Self,"+10% dano recebido (risco)",T3
+Uivo Aterrador,Ativa,0,0,Instantâneo,60,"Medo 2s / -10% dano 8s",Raio 6,"Imunidade decrescente após primeira aplicação",T2
+Investida Predatória,Ativa,0,0,Instantâneo,45,"150% dano + 20% mitigação se marcado",Linha 6,"Não aplica knockback excessivo",T2
+Rastreio Sanguíneo,Ativa,0,0,"6s",75,"Revela sangrando +15% vel",Raio 12,"Não remove furtividade absoluta",T3
+Luar Carmesim,Ativa,35,0,"12s",210,"Bleed 5%/s inimigos +15% AS aliados",Raio 8,"Aura consome Hemocraft, uptime 40%",T4
