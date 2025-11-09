@@ -1,0 +1,37 @@
+# Skills raciais dos anões (Colina e Montanha).
+skills:
+  FortitudeAncestral:
+    display: "&6Fortitude Anã"
+    type: ACTIVE
+    description: |
+      Ergue um escudo protetor ao anão e ao aliado mais próximo.
+      Absorve parte do dano físico/venenoso e concede tenacidade.
+    tiers:
+      T1: { cooldown: 90, duration: 8, absorb_percent: 0.15 }
+      T2: { cooldown: 90, duration: 9, absorb_percent: 0.17 }
+      T3: { cooldown: 85, duration: 10, absorb_percent: 0.18 }
+      T4: { cooldown: 80, duration: 10, absorb_percent: 0.2 }
+    cost:
+      resource: stamina
+      amount: 0
+    effects:
+      target: self+nearest_ally_8
+      type: shield
+      scaling: max_health
+      notes: "Absorção converte dano venenoso extra em mitigação respeitando cap de 45%."
+  PosturaDePedra:
+    display: "&7Postura de Pedra"
+    type: ACTIVE
+    description: "Reduz empurrões e converte 15% do dano físico recebido em absorção temporária."
+    tiers:
+      T1: { cooldown: 90, duration: 8, knockback_resist: 0.6 }
+      T2: { cooldown: 90, duration: 8, knockback_resist: 0.65 }
+      T3: { cooldown: 85, duration: 9, knockback_resist: 0.7 }
+      T4: { cooldown: 80, duration: 9, knockback_resist: 0.75 }
+    cost:
+      resource: stamina
+      amount: 10
+    effects:
+      target: self
+      type: posture
+      notes: "Enquanto ativo, velocidade é reduzida em 10% para manter equilíbrio."

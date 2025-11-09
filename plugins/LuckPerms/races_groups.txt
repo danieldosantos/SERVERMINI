@@ -1,0 +1,104 @@
+# Comandos LuckPerms para raças D&D 5e.
+# Executar na ordem listada.
+
+lp creategroup race_anao
+lp creategroup race_anao.colina
+lp creategroup race_anao.montanha
+lp creategroup race_draconato
+lp creategroup race_elfo
+lp creategroup race_elfo.alto
+lp creategroup race_elfo.floresta
+lp creategroup race_elfo.drow
+lp creategroup race_gnomo
+lp creategroup race_gnomo.floresta
+lp creategroup race_gnomo.rocha
+lp creategroup race_halfling
+lp creategroup race_halfling.pesleves
+lp creategroup race_halfling.robusto
+lp creategroup race_humano
+lp creategroup race_humano.variante
+lp creategroup race_meioelfo
+lp creategroup race_meioorc
+lp creategroup race_tiefling
+
+# Heranças base → subgrupos
+lp group race_anao.colina parent add race_anao
+lp group race_anao.montanha parent add race_anao
+lp group race_elfo.alto parent add race_elfo
+lp group race_elfo.floresta parent add race_elfo
+lp group race_elfo.drow parent add race_elfo
+lp group race_gnomo.floresta parent add race_gnomo
+lp group race_gnomo.rocha parent add race_gnomo
+lp group race_halfling.pesleves parent add race_halfling
+lp group race_halfling.robusto parent add race_halfling
+lp group race_humano.variante parent add race_humano
+
+# Permissões para habilidades (SkillAPI) e itens (MythicMobs)
+# Anões
+lp group race_anao.colina permission set psa.skill.FortitudeAncestral true
+lp group race_anao.colina permission set mythicmobs.item.DwarvenFortitudeStone true
+lp group race_anao.montanha permission set psa.skill.PosturaDePedra true
+lp group race_anao.montanha permission set mythicmobs.item.MountainBastionCharm true
+
+# Draconato
+lp group race_draconato permission set psa.skill.SoproDraconico true
+lp group race_draconato permission set mythicmobs.item.DraconicCharm true
+
+# Elfos
+lp group race_elfo.alto permission set psa.skill.TruqueArcano true
+lp group race_elfo.alto permission set mythicmobs.item.HighElfFoci true
+lp group race_elfo.floresta permission set psa.skill.PassosFaes true
+lp group race_elfo.floresta permission set mythicmobs.item.ForestElfQuiver true
+lp group race_elfo.drow permission set psa.skill.LuzesFeericas true
+lp group race_elfo.drow permission set psa.skill.MantoSombras true
+lp group race_elfo.drow permission set mythicmobs.item.DrowMoonbrooch true
+
+# Gnomos
+lp group race_gnomo.floresta permission set psa.skill.CantoCativante true
+lp group race_gnomo.floresta permission set mythicmobs.item.GnomeWhistle true
+lp group race_gnomo.rocha permission set psa.skill.EngenhoGnomesco true
+lp group race_gnomo.rocha permission set mythicmobs.item.GnomeGyroCore true
+
+# Halflings
+lp group race_halfling.pesleves permission set psa.skill.PassosSilenciosos true
+lp group race_halfling.pesleves permission set mythicmobs.item.HalflingLuckyCoin true
+lp group race_halfling.robusto permission set psa.skill.FortalecerFamilia true
+lp group race_halfling.robusto permission set mythicmobs.item.HalflingHearthLadle true
+
+# Humanos
+lp group race_humano permission set psa.skill.InvestidaCoordenada true
+lp group race_humano permission set mythicmobs.item.HumanBannerSigil true
+lp group race_humano.variante permission set psa.skill.TalentoVariavel true
+lp group race_humano.variante permission set mythicmobs.item.HumanVariantMedal true
+
+# Meio-Elfo
+lp group race_meioelfo permission set psa.skill.HarmoniaHibrida true
+lp group race_meioelfo permission set mythicmobs.item.HalfElfHarmonyOrb true
+
+# Meio-Orc
+lp group race_meioorc permission set psa.skill.TenacidadeImplacavel true
+lp group race_meioorc permission set mythicmobs.item.HalfOrcBattleBrand true
+
+# Tiefling
+lp group race_tiefling permission set psa.skill.ToqueIgneo true
+lp group race_tiefling permission set psa.skill.LaminaDasChamas true
+lp group race_tiefling permission set mythicmobs.item.TieflingHellbrand true
+lp group race_tiefling permission set mythicmobs.item.TieflingSparkGlove true
+
+# Permissões de Skript (comandos de teste)
+lp group race_draconato permission set skript.command.sopro_draco true
+lp group race_anao.colina permission set skript.command.fortitude_anao true
+lp group race_anao.montanha permission set skript.command.postura_pedra true
+lp group race_elfo.alto permission set skript.command.truque_arcano true
+lp group race_elfo.floresta permission set skript.command.passos_faes true
+lp group race_elfo.drow permission set skript.command.luzes_feericas true
+lp group race_gnomo.floresta permission set skript.command.canto_cativante true
+lp group race_gnomo.rocha permission set skript.command.engenho_gnomesco true
+lp group race_halfling.pesleves permission set skript.command.passos_silenciosos true
+lp group race_halfling.robusto permission set skript.command.fortalecer_familia true
+lp group race_humano permission set skript.command.investida_coord true
+lp group race_humano.variante permission set skript.command.talento_variavel true
+lp group race_meioelfo permission set skript.command.harmonia_hibrida true
+lp group race_meioorc permission set skript.command.tenacidade_implacavel true
+lp group race_tiefling permission set skript.command.toque_igneo true
+lp group race_tiefling permission set skript.command.lamina_das_chamas true

@@ -1,0 +1,235 @@
+# Skript de integração para raças D&D 5e.
+# Comandos utilitários, chamadas de skills e kits de QA.
+
+options:
+  skillcmd: psa cast
+
+command /racial [<text>]:
+  description: "Dispara habilidade racial direta ou lista opções."
+  trigger:
+    if player has permission "race.core":
+      if arg-1 is set:
+        execute console command "{@skillcmd} %player% %arg-1%"
+        send action bar "&eRacial executada: &f%arg-1%"
+      else:
+        send "&6Raciais disponíveis:&f fortitude_anao, postura_de_pedra, sopro_draco, truque_arcano, passos_faes, luzes_feericas, manto_sombras, canto_cativante, engenho_gnomesco, passos_silenciosos, fortalecer_familia, investida_coord, talento_variavel, harmonia_hibrida, tenacidade_implacavel, toque_igneo, lamina_das_chamas"
+        send "&7Use /racial <nome> para disparar via SkillAPI."
+    else:
+      send "&cVocê não possui uma raça configurada."
+
+command /sopro_draco:
+  trigger:
+    if player has permission "lp.race_draconato":
+      execute console command "{@skillcmd} %player% SoproDraconico"
+    else:
+      send "&cRequer sangue dracônico."
+
+command /fortitude_anao:
+  trigger:
+    if player has permission "lp.race_anao.colina":
+      execute console command "{@skillcmd} %player% FortitudeAncestral"
+    else:
+      send "&cSomente anões da colina."
+
+command /postura_pedra:
+  trigger:
+    if player has permission "lp.race_anao.montanha":
+      execute console command "{@skillcmd} %player% PosturaDePedra"
+    else:
+      send "&cSomente anões da montanha."
+
+command /truque_arcano:
+  trigger:
+    if player has permission "lp.race_elfo.alto":
+      execute console command "{@skillcmd} %player% TruqueArcano"
+    else:
+      send "&cSomente altos elfos."
+
+command /passos_faes:
+  trigger:
+    if player has permission "lp.race_elfo.floresta":
+      execute console command "{@skillcmd} %player% PassosFaes"
+    else:
+      send "&cSomente elfos da floresta."
+
+command /luzes_feericas:
+  trigger:
+    if player has permission "lp.race_elfo.drow":
+      execute console command "{@skillcmd} %player% LuzesFeericas"
+    else:
+      send "&cSomente drows."
+
+command /manto_sombras:
+  trigger:
+    if player has permission "lp.race_elfo.drow":
+      execute console command "{@skillcmd} %player% MantoSombras"
+    else:
+      send "&cSomente drows."
+
+command /canto_cativante:
+  trigger:
+    if player has permission "lp.race_gnomo.floresta":
+      execute console command "{@skillcmd} %player% CantoCativante"
+    else:
+      send "&cSomente gnomos da floresta."
+
+command /engenho_gnomesco:
+  trigger:
+    if player has permission "lp.race_gnomo.rocha":
+      execute console command "{@skillcmd} %player% EngenhoGnomesco"
+    else:
+      send "&cSomente gnomos da rocha."
+
+command /passos_silenciosos:
+  trigger:
+    if player has permission "lp.race_halfling.pesleves":
+      execute console command "{@skillcmd} %player% PassosSilenciosos"
+    else:
+      send "&cSomente halflings pés-leves."
+
+command /fortalecer_familia:
+  trigger:
+    if player has permission "lp.race_halfling.robusto":
+      execute console command "{@skillcmd} %player% FortalecerFamilia"
+    else:
+      send "&cSomente halflings robustos."
+
+command /investida_coord:
+  trigger:
+    if player has permission "lp.race_humano":
+      execute console command "{@skillcmd} %player% InvestidaCoordenada"
+    else:
+      send "&cSomente humanos."
+
+command /talento_variavel:
+  trigger:
+    if player has permission "lp.race_humano.variante":
+      execute console command "{@skillcmd} %player% TalentoVariavel"
+    else:
+      send "&cSomente humanos variantes."
+
+command /harmonia_hibrida:
+  trigger:
+    if player has permission "lp.race_meioelfo":
+      execute console command "{@skillcmd} %player% HarmoniaHibrida"
+    else:
+      send "&cSomente meio-elfos."
+
+command /tenacidade_implacavel:
+  trigger:
+    if player has permission "lp.race_meioorc":
+      execute console command "{@skillcmd} %player% TenacidadeImplacavel"
+    else:
+      send "&cSomente meio-orcs."
+
+command /toque_igneo:
+  trigger:
+    if player has permission "lp.race_tiefling":
+      execute console command "{@skillcmd} %player% ToqueIgneo"
+    else:
+      send "&cSomente tieflings."
+
+command /lamina_das_chamas:
+  trigger:
+    if player has permission "lp.race_tiefling":
+      execute console command "{@skillcmd} %player% LaminaDasChamas"
+    else:
+      send "&cSomente tieflings."
+
+function give_race_kit(p: player, raceKey: text):
+  delete {_kit::*}
+  if {_raceKey} is "anao_colina":
+    add "DwarvenFortitudeStone" to {_kit::*}
+  else if {_raceKey} is "anao_montanha":
+    add "MountainBastionCharm" to {_kit::*}
+  else if {_raceKey} is "draconato":
+    add "DraconicCharm" to {_kit::*}
+  else if {_raceKey} is "elfo_alto":
+    add "HighElfFoci" to {_kit::*}
+  else if {_raceKey} is "elfo_floresta":
+    add "ForestElfQuiver" to {_kit::*}
+  else if {_raceKey} is "elfo_drow":
+    add "DrowMoonbrooch" to {_kit::*}
+  else if {_raceKey} is "gnomo_floresta":
+    add "GnomeWhistle" to {_kit::*}
+  else if {_raceKey} is "gnomo_rocha":
+    add "GnomeGyroCore" to {_kit::*}
+  else if {_raceKey} is "halfling_pesleves":
+    add "HalflingLuckyCoin" to {_kit::*}
+  else if {_raceKey} is "halfling_robusto":
+    add "HalflingHearthLadle" to {_kit::*}
+  else if {_raceKey} is "humano":
+    add "HumanBannerSigil" to {_kit::*}
+  else if {_raceKey} is "humano_variante":
+    add "HumanVariantMedal" to {_kit::*}
+  else if {_raceKey} is "meio_elfo":
+    add "HalfElfHarmonyOrb" to {_kit::*}
+  else if {_raceKey} is "meio_orc":
+    add "HalfOrcBattleBrand" to {_kit::*}
+  else if {_raceKey} is "tiefling":
+    add "TieflingHellbrand" to {_kit::*}
+    add "TieflingSparkGlove" to {_kit::*}
+  if {_kit::*} is set:
+    loop {_kit::*}:
+      give {_p} mythicitem:%loop-value%
+    execute console command "raceseffects reset %uuid of {_p}%"
+    send "&aKit racial entregue e cooldowns resetados." to {_p}
+  else:
+    send "&cRaça desconhecida." to {_p}
+
+command /kit_racial_anao_colina:
+  trigger:
+    give_race_kit(player, "anao_colina")
+command /kit_racial_anao_montanha:
+  trigger:
+    give_race_kit(player, "anao_montanha")
+command /kit_racial_draconato:
+  trigger:
+    give_race_kit(player, "draconato")
+command /kit_racial_elfo_alto:
+  trigger:
+    give_race_kit(player, "elfo_alto")
+command /kit_racial_elfo_floresta:
+  trigger:
+    give_race_kit(player, "elfo_floresta")
+command /kit_racial_elfo_drow:
+  trigger:
+    give_race_kit(player, "elfo_drow")
+command /kit_racial_gnomo_floresta:
+  trigger:
+    give_race_kit(player, "gnomo_floresta")
+command /kit_racial_gnomo_rocha:
+  trigger:
+    give_race_kit(player, "gnomo_rocha")
+command /kit_racial_halfling_pesleves:
+  trigger:
+    give_race_kit(player, "halfling_pesleves")
+command /kit_racial_halfling_robusto:
+  trigger:
+    give_race_kit(player, "halfling_robusto")
+command /kit_racial_humano:
+  trigger:
+    give_race_kit(player, "humano")
+command /kit_racial_humano_variante:
+  trigger:
+    give_race_kit(player, "humano_variante")
+command /kit_racial_meio_elfo:
+  trigger:
+    give_race_kit(player, "meio_elfo")
+command /kit_racial_meio_orc:
+  trigger:
+    give_race_kit(player, "meio_orc")
+command /kit_racial_tiefling:
+  trigger:
+    give_race_kit(player, "tiefling")
+
+on damage:
+  if attacker is a player:
+    set {racial.combat.%attacker%} to now
+
+on any move:
+  if {racial.combat.%player%} is set:
+    if difference between now and {racial.combat.%player%} > 15 seconds:
+      delete {racial.combat.%player%}
+      execute console command "raceseffects charges %player% regen"
+      send action bar "&aCargas raciais regeneradas." to player

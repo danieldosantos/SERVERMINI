@@ -1,0 +1,34 @@
+# Skills raciais dos tieflings.
+skills:
+  ToqueIgneo:
+    display: "&cToque Ígneo"
+    type: ACTIVE
+    description: "Golpe flamejante corpo-a-corpo com queimadura."
+    tiers:
+      T1: { cooldown: 60, damage_multiplier: 1.3, burn: 0.18 }
+      T2: { cooldown: 60, damage_multiplier: 1.35, burn: 0.2 }
+      T3: { cooldown: 55, damage_multiplier: 1.4, burn: 0.22 }
+      T4: { cooldown: 50, damage_multiplier: 1.45, burn: 0.25 }
+    cost:
+      resource: mana
+      amount: 15
+    effects:
+      target: melee_single
+      type: strike
+      notes: "PvP limita dano extra a 120% e burn a 0.12."
+  LaminaDasChamas:
+    display: "&6Lâmina das Chamas"
+    type: ACTIVE
+    description: "Conjura espada de fogo temporária."
+    tiers:
+      T1: { cooldown: 120, duration: 12, damage_bonus: 0.1 }
+      T2: { cooldown: 115, duration: 12, damage_bonus: 0.11 }
+      T3: { cooldown: 110, duration: 12, damage_bonus: 0.12 }
+      T4: { cooldown: 105, duration: 12, damage_bonus: 0.13 }
+    cost:
+      resource: mana
+      amount: 30
+    effects:
+      target: self
+      type: weapon_enchant
+      notes: "Cada ataque aplica DoT de fogo leve; PvP reduz bônus para 6-8%."

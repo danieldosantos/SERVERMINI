@@ -1,0 +1,55 @@
+# Raça: Draconato
+# Fantasia: descendentes dracônicos dominando sopros elementais.
+race_id: draconato
+name: "Draconato"
+identity: "Guerreiros escamados que canalizam o poder de seu ancestral dracônico."
+luckperms:
+  required: "race_draconato"
+  inherit: null
+tags:
+  - dragonborn
+placeholders:
+  racial_cd_main: "{cooldown:skill_sopro_draconico}"
+passives:
+  escamas_elementais:
+    name: "Escamas Elementais"
+    type: timed_attribute
+    trigger: damage_elemental
+    duration: 10
+    cooldown: 45
+    uptime_cap: 0.45
+    attributes:
+      mitigation_elemental: 0.15
+    diminishing_returns: elemental
+    description: "Ao receber dano do elemento do clã, ativa mitigação de 15% por 10s."
+  sangue_ardente:
+    name: "Sangue Ardente"
+    type: damage_bonus
+    trigger: health_threshold:0.5
+    duration: 8
+    cooldown: 60
+    uptime_cap: 0.4
+    bonus_percent: 0.12
+    description: "Abaixo de 50% de vida causa +12% de dano elemental relacionado."
+actives:
+  sopro_draconico:
+    name: "Sopro Dracônico"
+    skill: SoproDraconico
+    cooldown: 60
+    charges: 1
+    description: "Cone de 6 blocos com 130% do poder elemental, aplica queimadura/choque/gelar conforme sub-tipo."
+resistances:
+  elemental:
+    base: 0.2
+    max: 0.45
+    notes: "Restringir empilhamento com equipamentos elementais via DR progressiva."
+synergy_notes:
+  - "Build sugerida: Guerreiro elemental com foco em golpes carregados aproveita Sangue Ardente para bursts controlados."
+  - "Restrição: Warlocks de fogo convertem resistência excedente em chance de dissipar queimadura (não imunidade)."
+tests:
+  pve:
+    - "Limpar sala de elementais em 2 rotações de sopro (DPS alvo 140% do baseline T2)."
+    - "Sobreviver a rajadas de fogo contínuas sem ultrapassar 40% de mitigação combinada."
+  pvp:
+    - "Arena 1v1: abrir com Sopro + burst, TTK mínimo 12s no alvo com mitigação média."
+    - "Teamfight 5v5: usar Sopro como ferramenta de zoneamento sem one-shot (cone 6 blocos)."

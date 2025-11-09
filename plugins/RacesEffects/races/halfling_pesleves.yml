@@ -1,0 +1,53 @@
+# Raça: Halfling Pés-Leves
+# Fantasia: astutos viajantes que escapam por pouco de perigos.
+race_id: halfling_pesleves
+name: "Halfling Pés-Leves"
+identity: "Trapaceiros sortudos capazes de desaparecer em um piscar de olhos."
+luckperms:
+  required: "race_halfling.pesleves"
+  inherit: "race_halfling"
+tags:
+  - halfling
+placeholders:
+  racial_cd_main: "{cooldown:skill_passos_silenciosos}"
+passives:
+  sorte_halfling:
+    name: "Sorte Halfling"
+    type: dodge_proc
+    trigger: hit_taken
+    duration: 0
+    cooldown: 18
+    uptime_cap: 0.3
+    dodge_chance: 0.35
+    description: "Pode evitar um golpe a cada 18s, convertendo-o em 0 de dano (não funciona em ultimates)."
+  passo_suave:
+    name: "Passo Suave"
+    type: stealth_bonus
+    trigger: crouch
+    duration: 12
+    cooldown: 45
+    uptime_cap: 0.45
+    stealth_bonus: 0.4
+    description: "Agachar concede camuflagem de 40% por 12s e reduz ruído de passos."
+actives:
+  passos_silenciosos:
+    name: "Passos Silenciosos"
+    skill: PassosSilenciosos
+    cooldown: 75
+    charges: 2
+    description: "Dash lateral de 5 blocos que deixa imagem residual confundindo inimigos (PvP desorienta 1.5s)."
+resistances:
+  mental:
+    base: 0.05
+    max: 0.25
+    notes: "Pequena resistência a medo/charme; aplica DR com classes ladinas."
+synergy_notes:
+  - "Build saudável: Ladino de mobilidade com foco em deslocamentos e escape de bursts."
+  - "Restrição: invisibilidade total de classes sombra reduzida para 60% quando combinada."
+tests:
+  pve:
+    - "Fuga de dungeon com armadilhas, testar Sorte Halfling evitando 1 golpe a cada 18s."
+    - "Evento escolta stealth, medir camuflagem média em Passo Suave."
+  pvp:
+    - "Duelo vs guerreiro agressivo; sobreviver 25s usando evasão e dash."
+    - "Capture the flag: infiltrar base inimiga sem ultrapassar caps de velocidade/camuflagem."

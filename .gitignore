@@ -66,6 +66,8 @@ plugins/**
 !plugins/MythicMobs/**
 !plugins/LuckPerms/
 !plugins/LuckPerms/**
+!plugins/RacesEffects/
+!plugins/RacesEffects/**
 !plugins/*.yml       # manter YAMLs principais de plugins (caso queira versionar configs)
 !plugins/*.json
 !plugins/**/*.sk     # versionar scripts do Skript quando necessario

@@ -1,0 +1,158 @@
+# Itens raciais vinculados às habilidades e permissões LuckPerms.
+items:
+  DwarvenFortitudeStone:
+    Id: NETHERITE_BLOCK
+    Display: '&6Pedra da Fortitude'
+    Lore:
+      - '&7Um fragmento da muralha ancestral.'
+      - '&eClique direito:&f ativa Fortitude Anã.'
+      - '&8Uso restrito aos Anões da Colina.'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+    Enchantments:
+      - DURABILITY:5
+    NBT:
+      race-lock: 'race_anao.colina'
+      skill: 'FortitudeAncestral'
+  MountainBastionCharm:
+    Id: SHULKER_SHELL
+    Display: '&7Totem da Postura'
+    Lore:
+      - '&7Pedra que estabiliza o portador.'
+      - '&eClique direito:&f Postura de Pedra.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_anao.montanha'
+      skill: 'PosturaDePedra'
+  DraconicCharm:
+    Id: BLAZE_ROD
+    Display: '&cTalismã Dracônico'
+    Lore:
+      - '&6Respira o elemento ancestral.'
+      - '&eClique direito:&f usa Sopro Dracônico.'
+    Enchantments:
+      - FIRE_ASPECT:2
+    NBT:
+      race-lock: 'race_draconato'
+      skill: 'SoproDraconico'
+  HighElfFoci:
+    Id: ENDER_EYE
+    Display: '&dFoco Arcano Élfico'
+    Lore:
+      - '&dPermite canalizar Truques Arcanos.'
+      - '&eClique:&f lança Truque Arcano.'
+    NBT:
+      race-lock: 'race_elfo.alto'
+      skill: 'TruqueArcano'
+  ForestElfQuiver:
+    Id: FEATHER
+    Display: '&aPluma dos Bosques'
+    Lore:
+      - '&7Cheira a folhas úmidas.'
+      - '&eSneak + clique:&f Passos Feéricos.'
+    NBT:
+      race-lock: 'race_elfo.floresta'
+      skill: 'PassosFaes'
+  DrowMoonbrooch:
+    Id: AMETHYST_SHARD
+    Display: '&5Broche da Lua Profunda'
+    Lore:
+      - '&5Sussurra segredos das casas subterrâneas.'
+      - '&eClique:&f aciona Luzes Feéricas.'
+    NBT:
+      race-lock: 'race_elfo.drow'
+      skill: 'LuzesFeericas'
+  GnomeWhistle:
+    Id: MUSIC_DISC_FAR
+    Display: '&bApito Encantador'
+    Lore:
+      - '&bChama aliados peludos temporários.'
+      - '&eClique:&f usa Canto Cativante.'
+    NBT:
+      race-lock: 'race_gnomo.floresta'
+      skill: 'CantoCativante'
+  GnomeGyroCore:
+    Id: REDSTONE_TORCH
+    Display: '&7Núcleo Girognomo'
+    Lore:
+      - '&7Energia comprimida para drones protetores.'
+      - '&eClique:&f Engenho Gnomesco.'
+    NBT:
+      race-lock: 'race_gnomo.rocha'
+      skill: 'EngenhoGnomesco'
+  HalflingLuckyCoin:
+    Id: SUNFLOWER
+    Display: '&eMoeda da Sorte'
+    Lore:
+      - '&eGira entre os dedos com facilidade.'
+      - '&eClique:&f Passos Silenciosos.'
+    NBT:
+      race-lock: 'race_halfling.pesleves'
+      skill: 'PassosSilenciosos'
+  HalflingHearthLadle:
+    Id: BOWL
+    Display: '&6Concha de Lar'
+    Lore:
+      - '&6Serve guisado milagroso.'
+      - '&eClique:&f Fortalecer a Família.'
+    NBT:
+      race-lock: 'race_halfling.robusto'
+      skill: 'FortalecerFamilia'
+  HumanBannerSigil:
+    Id: PAPER
+    Display: '&fEstandarte Coordenado'
+    Lore:
+      - '&fSinaliza a hora de avançar.'
+      - '&eClique:&f Investida Coordenada.'
+    NBT:
+      race-lock: 'race_humano'
+      skill: 'InvestidaCoordenada'
+  HumanVariantMedal:
+    Id: GOLD_NUGGET
+    Display: '&eMedalhão de Talento'
+    Lore:
+      - '&eRepresenta talento escolhido.'
+      - '&eClique:&f ativa Talento Variável.'
+    NBT:
+      race-lock: 'race_humano.variante'
+      skill: 'TalentoVariavel'
+  HalfElfHarmonyOrb:
+    Id: HEART_OF_THE_SEA
+    Display: '&dOrbe da Harmonia'
+    Lore:
+      - '&dPulsa ao ritmo de duas linhagens.'
+      - '&eClique:&f Harmonia Híbrida.'
+    NBT:
+      race-lock: 'race_meioelfo'
+      skill: 'HarmoniaHibrida'
+  HalfOrcBattleBrand:
+    Id: IRON_AXE
+    Display: '&4Marca de Guerra'
+    Lore:
+      - '&4Bate no peito evocando tenacidade.'
+      - '&eClique:&f prepara Tenacidade Implacável.'
+    Options:
+      Unbreakable: true
+    NBT:
+      race-lock: 'race_meioorc'
+      skill: 'TenacidadeImplacavel'
+  TieflingHellbrand:
+    Id: BLAZE_POWDER
+    Display: '&cMarca Infernal'
+    Lore:
+      - '&cCheira a enxofre.'
+      - '&eClique:&f conjura Lâmina das Chamas.'
+    NBT:
+      race-lock: 'race_tiefling'
+      skill: 'LaminaDasChamas'
+  TieflingSparkGlove:
+    Id: LEATHER
+    Display: '&cManopla Ígnea'
+    Lore:
+      - '&cMantém brasas constantes.'
+      - '&eClique esquerdo:&f Toque Ígneo.'
+    NBT:
+      race-lock: 'race_tiefling'
+      skill: 'ToqueIgneo'

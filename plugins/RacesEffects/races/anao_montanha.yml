@@ -1,0 +1,56 @@
+# Raça: Anão da Montanha (Mountain Dwarf)
+# Fantasia: muralhas vivas com pele de pedra e disciplina marcial.
+race_id: anao_montanha
+name: "Anão da Montanha"
+identity: "Guardiões de bastiões, com peles endurecidas pela pressão das cavernas profundas."
+luckperms:
+  required: "race_anao.montanha"
+  inherit: "race_anao"
+tags:
+  - dwarf
+placeholders:
+  racial_cd_main: "{cooldown:skill_postura_de_pedra}"
+passives:
+  pele_de_granito:
+    name: "Pele de Granito"
+    type: timed_attribute
+    trigger: hit_taken
+    duration: 10
+    cooldown: 45
+    uptime_cap: 0.5
+    attributes:
+      mitigation_physical: 0.12
+      knockback_resist: 0.4
+    diminishing_returns: physical
+    description: "Após sofrer dano, ganha 12% de mitigação física e 40% de resistência a empurrões por 10s."
+  olhos_da_forja:
+    name: "Olhos da Forja"
+    type: darkvision
+    trigger: time:night
+    duration: 30
+    cooldown: 60
+    uptime_cap: 0.5
+    range: 18
+    description: "Visão aprimorada subterrânea (alcance 18 blocos) à noite/ambientes escuros."
+actives:
+  postura_de_pedra:
+    name: "Postura de Pedra"
+    skill: PosturaDePedra
+    cooldown: 90
+    charges: 1
+    description: "Reduz empurrões e converte 15% de dano físico em absorção por 8s."
+resistances:
+  physical:
+    base: 0.08
+    max: 0.45
+    notes: "Soma-se com tanques, aplicar DR ao exceder 30%."
+synergy_notes:
+  - "Combina com classes corpo-a-corpo pesadas; incentivo a usar Postura de Pedra antes de investidas."
+  - "Restrição: classes com escudos mágicos convertem mitigação excedente em estabilidade (sem stack infinito)."
+tests:
+  pve:
+    - "Tankar golemo do Tier 3 durante 45s sem ultrapassar 42% de mitigação."
+    - "Manter controle de chefe que empurra (verificar resistência a knockback na janela ativa)."
+  pvp:
+    - "1v1 vs guerreiro empurrador em arena elevada, evitar queda por 60s."
+    - "Captura de bandeira defendendo choke com Postura ativa (uptime 8s / CD 90s)."
