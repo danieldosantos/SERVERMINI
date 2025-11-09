@@ -1,0 +1,351 @@
+# Habilidades do Juramento da Devoção.
+skills:
+  GolpeSagrado:
+    display: "&eGolpe Sagrado"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_golpe_sagrado
+    description: |
+      Variante consagrada do Golpe Divino que causa +100% de dano radiante adicional
+      e reduz em 10% a resistência mágica do alvo por 4s.
+    tiers:
+      T1: { cooldown: 45, duration: 4, damage_multiplier: 2.0, resist_shred: 0.10 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      trigger: next_melee_hit
+      damage:
+        type: radiant
+        multiplier: 2.0
+      debuffs:
+        - type: magic_resist_down
+          value: 0.10
+          duration: 4
+    tags: [melee, radiant, debuff]
+    notes:
+      pvp: "Redução de resistência limitada a 7% contra jogadores."
+
+  LuzOrientadora:
+    display: "&fLuz Orientadora"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_luz_orientadora
+    description: |
+      Revela e marca um alvo por 8s, concedendo +10% de chance de crítico para aliados
+      contra ele.
+    tiers:
+      T1: { cooldown: 60, duration: 8, crit_bonus: 0.10 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      mark: true
+      duration: 8
+      ally_crit: 0.10
+      range: 20
+    tags: [utility, mark]
+    notes:
+      pvp: "Bônus de crítico reduzido para 6% em arenas."
+
+  VotoDePureza:
+    display: "&bVoto de Pureza"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_voto_de_pureza
+    description: |
+      Garante imunidade a veneno e medo para o paladino por 6s.
+    tiers:
+      T1: { cooldown: 75, duration: 6 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      self_buff: true
+      duration: 6
+      immunity: [poison, fear]
+    tags: [defense, self]
+    notes:
+      pvp: "Aplica cooldown compartilhado com outras imunidades para evitar abuso."
+
+  EscudoDevoto:
+    display: "&bEscudo Devoto"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_escudo_devoto
+    description: |
+      Reflete 20% do dano mágico recebido por 6s.
+    tiers:
+      T1: { cooldown: 90, duration: 6, reflect: 0.20 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      reflect:
+        type: magic
+        ratio: 0.20
+      duration: 6
+    tags: [defense, reactive]
+    notes:
+      pvp: "Reflexão reduzida para 12% em batalhas jogador vs jogador."
+
+  AuraDePureza:
+    display: "&6Aura de Pureza"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_aura_de_pureza
+    description: |
+      Aura de 6 blocos por 10s que reduz em 20% o dano elemental recebido por aliados.
+    tiers:
+      T2: { cooldown: 90, duration: 10, radius: 6, elemental_reduction: 0.20 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      aura: true
+      radius: 6
+      duration: 10
+      elemental_reduction: 0.20
+    tags: [aura, defense]
+    notes:
+      pvp: "Redução efetiva limitada a 15% em arenas."
+
+  SeloDaVerdade:
+    display: "&fSelo da Verdade"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_selo_da_verdade
+    description: |
+      Próximo ataque além do dano normal dissipa um buff leve do alvo.
+    tiers:
+      T2: { cooldown: 75, dispel: 1 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      trigger: next_melee_hit
+      dispel: 1
+    tags: [anti_buff, melee]
+    notes:
+      pvp: "Não remove efeitos de ultimate; respeita imunidades temporárias."
+
+  LampadaDeVigilia:
+    display: "&eLâmpada de Vigília"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_lampada_de_vigilia
+    description: |
+      Invoca tocha sagrada por 8s que revela inimigos e reduz sua precisão em 10%.
+    tiers:
+      T2: { cooldown: 60, duration: 8, radius: 6, accuracy_down: 0.10 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      deploy_totem: true
+      radius: 6
+      duration: 8
+      reveal: true
+      debuffs:
+        - type: accuracy_down
+          value: 0.10
+          duration: 2
+    tags: [utility, zone]
+    notes:
+      pvp: "Debuff de precisão cai para 6% em arenas."
+
+  ProtecaoSacra:
+    display: "&bProteção Sacra"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_protecao_sacra
+    description: |
+      Concede 150 pontos de escudo ao aliado alvo instantaneamente.
+    tiers:
+      T2: { cooldown: 60, shield: 150 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      shield: 150
+      range: 12
+    tags: [shield, support]
+    notes:
+      pvp: "Escudo reduzido para 120 em conteúdo competitivo."
+
+  OrdemConsagrada:
+    display: "&6Ordem Consagrada"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_ordem_consagrada
+    description: |
+      Aliados em 6 blocos recebem +15% de penetração mágica por 8s.
+    tiers:
+      T3: { cooldown: 90, duration: 8, radius: 6, penetration_bonus: 0.15 }
+    cost:
+      resource: mana
+      amount: 30
+    effects:
+      aura: true
+      radius: 6
+      duration: 8
+      penetration_bonus: 0.15
+    tags: [buff, aura]
+    notes:
+      pvp: "Bônus limitado a 10% para PvP organizado."
+
+  RepelirProfano:
+    display: "&eRepelir Profano"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_repelir_profano
+    description: |
+      Onda repelente que empurra inimigos próximos e reduz seu dano em 10% por 6s.
+    tiers:
+      T3: { cooldown: 75, radius: 5, damage_down: 0.10, duration: 6 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      radius: 5
+      knockback: true
+      debuffs:
+        - type: damage_down
+          value: 0.10
+          duration: 6
+    tags: [control, debuff]
+    notes:
+      pvp: "Aplica imunidade decrescente a empurrões por 12s."
+
+  CirculoDeLuz:
+    display: "&aCírculo de Luz"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_circulo_de_luz
+    description: |
+      Consagra o solo por 8s, curando aliados em 4% da vida por segundo.
+    tiers:
+      T3: { cooldown: 105, duration: 8, heal_tick: 0.04, radius: 6 }
+    cost:
+      resource: mana
+      amount: 30
+    effects:
+      radius: 6
+      duration: 8
+      heal_per_second: 0.04
+    tags: [zone, heal]
+    notes:
+      pvp: "Cura reduzida para 3% por segundo em arenas."
+
+  SentencaDePureza:
+    display: "&eSentença de Pureza"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_sentenca_de_pureza
+    description: |
+      Golpe radiante de 140%; remove medo ou veneno do alvo e causa +20% se removido.
+    tiers:
+      T3: { cooldown: 60, damage_multiplier: 1.4, bonus_vs_afflicted: 0.20 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      damage:
+        type: radiant
+        multiplier: 1.4
+      conditional_bonus:
+        status: [fear, poison]
+        bonus: 0.20
+        cleanse: true
+    tags: [burst, radiant]
+    notes:
+      pvp: "Bônus reduzido para 12% contra jogadores."
+
+  MilagreDaFe:
+    display: "&aMilagre da Fé"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_milagre_da_fe
+    description: |
+      Canaliza luz por 6s curando 20% da vida por segundo em aliados próximos e concedendo
+      imunidade a medo e charme durante o efeito.
+    tiers:
+      T4: { cooldown: 240, duration: 6, heal_tick: 0.20, radius: 8 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      radius: 8
+      duration: 6
+      heal_per_second: 0.20
+      immunities: [fear, charm]
+    tags: [ultimate, heal]
+    notes:
+      pvp: "Cura por segundo reduzida para 15% em arenas; imunidades permanecem."
+
+  VotoInquebravavel:
+    display: "&6Voto Inquebrável"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_voto_inquebravavel
+    description: |
+      Impede o paladino de cair abaixo de 1 de vida por 10s (não renova).
+    tiers:
+      T4: { cooldown: 210, duration: 10 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      self_buff: true
+      duration: 10
+      cheat_death: true
+    tags: [ultimate, defense]
+    notes:
+      pvp: "Após expirar, aplica fadiga -20% dano causado por 6s."
+
+  LuzAbsoluta:
+    display: "&fLuz Absoluta"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_luz_absoluta
+    description: |
+      Emite clarão que cega inimigos por até 2.5s e reduz em 15% suas resistências por 8s.
+    tiers:
+      T4: { cooldown: 120, radius: 6, blind: 2.5, resistance_down: 0.15, duration: 8 }
+    cost:
+      resource: mana
+      amount: 35
+    effects:
+      radius: 6
+      blind: 2.5
+      debuffs:
+        - type: resistance_down
+          value: 0.15
+          duration: 8
+    tags: [control, debuff]
+    notes:
+      pvp: "Cegueira dura máximo 1.5s com imunidade decrescente."
+
+  EstandarteDaVirtude:
+    display: "&6Estandarte da Virtude"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_estandarte_da_virtude
+    description: |
+      Estandarte de 8 blocos por 12s concedendo +15% de cura recebida e +10% mitigação
+      aos aliados.
+    tiers:
+      T4: { cooldown: 120, duration: 12, radius: 8, healing_bonus: 0.15, mitigation: 0.10 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      deploy_banner: true
+      radius: 8
+      duration: 12
+      buff:
+        healing_received: 0.15
+        mitigation: 0.10
+    tags: [aura, banner]
+    notes:
+      pvp: "Mitigação reduzida para 7% em arenas."

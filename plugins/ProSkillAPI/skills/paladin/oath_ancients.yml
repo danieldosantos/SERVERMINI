@@ -1,0 +1,342 @@
+# Habilidades do Juramento dos Anciões.
+skills:
+  VinhaRestritiva:
+    display: "&2Vinha Restritiva"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_vinha_restritiva
+    description: |
+      Invoca vinhas naturais que enraízam o alvo por 2s e reduzem seu dano em 10% por 6s.
+    tiers:
+      T1: { cooldown: 60, root: 2, damage_down: 0.10, duration: 6 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      root: 2
+      debuffs:
+        - type: damage_down
+          value: 0.10
+          duration: 6
+    tags: [control, nature]
+    notes:
+      pvp: "Raiz reduzida para 1.5s e aplica imunidade decrescente."
+
+  AuraDaNatureza:
+    display: "&aAura da Natureza"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_aura_da_natureza
+    description: |
+      Concede +10% de resistência elemental a aliados em 6 blocos por 8s.
+    tiers:
+      T1: { cooldown: 90, duration: 8, radius: 6, elemental_resist: 0.10 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      aura: true
+      radius: 6
+      duration: 8
+      elemental_resist: 0.10
+    tags: [aura, defense]
+    notes:
+      pvp: "Resistência limitada a 7% em arenas para evitar sobreposição."
+
+  LuzRadiante:
+    display: "&fLuz Radiante"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_luz_radiante
+    description: |
+      Cega inimigos por 2s e concede regeneração de 4% por segundo a aliados por 4s.
+    tiers:
+      T1: { cooldown: 75, blind: 2, regen: 0.04, duration: 4, radius: 6 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      radius: 6
+      blind: 2
+      ally_regen: 0.04
+      duration: 4
+    tags: [utility, heal]
+    notes:
+      pvp: "Cegueira cai para 1s e regen 3% em arenas."
+
+  AsasDeSafira:
+    display: "&bAsas de Safira"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_asas_de_safira
+    description: |
+      Permite planar por 3s com bônus de velocidade de 0.03.
+    tiers:
+      T1: { cooldown: 60, duration: 3, speed_bonus: 0.03 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      glide: true
+      duration: 3
+      speed_bonus: 0.03
+    tags: [mobility]
+    notes:
+      pvp: "Velocidade respeita cap +0.05 global."
+
+  BencaoVerdejante:
+    display: "&aBenção Verdejante"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_bencao_verdejante
+    description: |
+      Cura 18% da vida do aliado alvo e remove queimaduras ou venenos.
+    tiers:
+      T2: { cooldown: 75, heal_percent: 0.18 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      heal_percent: 0.18
+      cleanse: [burn, poison]
+      range: 12
+    tags: [heal, cleanse]
+    notes:
+      pvp: "Cura reduzida para 14% em arenas."
+
+  SementeReconstituinte:
+    display: "&2Semente Reconstituinte"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_semente_reconstituinte
+    description: |
+      Implanta semente que após 6s cura 12% de vida de aliados em 6 blocos.
+    tiers:
+      T2: { cooldown: 90, delay: 6, heal_percent: 0.12, radius: 6 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      delayed_heal: 6
+      heal_percent: 0.12
+      radius: 6
+    tags: [heal, delayed]
+    notes:
+      pvp: "Cura cai para 8% em arenas."
+
+  ArmaduraDeMusgo:
+    display: "&aArmadura de Musgo"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_armadura_de_musgo
+    description: |
+      Concede 150 de escudo e -10% de dano recebido por 6s ao alvo aliado.
+    tiers:
+      T2: { cooldown: 75, shield: 150, mitigation: 0.10, duration: 6 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      shield: 150
+      mitigation: 0.10
+      duration: 6
+      range: 12
+    tags: [shield, defense]
+    notes:
+      pvp: "Escudo cai para 120 em arenas competitivas."
+
+  ChamadoSilvestre:
+    display: "&aChamado Silvestre"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_chamado_silvestre
+    description: |
+      Evoca sprites por 8s que curam 3% por segundo o aliado mais ferido próximo.
+    tiers:
+      T2: { cooldown: 105, duration: 8, heal_tick: 0.03 }
+    cost:
+      resource: mana
+      amount: 30
+    effects:
+      pet_heal: true
+      duration: 8
+      heal_per_second: 0.03
+    tags: [heal, sustain]
+    notes:
+      pvp: "Cura reduzida para 2% por segundo contra jogadores."
+
+  MuralhaEsmeralda:
+    display: "&2Muralha Esmeralda"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_muralha_esmeralda
+    description: |
+      Cria domo de 6 blocos por 8s reduzindo projéteis em 50%.
+    tiers:
+      T3: { cooldown: 105, duration: 8, radius: 6, projectile_reduction: 0.50 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      dome: true
+      radius: 6
+      duration: 8
+      projectile_reduction: 0.50
+    tags: [zone, defense]
+    notes:
+      pvp: "Redução limitada a 35% em arenas."
+
+  CoroDaVida:
+    display: "&aCoro da Vida"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_coro_da_vida
+    description: |
+      Aura de 6 blocos por 10s que aumenta cura recebida em 15%.
+    tiers:
+      T3: { cooldown: 90, duration: 10, radius: 6, healing_bonus: 0.15 }
+    cost:
+      resource: mana
+      amount: 30
+    effects:
+      aura: true
+      radius: 6
+      duration: 10
+      healing_received: 0.15
+    tags: [aura, heal]
+    notes:
+      pvp: "Bônus cai para 10% em arenas."
+
+  RaizesAntigas:
+    display: "&2Raízes Antigas"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_raizes_antigas
+    description: |
+      Cria linha de raízes que puxa levemente inimigos e reduz velocidade em 30% por 6s.
+    tiers:
+      T3: { cooldown: 75, pull: 1, slow: 0.30, duration: 6 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      line: true
+      pull: 1
+      slow: 0.30
+      duration: 6
+    tags: [control]
+    notes:
+      pvp: "Lentidão ajustada para 20% em arenas."
+
+  LuzDoBosque:
+    display: "&aLuz do Bosque"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_luz_do_bosque
+    description: |
+      Remove um debuff a cada 3s (máx. 2) de aliados em 6 blocos.
+    tiers:
+      T3: { cooldown: 105, duration: 6, radius: 6, cleanse_ticks: 2 }
+    cost:
+      resource: mana
+      amount: 30
+    effects:
+      radius: 6
+      duration: 6
+      cleanse_interval: 3
+      cleanse_count: 2
+    tags: [cleanse, aura]
+    notes:
+      pvp: "Compartilha imunidade de 12s contra o mesmo debuff."
+
+  HarmoniaPrimordial:
+    display: "&2Harmonia Primordial"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_harmonia_primordial
+    description: |
+      Cria círculo de 8 blocos por 12s concedendo +25% cura recebida e -15% dano sofrido
+      por aliados.
+    tiers:
+      T4: { cooldown: 240, duration: 12, radius: 8, healing_bonus: 0.25, mitigation: 0.15 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      radius: 8
+      duration: 12
+      buff:
+        healing_received: 0.25
+        mitigation: 0.15
+    tags: [ultimate, aura]
+    notes:
+      pvp: "Mitigação limitada a 12% em arenas para manter cap global."
+
+  SalvaDePolen:
+    display: "&eSalva de Pólen"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_salva_de_polen
+    description: |
+      Lança pólen em 6 blocos reduzindo resistências em 15% e ofuscando por 2s.
+    tiers:
+      T4: { cooldown: 120, radius: 6, resistance_down: 0.15, blind: 2 }
+    cost:
+      resource: mana
+      amount: 35
+    effects:
+      radius: 6
+      debuffs:
+        - type: resistance_down
+          value: 0.15
+          duration: 8
+        - type: blind
+          value: 2
+    tags: [debuff, control]
+    notes:
+      pvp: "Resistência reduzida para 10% e ofuscamento 1.5s em arenas."
+
+  ChamadoDasRaizes:
+    display: "&2Chamado das Raízes"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_chamado_das_raizes
+    description: |
+      Enraíza inimigos em 6 blocos por 2s e aplica -10% penetração por 8s.
+    tiers:
+      T4: { cooldown: 120, radius: 6, root: 2, penetration_down: 0.10, duration: 8 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      radius: 6
+      root: 2
+      debuffs:
+        - type: penetration_down
+          value: 0.10
+          duration: 8
+      diminishing: true
+    tags: [control, debuff]
+    notes:
+      pvp: "Raiz cai para 1.5s com DR acumulativa."
+
+  BencaoAntediluviana:
+    display: "&aBenção Antediluviana"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_bencao_antediluviana
+    description: |
+      Cura instantaneamente 20% da vida e concede +10% mitigação por 8s ao aliado.
+    tiers:
+      T4: { cooldown: 90, heal_percent: 0.20, mitigation: 0.10, duration: 8 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      heal_percent: 0.20
+      mitigation: 0.10
+      duration: 8
+      range: 12
+    tags: [heal, defense]
+    notes:
+      pvp: "Cura reduzida para 16% em arenas; mitigação limitada a 7%."

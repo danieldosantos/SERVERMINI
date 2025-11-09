@@ -1,0 +1,349 @@
+# Habilidades comuns do Paladino organizadas por tier.
+skills:
+  GolpeDivino:
+    display: "&eGolpe Divino"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_golpe_divino
+    description: |
+      Imbui o próximo ataque corpo a corpo com energia radiante, causando +100% de dano
+      adicional e exibindo partículas douradas no impacto. Consome 1 carga de Fé.
+    tiers:
+      T1: { cooldown: 45, duration: 12, damage_multiplier: 2.0 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      trigger: next_melee_hit
+      damage:
+        type: radiant
+        multiplier: 2.0
+      particles: "SPELL_INSTANT"
+    tags: [melee, radiant, burst]
+    notes:
+      pvp: "Limite de dano final travado em 150% do dano base contra jogadores."
+
+  ImposicaoMenor:
+    display: "&aImposição Menor"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_imposicao_menor
+    description: |
+      Canaliza luz restauradora no alvo aliado, curando 16% da vida máxima e removendo
+      um efeito negativo leve. Possui duas cargas independentes.
+    tiers:
+      T1: { cooldown: 30, duration: 0, charges: 2, recharge: 180, heal_percent: 0.16 }
+    cost:
+      resource: charges
+      amount: 1
+      key: imposicao_menor
+    effects:
+      target: ally
+      range: 10
+      heal_percent: 0.16
+      cleanse: 1
+    tags: [heal, support, cleanse]
+    notes:
+      pvp: "Cura reduzida para 12% em alvos jogadores; imunidade compartilhada de dispel por 8s."
+
+  SeloProtetor:
+    display: "&bSelo Protetor"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_selo_protetor
+    description: |
+      Ergue um selo que protege aliados próximos, concedendo +10% mitigação de dano por 10s
+      dentro de 6 blocos.
+    tiers:
+      T1: { cooldown: 75, duration: 10, radius: 6, mitigation: 0.10 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      aura: true
+      radius: 6
+      duration: 10
+      mitigation: 0.10
+    tags: [defense, aura]
+    notes:
+      pvp: "Mitigação efetiva limitada a 35% quando somada com outros redutores."
+
+  LuzSagrada:
+    display: "&fLuz Sagrada"
+    type: ACTIVE
+    tier: T1
+    skill-id: paladin_luz_sagrada
+    description: |
+      Emite um clarão que revela inimigos furtivos e invisíveis em 8 blocos por 6s.
+    tiers:
+      T1: { cooldown: 60, duration: 6, radius: 8 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      radius: 8
+      reveal: true
+      duration: 6
+    tags: [utility, detection]
+    notes:
+      pvp: "Aplica ofuscamento leve (1s) apenas no alvo inicial em arenas rankeadas."
+
+  RepreensaoSagrada:
+    display: "&eRepreensão Sagrada"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_repreensao_sagrada
+    description: |
+      Explode energia radiante em 5 blocos, causando 120% de dano radiante e reduzindo em
+      10% o dano causado pelos inimigos por 6s.
+    tiers:
+      T2: { cooldown: 60, radius: 5, damage_multiplier: 1.2, debuff_duration: 6, damage_reduction: 0.10 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      radius: 5
+      damage:
+        type: radiant
+        multiplier: 1.2
+      debuffs:
+        - type: damage_down
+          value: 0.10
+          duration: 6
+    tags: [burst, radiant, debuff]
+    notes:
+      pvp: "Redução de dano limitada a 7% em PvP para evitar stacking excessivo."
+
+  JuramentoDeGuarda:
+    display: "&6Juramento de Guarda"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_juramento_de_guarda
+    description: |
+      Marca um aliado e redireciona 20% do dano recebido para o paladino por 8s.
+    tiers:
+      T2: { cooldown: 90, duration: 8, redirect: 0.20 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      link: ally
+      duration: 8
+      damage_redirect: 0.20
+      range: 12
+    tags: [support, guard, link]
+    notes:
+      pvp: "Dano redirecionado sofre mitigação adicional de 20% antes de aplicado ao paladino."
+
+  PurificarCorrupcao:
+    display: "&fPurificar Corrupção"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_purificar_corrupcao
+    description: |
+      Dissipa um efeito negativo forte (veneno, queimadura ou medo) de aliados em 6 blocos.
+    tiers:
+      T2: { cooldown: 90, radius: 6, cleanse: 1 }
+    cost:
+      resource: mana
+      amount: 30
+    effects:
+      radius: 6
+      cleanse: strong
+      max_targets: 5
+    tags: [cleanse, support]
+    notes:
+      pvp: "Concede imunidade compartilhada de 12s à reaplicação do mesmo efeito."
+
+  PassoResoluto:
+    display: "&fPasso Resoluto"
+    type: ACTIVE
+    tier: T2
+    skill-id: paladin_passo_resoluto
+    description: |
+      Concede +0.03 de velocidade de movimento e imunidade a empurrões por 6s.
+    tiers:
+      T2: { cooldown: 60, duration: 6, speed_bonus: 0.03 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      self_buff: true
+      duration: 6
+      speed: 0.03
+      knockback_immunity: true
+    tags: [mobility, utility]
+    notes:
+      pvp: "Velocidade extra limitada pela cap global de +0.05."
+
+  AuraDeValor:
+    display: "&6Aura de Valor"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_aura_de_valor
+    description: |
+      Cria uma aura de 6 blocos por 10s que concede +12% de mitigação de dano a aliados.
+    tiers:
+      T3: { cooldown: 105, duration: 10, radius: 6, mitigation: 0.12 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      aura: true
+      radius: 6
+      duration: 10
+      mitigation: 0.12
+    tags: [aura, defense]
+    notes:
+      pvp: "Mitigação efetiva limitada a 40% considerando outras fontes."
+
+  GolpeExorcista:
+    display: "&eGolpe Exorcista"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_golpe_exorcista
+    description: |
+      Causa 140% de dano radiante e remove um buff leve de inimigos marcados.
+    tiers:
+      T3: { cooldown: 60, damage_multiplier: 1.4 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      target: single
+      damage:
+        type: radiant
+        multiplier: 1.4
+      dispel_on_marked: 1
+    tags: [burst, radiant, anti_buff]
+    notes:
+      pvp: "Remove apenas bençãos de nível comum; buffs épicos requerem 2 marcas."
+
+  EscudoDaFe:
+    display: "&bEscudo da Fé"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_escudo_da_fe
+    description: |
+      Concede um escudo de 180 pontos a até 3 aliados, priorizando os mais feridos.
+    tiers:
+      T3: { cooldown: 75, shield: 180, max_targets: 3 }
+    cost:
+      resource: mana
+      amount: 30
+    effects:
+      shield: 180
+      max_targets: 3
+      radius: 10
+    tags: [shield, support]
+    notes:
+      pvp: "Valor do escudo reduzido para 140 contra jogadores."
+
+  VotoDePerseveranca:
+    display: "&fVoto de Perseverança"
+    type: ACTIVE
+    tier: T3
+    skill-id: paladin_voto_de_perseveranca
+    description: |
+      Reduz em 25% a duração de controles em aliados a 6 blocos por 8s.
+    tiers:
+      T3: { cooldown: 90, duration: 8, radius: 6, control_reduction: 0.25 }
+    cost:
+      resource: mana
+      amount: 25
+    effects:
+      aura: true
+      radius: 6
+      duration: 8
+      control_reduction: 0.25
+    tags: [support, control]
+    notes:
+      pvp: "Não se acumula com resistência racial; aplica diminishing returns automaticamente."
+
+  BencaoSuprema:
+    display: "&aBenção Suprema"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_bencao_suprema
+    description: |
+      Cura instantaneamente 20% da vida do alvo e remove dois efeitos negativos.
+    tiers:
+      T4: { cooldown: 90, cleanse: 2, heal_percent: 0.20 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      heal_percent: 0.20
+      cleanse: 2
+      range: 10
+    tags: [heal, cleanse]
+    notes:
+      pvp: "Cura reduzida para 16% em arenas; mantém duas remoções."
+
+  EstandarteSagrado:
+    display: "&6Estandarte Sagrado"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_estandarte_sagrado
+    description: |
+      Ergue um estandarte por 12s em 8 blocos, concedendo +12% de dano e -12% dano recebido
+      a aliados na área.
+    tiers:
+      T4: { cooldown: 120, duration: 12, radius: 8, damage_bonus: 0.12, mitigation: 0.12 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      deploy_banner: true
+      radius: 8
+      duration: 12
+      buff:
+        damage: 0.12
+        mitigation: 0.12
+    tags: [aura, banner]
+    notes:
+      pvp: "Bônus ofensivo reduzido para 8% em cercos PvP."
+
+  JuizoFinal:
+    display: "&cJuízo Final"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_juizo_final
+    description: |
+      Invoca um raio radiante causando 160% no alvo principal e 80% em 4 blocos ao redor.
+    tiers:
+      T4: { cooldown: 105, primary_multiplier: 1.6, splash_multiplier: 0.8, radius: 4 }
+    cost:
+      resource: mana
+      amount: 35
+    effects:
+      radius: 4
+      damage:
+        type: radiant
+        primary: 1.6
+        splash: 0.8
+    tags: [burst, radiant]
+    notes:
+      pvp: "Splash reduzido para 0.6x em PvP de mundo aberto."
+
+  ConsagracaoMaior:
+    display: "&dConsagração Maior"
+    type: ACTIVE
+    tier: T4
+    skill-id: paladin_consagracao_maior
+    description: |
+      Consagra o solo por 10s em 6 blocos: inimigos perdem 15% de penetração e aliados
+      recebem +10% de cura.
+    tiers:
+      T4: { cooldown: 120, duration: 10, radius: 6, enemy_pen: -0.15, ally_healing: 0.10 }
+    cost:
+      resource: faith
+      amount: 1
+    effects:
+      radius: 6
+      duration: 10
+      debuff_penetration: -0.15
+      buff_healing: 0.10
+    tags: [zone, support]
+    notes:
+      pvp: "Redução de penetração limitada a -10% contra jogadores."
