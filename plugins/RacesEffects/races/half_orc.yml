@@ -1,0 +1,69 @@
+# Raça: Meio-Orc (Base)
+race_id: half_orc
+name: "Meio-Orc"
+identity: "Sobreviventes agressivos que transformam pressão em instinto de combate disciplinado."
+luckperms:
+  required: "race_half_orc"
+  inherit: null
+tags:
+  - halforc
+placeholders:
+  racial_cd_main: "{cooldown:skill_half_orc_furia_controlada}"
+  racial_tenacidade: "{uptime:tenacidade_implacavel}" 
+  racial_furia_fadiga: "{status:fatiga_orc}"
+hud:
+  actionbar:
+    enabled: true
+    template_active: "&4Fúria {cooldown:skill_half_orc_furia_controlada}&7 | &cTenacidade:&f {uptime:tenacidade_implacavel}"
+passives:
+  visao_no_escuro:
+    name: "Visão no Escuro"
+    type: darkvision
+    trigger: light_level:low
+    duration: 30
+    cooldown: 45
+    uptime_cap: 0.6
+    range: 24
+    description: "Permite enxergar até 24 blocos em baixa luminosidade sem remover penalidades de brilho."
+  tenacidade_implacavel:
+    name: "Tenacidade Implacável"
+    type: mitigation_threshold
+    trigger: health_threshold_self:0.35
+    duration: 6
+    cooldown: 45
+    uptime_cap: 0.2
+    mitigation_general: 0.15
+    diminishing_returns: mitigation
+    description: "Ao cair abaixo de 35% HP ganha +15% mitigação geral por 6s (DR compartilhada com classe/itens)."
+  ameaca_orc:
+    name: "Ameaça Orc"
+    type: retaliation_bonus
+    trigger: retaliated_recently
+    duration: 4
+    cooldown: 0
+    uptime_cap: 0.4
+    bonus:
+      melee_damage: 0.05
+    conditions:
+      requires_recent_attacker: true
+      window_seconds: 4
+    description: "+5% dano corpo-a-corpo contra inimigos que o atingiram nos últimos 4s; não ativa em aberturas."
+actives:
+  furia_controlada:
+    name: "Fúria Controlada"
+    skill: HalfOrc_FuriaControlada
+    cooldown: 75
+    charges: 1
+    description: "+10–18% dano corpo-a-corpo por 8s, seguida de Fatiga Orc (-10% dano por 6s)."
+resistances: {}
+synergy_notes:
+  - "Barbaro: Fúria Controlada aplica DR com Fúria da classe para limitar bursts e manter uptime combinado ≤60%."
+  - "Guerreiro: Tenacidade respeita mitigação máxima 45% antes de multiplicadores defensivos."
+  - "Blood Hunter (Lycan): Fatiga Orc garante que uptime conjunto de buffs ofensivos fique abaixo de 60%."
+tests:
+  pve:
+    - "Duelo contra lobo/urso/guardião verificando Tenacidade ativando 1x por minuto e mantendo TTK estável."
+    - "Chefe médio monitorando que Ameaça Orc não aplica bônus em aberturas de combate."
+  pvp:
+    - "Duelo contra Ladino: confirmar janela de Fúria Controlada + Ameaça Orc respeita caps de dano."
+    - "Arena vs Paladino/Guerreiro garantindo que mitigação total permaneça ≤45%."

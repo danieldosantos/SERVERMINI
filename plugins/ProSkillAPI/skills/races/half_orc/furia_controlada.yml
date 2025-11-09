@@ -1,0 +1,44 @@
+# Skill racial — Fúria Controlada
+skills:
+  HalfOrc_FuriaControlada:
+    display: "&4Fúria Controlada"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Canaliza a agressividade orc para aumentar o dano corpo-a-corpo por 8s.
+      Ao terminar, aplica Fatiga Orc por 6s reduzindo o dano em 10%.
+      Cooldown de 75s garante uptime inferior a 60% mesmo com reduções.
+    tiers:
+      T1: { cooldown: 75, duration: 8, damage_bonus: 0.10, fatigue_penalty: -0.10 }
+      T2: { cooldown: 75, duration: 8, damage_bonus: 0.12, fatigue_penalty: -0.10 }
+      T3: { cooldown: 75, duration: 8, damage_bonus: 0.15, fatigue_penalty: -0.10 }
+      T4: { cooldown: 75, duration: 8, damage_bonus: 0.18, fatigue_penalty: -0.10 }
+    cost:
+      resource: stamina
+      amount: 0
+    effects:
+      - target: self
+        type: status
+        id: half_orc_furia_controlada
+        duration: { tier: duration }
+        modifiers:
+          melee_damage: { tier: damage_bonus }
+      - target: self
+        type: status
+        id: half_orc_fatiga_orc
+        delay: { tier: duration }
+        duration: 6
+        modifiers:
+          melee_damage: { tier: fatigue_penalty }
+      - target: self
+        type: particles
+        effect: mythicmobs:HalfOrcFuryAura
+      - target: self
+        type: placeholder_update
+        keys:
+          - racial_cd_main
+          - racial_furia_fadiga
+    notes: |
+      • Fatiga Orc é aplicada automaticamente após o término da fúria para evitar abuso de uptime.
+      • Dano bônus segue limite de mitigação ofensiva configurado no servidor.
+      • Integração com MythicMobs usa efeito `HalfOrcFuryAura` para partículas rubras.

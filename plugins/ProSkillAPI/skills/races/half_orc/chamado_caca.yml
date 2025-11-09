@@ -1,0 +1,44 @@
+# Skill racial — Chamado da Caça
+skills:
+  HalfOrc_Tribal_ChamadoCaca:
+    display: "&6Chamado da Caça"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Emite um brado tribal que marca um alvo por 10s.
+      Enquanto marcado, o meio-orc ganha penetração de armadura adicional contra o alvo.
+      A marca atualiza placeholders de rastreamento no HUD tribal.
+    tiers:
+      T1: { cooldown: 60, duration: 10, armor_pen: 0.12 }
+      T2: { cooldown: 60, duration: 10, armor_pen: 0.12 }
+      T3: { cooldown: 60, duration: 10, armor_pen: 0.12 }
+      T4: { cooldown: 60, duration: 10, armor_pen: 0.12 }
+    cost:
+      resource: stamina
+      amount: 5
+    effects:
+      - target: enemy_single
+        range: 8
+        type: status
+        id: half_orc_tracked_mark
+        duration: { tier: duration }
+        modifiers:
+          received_tracking: 1
+      - target: self
+        type: status
+        id: half_orc_penetracao_tribal
+        duration: { tier: duration }
+        modifiers:
+          armor_penetration: { tier: armor_pen }
+      - target: self
+        type: raceseffects_trigger
+        trait: instinto_rastreador
+      - target: self
+        type: placeholder_update
+        keys:
+          - racial_cd_main
+          - racial_tracker
+    notes: |
+      • Marca não revela invisibilidade total; apenas deixa trilhas leves via RacesEffects.
+      • Penetração mantém limites globais ofensivos e sofre DR com buffs de classe.
+      • Cooldown de 60s oferece uptime máximo ≈16%. Sem cargas extras.

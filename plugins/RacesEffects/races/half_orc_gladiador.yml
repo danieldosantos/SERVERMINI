@@ -1,0 +1,50 @@
+# Sub-raça: Meio-Orc Gladiador
+race_id: half_orc_gladiador
+name: "Meio-Orc Gladiador"
+identity: "Guerreiros de arena que controlam o ritmo do duelo com agressividade medida."
+luckperms:
+  required: "race_half_orc.gladiador"
+  inherit: "race_half_orc"
+placeholders:
+  racial_cd_main: "{cooldown:skill_half_orc_estouro_arena}"
+  racial_combo: "{status:ritmo_arena}"
+passives:
+  ritmo_arena:
+    name: "Ritmo de Arena"
+    type: timed_attribute
+    trigger: combo_hits:3
+    combo_window: 6
+    duration: 4
+    cooldown: 20
+    uptime_cap: 0.2
+    attributes:
+      attack_speed: 0.1
+    description: "Ao acertar 3 golpes em 6s ganha +10% velocidade de ataque por 4s (CD interno 20s)."
+  grito_desafio:
+    name: "Grito de Desafio"
+    type: taunt
+    trigger: manual
+    radius: 4
+    duration: 4
+    cooldown: 90
+    uptime_cap: 0.04
+    target_limit: 6
+    description: "Provocação leve PvE em 4 blocos; cada alvo só pode ser provocado a cada 90s."
+actives:
+  estouro_arena:
+    name: "Estouro de Arena"
+    skill: HalfOrc_Gladiador_EstouroArena
+    cooldown: 120
+    charges: 1
+    description: "+25% dano corpo-a-corpo por 6s seguido de Exaustão (-20% velocidade de ataque por 6s)."
+resistances: {}
+synergy_notes:
+  - "Guerreiro: Estouro respeita caps de velocidade ao combinar com manobras de batalha."
+  - "Classes defensivas recebem aviso para aplicar DR adicional quando Grito estiver em recarga."
+tests:
+  pve:
+    - "Gladiador vs guardião: confirmar combo de 3 golpes ativa Ritmo apenas 1x a cada 20s."
+    - "Provocar mobs em 4 blocos; revisar que taunt não afeta jogadores."
+  pvp:
+    - "Duelo vs Guerreiro: medir pico de Estouro (6s) seguido de Exaustão com penalidade -20%."
+    - "Arena em equipe garantindo que Ritmo não ultrapassa limite de ataque combinado com buffs externos."
