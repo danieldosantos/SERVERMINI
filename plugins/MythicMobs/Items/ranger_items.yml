@@ -1,241 +1,182 @@
-# Itens focais para Patrulheiro e conclaves
+# Itens focais para Patrulheiro, Caçador e Mestre das Feras organizados por TIER
+# Cada item dispara skills mapeadas no ProSkillAPI e possui trava via PersistentData/classlock.
 items:
-  HunterMarkCharm:
-    Id: ECHO_SHARD
+  # TIER 1
+  RangerMarkCharm:
+    Id: ENDER_EYE
     Display: '&aTalismã da Marca'
     Lore:
-      - '&7Ativa §aMarca do Caçador§7 (1 carga de Foco).'
-      - '&8Requer grupo: class_ranger'
+      - '&7Ativa &aMarca do Caçador&7 (revela e amplia dano).'
+      - '&8Requer: class_ranger'
     Options:
       Unbreakable: true
       KeepOnDeath: true
     PersistentData:
       classlock: 'class_ranger'
-      skill: 'ranger_hunters_mark'
+      tier: 'T1'
+      skill: 'ranger_common_mark_of_the_hunter'
     Skills:
-      - skill{s=ranger_hunters_mark} @self ~onUse
-  TrapKit:
-    Id: TRIPWIRE_HOOK
-    Display: '&6Kit de Armadilhas'
-    Lore:
-      - '&7Posiciona §6Armadilha Tática§7 com telegraph visível.'
-      - '&8Requer grupo: class_ranger'
-    Options:
-      Unbreakable: true
-      KeepOnDeath: true
-    PersistentData:
-      classlock: 'class_ranger'
-      skill: 'ranger_tactical_trap'
-    Skills:
-      - skill{s=ranger_tactical_trap} @self ~onUse
-  RangerQuiverCommand:
+      - skill{s=ranger_common_mark_of_the_hunter} @self ~onUse
+  HunterRicochetBow:
     Id: BOW
-    Display: '&2Comando de Disparo'
+    Display: '&6Arco de Varredura'
     Lore:
-      - '&7Dispara §2Comando de Disparo§7 (3 flechas controladas).'
-      - '&8Requer grupo: class_ranger'
-    Options:
-      Unbreakable: true
-    PersistentData:
-      classlock: 'class_ranger'
-      skill: 'ranger_burst_shot'
-    Skills:
-      - skill{s=ranger_burst_shot} @self ~onRightClick
-  HunterBow:
-    Id: BOW
-    Display: '&6Arco do Predador'
-    Lore:
-      - '&7Dispara §6Rajada Predatória§7.'
-      - '&8Grupo: class_ranger.hunter'
+      - '&7Dispara &6Varredura da Presa&7 (ricocheteia no marcado).'
+      - '&8Requer: class_ranger.hunter'
     Options:
       Unbreakable: true
       Damage: 6
     PersistentData:
       classlock: 'class_ranger.hunter'
-      skill: 'ranger_hunter_predatory_volley'
+      tier: 'T1'
+      skill: 'ranger_hunter_prey_sweep'
     Skills:
-      - skill{s=ranger_hunter_predatory_volley} @self ~onRightClick
-  HunterNet:
-    Id: STRING
-    Display: '&7Rede do Caçador'
-    Lore:
-      - '&7Ativa §7Rede Enredante§7 (imobiliza 4s).'
-      - '&8Grupo: class_ranger.hunter'
-    Options:
-      Unbreakable: true
-    PersistentData:
-      classlock: 'class_ranger.hunter'
-      skill: 'ranger_hunter_entangling_net'
-    Skills:
-      - skill{s=ranger_hunter_entangling_net} @self ~onUse
-  HunterScope:
-    Id: SPYGLASS
-    Display: '&eLuneta do Predador'
-    Lore:
-      - '&7Concede §eOlho do Predador§7 (+15% crítico).'
-      - '&8Grupo: class_ranger.hunter'
-    Options:
-      Unbreakable: true
-    PersistentData:
-      classlock: 'class_ranger.hunter'
-      skill: 'ranger_hunter_predators_eye'
-    Skills:
-      - skill{s=ranger_hunter_predators_eye} @self ~onUse
-  HunterBoots:
-    Id: LEATHER_BOOTS
-    Display: '&aBotas Silvestres'
-    Lore:
-      - '&7Ativa §aPasso Silvestre§7 (+0.04 vel).'
-      - '&8Grupo: class_ranger.hunter'
-    Options:
-      Unbreakable: true
-      Color: 34,74,29
-    PersistentData:
-      classlock: 'class_ranger.hunter'
-      skill: 'ranger_hunter_wildstep'
-    Skills:
-      - skill{s=ranger_hunter_wildstep} @self ~onUse
-  HunterQuiver:
-    Id: ARROW
-    Display: '&6Aljava Tempestuosa'
-    Lore:
-      - '&7Ultimate §6Chuva de Flechas§7.'
-      - '&8Grupo: class_ranger.hunter'
-    Options:
-      Unbreakable: true
-    PersistentData:
-      classlock: 'class_ranger.hunter'
-      skill: 'ranger_hunter_arrow_storm'
-    Skills:
-      - skill{s=ranger_hunter_arrow_storm} @self ~onSneakRightClick
-  BeastWhistle:
+      - skill{s=ranger_hunter_prey_sweep} @self ~onRightClick
+  BeastCommandWhistle:
     Id: GOAT_HORN
-    Display: '&aApito Alpha'
+    Display: '&aApito do Companheiro'
     Lore:
-      - '&7Chama §aChamado Alpha§7 (empodera companheiro).'
-      - '&8Grupo: class_ranger.beastmaster'
+      - '&7Ordena &aApito da Fera&7 (pet foca o marcado).'
+      - '&8Requer: class_ranger.beastmaster'
     Options:
       Unbreakable: true
     PersistentData:
       classlock: 'class_ranger.beastmaster'
-      skill: 'ranger_beastmaster_alpha_call'
+      tier: 'T1'
+      skill: 'ranger_beast_apito_da_fera'
     Skills:
-      - skill{s=ranger_beastmaster_alpha_call} @self ~onUse
-  BeastCharm:
-    Id: HEART_OF_THE_SEA
-    Display: '&aAmuleto de Sincronia'
+      - skill{s=ranger_beast_apito_da_fera} @self ~onUse
+
+  # TIER 2
+  RangerTrapKit:
+    Id: TRIPWIRE_HOOK
+    Display: '&6Kit de Armadilhas'
     Lore:
-      - '&7Ativa §aSincronia Selvagem§7.'
-      - '&8Grupo: class_ranger.beastmaster'
+      - '&7Posiciona &6Plantar Armadilha&7 (enraiza e causa dano).'
+      - '&8Requer: class_ranger'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_ranger'
+      tier: 'T2'
+      skill: 'ranger_common_trap_plant'
+    Skills:
+      - skill{s=ranger_common_trap_plant} @self ~onUse
+  HunterSteelGloves:
+    Id: IRON_NUGGET
+    Display: '&7Garras de Aço'
+    Lore:
+      - '&7Concede &7Garras de Aço&7 (+dano e velocidade).'
+      - '&8Requer: class_ranger.hunter'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_ranger.beastmaster'
-      skill: 'ranger_beastmaster_wild_sync'
+      classlock: 'class_ranger.hunter'
+      tier: 'T2'
+      skill: 'ranger_hunter_steel_claws'
     Skills:
-      - skill{s=ranger_beastmaster_wild_sync} @self ~onUse
-  BeastHarness:
-    Id: SADDLE
-    Display: '&6Arreio Coordenado'
+      - skill{s=ranger_hunter_steel_claws} @self ~onRightClick
+  BeastDashHarness:
+    Id: LEATHER_HORSE_ARMOR
+    Display: '&aArnês de Investida'
     Lore:
-      - '&7Executa §6Investida Coordenada§7.'
-      - '&8Grupo: class_ranger.beastmaster'
+      - '&7Ativa &aInvestida Coordenada&7 (dash conjunto).'
+      - '&8Requer: class_ranger.beastmaster'
+    Options:
+      Unbreakable: true
+      Color: 60,110,45
+    PersistentData:
+      classlock: 'class_ranger.beastmaster'
+      tier: 'T2'
+      skill: 'ranger_beast_coordinated_charge'
+    Skills:
+      - skill{s=ranger_beast_coordinated_charge} @self ~onUse
+
+  # TIER 3
+  RangerArrowRainQuiver:
+    Id: ARROW
+    Display: '&2Aljava da Chuva'
+    Lore:
+      - '&7Libera &2Chuva de Setas&7 (zona de dano).'
+      - '&8Requer: class_ranger'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_ranger.beastmaster'
-      skill: 'ranger_beastmaster_coordinated_dash'
+      classlock: 'class_ranger'
+      tier: 'T3'
+      skill: 'ranger_common_arrow_rain'
     Skills:
-      - skill{s=ranger_beastmaster_coordinated_dash} @self ~onSneakRightClick
-  BeastShield:
-    Id: SHIELD
-    Display: '&eEscudo Instintivo'
-    Lore:
-      - '&7Divide dano via §eProteção Instintiva§7.'
-      - '&8Grupo: class_ranger.beastmaster'
-    Options:
-      Unbreakable: true
-    PersistentData:
-      classlock: 'class_ranger.beastmaster'
-      skill: 'ranger_beastmaster_instinctive_guard'
-    Skills:
-      - skill{s=ranger_beastmaster_instinctive_guard} @self ~onUse
-  BeastTotem:
+      - skill{s=ranger_common_arrow_rain} @self ~onSneakRightClick
+  HunterExecuteCharm:
     Id: TOTEM_OF_UNDYING
-    Display: '&cTotem Primevo'
+    Display: '&cÍdolo do Predador'
     Lore:
-      - '&7Libera §cFúria Primal§7 (forma alfa).'
-      - '&8Grupo: class_ranger.beastmaster'
+      - '&7Canaliza &cMatar/Incapacitar&7 (escolha de finalização).'
+      - '&8Requer: class_ranger.hunter'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_ranger.hunter'
+      tier: 'T3'
+      skill: 'ranger_hunter_execute_or_stun'
+    Skills:
+      - skill{s=ranger_hunter_execute_or_stun} @self ~onUse
+  BeastAlphaWardTotem:
+    Id: MOSSY_COBBLESTONE_WALL
+    Display: '&aTotem Alfa'
+    Lore:
+      - '&7Projeta &aProteção Alfa&7 (escudo na fera).'
+      - '&8Requer: class_ranger.beastmaster'
     Options:
       Unbreakable: true
     PersistentData:
       classlock: 'class_ranger.beastmaster'
-      skill: 'ranger_beastmaster_primal_fury'
+      tier: 'T3'
+      skill: 'ranger_beast_alpha_protection'
     Skills:
-      - skill{s=ranger_beastmaster_primal_fury} @self ~onSneakRightClick
-  GloomDagger:
-    Id: NETHERITE_SWORD
-    Display: '&8Adaga Sombria'
+      - skill{s=ranger_beast_alpha_protection} @self ~onUse
+
+  # TIER 4
+  RangerWildTotem:
+    Id: FLOWERING_AZALEA
+    Display: '&5Totem da Mata'
     Lore:
-      - '&7Ativa §8Sombras Caçadoras§7.'
-      - '&8Grupo: class_ranger.gloom'
-    Options:
-      Unbreakable: true
-      Damage: 5
-    PersistentData:
-      classlock: 'class_ranger.gloom'
-      skill: 'ranger_gloom_hunting_shadows'
-    Skills:
-      - skill{s=ranger_gloom_hunting_shadows} @self ~onLeftClick
-  GloomCloak:
-    Id: BLACK_CARPET
-    Display: '&8Manto Umbrático'
-    Lore:
-      - '&7Permite §8Salto Umbrático§7.'
-      - '&8Grupo: class_ranger.gloom'
+      - '&7Convoca &5Chamado da Mata&7 (aura aliado).'
+      - '&8Requer: class_ranger'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_ranger.gloom'
-      skill: 'ranger_gloom_shadow_step'
+      classlock: 'class_ranger'
+      tier: 'T4'
+      skill: 'ranger_common_call_of_the_wild'
     Skills:
-      - skill{s=ranger_gloom_shadow_step} @self ~onSneakRightClick
-  GloomHood:
-    Id: BLACK_DYE
-    Display: '&8Capuz Penumbra'
+      - skill{s=ranger_common_call_of_the_wild} @self ~onUse
+  HunterPriorityScope:
+    Id: SPYGLASS
+    Display: '&6Mira Prioritária'
     Lore:
-      - '&7Ativa §8Manto Penumbra§7.'
-      - '&8Grupo: class_ranger.gloom'
+      - '&7Ativa &6Alvo Prioritário&7 (+dano global).'
+      - '&8Requer: class_ranger.hunter'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_ranger.gloom'
-      skill: 'ranger_gloom_penumbra_cloak'
+      classlock: 'class_ranger.hunter'
+      tier: 'T4'
+      skill: 'ranger_hunter_priority_target'
     Skills:
-      - skill{s=ranger_gloom_penumbra_cloak} @self ~onUse
-  GloomBow:
-    Id: BOW
-    Display: '&0Arco Velado'
+      - skill{s=ranger_hunter_priority_target} @self ~onUse
+  BeastPackFuryTotem:
+    Id: BONE
+    Display: '&cOssada do Bando'
     Lore:
-      - '&7Dispara §2Disparo Envenenado§7.'
-      - '&8Grupo: class_ranger.gloom'
+      - '&7Desencadeia &cFúria do Bando&7 (ultimate pet).'
+      - '&8Requer: class_ranger.beastmaster'
     Options:
       Unbreakable: true
     PersistentData:
-      classlock: 'class_ranger.gloom'
-      skill: 'ranger_gloom_poisoned_shot'
+      classlock: 'class_ranger.beastmaster'
+      tier: 'T4'
+      skill: 'ranger_beast_pack_fury'
     Skills:
-      - skill{s=ranger_gloom_poisoned_shot} @self ~onRightClick
-  GloomRelic:
-    Id: WITHER_ROSE
-    Display: '&0Relíquia da Caça Sombria'
-    Lore:
-      - '&7Canaliza §0Caça Sombria§7 (ultimate).'
-      - '&8Grupo: class_ranger.gloom'
-    Options:
-      Unbreakable: true
-    PersistentData:
-      classlock: 'class_ranger.gloom'
-      skill: 'ranger_gloom_shadow_hunt'
-    Skills:
-      - skill{s=ranger_gloom_shadow_hunt} @self ~onSneakRightClick
+      - skill{s=ranger_beast_pack_fury} @self ~onUse

@@ -1,0 +1,296 @@
+# Habilidades do arquétipo Caçador organizadas por TIER para ProSkillAPI
+# Inclui metadados de custos, CDs e notas de balanceamento.
+tiers:
+  T1:
+    - skill-id: ranger_hunter_duelist_technique
+      display: "Técnica do Duelista"
+      type: active
+      psapi:
+        resource: mana
+        cost: 20
+        cooldown: 60
+        duration: 10
+        area: self
+        tags: [buff, penetration, mark_synergy]
+        scaling:
+          tier-base: 1
+          penetration-vs-mark: 0.20
+      effects:
+        - "Por 10s concede +20% penetração apenas contra o alvo marcado."
+        - "Exibe ícone específico na HUD quando ativo."
+        - "Não acumula com Foco do Arqueiro (usa maior valor)."
+    - skill-id: ranger_hunter_prey_sweep
+      display: "Varredura da Presa"
+      type: active
+      psapi:
+        resource: mana
+        cost: 20
+        cooldown: 60
+        duration: 8
+        area: self
+        tags: [buff, ricochet]
+        scaling:
+          tier-base: 1
+          ricochet-percent: 0.60
+          secondary-range: 6
+      effects:
+        - "Durante 8s, acertos no marcado ricocheteiam 60% do dano para outro inimigo."
+        - "Ricochetes priorizam alvos próximos ao marcado."
+        - "Escala apenas 1 vez por ataque para evitar abuso."
+    - skill-id: ranger_hunter_evasion
+      display: "Evasão de Caçador"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 60
+        duration: 6
+        area: self
+        tags: [mitigation, projectile]
+        scaling:
+          tier-base: 1
+          ranged-damage-reduction: 0.25
+      effects:
+        - "Reduz em 25% o dano de projéteis por 6s (cap global 45%)."
+        - "Aplica efeito visual de rolagem lateral."
+        - "HUD mostra tempo restante em barra secundária."
+    - skill-id: ranger_hunter_concussive_shot
+      display: "Tiro de Concussão"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 75
+        area: single
+        tags: [control, stun, mark_synergy]
+        scaling:
+          tier-base: 1
+          stun-duration: 1.5
+          immunity-tag: diminishing_stun
+      effects:
+        - "Aplica atordoamento de 1.5s no alvo marcado (com imunidade decrescente)."
+        - "Também causa 80% do dano base (ajustável no componente)."
+        - "Em PvE aplica retrocesso leve; em PvP só o stun."
+  T2:
+    - skill-id: ranger_hunter_steel_claws
+      display: "Garras de Aço"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 75
+        duration: 10
+        area: self
+        tags: [buff, attack_speed]
+        scaling:
+          tier-base: 2
+          damage-bonus: 0.15
+          attack-speed: 0.10
+      effects:
+        - "+15% dano e +10% velocidade de ataque por 10s."
+        - "Aplicação mostra partículas metálicas nas armas."
+        - "Afeta tanto projéteis quanto ataques corpo a corpo."
+    - skill-id: ranger_hunter_chain_arrow
+      display: "Flecha Encadeada"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 75
+        area: chain_6
+        tags: [projectile, chain, slow]
+        scaling:
+          tier-base: 2
+          targets: 3
+          damage-multi: 1.00
+          slow-percent: 0.10
+          slow-duration: 4
+      effects:
+        - "Encadeia até 3 alvos a 6 blocos, 100% dano cada."
+        - "Reduz velocidade em 10% por 4s (DR aplicado)."
+        - "Mostra arcos de energia entre alvos via MythicMobs."
+    - skill-id: ranger_hunter_relentless_predator
+      display: "Predador Implacável"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 60
+        duration: 10
+        area: self
+        tags: [bleed, mark_synergy]
+        scaling:
+          tier-base: 2
+          bleed-percent: 0.05
+          max-stacks: 3
+          threshold: 0.50
+      effects:
+        - "Enquanto o marcado <50% HP, acertos aplicam sangramento 5%/3s."
+        - "Máximo de 3 acúmulos com DR integrado."
+        - "HUD mostra stacks ativos no alvo."
+    - skill-id: ranger_hunter_shock_trap
+      display: "Armadilha de Choque"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 90
+        duration: 20
+        area: trap_radius_6
+        tags: [trap, root, silence]
+        scaling:
+          tier-base: 2
+          damage-multi: 1.00
+          root-duration: 2
+          silence-duration: 1.5
+      effects:
+        - "Armadilha elétrica: enraíza 2s e silencia 1.5s no disparo."
+        - "Compartilha limite de 1 armadilha ativa por vez."
+        - "Partículas elétricas configuradas no MythicMobs."
+  T3:
+    - skill-id: ranger_hunter_execute_or_stun
+      display: "Matar/Incapacitar"
+      type: active
+      psapi:
+        resource: mana
+        cost: 40
+        cooldown: 120
+        area: single
+        tags: [choice, execute, stun]
+        scaling:
+          tier-base: 3
+          execute-damage: 1.60
+          stun-duration: 2
+          secondary-damage: 1.20
+      effects:
+        - "Escolha no cast: Matar (160% no marcado, bônus execução <25% HP) ou Incapacitar (stun 2s +120%)."
+        - "Imunidade decrescente aplicada ao stun."
+        - "Disponível apenas com alvo marcado ativo."
+    - skill-id: ranger_hunter_coordinated_hunt
+      display: "Caça Coordenada"
+      type: active
+      psapi:
+        resource: mana
+        cost: 35
+        cooldown: 90
+        duration: 8
+        area: allies_radius_12
+        tags: [buff, ally_support, mark_synergy]
+        scaling:
+          tier-base: 3
+          ally-damage-bonus: 0.10
+      effects:
+        - "Aliados que atacam o marcado ganham +10% dano por 8s."
+        - "Aplica indicador no scoreboard para aliados próximos."
+        - "Não acumula com buffs similares (usa maior bônus)."
+    - skill-id: ranger_hunter_spike_trail
+      display: "Trilha de Espinhos"
+      type: active
+      psapi:
+        resource: mana
+        cost: 35
+        cooldown: 90
+        duration: 6
+        area: trail_6
+        tags: [aoe, slow, bleed]
+        scaling:
+          tier-base: 3
+          tick-damage: 0.50
+          slow-percent: 0.30
+      effects:
+        - "Deixa rastro de 6s causando 50%/s e -30% velocidade."
+        - "Sincroniza com Passo do Vento e dashs."
+        - "Partículas de vinhas espinhosas."
+    - skill-id: ranger_hunter_mortal_focus
+      display: "Foco Mortal"
+      type: active
+      psapi:
+        resource: mana
+        cost: 35
+        cooldown: 105
+        duration: 8
+        area: self
+        tags: [crit_buff, cleanse, mark_synergy]
+        scaling:
+          tier-base: 3
+          crit-vs-marked: 0.25
+          cleanse: 1
+      effects:
+        - "+25% crítico apenas contra o marcado por 8s."
+        - "Remove 1 debuff leve do caçador ao ativar."
+        - "HUD mostra contador dedicado quando ativo."
+  T4:
+    - skill-id: ranger_hunter_priority_target
+      display: "Alvo Prioritário"
+      type: active
+      psapi:
+        resource: mana
+        cost: 50
+        cooldown: 240
+        duration: 12
+        area: marked_target
+        tags: [ultimate, damage_amp, mark_synergy]
+        scaling:
+          tier-base: 4
+          global-damage-amp: 0.20
+          personal-penetration: 0.10
+      effects:
+        - "Por 12s o marcado sofre +20% dano de todos."
+        - "Você recebe +10% penetração adicional contra ele."
+        - "Aplica efeito visual único (retícula vermelha) via MythicMobs."
+    - skill-id: ranger_hunter_shattering_arrow
+      display: "Flecha Estilhaçante"
+      type: active
+      psapi:
+        resource: mana
+        cost: 45
+        cooldown: 120
+        area: impact_split
+        tags: [burst, projectile, cleave]
+        scaling:
+          tier-base: 4
+          impact-damage: 1.60
+          shard-count: 3
+          shard-damage: 0.60
+      effects:
+        - "Impacto 160% no alvo e gera 3 estilhaços (60% cada)."
+        - "Estilhaços buscam inimigos próximos (4 blocos)."
+        - "Respeita limites de hit por alvo (1)."
+    - skill-id: ranger_hunter_sixth_sense
+      display: "Sexto Sentido"
+      type: active
+      psapi:
+        resource: mana
+        cost: 40
+        cooldown: 120
+        duration: 10
+        area: self
+        tags: [defense, control_immunity, speed]
+        scaling:
+          tier-base: 4
+          control-immune-charges: 1
+          speed-bonus: 0.03
+      effects:
+        - "Evita o próximo controle recebido em até 10s e concede +0.03 velocidade."
+        - "Exibe ícone de imunidade decrescente pós-uso (30s)."
+        - "Integra sinal sonoro leve via MythicMobs."
+    - skill-id: ranger_hunter_last_hunt
+      display: "Última Caçada"
+      type: active
+      psapi:
+        resource: mana
+        cost: 40
+        cooldown: 120
+        duration: 8
+        area: self
+        tags: [sustain, cd_reduction, mark_synergy]
+        scaling:
+          tier-base: 4
+          mana-return: 5
+          cooldown-reduction-skill: ranger_common_piercing_shot
+          reduction-per-hit: 1
+          reduction-cap: 6
+      effects:
+        - "Durante 8s, acertos no marcado restauram 5 mana."
+        - "Reduz 1s do CD de Tiro Perfurante por acerto (máx 6s)."
+        - "Integra travas para evitar múltiplos procs no mesmo tick."
