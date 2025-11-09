@@ -1,139 +1,198 @@
-# Itens focais do Bruxo (classe base e patronos)
+# Itens focais do Bruxo para integração MythicMobs ↔ ProSkillAPI ↔ Skript
 items:
-  EldritchWand:
+  WarlockT1_EldritchFocus:
     Id: BLAZE_ROD
-    Display: '&5Varinha Eldritch'
+    Display: '&5Foco Eldritch Aprendiz'
     Lore:
-      - '&7Clique direito: ativa §5Rajada Mística§7.'
-      - '&8Requer permissão LuckPerms: class_warlock.'
-      - '&7Atualiza HUD de projéteis via PlaceholderAPI.'
+      - '&7Clique direito: Rajada Mística (T1).'
+      - '&7Clique esquerdo: Atualiza HUD de projéteis/hex.'
+      - '&8Permissão: class_warlock'
     Options:
       Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock'
-      psapi-skill: 'warlock_eldritch_blast'
-  HexTalisman:
-    Id: ENDER_EYE
-    Display: '&5Talismã do Hex'
-    Lore:
-      - '&7Clique direito: aplica §5Hex§7 ao alvo.'
-      - '&8Cooldown individual de 45s por alvo (Skript).' 
-      - '&7Mostra stacks no scoreboard warlock_hex_stacks.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock'
-      psapi-skill: 'warlock_hex'
-  PactLedger:
-    Id: WRITABLE_BOOK
-    Display: '&5Livro de Invocações'
-    Lore:
-      - '&7Atalho para atualizar recursos de pacto e HUD.'
-      - '&8Usável por qualquer patrono do Bruxo.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock'
-      skript-trigger: 'warlock_update_hud'
-
-  FiendWhip:
-    Id: LAVA_BUCKET
-    Display: '&cChicote de Brasas'
-    Lore:
-      - '&7Habilidade: §cChicote Infernal§7.'
-      - '&8Requer permissão: class_warlock.fiend.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock.fiend'
-      psapi-skill: 'warlock_fiend_chicote_infernal'
-  FiendBrand:
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_warlock'
+      tier: 'T1'
+      skill: 'warlock_common_rajada_mistica'
+    Skills:
+      - skill{s=warlock_common_rajada_mistica} @target ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
+  WarlockT1_FiendBrand:
     Id: FIRE_CHARGE
-    Display: '&cMarca Pactual'
+    Display: '&cMarca das Brasas Iniciante'
     Lore:
-      - '&7Coloca §cArmadilha de Brasas§7.'
-      - '&8Verifica resistências raciais ao fogo.'
+      - '&7Clique direito: Chicote Infernal (T1).'
+      - '&7Sincroniza queimaduras com Brasa Salutar.'
+      - '&8Permissão: class_warlock.fiend'
     Options:
       Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock.fiend'
-      psapi-skill: 'warlock_fiend_armadilha_de_brasas'
-  FiendHellcore:
-    Id: NETHER_STAR
-    Display: '&cNúcleo do Inferno'
-    Lore:
-      - '&7Ultimate: §cInferno Pactuado§7.'
-      - '&8Cooldown 240s, aplica queimadura prolongada.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock.fiend'
-      psapi-skill: 'warlock_fiend_inferno_pactuado'
-
-  ArchfeyWand:
+    PersistentData:
+      classlock: 'class_warlock.fiend'
+      tier: 'T1'
+      skill: 'warlock_fiend_chicote_infernal'
+    Skills:
+      - skill{s=warlock_fiend_chicote_infernal} @target ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
+  WarlockT1_ArchfeySigil:
     Id: FLOWER_POT
-    Display: '&aCajado das Brumas'
+    Display: '&aSinete Nebuloso'
     Lore:
-      - '&7Habilidade: §aPasso Brumoso§7.'
-      - '&8Requer permissão: class_warlock.archfey.'
+      - '&7Clique direito: Passo Brumoso (T1).'
+      - '&7Gera clones ilusórios (MythicSkill).'
+      - '&8Permissão: class_warlock.archfey'
     Options:
       Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock.archfey'
-      psapi-skill: 'warlock_archfey_passo_brumoso'
-  ArchfeyMirror:
-    Id: GLASS
-    Display: '&aEspelho Encantado'
-    Lore:
-      - '&7Projeta §aExplosão Encantadora§7.'
-      - '&8Spawna clones via MythicMobs skill.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock.archfey'
-      psapi-skill: 'warlock_archfey_explosao_encantadora'
-  ArchfeyGroveCharm:
-    Id: MOSS_BLOCK
-    Display: '&aAmuleto do Bosque'
-    Lore:
-      - '&7Ultimate: §aCortejo da Rainha§7.'
-      - '&8Reduz CDs aliados em 20% dentro da aura.'
-    Options:
-      Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock.archfey'
-      psapi-skill: 'warlock_archfey_cortejo_da_rainha'
+    PersistentData:
+      classlock: 'class_warlock.archfey'
+      tier: 'T1'
+      skill: 'warlock_archfey_passo_brumoso'
+    Skills:
+      - skill{s=warlock_archfey_passo_brumoso} @self ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
 
-  GreatOldOneTome:
-    Id: ENCHANTED_BOOK
-    Display: '&3Tomo do Abismo'
+  WarlockT2_HexSeal:
+    Id: ENDER_EYE
+    Display: '&5Selo de Ruína Aprimorado'
     Lore:
-      - '&7Habilidade: §3Sussurros Devastadores§7.'
-      - '&8Requer permissão: class_warlock.greatoldone.'
+      - '&7Clique direito: Selo de Ruína (T2).'
+      - '&7Explode alvos marcados pelo Hex.'
+      - '&8Permissão: class_warlock'
     Options:
       Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock.greatoldone'
-      psapi-skill: 'warlock_greatoldone_sussurros_devastadores'
-  GreatOldOneRelic:
+    PersistentData:
+      classlock: 'class_warlock'
+      tier: 'T2'
+      skill: 'warlock_common_selo_de_ruina'
+    Skills:
+      - skill{s=warlock_common_selo_de_ruina} @target ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
+  WarlockT2_FiendEmberKnife:
+    Id: GOLDEN_SWORD
+    Display: '&cPunhal de Brasas'
+    Lore:
+      - '&7Clique direito: Armadilha de Brasas (T2).'
+      - '&7Revela área com partículas de fogo.'
+      - '&8Permissão: class_warlock.fiend'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_warlock.fiend'
+      tier: 'T2'
+      skill: 'warlock_fiend_armadilha_de_brasas'
+    Skills:
+      - skill{s=warlock_fiend_armadilha_de_brasas} @location ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
+  WarlockT2_OldOneIdol:
     Id: HEART_OF_THE_SEA
-    Display: '&3Relíquia Alienígena'
+    Display: '&3Ídolo Esdrúxulo'
     Lore:
-      - '&7Canaliza §3Cascata de Loucura§7.'
-      - '&8Checa resistências psíquicas (RacesEffects).'
+      - '&7Clique direito: Marionete Mental (T2).'
+      - '&7Força deslocamento e silêncio breves.'
+      - '&8Permissão: class_warlock.greatoldone'
     Options:
       Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock.greatoldone'
-      psapi-skill: 'warlock_greatoldone_cascata_de_loucura'
-  GreatOldOneEye:
+    PersistentData:
+      classlock: 'class_warlock.greatoldone'
+      tier: 'T2'
+      skill: 'warlock_greatoldone_marionete_mental'
+    Skills:
+      - skill{s=warlock_greatoldone_marionete_mental} @target ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
+
+  WarlockT3_ShadowManacles:
+    Id: CHAIN
+    Display: '&5Manilhas Etéreas'
+    Lore:
+      - '&7Clique direito: Correntes Etéreas (T3).'
+      - '&7Trava inimigos por 2.5s com DR.'
+      - '&8Permissão: class_warlock'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_warlock'
+      tier: 'T3'
+      skill: 'warlock_common_correntes_etereas'
+    Skills:
+      - skill{s=warlock_common_correntes_etereas} @location ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
+  WarlockT3_ArchfeyBloom:
+    Id: MOSS_BLOCK
+    Display: '&aBroto Feérico'
+    Lore:
+      - '&7Clique direito: Círculo Féerico (T3).'
+      - '&7Purifica aliados e mantém aura.'
+      - '&8Permissão: class_warlock.archfey'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_warlock.archfey'
+      tier: 'T3'
+      skill: 'warlock_archfey_circulo_feerico'
+    Skills:
+      - skill{s=warlock_archfey_circulo_feerico} @self ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
+  WarlockT3_OldOneRelic:
+    Id: ENCHANTED_BOOK
+    Display: '&3Relíquia Onírica'
+    Lore:
+      - '&7Clique direito: Cascata de Loucura (T3).'
+      - '&7Consome stacks via HUD de Loucura.'
+      - '&8Permissão: class_warlock.greatoldone'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_warlock.greatoldone'
+      tier: 'T3'
+      skill: 'warlock_greatoldone_cascata_de_loucura'
+    Skills:
+      - skill{s=warlock_greatoldone_cascata_de_loucura} @self ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
+
+  WarlockT4_PotencyCenser:
+    Id: WITHER_ROSE
+    Display: '&5Incensário da Potestade'
+    Lore:
+      - '&7Clique direito: Evocar Potestade (T4).'
+      - '&7Amplia rajadas e resistência shred.'
+      - '&8Permissão: class_warlock'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_warlock'
+      tier: 'T4'
+      skill: 'warlock_common_evocar_potestade'
+    Skills:
+      - skill{s=warlock_common_evocar_potestade} @self ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
+  WarlockT4_FiendMeteorCore:
+    Id: NETHER_STAR
+    Display: '&cNúcleo Infernal Pactuado'
+    Lore:
+      - '&7Clique direito: Inferno Pactuado (T4).'
+      - '&7Ultimate 240s com queimadura longa.'
+      - '&8Permissão: class_warlock.fiend'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_warlock.fiend'
+      tier: 'T4'
+      skill: 'warlock_fiend_inferno_pactuado'
+    Skills:
+      - skill{s=warlock_fiend_inferno_pactuado} @location ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
+  WarlockT4_OldOneEye:
     Id: EYE_ARMOR_TRIM_SMITHING_TEMPLATE
-    Display: '&3Olho do Grande Antigo'
+    Display: '&3Olho da Quietude Ancestral'
     Lore:
-      - '&7Ultimate: §3Abismo Sussurrante§7.'
-      - '&8Garante mitigação do Bruxo limitada a 45% total.'
+      - '&7Clique direito: Abismo Sussurrante (T4).'
+      - '&7Aplica medo inicial e puxa inimigos.'
+      - '&8Permissão: class_warlock.greatoldone'
     Options:
       Unbreakable: true
-    NBT:
-      class-lock: 'class_warlock.greatoldone'
-      psapi-skill: 'warlock_greatoldone_abismo_sussurrante'
+    PersistentData:
+      classlock: 'class_warlock.greatoldone'
+      tier: 'T4'
+      skill: 'warlock_greatoldone_abismo_sussurrante'
+    Skills:
+      - skill{s=warlock_greatoldone_abismo_sussurrante} @location ~onRightClick
+      - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick

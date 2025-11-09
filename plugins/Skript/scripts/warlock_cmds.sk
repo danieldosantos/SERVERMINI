@@ -1,245 +1,142 @@
-# Skript - Comandos e HUD da classe Bruxo
+# Skript - Comandos, binds e HUD para a classe Bruxo (Warlock)
 options:
   prefix: &5[Bruxo]&f
-  hex-duration: 12
-  hex-duration-bonus: 2
-  hex-cooldown: 45
-  eldritch-window: 10
-  eldritch-cooldown: 5
-  pact-regen: 45
-  major-cd-objective: "warlock_major_cd"
-  hex-objective: "warlock_hex_stacks"
-  window-objective: "warlock_eldritch_window"
+  hud-hex: "warlock_hex_timer"
+  hud-rajada: "warlock_rajada_window"
+  hud-ultimate: "warlock_ultimate_cd"
+  hud-invoc: "warlock_invocation_charges"
   lp-class: "group.class_warlock"
   lp-fiend: "group.class_warlock.fiend"
   lp-archfey: "group.class_warlock.archfey"
   lp-oldone: "group.class_warlock.greatoldone"
+  kit-sound: "minecraft:entity.evoker.prepare_attack"
 
 function warlock_update_hud(p: player):
+  if {_p} is not online:
+    stop
   set {_name} to name of {_p}
-  set {_hex-stacks} to size of {warlock.hex.active.%uuid of {_p}%::*}
-  if {_hex-stacks} is not set:
-    set {_hex-stacks} to 0
-  execute console command "scoreboard players set %{_name}% {@hex-objective} %{_hex-stacks}%"
-  if {warlock.eldritch.window.%uuid of {_p}%} is set:
-    set {_elapsed} to difference between now and {warlock.eldritch.window.%uuid of {_p}%}
-    set {_elapsed} to {_elapsed} / 1 second
-    set {_remaining} to {@eldritch-window} - {_elapsed}
-    if {_remaining} < 0:
-      delete {warlock.eldritch.window.%uuid of {_p}%}
-      set {_remaining} to 0
-  else:
-    set {_remaining} to 0
-  execute console command "scoreboard players set %{_name}% {@window-objective} %floor({_remaining})%"
-  set {_major} to placeholder "%skills_warlock_major_cd%" for {_p}
-  if {_major} is not set:
-    set {_major} to 0
-  execute console command "scoreboard players set %{_name}% {@major-cd-objective} %{_major}%"
+  set {_hex_cd} to placeholder "%skills_cooldown_warlock_common_hex_maldicao_menor%" for {_p}
+  if {_hex_cd} is not a number:
+    set {_hex_cd} to 0
+  execute console command "scoreboard players set %{_name}% {@hud-hex} %round({_hex_cd})%"
+  set {_rajada_cd} to placeholder "%skills_cooldown_warlock_common_rajada_mistica%" for {_p}
+  if {_rajada_cd} is not a number:
+    set {_rajada_cd} to 0
+  execute console command "scoreboard players set %{_name}% {@hud-rajada} %round({_rajada_cd})%"
+  set {_ult_cd} to placeholder "%skills_cooldown_warlock_common_evocar_potestade%" for {_p}
+  if {_ult_cd} is not a number:
+    set {_ult_cd} to 0
+  execute console command "scoreboard players set %{_name}% {@hud-ultimate} %round({_ult_cd})%"
+  if {warlock.invocation_charges.%uuid of {_p}%} is not set:
+    set {warlock.invocation_charges.%uuid of {_p}%} to 0
+  execute console command "scoreboard players set %{_name}% {@hud-invoc} %{warlock.invocation_charges.%uuid of {_p}%}%"
 
-function warlock_register_hex(p: player, target: text):
-  set {_uuid} to uuid of {_p}
-  set {warlock.hex.active.%{_uuid}%::%{target}%} to now
-  set {warlock.hex.cooldown.%{_uuid}%::%{target}%} to now
-  warlock_update_hud({_p})
-  send action bar "&5Hex aplicado em &d%{target}%" to {_p}
+command /hex:
+  trigger:
+    if player has permission {@lp-class}:
+      execute console command "skills cast warlock_common_hex_maldicao_menor %player%"
+      add 1 to {warlock.invocation_charges.%uuid of player%}
+      warlock_update_hud(player)
+    else:
+      send "{@prefix} Você precisa ser um Bruxo." to player
 
-function warlock_hex_apply(caster: text, target: text):
-  set {_p} to player named {_caster}
-  if {_p} is not set:
-    stop
-  if {_target} is "":
-    stop
-  set {_key} to "%{_target}%"
-  set {_last} to {warlock.hex.cooldown.%uuid of {_p}%::%{_key}%}
-  if {_last} is set:
-    if difference between now and {_last} < {@hex-cooldown} seconds:
-      send action bar "&cHex em %{_key}% ainda recarregando." to {_p}
-      stop
-  warlock_register_hex({_p}, {_key})
+command /rajada:
+  trigger:
+    if player has permission {@lp-class}:
+      execute console command "skills cast warlock_common_rajada_mistica %player%"
+      warlock_update_hud(player)
+    else:
+      send "{@prefix} Você precisa ser um Bruxo." to player
 
-function warlock_hex_cleanup():
-  loop {warlock.hex.active::*}:
-    set {_parts::*} to split "%loop-index%" at "::"
-    if size of {_parts::*} < 2:
-      continue
-    set {_uuid} to {_parts::1}
-    set {_target} to {_parts::2}
-    set {_player} to player with uuid {_uuid}
-    if {_player} is not set:
-      delete {warlock.hex.active.%loop-index%}
-      delete {warlock.hex.cooldown.%loop-index%}
-      next loop
-    if difference between now and {warlock.hex.active.%loop-index%} > ({@hex-duration} + {@hex-duration-bonus}) seconds:
-      delete {warlock.hex.active.%loop-index%}
-      warlock_update_hud({_player})
+command /patrono_fiend:
+  trigger:
+    if player has permission {@lp-fiend}:
+      send "{@prefix} Patrono Fiend — Acesso às magias: Chicote Infernal, Armadilha de Brasas, Caldeira do Inferno, Inferno Pactuado." to player
+      warlock_update_hud(player)
+    else:
+      send "{@prefix} Você não possui pacto com o Fiend." to player
 
-function warlock_eldritch_start(caster: text):
-  set {_p} to player named {_caster}
-  if {_p} is not set:
-    stop
-  set {warlock.eldritch.window.%uuid of {_p}%} to now
-  warlock_update_hud({_p})
-  send action bar "&5Rajada ativa: projeteis liberados!" to {_p}
+command /patrono_archfey:
+  trigger:
+    if player has permission {@lp-archfey}:
+      send "{@prefix} Patrono Archfey — Habilidades: Passo Brumoso, Véu das Estações, Círculo Féerico, Cortejo da Rainha." to player
+      warlock_update_hud(player)
+    else:
+      send "{@prefix} Você não possui pacto com o Archfey." to player
 
-function warlock_resistance_cap(caster: text, element: text):
-  set {_p} to player named {_caster}
-  if {_p} is not set:
-    stop
-  set {_placeholder} to placeholder "%raceseffects_resistance_elemental%" for {_p}
-  if {_placeholder} is not set:
-    stop
-  set {_value} to {_placeholder} parsed as number
-  if {_value} is not set:
-    stop
-  if {_value} > 0.45:
-    if {warlock.resist.warn.%uuid of {_p}%} is not set or difference between now and {warlock.resist.warn.%uuid of {_p}%} > 10 seconds:
-      set {warlock.resist.warn.%uuid of {_p}%} to now
-      send action bar "&6Resistência reduzida para respeitar o limite de 45%." to {_p}
-
-function warlock_hex_penetration(caster: text):
-  set {_p} to player named {_caster}
-  if {_p} is not set:
-    stop
-  set {_count} to size of {warlock.hex.active.%uuid of {_p}%::*}
-  if {_count} is not set:
-    set {_count} to 0
-  set {warlock.hex.penetration.%uuid of {_p}%} to {_count}
-
-function warlock_regen_pact(caster: text):
-  set {_p} to player named {_caster}
-  if {_p} is not set:
-    stop
-  if {warlock.pact.last.%uuid of {_p}%} is not set or difference between now and {warlock.pact.last.%uuid of {_p}%} > {@pact-regen} seconds:
-    set {warlock.pact.last.%uuid of {_p}%} to now
-    execute console command "skillapi give-mana %{_p}% 1"
-
-on load:
-  broadcast "&7warlock_cmds.sk carregado." to console
-  execute console command "scoreboard objectives add {@hex-objective} dummy"
-  execute console command "scoreboard objectives add {@window-objective} dummy"
-  execute console command "scoreboard objectives add {@major-cd-objective} dummy"
-
-every 5 seconds:
-  warlock_hex_cleanup()
+command /patrono_oldone:
+  trigger:
+    if player has permission {@lp-oldone}:
+      send "{@prefix} Patrono Great Old One — Técnicas: Marionete Mental, Nó Psíquico, Cascata de Loucura, Abismo Sussurrante." to player
+      warlock_update_hud(player)
+    else:
+      send "{@prefix} Você não possui pacto com o Grande Antigo." to player
 
 command /kit_bruxo:
-  permission: {@lp-class}
   trigger:
-    clear player's inventory
-    execute console command "mm items give %player% EldritchWand"
-    execute console command "mm items give %player% HexTalisman"
-    execute console command "mm items give %player% PactLedger"
-    execute console command "scoreboard players set %player% {@hex-objective} 0"
-    execute console command "scoreboard players set %player% {@window-objective} 0"
-    execute console command "scoreboard players set %player% {@major-cd-objective} 0"
-    delete {warlock.hex.active.%uuid of player%::*}
-    delete {warlock.eldritch.window.%uuid of player%}
-    send "{@prefix} &7Kit base do Bruxo entregue."
+    if player has permission {@lp-class}:
+      clear all potion effects from player
+      delete {warlock.invocation_charges.%uuid of player%}
+      execute console command "mm items give %player% WarlockT1_EldritchFocus"
+      execute console command "mm items give %player% WarlockT2_HexSeal"
+      execute console command "mm items give %player% WarlockT3_ShadowManacles"
+      execute console command "mm items give %player% WarlockT4_PotencyCenser"
+      if player has permission {@lp-fiend}:
+        execute console command "mm items give %player% WarlockT1_FiendBrand"
+        execute console command "mm items give %player% WarlockT2_FiendEmberKnife"
+        execute console command "mm items give %player% WarlockT4_FiendMeteorCore"
+      if player has permission {@lp-archfey}:
+        execute console command "mm items give %player% WarlockT1_ArchfeySigil"
+        execute console command "mm items give %player% WarlockT3_ArchfeyBloom"
+      if player has permission {@lp-oldone}:
+        execute console command "mm items give %player% WarlockT2_OldOneIdol"
+        execute console command "mm items give %player% WarlockT3_OldOneRelic"
+        execute console command "mm items give %player% WarlockT4_OldOneEye"
+      play sound {@kit-sound} at player
+      send "{@prefix} Kit de teste distribuído. HUD atualizada." to player
+      warlock_update_hud(player)
+    else:
+      send "{@prefix} Apenas Bruxos podem usar este kit." to player
 
-command /hex [<player>]:
-  aliases: /warlock_hex
-  permission: {@lp-class}
-  trigger:
-    set {_target} to arg-1
-    if {_target} is not set:
-      set {_target} to targeted entity
-    if {_target} is not set:
-      send "{@prefix} &cSelecione ou informe um alvo."
-      stop
-    execute console command "skillapi cast warlock_hex %player%"
+on right click with any:
+  if name of player's tool is "§5Foco Eldritch Aprendiz":
+    execute console command "skills cast warlock_common_rajada_mistica %player%"
+    cancel event
+  else if name of player's tool is "§5Selo de Ruína Aprimorado":
+    execute console command "skills cast warlock_common_selo_de_ruina %player%"
+    cancel event
+  else if name of player's tool is "§5Manilhas Etéreas":
+    execute console command "skills cast warlock_common_correntes_etereas %player%"
+    cancel event
+  else if name of player's tool is "§5Incensário da Potestade":
+    execute console command "skills cast warlock_common_evocar_potestade %player%"
+    cancel event
+  else if name of player's tool is "§cMarca das Brasas Iniciante":
+    execute console command "skills cast warlock_fiend_chicote_infernal %player%"
+    cancel event
+  else if name of player's tool is "§cPunhal de Brasas":
+    execute console command "skills cast warlock_fiend_armadilha_de_brasas %player%"
+    cancel event
+  else if name of player's tool is "§cNúcleo Infernal Pactuado":
+    execute console command "skills cast warlock_fiend_inferno_pactuado %player%"
+    cancel event
+  else if name of player's tool is "§aSinete Nebuloso":
+    execute console command "skills cast warlock_archfey_passo_brumoso %player%"
+    cancel event
+  else if name of player's tool is "§aBroto Feérico":
+    execute console command "skills cast warlock_archfey_circulo_feerico %player%"
+    cancel event
+  else if name of player's tool is "§3Ídolo Esdrúxulo":
+    execute console command "skills cast warlock_greatoldone_marionete_mental %player%"
+    cancel event
+  else if name of player's tool is "§3Relíquia Onírica":
+    execute console command "skills cast warlock_greatoldone_cascata_de_loucura %player%"
+    cancel event
+  else if name of player's tool is "§3Olho da Quietude Ancestral":
+    execute console command "skills cast warlock_greatoldone_abismo_sussurrante %player%"
+    cancel event
+  if event is cancelled:
     warlock_update_hud(player)
 
-command /eldritch:
-  aliases: /warlock_eldritch
-  permission: {@lp-class}
-  trigger:
-    execute console command "skillapi cast warlock_eldritch_blast %player%"
-    warlock_update_hud(player)
-
-command /fiend_whip:
-  aliases: /fiend_chicote
-  permission: {@lp-fiend}
-  trigger:
-    execute console command "skillapi cast warlock_fiend_chicote_infernal %player%"
-
-command /fiend_trap:
-  aliases: /fiend_brasas
-  permission: {@lp-fiend}
-  trigger:
-    execute console command "skillapi cast warlock_fiend_armadilha_de_brasas %player%"
-
-command /fiend_contract:
-  permission: {@lp-fiend}
-  trigger:
-    execute console command "skillapi cast warlock_fiend_contrato_de_chamas %player%"
-
-command /fiend_gate:
-  permission: {@lp-fiend}
-  trigger:
-    execute console command "skillapi cast warlock_fiend_portal_igneo %player%"
-
-command /fiend_inferno:
-  permission: {@lp-fiend}
-  trigger:
-    execute console command "skillapi cast warlock_fiend_inferno_pactuado %player%"
-
-command /archfey_burst:
-  aliases: /archfey_explosao
-  permission: {@lp-archfey}
-  trigger:
-    execute console command "skillapi cast warlock_archfey_explosao_encantadora %player%"
-
-command /archfey_step:
-  aliases: /archfey_passo
-  permission: {@lp-archfey}
-  trigger:
-    execute console command "skillapi cast warlock_archfey_passo_brumoso %player%"
-
-command /archfey_dream:
-  permission: {@lp-archfey}
-  trigger:
-    execute console command "skillapi cast warlock_archfey_dominio_do_sonho %player%"
-
-command /archfey_laco:
-  permission: {@lp-archfey}
-  trigger:
-    execute console command "skillapi cast warlock_archfey_laco_feerico %player%"
-
-command /archfey_cortejo:
-  permission: {@lp-archfey}
-  trigger:
-    execute console command "skillapi cast warlock_archfey_cortejo_da_rainha %player%"
-
-command /oldone_whispers:
-  aliases: /oldone_sussurros
-  permission: {@lp-oldone}
-  trigger:
-    execute console command "skillapi cast warlock_greatoldone_sussurros_devastadores %player%"
-
-command /oldone_visoes:
-  permission: {@lp-oldone}
-  trigger:
-    execute console command "skillapi cast warlock_greatoldone_visoes_alienigenas %player%"
-
-command /oldone_marionete:
-  permission: {@lp-oldone}
-  trigger:
-    execute console command "skillapi cast warlock_greatoldone_marionete_mental %player%"
-
-command /oldone_cascata:
-  permission: {@lp-oldone}
-  trigger:
-    execute console command "skillapi cast warlock_greatoldone_cascata_de_loucura %player%"
-
-command /oldone_abismo:
-  permission: {@lp-oldone}
-  trigger:
-    execute console command "skillapi cast warlock_greatoldone_abismo_sussurrante %player%"
-
-# Glue: clique de itens MythicMobs
-on rightclick:
-  if player's tool is set:
-    if player's tool has nbt tag "psapi-skill":
-      set {_skill} to nbt tag "psapi-skill" of player's tool
-      execute console command "skillapi cast %{_skill}% %player%"
-      cancel event
+on script load:
+  broadcast "{@prefix} Script do Bruxo carregado."
