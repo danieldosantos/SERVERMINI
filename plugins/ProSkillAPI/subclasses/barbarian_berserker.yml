@@ -1,0 +1,43 @@
+# Subclasse Berserker do Bárbaro
+name: Barbarian_Berserker
+display: "§cCaminho do Berserker"
+description:
+  - "§7Canaliza fúria bruta para explosões de dano."
+  - "§cRecebe dano adicional quando combina Fúria e Ataque Temerário."
+options:
+  needs-permission: true
+  parent: Barbarian
+  mana-name: "Fúria"
+  rage-synergy:
+    fury-temerario-risk: 0.10
+skills:
+  tier1:
+    active:
+      - barbarian_berserker_bestial_roar
+      - barbarian_berserker_bloody_charge
+    passive:
+      - barbarian_berserker_risk_reward
+  tier2:
+    active:
+      - barbarian_berserker_bestial_roar
+      - barbarian_berserker_bloody_charge
+      - barbarian_berserker_relentless_impetus
+    passive:
+      - barbarian_berserker_risk_reward
+  tier3:
+    active:
+      - barbarian_berserker_bestial_roar
+      - barbarian_berserker_bloody_charge
+      - barbarian_berserker_relentless_impetus
+      - barbarian_berserker_frenzied_retaliation
+    passive:
+      - barbarian_berserker_risk_reward
+  tier4:
+    active:
+      - barbarian_berserker_bestial_roar
+      - barbarian_berserker_bloody_charge
+      - barbarian_berserker_relentless_impetus
+      - barbarian_berserker_frenzied_retaliation
+      - barbarian_berserker_carnage
+    passive:
+      - barbarian_berserker_risk_reward

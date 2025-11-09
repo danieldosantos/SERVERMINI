@@ -1,0 +1,35 @@
+# Skill: Defesa sem Armadura
+name: barbarian_unarmored_defense
+display: "§7Defesa sem Armadura"
+icon: LEATHER_CHESTPLATE
+type: Passive
+max-level: 1
+description:
+  - "§7Enquanto não estiver usando armadura pesada, ganha +8% redução física"
+  - "§7e +6% chance de esquiva baseada em mobilidade."
+components:
+  EquipCheck:
+    type: trigger
+    data:
+      slot: armor
+      allowed:
+        - LEATHER
+        - CHAIN
+        - NONE
+    children:
+      ApplyDefense:
+        type: mechanic
+        data:
+          potion: DAMAGE_RESISTANCE
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+      ApplyDodge:
+        type: mechanic
+        data:
+          potion: SPEED
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0

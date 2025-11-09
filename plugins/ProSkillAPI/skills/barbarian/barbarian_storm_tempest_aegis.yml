@@ -1,0 +1,20 @@
+# Skill Passiva: Égide da Tempestade
+name: barbarian_storm_tempest_aegis
+display: "§3Égide da Tempestade"
+icon: CONDUIT
+type: Passive
+max-level: 1
+description:
+  - "§7Gera escudo elétrico fora de combate que absorve 8% do dano de projéteis; decai em contato com resistências raciais."
+components:
+  OutOfCombat:
+    type: trigger
+    data:
+      delay: 10
+      interval: 8
+    children:
+      ApplyShield:
+        type: mechanic
+        data:
+          command: "skript run storm_aegis %player%"
+          silent: true

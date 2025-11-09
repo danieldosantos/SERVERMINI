@@ -1,0 +1,39 @@
+# Skill: Percepção do Perigo
+name: barbarian_danger_sense
+display: "§ePercepção do Perigo"
+icon: SPYGLASS
+type: Passive
+max-level: 1
+description:
+  - "§7Ao sofrer dano em área, ganha -25% dano de explosões e projéteis por 6s."
+  - "§8Tempo de recarga interno: 12s para manter uptime <60%."
+components:
+  DamageTaken:
+    type: trigger
+    data:
+      cooldown: 12
+      group: enemy
+      damage-type: AOE
+    children:
+      ApplyBuff:
+        type: mechanic
+        data:
+          potion: DAMAGE_RESISTANCE
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+          indicator: "§ePercepção do Perigo"
+      ApplyProjectileShield:
+        type: mechanic
+        data:
+          potion: SLOW_FALLING
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 3
+          amplifier-scale: 0
+      Message:
+        type: mechanic
+        data:
+          message: "§eVocê antecipa o perigo iminente!"
+          targets: self

@@ -1,0 +1,50 @@
+# Skill: Grito Bestial
+name: barbarian_berserker_bestial_roar
+display: "§cGrito Bestial"
+icon: GOAT_HORN
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 75
+  cooldown-scale: 0
+  cost-base: 0
+  cost-scale: 0
+description:
+  - "§7Toca o berrante, reduzindo em 10% o dano causado por inimigos em 6 blocos."
+  - "§7Duração: 12s. Consome 1 carga de Fúria."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      ConsumeRage:
+        type: mechanic
+        data:
+          key: rage_stacks
+          amount-base: 1
+          amount-scale: 0
+          min-value: 1
+          indicator: "§6-1 Rage"
+      AreaDebuff:
+        type: target
+        data:
+          shape: sphere
+          radius-base: 6
+          radius-scale: 0
+          group: enemy
+        children:
+          ApplyWeakness:
+            type: mechanic
+            data:
+              potion: WEAKNESS
+              seconds-base: 12
+              seconds-scale: 0
+              amplifier-base: 0
+              amplifier-scale: 0
+              indicator: "§c-10% dano"
+      Message:
+        type: mechanic
+        data:
+          message: "§cVocê solta um grito bestial!"
+          targets: self

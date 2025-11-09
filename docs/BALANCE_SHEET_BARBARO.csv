@@ -1,0 +1,24 @@
+Skill,Tipo,Custo(Fúria/Mana),Duração,CD,Dano/Redução,Área,Notas PvP,Tier
+barbarian_fury,Ativa,0 (reaplicar consome 1 Rage),120s,180s,+18% dano/+18% redução,Self,Cap resistência 45%,T1
+barbarian_reckless_attack,Ativa,0,20s,60s,+25% crit / +15% dano recebido,Self,Risco adicional controlado,T1
+barbarian_danger_sense,Passiva,0,6s uptime,12s ICD,-25% explosões/projéteis,Self trigger,Uptime <60%,T1
+barbarian_unarmored_defense,Passiva,0,Contínuo (checks 6s),--,+8% redução/+6% esquiva,Self,Requer sem armadura pesada,T1
+barbarian_vigor,Passiva,0,4s tick,8s delay,1.5% HP por tick,Self,Fora de combate,T2
+barbarian_berserker_bestial_roar,Ativa,1 Rage,12s,75s,-10% dano inimigo,6 blocos,Útil para mitigar burst,T2
+barbarian_berserker_bloody_charge,Ativa,0,Impacto,45s,160% dano/+20% redução,5 blocos dash,Recuo limitado,T2
+barbarian_berserker_frenzied_retaliation,Ativa,0,8s,90s,Reflete 30% (<50% HP),Self,Sem dano de queda,T3
+barbarian_berserker_relentless_impetus,Ativa,0,10s,60s,+0.04 velocidade,Self,Capa velocidade total ≤0.05,T2
+barbarian_berserker_carnage,Ativa (ULT),1 Rage,15s,210s,1.1x dano +25% lifesteal,3 blocos cleave,Lifesteal cap 25%,T3
+barbarian_berserker_risk_reward,Passiva,0,Enquanto buffs,2s refresh,+10% dano recebido,Fúria+Temerário,Somente se ambos ativos,T2
+barbarian_totem_bear,Ativa,1 Rage,10s,120s,-35% dano físico,5 blocos,RacesEffects aplica DR,T2
+barbarian_totem_eagle,Ativa,0,15s,75s,Visão noturna/+1 alcance,8 blocos,Vantagem posicionamento,T2
+barbarian_totem_wolf,Ativa,0,12s,90s,+12% dano aliado,Marca alvo+8 blocos,Sem stack multiplicativo,T2
+barbarian_totem_tiger,Ativa,0,8s,70s,+30% vel ataque,8 blocos,Não ultrapassa cap haste,T3
+barbarian_totem_phoenix,Ativa (ULT),0,12s,240s,Revive 40% HP,Aura 8 blocos,Bloqueio arenas ranqueadas,T4
+barbarian_totem_spirit_link,Passiva,0,Checks 4s,--,Retorno decrescente resistências,Aliados Totem,Integração RacesEffects,T2
+barbarian_storm_thunder_hammer,Ativa,0,2s stun,45s,140% dano+stun alvo,6 blocos alvo,PvP stun 2s,T2
+barbarian_storm_galvanic_surge,Ativa,0,3 ticks/8s,60s,3x40% dano,8 blocos alvo,Cooldown controlado,T2
+barbarian_storm_wind_cloak,Ativa,0,10s,90s,+50% resist projétil/empurra,4 blocos,Uso defensivo,T3
+barbarian_storm_tempest_cauldron,Ativa,0,10s,120s,50%/2s (x5),6 blocos,Avaliar DPS sustentado,T3
+barbarian_storm_eye,Ativa (ULT),0,12s,210s,Puxão +20% dano elétrico,8 blocos,Puxão lento,T3
+barbarian_storm_tempest_aegis,Passiva,0,Escudo 8s ciclo,8s intervalo,Escudo projétil 8%,Self,RacesEffects aplica DR,T2

@@ -1,0 +1,46 @@
+# Skill: Totem do Lobo
+name: barbarian_totem_wolf
+display: "§fTotem do Lobo"
+icon: BONE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 90
+  cooldown-scale: 0
+description:
+  - "§7Marca um alvo e concede +12% dano contra ele para aliados próximos por 12s."
+components:
+  Cast:
+    type: trigger
+    children:
+      TargetEnemy:
+        type: target
+        data:
+          range-base: 15
+          group: enemy
+        children:
+          ApplyMark:
+            type: mechanic
+            data:
+              potion: GLOWING
+              seconds-base: 12
+              amplifier-base: 0
+              indicator: "§fMarca do Lobo"
+          AllyCircle:
+            type: target
+            data:
+              group: ally
+              radius-base: 8
+            children:
+              ApplyDamageBoost:
+                type: mechanic
+                data:
+                  potion: STRENGTH
+                  seconds-base: 12
+                  amplifier-base: 0
+                  indicator: "§f+12% dano vs alvo marcado"
+      Message:
+        type: mechanic
+        data:
+          message: "§fA alcateia focou o alvo marcado!"
+          targets: self

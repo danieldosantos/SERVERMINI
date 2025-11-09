@@ -1,0 +1,47 @@
+# Skill: Olho do Furacão (ULT)
+name: barbarian_storm_eye
+display: "§bOlho do Furacão"
+icon: TRIDENT
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 210
+  cooldown-scale: 0
+description:
+  - "§7Cria vórtice de 8 blocos por 12s que puxa inimigos e aplica +20% vulnerabilidade elétrica."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      VortexLoop:
+        type: mechanic
+        data:
+          repeat: 6
+          interval: 2
+        children:
+          TargetEnemies:
+            type: target
+            data:
+              shape: sphere
+              radius-base: 8
+              group: enemy
+            children:
+              Pull:
+                type: mechanic
+                data:
+                  pull-base: 0.4
+                  pull-y-base: 0.1
+              Vulnerability:
+                type: mechanic
+                data:
+                  potion: WEAKNESS
+                  seconds-base: 2.5
+                  amplifier-base: 1
+                  indicator: "§b+20% dano elétrico"
+      Message:
+        type: mechanic
+        data:
+          message: "§bO olho do furacão engole seus inimigos!"
+          targets: self

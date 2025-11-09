@@ -1,0 +1,39 @@
+# Skill: Caldeirão da Tempestade
+name: barbarian_storm_tempest_cauldron
+display: "§3Caldeirão da Tempestade"
+icon: WATER_BUCKET
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 120
+  cooldown-scale: 0
+description:
+  - "§7Invoca chuva elétrica em área de 6 blocos por 10s (50% dano a cada 2s)."
+components:
+  Cast:
+    type: trigger
+    children:
+      AreaLoop:
+        type: mechanic
+        data:
+          repeat: 5
+          interval: 2
+        children:
+          TargetArea:
+            type: target
+            data:
+              shape: sphere
+              radius-base: 6
+              group: enemy
+            children:
+              DealDamage:
+                type: mechanic
+                data:
+                  damage-base: 0.5
+                  damage-scale: 0
+                  indicator: "§3Raio"
+      Message:
+        type: mechanic
+        data:
+          message: "§3Você convoca o caldeirão da tempestade!"
+          targets: self

@@ -1,0 +1,30 @@
+# Skill Passiva: Risco Calculado do Berserker
+name: barbarian_berserker_risk_reward
+display: "§cRisco e Recompensa"
+icon: RED_DYE
+type: Passive
+max-level: 1
+description:
+  - "§7Quando Fúria e Ataque Temerário estão ativos juntos, recebe +10% dano"
+  - "§7adicional (após mitigação), reforçando a fantasia de risco."
+components:
+  CheckBuffs:
+    type: trigger
+    data:
+      interval: 2
+    children:
+      Condition:
+        type: condition
+        data:
+          has-buff:
+            - barbarian_fury
+            - barbarian_reckless_attack
+        children:
+          ApplyDebuff:
+            type: mechanic
+            data:
+              potion: WEAKNESS
+              seconds-base: 2
+              seconds-scale: 0
+              amplifier-base: 0
+              amplifier-scale: 0

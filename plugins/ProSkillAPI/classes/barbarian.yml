@@ -1,0 +1,118 @@
+# Classe base Bárbaro para ProSkillAPI
+name: Barbarian
+prefix: "Barb"
+display: "§6Bárbaro"
+main-class: true
+description:
+  - "§7Guerreiro primal que alterna entre tanque e DPS corpo a corpo."
+  - "§eAdministra cargas de Fúria para ativar janelas de poder controlado."
+  - "§7Sinergia moderada com raças resistentes, com retornos decrescentes."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Fúria"
+  mana-regen: 0
+  max-level: 60
+  exp-source: kill
+  attributes-scaled: true
+  needs-race: false
+  rage-resource:
+    key: rage_stacks
+    display: "Rage"
+    min: 0
+    max: 3
+    scaling:
+      tier1: 3
+      tier2: 3
+      tier3: 4
+      tier4: 4
+    decay-out-of-combat:
+      delay: 12
+      interval: 6
+      amount: 1
+  scoreboard:
+    rage: "barbarian_rage"
+    fury-duration: "barbarian_fury_time"
+    major-cd: "barbarian_major_cd"
+    placeholders:
+      rage: "%skills_rage_stacks%"
+      fury-time: "%skills_fury_time%"
+      major-cd: "%skills_major_cd%"
+attributes:
+  health-base: 36
+  health-scale: 2.5
+  mana-base: 0
+  mana-scale: 0
+  walk-speed-base: 0.02
+  walk-speed-scale: 0.004
+  physical-defense-base: 3
+  physical-defense-scale: 1.2
+  skill-damage: 0.0
+  attack-damage: 2.0
+  level-bonus:
+    1:
+      health: 36
+      defense: 5
+      speed: 0.0
+    5:
+      health: 58
+      defense: 8
+      speed: 0.01
+    11:
+      health: 92
+      defense: 12
+      speed: 0.015
+    17:
+      health: 128
+      defense: 15
+      speed: 0.02
+mana:
+  regen-combat: 0
+  regen-out: 0
+exp:
+  kill-multiplier: 1.0
+  quest-multiplier: 1.0
+  pvp-multiplier: 1.0
+skills:
+  tier1:
+    active:
+      - barbarian_fury
+      - barbarian_reckless_attack
+    passive:
+      - barbarian_unarmored_defense
+      - barbarian_danger_sense
+  tier2:
+    active:
+      - barbarian_fury
+      - barbarian_reckless_attack
+    passive:
+      - barbarian_unarmored_defense
+      - barbarian_danger_sense
+      - barbarian_vigor
+  tier3:
+    active:
+      - barbarian_fury
+      - barbarian_reckless_attack
+    passive:
+      - barbarian_unarmored_defense
+      - barbarian_danger_sense
+      - barbarian_vigor
+  tier4:
+    active:
+      - barbarian_fury
+      - barbarian_reckless_attack
+    passive:
+      - barbarian_unarmored_defense
+      - barbarian_danger_sense
+      - barbarian_vigor
+subclasses:
+  berserker:
+    display: "§cCaminho do Berserker"
+    file: barbarian_berserker.yml
+  totem:
+    display: "§aGuardião Totêmico"
+    file: barbarian_totem.yml
+  storm:
+    display: "§bArauto da Tempestade"
+    file: barbarian_storm.yml

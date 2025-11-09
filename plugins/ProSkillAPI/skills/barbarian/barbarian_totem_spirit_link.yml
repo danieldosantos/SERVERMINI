@@ -1,0 +1,25 @@
+# Skill Passiva: Vínculo Espiritual
+name: barbarian_totem_spirit_link
+display: "§aVínculo Totêmico"
+icon: HEART_OF_THE_SEA
+type: Passive
+max-level: 1
+description:
+  - "§7Monitora resistências raciais e aplica retorno decrescente com buffs totêmicos."
+components:
+  CheckResistance:
+    type: trigger
+    data:
+      interval: 4
+    children:
+      Condition:
+        type: condition
+        data:
+          placeholder: "%raceseffects_resistance_elemental%"
+          compare: ">=0.2"
+        children:
+          ApplyCap:
+            type: mechanic
+            data:
+              command: "skript run barbarian_resistance_cap %player%"
+              silent: true

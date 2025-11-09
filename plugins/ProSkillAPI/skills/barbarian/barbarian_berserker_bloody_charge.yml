@@ -1,0 +1,51 @@
+# Skill: Investida Sanguinária
+name: barbarian_berserker_bloody_charge
+display: "§4Investida Sanguinária"
+icon: NETHERITE_AXE
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 45
+  cooldown-scale: 0
+description:
+  - "§7Avança 5 blocos, causando 160% do dano de arma no impacto."
+  - "§7Ao acertar, ganha +20% redução de dano por 6s."
+components:
+  Cast:
+    type: trigger
+    children:
+      Dash:
+        type: mechanic
+        data:
+          forward-base: 5
+          forward-scale: 0
+          speed-base: 1.2
+          indicator: "§4Investida"
+      DamageCone:
+        type: target
+        data:
+          group: enemy
+          range-base: 5
+          range-scale: 0
+          angle-base: 45
+        children:
+          DealDamage:
+            type: mechanic
+            data:
+              damage-base: 1.6
+              damage-scale: 0
+              indicator: "§4Golpe Sanguinário"
+      ApplyMitigation:
+        type: mechanic
+        data:
+          potion: DAMAGE_RESISTANCE
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+          indicator: "§a-20% dano recebido"
+      Message:
+        type: mechanic
+        data:
+          message: "§4Você investe com ferocidade!"
+          targets: self

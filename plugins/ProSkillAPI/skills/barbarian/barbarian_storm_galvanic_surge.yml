@@ -1,0 +1,38 @@
+# Skill: Surto Galvânico
+name: barbarian_storm_galvanic_surge
+display: "§9Surto Galvânico"
+icon: LIGHTNING_ROD
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§73 descargas de 40% do dano cada ao longo de 8s."
+components:
+  Cast:
+    type: trigger
+    children:
+      Chain:
+        type: mechanic
+        data:
+          repeat: 3
+          interval: 2.5
+        children:
+          TargetEnemy:
+            type: target
+            data:
+              range-base: 8
+              group: enemy
+            children:
+              Damage:
+                type: mechanic
+                data:
+                  damage-base: 0.4
+                  damage-scale: 0
+                  indicator: "§9Descarga"
+      Message:
+        type: mechanic
+        data:
+          message: "§9Surto galvânico em curso!"
+          targets: self

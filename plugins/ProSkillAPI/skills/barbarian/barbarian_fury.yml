@@ -1,0 +1,84 @@
+# Skill: Fúria (classe base)
+name: barbarian_fury
+display: "§6Fúria"
+icon: BLAZE_POWDER
+type: Active
+max-level: 1
+skill-req: []
+needs-permission: true
+attributes:
+  level-base: 1
+  level-scale: 0
+  cost-base: 0
+  cost-scale: 0
+  cooldown-base: 180
+  cooldown-scale: 0
+  mana-cost-base: 0
+  mana-cost-scale: 0
+  range-base: 0
+  range-scale: 0
+  radius-base: 0
+  radius-scale: 0
+description:
+  - "§eAtiva estado de Fúria: +18% dano corpo a corpo, +18% resistência física,"
+  - "§eimunidade a empurrões por 6s ao ativar e revela stacks de Rage no HUD."
+  - "§7Duração: 120s. Reaplicar consome 1 carga de Rage para estender em 60s."
+  - "§cNão empilha com resistências raciais além do limite global (45%)."
+components:
+  Cast:
+    type: trigger
+    data:
+      cooldown: true
+    children:
+      CheckRage:
+        type: condition
+        data:
+          key: rage_stacks
+          min-value: 1
+          fail-message: "§cVocê precisa de Fúria acumulada para reforçar o efeito."
+        children:
+          Consume:
+            type: mechanic
+            data:
+              key: rage_stacks
+              amount-base: 1
+              amount-scale: 0
+              min-value: 0
+              allow-negative: false
+              indicator: "§6-1 Rage (manter Fúria ativa)"
+      ApplyBuff:
+        type: mechanic
+        data:
+          potion: INCREASE_DAMAGE
+          seconds-base: 120
+          seconds-scale: 0
+          amplifier-base: 1
+          amplifier-scale: 0
+          indicator: "§6Fúria: +18% dano"
+      ApplyResistance:
+        type: mechanic
+        data:
+          potion: DAMAGE_RESISTANCE
+          seconds-base: 120
+          seconds-scale: 0
+          amplifier-base: 0
+          amplifier-scale: 0
+          indicator: "§6Fúria: +18% resistência"
+      KnockbackImmunity:
+        type: mechanic
+        data:
+          potion: RESISTANCE
+          seconds-base: 6
+          seconds-scale: 0
+          amplifier-base: 5
+          amplifier-scale: 0
+      RefreshScoreboard:
+        type: mechanic
+        data:
+          command: "placeholderapi parse me \"%skills_fury_time%\""
+          silent: true
+      Message:
+        type: mechanic
+        data:
+          message: "§6Você entra em Fúria!"
+          targets: self

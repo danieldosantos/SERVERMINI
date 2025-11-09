@@ -1,0 +1,36 @@
+# Skill: Impetus Irrefreável
+name: barbarian_berserker_relentless_impetus
+display: "§6Impetus Irrefreável"
+icon: LEATHER_BOOTS
+type: Active
+max-level: 1
+attributes:
+  cooldown-base: 60
+  cooldown-scale: 0
+description:
+  - "§7Remove lentidão e concede +0.04 velocidade de movimento por 10s."
+components:
+  Cast:
+    type: trigger
+    children:
+      CleanseSlow:
+        type: mechanic
+        data:
+          remove-negative: true
+          types:
+            - SLOW
+            - LEVITATION
+      ApplySpeed:
+        type: mechanic
+        data:
+          potion: SPEED
+          seconds-base: 10
+          seconds-scale: 0
+          amplifier-base: 1
+          amplifier-scale: 0
+          indicator: "§6Impetus"
+      Message:
+        type: mechanic
+        data:
+          message: "§6Seus passos não podem ser contidos!"
+          targets: self
