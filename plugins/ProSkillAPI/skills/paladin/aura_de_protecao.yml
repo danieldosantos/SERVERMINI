@@ -1,0 +1,15 @@
+name: Aura de Protecao
+type: passive
+max-level: 1
+description:
+  - "Enquanto Canalizar Voto estiver ativo, aliados a 6 blocos recebem +10% mitigação."
+  - "Não acumula com outras auras; scripts de juramento substituem o efeito base."
+icon: SHIELD
+components:
+  passive:
+    sequence:
+      - type: command
+        command: "skript run paladin_aura_sync %player%"
+        async: true
+messages:
+  passive: "&b[Paladino] Aura de Proteção sincronizada."

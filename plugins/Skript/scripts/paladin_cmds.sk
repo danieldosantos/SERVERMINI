@@ -1,0 +1,248 @@
+# Comandos e integrações do Paladino
+options:
+  faith-regen-interval: 35 seconds
+  faith-regen-out-of-combat: 30 seconds
+  imposicao-recharge: 180 seconds
+  aura-radius: 6
+  prefix: "&e[Paladino]"
+
+on load:
+  broadcast "&e[Skript] Comandos do Paladino carregados."
+
+on join:
+  if player has permission "class_paladin":
+    set {paladin.faith.%player%} to paladinMaxFaith(player)
+    set {paladin.imposicao.%player%} to paladinMaxImposicao(player)
+
+function paladinMaxFaith(p: player) :: number:
+  set {_lvl} to placeholderapi "%skillapi_level%" with p
+  if {_lvl} is not a number:
+    return 3
+  if {_lvl} parsed as number >= 33:
+    return 4
+  else if {_lvl} parsed as number >= 11:
+    return 4
+  return 3
+
+function paladinFaith(p: player) :: number:
+  if {paladin.faith.%p%} is not set:
+    set {paladin.faith.%p%} to paladinMaxFaith(p)
+  return {paladin.faith.%p%}
+
+function paladinConsumeFaith(p: player, cost: number) :: boolean:
+  set {_current} to paladinFaith(p)
+  if {_current} < cost:
+    send "{@prefix} &cSem cargas de Fé." to p
+    return false
+  set {paladin.faith.%p%} to {_current} - cost
+  set {paladin.last.combat.%p%} to now
+  return true
+
+function paladinRestoreFaith(p: player, amount: number):
+  set {_max} to paladinMaxFaith(p)
+  set {_current} to paladinFaith(p)
+  set {_new} to {_current} + amount
+  if {_new} > {_max}:
+    set {_new} to {_max}
+  set {paladin.faith.%p%} to {_new}
+
+function paladinMaxImposicao(p: player) :: number:
+  set {_lvl} to placeholderapi "%skillapi_level%" with p
+  if {_lvl} is a number and {_lvl} parsed as number >= 33:
+    return 3
+  if {_lvl} is a number and {_lvl} parsed as number >= 11:
+    return 3
+  return 2
+
+function paladinImposicaoReady(p: player) :: number:
+  if {paladin.imposicao.%p%} is not set:
+    set {paladin.imposicao.%p%} to paladinMaxImposicao(p)
+  return {paladin.imposicao.%p%}
+
+function paladinConsumeImposicao(p: player) :: boolean:
+  set {_charges} to paladinImposicaoReady(p)
+  if {_charges} <= 0:
+    send "{@prefix} &cImposição de Mãos sem cargas. Aguarde recarga." to p
+    return false
+  set {paladin.imposicao.%p%} to {_charges} - 1
+  set {paladin.last.combat.%p%} to now
+  set {_delay} to {@imposicao-recharge}
+  set {_pl} to p
+  run task {_delay} later:
+    if {_pl} is online:
+      set {_max} to paladinMaxImposicao({_pl})
+      set {_current} to paladinImposicaoReady({_pl})
+      if {_current} < {_max}:
+        set {paladin.imposicao.%_pl%} to {_current} + 1
+        send "{@prefix} &aUma carga de Imposição de Mãos foi restaurada." to {_pl}
+  return true
+
+function paladinCast(p: player, ability: text):
+  set {_name} to name of p
+  set {_ability} to ability
+  switch {_ability}:
+    case "golpe":
+      if paladinConsumeFaith(p, 1) is false:
+        stop
+      execute console command "skillapi cast %{_name}% Golpe Divino"
+    case "imposicao":
+      if paladinConsumeImposicao(p) is false:
+        stop
+      execute console command "skillapi cast %{_name}% Imposicao de Maos"
+    case "canalizar":
+      if paladinConsumeFaith(p, 1) is false:
+        stop
+      execute console command "skillapi cast %{_name}% Canalizar Voto"
+    case "golpe_sagrado":
+      if paladinConsumeFaith(p, 1) is false:
+        stop
+      execute console command "skillapi cast %{_name}% Golpe Sagrado"
+    case "aura_pureza":
+      execute console command "skillapi cast %{_name}% Aura de Pureza"
+    case "luz_orientadora":
+      execute console command "skillapi cast %{_name}% Luz Orientadora"
+    case "escudo_devoto":
+      execute console command "skillapi cast %{_name}% Escudo Devoto"
+    case "milagre":
+      execute console command "skillapi cast %{_name}% Milagre da Fe"
+    case "juramento":
+      if paladinConsumeFaith(p, 1) is false:
+        stop
+      execute console command "skillapi cast %{_name}% Juramento de Inimizade"
+    case "passo":
+      execute console command "skillapi cast %{_name}% Passo do Redentor"
+    case "cadeia":
+      execute console command "skillapi cast %{_name}% Cadeia do Pecado"
+    case "furia":
+      execute console command "skillapi cast %{_name}% Furia Celestial"
+    case "execucao":
+      if paladinConsumeFaith(p, 1) is false:
+        stop
+      execute console command "skillapi cast %{_name}% Execucao Divina"
+    case "vinha":
+      execute console command "skillapi cast %{_name}% Vinha Restritiva"
+    case "aura_natureza":
+      execute console command "skillapi cast %{_name}% Aura da Natureza"
+    case "luz_radiante":
+      execute console command "skillapi cast %{_name}% Luz Radiante"
+    case "asas":
+      execute console command "skillapi cast %{_name}% Asas de Safira"
+    case "harmonia":
+      execute console command "skillapi cast %{_name}% Harmonia Primordial"
+    default:
+      send "{@prefix} &cHabilidade desconhecida." to p
+
+command /paladin_cast <text>:
+  permission: class_paladin
+  trigger:
+    paladinCast(player, arg 1)
+
+command /golpe:
+  permission: class_paladin
+  trigger:
+    paladinCast(player, "golpe")
+
+command /imposicao:
+  permission: class_paladin
+  trigger:
+    paladinCast(player, "imposicao")
+
+command /canalizar:
+  permission: class_paladin
+  trigger:
+    paladinCast(player, "canalizar")
+
+command /voto_devocao:
+  permission: class_paladin.devotion
+  trigger:
+    paladinCast(player, "aura_pureza")
+
+command /voto_vinganca:
+  permission: class_paladin.vengeance
+  trigger:
+    paladinCast(player, "juramento")
+
+command /voto_ancoes:
+  permission: class_paladin.ancients
+  trigger:
+    paladinCast(player, "aura_natureza")
+
+command /kit_paladino:
+  permission: class_paladin
+  trigger:
+    clear player's inventory
+    set {_name} to name of player
+    execute console command "cmi give %{_name}% DevotionBlade"
+    execute console command "cmi give %{_name}% DevotionRelic"
+    execute console command "cmi give %{_name}% VengeanceSigil"
+    execute console command "cmi give %{_name}% AncientsSpear"
+    send "{@prefix} &aKit de testes do Paladino entregue." to player
+    set {paladin.faith.%player%} to paladinMaxFaith(player)
+    set {paladin.imposicao.%player%} to paladinMaxImposicao(player)
+
+# Regeneração de Fé fora de combate
+every {@faith-regen-interval}:
+  loop all players:
+    if loop-player has permission "class_paladin":
+      if {paladin.last.combat.%loop-player%} is not set:
+        set {paladin.last.combat.%loop-player%} to now - {@faith-regen-out-of-combat}
+      if difference between now and {paladin.last.combat.%loop-player%} >= {@faith-regen-out-of-combat}:
+        paladinRestoreFaith(loop-player, 1)
+
+# Atualiza HUD via actionbar
+every 5 seconds:
+  loop all players:
+    if loop-player has permission "class_paladin":
+      set {_faith} to paladinFaith(loop-player)
+      set {_max} to paladinMaxFaith(loop-player)
+      set {_impo} to paladinImposicaoReady(loop-player)
+      set {_auraText} to ""
+      if {paladin.aura.expire.%loop-player%} is set:
+        set {_remaining} to difference between {paladin.aura.expire.%loop-player%} and now
+        if {_remaining} > 0 seconds:
+          set {_sec} to floor({_remaining} / 1 second)
+          set {_auraText} to " &7| &aAura: %{_sec}%s"
+        else:
+          delete {paladin.aura.expire.%loop-player%}
+      send action bar "&fFé: %{_faith}%/%{_max}% &7| &bImposição: %{_impo}%{_auraText}" to loop-player
+
+# Funções utilitárias chamadas pelas skills
+function paladin_channel_override(p: player, duration: number):
+  set {paladin.aura.expire.%p%} to now + (duration seconds)
+  send title "&fJuramento ativo" with subtitle "&7Duração: %{duration}%s" to p for 10 ticks, 40 ticks, 10 ticks
+
+function paladin_devocao_exaustao(p: player, duration: number):
+  if placeholderapi "%raceseffects_resistance_bonus%" with p parsed as number > 0.3:
+    apply mining fatigue 1 to p for duration seconds
+
+function paladin_vinganca_dash(p: player, dist: number):
+  push p forward dist parsed as number
+  set {paladin.last.combat.%p%} to now
+
+function paladin_vinganca_pull(caster: player, target: entity, dist: number):
+  if target is set:
+    set {_vec} to vector between location of caster and location of target
+    normalize {_vec}
+    multiply {_vec} by dist parsed as number / -6
+    set velocity of target to {_vec}
+    apply slowness 2 to target for 6 seconds
+    set {paladin.last.combat.%caster%} to now
+
+function paladin_vinganca_exec(p: player, target: entity, threshold: number):
+  if target is set:
+    if target is a living entity:
+      set {_hp} to health of target / max health of target
+      if {_hp} <= threshold parsed as number:
+        damage target by 10 true damage
+        play sound "entity.wither.break_block" with volume 1 and pitch 0.8 for p
+
+function paladin_ancoes_planar(p: player, duration: number):
+  apply slow falling 1 to p for duration seconds
+
+on damage of player:
+  if attacker is a player:
+    if attacker has permission "class_paladin":
+      set {paladin.last.combat.%attacker%} to now
+  if victim is a player:
+    if victim has permission "class_paladin":
+      set {paladin.last.combat.%victim%} to now

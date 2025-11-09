@@ -1,0 +1,40 @@
+name: Golpe Sagrado
+type: active
+max-level: 4
+requires:
+  subclass: paladin_devotion
+description:
+  - "Reforça o próximo ataque com +100% → +140% de dano radiante."
+  - "Consume 1 carga de Fé e aciona partículas claras."
+icon: GOLDEN_SWORD
+cooldown:
+  base: 45
+  scale: 0
+resource:
+  faith_charges:
+    cost: 1
+    minimum: 1
+custom:
+  duration: 12
+  damage:
+    tier1: 1.0
+    tier2: 1.16
+    tier3: 1.28
+    tier4: 1.4
+components:
+  cast:
+    sequence:
+      - type: buff
+        key: paladin_devocao_golpe
+        triggers: next-hit
+        stat: damage
+        value: "%custom.damage%"
+        duration: "%custom.duration%"
+      - type: particle
+        effect: END_ROD
+        amount: 30
+        radius: 0.5
+      - type: message
+        text: "&f[Devoção] Golpe Sagrado preparado (%custom.damage%x)."
+messages:
+  fail-resource: "&cSem cargas de Fé para Golpe Sagrado."

@@ -1,0 +1,36 @@
+name: Luz Radiante
+type: active
+max-level: 4
+requires:
+  subclass: paladin_ancients
+description:
+  - "Cega inimigos e concede regeneração de 5%/s por 5s aos aliados sob a luz."
+  - "Favorece raças naturais sem remover fraquezas."
+icon: GLOW_BERRIES
+cooldown:
+  base: 75
+  scale: -3
+  minimum: 60
+radius:
+  base: 8
+  scale: 1
+custom:
+  duration: 5
+  regen: 0.05
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        indicator: ring
+      - type: potion
+        targets: enemies
+        potion: BLINDNESS
+        amplifier: 0
+        duration: 100
+      - type: heal
+        targets: allies
+        value: "%custom.regen%"
+        scaling: max-health
+      - type: message
+        text: "&a[Anciões] Luz Radiante restaura aliados por %custom.duration%s."

@@ -1,0 +1,38 @@
+name: Vinha Restritiva
+type: active
+max-level: 4
+requires:
+  subclass: paladin_ancients
+description:
+  - "Enraíza inimigo por 3s e reduz seu dano em 15% por 8s."
+  - "Integra exaustão quando combinado com controle racial."
+icon: VINE
+cooldown:
+  base: 60
+  scale: -3
+  minimum: 48
+range:
+  base: 14
+  scale: 2
+custom:
+  root: 3
+  debuff-duration: 8
+  damage-down: 0.15
+components:
+  cast:
+    sequence:
+      - type: target
+        amount: 1
+        range: "%range%"
+        filter: enemies
+      - type: debuff
+        key: ancients_vinha_root
+        stat: root
+        value: 1
+        duration: "%custom.root%"
+      - type: debuff
+        stat: damage
+        value: "-%custom.damage-down%"
+        duration: "%custom.debuff-duration%"
+      - type: message
+        text: "&a[Anciões] Vinha Restritiva prende %target%."

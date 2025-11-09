@@ -1,0 +1,38 @@
+# Juramento da Devoção - Subclasse do Paladino
+name: "Paladino - Devoção"
+key: paladin_devotion
+parent: paladin
+description:
+  - "Defensor da pureza que dissipa trevas e protege aliados com luz direta."
+  - "Ênfase em resistência grupal e milagres de cura concentrada."
+attributes:
+  health:
+    base: 44
+    scale: 9
+  defense:
+    base: 16
+    scale: 5
+  skill-defense:
+    base: 8
+    scale: 3
+  holy-damage:
+    base: 0.1
+    scale: 0.04
+skills:
+  - name: Golpe Sagrado
+    level: 1
+  - name: Aura de Pureza
+    level: 2
+  - name: Luz Orientadora
+    level: 3
+  - name: Escudo Devoto
+    level: 4
+  - name: Milagre da Fe
+    level: 5
+channel-options:
+  - id: devocao_pureza
+    skill: Aura de Pureza
+    description: "Canalizar Voto ativa Aura de Pureza se equipada a relíquia."
+notes:
+  - "Aura de Pureza respeita diminishing returns com resistências raciais (cap 45%)."
+  - "Milagre da Fé é ultimate com cooldown de 240s e bloqueio em arenas via Skript."

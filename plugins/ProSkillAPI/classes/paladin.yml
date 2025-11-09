@@ -1,0 +1,128 @@
+# Classe base Paladino - ProSkillAPI
+name: "Paladin"
+key: paladin
+prefix: "Palad"
+display: "§fPaladino"
+main-class: true
+description:
+  - "§7Guardião híbrido que protege aliados com luz e aço."
+  - "§eAlterna entre suporte direto, controle pontual e mitigação pesada em janelas curtas."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Fé"
+  mana-regen: 0
+  max-level: 60
+  exp-source: kill
+  attributes-scaled: true
+  needs-race: false
+  scoreboard:
+    faith: "paladin_faith_charges"
+    cooldown-major: "paladin_major_cd"
+    aura-duration: "paladin_aura_remaining"
+    placeholders:
+      faith: "{faith_charges}"
+      cooldown-major: "{cooldown_next}"
+      aura-duration: "{aura_time_left}"
+  combat-state-placeholder: "%skills_combat_state%"
+attributes:
+  # Distribuição pensada para T1/T2/T3/T4 ≈ níveis 1/5/11/17
+  health-base: 40
+  health-scale: 2.6
+  mana-base: 0
+  mana-scale: 0
+  physical-defense-base: 6
+  physical-defense-scale: 1.4
+  skill-defense-base: 5
+  skill-defense-scale: 1.2
+  attack-damage: 1.2
+  holy-damage: 0.08
+  knockback-resist-base: 0.08
+  knockback-resist-scale: 0.012
+  walk-speed-base: 0.018
+  walk-speed-scale: 0.002
+  level-bonus:
+    1:
+      health: 40
+      defense: 8
+      holy: 0.08
+      speed: 0.0
+    5:
+      health: 68
+      defense: 11
+      holy: 0.1
+      speed: 0.01
+    11:
+      health: 106
+      defense: 15
+      holy: 0.12
+      speed: 0.015
+    17:
+      health: 144
+      defense: 18
+      holy: 0.14
+      speed: 0.02
+resources:
+  faith_charges:
+    display: "Cargas de Fé"
+    type: charges
+    base: 3
+    max: 4
+    scale: 0
+    unlock-level: 11
+    description: "Gastas em Golpe Divino, auras canalizadas e curas massivas."
+skills:
+  tier1:
+    active:
+      - Golpe Divino
+      - Imposicao de Maos
+      - Canalizar Voto
+    passive:
+      - Aura de Protecao
+      - Resistencia ao Medo
+  tier2:
+    active:
+      - Golpe Divino
+      - Imposicao de Maos
+      - Canalizar Voto
+    passive:
+      - Aura de Protecao
+      - Resistencia ao Medo
+  tier3:
+    active:
+      - Golpe Divino
+      - Imposicao de Maos
+      - Canalizar Voto
+    passive:
+      - Aura de Protecao
+      - Resistencia ao Medo
+  tier4:
+    active:
+      - Golpe Divino
+      - Imposicao de Maos
+      - Canalizar Voto
+    passive:
+      - Aura de Protecao
+      - Resistencia ao Medo
+subclasses:
+  devotion:
+    display: "§fJuramento da Devoção"
+    file: paladin_devotion.yml
+  vengeance:
+    display: "§cJuramento da Vingança"
+    file: paladin_vengeance.yml
+  ancients:
+    display: "§aJuramento dos Anciões"
+    file: paladin_ancients.yml
+requirements:
+  race-blacklist: []
+flags:
+  - holy
+  - protector
+  - support
+notes:
+  - "Aura de Proteção não ultrapassa 10% de mitigação compartilhada e respeita o cap global de 45%."
+  - "Canalizar Voto consome 1 carga de Fé e entrega uptime máximo de 30s por 90s (33%)."
+  - "Imposição de Mãos possui recarga longa (180s) por carga e remove apenas debuffs leves."
+  - "Scripts com RacesEffects aplicam exaustão de resistência caso a raça já conceda bônus semelhante."

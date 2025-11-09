@@ -1,0 +1,34 @@
+name: Aura da Natureza
+type: active
+max-level: 4
+requires:
+  subclass: paladin_ancients
+description:
+  - "Concede +15% resistência elemental a aliados em 6 blocos por 12s."
+  - "Aplica diminishing returns com bônus raciais (cap 45%)."
+icon: EMERALD
+cooldown:
+  base: 90
+  scale: -5
+  minimum: 75
+radius:
+  base: 6
+  scale: 1
+custom:
+  duration: 12
+  resist: 0.15
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        targets: allies
+        indicator: ring
+      - type: buff
+        key: ancients_aura_natureza
+        stat: elemental-resist
+        value: "%custom.resist%"
+        duration: "%custom.duration%"
+        diminishing-cap: 0.45
+      - type: message
+        text: "&a[Anciões] Aura da Natureza ativa por %custom.duration%s."

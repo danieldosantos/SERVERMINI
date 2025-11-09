@@ -1,0 +1,29 @@
+name: Asas de Safira
+type: active
+max-level: 4
+requires:
+  subclass: paladin_ancients
+description:
+  - "Invoca asas etéreas permitindo planar e ganhando +0.05 velocidade por 8s."
+  - "Respeita limite global de velocidade."
+icon: ELYTRA
+cooldown:
+  base: 105
+  scale: -5
+  minimum: 90
+custom:
+  duration: 8
+  speed: 0.05
+components:
+  cast:
+    sequence:
+      - type: buff
+        key: ancients_asas_speed
+        stat: walk-speed
+        value: "%custom.speed%"
+        duration: "%custom.duration%"
+      - type: command
+        command: "skript run paladin_ancoes_planar %player% %custom.duration%"
+        async: true
+      - type: message
+        text: "&a[Anciões] Asas de Safira o sustentam por %custom.duration%s."

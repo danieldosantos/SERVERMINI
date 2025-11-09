@@ -1,0 +1,33 @@
+name: Passo do Redentor
+type: active
+max-level: 4
+requires:
+  subclass: paladin_vengeance
+description:
+  - "Avança rapidamente até 12 blocos com imunidade a controle por 2s."
+  - "Respeita limite global de velocidade (+0.05)."
+icon: LEATHER_BOOTS
+cooldown:
+  base: 75
+  scale: -3
+  minimum: 60
+custom:
+  distance: 12
+  duration: 2
+components:
+  cast:
+    sequence:
+      - type: command
+        command: "skript run paladin_vinganca_dash %player% %custom.distance%"
+        async: true
+      - type: potion
+        potion: SPEED
+        amplifier: 2
+        duration: 40
+      - type: buff
+        key: vinganca_imunidade
+        stat: control-immune
+        value: 1
+        duration: "%custom.duration%"
+      - type: message
+        text: "&c[Vingança] Passo do Redentor ativado."

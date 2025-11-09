@@ -1,0 +1,39 @@
+name: Harmonia Primordial
+type: ultimate
+max-level: 4
+requires:
+  subclass: paladin_ancients
+description:
+  - "Ergue um totem por 15s em raio de 8 blocos com +25% cura recebida e -20% dano sofrido."
+  - "Cooldown 240s; uptime <60%."
+icon: FLOWERING_AZALEA
+cooldown:
+  base: 240
+  scale: 0
+radius:
+  base: 8
+  scale: 1
+custom:
+  duration: 15
+  heal: 0.25
+  reduction: 0.20
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        targets: allies
+        indicator: ring
+      - type: buff
+        key: ancients_harmonia_heal
+        stat: healing-received
+        value: "%custom.heal%"
+        duration: "%custom.duration%"
+      - type: buff
+        key: ancients_harmonia_reducao
+        stat: damage-reduction
+        value: "%custom.reduction%"
+        duration: "%custom.duration%"
+        diminishing-cap: 0.45
+      - type: message
+        text: "&a[Anciões] Harmonia Primordial estabiliza a área por %custom.duration%s."

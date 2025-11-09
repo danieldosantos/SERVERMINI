@@ -1,0 +1,26 @@
+name: Furia Celestial
+type: active
+max-level: 4
+requires:
+  subclass: paladin_vengeance
+description:
+  - "Aumenta velocidade de ataque corpo a corpo em 30% por 10s."
+  - "Respeita limite global de velocidade de ataque."
+icon: IRON_SWORD
+cooldown:
+  base: 90
+  scale: -5
+  minimum: 75
+custom:
+  duration: 10
+  bonus: 0.30
+components:
+  cast:
+    sequence:
+      - type: buff
+        key: vinganca_furia
+        stat: attack-speed
+        value: "%custom.bonus%"
+        duration: "%custom.duration%"
+      - type: message
+        text: "&c[Vingança] Fúria Celestial ativa por %custom.duration%s."
