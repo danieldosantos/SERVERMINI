@@ -1,0 +1,34 @@
+# Skills raciais dos halflings.
+skills:
+  PassosSilenciosos:
+    display: "&fPassos Silenciosos"
+    type: ACTIVE
+    description: "Dash lateral curto deixando ilusão e limpando slow."
+    tiers:
+      T1: { cooldown: 75, distance: 5, illusion_duration: 2 }
+      T2: { cooldown: 70, distance: 5, illusion_duration: 2 }
+      T3: { cooldown: 65, distance: 6, illusion_duration: 3 }
+      T4: { cooldown: 60, distance: 6, illusion_duration: 3 }
+    cost:
+      resource: stamina
+      amount: 15
+    effects:
+      target: self
+      type: dash
+      notes: "Aplica debuff de desorientação 1.5s no PvP ao alvo mais próximo."
+  FortalecerFamilia:
+    display: "&6Fortalecer a Família"
+    type: ACTIVE
+    description: "Aura calorosa que concede resistência a veneno e regen leve."
+    tiers:
+      T1: { cooldown: 90, duration: 10, poison_resist: 0.1, regen: 0.02 }
+      T2: { cooldown: 90, duration: 10, poison_resist: 0.12, regen: 0.02 }
+      T3: { cooldown: 85, duration: 11, poison_resist: 0.12, regen: 0.025 }
+      T4: { cooldown: 80, duration: 12, poison_resist: 0.15, regen: 0.025 }
+    cost:
+      resource: mana
+      amount: 20
+    effects:
+      target: group_radius_6
+      type: aura
+      notes: "Regen respeita limite de cura por golpe (tratada como HoT)."

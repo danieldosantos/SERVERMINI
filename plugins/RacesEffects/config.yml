@@ -1,0 +1,40 @@
+# Configuração central do RacesEffects para raças D&D 5e
+# Todos os tempos em segundos. Comentários em PT-BR para facilitar manutenção.
+locale: pt_BR
+hud:
+  scoreboard:
+    enabled: true
+    title: "&6&lTraços Raciais"
+    lines:
+      - "&eRaça:&f {race_active}"
+      - "&ePassivo:&f {racial_uptime}"
+      - "&eResist:&f {racial_resist_x}"
+      - "&eCarga:&f {racial_charges}"
+      - "&eCD Principal:&f {racial_cd_main}"
+  actionbar:
+    enabled: true
+    template_active: "&a{race_active}&f → &b{trait_name}&f ativo por &e{trait_duration}s"
+    template_expire: "&c{trait_name}&f em recarga: &e{trait_cooldown}s"
+# Controle global de caps defensivos/ofensivos.
+limits:
+  maxSpeedBonus: 0.05
+  maxMitigation: 0.45
+  maxLifeSteal: 0.25
+  defaultAreaRadius: 7
+placeholders:
+  racial_cd_main: "Nenhum"
+  racial_uptime: "0%"
+  racial_resist_x: "0%"
+  racial_charges: "0"
+biome_affinity_check_interval: 10
+# As tags abaixo são usadas nos arquivos de raças individuais.
+tags:
+  dwarf: "race_anao"
+  dragonborn: "race_draconato"
+  elf: "race_elfo"
+  gnome: "race_gnomo"
+  halfling: "race_halfling"
+  human: "race_humano"
+  halfelf: "race_meioelfo"
+  halforc: "race_meioorc"
+  tiefling: "race_tiefling"

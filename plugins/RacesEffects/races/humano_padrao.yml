@@ -1,0 +1,57 @@
+# Raça: Humano Padrão
+# Fantasia: adaptáveis e perseverantes em qualquer função.
+race_id: humano_padrao
+name: "Humano"
+identity: "Generalistas versáteis que avançam graças à disciplina coletiva."
+luckperms:
+  required: "race_humano"
+  inherit: null
+tags:
+  - human
+placeholders:
+  racial_cd_main: "{cooldown:skill_investida_coord}"
+passives:
+  adaptabilidade:
+    name: "Adaptabilidade"
+    type: attribute_swap
+    trigger: out_of_combat
+    duration: 20
+    cooldown: 120
+    uptime_cap: 0.2
+    attributes:
+      selectable:
+        - { attribute: strength, bonus: 1 }
+        - { attribute: agility, bonus: 1 }
+        - { attribute: intellect, bonus: 1 }
+    description: "Permite realocar 1 ponto de atributo para STR/AGI/INT fora de combate (não acumula)."
+  empreendedorismo:
+    name: "Empreendedorismo"
+    type: economic_bonus
+    trigger: quest_turnin
+    duration: 30
+    cooldown: 180
+    uptime_cap: 0.3
+    bonus_multiplier: 0.1
+    description: "+10% de recompensas sociais/econômicas durante 30s após completar atividades civis."
+actives:
+  investida_coord:
+    name: "Investida Coordenada"
+    skill: InvestidaCoordenada
+    cooldown: 90
+    charges: 1
+    description: "Buff de grupo de +5% velocidade +5% dano por 10s (caps respeitados)."
+resistances:
+  general:
+    base: 0.05
+    max: 0.25
+    notes: "Versatilidade leve, sem foco em resistências específicas."
+synergy_notes:
+  - "Build saudável: Paladino suporte usando Investida para iniciar encontros."
+  - "Restrição: bônus econômicos não afetam loot de raid competitiva."
+tests:
+  pve:
+    - "Missão pública com Investida coordenada mantendo buff 10s a cada 90s."
+    - "Simulação de economia verificando bônus de 10% ao vender itens por 30s."
+  pvp:
+    - "Teamfight 5v5 avaliando que buff não excede caps (velocidade total ≤0.05)."
+    - "Duelo utilizando swap de atributo fora de combate respeitando limite de +1."

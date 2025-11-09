@@ -1,0 +1,54 @@
+# Raça: Gnomo da Rocha
+# Fantasia: engenheiros resilientes com truques tecnológicos.
+race_id: gnomo_rocha
+name: "Gnomo da Rocha"
+identity: "Inventores incansáveis que montam escudos e mecanismos improvisados."
+luckperms:
+  required: "race_gnomo.rocha"
+  inherit: "race_gnomo"
+tags:
+  - gnome
+placeholders:
+  racial_cd_main: "{cooldown:skill_engenho_gnomesco}"
+passives:
+  pele_metaloide:
+    name: "Pele Metaloide"
+    type: timed_attribute
+    trigger: hit_taken
+    duration: 8
+    cooldown: 45
+    uptime_cap: 0.5
+    attributes:
+      mitigation_magical: 0.1
+    description: "Após sofrer dano mágico, reduz 10% do dano recebido por 8s."
+  afinidade_artifice:
+    name: "Afinidade de Artífice"
+    type: utility
+    trigger: interact_mechanical
+    duration: 20
+    cooldown: 90
+    uptime_cap: 0.3
+    bonus_success: 0.15
+    description: "+15% de chance de sucesso em interações de engenharia/forja enquanto durar."
+actives:
+  engenho_gnomesco:
+    name: "Engenho Gnomesco"
+    skill: EngenhoGnomesco
+    cooldown: 90
+    charges: 1
+    description: "Projeta drone escudo por 10s absorvendo 18% do dano até limite 120% do INT."
+resistances:
+  force:
+    base: 0.1
+    max: 0.35
+    notes: "Absorção não pode exceder 45% em conjunto com classes artificiais."
+synergy_notes:
+  - "Build saudável: Artífice suporte que combina drone com barreiras de classe (compartilha DR)."
+  - "Restrição: se classe já tem escudo permanente, Engenho reduz absorção para 12% mantendo identidade."
+tests:
+  pve:
+    - "Defesa de portal T3 usando drone para absorver projeções mágicas (mitigação <42%)."
+    - "Puzzle de engenharia: validar bônus de Afinidade em alavancas e engrenagens."
+  pvp:
+    - "Duelos contra mago explosivo; Engenho impede one-shot com absorção limitada."
+    - "Cerco 5v5: drone gera cobertura de 10s sem travar avanço (cooldown 90s)."

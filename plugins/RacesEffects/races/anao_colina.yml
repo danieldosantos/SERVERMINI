@@ -1,0 +1,56 @@
+# Raça: Anão da Colina (Hill Dwarf)
+# Fantasia: defensores estoicos das fortalezas subterrâneas.
+race_id: anao_colina
+name: "Anão da Colina"
+identity: "Resiliência lendária e fortitude espiritual dos clãs das colinas."
+luckperms:
+  required: "race_anao.colina"
+  inherit: "race_anao"
+tags:
+  - dwarf
+placeholders:
+  racial_cd_main: "{cooldown:skill_fortitude_anao}"
+passives:
+  resiliencia_da_colina:
+    name: "Resiliência da Colina"
+    type: timed_attribute
+    trigger: combat_enter
+    duration: 14
+    cooldown: 45
+    uptime_cap: 0.45
+    attributes:
+      max_health_percent: 0.08
+      mitigation_flat: 0.1
+    diminishing_returns: poison
+    description: "Ao entrar em combate ganha +8% de vida máxima e 10% de mitigação contra dano venenoso por 14s."
+  calma_ancestral:
+    name: "Calma Ancestral"
+    type: resolve_regen
+    trigger: biome_tag:mountain
+    duration: 12
+    cooldown: 60
+    uptime_cap: 0.4
+    regen_percent: 0.03
+    description: "Enquanto estiver em montanhas/colinas recebe regen leve (3% da vida máxima) por 12s."
+actives:
+  fortitude_anao:
+    name: "Fortitude Anã"
+    skill: FortitudeAncestral
+    cooldown: 90
+    charges: 2
+    description: "Ativa escudo temporário em si e aliado mais próximo. Usa skill no ProSkillAPI."
+resistances:
+  poison:
+    base: 0.2
+    max: 0.45
+    notes: "Aplicar DR com classes alquímicas; nunca ultrapassar 45%."
+synergy_notes:
+  - "Sinergia saudável: Guardião T2 focado em venenos mantém mitigação total em 35-40%."
+  - "Restrição: classes com imunidade a venenos convertem bônus extra em absorção temporária para respeitar caps."
+tests:
+  pve:
+    - "Defender corredor contra enxame de aranhas venenosas (TTK alvo 35s)."
+    - "Sustentar boss venenoso no Tier 2 com Fortitude Anã ativa (mitigação média 32%)."
+  pvp:
+    - "Duelo vs assassino com veneno: sobreviver 20s usando 1 carga de Fortitude."
+    - "Escaramuça 3v3 controlando ponto estreito, uptime médio dos passivos ≤45%."

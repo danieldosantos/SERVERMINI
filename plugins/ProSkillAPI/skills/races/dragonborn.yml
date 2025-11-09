@@ -1,0 +1,24 @@
+# Skill racial do Draconato.
+skills:
+  SoproDraconico:
+    display: "&cSopro Dracônico"
+    type: ACTIVE
+    description: |
+      Libera um cone elemental de 6 blocos causando dano escalado ao elemento do sangue.
+      Aplica estado secundário (queimadura, choque ou frio) conforme afinidade configurada.
+    tiers:
+      T1: { cooldown: 60, damage_multiplier: 1.2, dot_duration: 4 }
+      T2: { cooldown: 60, damage_multiplier: 1.3, dot_duration: 5 }
+      T3: { cooldown: 55, damage_multiplier: 1.4, dot_duration: 6 }
+      T4: { cooldown: 50, damage_multiplier: 1.6, dot_duration: 6 }
+    cost:
+      resource: mana
+      amount: 35
+    effects:
+      shape: cone
+      radius: 6
+      max_targets: 5
+      status_effects:
+        burn: { chance: 1.0, damage_percent: 0.2 }
+    notes:
+      pvp: "Dano final limitado a 130% e DOT reduzido para 50% do valor PvE."

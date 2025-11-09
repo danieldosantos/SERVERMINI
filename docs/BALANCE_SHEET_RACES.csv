@@ -1,0 +1,49 @@
+Raça,Subraça,Traço,Tipo,Custo (Carga/Mana),Duração (s),CD (s),Área (blocos),Bônus/Redução,Notas PvP,Tier,Observações DR
+Anão,Colina,Resiliência da Colina,Passivo,0,14,45,Self,"+8% HP, +10% DR veneno",Compartilha DR com venenos de classe,T1-T4,Limite 45% veneno
+Anão,Colina,Calma Ancestral,Passivo,0,12,60,Self,Regen 3% HP em montanhas,N/A,T1-T4,Inativa fora de bioma
+Anão,Colina,Fortitude Anã,Ativo,0 stamina,8-10,90-80,Aliado mais próximo,"Escudo 15-20% HP",PvP aplica DR 15%,T1-T4,Absorção converte excesso
+Anão,Montanha,Pele de Granito,Passivo,0,10,45,Self,"12% DR físico, 40% knockback",Nenhum,T1-T4,DR física entra na curva global
+Anão,Montanha,Olhos da Forja,Passivo,0,30,60,18 blocos,Darkvision 18 blocos,N/A,T1-T4,Sem interação DR
+Anão,Montanha,Postura de Pedra,Ativo,10 stamina,8-9,90-80,Self,"15% dano→absorção, +60-75% resist KB",PvP reduz absorção a 12%,T1-T4,Mitigação total ≤45%
+Draconato,Padrão,Escamas Elementais,Passivo,0,10,45,Self,15% DR elemento,N/A,T1-T4,DR entra na curva elemental
+Draconato,Padrão,Sangue Ardente,Passivo,0,8,60,Self,+12% dano elemental (<50% HP),PvP reduz para +8%,T1-T4,Ativo apenas abaixo de 50% HP
+Draconato,Padrão,Sopro Dracônico,Ativo,35 mana,Instantâneo,60-50,Cone 6 blocos,120-160% dano elemental,PvP dano cap 130%,T1-T4,Dot reduzido PvP 50%
+Elfo,Alto,Disciplina Arcanista,Passivo,0,12,45,Self,"+8% regen mana, +12% precisão",PvP mantém precisão 10%,T1-T4,Precisão total ≤20%
+Elfo,Alto,Memória Ancestral,Passivo,0,18,90,Self,Reescolhe truque,N/A,T1-T4,Somente fora de combate
+Elfo,Alto,Truque Arcano,Ativo,20 mana,Instantâneo,60-50,Alvo único,"0.8-1.1x dano + utilidade",PvP aplica slow 20-25%,T1-T4,Cooldown partilhado com variações
+Elfo,Floresta,Passo Ligeiro,Passivo,0,15,45,Self,+0.02 velocidade em floresta,N/A,T1-T4,Velocidade total ≤0.05
+Elfo,Floresta,Sentidos Aguçados,Passivo,0,18,60,8 blocos,Revela furtivos,N/A,T1-T4,Somente entardecer/folhas
+Elfo,Floresta,Passos Feéricos,Ativo,25 stamina,6,75-60,Teleporte 6-7 blocos,Dash +40-50% camuflagem,PvP camuflagem 35-40%,T1-T4,Inoperante fora de floresta
+Elfo,Drow,Visão Superior,Passivo,0,30,45,24 blocos,Darkvision 24,N/A,T1-T4,Sem DR
+Elfo,Drow,Fragilidade à Luz,Passivo,0,12,30,Self,"+8% dano recebido, -10% precisão",Sempre ativo sob sol,T1-T4,Debuff fixo
+Elfo,Drow,Luzes Feéricas,Ativo,25 mana,6-8,75-65,Raio 8 blocos,Revela + reduz evasão 12%,PvP evasão 8%,T1-T4,Sem stack com marcações semelhantes
+Elfo,Drow,Manto das Sombras,Ativo,35 mana,8-9,120-105,Cúpula 6 blocos,Mitigação 10-15%,PvP reduz para 8-10%,T1-T4,Não remove penalidade solar
+Gnomo,Floresta,Amigo dos Animais,Passivo,0,12,75,Raio 6,Charme PvE,N/A,T1-T4,Ignora bosses T3+
+Gnomo,Floresta,Mente Ligeira,Passivo,0,8,60,Self,15% DR mental,PvP idem,T1-T4,DR mental compartilha curva
+Gnomo,Floresta,Canto Cativante,Ativo,25 mana,4-6,90-80,Raio 6-8,Pacifica mobs, PvP -8 a -10% dano,PvP redução fixa 10%,T1-T4,Sem efeito em bosses T3+
+Gnomo,Rocha,Pele Metaloide,Passivo,0,8,45,Self,10% DR mágico,N/A,T1-T4,Compartilha curva mágica
+Gnomo,Rocha,Afinidade Artífice,Passivo,0,20,90,Self,+15% sucesso craft,N/A,T1-T4,N/A
+Gnomo,Rocha,Engenho Gnomesco,Ativo,30 mana,10-12,90-80,Raio 6,Absorção 18-24%,PvP absorção 14-18%,T1-T4,Excesso vira estabilidade
+Halfling,Pés-Leves,Sorte Halfling,Passivo,0,Proc 0,18,Self,35% chance negar 1 hit,PvP chance 25%,T1-T4,Reaplica após 18s
+Halfling,Pés-Leves,Passo Suave,Passivo,0,12,45,Self,40% camuflagem,N/A,T1-T4,Limitado por cap 60%
+Halfling,Pés-Leves,Passos Silenciosos,Ativo,15 stamina,Dash,75-60,5-6 blocos,Dash + desorienta 1.5s,PvP desorienta 1.0s,T1-T4,N/A
+Halfling,Robusto,Resistência Halfling,Passivo,0,12,45,Self,20% DR veneno,N/A,T1-T4,DR veneno respeita curva
+Halfling,Robusto,Vigor Caseiro,Passivo,0,15,60,Self,Regen 4% HP,N/A,T1-T4,Cura conta no cap 25%
+Halfling,Robusto,Fortalecer a Família,Ativo,20 mana,10-12,90-80,Raio 6,"+10-15% DR veneno, HoT 2-2.5%",PvP HoT 1.5%,T1-T4,DR compartilhada
+Humano,Padrão,Adaptabilidade,Passivo,0,20,120,Self,+1 atributo,N/A,T1-T4,Sem stack adicional
+Humano,Padrão,Empreendedorismo,Passivo,0,30,180,Self,+10% recompensas sociais,N/A,T1-T4,Sem efeito em loot competitivo
+Humano,Padrão,Investida Coordenada,Ativo,20 stamina,10-12,90-80,Raio 8,"+3-4% velocidade, +5-6.5% dano",PvP dano 4-5%,T1-T4,Velocidade total ≤0.05
+Humano,Variante,Talento Flexível,Passivo,0,0,180,Self,Escolhe talento leve,N/A,T1-T4,Reseta fora de combate
+Humano,Variante,Foco Intenso,Passivo,0,8,60,Self,+10% dano (PvP +6%),PvP limite 6%,T1-T4,Ativo após crítico
+Humano,Variante,Talento Variável,Ativo,15 mana,8-9,75-60,Self,"Bônus situacional 5-8%",PvP reduz 2-3%,T1-T4,Efeitos exclusivos não stackam
+Meio-Elfo,Padrão,Eco Élfico,Passivo,0,0,120,Self,Escolhe traço elfo (-20%),N/A,T1-T4,Aplica redutor 20%
+Meio-Elfo,Padrão,Eco Humano,Passivo,0,0,120,Self,Escolhe traço humano (-20%),N/A,T1-T4,Aplica redutor 20%
+Meio-Elfo,Padrão,Diplomacia Natural,Passivo,0,15,60,Self,-10% CD social,N/A,T1-T4,Sem efeito combate
+Meio-Elfo,Padrão,Harmonia Híbrida,Ativo,25 mana,10-12,90-80,Raio 6,"+5-6.5% resist, +5-6.5% dano suporte",PvP dano 4%,T1-T4,DR compartilhado converte excesso
+Meio-Orc,Padrão,Ferocidade do Sangue,Passivo,0,10,45,Self,+10% dano execute,PvP +6%,T1-T4,Ativo <35% HP alvo
+Meio-Orc,Padrão,Músculos Marcados,Passivo,0,8,60,Self,12% DR <40% HP,N/A,T1-T4,Compartilha com DR tanque
+Meio-Orc,Padrão,Tenacidade Implacável,Ativo,0,5,240-220,Self,Cheat death + regen 5-6%,PvP dano reduz 20%,T1-T4,Cooldown 4min mínimo
+Tiefling,Padrão,Resistência Infernal,Passivo,0,10,45,Self,25% DR fogo,N/A,T1-T4,DR fogo respeita curva
+Tiefling,Padrão,Herança Sombria,Passivo,0,20,60,20 blocos,Darkvision + percepção térmica,N/A,T1-T4,N/A
+Tiefling,Padrão,Toque Ígneo,Ativo,15 mana,Instantâneo,60-50,Contato,140-145% dano fogo,PvP 120%,T1-T4,Burn 12% PvP
+Tiefling,Padrão,Lâmina das Chamas,Ativo,30 mana,12,120-105,Self,"+10-13% dano fogo",PvP 6-8%,T1-T4,Respeita cap fogo 45%

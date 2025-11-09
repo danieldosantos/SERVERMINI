@@ -1,0 +1,53 @@
+# Raça: Elfo da Floresta
+# Fantasia: caçadores ágeis ligados à natureza.
+race_id: elfo_floresta
+name: "Elfo da Floresta"
+identity: "Exploradores ligeiros que caminham em harmonia com as copas e sombras."
+luckperms:
+  required: "race_elfo.floresta"
+  inherit: "race_elfo"
+tags:
+  - elf
+placeholders:
+  racial_cd_main: "{cooldown:skill_passos_faes}"
+passives:
+  passo_ligeiro:
+    name: "Passo Ligeiro"
+    type: speed_boost
+    trigger: biome_tag:forest
+    duration: 15
+    cooldown: 45
+    uptime_cap: 0.5
+    speed_bonus: 0.02
+    description: "Em florestas ganha +0.02 de velocidade por 15s (não empilha com montarias)."
+  sentidos_aguçados:
+    name: "Sentidos Aguçados"
+    type: detection
+    trigger: time:dusk
+    duration: 18
+    cooldown: 60
+    uptime_cap: 0.5
+    reveal_radius: 8
+    description: "Revela entidades furtivas em 8 blocos ao entardecer ou em folhagens densas."
+actives:
+  passos_faes:
+    name: "Passos Feéricos"
+    skill: PassosFaes
+    cooldown: 75
+    charges: 2
+    description: "Translada 6 blocos entre árvores com camuflagem leve (40% invis) por 6s."
+resistances:
+  nature:
+    base: 0.12
+    max: 0.35
+    notes: "DR quando combinado com classes druídicas; mantém vulnerabilidade a fogo."
+synergy_notes:
+  - "Combina com Patrulheiro T2 focado em arco, usando Passos Feéricos para reposicionar."
+  - "Restrição: classes sombra não excedem 60% de invis total (aplicar redução no efeito de camuflagem)."
+tests:
+  pve:
+    - "Patrulhar floresta enfrentando matilha (tempo alvo 50s com Passos ativo 6s)."
+    - "Evento de escolta na selva usando detecção para prever emboscadas."
+  pvp:
+    - "Duelo vs arqueiro rival; velocidade total ≤0.05 e camuflagem contrabalanceada."
+    - "Capture the point em mapa de floresta, segurar ponto 30s com camuflagem alternada."

@@ -1,0 +1,52 @@
+# Raça: Meio-Orc
+# Fantasia: combatentes brutais que se recusam a cair.
+race_id: meio_orc
+name: "Meio-Orc"
+identity: "Berserkers disciplinados que canalizam a fúria em momentos críticos."
+luckperms:
+  required: "race_meioorc"
+  inherit: null
+tags:
+  - halforc
+placeholders:
+  racial_cd_main: "{cooldown:skill_tenacidade_implacavel}"
+passives:
+  ferocidade_sangue:
+    name: "Ferocidade do Sangue"
+    type: execute_bonus
+    trigger: target_health_threshold:0.35
+    duration: 10
+    cooldown: 45
+    uptime_cap: 0.45
+    bonus_damage: 0.1
+    description: "Contra alvos abaixo de 35% HP, causa +10% dano por 10s (PvP limitado a +6%)."
+  musculos_marcados:
+    name: "Músculos Marcados"
+    type: mitigation_threshold
+    trigger: health_threshold_self:0.4
+    duration: 8
+    cooldown: 60
+    uptime_cap: 0.4
+    mitigation_general: 0.12
+    description: "Abaixo de 40% HP, reduz 12% do dano recebido por 8s (DR com tanques)."
+actives:
+  tenacidade_implacavel:
+    name: "Tenacidade Implacável"
+    skill: TenacidadeImplacavel
+    cooldown: 240
+    charges: 1
+    description: "Ao receber golpe letal, fica a 1 HP e ganha regen 5%/s por 5s (1 uso a cada 4min)."
+resistances:
+  physical:
+    base: 0.08
+    max: 0.4
+synergy_notes:
+  - "Build saudável: Bárbaro agressivo com controle de ferocidade em fases finais de boss."
+  - "Restrição: se classe concede imortalidade, Tenacidade vira escudo 20% HP ao invés de 1 HP."
+tests:
+  pve:
+    - "Boss T3: Tenacidade deve disparar 1x/4min e garantir sobrevivência sem trivializar mecânica."
+    - "Horda de ogros medindo bônus de execute (TTK ~30s)."
+  pvp:
+    - "Duelo prolongado 1v1 confirmando ferocidade máxima +6% no PvP."
+    - "Batalha em equipe, verificar que mitigação + ferocidade não excedem caps."

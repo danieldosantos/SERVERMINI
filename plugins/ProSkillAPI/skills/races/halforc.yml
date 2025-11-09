@@ -1,0 +1,20 @@
+# Skill racial dos meio-orcs.
+skills:
+  TenacidadeImplacavel:
+    display: "&4Tenacidade Implacável"
+    type: REACTION
+    description: "Salva o meio-orc da morte uma vez a cada 4 minutos."
+    tiers:
+      T1: { cooldown: 240, heal_percent: 0.25, regen: 0.05 }
+      T2: { cooldown: 240, heal_percent: 0.3, regen: 0.05 }
+      T3: { cooldown: 230, heal_percent: 0.3, regen: 0.055 }
+      T4: { cooldown: 220, heal_percent: 0.35, regen: 0.06 }
+    cost:
+      resource: rage
+      amount: 0
+    trigger:
+      condition: lethal_damage
+    effects:
+      type: cheat_death
+      duration: 5
+      notes: "Durante a janela ganha imunidade a controle duro, porém dano causado é reduzido em 20%."

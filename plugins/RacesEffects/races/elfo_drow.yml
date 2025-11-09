@@ -1,0 +1,61 @@
+# Raça: Drow
+# Fantasia: elfos sombrios com magia feérica e vulnerabilidade à luz.
+race_id: elfo_drow
+name: "Drow"
+identity: "Intrigantes subterrâneos que dominam escuridão e revelações feéricas."
+luckperms:
+  required: "race_elfo.drow"
+  inherit: "race_elfo"
+tags:
+  - elf
+placeholders:
+  racial_cd_main: "{cooldown:skill_luzes_feericas}"
+passives:
+  visao_no_escuro_superior:
+    name: "Visão Superior"
+    type: darkvision
+    trigger: light_level:low
+    duration: 30
+    cooldown: 45
+    uptime_cap: 0.6
+    range: 24
+    description: "Visão no escuro de 24 blocos em ambientes com luz ≤7."
+  fragilidade_a_luz:
+    name: "Fragilidade à Luz"
+    type: sunlight_debuff
+    trigger: light_level:high
+    duration: 12
+    cooldown: 30
+    uptime_cap: 0.6
+    modifiers:
+      accuracy_reduction: 0.1
+      damage_taken: 0.08
+    description: "Sob luz solar direta perde 10% de precisão e recebe 8% dano extra."
+actives:
+  luzes_feericas:
+    name: "Luzes Feéricas"
+    skill: LuzesFeericas
+    cooldown: 75
+    charges: 1
+    description: "Marca alvo em 8 blocos por 6s, removendo furtividade e aplicando debuff de evasão."
+  manto_sombras:
+    name: "Manto das Sombras"
+    skill: MantoSombras
+    cooldown: 120
+    charges: 1
+    description: "Cria cúpula sombria de 6 blocos por 8s; reduz luz ambiente e ativa Visão Superior instantaneamente."
+resistances:
+  necrotic:
+    base: 0.1
+    max: 0.35
+    notes: "Apenas em áreas escuras; aplicar DR com classes de sombra."
+synergy_notes:
+  - "Build saudável: Ladino sombrio utilizando Luzes Feéricas para suporte, compensando fragilidade solar."
+  - "Restrição: habilidades de invisibilidade fortes perdem 30% de duração enquanto Manto estiver ativo para evitar abuso."
+tests:
+  pve:
+    - "Patrulha subterrânea enfrentando patrulhas goblins, garantir uptime de Visão ≤60%."
+    - "Evento em superfície com luz intensa para validar debuff de Fragilidade (dano recebido +8%)."
+  pvp:
+    - "Arena noturna vs ranger furtivo: Luzes Feéricas revela e garante kill em ≥15s."
+    - "Batalha em campo aberto diurno, medir perda de DPS de 10% e necessidade de cobertura."
