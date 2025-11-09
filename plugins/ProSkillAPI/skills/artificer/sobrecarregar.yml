@@ -1,0 +1,53 @@
+name: artificer_sobrecarregar
+display: "§3Sobrecarregar"
+type: active
+max-level: 4
+requires:
+  class: artificer
+description:
+  - "Libera uma onda de energia que concede +15% velocidade de ataque/projéteis aos aliados em 6 blocos."
+  - "Buff dura 12 s e consome 1 carga de Infusão, com animações sutis de faísca."
+  - "Sincroniza HUD de cargas e aplica exaustão de resistência em raças com bônus similares."
+icon: REDSTONE_TORCH
+cooldown:
+  base: 90
+  scale: -5
+resource:
+  infusoes_charges:
+    cost: 1
+    minimum: 1
+custom:
+  radius: 6
+  duration: 12
+components:
+  cast:
+    sequence:
+      - type: self
+      - type: area
+        radius: "%custom.radius%"
+        allies: true
+        enemy: false
+        actions:
+          - type: buff
+            stat: attack-speed
+            value: 0.15
+            duration: "%custom.duration%"
+          - type: buff
+            stat: projectile-speed
+            value: 0.15
+            duration: "%custom.duration%"
+      - type: effect
+        effect: "particle"
+        particle: ELECTRIC_SPARK
+        radius: "%custom.radius%"
+      - type: command
+        command: "skript run artificer_resistance_sync %player%"
+        async: true
+      - type: command
+        command: "placeholderapi refresh %player% artificer_infusions"
+        async: true
+      - type: message
+        text: "&3[Artífice] Aliados sobrecarregados por %custom.duration%s."
+messages:
+  fail-resource: "&cSem cargas de Infusão suficientes."
+  cooldown: "&cSobrecarregar ainda recarregando (%cooldown%s)."

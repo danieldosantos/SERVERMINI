@@ -1,0 +1,43 @@
+name: artificer_alchemist_tonico_acelerante
+display: "§dTônico Acelerante"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_alchemist
+description:
+  - "Distribui tônico em aliados a 6 blocos concedendo +20% velocidade de ataque/magia por 10 s."
+  - "Consome 1 carga de Infusão e sinergiza com buffs de Sobrecarregar sem ultrapassar caps."
+icon: DRAGON_BREATH
+cooldown:
+  base: 75
+  scale: -5
+resource:
+  infusoes_charges:
+    cost: 1
+    minimum: 1
+custom:
+  radius: 6
+  duration: 10
+  bonus: 0.2
+components:
+  cast:
+    sequence:
+      - type: self
+      - type: area
+        radius: "%custom.radius%"
+        allies: true
+        enemy: false
+        actions:
+          - type: buff
+            stat: attack-speed
+            value: "%custom.bonus%"
+            duration: "%custom.duration%"
+          - type: buff
+            stat: skill-haste
+            value: "%custom.bonus%"
+            duration: "%custom.duration%"
+      - type: message
+        text: "&d[Alquimista] Tônico Acelerante distribuído."
+messages:
+  fail-resource: "&cSem cargas de Infusão suficientes."
+  cooldown: "&cTônico Acelerante ainda recarregando (%cooldown%s)."

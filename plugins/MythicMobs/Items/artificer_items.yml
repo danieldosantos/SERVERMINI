@@ -1,0 +1,170 @@
+# Itens focais do Artífice e subclasses
+items:
+  ArtificerInfusionWrench:
+    Id: TRIPWIRE_HOOK
+    Display: '&3Chave de Infusão'
+    Lore:
+      - '&7Clique direito: aciona Infundir Item em aliado/próprio.'
+      - '&7Clique esquerdo: abre monitor HUD (PlaceholderAPI).'
+      - '&8Requer grupo: class_artificer'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_artificer'
+      skill: 'artificer_infundir_item'
+    Skills:
+      - skill{s=artificer_infundir_item} @target ~onRightClick
+      - command{c="skript run artificer_refresh_hud %player%"} @self ~onLeftClick
+  ArtificerOverchargeFocus:
+    Id: REDSTONE_TORCH
+    Display: '&3Bastão de SobreCarga'
+    Lore:
+      - '&7Clique direito: ativa Sobrecarregar.'
+      - '&8Requer grupo: class_artificer'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_artificer'
+      skill: 'artificer_sobrecarregar'
+    Skills:
+      - skill{s=artificer_sobrecarregar} @self ~onRightClick
+  ArtificerRunicProjector:
+    Id: ENCHANTING_TABLE
+    Display: '&3Projetor Rúnico Portátil'
+    Lore:
+      - '&7Clique direito: projeta Campo Rúnico.'
+      - '&8Requer grupo: class_artificer'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_artificer'
+      skill: 'artificer_campo_runico'
+    Skills:
+      - skill{s=artificer_campo_runico} @self ~onRightClick
+  ArmorerArcCore:
+    Id: NETHER_STAR
+    Display: '&bNúcleo ArcArmor'
+    Lore:
+      - '&7Sneak + clique direito: alterna modo Guardião/Infiltrador.'
+      - '&8Grupo: class_artificer.armorer'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_artificer.armorer'
+      skill: 'artificer_armorer_mudar_modo'
+    Skills:
+      - skill{s=artificer_armorer_mudar_modo} @self ~onSneakRightClick
+  ArmorerArcGauntlet:
+    Id: NETHERITE_SWORD
+    Display: '&bManopla de Trovão'
+    Lore:
+      - '&7Clique esquerdo: Punho Trovão (modo Guardião).'
+      - '&8Grupo: class_artificer.armorer'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_artificer.armorer'
+      skill: 'artificer_armorer_punho_trovao'
+    Skills:
+      - skill{s=artificer_armorer_punho_trovao} @target ~onLeftClick
+  ArmorerArcBoots:
+    Id: NETHERITE_BOOTS
+    Display: '&bBotas Faseadas'
+    Lore:
+      - '&7Sneak + clique direito: Passo Amplificado (modo Infiltrador).'
+      - '&8Grupo: class_artificer.armorer'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_artificer.armorer'
+      skill: 'artificer_armorer_passo_amplificado'
+    Skills:
+      - skill{s=artificer_armorer_passo_amplificado} @self ~onSneakRightClick
+  BattleSmithForgeHammer:
+    Id: NETHERITE_AXE
+    Display: '&aMartelo da Forja de Batalha'
+    Lore:
+      - '&7Clique direito: invoca ou reposiciona Defensor de Aço.'
+      - '&8Grupo: class_artificer.battlesmith'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_artificer.battlesmith'
+      skill: 'artificer_battlesmith_invocar_defensor'
+    Skills:
+      - skill{s=artificer_battlesmith_invocar_defensor} @self ~onRightClick
+  BattleSmithTuningKit:
+    Id: SMITHING_TABLE
+    Display: '&aKit de Sintonização'
+    Lore:
+      - '&7Clique direito em aliado: Sintonizar Arma.'
+      - '&8Grupo: class_artificer.battlesmith'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_artificer.battlesmith'
+      skill: 'artificer_battlesmith_sintonizar_arma'
+    Skills:
+      - skill{s=artificer_battlesmith_sintonizar_arma} @target ~onRightClick
+  BattleSmithDefenderCore:
+    Id: IRON_BLOCK
+    Display: '&aConsole do Defensor'
+    Lore:
+      - '&7Clique direito: Comando Reparar (se Defensor ativo).'
+      - '&7Sneak + clique direito: Protocolo Guardião.'
+      - '&8Grupo: class_artificer.battlesmith'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_artificer.battlesmith'
+      skill: 'artificer_battlesmith_comando_reparar'
+    Skills:
+      - skill{s=artificer_battlesmith_comando_reparar} @self ~onRightClick
+      - skill{s=artificer_battlesmith_protocolo_guardiao} @self ~onSneakRightClick
+  AlchemistKit:
+    Id: BREWING_STAND
+    Display: '&dKit Alquímico Portátil'
+    Lore:
+      - '&7Clique direito: abre seleção de frascos (Skript).'
+      - '&8Grupo: class_artificer.alchemist'
+    Options:
+      Unbreakable: true
+      KeepOnDeath: true
+    PersistentData:
+      classlock: 'class_artificer.alchemist'
+      script: 'artificer_alchemy_menu'
+    Skills:
+      - command{c="skript run artificer_alchemy_menu %player%"} @self ~onRightClick
+  AlchemistCatalystStaff:
+    Id: BLAZE_ROD
+    Display: '&dCajado Catalisador'
+    Lore:
+      - '&7Clique direito: Panaceia.'
+      - '&7Clique esquerdo: Nuvem Corrosiva.'
+      - '&8Grupo: class_artificer.alchemist'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_artificer.alchemist'
+      skill: 'artificer_alchemist_panaceia'
+    Skills:
+      - skill{s=artificer_alchemist_panaceia} @self ~onRightClick
+      - skill{s=artificer_alchemist_nuvem_corrosiva} @target ~onLeftClick
+  AlchemistElixirSatchel:
+    Id: RABBIT_HIDE
+    Display: '&dBolsa de Elixires'
+    Lore:
+      - '&7Clique direito: Elixir de Vitalidade.'
+      - '&7Sneak + clique direito: Tônico Acelerante.'
+      - '&8Grupo: class_artificer.alchemist'
+    Options:
+      Unbreakable: true
+    PersistentData:
+      classlock: 'class_artificer.alchemist'
+      skill: 'artificer_alchemist_elixir_vitalidade'
+    Skills:
+      - skill{s=artificer_alchemist_elixir_vitalidade} @target ~onRightClick
+      - skill{s=artificer_alchemist_tonico_acelerante} @self ~onSneakRightClick

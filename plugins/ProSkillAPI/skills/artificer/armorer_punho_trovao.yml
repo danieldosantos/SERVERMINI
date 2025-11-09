@@ -1,0 +1,50 @@
+name: artificer_armorer_punho_trovao
+display: "§bPunho Trovão"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_armorer
+description:
+  - "Modo Guardião: golpe corpo a corpo com 120/130/135/140% de dano e atordoamento 1.5–2 s."
+  - "Utiliza 20 Mana Arcana e respeita caps de controle (sem stack infinito)."
+icon: NETHERITE_SWORD
+cooldown:
+  base: 45
+  scale: -2
+resource:
+  mana_arcana:
+    cost: 20
+    minimum: 20
+custom:
+  damage:
+    tier1: 1.2
+    tier2: 1.3
+    tier3: 1.35
+    tier4: 1.4
+  stun:
+    tier1: 1.5
+    tier2: 1.7
+    tier3: 1.8
+    tier4: 2.0
+components:
+  cast:
+    sequence:
+      - type: melee
+        damage: "%custom.damage%"
+        classification: skill
+        knockback: 0.4
+        effects:
+          - type: effect
+            effect: "particle"
+            particle: ELECTRIC_SPARK
+          - type: effect
+            effect: "sound"
+            sound: ENTITY_LIGHTNING_BOLT_THUNDER
+        status:
+          - type: stun
+            duration: "%custom.stun%"
+      - type: message
+        text: "&b[Armeiro] Punho Trovão conectado!"
+messages:
+  fail-resource: "&cMana Arcana insuficiente."
+  cooldown: "&cPunho Trovão ainda recarregando (%cooldown%s)."

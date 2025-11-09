@@ -1,0 +1,29 @@
+# Constructos controlados pelo Artífice
+SteelDefender:
+  Type: IRON_GOLEM
+  Display: '&aDefensor de Aço'
+  Health: 80
+  Damage: 8
+  Armor: 8
+  Options:
+    Despawn: true
+    PreventOtherDrops: true
+    Silent: true
+    MovementSpeed: 0.28
+    FollowRange: 18
+    KnockbackResistance: 0.6
+    Interactable: false
+    AlwaysShowName: true
+  Drops: []
+  AITargetSelectors:
+    - clear
+    - players
+    - owner
+  Skills:
+    - skill{s=artificer_defender_bash} @target ~onTimer:60
+    - skill{s=artificer_defender_guard} @self ~onDamaged 0.4
+    - command{c="skript run artificer_defender_sync %player%"} @Owner ~onSpawn
+  LevelModifiers:
+    Health: 6
+    Damage: 1.2
+    Armor: 0.8

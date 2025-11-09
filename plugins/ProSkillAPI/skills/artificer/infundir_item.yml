@@ -1,0 +1,41 @@
+name: artificer_infundir_item
+display: "§3Infundir Item"
+type: active
+max-level: 4
+requires:
+  class: artificer
+description:
+  - "Aplica um módulo temporário a arma, armadura ou foco do alvo aliado."
+  - "Dura 12/15/20/20 min (respeitando uptime ≤60%) e consome 1 carga de Infusão."
+  - "Utilize via comando /infundir ou chave inglesa focal."
+icon: TRIPWIRE_HOOK
+cooldown:
+  base: 120
+  scale: 0
+resource:
+  infusoes_charges:
+    cost: 1
+    minimum: 1
+custom:
+  duration:
+    tier1: 720
+    tier2: 900
+    tier3: 1200
+    tier4: 1200
+  range: 6
+components:
+  cast:
+    sequence:
+      - type: self
+      - type: command
+        command: "skript run artificer_infundir %player% %target%"
+        async: true
+      - type: message
+        text: "&3[Artífice] Módulo infundido em %target% por %custom.duration% s."
+      - type: command
+        command: "placeholderapi refresh %player% artificer_infusions"
+        async: true
+messages:
+  fail-resource: "&cSem cargas de Infusão suficientes."
+  cooldown: "&cInfundir Item ainda recarregando (%cooldown%s)."
+  no-target: "&eSelecione um aliado ou clique com a chave inglesa para infundir."

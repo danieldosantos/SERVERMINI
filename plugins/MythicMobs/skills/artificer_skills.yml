@@ -1,0 +1,10 @@
+artificer_defender_bash:
+  Skills:
+    - damage{a=6;ia=false} @target
+    - effect:particles{p=CRIT;amount=8;radius=1} @target
+    - effect:sound{s=entity.iron_golem.attack;v=1;p=1} @self
+artificer_defender_guard:
+  Skills:
+    - potion{type=ABSORPTION;lvl=2;d=120} @self
+    - potion{type=RESISTANCE;lvl=1;d=120} @Self
+    - effect:particles{p=BLOCK;amount=12;radius=1;material=IRON_BLOCK} @self

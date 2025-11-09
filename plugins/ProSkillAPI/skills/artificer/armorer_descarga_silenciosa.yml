@@ -1,0 +1,42 @@
+name: artificer_armorer_descarga_silenciosa
+display: "§bDescarga Silenciosa"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_armorer
+description:
+  - "Modo Infiltrador: golpe 110/115/118/120% que silencia o alvo por 3 s."
+  - "Efeito adicional: aplica debuff discreto evitando revelar o usuário (baixa partícula)."
+icon: IRON_SWORD
+cooldown:
+  base: 60
+  scale: -4
+resource:
+  mana_arcana:
+    cost: 25
+    minimum: 25
+custom:
+  damage:
+    tier1: 1.1
+    tier2: 1.15
+    tier3: 1.18
+    tier4: 1.2
+  silence: 3
+components:
+  cast:
+    sequence:
+      - type: melee
+        damage: "%custom.damage%"
+        classification: skill
+        knockback: 0.2
+        status:
+          - type: silence
+            duration: "%custom.silence%"
+      - type: effect
+        effect: "particle"
+        particle: SMOKE_NORMAL
+      - type: message
+        text: "&b[Armeiro] Descarga Silenciosa aplicada."
+messages:
+  fail-resource: "&cMana Arcana insuficiente."
+  cooldown: "&cDescarga Silenciosa ainda recarregando (%cooldown%s)."

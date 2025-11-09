@@ -1,0 +1,54 @@
+name: artificer_alchemist_nuvem_corrosiva
+display: "§dNuvem Corrosiva"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_alchemist
+description:
+  - "Libera nuvem de ácido em raio 6 blocos reduzindo mitigação/armadura dos inimigos em 15% por 10 s."
+  - "Consome 30 Mana Arcana e aplica diminuição de resistência adicional via RacesEffects quando necessário."
+icon: LINGERING_POTION
+cooldown:
+  base: 90
+  scale: -6
+resource:
+  mana_arcana:
+    cost: 30
+    minimum: 30
+custom:
+  radius: 6
+  duration: 10
+  reduction: -0.15
+components:
+  cast:
+    sequence:
+      - type: ground
+        radius: "%custom.radius%"
+        duration: "%custom.duration%"
+        period: 1
+        effects:
+          - type: effect
+            effect: "particle"
+            particle: SPELL_MOB
+            color: "60,255,120"
+            radius: "%custom.radius%"
+      - type: repeat
+        period: 1
+        times: "%custom.duration%"
+        actions:
+          - type: area
+            radius: "%custom.radius%"
+            enemy: true
+            actions:
+              - type: debuff
+                stat: damage-reduction
+                value: "%custom.reduction%"
+                duration: "%custom.duration%"
+              - type: command
+                command: "skript run artificer_resistance_sync %player%"
+                async: true
+      - type: message
+        text: "&d[Alquimista] Nuvem Corrosiva ativa por %custom.duration%s."
+messages:
+  fail-resource: "&cMana Arcana insuficiente."
+  cooldown: "&cNuvem Corrosiva ainda recarregando (%cooldown%s)."

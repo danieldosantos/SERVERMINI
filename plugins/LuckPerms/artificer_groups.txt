@@ -1,0 +1,45 @@
+# Grupos LuckPerms para Artífice e subclasses
+lp creategroup class_artificer
+lp creategroup class_artificer.armorer
+lp creategroup class_artificer.battlesmith
+lp creategroup class_artificer.alchemist
+
+# Heranças básicas
+lp parent set class_artificer.armorer class_artificer
+lp parent set class_artificer.battlesmith class_artificer
+lp parent set class_artificer.alchemist class_artificer
+
+# Permissões gerais da classe
+lp group class_artificer permission set skillapi.class.artificer true
+lp group class_artificer permission set skillapi.skill.artificer_infundir_item true
+lp group class_artificer permission set skillapi.skill.artificer_campo_runico true
+lp group class_artificer permission set skillapi.skill.artificer_sobrecarregar true
+lp group class_artificer permission set skript.command.infundir true
+lp group class_artificer permission set skript.command.sobrecarregar true
+lp group class_artificer permission set placeholderapi.use true
+
+# Subclasse Armeiro
+lp group class_artificer.armorer permission set skillapi.skill.artificer_armorer_mudar_modo true
+lp group class_artificer.armorer permission set skillapi.skill.artificer_armorer_punho_trovao true
+lp group class_artificer.armorer permission set skillapi.skill.artificer_armorer_campo_repulsor true
+lp group class_artificer.armorer permission set skillapi.skill.artificer_armorer_descarga_silenciosa true
+lp group class_artificer.armorer permission set skillapi.skill.artificer_armorer_passo_amplificado true
+lp group class_artificer.armorer permission set skillapi.skill.artificer_armorer_nucleo_arcano true
+lp group class_artificer.armorer permission set skript.command.modo_armadura true
+
+# Subclasse Battle Smith
+lp group class_artificer.battlesmith permission set skillapi.skill.artificer_battlesmith_invocar_defensor true
+lp group class_artificer.battlesmith permission set skillapi.skill.artificer_battlesmith_sintonizar_arma true
+lp group class_artificer.battlesmith permission set skillapi.skill.artificer_battlesmith_comando_reparar true
+lp group class_artificer.battlesmith permission set skillapi.skill.artificer_battlesmith_interferencia true
+lp group class_artificer.battlesmith permission set skillapi.skill.artificer_battlesmith_protocolo_guardiao true
+lp group class_artificer.battlesmith permission set skript.command.defensor true
+
+# Subclasse Alquimista
+lp group class_artificer.alchemist permission set skillapi.skill.artificer_alchemist_frasco_explosivo true
+lp group class_artificer.alchemist permission set skillapi.skill.artificer_alchemist_elixir_vitalidade true
+lp group class_artificer.alchemist permission set skillapi.skill.artificer_alchemist_nuvem_corrosiva true
+lp group class_artificer.alchemist permission set skillapi.skill.artificer_alchemist_tonico_acelerante true
+lp group class_artificer.alchemist permission set skillapi.skill.artificer_alchemist_panaceia true
+lp group class_artificer.alchemist permission set skript.command.frasco_explosivo true
+lp group class_artificer.alchemist permission set skript.command.frasco_tonico true

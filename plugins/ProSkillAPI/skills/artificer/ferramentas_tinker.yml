@@ -1,0 +1,29 @@
+name: artificer_ferramentas_tinker
+display: "§3Ferramentas de Tinker"
+type: passive
+max-level: 4
+requires:
+  class: artificer
+description:
+  - "Garante +10/11/13/15% de eficiência ao utilizar itens focais do Artífice."
+  - "Inclui redução de consumo de Mana Arcana em 5% e feedback visual ao ativar gadgets."
+icon: IRON_PICKAXE
+custom:
+  efficiency:
+    tier1: 0.10
+    tier2: 0.11
+    tier3: 0.13
+    tier4: 0.15
+  mana-reduction: 0.05
+components:
+  passive:
+    sequence:
+      - type: self
+      - type: buff
+        stat: skill-damage
+        value: "%custom.efficiency%"
+      - type: buff
+        stat: mana-cost
+        value: "-%custom.mana-reduction%"
+messages:
+  apply: "&3[Artífice] Ferramentas de Tinker calibradas (+%custom.efficiency%%)."

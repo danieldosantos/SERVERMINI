@@ -1,0 +1,31 @@
+name: artificer_battlesmith_comando_reparar
+display: "§aComando Reparar"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_battlesmith
+description:
+  - "Ordena o Defensor de Aço a se auto reparar: cura 20% da vida máxima e reduz dano recebido em 20% por 6 s."
+  - "Consome 1 carga de Infusão e reforça sinergia com o HUD de integridade."
+icon: ANVIL
+cooldown:
+  base: 45
+  scale: 0
+resource:
+  infusoes_charges:
+    cost: 1
+    minimum: 1
+custom:
+  command: "skript run artificer_defender_repair %player%"
+components:
+  cast:
+    sequence:
+      - type: self
+      - type: command
+        command: "%custom.command%"
+        async: true
+      - type: message
+        text: "&a[Battle Smith] Defensor em protocolo de reparo."
+messages:
+  fail-resource: "&cSem cargas de Infusão disponíveis."
+  cooldown: "&cComando Reparar ainda recarregando (%cooldown%s)."

@@ -1,0 +1,35 @@
+name: artificer_armorer_mudar_modo
+display: "§bMudar Modo"
+type: active
+max-level: 4
+requires:
+  subclass: artificer_armorer
+description:
+  - "Alterna entre o modo Guardião e Infiltrador da Armadura Arcana."
+  - "Consome 1 carga de Infusão e aplica cooldown compartilhado de 45 s."
+  - "Atualiza atributos e efeitos via Skript e MythicMobs (ArcArmorCore)."
+icon: NETHERITE_CHESTPLATE
+cooldown:
+  base: 45
+  scale: 0
+resource:
+  infusoes_charges:
+    cost: 1
+    minimum: 1
+custom:
+  command: "skript run artificer_armorer_toggle %player%"
+components:
+  cast:
+    sequence:
+      - type: self
+      - type: command
+        command: "%custom.command%"
+        async: true
+      - type: effect
+        effect: "sound"
+        sound: BLOCK_BEACON_POWER_SELECT
+      - type: message
+        text: "&b[Armeiro] Modo da armadura alternado."
+messages:
+  fail-resource: "&cSem cargas de Infusão para alternar o modo."
+  cooldown: "&cModo de armadura ainda recarregando (%cooldown%s)."

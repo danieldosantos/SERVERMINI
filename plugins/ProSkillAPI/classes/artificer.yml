@@ -1,0 +1,142 @@
+# Classe base Artífice focada em suporte e controle via gadgets
+name: Artificer
+prefix: "Artificer"
+display: "§3Artífice"
+main-class: true
+description:
+  - "§7Inventor arcano que combina magia e engenharia para apoiar o grupo."
+  - "§3Opera com Mana Arcana regenerativa e cargas limitadas de Infusão."
+  - "§7Balanceia utilidade, controle e mitigação leve sem ultrapassar limites globais."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Mana Arcana"
+  mana-regen: 4
+  max-level: 60
+  exp-source: quest
+  attributes-scaled: true
+  needs-race: false
+  resources:
+    # Recurso primário para magias e gadgets
+    mana_arcana:
+      key: mana_arcana
+      display: "Mana Arcana"
+      min: 0
+      max: 100
+      scaling:
+        tier1: 120
+        tier2: 150
+        tier3: 185
+        tier4: 220
+      regen-out-of-combat:
+        delay: 6
+        interval: 4
+        amount: 0.05
+      regen-in-combat:
+        delay: 8
+        interval: 5
+        amount: 0.03
+    # Cargas usadas para infusões de armaduras, módulos e constructos
+    infusoes_charges:
+      key: infusoes_charges
+      display: "Cargas de Infusão"
+      min: 0
+      max: 5
+      scaling:
+        tier1: 2
+        tier2: 3
+        tier3: 4
+        tier4: 5
+      regen-out-of-combat:
+        delay: 45
+        interval: 45
+        amount: 1
+      regen-in-combat:
+        delay: 999
+        interval: 999
+        amount: 0
+  scoreboard:
+    mana: "artificer_mana"
+    infusions: "artificer_infusoes"
+    cooldowns: "artificer_cd"
+    defender: "artificer_defender"
+    placeholders:
+      mana_percent: "%skills_mana_arcana_percent%"
+      infusoes_atual: "%skills_infusoes_charges_current%"
+      infusoes_max: "%skills_infusoes_charges_max%"
+      cooldown_next: "%skills_artificer_next_cd%"
+      defender_hp: "%skills_artificer_defender_hp%"
+attributes:
+  health-base: 28
+  health-scale: 2.5
+  mana-base: 120
+  mana-scale: 22
+  walk-speed-base: 0.025
+  walk-speed-scale: 0.003
+  physical-defense-base: 6
+  physical-defense-scale: 0.9
+  magical-defense-base: 8
+  magical-defense-scale: 1.1
+  skill-damage: 1.05
+  attack-damage: 1.1
+  level-bonus:
+    1:
+      health: 28
+      mana_arcana: 120
+      infusoes_charges: 2
+      speed: 0.0
+    5:
+      health: 38
+      mana_arcana: 150
+      infusoes_charges: 3
+      speed: 0.01
+    11:
+      health: 50
+      mana_arcana: 185
+      infusoes_charges: 4
+      speed: 0.03
+    17:
+      health: 62
+      mana_arcana: 220
+      infusoes_charges: 5
+      speed: 0.05
+mana:
+  regen-combat: 7
+  regen-out: 13
+exp:
+  kill-multiplier: 0.9
+  quest-multiplier: 1.05
+  pvp-multiplier: 1.0
+skills:
+  tier1:
+    active:
+      - artificer_infundir_item
+      - artificer_campo_runico
+      - artificer_sobrecarregar
+    passive:
+      - artificer_ferramentas_tinker
+  tier2:
+    active:
+      - artificer_infundir_item
+      - artificer_campo_runico
+      - artificer_sobrecarregar
+    passive:
+      - artificer_ferramentas_tinker
+      - artificer_recuperar_infusao
+  tier3:
+    active:
+      - artificer_infundir_item
+      - artificer_campo_runico
+      - artificer_sobrecarregar
+    passive:
+      - artificer_ferramentas_tinker
+      - artificer_recuperar_infusao
+  tier4:
+    active:
+      - artificer_infundir_item
+      - artificer_campo_runico
+      - artificer_sobrecarregar
+    passive:
+      - artificer_ferramentas_tinker
+      - artificer_recuperar_infusao
