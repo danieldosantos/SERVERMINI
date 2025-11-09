@@ -1,0 +1,13 @@
+# LuckPerms script para raça Anão e sub-raças.
+lp creategroup race_dwarf
+lp creategroup race_dwarf.hill
+lp creategroup race_dwarf.mountain
+lp creategroup race_dwarf.deep
+lp parent set race_dwarf.hill race_dwarf
+lp parent set race_dwarf.mountain race_dwarf
+lp parent set race_dwarf.deep race_dwarf
+# Permissões utilitárias sugeridas
+lp group race_dwarf permission set races.dwarf.base true
+lp group race_dwarf.hill permission set races.dwarf.hill true
+lp group race_dwarf.mountain permission set races.dwarf.mountain true
+lp group race_dwarf.deep permission set races.dwarf.deep true

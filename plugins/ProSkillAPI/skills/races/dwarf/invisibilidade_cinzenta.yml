@@ -1,0 +1,31 @@
+# ProSkillAPI skill: Invisibilidade Cinzenta
+skills:
+  InvisibilidadeCinzenta:
+    display: "&7Invisibilidade Cinzenta"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Dissipa-se na penumbra por 8s. Ataques encerram o efeito.
+      Não pode ser conjurada sob sol direto.
+    tiers:
+      T1: { cooldown: 90, duration: 8, speed_bonus: 0.02 }
+      T2: { cooldown: 90, duration: 8, speed_bonus: 0.02 }
+      T3: { cooldown: 90, duration: 8, speed_bonus: 0.025 }
+      T4: { cooldown: 90, duration: 8, speed_bonus: 0.025 }
+    cost:
+      resource: stamina
+      amount: 12
+    conditions:
+      - type: environment
+        key: sunlight
+        allow: false
+    effects:
+      - target: self
+        type: invisibility
+        duration: { tier: duration }
+        cancel_on_attack: true
+      - target: self
+        type: speed_modifier
+        mode: increase
+        value: { tier: speed_bonus }
+    notes: "Velocidade adicional nunca excede cap global de +0.05."

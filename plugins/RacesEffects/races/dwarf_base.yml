@@ -1,0 +1,65 @@
+# Race: Dwarf (Base)
+race_id: dwarf_base
+name: "Anão"
+identity: "Forjados em pedra e metal, disciplinados contra venenos e choques."
+luckperms:
+  required: "race_dwarf"
+  inherit: null
+tags:
+  - dwarf
+placeholders:
+  racial_cd_main: "{cooldown:skill_fortitude_anao}"
+passives:
+  resiliencia_ana:
+    name: "Resiliência Anã"
+    type: timed_attribute
+    trigger: poison_damage
+    duration: 12
+    cooldown: 36
+    uptime_cap: 0.33
+    attributes:
+      mitigation_poison: 0.25
+    diminishing_returns: poison
+    description: "Reduz 25% do dano de veneno por 12s ao sofrer veneno. Respeita DR global."
+  treinamento_de_forja:
+    name: "Treinamento de Forja"
+    type: timed_attribute
+    trigger: hit_taken
+    duration: 6
+    cooldown: 40
+    uptime_cap: 0.15
+    attributes:
+      knockback_resist: 0.1
+    description: "Após sofrer dano físico, reduz empurrões em 10% por 6s."
+  constituicao_ana:
+    name: "Constituição Anã"
+    type: scaling_attribute
+    trigger: passive
+    scaling:
+      T1: { max_health_percent: 0.02 }
+      T2: { max_health_percent: 0.025 }
+      T3: { max_health_percent: 0.03 }
+      T4: { max_health_percent: 0.04 }
+    description: "+2%/+2.5%/+3%/+4% de vida máxima base dependendo do tier racial."
+actives:
+  fortitude_anao:
+    name: "Fortitude Anã"
+    skill: FortitudeAnaBase
+    cooldown: 90
+    charges: 1
+    description: "Habilidade ativa do ProSkillAPI que gera escudo temporário por 8s."
+resistances:
+  poison:
+    base: 0.1
+    max: 0.45
+    notes: "Aplicar DR com classes e itens de veneno. Nunca exceder 45% mitigação total."
+synergy_notes:
+  - "Combina com classes corpo-a-corpo que enfrentam venenos constantes."
+  - "Mitigação de knockback permite posicionamento seguro sem quebrar caps de velocidade."
+tests:
+  pve:
+    - "Simular dungeon com venenos (3 ciclos) e verificar uptime de Resiliência ≤33%."
+    - "Checar knockback reduzido em encontros físicos sem ultrapassar limite de 60% uptime."
+  pvp:
+    - "Arena vs assassino de venenos utilizando Fortitude no tempo certo (CD 90s)."
+    - "Batalha em ponte avaliando redução de knockback dentro da janela de 6s." 

@@ -1,0 +1,54 @@
+# Subrace: Hill Dwarf
+race_id: dwarf_hill
+name: "Anão da Colina"
+identity: "Clãs longevos que mantêm vigor constante e sabedoria prática."
+luckperms:
+  required: "race_dwarf.hill"
+  inherit: "race_dwarf"
+tags:
+  - dwarf
+placeholders:
+  racial_cd_main: "{cooldown:skill_fortitude_profunda}"
+passives:
+  vigor_de_colina:
+    name: "Vigor de Colina"
+    type: regen
+    trigger: out_of_combat
+    duration: 6
+    cooldown: 45
+    uptime_cap: 0.2
+    regen_percent: 0.01
+    description: "Fora de combate regenera 1% da vida máxima por segundo por 6s (não acumula)."
+  sabedoria_terrosa:
+    name: "Sabedoria Terrosa"
+    type: cooldown_modifier
+    trigger: health_below:0.5
+    duration: 8
+    cooldown: 50
+    uptime_cap: 0.16
+    cooldown_reduction: 0.05
+    affected_tags:
+      - defensive
+    description: "Abaixo de 50% de vida reduz em 5% o tempo de recarga de skills defensivas por 8s."
+actives:
+  fortitude_profunda:
+    name: "Fortitude Profunda"
+    skill: FortitudeProfunda
+    cooldown: 105
+    charges: 1
+    description: "Escudo melhorado com cura final de 6% ao romper (ProSkillAPI)."
+resistances:
+  poison:
+    base: 0.05
+    max: 0.45
+    notes: "Soma-se à base anã respeitando DR."
+synergy_notes:
+  - "Favorece tanques e suportes que alternam entre combate e descanso para manter regen."
+  - "Cooldown reduction ativa apenas em skills marcadas como defensivas."
+tests:
+  pve:
+    - "Checar regen fora de combate: 3 ciclos por minuto mantendo uptime ≤20%."
+    - "Verificar Fortitude Profunda absorvendo e curando 6% ao quebrar em chefe T2."
+  pvp:
+    - "Arena 2v2 monitorando Sabedoria Terrosa abaixo de 50% HP (uptime ≤16%)."
+    - "Duelo prolongado usando Fortitude Profunda em janela de 105s."

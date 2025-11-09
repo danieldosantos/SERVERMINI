@@ -1,0 +1,26 @@
+# ProSkillAPI skill: Postura de Pedra
+skills:
+  PosturaDePedra:
+    display: "&7Postura de Pedra"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Enraíza-se no solo, reduzindo 25% do dano recebido por 8s.
+      Movimento é penalizado em 15% enquanto a postura dura.
+    tiers:
+      T1: { cooldown: 90, duration: 8, damage_reduction: 0.25, speed_penalty: 0.15 }
+      T2: { cooldown: 90, duration: 8, damage_reduction: 0.27, speed_penalty: 0.15 }
+      T3: { cooldown: 90, duration: 8, damage_reduction: 0.3, speed_penalty: 0.15 }
+      T4: { cooldown: 90, duration: 8, damage_reduction: 0.32, speed_penalty: 0.15 }
+    cost:
+      resource: stamina
+      amount: 10
+    effects:
+      - target: self
+        type: damage_reduction
+        value: { tier: damage_reduction }
+      - target: self
+        type: speed_modifier
+        mode: decrease
+        value: { tier: speed_penalty }
+    notes: "Respeita caps globais de mitigação (≤45%) e velocidade (+0.05)."

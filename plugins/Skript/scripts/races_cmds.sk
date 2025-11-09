@@ -4,39 +4,12 @@
 options:
   skillcmd: psa cast
 
-command /racial [<text>]:
-  description: "Dispara habilidade racial direta ou lista opções."
-  trigger:
-    if player has permission "race.core":
-      if arg-1 is set:
-        execute console command "{@skillcmd} %player% %arg-1%"
-        send action bar "&eRacial executada: &f%arg-1%"
-      else:
-        send "&6Raciais disponíveis:&f fortitude_anao, postura_de_pedra, sopro_draco, truque_arcano, passos_faes, luzes_feericas, manto_sombras, canto_cativante, engenho_gnomesco, passos_silenciosos, fortalecer_familia, investida_coord, talento_variavel, harmonia_hibrida, tenacidade_implacavel, toque_igneo, lamina_das_chamas"
-        send "&7Use /racial <nome> para disparar via SkillAPI."
-    else:
-      send "&cVocê não possui uma raça configurada."
-
 command /sopro_draco:
   trigger:
     if player has permission "lp.race_draconato":
       execute console command "{@skillcmd} %player% SoproDraconico"
     else:
       send "&cRequer sangue dracônico."
-
-command /fortitude_anao:
-  trigger:
-    if player has permission "lp.race_anao.colina":
-      execute console command "{@skillcmd} %player% FortitudeAncestral"
-    else:
-      send "&cSomente anões da colina."
-
-command /postura_pedra:
-  trigger:
-    if player has permission "lp.race_anao.montanha":
-      execute console command "{@skillcmd} %player% PosturaDePedra"
-    else:
-      send "&cSomente anões da montanha."
 
 command /truque_arcano:
   trigger:
