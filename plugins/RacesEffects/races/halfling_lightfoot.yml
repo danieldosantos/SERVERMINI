@@ -1,0 +1,63 @@
+# Sub-raça: Halfling Pés-Leves
+race_id: halfling_lightfoot
+name: "Halfling Pés-Leves"
+identity: "Agilidade, movimento silencioso, sorte social e evasão."
+luckperms:
+  required: "race_halfling.lightfoot"
+  inherit: "race_halfling"
+tags:
+  - halfling
+placeholders:
+  racial_cd_main: "{cooldown:skill_halfling_passo_silencioso}"
+  racial_esquiva: "{cooldown:skill_halfling_esquiva}" 
+  racial_sorte: "{status:halfling_lightfoot_luck}"
+passives:
+  furtividade_natural:
+    name: "Furtividade Natural"
+    type: stealth_bonus
+    trigger: shadow_or_foliage
+    duration: 18
+    cooldown: 36
+    uptime_cap: 0.6
+    stealth_bonus: 0.15
+    description: "+15% eficácia de stealth e dificuldade de detecção quando em sombras ou vegetação (máx. 60% uptime)."
+  leveza_graciosa:
+    name: "Leveza Graciosa"
+    type: speed_boost
+    trigger: combat_enter
+    duration: 6
+    cooldown: 45
+    uptime_cap: 0.4
+    speed_bonus: 0.02
+    notes: "Bônus dura 6s após entrar em combate respeitando limite global de +0.05 de velocidade."
+    description: "Ao entrar em combate recebe +0.02 velocidade por 6s (ICD 45s)."
+actives:
+  esquiva_halfling:
+    name: "Esquiva Halfling"
+    skill: Halfling_EsquivaHalfling
+    cooldown: 75
+    charges: 1
+    description: "Ignora um ataque físico recebido até 2s após ativar."
+  passo_silencioso:
+    name: "Passo Silencioso"
+    skill: Halfling_PassoSilencioso
+    cooldown: 60
+    charges: 1
+    description: "Dash de 5 blocos com invisibilidade de 2s."
+  sorte_em_dobro:
+    name: "Sorte em Dobro"
+    skill: Halfling_SorteEmDobro
+    cooldown: 210
+    charges: 1
+    description: "Ultimate: por 10s dobra a chance de Sortudo, mas reduz dano causado em 10%."
+resistances: {}
+synergy_notes:
+  - "Furtividade Natural limita uptime a ≤60% com gatilhos ambientais (sombras/vegetação)."
+  - "Sorte em Dobro interage com Sortudo sem quebrar ICD — dobra apenas o valor de chance ativa."
+tests:
+  pve:
+    - "Cenário de dungeon furtiva avaliando stealth médio ≤60% e dash respeitando cap de velocidade."
+    - "Boss físico aplicando Esquiva Halfling como resposta a golpes telegráficos (CD 75s)."
+  pvp:
+    - "Batalha em campo com /passo_silencioso garantindo invisibilidade de 2s sem loops."
+    - "Skirmish 3v3 ativando Sorte em Dobro e medindo redução de dano -10% durante 10s."

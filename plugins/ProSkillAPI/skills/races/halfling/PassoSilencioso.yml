@@ -1,0 +1,37 @@
+# ProSkillAPI: Passo Silencioso — sub-raça Pés-Leves
+skills:
+  Halfling_PassoSilencioso:
+    display: "&aPasso Silencioso"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Desaparece em um piscar de olhos, avançando 5 blocos.
+      Fica invisível por 2s e remove lentidões leves.
+    tiers:
+      T1: { cooldown: 60, distance: 5, invis: 2 }
+      T2: { cooldown: 60, distance: 5, invis: 2 }
+      T3: { cooldown: 55, distance: 5, invis: 2 }
+      T4: { cooldown: 50, distance: 5, invis: 2 }
+    cost:
+      resource: stamina
+      amount: 15
+    effects:
+      - target: self
+        type: dash
+        distance: { tier: distance }
+        height_cap: 1.2
+      - target: self
+        type: status
+        id: halfling_passo_sombra
+        duration: { tier: invis }
+        modifiers:
+          invisibility: true
+          slow_immunity: true
+      - target: self
+        type: placeholder
+        id: racial_cd_main
+        value: "{cooldown:skill_halfling_passo_silencioso}"
+      - target: self
+        type: action_bar
+        text: "&aVocê está invisível por {tier:invis}s"
+    notes: "Dash limitado a 5 blocos mantendo zona segura ≤8 blocos; invisibilidade curta não acumula com stealth total."

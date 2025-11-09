@@ -1,0 +1,33 @@
+# ProSkillAPI: Iniciativa Íntima — racial base dos halflings
+skills:
+  Halfling_IniciativaIntima:
+    display: "&aIniciativa Íntima"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Concentra a sorte halfling para esquivar golpes decisivos.
+      Concede +10% esquiva base e -15% knockback por 6s.
+    tiers:
+      T1: { cooldown: 45, duration: 6, dodge: 0.10, knockback: 0.15 }
+      T2: { cooldown: 45, duration: 6, dodge: 0.12, knockback: 0.17 }
+      T3: { cooldown: 45, duration: 6, dodge: 0.14, knockback: 0.18 }
+      T4: { cooldown: 45, duration: 6, dodge: 0.15, knockback: 0.20 }
+    cost:
+      resource: none
+      amount: 0
+    effects:
+      - target: self
+        type: status
+        id: halfling_iniciativa_dodge
+        duration: { tier: duration }
+        modifiers:
+          dodge: { tier: dodge }
+          knockback_resist: { tier: knockback }
+      - target: self
+        type: placeholder
+        id: racial_cd_main
+        value: "{cooldown:skill_halfling_iniciativa}"
+      - target: self
+        type: action_bar
+        text: "&aIniciativa Íntima ativa por {tier:duration}s"
+    notes: "Cooldown mínimo 45s conforme diretriz. Buff contabiliza no HUD de esquiva."

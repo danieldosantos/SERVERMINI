@@ -27,6 +27,9 @@ command /racial:
       if player has permission "lp.race_gnomo.rock":
         send "&7[Gnomo da Rocha] /baluarte, /gadget e /cupula protegem o grupo (ult 210s)."
       set {_sent} to true
+    if function "halflingRacialHelp" is defined:
+      if halflingRacialHelp(player):
+        set {_sent} to true
     if {_sent} is false:
       send "&7Nenhum traço racial detectado neste comando."
 
@@ -104,20 +107,6 @@ command /salto_galho:
     else:
       send "&cSomente elfos da floresta."
 
-command /passos_silenciosos:
-  trigger:
-    if player has permission "lp.race_halfling.pesleves":
-      execute console command "{@skillcmd} %player% PassosSilenciosos"
-    else:
-      send "&cSomente halflings pés-leves."
-
-command /fortalecer_familia:
-  trigger:
-    if player has permission "lp.race_halfling.robusto":
-      execute console command "{@skillcmd} %player% FortalecerFamilia"
-    else:
-      send "&cSomente halflings robustos."
-
 command /investida_coord:
   trigger:
     if player has permission "lp.race_humano":
@@ -193,10 +182,12 @@ function give_race_kit(p: player, raceKey: text):
   else if {_racekey} is "gnomo_rocha":
     add "RockGnomeWrench" to {_kit::*}
     add "StaticGadgetKit" to {_kit::*}
-  else if {_racekey} is "halfling_pesleves":
+  else if {_racekey} is "halfling_pesleves" or {_racekey} is "halfling_lightfoot":
     add "HalflingLuckyCoin" to {_kit::*}
-  else if {_racekey} is "halfling_robusto":
-    add "HalflingHearthLadle" to {_kit::*}
+    add "LightfootCloak" to {_kit::*}
+  else if {_racekey} is "halfling_robusto" or {_racekey} is "halfling_stout":
+    add "HalflingLuckyCoin" to {_kit::*}
+    add "StoutStoneCharm" to {_kit::*}
   else if {_racekey} is "humano":
     add "HumanBannerSigil" to {_kit::*}
   else if {_racekey} is "humano_variante":

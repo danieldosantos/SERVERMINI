@@ -1,0 +1,38 @@
+# ProSkillAPI: Respirar Fundo — sub-raça Robusto
+skills:
+  Halfling_RespirarFundo:
+    display: "&aRespirar Fundo"
+    type: ACTIVE
+    skill_class: racial
+    description: |
+      Inspira profundamente para purgar venenos e queimaduras.
+      Cura 12% da vida máxima e aplica resistência breve a DoTs.
+    tiers:
+      T1: { cooldown: 75, cleanse: [poison,burn], heal: 0.12, dot_resist: 0.10, duration: 4 }
+      T2: { cooldown: 75, cleanse: [poison,burn], heal: 0.12, dot_resist: 0.12, duration: 4 }
+      T3: { cooldown: 75, cleanse: [poison,burn], heal: 0.12, dot_resist: 0.14, duration: 5 }
+      T4: { cooldown: 75, cleanse: [poison,burn], heal: 0.12, dot_resist: 0.15, duration: 5 }
+    cost:
+      resource: stamina
+      amount: 8
+    effects:
+      - target: self
+        type: cleanse
+        effects: { tier: cleanse }
+      - target: self
+        type: heal_percent
+        amount: { tier: heal }
+      - target: self
+        type: status
+        id: halfling_respiro_dot
+        duration: { tier: duration }
+        modifiers:
+          mitigation_dot: { tier: dot_resist }
+      - target: self
+        type: placeholder
+        id: racial_resistencia_veneno
+        value: "{status:halfling_stout_poison}"
+      - target: self
+        type: action_bar
+        text: "&aRespirar Fundo: +{tier:heal:percent} cura"
+    notes: "Cura instantânea respeita limite de 12% (<25%). Resistência a DoT utiliza DR compartilhada com Robustez Stout."

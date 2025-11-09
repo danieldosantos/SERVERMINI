@@ -100,23 +100,34 @@ items:
       race-lock: 'race_gnomo.rocha'
       skill: 'EngenhoGnomesco'
   HalflingLuckyCoin:
-    Id: SUNFLOWER
-    Display: '&eMoeda da Sorte'
+    Id: GOLD_NUGGET
+    Display: '&eMoeda da Sorte Halfling'
     Lore:
-      - '&eGira entre os dedos com facilidade.'
-      - '&eClique:&f Passos Silenciosos.'
+      - '&7Brilha quando a sorte sorri.'
+      - '&eClique:&f ativa Iniciativa Íntima.'
     NBT:
-      race-lock: 'race_halfling.pesleves'
-      skill: 'PassosSilenciosos'
-  HalflingHearthLadle:
-    Id: BOWL
-    Display: '&6Concha de Lar'
+      race-lock: 'race_halfling'
+      skill: 'Halfling_IniciativaIntima'
+  LightfootCloak:
+    Id: LEATHER_CHESTPLATE
+    Display: '&aManto dos Pés-Leves'
     Lore:
-      - '&6Serve guisado milagroso.'
-      - '&eClique:&f Fortalecer a Família.'
+      - '&7Fibra leve que bebe a luz.'
+      - '&eClique:&f Passo Silencioso.'
+    Options:
+      Color: 70,140,80
     NBT:
-      race-lock: 'race_halfling.robusto'
-      skill: 'FortalecerFamilia'
+      race-lock: 'race_halfling.lightfoot'
+      skill: 'Halfling_PassoSilencioso'
+  StoutStoneCharm:
+    Id: POLISHED_ANDESITE
+    Display: '&6Amuleto de Pedra Robusta'
+    Lore:
+      - '&7Talismã pesado que ancora o portador.'
+      - '&eClique:&f Forte Como Pedra.'
+    NBT:
+      race-lock: 'race_halfling.stout'
+      skill: 'Halfling_ForteComoPedra'
   HumanBannerSigil:
     Id: PAPER
     Display: '&fEstandarte Coordenado'

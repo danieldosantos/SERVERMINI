@@ -1,0 +1,54 @@
+# Raça Base: Halfling
+race_id: halfling_base
+name: "Halfling"
+identity: "Pequenos, sorrateiros, rápidos e incrivelmente sortudos."
+luckperms:
+  required: "race_halfling"
+  inherit: null
+tags:
+  - halfling
+placeholders:
+  racial_cd_main: "{cooldown:skill_halfling_iniciativa}"
+  racial_esquiva: "{status:halfling_iniciativa_dodge}"
+  racial_sorte: "{status:halfling_sortudo_chance}"
+passives:
+  sortudo:
+    name: "Sortudo"
+    type: damage_fail_safe
+    trigger: fatal_or_critical_hit
+    cooldown: 60
+    uptime_cap: 0.2
+    scaling:
+      T1: { chance: 0.20, damage_reduction: 0.5 }
+      T2: { chance: 0.25, damage_reduction: 0.5 }
+      T3: { chance: 0.30, damage_reduction: 0.5 }
+      T4: { chance: 0.35, damage_reduction: 0.5 }
+    description: "Quando sofreria dano fatal ou crítico há chance de reduzir o dano em 50% (ICD 60s, não concede invencibilidade)."
+  passo_pequeno_rapido:
+    name: "Passo Pequeno, Passo Rápido"
+    type: speed_boost
+    trigger: out_of_combat_exit
+    duration: 10
+    cooldown: 30
+    uptime_cap: 0.33
+    speed_bonus: 0.01
+    notes: "Velocidade adicional respeita cap global de +0.05 somando buffs."
+    description: "Ao sair de combate recebe +0.01 de velocidade por 10s (CD interno 30s)."
+actives:
+  iniciativa_intima:
+    name: "Iniciativa Íntima"
+    skill: Halfling_IniciativaIntima
+    cooldown: 45
+    charges: 1
+    description: "Por 6s concede +10% esquiva e redução leve de empurrões."
+resistances: {}
+synergy_notes:
+  - "Funciona como seguro de vida sem loop: chance máxima 35% com ICD de 60s."
+  - "Passo Pequeno só ativa fora de combate, mantendo uptime ≤33% dentro dos limites de velocidade."
+tests:
+  pve:
+    - "Dungeon com bursts críticos medindo ativação de Sortudo sem quebrar ICD."
+    - "Rotas de patrulha: validar Passo Pequeno ativo ≤33% do tempo." 
+  pvp:
+    - "Duelo contra arqueiro crítico, confirmando redução de dano em 50% apenas quando procado."
+    - "Arena controle: verificar velocidade total ≤+0.05 com buffs combinados."

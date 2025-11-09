@@ -1,0 +1,5 @@
+lp creategroup race_halfling
+lp creategroup race_halfling.lightfoot
+lp creategroup race_halfling.stout
+lp parent set race_halfling.lightfoot race_halfling
+lp parent set race_halfling.stout race_halfling
