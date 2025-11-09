@@ -1,0 +1,40 @@
+name: druid_convoke_terrain
+display: "§2Conjuração de Terreno"
+type: active
+max-level: 4
+description:
+  - "§7Cria zona natural adaptativa (6 blocos) por 8s conforme o círculo ativo."
+  - "§2Terra: raízes prendem por 1.5s e reduzem velocidade em 40%."
+  - "§bLua: névoa concede camuflagem intermitente (uptime 50%) e redução de projéteis 20%."
+  - "§aPastor: trepadeiras concedem +10% cura recebida e causam lentidão 20% a inimigos."
+icon: MOSS_BLOCK
+mana:
+  base: 22
+  scale: 6
+cooldown:
+  base: 60
+  scale: -5
+radius:
+  base: 6
+  scale: 1
+duration:
+  base: 8
+  scale: 1
+custom:
+  slow-terra: 0.40
+  slow-pastor: 0.20
+  dr-limit: 0.60
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        duration: "%duration%"
+        shape: cylinder
+      - type: command
+        text: "skript run druidTerrain %player% %radius% %duration%"
+      - type: message
+        targets: self
+        text: "&2[Natureza] Terreno moldado ao seu círculo."
+messages:
+  cooldown: "&cTerreno ainda se recompõe."

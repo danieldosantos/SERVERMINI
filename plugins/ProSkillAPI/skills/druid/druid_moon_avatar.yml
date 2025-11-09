@@ -1,0 +1,41 @@
+name: druid_moon_avatar
+display: "§dAvatar da Lua"
+type: ultimate
+max-level: 4
+description:
+  - "§7Entra em forma híbrida por 18s permitindo uso simultâneo de habilidades ursina/felina sem custo adicional."
+  - "§dConcede +15% dano mágico e +15% resistência física durante a duração."
+  - "§7Cooldown 240s."
+icon: END_CRYSTAL
+mana:
+  base: 60
+  scale: 15
+cooldown:
+  base: 240
+  scale: 0
+duration:
+  base: 18
+  scale: 1
+custom:
+  magic-bonus: 0.15
+  resist-bonus: 0.15
+components:
+  cast:
+    sequence:
+      - type: buff
+        key: druid_moon_avatar_magic
+        stat: spell_damage
+        amount: "%custom.magic-bonus%"
+        duration: "%duration%"
+      - type: buff
+        key: druid_moon_avatar_resist
+        stat: damage_reduction
+        amount: "%custom.resist-bonus%"
+        duration: "%duration%"
+      - type: command
+        text: "skript run druidAvatarMoon %player% %duration%"
+      - type: message
+        targets: self
+        text: "&d[Avatar] O luar o envolve em poder primal."
+messages:
+  cast: "&d[Avatar da Lua] A noite atende ao seu chamado!"

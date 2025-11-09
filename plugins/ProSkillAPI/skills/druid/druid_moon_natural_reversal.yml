@@ -1,0 +1,38 @@
+name: druid_moon_natural_reversal
+display: "§fReversão Natural"
+type: active
+max-level: 4
+description:
+  - "§7Remove até 2 efeitos negativos de aliados em 10 blocos e cura 12% da vida instantaneamente."
+  - "§bPrioriza controles fortes (stuns, medo) e aplica imunidade leve a 1 novo efeito por 2s."
+  - "§7Cooldown 105s."
+icon: SNOWBALL
+mana:
+  base: 32
+  scale: 8
+cooldown:
+  base: 105
+  scale: -10
+radius:
+  base: 10
+  scale: 1
+custom:
+  heal-percent: 0.12
+  immunity-duration: 2
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        filter: allies
+      - type: cleanse
+        amount: 2
+      - type: heal
+        percent: "%custom.heal-percent%"
+      - type: buff
+        key: druid_moon_reversal_immunity
+        stat: crowd_control_resist
+        amount: 0.20
+        duration: "%custom.immunity-duration%"
+messages:
+  cast: "&f[Reversão] A luz lunar dissipa os efeitos nocivos."

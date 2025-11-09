@@ -1,0 +1,50 @@
+name: druid_shepherd_revitalizing_rain
+display: "§bChuva Revigorante"
+type: active
+max-level: 4
+description:
+  - "§7Invoca chuva sobre área de 8 blocos curando 4%/s por 8s e removendo queimaduras." 
+  - "§bAliados em Forma Selvagem recebem +5% resistência elemental durante a chuva (cap total 45%)."
+  - "§7Cooldown 105s."
+icon: WATER_BUCKET
+mana:
+  base: 32
+  scale: 8
+cooldown:
+  base: 105
+  scale: -10
+radius:
+  base: 8
+  scale: 1
+duration:
+  base: 8
+  scale: 1
+custom:
+  heal-percent: 0.04
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        duration: "%duration%"
+        filter: allies
+      - type: heal
+        percent: "%custom.heal-percent%"
+        interval: 1
+        duration: "%duration%"
+      - type: cleanse
+        effects:
+          - FIRE
+          - BURNING
+      - type: buff
+        key: druid_shepherd_rain_resist
+        stat: elemental_resistance
+        amount: 0.05
+        duration: "%duration%"
+        limit: 0.45
+      - type: effect
+        particle: DRIPPING_WATER
+        radius: "%radius%"
+        duration: "%duration%"
+messages:
+  cast: "&b[Chuva Revigorante] A vida retorna aos aliados."

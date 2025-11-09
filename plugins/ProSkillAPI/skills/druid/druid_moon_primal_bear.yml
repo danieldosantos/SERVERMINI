@@ -1,0 +1,48 @@
+name: druid_moon_primal_bear
+display: "§6Forma Ursina Primordial"
+type: active
+max-level: 4
+description:
+  - "§7Transforma-se em urso por 15s: +30% vida, ataques cleave em 4 blocos (120% dano)."
+  - "§bSubstitui Forma Selvagem durante a duração. Compartilha cooldown global de 120s."
+icon: HONEYCOMB
+mana:
+  base: 28
+  scale: 7
+cooldown:
+  base: 120
+  scale: -10
+resource:
+  wildshape_charges:
+    cost: 1
+    minimum: 1
+duration:
+  base: 15
+  scale: 1
+custom:
+  health-boost: 0.30
+  cleave-radius: 4
+  damage-multiplier: 1.20
+components:
+  cast:
+    sequence:
+      - type: buff
+        key: druid_moon_bear_form
+        stat: health_bonus
+        amount: "%custom.health-boost%"
+        duration: "%duration%"
+      - type: buff
+        key: druid_moon_bear_cleave
+        stat: cleave_radius
+        amount: "%custom.cleave-radius%"
+        duration: "%duration%"
+      - type: buff
+        key: druid_moon_bear_damage
+        stat: melee_damage
+        amount: 0.20
+        duration: "%duration%"
+      - type: message
+        targets: self
+        text: "&6[Lua] Você ruge em forma ursina!"
+messages:
+  cooldown: "&cO espírito ursino precisa descansar." 

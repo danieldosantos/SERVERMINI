@@ -1,0 +1,119 @@
+# Classe base Druida para ProSkillAPI
+name: Druid
+prefix: "Dru"
+display: "§2Druida"
+main-class: true
+description:
+  - "§7Guardião versátil que alterna entre controle de terreno e formas animais."
+  - "§aMantém a Forma Selvagem com cargas limitadas e gerenciamento de cooldowns longos."
+  - "§7Sinergia moderada com bônus raciais naturais (limite 1,25x e retornos decrescentes)."
+options:
+  needs-permission: true
+  tree: requirement
+  reset-on-death: false
+  mana-name: "Essência"
+  mana-regen: 3
+  max-level: 60
+  exp-source: quest
+  attributes-scaled: true
+  needs-race: false
+  wildshape-resource:
+    key: wildshape_charges
+    display: "WildShape"
+    min: 0
+    max: 3
+    scaling:
+      tier1: 1
+      tier2: 1
+      tier3: 2
+      tier4: 2
+    recharge:
+      cooldown: 180
+      message: "§bSuas energias naturais se recompoem."
+  scoreboard:
+    wildshape-time: "druid_wildshape_time"
+    wildshape-charges: "druid_wildshape_charges"
+    major-cd: "druid_major_cd"
+    placeholders:
+      wildshape-time: "%skills_wildshape_time%"
+      wildshape-charges: "%skills_wildshape_charges%"
+      major-cd: "%skills_druid_longest_cd%"
+attributes:
+  health-base: 24
+  health-scale: 2.0
+  mana-base: 40
+  mana-scale: 6
+  walk-speed-base: 0.022
+  walk-speed-scale: 0.003
+  physical-defense-base: 2
+  physical-defense-scale: 0.8
+  skill-damage: 6.0
+  attack-damage: 1.0
+  level-bonus:
+    1:
+      health: 26
+      mana: 40
+      speed: 0.0
+    5:
+      health: 45
+      mana: 65
+      speed: 0.01
+    11:
+      health: 70
+      mana: 95
+      speed: 0.015
+    17:
+      health: 98
+      mana: 130
+      speed: 0.02
+mana:
+  regen-combat: 4
+  regen-out: 7
+exp:
+  kill-multiplier: 0.9
+  quest-multiplier: 1.1
+  pvp-multiplier: 1.0
+skills:
+  tier1:
+    active:
+      - druid_wildshape
+      - druid_natural_bond
+      - druid_convoke_terrain
+    passive:
+      - druid_elemental_affinity
+  tier2:
+    active:
+      - druid_wildshape
+      - druid_natural_bond
+      - druid_convoke_terrain
+    passive:
+      - druid_elemental_affinity
+      - druid_wildsenses
+  tier3:
+    active:
+      - druid_wildshape
+      - druid_natural_bond
+      - druid_convoke_terrain
+    passive:
+      - druid_elemental_affinity
+      - druid_wildsenses
+      - druid_wildshape_mastery
+  tier4:
+    active:
+      - druid_wildshape
+      - druid_natural_bond
+      - druid_convoke_terrain
+    passive:
+      - druid_elemental_affinity
+      - druid_wildsenses
+      - druid_wildshape_mastery
+subclasses:
+  land:
+    display: "§2Círculo da Terra"
+    file: druid_land.yml
+  moon:
+    display: "§bCírculo da Lua"
+    file: druid_moon.yml
+  shepherd:
+    display: "§aCírculo do Pastor"
+    file: druid_shepherd.yml

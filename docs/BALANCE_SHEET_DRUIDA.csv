@@ -1,0 +1,22 @@
+Skill,Tipo,Custo (Mana/Carga),Duração,CD (s),Dano/Redução/Cura,Área/Alcance,Notas PvP,Tier
+Forma Selvagem,Ativa,20 mana + 1 carga,60s,180->150,+15% resistência elemental / +10% velocidade,Self,Sem imunidade total; respeita limite 45% resistência,T1
+Vínculo Natural,Ativa,18 mana,4s,45,3% HP/s (cap 6%),12 blocos,HoT curto; remove queimaduras,T1
+Conjuração de Terreno,Ativa,22 mana,8s,60,Efeitos por círculo (slow/camuflagem/regen),6 blocos,Controle ≤40%; DR aplicado,T1
+Afinidade Elemental,Passiva,0,Rotativa,Passive,8% redução elemental escolhida,Self,Checa caps com RacesEffects,T1
+Sentidos Selvagens,Passiva,0,12s on/12s off,Passive,Visão noturna + rastreio,8 blocos,Uptime 50% evita stealth total,T2
+Maestria Forma Selvagem,Passiva,0,Enquanto ativo,Passive,-10%/-20% cooldown Forma Selvagem,Self,Sincroniza 2ª carga no Tier 3,T3
+Pilares de Pedra (Land),Ativa,24 mana,Instantâneo,60,120% dano + slow 20%,10 blocos alvo,Empurra 3 blocos,T2
+Aura do Bosque (Land),Ativa,30 mana,12s,90,+20% regen/+50% res veneno,8 blocos,Cura inicial 2% sem ultrapassar cap,T2
+Solo Entrópico (Land),Ativa,26 mana,8s,75,5% DoT/s + slow 40%,6 blocos,Slow respeita DR; sem stack com outras lamas,T3
+Chicote de Vinhas (Land),Ativa,20 mana,6s,55,5% DoT/s pós puxão,15 blocos,Puxão reduzido em chefes,T3
+Coração do Mundo (Land),Ultimate,60 mana,15s,240,+25% resistência + cura 4%/s,10 blocos,Cap global 45% resistência,T4
+Forma Ursina Primordial (Moon),Ativa,28 mana + 1 carga,15s,120,+30% vida + cleave 120%,Self,Compartilha CD com Forma Selvagem,T2
+Forma Felina (Moon),Ativa,22 mana + 1 carga,10s,75,+0.05 velocidade + críticos,Self,Limite de velocidade +0.05,T2
+Rugido Lunar (Moon),Ativa,24 mana,8s,90,Medo 3s + -15% dano inimigo,6 blocos,DR mínimo 1.5s medo,T3
+Reversão Natural (Moon),Ativa,32 mana,Instantâneo,105,Cura 12% + cleanse,10 blocos,Imunidade leve 2s,T3
+Avatar da Lua (Moon),Ultimate,60 mana,18s,240,+15% dano mágico +15% resistência,Self,Permite formas sem custo adicional,T4
+Chamado do Lobo Espiritual (Shepherd),Ativa,28 mana,12s,60,80% dano a cada 2s,Pet single target,Despawns em 12s,T2
+Escudo Ancestral (Shepherd),Ativa,30 mana,8s,90,200 absorção + cura 30,8 blocos divide,Cura final distribuída,T2
+Vínculo Harmonioso (Shepherd),Ativa,24 mana,10s,75,+15% cura recebida,10 blocos summons,Afeta apenas invocações e espíritos,T3
+Chuva Revigorante (Shepherd),Ativa,32 mana,8s,105,4% HP/s + cleanse,8 blocos,Concede +5% resistência elemental,T3
+Conclave Primal (Shepherd),Ultimate,60 mana,16s,240,+15% resistência/+0.03 vel/+12% cura,10 blocos + espíritos,Buffs respeitam caps,T4

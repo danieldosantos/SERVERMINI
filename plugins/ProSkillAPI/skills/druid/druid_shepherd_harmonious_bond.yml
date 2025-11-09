@@ -1,0 +1,38 @@
+name: druid_shepherd_harmonious_bond
+display: "§aVínculo Harmonioso"
+type: active
+max-level: 4
+description:
+  - "§7Amplifica em 15% a cura recebida por entidades invocadas e totens aliados por 10s."
+  - "§aAplicável também a espíritos de raças caso estejam vinculados ao Druida (DR aplicado)."
+icon: MUSIC_DISC_OTHERSIDE
+mana:
+  base: 24
+  scale: 6
+cooldown:
+  base: 75
+  scale: -5
+radius:
+  base: 10
+  scale: 1
+duration:
+  base: 10
+  scale: 1
+custom:
+  heal-boost: 0.15
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        filter: summons
+      - type: buff
+        key: druid_shepherd_bond_heal
+        stat: healing_received
+        amount: "%custom.heal-boost%"
+        duration: "%duration%"
+      - type: message
+        targets: area
+        text: "&a[Vínculo] Espíritos respondem com vigor renovado."
+messages:
+  cast: "&a[Vínculo Harmonioso] Invocações fortalecidas."

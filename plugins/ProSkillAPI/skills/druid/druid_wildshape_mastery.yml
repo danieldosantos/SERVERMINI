@@ -1,0 +1,20 @@
+name: druid_wildshape_mastery
+display: "§bMaestria em Forma Selvagem"
+type: passive
+max-level: 2
+description:
+  - "§7Reduz o tempo de recarga da Forma Selvagem em 10%/20% quando acima do nível 11."
+  - "§bConcede +1 carga adicional no Tier 3 (sincronizado com recurso da classe)."
+icon: PRISMARINE_CRYSTALS
+custom:
+  cooldown-multiplier: 0.10
+components:
+  passive:
+    sequence:
+      - type: modify
+        target: skill
+        key: druid_wildshape
+        attribute: cooldown
+        multiplier: 0.90
+      - type: command
+        text: "placeholderapi refresh %player% skills_wildshape_charges"

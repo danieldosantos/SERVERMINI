@@ -1,0 +1,48 @@
+# LuckPerms configuração de grupos para classe Druida
+lp creategroup class_druid
+lp group class_druid setdisplayname "Druida"
+lp group class_druid meta add prefix "&2[Druida]&f "
+lp group class_druid permission set class_druid true
+lp group class_druid permission set skillapi.class.druid true
+lp group class_druid permission set mythicmobs.item.druid true
+lp group class_druid permission set skript.command.forma true
+lp group class_druid permission set skript.command.kit_druida true
+lp group class_druid permission set placeholderapi.placeholder.skills_wildshape_time true
+lp group class_druid permission set placeholderapi.placeholder.skills_wildshape_charges true
+lp group class_druid permission set placeholderapi.placeholder.skills_druid_longest_cd true
+
+lp creategroup class_druid.land
+lp group class_druid.land parent add class_druid
+lp group class_druid.land setdisplayname "Druida - Círculo da Terra"
+lp group class_druid.land meta add prefix "&2[Terra]&f "
+lp group class_druid.land permission set skillapi.subclass.druid_land true
+lp group class_druid.land permission set mythicmobs.item.druid.land true
+lp group class_druid.land permission set skript.command.terra_pilares true
+lp group class_druid.land permission set skript.command.terra_aura true
+lp group class_druid.land permission set skript.command.terra_solo true
+lp group class_druid.land permission set skript.command.terra_vinhas true
+lp group class_druid.land permission set skript.command.terra_coracao true
+
+lp creategroup class_druid.moon
+lp group class_druid.moon parent add class_druid
+lp group class_druid.moon setdisplayname "Druida - Círculo da Lua"
+lp group class_druid.moon meta add prefix "&b[Lua]&f "
+lp group class_druid.moon permission set skillapi.subclass.druid_moon true
+lp group class_druid.moon permission set mythicmobs.item.druid.moon true
+lp group class_druid.moon permission set skript.command.lua_urso true
+lp group class_druid.moon permission set skript.command.lua_felina true
+lp group class_druid.moon permission set skript.command.lua_rugido true
+lp group class_druid.moon permission set skript.command.lua_reversao true
+lp group class_druid.moon permission set skript.command.lua_avatar true
+
+lp creategroup class_druid.shepherd
+lp group class_druid.shepherd parent add class_druid
+lp group class_druid.shepherd setdisplayname "Druida - Círculo do Pastor"
+lp group class_druid.shepherd meta add prefix "&a[Pastor]&f "
+lp group class_druid.shepherd permission set skillapi.subclass.druid_shepherd true
+lp group class_druid.shepherd permission set mythicmobs.item.druid.shepherd true
+lp group class_druid.shepherd permission set skript.command.pastor_lobo true
+lp group class_druid.shepherd permission set skript.command.pastor_escudo true
+lp group class_druid.shepherd permission set skript.command.pastor_vinculo true
+lp group class_druid.shepherd permission set skript.command.pastor_chuva true
+lp group class_druid.shepherd permission set skript.command.pastor_conclave true

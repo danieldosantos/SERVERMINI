@@ -1,0 +1,52 @@
+name: druid_land_heart_of_world
+display: "§6Coração do Mundo"
+type: ultimate
+max-level: 4
+description:
+  - "§7Canaliza energia terrestre por 15s concedendo +25% resistência total e cura 4%/s aliados em 10 blocos."
+  - "§6Durante o efeito, o Druida ganha 15% redução adicional contra veneno e ácido."
+  - "§7Cooldown 240s. Cura respeita cap global de 6%/s com outras fontes."
+icon: BUDDING_AMETHYST
+mana:
+  base: 60
+  scale: 15
+cooldown:
+  base: 240
+  scale: 0
+radius:
+  base: 10
+  scale: 1
+duration:
+  base: 15
+  scale: 1
+custom:
+  resist-percent: 0.25
+  heal-percent: 0.04
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        duration: "%duration%"
+        filter: allies
+      - type: buff
+        key: druid_land_heart_resist
+        stat: damage_reduction
+        amount: "%custom.resist-percent%"
+        duration: "%duration%"
+      - type: heal
+        percent: "%custom.heal-percent%"
+        interval: 1
+        duration: "%duration%"
+        targets: area
+      - type: buff
+        key: druid_land_heart_acid
+        stat: poison_resist
+        amount: 0.15
+        duration: "%duration%"
+      - type: effect
+        particle: GEODE
+        radius: "%radius%"
+        duration: "%duration%"
+messages:
+  cast: "&6[Coração do Mundo] As raízes profundas o protegem."

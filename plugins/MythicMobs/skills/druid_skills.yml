@@ -1,0 +1,6 @@
+# Habilidades simples para entidades do Druida
+skills:
+  druid_shepherd_wolf_attack:
+    Skills:
+      - damage{a=8;ia=true} @target
+      - effect:particles{p=SOUL;amount=8;radius=0.5} @target

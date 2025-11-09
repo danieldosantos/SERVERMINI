@@ -1,0 +1,50 @@
+# Entidades auxiliares para habilidades do Druida
+ShepherdWolfSpirit:
+  Type: WOLF
+  Display: '&fLobo Espiritual'
+  Health: 40
+  Damage: 6
+  Options:
+    Despawn: true
+    PreventOtherDrops: true
+    Silent: true
+    Glowing: true
+  Skills:
+    - skill{s=druid_shepherd_wolf_attack} @target ~onTimer:40
+
+ShepherdBearSpirit:
+  Type: POLAR_BEAR
+  Display: '&dUrso Ancestral'
+  Health: 80
+  Damage: 8
+  Options:
+    Despawn: true
+    PreventOtherDrops: true
+    Silent: true
+  Skills:
+    - effect:particles{p=SOUL_FIRE_FLAME;amount=12;radius=1} @self ~onTimer:20
+
+ShepherdEagleSpirit:
+  Type: PARROT
+  Display: '&bÁguia Espiritual'
+  Health: 30
+  Damage: 4
+  Options:
+    Despawn: true
+    PreventOtherDrops: true
+    Silent: true
+    Glowing: true
+  Skills:
+    - effect:particles{p=CLOUD;amount=8;radius=1} @self ~onTimer:10
+
+ShepherdStagSpirit:
+  Type: GOAT
+  Display: '&aCervo Espiritual'
+  Health: 50
+  Damage: 5
+  Options:
+    Despawn: true
+    PreventOtherDrops: true
+    Silent: true
+  Skills:
+    - effect:particles{p=HAPPY_VILLAGER;amount=6;radius=1} @self ~onTimer:15

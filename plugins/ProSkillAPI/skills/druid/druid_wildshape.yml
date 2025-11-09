@@ -1,0 +1,64 @@
+name: druid_wildshape
+display: "§bForma Selvagem"
+type: active
+max-level: 4
+description:
+  - "§7Assume forma animal adequada ao círculo por 60s (reduzida caso efeitos raciais excedam 1,25x)."
+  - "§b+15% resistência elemental, +10% velocidade (cap +0,05 total), ataques corpo a corpo causam 110% dano."
+  - "§7Consome 1 carga de Forma Selvagem. Recarrega 1 carga a cada 180s fora de combate."
+  - "§7PlaceholderAPI: %skills_wildshape_time% (tempo restante) / %skills_wildshape_charges%."
+icon: TOTEM_OF_UNDYING
+mana:
+  base: 20
+  scale: 5
+cooldown:
+  base: 180
+  scale: -15
+resource:
+  wildshape_charges:
+    cost: 1
+    minimum: 1
+range:
+  base: 0
+  scale: 0
+duration:
+  base: 60
+  scale: 4
+custom:
+  speed-cap: 0.05
+  resist-cap: 0.45
+  elemental-type: adaptive
+components:
+  cast:
+    sequence:
+      - type: trigger
+        key: wildshape_activate
+      - type: buff
+        key: druid_wildshape_form
+        stat: transformation
+        duration: "%duration%"
+      - type: buff
+        key: druid_wildshape_resist
+        stat: elemental_resistance
+        amount: 0.15
+        duration: "%duration%"
+      - type: buff
+        key: druid_wildshape_speed
+        stat: walk_speed
+        amount: 0.04
+        duration: "%duration%"
+        limit: "%custom.speed-cap%"
+      - type: buff
+        key: druid_wildshape_damage
+        stat: melee_damage
+        amount: 0.10
+        duration: "%duration%"
+      - type: command
+        async: true
+        text: "raceeffects applywildshape %player% %duration%"
+      - type: message
+        targets: self
+        text: "&b[Natureza] Você assumiu a Forma Selvagem!"
+messages:
+  fail-resource: "&cSem cargas de Forma Selvagem disponíveis."
+  cooldown: "&cForma Selvagem ainda se recupera da última transformação."

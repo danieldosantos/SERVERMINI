@@ -1,0 +1,47 @@
+name: druid_land_entropy_soil
+display: "§6Solo Entrópico"
+type: active
+max-level: 4
+description:
+  - "§7Transmuta o solo em lama pegajosa por 8s em raio de 6 blocos reduzindo velocidade em 40%."
+  - "§6Inimigos presos recebem 5% de dano de natureza por segundo (não crítico)."
+  - "§7Cooldown 75s. Efeitos de lentidão respeitam limites de diminishing returns."
+icon: MUD
+mana:
+  base: 26
+  scale: 7
+cooldown:
+  base: 75
+  scale: -5
+radius:
+  base: 6
+  scale: 1
+duration:
+  base: 8
+  scale: 1
+custom:
+  slow: 0.40
+  dot-percent: 0.05
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        duration: "%duration%"
+        filter: enemies
+      - type: buff
+        key: druid_land_entropy_slow
+        stat: slow
+        amount: "%custom.slow%"
+        duration: "%duration%"
+      - type: damage
+        percent: "%custom.dot-percent%"
+        interval: 1
+        duration: "%duration%"
+        element: earth
+      - type: effect
+        particle: DRIPPING_HONEY
+        radius: "%radius%"
+        duration: "%duration%"
+messages:
+  cast: "&6[Entropia] O solo se torna lama sufocante."

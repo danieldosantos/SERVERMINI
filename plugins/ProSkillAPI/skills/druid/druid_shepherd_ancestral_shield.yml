@@ -1,0 +1,41 @@
+name: druid_shepherd_ancestral_shield
+display: "§eEscudo Ancestral"
+type: active
+max-level: 4
+description:
+  - "§7Projeta barreira de 200 pontos divididos entre aliados próximos por 8s."
+  - "§eEscudo converte 15% do dano absorvido em cura distribuída ao final."
+  - "§7Cooldown 90s."
+icon: SHIELD
+mana:
+  base: 30
+  scale: 8
+cooldown:
+  base: 90
+  scale: -10
+radius:
+  base: 8
+  scale: 1
+duration:
+  base: 8
+  scale: 1
+custom:
+  shield-value: 200
+components:
+  cast:
+    sequence:
+      - type: area
+        radius: "%radius%"
+        duration: "%duration%"
+        filter: allies
+      - type: shield
+        amount: "%custom.shield-value%"
+        split: true
+        duration: "%duration%"
+      - type: message
+        targets: area
+        text: "&e[Escudo] Espíritos o protegem."
+      - type: command
+        text: "skript run druidShieldResolve %player% %radius% %duration%"
+messages:
+  cast: "&e[Escudo Ancestral] Espíritos formam um escudo compartilhado."

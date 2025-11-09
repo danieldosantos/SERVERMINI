@@ -1,0 +1,19 @@
+name: druid_elemental_affinity
+display: "§aAfinidade Elemental"
+type: passive
+max-level: 4
+description:
+  - "§7Escolhe um elemento (fogo, gelo, trovão, ácido) baseado no bioma/círculo."
+  - "§aReduz dano elemental correspondente em 8% (cap global 45% após DR)."
+  - "§7Troca automática a cada 120s se em bioma diferente; sinergia com raças respeita limite de 1,25x."
+icon: HEART_OF_THE_SEA
+custom:
+  reduction: 0.08
+components:
+  passive:
+    sequence:
+      - type: listen
+        event: on_biome_tick
+      - type: command
+        async: true
+        text: "raceeffects druidAffinity %player% %custom.reduction%"
