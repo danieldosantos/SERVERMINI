@@ -1,0 +1,292 @@
+# Habilidades do arquétipo Mestre das Feras estruturadas por TIER para ProSkillAPI
+# Foco em integração com pet visual e gerenciamento de mitigação.
+tiers:
+  T1:
+    - skill-id: ranger_beast_apito_da_fera
+      display: "Apito da Fera"
+      type: active
+      psapi:
+        resource: mana
+        cost: 15
+        cooldown: 45
+        duration: 6
+        area: pet_command
+        tags: [pet_command, speed, mark_synergy]
+        scaling:
+          tier-base: 1
+          pet-speed: 0.10
+      effects:
+        - "Ordena a fera a focar o alvo marcado e concede +10% velocidade por 6s."
+        - "Atualiza HUD de alvo do pet via PlaceholderAPI."
+        - "Executa partícula sonora configurada no MythicMobs (apito)."
+    - skill-id: ranger_beast_instinct_bond
+      display: "Vínculo Instintivo"
+      type: active
+      psapi:
+        resource: mana
+        cost: 20
+        cooldown: 60
+        duration: 8
+        area: self
+        tags: [link, mitigation, pet]
+        scaling:
+          tier-base: 1
+          redirect-percent: 0.15
+      effects:
+        - "Redireciona 15% do dano recebido ao pet por 8s (respeita caps globais)."
+        - "Aplicação exibe linha etérea entre mestre e fera."
+        - "Interrompe se pet estiver ausente."
+    - skill-id: ranger_beast_blade_and_fang
+      display: "Lâmina & Presa"
+      type: active
+      psapi:
+        resource: mana
+        cost: 20
+        cooldown: 60
+        duration: 6
+        area: combo_melee
+        tags: [combo, pet_attack]
+        scaling:
+          tier-base: 1
+          player-damage: 1.00
+          pet-cleave: 0.80
+          cleave-radius: 3
+      effects:
+        - "Próximo ataque do mestre acerta 100% e convoca golpe da fera em cleave 3 blocos (80%)."
+        - "Ambos os hits compartilham crit e efeitos on-hit."
+        - "Inclui trava de 6s para evitar multi-proc."
+    - skill-id: ranger_beast_aid_call
+      display: "Chamado de Socorro"
+      type: active
+      psapi:
+        resource: mana
+        cost: 20
+        cooldown: 60
+        duration: 4
+        area: self
+        tags: [pet_command, mitigation]
+        scaling:
+          tier-base: 1
+          mitigation: 0.10
+      effects:
+        - "Puxa a fera até você e concede 10% mitigação a ambos por 4s."
+        - "Remove controles leves do pet ao chegar."
+        - "Cooldown compartilhado com outros recall (não empilha)."
+  T2:
+    - skill-id: ranger_beast_coordinated_charge
+      display: "Investida Coordenada"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 75
+        area: dash_pair
+        tags: [dash, burst, pet_attack]
+        scaling:
+          tier-base: 2
+          dash-distance: 5
+          player-damage: 1.40
+          pet-damage: 1.40
+      effects:
+        - "Você e a fera avançam 5 blocos atingindo o marcado (140% cada)."
+        - "Gera partículas duplas (verde e âmbar)."
+        - "Aplica brevíssimo slow 0.5s para alinhar hits (PvE)."
+    - skill-id: ranger_beast_guard_howl
+      display: "Uivo de Guarda"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 75
+        duration: 8
+        area: radius_6
+        tags: [debuff, mitigation, pet]
+        scaling:
+          tier-base: 2
+          enemy-damage-reduction: 0.10
+      effects:
+        - "Fera ruge reduzindo dano inimigo em 10% num raio de 6 blocos por 8s."
+        - "Não acumula com debuffs similares (usa maior valor)."
+        - "HUD exibe ícone quando ativo."
+    - skill-id: ranger_beast_trainer_trick
+      display: "Truque do Adestrador"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 60
+        area: pet_single
+        tags: [cleanse, heal, pet]
+        scaling:
+          tier-base: 2
+          heal-percent: 0.18
+          cleanse: 1
+      effects:
+        - "Remove 1 debuff leve do pet e cura 18% da vida máxima."
+        - "Respeita cap de mitigação/DR compartilhada."
+        - "Ativa partículas douradas na fera."
+    - skill-id: ranger_beast_pack_trail
+      display: "Rastro do Bando"
+      type: active
+      psapi:
+        resource: mana
+        cost: 25
+        cooldown: 75
+        duration: 8
+        area: link_radius_8
+        tags: [buff, crit, pet]
+        scaling:
+          tier-base: 2
+          crit-bonus: 0.10
+      effects:
+        - "Enquanto estiverem a ≤8 blocos, ambos ganham +10% crítico por 8s."
+        - "HUD mostra indicador de proximidade ativa."
+        - "Se separarem a habilidade termina cedo."
+  T3:
+    - skill-id: ranger_beast_alpha_protection
+      display: "Proteção Alfa"
+      type: active
+      psapi:
+        resource: mana
+        cost: 35
+        cooldown: 90
+        duration: 6
+        area: pet_single
+        tags: [mitigation, shield, pet]
+        scaling:
+          tier-base: 3
+          pet-mitigation: 0.20
+          heal-share: 0.50
+      effects:
+        - "Concede +20% mitigação à fera por 6s."
+        - "50% da sua cura recebida transborda para ela."
+        - "Exibe aura protetiva verde."
+    - skill-id: ranger_beast_synchronized_hunt
+      display: "Caçada Sincronizada"
+      type: active
+      psapi:
+        resource: mana
+        cost: 35
+        cooldown: 105
+        duration: 10
+        area: self
+        tags: [combo, pet_attack]
+        scaling:
+          tier-base: 3
+          hit-threshold: 2
+          pet-damage: 0.80
+      effects:
+        - "Por 10s, a cada 2 acertos seus a fera salta no marcado (80% dano)."
+        - "Acionamentos têm intervalo mínimo 1s."
+        - "HUD mostra contador de acertos."
+    - skill-id: ranger_beast_rending_claw
+      display: "Garra Dilacerante"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 90
+        duration: 6
+        area: pet_single
+        tags: [bleed, pet_attack, penetration]
+        scaling:
+          tier-base: 3
+          bleed-percent: 0.06
+          bleed-duration: 6
+          penetration-bonus: 0.10
+      effects:
+        - "Pet aplica sangramento 6%/s por 6s no alvo."
+        - "Enquanto durar você ganha +10% penetração contra o alvo."
+        - "Partículas carmesim discretas."
+    - skill-id: ranger_beast_controlled_retreat
+      display: "Retirada Controlada"
+      type: active
+      psapi:
+        resource: mana
+        cost: 30
+        cooldown: 105
+        area: dash_pair_back
+        tags: [mobility, trap, pet_command]
+        scaling:
+          tier-base: 3
+          dash-distance: 6
+          trap-skill-ref: ranger_common_trap_plant
+      effects:
+        - "Recua você e a fera 6 blocos, deixando armadilha padrão no ponto."
+        - "Garante imunidade a knockback por 0.5s após recuo."
+        - "Compartilha limite de armadilhas ativas."
+  T4:
+    - skill-id: ranger_beast_pack_fury
+      display: "Fúria do Bando"
+      type: active
+      psapi:
+        resource: mana
+        cost: 50
+        cooldown: 240
+        duration: 12
+        area: self_pet
+        tags: [ultimate, attack_speed, lifesteal]
+        scaling:
+          tier-base: 4
+          attack-speed: 0.20
+          lifesteal: 0.15
+      effects:
+        - "Você e a fera recebem +20% velocidade de ataque e +15% roubo de vida por 12s."
+        - "Cap de cura por golpe (25%) aplicado automaticamente."
+        - "Partículas rubras e howl global ao ativar."
+    - skill-id: ranger_beast_intimidating_roar
+      display: "Rugido Intimidador"
+      type: active
+      psapi:
+        resource: mana
+        cost: 45
+        cooldown: 120
+        duration: 8
+        area: radius_6
+        tags: [fear, debuff, control]
+        scaling:
+          tier-base: 4
+          fear-duration: 2
+          damage-reduction: 0.15
+      effects:
+        - "Causa medo 2s (imunidade decrescente) e -15% dano inimigo por 8s."
+        - "PvP converte medo em slow 40%/2s para evitar controle duro excessivo."
+        - "Atualiza scoreboard de debuff aplicado."
+    - skill-id: ranger_beast_survival_instinct
+      display: "Instinto de Sobrevivência"
+      type: passive
+      psapi:
+        resource: none
+        cooldown: 120
+        duration: 6
+        area: pet_single
+        tags: [passive, shield, pet]
+        scaling:
+          tier-base: 4
+          health-threshold: 0.30
+          shield-percent: 0.20
+          internal-cooldown: 90
+      effects:
+        - "Quando pet <30% HP: concede escudo 20% da vida por 6s (CD interno 90s)."
+        - "Exibe indicador visual na barra do pet."
+        - "Gera mensagem ao mestre quando disponível novamente."
+    - skill-id: ranger_beast_final_hunt
+      display: "Caçada Final"
+      type: active
+      psapi:
+        resource: mana
+        cost: 40
+        cooldown: 120
+        duration: 8
+        area: self
+        tags: [sustain, cd_reduction, pet]
+        scaling:
+          tier-base: 4
+          cd-reduction-skill: ranger_beast_apito_da_fera
+          reduction-per-hit: 1
+          heal-pet-percent: 0.04
+          interval: 2
+      effects:
+        - "Durante 8s seus acertos reduzem 1s do CD de Apito da Fera (máx 4 procs)."
+        - "A cada 2s cura a fera em 4% (cap respeitado)."
+        - "Integra contador na HUD para monitorar procs."

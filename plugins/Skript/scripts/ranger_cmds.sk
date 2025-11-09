@@ -1,307 +1,129 @@
-# Patrulheiro - integração entre ProSkillAPI, MythicMobs e utilidades
-# Depende de: Skript, SkBee (placeholderapi), ProSkillAPI compat hooks
+# Patrulheiro - comandos utilitários, binds e HUD
+# Requer: Skript, SkBee (NBT/PlaceholderAPI), MythicMobs, ProSkillAPI
 
 options:
-  focus-delay: 12 seconds
-  focus-interval: 50 seconds
-  trap-radius: 3.5
-  trap-duration: 10 seconds
-  trap-telegraph: 1.5 seconds
+  ooc-delay: 12 seconds
+  hud-refresh: 5 seconds
 
 on load:
-  broadcast "&2[Ranger] Script de comandos e integrações carregado." to console
-  start focus regen task
-  start trap ticker
+  broadcast "&2[Ranger] Integrações atualizadas (tiers 1-4)." to console
 
-function ranger_focus_cap(p: player) :: number:
-  set {_tier} to placeholderapi parse "%skillapi_class_tier_ranger%" for {_p}
-  if {_tier} is not set:
-    set {_tier} to 1
-  set {_tier} to {_tier} parsed as number
-  if {_tier} >= 3:
-    return 4
-  else:
-    return 3
+function ranger_is_class(p: player) :: boolean:
+  if {_p} has permission "class_ranger" or {_p} has permission "class_ranger.*":
+    return true
+  return false
 
 function ranger_refresh_hud(p: player):
-  placeholderapi refresh "%skills_hunt_focus%" for {_p}
   placeholderapi refresh "%skills_ranger_mark_timer%" for {_p}
-  placeholderapi refresh "%skills_ranger_trap_cd%" for {_p}
-  placeholderapi refresh "%skills_ranger_pet_status%" for {_p}
+  placeholderapi refresh "%skills_ranger_special_ammo%" for {_p}
+  placeholderapi refresh "%skills_ranger_lure_cd%" for {_p}
+  placeholderapi refresh "%skills_ranger_pet_hp%" for {_p}
+  placeholderapi refresh "%skills_ranger_pet_buff%" for {_p}
 
-function ranger_spend_focus(p: player, amount: number, reason: text):
-  set {_cap} to ranger_focus_cap({_p})
-  if {huntfocus.%{_p}%} is not set:
-    set {huntfocus.%{_p}%} to {_cap}
-  if {huntfocus.%{_p}%} < {_amount}:
-    send "&cVocê não possui Foco suficiente." to {_p}
-    execute console command "skillapi cancel %{_p}%"
-    return
-  remove {_amount} from {huntfocus.%{_p}%}
-  set {ranger.lastfocus.%{_p}%} to now
-  send action bar "&a- %{_amount}% Foco (${_reason})" to {_p}
-  ranger_refresh_hud({_p})
-
-function ranger_gain_focus(p: player, amount: number):
-  set {_cap} to ranger_focus_cap({_p})
-  if {huntfocus.%{_p}%} is not set:
-    set {huntfocus.%{_p}%} to {_cap}
-  if {huntfocus.%{_p}%} >= {_cap}:
-    return
-  add {_amount} to {huntfocus.%{_p}%}
-  send action bar "&2+ %{_amount}% Foco" to {_p}
-  ranger_refresh_hud({_p})
-
-function start focus regen task():
-  every 10 seconds:
-    loop all players:
-      if loop-player has permission "class_ranger" or loop-player has permission "class_ranger.*":
-        if {ranger.combat.%loop-player%} is set:
-          if difference between now and {ranger.combat.%loop-player%} < {@focus-delay}:
-            continue
-        if {ranger.lastfocus.%loop-player%} is not set:
-          set {ranger.lastfocus.%loop-player%} to now
-        if difference between now and {ranger.lastfocus.%loop-player%} >= {@focus-interval}:
-          ranger_gain_focus(loop-player, 1)
-          set {ranger.lastfocus.%loop-player%} to now
+every {@hud-refresh} seconds:
+  loop all players:
+    if ranger_is_class(loop-player):
+      if {ranger.combat.%loop-player%} is set:
+        if difference between now and {ranger.combat.%loop-player%} > {@ooc-delay}:
+          delete {ranger.combat.%loop-player%}
+      ranger_refresh_hud(loop-player)
 
 on damage of player:
-  set {ranger.combat.%victim%} to now
-on damage by player:
-  set {ranger.combat.%attacker%} to now
+  if attacker is a player:
+    if ranger_is_class(attacker):
+      set {ranger.combat.%attacker%} to now
+  if ranger_is_class(victim):
+    set {ranger.combat.%victim%} to now
 
-command /marca:
+command /marcar:
+  aliases: /marca
   permission: class_ranger.command
   trigger:
-    execute console command "skillapi cast %player% ranger_hunters_mark"
+    if ranger_is_class(player) is false:
+      send "&cApenas Patrulheiros." to player
+      stop
+    execute console command "skillapi cast %player% ranger_common_mark_of_the_hunter"
+    ranger_refresh_hud(player)
 
-command /armadilha:
+command /isca:
   permission: class_ranger.command
   trigger:
-    execute console command "skillapi cast %player% ranger_tactical_trap"
+    if ranger_is_class(player) is false:
+      send "&cApenas Patrulheiros." to player
+      stop
+    execute console command "skillapi cast %player% ranger_common_prey_lure"
+    ranger_refresh_hud(player)
 
-command /rajada:
-  permission: class_ranger.command
-  trigger:
-    execute console command "skillapi cast %player% ranger_burst_shot"
-
-command /companheiro:
+command /apito:
   permission: class_ranger.command
   trigger:
     if player has permission "class_ranger.beastmaster":
-      execute console command "skillapi cast %player% ranger_beastmaster_alpha_call"
+      execute console command "skillapi cast %player% ranger_beast_apito_da_fera"
+      ranger_refresh_hud(player)
     else:
-      send "&cSomente Mestres das Feras podem usar este comando." to player
+      send "&cSomente Mestres das Feras." to player
+
+command /trilha_hunter:
+  permission: class_ranger.command
+  trigger:
+    if player has permission "class_ranger.hunter":
+      execute console command "skillapi cast %player% ranger_hunter_spike_trail"
+    else:
+      send "&cSomente Caçadores." to player
+
+command /trilha_beast:
+  permission: class_ranger.command
+  trigger:
+    if player has permission "class_ranger.beastmaster":
+      execute console command "skillapi cast %player% ranger_beast_pack_trail"
+      ranger_refresh_hud(player)
+    else:
+      send "&cSomente Mestres das Feras." to player
 
 command /kit_ranger:
   permission: class_ranger.command
   trigger:
+    if ranger_is_class(player) is false:
+      send "&cApenas Patrulheiros." to player
+      stop
     clear player's inventory
-    execute console command "mm items give %player% HunterMarkCharm"
-    execute console command "mm items give %player% TrapKit"
-    execute console command "mm items give %player% RangerQuiverCommand"
+    clear all potion effects of player
+    execute console command "mm items give %player% RangerMarkCharm"
+    execute console command "mm items give %player% RangerTrapKit"
+    execute console command "mm items give %player% RangerArrowRainQuiver"
+    execute console command "mm items give %player% RangerWildTotem"
     if player has permission "class_ranger.hunter":
-      execute console command "mm items give %player% HunterBow"
-      execute console command "mm items give %player% HunterNet"
-      execute console command "mm items give %player% HunterScope"
+      execute console command "mm items give %player% HunterRicochetBow"
+      execute console command "mm items give %player% HunterSteelGloves"
+      execute console command "mm items give %player% HunterExecuteCharm"
+      execute console command "mm items give %player% HunterPriorityScope"
     if player has permission "class_ranger.beastmaster":
-      execute console command "mm items give %player% BeastWhistle"
-      execute console command "mm items give %player% BeastCharm"
-      execute console command "mm items give %player% BeastHarness"
-    if player has permission "class_ranger.gloom":
-      execute console command "mm items give %player% GloomDagger"
-      execute console command "mm items give %player% GloomCloak"
-      execute console command "mm items give %player% GloomBow"
+      execute console command "mm items give %player% BeastCommandWhistle"
+      execute console command "mm items give %player% BeastDashHarness"
+      execute console command "mm items give %player% BeastAlphaWardTotem"
+      execute console command "mm items give %player% BeastPackFuryTotem"
     send "&2Kit de teste do Patrulheiro entregue." to player
-    set {huntfocus.%player%} to ranger_focus_cap(player)
     ranger_refresh_hud(player)
 
-command /rastrear_on:
-  permission: class_ranger.command
-  trigger:
-    set {ranger.tracker.%player%} to true
-    send "&aRastreamento ativado." to player
+# Binds - leitura de NBT dos itens focais e execução da skill definida
+on right click:
+  set {_item} to player's tool
+  if {_item} is air:
+    stop
+  set {_skill} to nbt string "skill" of {_item}
+  if {_skill} is set:
+    if ranger_is_class(player):
+      cancel event
+      execute console command "skillapi cast %player% %{_skill}%"
+      ranger_refresh_hud(player)
 
-command /rastrear_off:
-  permission: class_ranger.command
-  trigger:
-    delete {ranger.tracker.%player%}
-    send "&cRastreamento desativado." to player
-
-# Aliases direcionados às subclasses
-command /hunter_scope:
-  permission: class_ranger.hunter
-  trigger:
-    execute console command "skillapi cast %player% ranger_hunter_predators_eye"
-
-command /beast_sync:
-  permission: class_ranger.beastmaster
-  trigger:
-    execute console command "skillapi cast %player% ranger_beastmaster_wild_sync"
-
-command /gloom_cloak:
-  permission: class_ranger.gloom
-  trigger:
-    execute console command "skillapi cast %player% ranger_gloom_penumbra_cloak"
-
-# Mark logic
-function ranger_clear_mark(p: player):
-  if {ranger.mark.%{_p}%} is set:
-    delete {ranger.mark.%{_p}%}
-    ranger_refresh_hud({_p})
-
-function ranger_apply_mark(p: player, target: entity):
-  ranger_clear_mark({_p})
-  set {ranger.mark.%{_p}%} to uuid of {_target}
-  set {ranger.mark.expire.%{_p}%} to now + 12 seconds
-  if {ranger.tracker.%{_p}%} is set:
-    send "&aAlvo rastreado: %{_target}'s name%." to {_p}
-  ranger_refresh_hud({_p})
-
-function ranger_mark_timer(p: player) :: number:
-  if {ranger.mark.expire.%{_p}%} is set:
-    return difference between {ranger.mark.expire.%{_p}%} and now
-  return 0
-
-every 1 second:
-  loop {ranger.mark::*}:
-    set {_p} to loop-index parsed as player
-    if {_p} is online:
-      if {ranger.mark.expire.%{_p}%} is set:
-        if now is after {ranger.mark.expire.%{_p}%}:
-          ranger_clear_mark({_p})
-
-# Trap handling
-function ranger_trap_limit(p: player) :: number:
-  if {ranger.traplimit.%{_p}%} is set:
-    return {ranger.traplimit.%{_p}%}
-  return 1
-
-function ranger_upgrade_traps(p: player):
-  set {ranger.traplimit.%{_p}%} to 2
-
-function ranger_validate_trap(p: player):
-  set {_limit} to ranger_trap_limit({_p})
-  if size of {ranger.traps.%{_p}%::*} >= {_limit}:
-    send "&cLimite de armadilhas alcançado." to {_p}
-    execute console command "skillapi cancel %{_p}%"
-
-function ranger_spawn_trap(p: player, loc: location):
-  set {_id} to "%uuid of {_p}%::%now%"
-  set {ranger.traps.%{_p}%::%{_id}%} to {_loc}
-  set {ranger.traps.expire.%{_p}%::%{_id}%} to now + {@trap-duration}
-  play effect flame at {_loc}
-  wait {@trap-telegraph}
-  play effect redstone at {_loc}
-
-function start trap ticker():
-  every 5 ticks:
-    loop {ranger.traps::*}:
-      set {_owner} to loop-index parsed as player
-      if {_owner} is offline:
-        delete {ranger.traps.%loop-index%::*}
-        next loop
-      loop {ranger.traps.%loop-index%::*}:
-        set {_id} to loop-index
-        set {_loc} to loop-value
-        if {_loc} is not set:
-          delete {ranger.traps.%loop-index%::%{_id}%}
-          continue
-        if now is after {ranger.traps.expire.%loop-index%::%{_id}%}:
-          delete {ranger.traps.%loop-index%::%{_id}%}
-          delete {ranger.traps.expire.%loop-index%::%{_id}%}
-          continue
-        loop all entities in radius {@trap-radius} around {_loc}:
-          if loop-entity is player or loop-entity is a living entity:
-            if loop-entity is {_owner}:
-              continue
-            damage loop-entity by ({ranger_trap_damage({_owner})}) hearts
-            apply slow 2 to loop-entity for 4 seconds
-            if {ranger.mark.%{_owner}%} is set:
-              if uuid of loop-entity is {ranger.mark.%{_owner}%}:
-                damage loop-entity by ({ranger_trap_damage({_owner})} * 0.15) hearts
-            send "&6Armadilha detonada!" to {_owner}
-            delete {ranger.traps.%loop-index%::%{_id}%}
-            delete {ranger.traps.expire.%loop-index%::%{_id}%}
-            stop
-
-function ranger_trap_damage(p: player) :: number:
-  if {ranger.trap_bonus.%{_p}%} is set:
-    return 1.2 + {ranger.trap_bonus.%{_p}%}
-  return 1.2
-
-# Race integration placeholder
-function ranger_race_cap(p: player):
-  if placeholderapi parse "%raceseffects_speed_bonus%" for {_p} is greater than 0:
-    send "&eExaustão de resistência aplicada (buff racial alto)." to {_p}
-
-# Passivas auxiliares
-function ranger_apply_favored(p: player):
-  if {ranger.favored.%{_p}%} is not set:
-    set {ranger.favored.%{_p}%} to now
-
-function ranger_compass_tick(p: player):
-  if {ranger.mark.%{_p}%} is set:
-    set {_target} to entity with uuid {ranger.mark.%{_p}%}
-    if {_target} exists:
-      draw line from {_p}'s location to {_target}'s location with particle redstone
-
-# Pet utilities
-function ranger_pet_alpha(p: player, seconds: number):
-  execute console command "mm mobs summon ranger_pet %player%"
-  set {ranger.petbuff.%{_p}%} to now + {_seconds} seconds
-  ranger_refresh_hud({_p})
-
-function ranger_pet_sync(p: player, seconds: number):
-  set {ranger.petsync.%{_p}%} to now + {_seconds} seconds
-
-function ranger_dash(p: player, distance: number):
-  push {_p} direction {_p}'s direction vector with speed {_distance} * 0.3
-
-function ranger_pet_dash(p: player, distance: number):
-  execute console command "mm mobs cast ranger_pet_dash %player% {_distance}"
-
-function ranger_pet_guard(p: player, seconds: number):
-  set {ranger.petguard.%{_p}%} to now + {_seconds} seconds
-
-function ranger_pet_primal(p: player, seconds: number):
-  execute console command "mm mobs cast ranger_pet_primal %player% {_seconds}"
-  set {ranger.petbuff.%{_p}%} to now + {_seconds} seconds
-  ranger_refresh_hud({_p})
-
-# Hunter extras
-function ranger_hunter_crit_buff(p: player):
-  if {ranger.mark.%{_p}%} is set:
-    apply speed 1 to {_p} for 3 seconds
-
-function ranger_hunter_highlight(p: player, seconds: number):
-  send title "&eFoco Afiado" with subtitle "&7Pontos fracos expostos" to {_p}
-
-function ranger_apply_speed_cap(p: player, value: number, seconds: number):
-  apply speed 1 to {_p} for {_seconds} seconds
-
-function ranger_arrow_storm(p: player, loc: location):
-  execute console command "mm mobs cast ranger_arrow_storm %player% %loc-x% %loc-y% %loc-z%"
-
-# CC helpers
-function ranger_apply_root(target: entity, seconds: number):
-  apply slowness 10 to {_target} for {_seconds} seconds
-
-function ranger_apply_vulnerability(p: player, target: entity, percent: number, seconds: number):
-  apply weakness 1 to {_target} for {_seconds} seconds
-
-function ranger_apply_fear(target: entity, seconds: number):
-  apply levitation 1 to {_target} for 1 second
-
-function ranger_shadow_step(p: player):
-  teleport {_p} to location behind {_p}'s targeted entity offset by 1 block
-
-function ranger_gloom_ambush(p: player, bonus: number, seconds: number):
-  set {ranger.ambush.%{_p}%} to now + {_seconds} seconds
-
-function ranger_apply_poison(p: player, target: entity, percent: number, seconds: number):
-  apply poison 1 to {_target} for {_seconds} seconds
-
-function ranger_shadow_hunt(p: player, loc: location, seconds: number):
-  execute console command "mm mobs cast ranger_shadow_hunt %player% %loc-x% %loc-y% %loc-z% %seconds%"
-
+on left click:
+  set {_item} to player's tool
+  if {_item} is air:
+    stop
+  set {_skill} to nbt string "skill" of {_item}
+  if {_skill} is set:
+    if ranger_is_class(player):
+      cancel event
+      execute console command "skillapi cast %player% %{_skill}%"
+      ranger_refresh_hud(player)
