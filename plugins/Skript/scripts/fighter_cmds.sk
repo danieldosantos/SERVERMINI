@@ -5,6 +5,15 @@ options:
 on load:
   broadcast "&7Skript fighter_cmds.sk carregado." to console
 
+function fighter_refresh_blocking(p: player):
+  set {_name} to name of {_p}
+  execute console command "placeholderapi refresh %{_name}% skills_blocking_state"
+  send "{@prefix} &7Estado de bloqueio sincronizado." to {_p}
+
+function fighter_cast_precise_maneuver(p: player):
+  set {_name} to name of {_p}
+  execute console command "skillapi cast fighter_battlemaster_precise_maneuver %{_name}%"
+
 command /kit_guerreiro:
   permission: group.class_fighter
   trigger:
@@ -38,18 +47,6 @@ command /folego:
   permission: group.class_fighter
   trigger:
     execute console command "skillapi cast fighter_second_wind %player%"
-
-command /postura:
-  permission: group.class_fighter
-  trigger:
-    execute console command "placeholderapi refresh %player% skills_blocking_state"
-    send "{@prefix} &7Estado de bloqueio sincronizado."
-
-command /manobra:
-  aliases: /manobra_precisa
-  permission: group.class_fighter.battlemaster
-  trigger:
-    execute console command "skillapi cast fighter_battlemaster_precise_maneuver %player%"
 
 command /champ_golpe:
   permission: group.class_fighter.champion

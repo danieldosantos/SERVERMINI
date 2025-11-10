@@ -17,6 +17,10 @@ function monk_refresh_hud(p: player):
   execute console command "placeholderapi refresh %{_name}% monk_posture"
   execute console command "placeholderapi refresh %{_name}% monk_cooldowns"
 
+function monk_cast_postura(p: player):
+  set {_name} to name of {_p}
+  execute console command "skillapi cast monk_focus_stance %{_name}%"
+
 command /golpe_ki:
   permission: class_monk
   trigger:
@@ -31,11 +35,6 @@ command /defletir:
   permission: class_monk
   trigger:
     execute console command "skillapi cast monk_deflect_projectiles %player%"
-
-command /postura:
-  permission: class_monk
-  trigger:
-    execute console command "skillapi cast monk_focus_stance %player%"
 
 command /combo:
   permission: class_monk

@@ -1,0 +1,76 @@
+# shared_combat_commands.sk
+# Centraliza comandos duplicados entre classes para evitar conflitos.
+# Responsável por encaminhar ações básicas como /golpe, /canalizar,
+# /postura e /manobra para as funções adequadas caso existam.
+
+command /canalizar:
+  trigger:
+    if player has permission "class_cleric":
+      if function "cleric_cast_canalizar" is defined:
+        cleric_cast_canalizar(player)
+      else:
+        make console execute command "psa channel %player%"
+      stop
+    if player has permission "class.paladin.skill":
+      if function "paladin_cast_canalizar" is defined:
+        paladin_cast_canalizar(player)
+      else:
+        execute console command "skillapi cast %player% paladin_selo_protetor"
+      stop
+    send "&cNenhuma classe vinculada ao comando /canalizar." to player
+
+command /golpe:
+  trigger:
+    if player has permission "group.class_warrior":
+      if function "warrior_cast_golpe" is defined:
+        warrior_cast_golpe(player)
+      else:
+        execute console command "skillapi cast warrior_quick_strike %player%"
+      stop
+    if player has permission "class.paladin.skill":
+      if function "paladin_cast_golpe" is defined:
+        paladin_cast_golpe(player)
+      else:
+        execute console command "skillapi cast %player% paladin_golpe_divino"
+      stop
+    send "&cNenhuma classe válida encontrada para /golpe." to player
+
+command /postura:
+  trigger:
+    if player has permission "group.class_warrior":
+      if function "warrior_cast_postura" is defined:
+        warrior_cast_postura(player)
+      else:
+        execute console command "skillapi cast warrior_prepared_stance %player%"
+      stop
+    if player has permission "group.class_fighter":
+      if function "fighter_refresh_blocking" is defined:
+        fighter_refresh_blocking(player)
+      else:
+        execute console command "placeholderapi refresh %player% skills_blocking_state"
+        send "&7Estado de bloqueio sincronizado." to player
+      stop
+    if player has permission "class_monk":
+      if function "monk_cast_postura" is defined:
+        monk_cast_postura(player)
+      else:
+        execute console command "skillapi cast monk_focus_stance %player%"
+      stop
+    send "&cVocê não possui postura para usar." to player
+
+command /manobra:
+  aliases: /manobra_precisa
+  trigger:
+    if player has permission "group.class_warrior.battlemaster":
+      if function "warrior_cast_manobra" is defined:
+        warrior_cast_manobra(player)
+      else:
+        execute console command "skillapi cast warrior_battlemaster_trip %player%"
+      stop
+    if player has permission "group.class_fighter.battlemaster":
+      if function "fighter_cast_precise_maneuver" is defined:
+        fighter_cast_precise_maneuver(player)
+      else:
+        execute console command "skillapi cast fighter_battlemaster_precise_maneuver %player%"
+      stop
+    send "&cApenas batalhamestres podem usar /manobra." to player

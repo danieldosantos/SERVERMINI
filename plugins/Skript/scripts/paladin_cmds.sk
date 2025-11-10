@@ -11,6 +11,14 @@ function paladin_refresh_hud(p: player):
   execute console command "placeholderapi refresh %p% paladin_cooldowns"
   execute console command "placeholderapi refresh %p% paladin_auras"
 
+function paladin_cast_golpe(p: player):
+  set {_name} to name of {_p}
+  execute console command "skillapi cast %{_name}% paladin_golpe_divino"
+
+function paladin_cast_canalizar(p: player):
+  set {_name} to name of {_p}
+  execute console command "skillapi cast %{_name}% paladin_selo_protetor"
+
 command /paladin_cast <text>:
   trigger:
     if sender is not player:
@@ -20,20 +28,10 @@ command /paladin_cast <text>:
     else:
       send "&c[Paladino] Permissão insuficiente."
 
-command /golpe:
-  permission: {@baseperm}.skill
-  trigger:
-    execute console command "skillapi cast %player% paladin_golpe_divino"
-
 command /imposicao:
   permission: {@baseperm}.skill
   trigger:
     execute console command "skillapi cast %player% paladin_imposicao_menor"
-
-command /canalizar:
-  permission: {@baseperm}.skill
-  trigger:
-    execute console command "skillapi cast %player% paladin_selo_protetor"
 
 command /voto_devocao:
   permission: {@baseperm}.devotion
