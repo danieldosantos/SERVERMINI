@@ -46,51 +46,12 @@ command /racial:
     if {_sent} is false:
       send "&7Nenhum traço racial detectado neste comando."
 
-command /sopro_draco:
-  trigger:
-    if player has permission "lp.race_draconato":
-      execute console command "{@skillcmd} %player% SoproDraconico"
-    else:
-      send "&cRequer sangue dracônico."
-
 command /fae_passos:
   trigger:
     if player has permission "lp.race_elfo":
       execute console command "{@skillcmd} %player% FaePassos"
     else:
       send "&cSomente elfos."
-
-command /truque_arcano [<text>]:
-  trigger:
-    if player has permission "lp.race_elfo.alto":
-      if arg-1 is set:
-        set {_choice} to lowercase of arg-1
-        if {_choice} is "seta" or "seta_arcana":
-          set {race.truque_arcano.%player%} to "seta"
-          send "&dTruque configurado para Seta Arcana."
-          stop
-        else if {_choice} is "barreira" or "barreira_cintilante":
-          set {race.truque_arcano.%player%} to "barreira"
-          send "&dTruque configurado para Barreira Cintilante."
-          stop
-        else if {_choice} is "piscar" or "piscar_breve":
-          set {race.truque_arcano.%player%} to "piscar"
-          send "&dTruque configurado para Piscar Breve."
-          stop
-        else:
-          send "&cOpção inválida. Use seta, barreira ou piscar."
-          stop
-      set {_mode} to {race.truque_arcano.%player%}
-      if {_mode} is not set:
-        set {_mode} to "seta"
-      if {_mode} is "barreira":
-        execute console command "{@skillcmd} %player% TruqueArcanoBarreira"
-      else if {_mode} is "piscar":
-        execute console command "{@skillcmd} %player% TruqueArcanoPiscar"
-      else:
-        execute console command "{@skillcmd} %player% TruqueArcanoSeta"
-    else:
-      send "&cSomente altos elfos."
 
 command /luzes_feericas:
   trigger:
@@ -306,10 +267,6 @@ command /kit_racial_meio_elfo:
 command /kit_racial_meio_orc:
   trigger:
     give_race_kit(player, "meio_orc")
-command /kit_racial_tiefling:
-  trigger:
-    give_race_kit(player, "tiefling")
-
 # ---------------------------------------
 # Gestão simples de combate/cargas
 # ---------------------------------------

@@ -9,6 +9,18 @@ options:
 on load:
   broadcast "&7Skript warrior_cmds.sk carregado." to console
 
+function warrior_cast_golpe(p: player):
+  set {_name} to name of {_p}
+  execute console command "skillapi cast warrior_quick_strike %{_name}%"
+
+function warrior_cast_postura(p: player):
+  set {_name} to name of {_p}
+  execute console command "skillapi cast warrior_prepared_stance %{_name}%"
+
+function warrior_cast_manobra(p: player):
+  set {_name} to name of {_p}
+  execute console command "skillapi cast warrior_battlemaster_trip %{_name}%"
+
 command /kit_warrior:
   permission: {@perm-base}
   trigger:
@@ -28,21 +40,6 @@ command /kit_warrior:
     execute console command "scoreboard objectives add warrior_posture dummy" if scoreboard objective "warrior_posture" does not exist
     warrior_refresh_hud(player)
     send "{@prefix} &7Kit de testes entregue. HUD inicializada."
-
-command /golpe:
-  permission: {@perm-base}
-  trigger:
-    execute console command "skillapi cast warrior_quick_strike %player%"
-
-command /postura:
-  permission: {@perm-base}
-  trigger:
-    execute console command "skillapi cast warrior_prepared_stance %player%"
-
-command /manobra:
-  permission: {@perm-battlemaster}
-  trigger:
-    execute console command "skillapi cast warrior_battlemaster_trip %player%"
 
 command /foco:
   permission: {@perm-samurai}

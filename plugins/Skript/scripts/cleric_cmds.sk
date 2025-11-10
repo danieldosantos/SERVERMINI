@@ -14,15 +14,14 @@ function clericUpdateHud(p: player):
   make console execute command "scoreboard players set %{_uuid}% cleric_cds %{_cooldowns}%"
   make console execute command "scoreboard players set %{_uuid}% cleric_auras %{_auras}%"
 
+function cleric_cast_canalizar(p: player):
+  set {_name} to name of {_p}
+  make console execute command "psa channel %{_name}%"
+
 command /palavra [<text>]:
   permission: {@cleric-class}
   trigger:
     make console execute command "psa cast Palavra_Curativa %player%"
-
-command /canalizar:
-  permission: {@cleric-class}
-  trigger:
-    make console execute command "psa channel %player%"
 
 command /dominio_vida:
   permission: {@domain-life}
