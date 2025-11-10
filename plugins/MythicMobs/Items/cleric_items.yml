@@ -1,5 +1,5 @@
 Cleric_T1_Symbol:
-  Id: GOLD_NUGGET
+  Id: minecraft:gold_nugget
   Display: '&6Símbolo Sagrado do Acolhimento'
   Lore:
   - '&7Classe: Clérigo'
@@ -16,7 +16,7 @@ Cleric_T1_Symbol:
   - skill{s=Luz_Sagrada} @target ~onLeftClick
 
 Cleric_T1_Lanterna_Twilight:
-  Id: LANTERN
+  Id: minecraft:lantern
   Display: '&5Lanterna do Poente'
   Lore:
   - '&7Domínio: Crepúsculo'
@@ -31,7 +31,7 @@ Cleric_T1_Lanterna_Twilight:
   - skill{s=Sino_da_Vigilia} @self ~onRightClickSneak
 
 Cleric_T2_Maza_War:
-  Id: IRON_SHOVEL
+  Id: minecraft:iron_shovel
   Display: '&cMaça Consagrada do Combate'
   Lore:
   - '&7Domínio: Guerra'
@@ -48,7 +48,7 @@ Cleric_T2_Maza_War:
   - skill{s=Martelo_Retumbante} @target ~onLeftClick
 
 Cleric_T2_Turbilo_Life:
-  Id: HOPPER
+  Id: minecraft:hopper
   Display: '&aTuríbulo da Graça'
   Lore:
   - '&7Domínio: Vida'
@@ -63,7 +63,7 @@ Cleric_T2_Turbilo_Life:
   - skill{s=Graca_Abundante} @target ~onRightClickSneak
 
 Cleric_T3_Cetro_Comum:
-  Id: BLAZE_ROD
+  Id: minecraft:blaze_rod
   Display: '&fCetro Solene'
   Lore:
   - '&7Classe: Clérigo'
@@ -78,7 +78,7 @@ Cleric_T3_Cetro_Comum:
   - skill{s=Luz_Punitiva} @target ~onLeftClick
 
 Cleric_T3_Emblema_Twilight:
-  Id: AMETHYST_SHARD
+  Id: minecraft:amethyst_shard
   Display: '&5Emblema das Estrelas'
   Lore:
   - '&7Domínio: Crepúsculo'
@@ -93,7 +93,7 @@ Cleric_T3_Emblema_Twilight:
   - skill{s=Eclipse_Parcial} @location ~onRightClickSneak
 
 Cleric_T4_Relic_Life:
-  Id: NETHER_STAR
+  Id: minecraft:nether_star
   Display: '&aRelíquia do Milagre Vital'
   Lore:
   - '&7Domínio: Vida'
@@ -108,7 +108,7 @@ Cleric_T4_Relic_Life:
   - skill{s=Santuario_Vivo} @self ~onLeftClick
 
 Cleric_T4_Estandarte_Supremo:
-  Id: BANNER
+  Id: minecraft:banner
   Display: '&cEstandarte de Guerra Celestial'
   Lore:
   - '&7Domínio: Guerra'
@@ -123,7 +123,7 @@ Cleric_T4_Estandarte_Supremo:
   - skill{s=Juizo_de_Guerra} @target ~onRightClickSneak
 
 Cleric_T4_Lanterna_Crepuscular:
-  Id: SOUL_LANTERN
+  Id: minecraft:soul_lantern
   Display: '&5Lanterna do Eclipse Sagrado'
   Lore:
   - '&7Domínio: Crepúsculo'

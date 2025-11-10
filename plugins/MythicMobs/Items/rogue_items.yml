@@ -1,7 +1,7 @@
 # Itens focais para Ladino e subclasses (Assassino, Ladrão, Espadachim)
 items:
   RogueStealthCloak:
-    Id: LEATHER_CHESTPLATE
+    Id: minecraft:leather_chestplate
     Display: '&8Manto de Sombras'
     Lore:
       - '&7Ativa &8Furtividade Tática&7 (/furtivo).'
@@ -18,7 +18,7 @@ items:
     Skills:
       - skill{s=rogue_tactical_stealth} @self ~onRightClick
   RogueEvasionCharm:
-    Id: FEATHER
+    Id: minecraft:feather
     Display: '&aTalismã de Evasão'
     Lore:
       - '&7Canaliza &aEvasão&7 (/evasao).'
@@ -34,7 +34,7 @@ items:
     Skills:
       - skill{s=rogue_evasion} @self ~onUse
   RogueDashHook:
-    Id: FISHING_ROD
+    Id: minecraft:fishing_rod
     Display: '&eCorda de Pique'
     Lore:
       - '&7Dispara &ePique Acrobático&7 (/pique).'
@@ -51,7 +51,7 @@ items:
       - skill{s=rogue_acrobatic_dash} @self ~onRightClick
 
   AssassinDagger:
-    Id: IRON_SWORD
+    Id: minecraft:iron_sword
     Display: '&4Adaga do Carrasco'
     Lore:
       - '&7Habilita &4Marcador de Alvo&7 e combos de execução.'
@@ -67,7 +67,7 @@ items:
     Skills:
       - skill{s=rogue_assassin_mark_target} @self ~onLeftClick
   AssassinCloak:
-    Id: BLACK_DYE
+    Id: minecraft:black_dye
     Display: '&4Véu de Emboscada'
     Lore:
       - '&7Garante &4Ataque de Emboscada&7 após furtividade.'
@@ -83,7 +83,7 @@ items:
     Skills:
       - skill{s=rogue_assassin_ambush_strike} @self ~onUse
   ToxinVial:
-    Id: POTION
+    Id: minecraft:potion
     Display: '&2Frasco de Toxina'
     Lore:
       - '&7Aplica &2Toxina Preparada&7 nos golpes.'
@@ -98,7 +98,7 @@ items:
     Skills:
       - skill{s=rogue_assassin_prepared_toxin} @self ~onRightClick
   AssassinExecutionCharm:
-    Id: NETHERITE_SWORD
+    Id: minecraft:netherite_sword
     Display: '&4Símbolo de Execução'
     Lore:
       - '&7Ativa &4Execução Calculada&7 (ultimate).'
@@ -115,7 +115,7 @@ items:
       - skill{s=rogue_assassin_calculated_execution} @self ~onUse
 
   ThiefHook:
-    Id: TRIPWIRE_HOOK
+    Id: minecraft:tripwire_hook
     Display: '&2Grapple do Ladrão'
     Lore:
       - '&7Dispara &2Hookshot&7.'
@@ -131,7 +131,7 @@ items:
     Skills:
       - skill{s=rogue_thief_hookshot} @self ~onUse
   ThiefSmokeBomb:
-    Id: FIREWORK_STAR
+    Id: minecraft:firework_star
     Display: '&7Granada de Fumaça'
     Lore:
       - '&7Invoca &7Bomba de Fumaça&7.'
@@ -146,7 +146,7 @@ items:
     Skills:
       - skill{s=rogue_thief_smoke_bomb} @self ~onUse
   ThiefBoots:
-    Id: LEATHER_BOOTS
+    Id: minecraft:leather_boots
     Display: '&eBotas Levíssimas'
     Lore:
       - '&7Ativa &eMãos Velozes&7 para resets de mobilidade.'
@@ -163,7 +163,7 @@ items:
     Skills:
       - skill{s=rogue_thief_fast_hands} @self ~onRightClick
   ThiefMasterKit:
-    Id: GOLDEN_PICKAXE
+    Id: minecraft:golden_pickaxe
     Display: '&6Ferramenta Mestre'
     Lore:
       - '&7Canaliza &6Arrombador Mestre&7 (ultimate).'
@@ -180,7 +180,7 @@ items:
       - skill{s=rogue_thief_master_lockbreaker} @self ~onUse
 
   SwashRapier:
-    Id: DIAMOND_SWORD
+    Id: minecraft:diamond_sword
     Display: '&bRapieira do Bravoure'
     Lore:
       - '&7Aciona &bDesafio do Duelista&7.'
@@ -196,7 +196,7 @@ items:
     Skills:
       - skill{s=rogue_swash_duelist_challenge} @self ~onLeftClick
   SwashPlume:
-    Id: FEATHER
+    Id: minecraft:feather
     Display: '&bPluma de Gala'
     Lore:
       - '&7Garante &bPasso de Dança&7.'
@@ -212,7 +212,7 @@ items:
     Skills:
       - skill{s=rogue_swash_dance_step} @self ~onUse
   SwashBoots:
-    Id: LEATHER_BOOTS
+    Id: minecraft:leather_boots
     Display: '&bBotas do Duelista'
     Lore:
       - '&7Ativa &bEstocada Rápida&7.'
@@ -229,7 +229,7 @@ items:
     Skills:
       - skill{s=rogue_swash_rapid_thrust} @self ~onRightClick
   SwashCrest:
-    Id: FIRE_CHARGE
+    Id: minecraft:fire_charge
     Display: '&dInsígnia do Duelista'
     Lore:
       - '&7Canaliza &dClímax do Duelista&7 (ultimate).'

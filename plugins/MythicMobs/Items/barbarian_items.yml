@@ -1,7 +1,7 @@
 # Itens focais do Bárbaro e Caminhos Primitivos
 items:
   BarbarianRageCharm:
-    Id: BLAZE_POWDER
+    Id: minecraft:blaze_powder
     Display: '&6Talismã da Fúria'
     Lore:
       - '&7Ativa §6Fúria§7 (20s, +dano e resistência).'
@@ -15,7 +15,7 @@ items:
     Skills:
       - skill{s=barbarian_fury} @self ~onUse
   BerserkerWarHorn:
-    Id: GOAT_HORN
+    Id: minecraft:goat_horn
     Display: '&cBerrante Berserker'
     Lore:
       - '&7Sopre para aplicar §cGrito Bestial§7.'
@@ -28,7 +28,7 @@ items:
     Skills:
       - skill{s=barbarian_berserker_bestial_roar} @self ~onUse
   BerserkerBattleAxe:
-    Id: NETHERITE_AXE
+    Id: minecraft:netherite_axe
     Display: '&4Machado da Carnificina'
     Lore:
       - '&7Libera §4Carnificina§7 (cleave triplo).'
@@ -42,7 +42,7 @@ items:
     Skills:
       - skill{s=barbarian_berserker_carnage} @self ~onLeftClick
   BerserkerSpikedShield:
-    Id: SHIELD
+    Id: minecraft:shield
     Display: '&4Broquel Espinhado'
     Lore:
       - '&7Ativa §4Retaliação Frenética§7 (reflexo 30%).'
@@ -55,7 +55,7 @@ items:
     Skills:
       - skill{s=barbarian_berserker_frenzied_retaliation} @self ~onUse
   TotemBearCharm:
-    Id: TOTEM_OF_UNDYING
+    Id: minecraft:totem_of_undying
     Display: '&6Totem do Urso'
     Lore:
       - '&7Projeta -35% dano físico por 10s (5b).' 
@@ -68,7 +68,7 @@ items:
     Skills:
       - skill{s=barbarian_totem_bear} @self ~onUse
   TotemEagleCharm:
-    Id: FEATHER
+    Id: minecraft:feather
     Display: '&fTotem da Águia'
     Lore:
       - '&7Concede alcance +1 bloco e visão por 15s.'
@@ -81,7 +81,7 @@ items:
     Skills:
       - skill{s=barbarian_totem_eagle} @self ~onUse
   TotemWolfCharm:
-    Id: WOLF_SPAWN_EGG
+    Id: minecraft:wolf_spawn_egg
     Display: '&fTotem do Lobo'
     Lore:
       - '&7Marca um inimigo (12s, +12% dano aliado).'
@@ -94,7 +94,7 @@ items:
     Skills:
       - skill{s=barbarian_totem_wolf} @self ~onUse
   TotemTigerCharm:
-    Id: ORANGE_DYE
+    Id: minecraft:orange_dye
     Display: '&6Totem do Tigre'
     Lore:
       - '&7+30% velocidade de ataque por 8s.'
@@ -107,7 +107,7 @@ items:
     Skills:
       - skill{s=barbarian_totem_tiger} @self ~onUse
   TotemPhoenixCharm:
-    Id: BLAZE_ROD
+    Id: minecraft:blaze_rod
     Display: '&cTotem da Fênix'
     Lore:
       - '&7Aura 8b/12s com reviver (40% HP).'
@@ -120,7 +120,7 @@ items:
     Skills:
       - skill{s=barbarian_totem_phoenix} @self ~onUse
   StormWarHammer:
-    Id: GOLDEN_AXE
+    Id: minecraft:golden_axe
     Display: '&bMartelo da Tempestade'
     Lore:
       - '&7140% dano + atordoamento 2s.'
@@ -133,7 +133,7 @@ items:
     Skills:
       - skill{s=barbarian_storm_thunder_hammer} @self ~onUse
   StormChargeGauntlet:
-    Id: IRON_HORSE_ARMOR
+    Id: minecraft:iron_horse_armor
     Display: '&9Manopla Galvânica'
     Lore:
       - '&7Dispara §bSurto Galvânico§7 (3 descargas).'
@@ -146,7 +146,7 @@ items:
     Skills:
       - skill{s=barbarian_storm_galvanic_surge} @self ~onUse
   StormMantle:
-    Id: BLUE_CARPET
+    Id: minecraft:blue_carpet
     Display: '&bManto dos Ventos'
     Lore:
       - '&7Ativa §bCapa de Ventos§7 (-projéteis).'
@@ -159,7 +159,7 @@ items:
     Skills:
       - skill{s=barbarian_storm_wind_cloak} @self ~onUse
   StormDrum:
-    Id: DRUM
+    Id: minecraft:drum
     Display: '&bTambor Tempestuoso'
     Lore:
       - '&7Invoca §bCaldeirão da Tempestade§7 (zona 6b).'
@@ -172,7 +172,7 @@ items:
     Skills:
       - skill{s=barbarian_storm_tempest_cauldron} @self ~onUse
   StormEyeTotem:
-    Id: ENDER_EYE
+    Id: minecraft:ender_eye
     Display: '&bTotem do Olho da Tempestade'
     Lore:
       - '&7Canaliza §bOlho do Furacão§7 (vórtice 8b).'

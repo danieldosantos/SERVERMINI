@@ -1,7 +1,7 @@
 # Itens focais do Guerreiro e arquétipos
 items:
   WarriorTrainingBlade:
-    Id: IRON_SWORD
+    Id: minecraft:iron_sword
     Display: '&6Lâmina de Treino do Guerreiro'
     Lore:
       - '&7Aciona Golpe Rápido em alvo próximo.'
@@ -15,7 +15,7 @@ items:
     Skills:
       - skill{s=warrior_quick_strike} @target ~onLeftClick
   WarriorShield:
-    Id: SHIELD
+    Id: minecraft:shield
     Display: '&6Escudo de Linha'
     Lore:
       - '&7Ativa Postura Defensiva e Empurrão.'
@@ -29,7 +29,7 @@ items:
       - skill{s=warrior_defensive_stance} @self ~onRightClick
       - skill{s=warrior_shove} @target ~onLeftClick
   WarriorBanner:
-    Id: WHITE_BANNER
+    Id: minecraft:white_banner
     Display: '&6Estandarte de Postura'
     Lore:
       - '&7Alterna Postura Preparada e Agressiva.'
@@ -43,7 +43,7 @@ items:
       - skill{s=warrior_prepared_stance} @self ~onUse
       - skill{s=warrior_aggressive_stance} @self ~onSneakRightClick
   ChampionClaymore:
-    Id: NETHERITE_SWORD
+    Id: minecraft:netherite_sword
     Display: '&eLâmina da Glória'
     Lore:
       - '&7Golpe Preciso e Pressão Constante.'
@@ -58,7 +58,7 @@ items:
       - skill{s=warrior_champion_precise_strike} @self ~onRightClick
       - skill{s=warrior_quick_strike} @target ~onLeftClick
   ChampionHelm:
-    Id: GOLDEN_HELMET
+    Id: minecraft:golden_helmet
     Display: '&eElmo da Fama'
     Lore:
       - '&7Ultimate: Glória do Campeão.'
@@ -71,7 +71,7 @@ items:
     Skills:
       - skill{s=warrior_champion_glory} @self ~onSneakLeftClick
   BattlemasterHalberd:
-    Id: IRON_AXE
+    Id: minecraft:iron_axe
     Display: '&cAlabarda de Comando'
     Lore:
       - '&7Aciona Manobras de Derrubar e Ameaça.'
@@ -86,7 +86,7 @@ items:
       - skill{s=warrior_battlemaster_trip} @target ~onLeftClick
       - skill{s=warrior_battlemaster_threaten} @target ~onRightClick
   BattlemasterStandard:
-    Id: RED_BANNER
+    Id: minecraft:red_banner
     Display: '&cEstandarte de Guerra'
     Lore:
       - '&7Comandar Linha e Chamado de Guerra.'
@@ -100,7 +100,7 @@ items:
       - skill{s=warrior_battlemaster_command_line} @self ~onUse
       - skill{s=warrior_battlemaster_war_call} @self ~onSneakLeftClick
   SamuraiKatana:
-    Id: NETHERITE_SWORD
+    Id: minecraft:netherite_sword
     Display: '&dKatana Ancestral'
     Lore:
       - '&7Foco da Lâmina e Postura Iaijutsu.'
@@ -115,7 +115,7 @@ items:
       - skill{s=warrior_samurai_blade_focus} @self ~onRightClick
       - skill{s=warrior_quick_strike} @target ~onLeftClick
   SamuraiStandard:
-    Id: PURPLE_BANNER
+    Id: minecraft:purple_banner
     Display: '&dEstandarte do Espírito'
     Lore:
       - '&7Retaliação e Espírito Guerreiro.'

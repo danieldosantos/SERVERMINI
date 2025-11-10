@@ -1,6 +1,6 @@
 Items:
   BerserkerWarHorn:
-    Id: GOAT_HORN
+    Id: minecraft:goat_horn
     Display: '&6Grito Bestial &8(Berserker)'
     Lore:
       - '&7Usar: Clique direito'
@@ -15,7 +15,7 @@ Items:
         - cooldown{t=75}
 
   BerserkerBattleAxe:
-    Id: IRON_AXE
+    Id: minecraft:iron_axe
     Display: '&6Investida Sanguinaria &8(Berserker)'
     Lore:
       - '&7Usar: Clique direito'
@@ -29,7 +29,7 @@ Items:
         - cooldown{t=45}
 
   BerserkerSpikedShield:
-    Id: SHIELD
+    Id: minecraft:shield
     Display: '&6Retaliacao Frenetica &8(Berserker)'
     Lore:
       - '&7Usar: Clique direito (HP < 50%)'
@@ -43,7 +43,7 @@ Items:
         - cooldown{t=90}
 
   BerserkerBoots:
-    Id: LEATHER_BOOTS
+    Id: minecraft:leather_boots
     Display: '&6Impetus Irrefreavel &8(Berserker)'
     Lore:
       - '&7Usar: Clique direito'
@@ -57,7 +57,7 @@ Items:
         - cooldown{t=60}
 
   BerserkerTotem:
-    Id: TOTEM_OF_UNDYING
+    Id: minecraft:totem_of_undying
     Display: '&6Carnificina Implacavel &8(Berserker)'
     Lore:
       - '&7Usar: Clique direito (canaliza 3s)'

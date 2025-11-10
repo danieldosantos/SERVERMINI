@@ -1,5 +1,5 @@
 SkeletonKingSword:
-  Id: DIAMOND_SWORD
+  Id: minecraft:diamond_sword
   Display: '&3Greatsword of the Skeleton King'
   Lore:
   - '&6A powerful sword used by'
@@ -13,7 +13,7 @@ SkeletonKingSword:
       Health: 10
       MovementSpeed: 0.1
 KingsCrown:
-  Id: GOLDEN_HELMET
+  Id: minecraft:golden_helmet
   Display: '&dCrown of the King'
   Lore:
   - '&6A kingly crowl that grants'
@@ -31,7 +31,7 @@ KingsCrown:
       Health: 10
       KnockbackResistance: 10
 BanditTunic:
-  Id: LEATHER_CHESTPLATE
+  Id: minecraft:leather_chestplate
   Display: '&aBandit Tunic'
   Lore:
   - '&6A leather tunic taken from'

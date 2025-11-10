@@ -62,24 +62,24 @@ command /ult:
       execute console command "skillapi cast warrior_iron_heart %player%"
 
 # Bindings MythicMobs
-on leftclick with iron sword:
+on left click with iron sword:
   if name of player's tool is "&6Lâmina de Treino do Guerreiro":
     if player has permission {@perm-base}:
       execute console command "skillapi cast warrior_quick_strike %player%"
     else:
       send "{@prefix} &cApenas Guerreiros podem usar isso."
 
-on rightclick with shield:
+on right click with shield:
   if name of player's tool is "&6Escudo de Linha":
     if player has permission {@perm-base}:
       execute console command "skillapi cast warrior_defensive_stance %player%"
 
-on leftclick with shield:
+on left click with shield:
   if name of player's tool is "&6Escudo de Linha":
     if player has permission {@perm-base}:
       execute console command "skillapi cast warrior_shove %player%"
 
-on rightclick with white banner:
+on right click with white banner:
   if name of player's tool is "&6Estandarte de Postura":
     if player has permission {@perm-base}:
       execute console command "skillapi cast warrior_prepared_stance %player%"
@@ -89,12 +89,12 @@ on sneak right click with white banner:
     if player has permission {@perm-base}:
       execute console command "skillapi cast warrior_aggressive_stance %player%"
 
-on rightclick with netherite sword:
+on right click with netherite sword:
   if name of player's tool is "&eLâmina da Glória":
     if player has permission {@perm-champion}:
       execute console command "skillapi cast warrior_champion_precise_strike %player%"
 
-on leftclick with netherite sword:
+on left click with netherite sword:
   if name of player's tool is "&eLâmina da Glória":
     if player has permission {@perm-champion}:
       execute console command "skillapi cast warrior_quick_strike %player%"
@@ -104,12 +104,12 @@ on sneak left click with golden helmet:
     if player has permission {@perm-champion}:
       execute console command "skillapi cast warrior_champion_glory %player%"
 
-on leftclick with iron axe:
+on left click with iron axe:
   if name of player's tool is "&cAlabarda de Comando":
     if player has permission {@perm-battlemaster}:
       execute console command "skillapi cast warrior_battlemaster_trip %player%"
 
-on rightclick with iron axe:
+on right click with iron axe:
   if name of player's tool is "&cAlabarda de Comando":
     if player has permission {@perm-battlemaster}:
       execute console command "skillapi cast warrior_battlemaster_threaten %player%"
@@ -124,12 +124,12 @@ on sneak left click with red banner:
     if player has permission {@perm-battlemaster}:
       execute console command "skillapi cast warrior_battlemaster_war_call %player%"
 
-on rightclick with netherite sword:
+on right click with netherite sword:
   if name of player's tool is "&dKatana Ancestral":
     if player has permission {@perm-samurai}:
       execute console command "skillapi cast warrior_samurai_blade_focus %player%"
 
-on leftclick with netherite sword:
+on left click with netherite sword:
   if name of player's tool is "&dKatana Ancestral":
     if player has permission {@perm-samurai}:
       execute console command "skillapi cast warrior_quick_strike %player%"

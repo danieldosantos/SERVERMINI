@@ -1,7 +1,7 @@
 # Itens raciais Meio-Orc (base + variações)
 items:
   OrcBattleTalisman:
-    Id: NETHERITE_SCRAP
+    Id: minecraft:netherite_scrap
     Display: '&4Talismã de Batalha Orc'
     Lore:
       - '&7Um foco ancestral que responde à fúria controlada.'
@@ -17,7 +17,7 @@ items:
       skill: 'HalfOrc_FuriaControlada'
       skript-trigger: 'furia_orc'
   TribalBoneCharm:
-    Id: BONE
+    Id: minecraft:bone
     Display: '&6Amuleto Tribal de Ossos'
     Lore:
       - '&7Banhado em sangue de caça, vibra quando um alvo é marcado.'
@@ -33,7 +33,7 @@ items:
       skill: 'HalfOrc_Tribal_ChamadoCaca'
       skript-trigger: 'tribal'
   ArenaWarBangle:
-    Id: IRON_NUGGET
+    Id: minecraft:iron_nugget
     Display: '&cBracelete de Guerra da Arena'
     Lore:
       - '&7Ressoa com o rugido da multidão quando a arena chama.'

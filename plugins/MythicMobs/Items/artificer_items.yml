@@ -1,7 +1,7 @@
 # Itens focais do Artífice e subclasses
 items:
   ArtificerInfusionWrench:
-    Id: TRIPWIRE_HOOK
+    Id: minecraft:tripwire_hook
     Display: '&3Chave de Infusão'
     Lore:
       - '&7Clique direito: aciona Infundir Item em aliado/próprio.'
@@ -17,7 +17,7 @@ items:
       - skill{s=artificer_infundir_item} @target ~onRightClick
       - command{c="skript run artificer_refresh_hud %player%"} @self ~onLeftClick
   ArtificerOverchargeFocus:
-    Id: REDSTONE_TORCH
+    Id: minecraft:redstone_torch
     Display: '&3Bastão de SobreCarga'
     Lore:
       - '&7Clique direito: ativa Sobrecarregar.'
@@ -30,7 +30,7 @@ items:
     Skills:
       - skill{s=artificer_sobrecarregar} @self ~onRightClick
   ArtificerRunicProjector:
-    Id: ENCHANTING_TABLE
+    Id: minecraft:enchanting_table
     Display: '&3Projetor Rúnico Portátil'
     Lore:
       - '&7Clique direito: projeta Campo Rúnico.'
@@ -43,7 +43,7 @@ items:
     Skills:
       - skill{s=artificer_campo_runico} @self ~onRightClick
   ArmorerArcCore:
-    Id: NETHER_STAR
+    Id: minecraft:nether_star
     Display: '&bNúcleo ArcArmor'
     Lore:
       - '&7Sneak + clique direito: alterna modo Guardião/Infiltrador.'
@@ -57,7 +57,7 @@ items:
     Skills:
       - skill{s=artificer_armorer_mudar_modo} @self ~onSneakRightClick
   ArmorerArcGauntlet:
-    Id: NETHERITE_SWORD
+    Id: minecraft:netherite_sword
     Display: '&bManopla de Trovão'
     Lore:
       - '&7Clique esquerdo: Punho Trovão (modo Guardião).'
@@ -70,7 +70,7 @@ items:
     Skills:
       - skill{s=artificer_armorer_punho_trovao} @target ~onLeftClick
   ArmorerArcBoots:
-    Id: NETHERITE_BOOTS
+    Id: minecraft:netherite_boots
     Display: '&bBotas Faseadas'
     Lore:
       - '&7Sneak + clique direito: Passo Amplificado (modo Infiltrador).'
@@ -83,7 +83,7 @@ items:
     Skills:
       - skill{s=artificer_armorer_passo_amplificado} @self ~onSneakRightClick
   BattleSmithForgeHammer:
-    Id: NETHERITE_AXE
+    Id: minecraft:netherite_axe
     Display: '&aMartelo da Forja de Batalha'
     Lore:
       - '&7Clique direito: invoca ou reposiciona Defensor de Aço.'
@@ -97,7 +97,7 @@ items:
     Skills:
       - skill{s=artificer_battlesmith_invocar_defensor} @self ~onRightClick
   BattleSmithTuningKit:
-    Id: SMITHING_TABLE
+    Id: minecraft:smithing_table
     Display: '&aKit de Sintonização'
     Lore:
       - '&7Clique direito em aliado: Sintonizar Arma.'
@@ -110,7 +110,7 @@ items:
     Skills:
       - skill{s=artificer_battlesmith_sintonizar_arma} @target ~onRightClick
   BattleSmithDefenderCore:
-    Id: IRON_BLOCK
+    Id: minecraft:iron_block
     Display: '&aConsole do Defensor'
     Lore:
       - '&7Clique direito: Comando Reparar (se Defensor ativo).'
@@ -125,7 +125,7 @@ items:
       - skill{s=artificer_battlesmith_comando_reparar} @self ~onRightClick
       - skill{s=artificer_battlesmith_protocolo_guardiao} @self ~onSneakRightClick
   AlchemistKit:
-    Id: BREWING_STAND
+    Id: minecraft:brewing_stand
     Display: '&dKit Alquímico Portátil'
     Lore:
       - '&7Clique direito: abre seleção de frascos (Skript).'
@@ -139,7 +139,7 @@ items:
     Skills:
       - command{c="skript run artificer_alchemy_menu %player%"} @self ~onRightClick
   AlchemistCatalystStaff:
-    Id: BLAZE_ROD
+    Id: minecraft:blaze_rod
     Display: '&dCajado Catalisador'
     Lore:
       - '&7Clique direito: Panaceia.'
@@ -154,7 +154,7 @@ items:
       - skill{s=artificer_alchemist_panaceia} @self ~onRightClick
       - skill{s=artificer_alchemist_nuvem_corrosiva} @target ~onLeftClick
   AlchemistElixirSatchel:
-    Id: RABBIT_HIDE
+    Id: minecraft:rabbit_hide
     Display: '&dBolsa de Elixires'
     Lore:
       - '&7Clique direito: Elixir de Vitalidade.'

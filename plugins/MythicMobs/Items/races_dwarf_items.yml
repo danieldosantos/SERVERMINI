@@ -1,7 +1,7 @@
 # Itens raciais focais dos anões e sub-raças.
 items:
   DwarvenRunestone:
-    Id: DEEPSLATE_TILE_STAIRS
+    Id: minecraft:deepslate_tile_stairs
     Display: '&6Runa da Forja Anã'
     Lore:
       - '&7Fragmento ressonante com o pulsar das cavernas.'
@@ -15,7 +15,7 @@ items:
       race-lock: 'race_dwarf'
       skill: 'FortitudeAnaBase'
   HillDwarfHeartstone:
-    Id: GLOWSTONE_DUST
+    Id: minecraft:glowstone_dust
     Display: '&eCoração da Colina'
     Lore:
       - '&eLateja com calor constante.'
@@ -26,7 +26,7 @@ items:
       race-lock: 'race_dwarf.hill'
       skill: 'FortitudeProfunda'
   MountainDwarfRunicBuckle:
-    Id: NETHERITE_SCRAP
+    Id: minecraft:netherite_scrap
     Display: '&7Fivela Rúnica de Pedra'
     Lore:
       - '&7Trava o corpo ao solo firme.'
@@ -37,7 +37,7 @@ items:
       race-lock: 'race_dwarf.mountain'
       skill: 'PosturaDePedra'
   DuergarIronSigil:
-    Id: RAW_IRON_BLOCK
+    Id: minecraft:raw_iron_block
     Display: '&8Sigilo de Ferro Duergar'
     Lore:
       - '&8Exala runas de crescimento sombrias.'
@@ -49,7 +49,7 @@ items:
       race-lock: 'race_dwarf.deep'
       skill: 'CrescerDuergar'
   DuergarGloomRing:
-    Id: WITHER_ROSE
+    Id: minecraft:wither_rose
     Display: '&5Anel da Penumbra'
     Lore:
       - '&5Bebe a luz do ambiente.'

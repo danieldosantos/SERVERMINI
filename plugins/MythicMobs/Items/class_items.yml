@@ -1,5 +1,5 @@
 BarbarianRecklessCharm:
-  Id: GOLD_NUGGET
+  Id: minecraft:gold_nugget
   Display: '&6Talisma Temerario &8(Classe)'
   Lore:
   - '&7Clique direito: Ataque Temerario'
@@ -12,7 +12,7 @@ BarbarianRecklessCharm:
 
 # ===================== BRUXO =====================
 EldritchWand:
-  Id: BLAZE_ROD
+  Id: minecraft:blaze_rod
   Display: '&5Varinha Eldritch &8(Bruxo)'
   Lore:
   - '&7Clique direito: Rajada Mistica'
@@ -23,7 +23,7 @@ EldritchWand:
     Unbreakable: true
 
 HexTalisman:
-  Id: GHAST_TEAR
+  Id: minecraft:ghast_tear
   Display: '&6Talisma do Hex &8(Bruxo)'
   Lore:
   - '&7Clique direito: Hex'
@@ -33,7 +33,7 @@ HexTalisman:
     Unbreakable: true
 
 FeyCharm:
-  Id: EMERALD
+  Id: minecraft:emerald
   Display: '&aAmuleto da Arquifada &8(Subclasse)'
   Lore:
   - '&7Subclasse: Arquifada'
@@ -43,7 +43,7 @@ FeyCharm:
     Unbreakable: true
 
 FiendMark:
-  Id: NETHER_WART
+  Id: minecraft:nether_wart
   Display: '&cMarca do Diabolico &8(Subclasse)'
   Lore:
   - '&7Subclasse: Diabo'
@@ -53,7 +53,7 @@ FiendMark:
     Unbreakable: true
 
 EldritchMark:
-  Id: ENDER_EYE
+  Id: minecraft:ender_eye
   Display: '&5Marca do Ancestral &8(Subclasse)'
   Lore:
   - '&7Subclasse: Grande Antigo'
@@ -64,7 +64,7 @@ EldritchMark:
 
 # ===================== BARDO =====================
 BardLute:
-  Id: MUSIC_DISC_13
+  Id: minecraft:music_disc_13
   Display: '&dAlaude do Bardo &8(Classe)'
   Lore:
   - '&7Clique direito: Inspiracao'
@@ -76,7 +76,7 @@ BardLute:
     Unbreakable: true
 
 BardLoreBook:
-  Id: BOOK
+  Id: minecraft:book
   Display: '&aLivro do Conhecimento &8(Subclasse)'
   Lore:
   - '&7Clique direito: Cancao de Descanso'
@@ -87,7 +87,7 @@ BardLoreBook:
     Unbreakable: true
 
 BardValorMedal:
-  Id: IRON_NUGGET
+  Id: minecraft:iron_nugget
   Display: '&aMedalha do Valor &8(Subclasse)'
   Lore:
   - '&7Subclasse: Valor'
@@ -98,7 +98,7 @@ BardValorMedal:
 
 # ===================== RACIAIS =====================
 HalfElfFeather:
-  Id: FEATHER
+  Id: minecraft:feather
   Display: '&bPena de Meio-Elfo &8(Racial)'
   Lore:
   - '&7Clique direito: Queda Lenta I 7s'
@@ -108,7 +108,7 @@ HalfElfFeather:
     Unbreakable: true
 
 DragonbornScale:
-  Id: PRISMARINE_SHARD
+  Id: minecraft:prismarine_shard
   Display: '&bEscama de Dragonborn &8(Racial)'
   Lore:
   - '&7Passivo: +1.0 de Vida Max'
@@ -118,7 +118,7 @@ DragonbornScale:
     Unbreakable: true
 
 DragonbornBreathAcid:
-  Id: SLIME_BALL
+  Id: minecraft:slime_ball
   Display: '&aSopro Acido &8(Racial)'
   Lore:
   - '&7Sopro: dano acido em area'
@@ -129,7 +129,7 @@ DragonbornBreathAcid:
   - skill{s=DB_AcidBreath} ~onRightClick
 
 DragonbornBreathCold:
-  Id: SNOWBALL
+  Id: minecraft:snowball
   Display: '&fSopro Gelido &8(Racial)'
   Lore:
   - '&7Sopro: efeito de frio/lentidao'
@@ -140,7 +140,7 @@ DragonbornBreathCold:
   - skill{s=DB_ColdBreath} ~onRightClick
 
 DragonbornBreathFire:
-  Id: FIRE_CHARGE
+  Id: minecraft:fire_charge
   Display: '&cSopro de Fogo &8(Racial)'
   Lore:
   - '&7Sopro: jato de fogo a frente'
@@ -151,7 +151,7 @@ DragonbornBreathFire:
   - skill{s=DB_FireBreath} ~onRightClick
 
 DragonbornBreathLightning:
-  Id: AMETHYST_SHARD
+  Id: minecraft:amethyst_shard
   Display: '&eSopro Eletrico &8(Racial)'
   Lore:
   - '&7Sopro: descarga eletrica'
@@ -162,7 +162,7 @@ DragonbornBreathLightning:
   - skill{s=DB_LightningBreath} ~onRightClick
 
 DragonbornBreathPoison:
-  Id: SPIDER_EYE
+  Id: minecraft:spider_eye
   Display: '&2Sopro Venenoso &8(Racial)'
   Lore:
   - '&7Sopro: nuvem venenosa'
@@ -173,7 +173,7 @@ DragonbornBreathPoison:
   - skill{s=DB_PoisonBreath} ~onRightClick
 
 DwarfStone:
-  Id: COBBLESTONE
+  Id: minecraft:cobblestone
   Display: '&7Pedra Ana &8(Racial)'
   Lore:
   - '&7Passivo: resistencia a veneno'
@@ -183,7 +183,7 @@ DwarfStone:
     Unbreakable: true
 
 DwarfHillAle:
-  Id: HONEY_BOTTLE
+  Id: minecraft:honey_bottle
   Display: '&6Hidromel da Colina &8(Racial)'
   Lore:
   - '&7Passivo: +2.0 Vida Max'
@@ -192,7 +192,7 @@ DwarfHillAle:
     Unbreakable: true
 
 DwarfMountainPick:
-  Id: STONE_PICKAXE
+  Id: minecraft:stone_pickaxe
   Display: '&8Picareta da Montanha &8(Racial)'
   Lore:
   - '&7Passivo: Strength I (curto)'
@@ -202,7 +202,7 @@ DwarfMountainPick:
 
 # Picareta racial unificada dos Anões (base e sub-raças)
 DwarfRacialPick:
-  Id: IRON_PICKAXE
+  Id: minecraft:iron_pickaxe
   Display: '&7Picareta Anao &8(Racial)'
   Lore:
   - '&7Encantos: Eficiencia I, Fortuna I'
@@ -214,7 +214,7 @@ DwarfRacialPick:
   - LOOT_BONUS_BLOCKS:1  # Fortune I
 
 ElfCharm:
-  Id: MOSS_BLOCK
+  Id: minecraft:moss_block
   Display: '&aAmuleto Elfico &8(Racial)'
   Lore:
   - '&7Passivo: Darkvision'
@@ -223,7 +223,7 @@ ElfCharm:
     Unbreakable: true
 
 DrowPendant:
-  Id: AMETHYST_CLUSTER
+  Id: minecraft:amethyst_cluster
   Display: '&5Pingente Drow &8(Racial)'
   Lore:
   - '&7Passivo: Darkvision'
@@ -234,7 +234,7 @@ DrowPendant:
 
 # ===================== HALFLINGS =====================
 HalflingHorn:
-  Id: GOAT_HORN
+  Id: minecraft:goat_horn
   Display: '&eTrombeta Halfling &8(Racial)'
   Lore:
   - '&7Clique direito: Paralisa inimigos proximos'
@@ -245,7 +245,7 @@ HalflingHorn:
     Unbreakable: true
 
 HighElfGem:
-  Id: LAPIS_LAZULI
+  Id: minecraft:lapis_lazuli
   Display: '&aGema do Alto Elfo &8(Racial)'
   Lore:
   - '&7Passivo: sorte/inteligencia leve'
@@ -254,7 +254,7 @@ HighElfGem:
     Unbreakable: true
 
 WoodElfLeaf:
-  Id: OAK_LEAVES
+  Id: minecraft:oak_leaves
   Display: '&2Folha Elfica &8(Racial)'
   Lore:
   - '&7Passivo: +0.02 velocidade'
@@ -263,7 +263,7 @@ WoodElfLeaf:
     Unbreakable: true
 
 GnomeCog:
-  Id: CLOCK
+  Id: minecraft:clock
   Display: '&6Engrenagem Gnomica &8(Racial)'
   Lore:
   - '&7Passivo: Darkvision'
@@ -272,7 +272,7 @@ GnomeCog:
     Unbreakable: true
 
 ForestGnomeAcorn:
-  Id: ACACIA_SAPLING
+  Id: minecraft:acacia_sapling
   Display: '&aBolota da Floresta &8(Racial)'
   Lore:
   - '&7Passivo: Haste I (curto)'
@@ -281,7 +281,7 @@ ForestGnomeAcorn:
     Unbreakable: true
 
 RockGnomeGear:
-  Id: IRON_NUGGET
+  Id: minecraft:iron_nugget
   Display: '&7Peca de Engrenagem &8(Racial)'
   Lore:
   - '&7Passivo: Absorcao I (curto)'
@@ -290,7 +290,7 @@ RockGnomeGear:
     Unbreakable: true
 
 HalflingPipe:
-  Id: STICK
+  Id: minecraft:stick
   Display: '&eCachimbo Halfling &8(Racial)'
   Lore:
   - '&7Passivo: sem bonus diretos'
@@ -299,7 +299,7 @@ HalflingPipe:
     Unbreakable: true
 
 LightfootLuckyCoin:
-  Id: GOLD_NUGGET
+  Id: minecraft:gold_nugget
   Display: '&6Moeda da Sorte &8(Racial)'
   Lore:
   - '&7Passivo: sorte (pequena)'
@@ -308,7 +308,7 @@ LightfootLuckyCoin:
     Unbreakable: true
 
 StoutSturdyBelt:
-  Id: LEATHER_HORSE_ARMOR
+  Id: minecraft:leather_horse_armor
   Display: '&6Cinto Robusto &8(Racial)'
   Lore:
   - '&7Passivo: saturacao curta'
@@ -317,7 +317,7 @@ StoutSturdyBelt:
     Unbreakable: true
 
 HumanMedal:
-  Id: IRON_INGOT
+  Id: minecraft:iron_ingot
   Display: '&fMedalha Humana &8(Racial)'
   Lore:
   - '&7Passivo: Regeneracao II continua'
@@ -326,7 +326,7 @@ HumanMedal:
     Unbreakable: true
 
 TieflingSigil:
-  Id: NETHER_BRICK
+  Id: minecraft:nether_brick
   Display: '&cSigilo Infernal &8(Racial)'
   Lore:
   - '&7Passivo: resistencia ao fogo'
@@ -334,7 +334,7 @@ TieflingSigil:
   Options:
     Unbreakable: true
 HalfOrcTusk:
-  Id: BONE
+  Id: minecraft:bone
   Display: '&fPresa de Meio-Orc &8(Racial)'
   Lore:
   - '&7Racial: Meio-Orc'
@@ -344,7 +344,7 @@ HalfOrcTusk:
     Unbreakable: true
 
 HalfOrcBerserkCharm:
-  Id: MAGMA_CREAM
+  Id: minecraft:magma_cream
   Display: '&6Talisma Berserk &8(Racial)'
   Lore:
   - '&7Clique direito: Berserk'
@@ -356,7 +356,7 @@ HalfOrcBerserkCharm:
     Unbreakable: true
 
 BarbarianBerserkerCharm:
-  Id: BLAZE_POWDER
+  Id: minecraft:blaze_powder
   Display: '&6Talisma do Berserker &8(Subclasse)'
   Lore:
   - '&7Subclasse: Berserker'
@@ -367,7 +367,7 @@ BarbarianBerserkerCharm:
     Unbreakable: true
 
 ElfWoodBrooch:
-  Id: OAK_LEAVES
+  Id: minecraft:oak_leaves
   Display: '&aBroche da Floresta &8(Racial)'
   Lore:
   - '&7Um broche feito de folhas e cipas.'
@@ -376,7 +376,7 @@ ElfWoodBrooch:
     Unbreakable: true
 
 DrowWeb:
-  Id: COBWEB
+  Id: minecraft:cobweb
   Display: '&8Teia de Drow &8(Racial)'
   Lore:
   - '&7Clique direito: teleporte aleatorio (raio 7)'
@@ -386,7 +386,7 @@ DrowWeb:
     Unbreakable: true
 
 TotemBearCharm:
-  Id: LEATHER
+  Id: minecraft:leather
   Display: '&6Totem do Urso &8(Subclasse)'
   Lore:
   - '&7Subclasse: Totem (Urso)'
@@ -397,7 +397,7 @@ TotemBearCharm:
     Unbreakable: true
 
 TotemEagleCharm:
-  Id: FEATHER
+  Id: minecraft:feather
   Display: '&6Totem da Aguia &8(Subclasse)'
   Lore:
   - '&7Subclasse: Totem (Aguia)'
@@ -408,7 +408,7 @@ TotemEagleCharm:
     Unbreakable: true
 
 TotemWolfCharm:
-  Id: FLINT
+  Id: minecraft:flint
   Display: '&6Totem do Lobo &8(Subclasse)'
   Lore:
   - '&7Subclasse: Totem (Lobo)'
@@ -418,7 +418,7 @@ TotemWolfCharm:
   Options:
     Unbreakable: true
 BarbarianRageCharm:
-  Id: REDSTONE
+  Id: minecraft:redstone
   Display: '&6Talisma da Furia &8(Classe)'
   Lore:
   - '&7Clique direito: Furia'

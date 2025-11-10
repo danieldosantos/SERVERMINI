@@ -1,7 +1,7 @@
 # Itens focais para Guerreiro e arquétipos
 items:
   FighterActionMedal:
-    Id: NETHER_STAR
+    Id: minecraft:nether_star
     Display: '&eMedalha do Surto'
     Lore:
       - '&7Ativa §eSurto de Ação§7 (reset CDs menores).'
@@ -15,7 +15,7 @@ items:
     Skills:
       - skill{s=fighter_action_surge} @self ~onUse
   FighterSecondWindBrooch:
-    Id: GHAST_TEAR
+    Id: minecraft:ghast_tear
     Display: '&aBroche do Segundo Fôlego'
     Lore:
       - '&7Canaliza §aSegundo Fôlego§7 (cura escalonada).'
@@ -29,7 +29,7 @@ items:
     Skills:
       - skill{s=fighter_second_wind} @self ~onUse
   ChampionGreatsword:
-    Id: NETHERITE_SWORD
+    Id: minecraft:netherite_sword
     Display: '&6Lâmina do Coliseu'
     Lore:
       - '&7160% dano + chance crítica extra.'
@@ -43,7 +43,7 @@ items:
     Skills:
       - skill{s=fighter_champion_superior_strike} @target ~onLeftClick
   ChampionShield:
-    Id: SHIELD
+    Id: minecraft:shield
     Display: '&aEscudo do Triunfo'
     Lore:
       - '&720% mitigação + cura ao longo do tempo.'
@@ -56,7 +56,7 @@ items:
     Skills:
       - skill{s=fighter_champion_unyielding_resilience} @self ~onRightClick
   ChampionStandard:
-    Id: RED_BANNER
+    Id: minecraft:red_banner
     Display: '&eEstandarte do Gladiador'
     Lore:
       - '&7Provoca inimigos em 6 blocos.'
@@ -69,7 +69,7 @@ items:
     Skills:
       - skill{s=fighter_champion_gladiator_challenge} @self ~onUse
   ChampionBoots:
-    Id: NETHERITE_BOOTS
+    Id: minecraft:netherite_boots
     Display: '&6Grevas do Coliseu'
     Lore:
       - '&7Salto frontal de 6 blocos.'
@@ -82,7 +82,7 @@ items:
     Skills:
       - skill{s=fighter_champion_coliseum_leap} @self ~onSneakRightClick
   ChampionCrown:
-    Id: GOLDEN_HELMET
+    Id: minecraft:golden_helmet
     Display: '&6Coroa do Triunfo'
     Lore:
       - '&7Ultimate: Triunfo Inesquecível.'
@@ -95,7 +95,7 @@ items:
     Skills:
       - skill{s=fighter_champion_unforgettable_triumph} @self ~onSneakLeftClick
   BattlemasterWhip:
-    Id: STRING
+    Id: minecraft:string
     Display: '&cChicote Desarmante'
     Lore:
       - '&7Remove arma e reduz dano do alvo.'
@@ -108,7 +108,7 @@ items:
     Skills:
       - skill{s=fighter_battlemaster_disarming_strike} @target ~onLeftClick
   BattlemasterManual:
-    Id: BOOK
+    Id: minecraft:book
     Display: '&cManual de Manobras'
     Lore:
       - '&7Concede Manobra Precisa (penetração extra).'
@@ -121,7 +121,7 @@ items:
     Skills:
       - skill{s=fighter_battlemaster_precise_maneuver} @self ~onRightClick
   BattlemasterShield:
-    Id: SHIELD
+    Id: minecraft:shield
     Display: '&cEscudo Estratégico'
     Lore:
       - '&7Postura Defensiva (-30% dano).'
@@ -134,7 +134,7 @@ items:
     Skills:
       - skill{s=fighter_battlemaster_defensive_posture} @self ~onUse
   BattlemasterBanner:
-    Id: WHITE_BANNER
+    Id: minecraft:white_banner
     Display: '&cEstandarte de Comando'
     Lore:
       - '&7Reduz CDs aliados e aumenta velocidade.'
@@ -147,7 +147,7 @@ items:
     Skills:
       - skill{s=fighter_battlemaster_tactical_command} @self ~onRightClick
   BattlemasterHalberd:
-    Id: IRON_AXE
+    Id: minecraft:iron_axe
     Display: '&cAlabarda da Vitória'
     Lore:
       - '&7Ultimate Giro da Vitória.'
@@ -160,7 +160,7 @@ items:
     Skills:
       - skill{s=fighter_battlemaster_victory_spin} @target ~onSneakLeftClick
   EldritchKnightRuneblade:
-    Id: NETHERITE_SWORD
+    Id: minecraft:netherite_sword
     Display: '&bLâmina Rúnica'
     Lore:
       - '&7Ativa Golpe Imbuído (130% dano mágico).'
@@ -174,7 +174,7 @@ items:
     Skills:
       - skill{s=fighter_eldritchknight_imbued_strike} @target ~onLeftClick
   EldritchKnightRuneFocus:
-    Id: AMETHYST_SHARD
+    Id: minecraft:amethyst_shard
     Display: '&bFoco de Runas'
     Lore:
       - '&7Concede Arma Rúnica (+20% dano por 10s).'
@@ -187,7 +187,7 @@ items:
     Skills:
       - skill{s=fighter_eldritchknight_runic_weapon} @self ~onUse
   EldritchKnightGuardianSigil:
-    Id: SHIELD
+    Id: minecraft:shield
     Display: '&bSigilo Guardião'
     Lore:
       - '&7Ativa Guardião Arcano (+15% mit. mágica).'
@@ -200,7 +200,7 @@ items:
     Skills:
       - skill{s=fighter_eldritchknight_arcane_guardian} @self ~onRightClick
   EldritchKnightStaticTotem:
-    Id: LAPIS_LAZULI
+    Id: minecraft:lapis_lazuli
     Display: '&bTotem Estático'
     Lore:
       - '&7Projeta Escudo Estático (projéteis -30%).'
@@ -213,7 +213,7 @@ items:
     Skills:
       - skill{s=fighter_eldritchknight_static_shield} @self ~onUse
   EldritchKnightArcaneCodex:
-    Id: WRITABLE_BOOK
+    Id: minecraft:writable_book
     Display: '&bCódice do Gládio'
     Lore:
       - '&7Ultimate Gládio Arcano (12s cleave).'
