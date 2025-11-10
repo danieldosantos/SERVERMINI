@@ -223,80 +223,94 @@ command /storm_olho:
   trigger:
     execute console command "skillapi cast barbarian_storm_eye %player%"
 
-on right click with blaze powder:
-  if name of player's tool is "&6Talismã da Fúria":
-    if player has permission {@perm-base}:
-      execute console command "skillapi cast barbarian_fury %player%"
-      wait 5 ticks
-      barbarian_refresh_hud(player)
-    else:
-      send "{@prefix} &cApenas Bárbaros podem usar isso."
-
-on right click with goat horn:
-  if name of player's tool is "&cBerrante Berserker":
-    if player has permission {@perm-berserker}:
-      execute console command "skillapi cast barbarian_berserker_bestial_roar %player%"
-
-on left click with netherite axe:
-  if name of player's tool is "&4Machado da Carnificina":
-    if player has permission {@perm-berserker}:
-      execute console command "skillapi cast barbarian_berserker_carnage %player%"
-
-on right click with shield:
-  if name of player's tool is "&4Broquel Espinhado":
-    if player has permission {@perm-berserker}:
-      execute console command "skillapi cast barbarian_berserker_frenzied_retaliation %player%"
-
-on right click with carved pumpkin:
-  if name of player's tool is "&6Totem do Urso":
-    if player has permission {@perm-totem}:
-      execute console command "skillapi cast barbarian_totem_bear %player%"
-
-on right click with feather:
-  if name of player's tool is "&fTotem da Águia":
-    if player has permission {@perm-totem}:
-      execute console command "skillapi cast barbarian_totem_eagle %player%"
-
-on right click with wolf spawn egg:
-  if name of player's tool is "&fTotem do Lobo":
-    if player has permission {@perm-totem}:
-      execute console command "skillapi cast barbarian_totem_wolf %player%"
-
-on right click with orange dye:
-  if name of player's tool is "&6Totem do Tigre":
-    if player has permission {@perm-totem}:
-      execute console command "skillapi cast barbarian_totem_tiger %player%"
-
-on right click with blaze rod:
-  if name of player's tool is "&cTotem da Fênix":
-    if player has permission {@perm-totem}:
-      execute console command "skillapi cast barbarian_totem_phoenix %player%"
-
-on right click with golden axe:
-  if name of player's tool is "&bMartelo da Tempestade":
-    if player has permission {@perm-storm}:
-      execute console command "skillapi cast barbarian_storm_thunder_hammer %player%"
-
-on right click with iron horse armor:
-  if name of player's tool is "&9Manopla Galvânica":
-    if player has permission {@perm-storm}:
-      execute console command "skillapi cast barbarian_storm_galvanic_surge %player%"
-
-on right click with blue carpet:
-  if name of player's tool is "&bManto dos Ventos":
-    if player has permission {@perm-storm}:
-      execute console command "skillapi cast barbarian_storm_wind_cloak %player%"
-
-on right click with drum:
-  if name of player's tool is "&bTambor Tempestuoso":
-    if player has permission {@perm-storm}:
-      execute console command "skillapi cast barbarian_storm_tempest_cauldron %player%"
-
-on right click with ender eye:
-  if name of player's tool is "&bTotem do Olho da Tempestade":
-    if player has permission {@perm-storm}:
-      execute console command "skillapi cast barbarian_storm_eye %player%"
-
+on right click:
+  if player's tool is blaze powder:
+    if name of player's tool is "&6Talismã da Fúria":
+      if player has permission {@perm-base}:
+        execute console command "skillapi cast barbarian_fury %player%"
+        wait 5 ticks
+        barbarian_refresh_hud(player)
+      else:
+        send "{@prefix} &cApenas Bárbaros podem usar isso."
+  
+on right click:
+  if player's tool is goat horn:
+    if name of player's tool is "&cBerrante Berserker":
+      if player has permission {@perm-berserker}:
+        execute console command "skillapi cast barbarian_berserker_bestial_roar %player%"
+  
+on left click:
+  if player's tool is netherite axe:
+    if name of player's tool is "&4Machado da Carnificina":
+      if player has permission {@perm-berserker}:
+        execute console command "skillapi cast barbarian_berserker_carnage %player%"
+  
+on right click:
+  if player's tool is shield:
+    if name of player's tool is "&4Broquel Espinhado":
+      if player has permission {@perm-berserker}:
+        execute console command "skillapi cast barbarian_berserker_frenzied_retaliation %player%"
+  
+on right click:
+  if player's tool is carved pumpkin:
+    if name of player's tool is "&6Totem do Urso":
+      if player has permission {@perm-totem}:
+        execute console command "skillapi cast barbarian_totem_bear %player%"
+  
+on right click:
+  if player's tool is feather:
+    if name of player's tool is "&fTotem da Águia":
+      if player has permission {@perm-totem}:
+        execute console command "skillapi cast barbarian_totem_eagle %player%"
+  
+on right click:
+  if player's tool is wolf spawn egg:
+    if name of player's tool is "&fTotem do Lobo":
+      if player has permission {@perm-totem}:
+        execute console command "skillapi cast barbarian_totem_wolf %player%"
+  
+on right click:
+  if player's tool is orange dye:
+    if name of player's tool is "&6Totem do Tigre":
+      if player has permission {@perm-totem}:
+        execute console command "skillapi cast barbarian_totem_tiger %player%"
+  
+on right click:
+  if player's tool is blaze rod:
+    if name of player's tool is "&cTotem da Fênix":
+      if player has permission {@perm-totem}:
+        execute console command "skillapi cast barbarian_totem_phoenix %player%"
+  
+on right click:
+  if player's tool is golden axe:
+    if name of player's tool is "&bMartelo da Tempestade":
+      if player has permission {@perm-storm}:
+        execute console command "skillapi cast barbarian_storm_thunder_hammer %player%"
+  
+on right click:
+  if player's tool is iron horse armor:
+    if name of player's tool is "&9Manopla Galvânica":
+      if player has permission {@perm-storm}:
+        execute console command "skillapi cast barbarian_storm_galvanic_surge %player%"
+  
+on right click:
+  if player's tool is blue carpet:
+    if name of player's tool is "&bManto dos Ventos":
+      if player has permission {@perm-storm}:
+        execute console command "skillapi cast barbarian_storm_wind_cloak %player%"
+  
+on right click:
+  if player's tool is drum:
+    if name of player's tool is "&bTambor Tempestuoso":
+      if player has permission {@perm-storm}:
+        execute console command "skillapi cast barbarian_storm_tempest_cauldron %player%"
+  
+on right click:
+  if player's tool is ender eye:
+    if name of player's tool is "&bTotem do Olho da Tempestade":
+      if player has permission {@perm-storm}:
+        execute console command "skillapi cast barbarian_storm_eye %player%"
+  
 on damage:
   set {_victim} to victim
   set {_attacker} to attacker
