@@ -1,11 +1,11 @@
 # LuckPerms - grupos da classe Bardo e colégios
 lp creategroup class_bard
-lp creategroup class_bard.lore
+lp creategroup class_bard.knowledge
 lp creategroup class_bard.valor
 lp creategroup class_bard.glamour
 
 # Heranças
-lp group class_bard.lore parent add class_bard
+lp group class_bard.knowledge parent add class_bard
 lp group class_bard.valor parent add class_bard
 lp group class_bard.glamour parent add class_bard
 
@@ -23,16 +23,29 @@ lp group class_bard permission set placeholderapi.placeholder.skills_inspiration
 lp group class_bard permission set placeholderapi.placeholder.skills_bard_song_timer true
 lp group class_bard permission set placeholderapi.placeholder.skills_bard_major_cd true
 
-# Subclasse Lore
-lp group class_bard.lore permission set proskillapi.subclass.bard_lore true
-lp group class_bard.lore permission set skillapi.skill.bard_lore_verso_analisador true
-lp group class_bard.lore permission set skillapi.skill.bard_lore_balada_dos_segredos true
-lp group class_bard.lore permission set skillapi.skill.bard_lore_palavra_desconcertante true
-lp group class_bard.lore permission set skillapi.skill.bard_lore_orquestracao_perfeita true
-lp group class_bard.lore permission set skillapi.skill.bard_lore_sinfonia_onisciente true
-lp group class_bard.lore permission set mythicmobs.item.LoreSongbook true
-lp group class_bard.lore permission set mythicmobs.item.LoreRelicHarp true
-lp group class_bard.lore permission set mythicmobs.item.LoreFocusQuill true
+# Subclasse Conhecimento
+lp group class_bard.knowledge permission set proskillapi.subclass.bard_lore true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_verso_analisador true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_palavra_desconcertante true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_eco_de_estudo true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_nota_precisa true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_balada_dos_segredos true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_ritmo_da_razao true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_marcacao_sapiente true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_glosa_arcana true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_orquestracao_perfeita true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_estudo_debilitante true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_crescendo_runico true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_cadencia_antimagia true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_sinfonia_onisciente true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_estro_fulgente true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_quebra_encanto true
+lp group class_bard.knowledge permission set skillapi.skill.bard_knowledge_tessitura_intelectual true
+lp group class_bard.knowledge permission set mythicmobs.item.BardLoreBook true
+lp group class_bard.knowledge permission set mythicmobs.item.Bard_Knowledge_T1_Focus true
+lp group class_bard.knowledge permission set mythicmobs.item.Bard_Knowledge_T2_Focus true
+lp group class_bard.knowledge permission set mythicmobs.item.Bard_Knowledge_T3_Focus true
+lp group class_bard.knowledge permission set mythicmobs.item.Bard_Knowledge_T4_Focus true
 
 # Subclasse Valor
 lp group class_bard.valor permission set proskillapi.subclass.bard_valor true
@@ -59,6 +72,6 @@ lp group class_bard.glamour permission set mythicmobs.item.GlamourStarLyre true
 # Comandos auxiliares / kit
 lp group class_bard permission set skript.command.kit_bardo true
 lp group class_bard permission set skript.command.bard_inspire true
-lp group class_bard.lore permission set skript.command.lore_verso true
+lp group class_bard.knowledge permission set skript.command.lore_verso true
 lp group class_bard.valor permission set skript.command.valor_hino true
 lp group class_bard.glamour permission set skript.command.glamour_encanto true
