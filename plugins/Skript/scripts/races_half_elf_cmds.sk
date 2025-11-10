@@ -1,6 +1,6 @@
-# races_half_elf_cmds.sk — Integração completa da raça Meio-Elfo e heranças.
-# Responsável por ligar MythicMobs ↔ ProSkillAPI ↔ RacesEffects, além de
-# comandos utilitários e kits de QA.
+﻿# races_half_elf_cmds.sk â€” IntegraÃ§Ã£o completa da raÃ§a Meio-Elfo e heranÃ§as.
+# ResponsÃ¡vel por ligar MythicMobs â†” ProSkillAPI â†” RacesEffects, alÃ©m de
+# comandos utilitÃ¡rios e kits de QA.
 
 options:
   skillcmd: psa cast
@@ -11,7 +11,7 @@ options:
   drow_group: "race_half_elf.drow"
   wood_group: "race_half_elf.wood"
   feather_name: "&dPena do Meio-Elfo &8(Racial)"
-  sigil_name: "&dSigilo do Sábio Meio-Elfo"
+  sigil_name: "&dSigilo do SÃ¡bio Meio-Elfo"
   brooch_name: "&5Broche Lunar Meio-Drow"
   charm_name: "&2Amuleto do Bosque Meio-Elfo"
 
@@ -39,7 +39,7 @@ function halfElfSyncModes(p: player):
 
 function halfElfCastSkill(p: player, skill: text, label: text):
   execute console command "{@skillcmd} %player% %skill%"
-  send action bar "&dRaça: Meio-Elfo &7→ &f%{_label}%" to {_p}
+  send action bar "&dRaÃ§a: Meio-Elfo &7â†’ &f%{_label}%" to {_p}
 
 function halfElfCurrentCantrip(p: player) :: text:
   return {halfelf.cantrip::%uuid of {_p}%}
@@ -50,13 +50,13 @@ function halfElfSetCantrip(p: player, cantrip: text):
   execute console command "{@race_meta_cmd} %player% halfelf_cantrip %{_cantrip}%"
 
 command /meioelfo_modo [<text>] [<text>]:
-  description: "Seleciona os mini-bônus da versatilidade meio-élfica."
+  description: "Seleciona os mini-bÃ´nus da versatilidade meio-Ã©lfica."
   permission: race.halfelf
   trigger:
     if player is not online:
       stop
     if halfElfHasGroup(player, {@base_group}) is false:
-      send "&cVocê precisa ser um meio-elfo para usar este comando." to player
+      send "&cVocÃª precisa ser um meio-elfo para usar este comando." to player
       stop
     set {_action} to arg-1
     if {_action} is not set:
@@ -69,7 +69,7 @@ command /meioelfo_modo [<text>] [<text>]:
     if {_action} is "escolher":
       set {_choice} to arg-2
       if {_choice} is not set:
-        send "&cInforme a opção desejada (diplomata, instinto, calma, descendencia)." to player
+        send "&cInforme a opÃ§Ã£o desejada (diplomata, instinto, calma, descendencia)." to player
         stop
       if {_choice} is "diplomata":
         set {_mode} to "diplomata_nato"
@@ -80,7 +80,7 @@ command /meioelfo_modo [<text>] [<text>]:
       else if {_choice} is "descendencia":
         set {_mode} to "desc_mista_trigger"
       else:
-        send "&cOpção inválida." to player
+        send "&cOpÃ§Ã£o invÃ¡lida." to player
         stop
       if {_mode} is set:
         set {_uuid} to uuid of player
@@ -96,77 +96,85 @@ command /meioelfo_modo [<text>] [<text>]:
           send "&aModo &f%arg-2% &aadicionado." to player
         halfElfSyncModes(player)
       stop
-    send "&cSintaxe: /meioelfo_modo escolher <opção>." to player
+    send "&cSintaxe: /meioelfo_modo escolher <opÃ§Ã£o>." to player
 
 command /truque_arcano [<text>] [<text>]:
-  description: "Seleciona ou lança o truque arcano da herança alto elfo."
+  description: "Seleciona ou lanÃ§a o truque arcano da heranÃ§a alto elfo."
   permission: race.halfelf.high
   trigger:
     if halfElfHasGroup(player, {@high_group}) is false:
-      send "&cSomente meio-elfos de herança alta podem usar truques." to player
+      send "&cSomente meio-elfos de heranÃ§a alta podem usar truques." to player
       stop
     if arg-1 is "select" or arg-1 is "selecionar":
       set {_option} to arg-2
       if {_option} is not set:
-        send "&7Opções: &dFaisca&7, &eLuz&7, &bMao." to player
+        send "&7OpÃ§Ãµes: &dFaisca&7, &eLuz&7, &bMao." to player
         stop
       set {_opt} to lowercase {_option}
       if {_opt} is "faisca":
         halfElfSetCantrip(player, "HalfElf_TruqueFaisca")
-        send "&aTruque definido: Faísca Hipnótica." to player
+        send "&aTruque definido: FaÃ­sca HipnÃ³tica." to player
       else if {_opt} is "luz":
         halfElfSetCantrip(player, "HalfElf_TruqueLuz")
         send "&aTruque definido: Luz Reveladora." to player
       else if {_opt} is "mao":
         halfElfSetCantrip(player, "HalfElf_TruqueMao")
-        send "&aTruque definido: Mão Prestidigitadora." to player
+        send "&aTruque definido: MÃ£o Prestidigitadora." to player
       else:
-        send "&cOpção inválida. Use faisca/luz/mao." to player
+        send "&cOpÃ§Ã£o invÃ¡lida. Use faisca/luz/mao." to player
       stop
     if arg-1 is set:
-      send "&7Use &f/truque_arcano selecionar <opção>&7 para trocar o truque." to player
+      send "&7Use &f/truque_arcano selecionar <opÃ§Ã£o>&7 para trocar o truque." to player
       stop
     set {_current} to halfElfCurrentCantrip(player)
     if {_current} is not set:
       set {_current} to "HalfElf_TruqueFaisca"
     halfElfCastSkill(player, {_current}, "Truque Arcano")
 
-command /racial [<text>]:
-  description: "Atalho para habilidades raciais registradas."
-  permission: race.core
-  trigger:
-    if arg-1 is not set:
-      send "&dComandos raciais disponíveis:&f tato_social, truque_arcano, fae_lights, shadow_step, camuflagem." to player
-      stop
-    set {_key} to lowercase arg-1
-    if {_key} is "tato_social":
-      if halfElfHasGroup(player, {@base_group}) is true:
-        halfElfCastSkill(player, "HalfElf_TatoSocial", "Tato Social")
-      else:
-        send "&cApenas meio-elfos padrão podem usar Tato Social." to player
-    else if {_key} is "truque_arcano":
-      execute player command "/truque_arcano"
-    else if {_key} is "fae_lights":
-      execute player command "/fae_lights"
-    else if {_key} is "shadow_step" or {_key} is "passo_faerico":
-      execute player command "/shadow_step"
-    else if {_key} is "camuflagem":
-      execute player command "/camuflagem_silvestre"
+function halfElfHandleRacialKey(p: player, key: text) :: boolean:
+  if key is not set:
+    return false
+  set {_agent} to lowercase key
+  if {_agent} is "tato_social":
+    if halfElfHasGroup(p, {@base_group}) is true:
+      halfElfCastSkill(p, "HalfElf_TatoSocial", "Tato Social")
     else:
-      send "&cOpção desconhecida." to player
+      send "&cApenas meio-elfos padrǜo podem usar Tato Social." to p
+    return true
+  else if {_agent} is "truque_arcano":
+    execute player command "/truque_arcano"
+    return true
+  else if {_agent} is "fae_lights":
+    execute player command "/fae_lights"
+    return true
+  else if {_agent} is "shadow_step" or {_agent} is "passo_faerico":
+    execute player command "/shadow_step"
+    return true
+  else if {_agent} is "camuflagem":
+    execute player command "/camuflagem_silvestre"
+    return true
+  return false
 
-command /fae_lights:
-  description: "Ativa Luzes Feéricas (herança drow)."
+command /racial_halfelf [<text>]:
+  description: "Atalho para habilidades meio-elfo."
+  permission: race.halfelf
+  trigger:
+    if arg-1 is set:
+      if halfElfHandleRacialKey(player, arg-1) is false:
+        send "&cOpção desconhecida." to player
+    else:
+      send "&dComandos raciais disponǸveis:&f tato_social, truque_arcano, fae_lights, shadow_step, camuflagem."command /fae_lights:
+  description: "Ativa Luzes FeÃ©ricas (heranÃ§a drow)."
   permission: race.halfelf.drow
   trigger:
     if halfElfHasGroup(player, {@drow_group}) is false:
-      send "&cSomente meio-elfos drow podem usar Luzes Feéricas." to player
+      send "&cSomente meio-elfos drow podem usar Luzes FeÃ©ricas." to player
       stop
-    halfElfCastSkill(player, "HalfElf_LuzesFeericas", "Luzes Feéricas")
+    halfElfCastSkill(player, "HalfElf_LuzesFeericas", "Luzes FeÃ©ricas")
 
 command /shadow_step:
   aliases: passo_faerico
-  description: "Teleporta entre sombras (herança drow)."
+  description: "Teleporta entre sombras (heranÃ§a drow)."
   permission: race.halfelf.drow
   trigger:
     if halfElfHasGroup(player, {@drow_group}) is false:
@@ -175,7 +183,7 @@ command /shadow_step:
     halfElfCastSkill(player, "HalfElf_PassoSombrio", "Passo Sombrio")
 
 command /camuflagem_silvestre:
-  description: "Ativa camuflagem em biomas naturais (herança elfo da floresta)."
+  description: "Ativa camuflagem em biomas naturais (heranÃ§a elfo da floresta)."
   permission: race.halfelf.wood
   trigger:
     if halfElfHasGroup(player, {@wood_group}) is false:
@@ -184,7 +192,7 @@ command /camuflagem_silvestre:
     halfElfCastSkill(player, "HalfElf_CamuflagemSilvestre", "Camuflagem Silvestre")
 
 command /kit_racial_halfelf:
-  description: "Entrega kit de QA para testes da raça Meio-Elfo."
+  description: "Entrega kit de QA para testes da raÃ§a Meio-Elfo."
   permission: race.halfelf.kit
   trigger:
     if halfElfHasGroup(player, {@base_group}) is false:
@@ -192,7 +200,7 @@ command /kit_racial_halfelf:
       stop
     execute console command "kit halfelf_racial %player%"
     execute console command "cmi kit halfelf_racial %player%"
-    send "&aKit de QA enviado. Confira seu inventário." to player
+    send "&aKit de QA enviado. Confira seu inventÃ¡rio." to player
 
 # Hooks de clique em itens focais MythicMobs
 on right click:
@@ -207,11 +215,11 @@ on right click:
     if halfElfHasGroup(player, {@high_group}) is true:
       execute player command "/truque_arcano"
     else:
-      send "&cO sigilo vibra e recusa o usuário." to player
+      send "&cO sigilo vibra e recusa o usuÃ¡rio." to player
   if name of player's tool is {@brooch_name}:
     cancel event
     if halfElfHasGroup(player, {@drow_group}) is true:
-      halfElfCastSkill(player, "HalfElf_LuzesFeericas", "Luzes Feéricas")
+      halfElfCastSkill(player, "HalfElf_LuzesFeericas", "Luzes FeÃ©ricas")
     else:
       send "&cO broche apaga sem sangue drow." to player
   if name of player's tool is {@charm_name}:
@@ -221,9 +229,12 @@ on right click:
     else:
       send "&cO amuleto permanece inerte." to player
 
-# Regeneração de cargas fora de combate (placeholder para integração futura)
+# RegeneraÃ§Ã£o de cargas fora de combate (placeholder para integraÃ§Ã£o futura)
 every 20 seconds:
   loop all players:
     if loop-player is online:
       if {combat.tag::%uuid of loop-player%} is not set:
         execute console command "{@race_meta_cmd} %loop-player% racial_uptime refresh"
+
+
+
