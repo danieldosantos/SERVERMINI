@@ -98,7 +98,7 @@ command /kit_bruxo:
     else:
       send "{@prefix} Apenas Bruxos podem usar este kit." to player
 
-on right click with any:
+on right click:
   if name of player's tool is "§5Foco Eldritch Aprendiz":
     execute console command "skills cast warlock_common_rajada_mistica %player%"
     cancel event
@@ -140,3 +140,4 @@ on right click with any:
 
 on script load:
   broadcast "{@prefix} Script do Bruxo carregado."
+

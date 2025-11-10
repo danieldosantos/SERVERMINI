@@ -104,88 +104,104 @@ command /fighter_ooc <text>:
       send "{@prefix} &7Estado normalizado."
 
 # Bindings para itens MythicMobs
-on left click with nether star:
-  if name of player's tool is "&eMedalha do Surto":
-    if player has permission "group.class_fighter":
-      execute console command "skillapi cast fighter_action_surge %player%"
-    else:
-      send "{@prefix} &cApenas Guerreiros podem usar isso."
-
-on right click with ghast tear:
-  if name of player's tool is "&aBroche do Segundo Fôlego":
-    if player has permission "group.class_fighter":
-      execute console command "skillapi cast fighter_second_wind %player%"
-
-on left click with netherite sword:
-  if name of player's tool is "&6Lâmina do Coliseu":
-    if player has permission "group.class_fighter.champion":
-      execute console command "skillapi cast fighter_champion_superior_strike %player%"
-
-on right click with shield:
-  if name of player's tool is "&aEscudo do Triunfo":
-    if player has permission "group.class_fighter.champion":
-      execute console command "skillapi cast fighter_champion_unyielding_resilience %player%"
-
-on right click with red banner:
-  if name of player's tool is "&eEstandarte do Gladiador":
-    if player has permission "group.class_fighter.champion":
-      execute console command "skillapi cast fighter_champion_gladiator_challenge %player%"
-
-on sneak right click with netherite boots:
-  if name of player's tool is "&6Grevas do Coliseu":
-    if player has permission "group.class_fighter.champion":
-      execute console command "skillapi cast fighter_champion_coliseum_leap %player%"
-
-on sneak left click with golden helmet:
-  if name of player's tool is "&6Coroa do Triunfo":
-    if player has permission "group.class_fighter.champion":
-      execute console command "skillapi cast fighter_champion_unforgettable_triumph %player%"
-
-on left click with string:
-  if name of player's tool is "&cChicote Desarmante":
-    if player has permission "group.class_fighter.battlemaster":
-      execute console command "skillapi cast fighter_battlemaster_disarming_strike %player%"
-
-on right click with book:
-  if name of player's tool is "&cManual de Manobras":
-    if player has permission "group.class_fighter.battlemaster":
-      execute console command "skillapi cast fighter_battlemaster_precise_maneuver %player%"
-
-on right click with white banner:
-  if name of player's tool is "&cEstandarte de Comando":
-    if player has permission "group.class_fighter.battlemaster":
-      execute console command "skillapi cast fighter_battlemaster_tactical_command %player%"
-
-on sneak left click with iron axe:
-  if name of player's tool is "&cAlabarda da Vitória":
-    if player has permission "group.class_fighter.battlemaster":
-      execute console command "skillapi cast fighter_battlemaster_victory_spin %player%"
-
-on left click with netherite sword:
-  if name of player's tool is "&bLâmina Rúnica":
-    if player has permission "group.class_fighter.eldritch_knight":
-      execute console command "skillapi cast fighter_eldritchknight_imbued_strike %player%"
-
-on right click with amethyst shard:
-  if name of player's tool is "&bFoco de Runas":
-    if player has permission "group.class_fighter.eldritch_knight":
-      execute console command "skillapi cast fighter_eldritchknight_runic_weapon %player%"
-
-on right click with shield:
-  if name of player's tool is "&bSigilo Guardião":
-    if player has permission "group.class_fighter.eldritch_knight":
-      execute console command "skillapi cast fighter_eldritchknight_arcane_guardian %player%"
-
-on right click with lapis lazuli:
-  if name of player's tool is "&bTotem Estático":
-    if player has permission "group.class_fighter.eldritch_knight":
-      execute console command "skillapi cast fighter_eldritchknight_static_shield %player%"
-
-on sneak left click with writable book:
-  if name of player's tool is "&bCódice do Gládio":
-    if player has permission "group.class_fighter.eldritch_knight":
-      execute console command "skillapi cast fighter_eldritchknight_arcane_gladius %player%"
-
+on left click:
+  if player's tool is nether star:
+    if name of player's tool is "&eMedalha do Surto":
+      if player has permission "group.class_fighter":
+        execute console command "skillapi cast fighter_action_surge %player%"
+      else:
+        send "{@prefix} &cApenas Guerreiros podem usar isso."
+  
+on right click:
+  if player's tool is ghast tear:
+    if name of player's tool is "&aBroche do Segundo Fôlego":
+      if player has permission "group.class_fighter":
+        execute console command "skillapi cast fighter_second_wind %player%"
+  
+on left click:
+  if player's tool is netherite sword:
+    if name of player's tool is "&6Lâmina do Coliseu":
+      if player has permission "group.class_fighter.champion":
+        execute console command "skillapi cast fighter_champion_superior_strike %player%"
+  
+on right click:
+  if player's tool is shield:
+    if name of player's tool is "&aEscudo do Triunfo":
+      if player has permission "group.class_fighter.champion":
+        execute console command "skillapi cast fighter_champion_unyielding_resilience %player%"
+  
+on right click:
+  if player's tool is red banner:
+    if name of player's tool is "&eEstandarte do Gladiador":
+      if player has permission "group.class_fighter.champion":
+        execute console command "skillapi cast fighter_champion_gladiator_challenge %player%"
+  
+on sneak right click:
+  if player's tool is netherite boots:
+    if name of player's tool is "&6Grevas do Coliseu":
+      if player has permission "group.class_fighter.champion":
+        execute console command "skillapi cast fighter_champion_coliseum_leap %player%"
+  
+on sneak left click:
+  if player's tool is golden helmet:
+    if name of player's tool is "&6Coroa do Triunfo":
+      if player has permission "group.class_fighter.champion":
+        execute console command "skillapi cast fighter_champion_unforgettable_triumph %player%"
+  
+on left click:
+  if player's tool is string:
+    if name of player's tool is "&cChicote Desarmante":
+      if player has permission "group.class_fighter.battlemaster":
+        execute console command "skillapi cast fighter_battlemaster_disarming_strike %player%"
+  
+on right click:
+  if player's tool is book:
+    if name of player's tool is "&cManual de Manobras":
+      if player has permission "group.class_fighter.battlemaster":
+        execute console command "skillapi cast fighter_battlemaster_precise_maneuver %player%"
+  
+on right click:
+  if player's tool is white banner:
+    if name of player's tool is "&cEstandarte de Comando":
+      if player has permission "group.class_fighter.battlemaster":
+        execute console command "skillapi cast fighter_battlemaster_tactical_command %player%"
+  
+on sneak left click:
+  if player's tool is iron axe:
+    if name of player's tool is "&cAlabarda da Vitória":
+      if player has permission "group.class_fighter.battlemaster":
+        execute console command "skillapi cast fighter_battlemaster_victory_spin %player%"
+  
+on left click:
+  if player's tool is netherite sword:
+    if name of player's tool is "&bLâmina Rúnica":
+      if player has permission "group.class_fighter.eldritch_knight":
+        execute console command "skillapi cast fighter_eldritchknight_imbued_strike %player%"
+  
+on right click:
+  if player's tool is amethyst shard:
+    if name of player's tool is "&bFoco de Runas":
+      if player has permission "group.class_fighter.eldritch_knight":
+        execute console command "skillapi cast fighter_eldritchknight_runic_weapon %player%"
+  
+on right click:
+  if player's tool is shield:
+    if name of player's tool is "&bSigilo Guardião":
+      if player has permission "group.class_fighter.eldritch_knight":
+        execute console command "skillapi cast fighter_eldritchknight_arcane_guardian %player%"
+  
+on right click:
+  if player's tool is lapis lazuli:
+    if name of player's tool is "&bTotem Estático":
+      if player has permission "group.class_fighter.eldritch_knight":
+        execute console command "skillapi cast fighter_eldritchknight_static_shield %player%"
+  
+on sneak left click:
+  if player's tool is writable book:
+    if name of player's tool is "&bCódice do Gládio":
+      if player has permission "group.class_fighter.eldritch_knight":
+        execute console command "skillapi cast fighter_eldritchknight_arcane_gladius %player%"
+  
 # Funções utilitárias chamadas pelas skills via "skript run"
 function fighter_speed_cap(p: player):
   if {fighter.speedboost.%p%} is not set:
@@ -361,4 +377,5 @@ function fighter_victory_thrust(p: player, t: entity, mana: number):
       set {_uuid} to uuid of p
       set {_mana} to mana parsed as number
       execute console command "auraskills player %{_uuid}% resource mana add %{_mana}%"
+
 

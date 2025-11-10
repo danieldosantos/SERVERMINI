@@ -59,88 +59,104 @@ command /ult:
       execute console command "skillapi cast warrior_iron_heart %player%"
 
 # Bindings MythicMobs
-on left click with iron sword:
-  if name of player's tool is "&6Lâmina de Treino do Guerreiro":
-    if player has permission {@perm-base}:
-      execute console command "skillapi cast warrior_quick_strike %player%"
-    else:
-      send "{@prefix} &cApenas Guerreiros podem usar isso."
-
-on right click with shield:
-  if name of player's tool is "&6Escudo de Linha":
-    if player has permission {@perm-base}:
-      execute console command "skillapi cast warrior_defensive_stance %player%"
-
-on left click with shield:
-  if name of player's tool is "&6Escudo de Linha":
-    if player has permission {@perm-base}:
-      execute console command "skillapi cast warrior_shove %player%"
-
-on right click with white banner:
-  if name of player's tool is "&6Estandarte de Postura":
-    if player has permission {@perm-base}:
-      execute console command "skillapi cast warrior_prepared_stance %player%"
-
-on sneak right click with white banner:
-  if name of player's tool is "&6Estandarte de Postura":
-    if player has permission {@perm-base}:
-      execute console command "skillapi cast warrior_aggressive_stance %player%"
-
-on right click with netherite sword:
-  if name of player's tool is "&eLâmina da Glória":
-    if player has permission {@perm-champion}:
-      execute console command "skillapi cast warrior_champion_precise_strike %player%"
-
-on left click with netherite sword:
-  if name of player's tool is "&eLâmina da Glória":
-    if player has permission {@perm-champion}:
-      execute console command "skillapi cast warrior_quick_strike %player%"
-
-on sneak left click with golden helmet:
-  if name of player's tool is "&eElmo da Fama":
-    if player has permission {@perm-champion}:
-      execute console command "skillapi cast warrior_champion_glory %player%"
-
-on left click with iron axe:
-  if name of player's tool is "&cAlabarda de Comando":
-    if player has permission {@perm-battlemaster}:
-      execute console command "skillapi cast warrior_battlemaster_trip %player%"
-
-on right click with iron axe:
-  if name of player's tool is "&cAlabarda de Comando":
-    if player has permission {@perm-battlemaster}:
-      execute console command "skillapi cast warrior_battlemaster_threaten %player%"
-
-on use of red banner:
-  if name of player's tool is "&cEstandarte de Guerra":
-    if player has permission {@perm-battlemaster}:
-      execute console command "skillapi cast warrior_battlemaster_command_line %player%"
-
-on sneak left click with red banner:
-  if name of player's tool is "&cEstandarte de Guerra":
-    if player has permission {@perm-battlemaster}:
-      execute console command "skillapi cast warrior_battlemaster_war_call %player%"
-
-on right click with netherite sword:
-  if name of player's tool is "&dKatana Ancestral":
-    if player has permission {@perm-samurai}:
-      execute console command "skillapi cast warrior_samurai_blade_focus %player%"
-
-on left click with netherite sword:
-  if name of player's tool is "&dKatana Ancestral":
-    if player has permission {@perm-samurai}:
-      execute console command "skillapi cast warrior_quick_strike %player%"
-
-on sneak left click with purple banner:
-  if name of player's tool is "&dEstandarte do Espírito":
-    if player has permission {@perm-samurai}:
-      execute console command "skillapi cast warrior_samurai_war_spirit %player%"
-
-on use of purple banner:
-  if name of player's tool is "&dEstandarte do Espírito":
-    if player has permission {@perm-samurai}:
-      execute console command "skillapi cast warrior_samurai_iaijutsu_stance %player%"
-
+on left click:
+  if player's tool is iron sword:
+    if name of player's tool is "&6Lâmina de Treino do Guerreiro":
+      if player has permission {@perm-base}:
+        execute console command "skillapi cast warrior_quick_strike %player%"
+      else:
+        send "{@prefix} &cApenas Guerreiros podem usar isso."
+  
+on right click:
+  if player's tool is shield:
+    if name of player's tool is "&6Escudo de Linha":
+      if player has permission {@perm-base}:
+        execute console command "skillapi cast warrior_defensive_stance %player%"
+  
+on left click:
+  if player's tool is shield:
+    if name of player's tool is "&6Escudo de Linha":
+      if player has permission {@perm-base}:
+        execute console command "skillapi cast warrior_shove %player%"
+  
+on right click:
+  if player's tool is white banner:
+    if name of player's tool is "&6Estandarte de Postura":
+      if player has permission {@perm-base}:
+        execute console command "skillapi cast warrior_prepared_stance %player%"
+  
+on sneak right click:
+  if player's tool is white banner:
+    if name of player's tool is "&6Estandarte de Postura":
+      if player has permission {@perm-base}:
+        execute console command "skillapi cast warrior_aggressive_stance %player%"
+  
+on right click:
+  if player's tool is netherite sword:
+    if name of player's tool is "&eLâmina da Glória":
+      if player has permission {@perm-champion}:
+        execute console command "skillapi cast warrior_champion_precise_strike %player%"
+  
+on left click:
+  if player's tool is netherite sword:
+    if name of player's tool is "&eLâmina da Glória":
+      if player has permission {@perm-champion}:
+        execute console command "skillapi cast warrior_quick_strike %player%"
+  
+on sneak left click:
+  if player's tool is golden helmet:
+    if name of player's tool is "&eElmo da Fama":
+      if player has permission {@perm-champion}:
+        execute console command "skillapi cast warrior_champion_glory %player%"
+  
+on left click:
+  if player's tool is iron axe:
+    if name of player's tool is "&cAlabarda de Comando":
+      if player has permission {@perm-battlemaster}:
+        execute console command "skillapi cast warrior_battlemaster_trip %player%"
+  
+on right click:
+  if player's tool is iron axe:
+    if name of player's tool is "&cAlabarda de Comando":
+      if player has permission {@perm-battlemaster}:
+        execute console command "skillapi cast warrior_battlemaster_threaten %player%"
+  
+on right click:
+  if player's tool is red banner:
+    if name of player's tool is "&cEstandarte de Guerra":
+      if player has permission {@perm-battlemaster}:
+        execute console command "skillapi cast warrior_battlemaster_command_line %player%"
+  
+on sneak left click:
+  if player's tool is red banner:
+    if name of player's tool is "&cEstandarte de Guerra":
+      if player has permission {@perm-battlemaster}:
+        execute console command "skillapi cast warrior_battlemaster_war_call %player%"
+  
+on right click:
+  if player's tool is netherite sword:
+    if name of player's tool is "&dKatana Ancestral":
+      if player has permission {@perm-samurai}:
+        execute console command "skillapi cast warrior_samurai_blade_focus %player%"
+  
+on left click:
+  if player's tool is netherite sword:
+    if name of player's tool is "&dKatana Ancestral":
+      if player has permission {@perm-samurai}:
+        execute console command "skillapi cast warrior_quick_strike %player%"
+  
+on sneak left click:
+  if player's tool is purple banner:
+    if name of player's tool is "&dEstandarte do Espírito":
+      if player has permission {@perm-samurai}:
+        execute console command "skillapi cast warrior_samurai_war_spirit %player%"
+  
+on right click:
+  if player's tool is purple banner:
+    if name of player's tool is "&dEstandarte do Espírito":
+      if player has permission {@perm-samurai}:
+        execute console command "skillapi cast warrior_samurai_iaijutsu_stance %player%"
+  
 # Funções utilitárias
 function warrior_refresh_hud(p: player):
   set {_stamina} to placeholderapi "%skills_warrior_stamina%" with p
@@ -519,4 +535,5 @@ every 1 second:
     else:
       delete {warrior.combo.%loop-player%}
       delete {warrior.posture.%loop-player%}
+
 
