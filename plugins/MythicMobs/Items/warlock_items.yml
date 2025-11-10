@@ -1,7 +1,7 @@
 # Itens focais do Bruxo para integração MythicMobs ↔ ProSkillAPI ↔ Skript
 items:
   WarlockT1_EldritchFocus:
-    Id: BLAZE_ROD
+    Id: minecraft:blaze_rod
     Display: '&5Foco Eldritch Aprendiz'
     Lore:
       - '&7Clique direito: Rajada Mística (T1).'
@@ -18,7 +18,7 @@ items:
       - skill{s=warlock_common_rajada_mistica} @target ~onRightClick
       - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
   WarlockT1_FiendBrand:
-    Id: FIRE_CHARGE
+    Id: minecraft:fire_charge
     Display: '&cMarca das Brasas Iniciante'
     Lore:
       - '&7Clique direito: Chicote Infernal (T1).'
@@ -34,7 +34,7 @@ items:
       - skill{s=warlock_fiend_chicote_infernal} @target ~onRightClick
       - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
   WarlockT1_ArchfeySigil:
-    Id: FLOWER_POT
+    Id: minecraft:flower_pot
     Display: '&aSinete Nebuloso'
     Lore:
       - '&7Clique direito: Passo Brumoso (T1).'
@@ -51,7 +51,7 @@ items:
       - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
 
   WarlockT2_HexSeal:
-    Id: ENDER_EYE
+    Id: minecraft:ender_eye
     Display: '&5Selo de Ruína Aprimorado'
     Lore:
       - '&7Clique direito: Selo de Ruína (T2).'
@@ -67,7 +67,7 @@ items:
       - skill{s=warlock_common_selo_de_ruina} @target ~onRightClick
       - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
   WarlockT2_FiendEmberKnife:
-    Id: GOLDEN_SWORD
+    Id: minecraft:golden_sword
     Display: '&cPunhal de Brasas'
     Lore:
       - '&7Clique direito: Armadilha de Brasas (T2).'
@@ -83,7 +83,7 @@ items:
       - skill{s=warlock_fiend_armadilha_de_brasas} @location ~onRightClick
       - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
   WarlockT2_OldOneIdol:
-    Id: HEART_OF_THE_SEA
+    Id: minecraft:heart_of_the_sea
     Display: '&3Ídolo Esdrúxulo'
     Lore:
       - '&7Clique direito: Marionete Mental (T2).'
@@ -100,7 +100,7 @@ items:
       - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
 
   WarlockT3_ShadowManacles:
-    Id: CHAIN
+    Id: minecraft:chain
     Display: '&5Manilhas Etéreas'
     Lore:
       - '&7Clique direito: Correntes Etéreas (T3).'
@@ -116,7 +116,7 @@ items:
       - skill{s=warlock_common_correntes_etereas} @location ~onRightClick
       - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
   WarlockT3_ArchfeyBloom:
-    Id: MOSS_BLOCK
+    Id: minecraft:moss_block
     Display: '&aBroto Feérico'
     Lore:
       - '&7Clique direito: Círculo Féerico (T3).'
@@ -132,7 +132,7 @@ items:
       - skill{s=warlock_archfey_circulo_feerico} @self ~onRightClick
       - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
   WarlockT3_OldOneRelic:
-    Id: ENCHANTED_BOOK
+    Id: minecraft:enchanted_book
     Display: '&3Relíquia Onírica'
     Lore:
       - '&7Clique direito: Cascata de Loucura (T3).'
@@ -149,7 +149,7 @@ items:
       - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
 
   WarlockT4_PotencyCenser:
-    Id: WITHER_ROSE
+    Id: minecraft:wither_rose
     Display: '&5Incensário da Potestade'
     Lore:
       - '&7Clique direito: Evocar Potestade (T4).'
@@ -165,7 +165,7 @@ items:
       - skill{s=warlock_common_evocar_potestade} @self ~onRightClick
       - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
   WarlockT4_FiendMeteorCore:
-    Id: NETHER_STAR
+    Id: minecraft:nether_star
     Display: '&cNúcleo Infernal Pactuado'
     Lore:
       - '&7Clique direito: Inferno Pactuado (T4).'
@@ -181,7 +181,7 @@ items:
       - skill{s=warlock_fiend_inferno_pactuado} @location ~onRightClick
       - command{c="skript run warlock_update_hud %player%"} @self ~onLeftClick
   WarlockT4_OldOneEye:
-    Id: EYE_ARMOR_TRIM_SMITHING_TEMPLATE
+    Id: minecraft:eye_armor_trim_smithing_template
     Display: '&3Olho da Quietude Ancestral'
     Lore:
       - '&7Clique direito: Abismo Sussurrante (T4).'

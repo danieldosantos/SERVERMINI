@@ -1,7 +1,7 @@
 # Itens focais da classe Blood Hunter para MythicMobs
 items:
   CrimsonRiteBlade:
-    Id: IRON_SWORD
+    Id: minecraft:iron_sword
     Display: '&cLâmina do Rito Carmesim'
     Lore:
       - '&7Clique direito: ativa §cRito Carmesim§7.'
@@ -15,7 +15,7 @@ items:
     Skills:
       - skill{s=blood_hunter_crimson_rite} @self ~onUse
   BloodMarkCharm:
-    Id: ENDER_EYE
+    Id: minecraft:ender_eye
     Display: '&4Talismã da Presa'
     Lore:
       - '&7Clique direito: aplica §4Marca de Presa§7.'
@@ -28,7 +28,7 @@ items:
     Skills:
       - skill{s=blood_hunter_mark_of_the_prey} @self ~onUse
   BloodFocusVial:
-    Id: REDSTONE
+    Id: minecraft:redstone
     Display: '&cFrasco de Concentração'
     Lore:
       - '&7Clique direito: ativa §cConcentração de Sangue§7.'
@@ -41,7 +41,7 @@ items:
     Skills:
       - skill{s=blood_hunter_blood_focus} @self ~onUse
   GhostRitualDagger:
-    Id: DIAMOND_SWORD
+    Id: minecraft:diamond_sword
     Display: '&fPunhal Espectral'
     Lore:
       - '&7Canaliza §fRito do Espectro§7.'
@@ -54,7 +54,7 @@ items:
     Skills:
       - skill{s=blood_hunter_ghostslayer_rite} @self ~onUse
   SanctifiedVial:
-    Id: HONEY_BOTTLE
+    Id: minecraft:honey_bottle
     Display: '&fVial Consagrado'
     Lore:
       - '&7Ativa §fVéu Consagrado§7 para proteger aliados.'
@@ -67,7 +67,7 @@ items:
     Skills:
       - skill{s=blood_hunter_ghostslayer_hallowed_veil} @self ~onUse
   GravewardCharm:
-    Id: TOTEM_OF_UNDYING
+    Id: minecraft:totem_of_undying
     Display: '&fTalismã Tumba-Selada'
     Lore:
       - '&7Ultimate §fAnátema dos Mortos§7.'
@@ -80,7 +80,7 @@ items:
     Skills:
       - skill{s=blood_hunter_ghostslayer_anathema} @self ~onSneakRightClick
   ProfaneTome:
-    Id: WRITABLE_BOOK
+    Id: minecraft:writable_book
     Display: '&5Grimório Profano'
     Lore:
       - '&7Clique direito: ativa §5Rito Eldritch§7.'
@@ -93,7 +93,7 @@ items:
     Skills:
       - skill{s=blood_hunter_profanesoul_rite} @self ~onUse
   HexBrandSigil:
-    Id: ECHO_SHARD
+    Id: minecraft:echo_shard
     Display: '&5Selo do Patrono'
     Lore:
       - '&7Aplica §5Maldição do Patrono§7 no alvo marcado.'
@@ -106,7 +106,7 @@ items:
     Skills:
       - skill{s=blood_hunter_profanesoul_patron_curse} @self ~onUse
   EldritchNeedle:
-    Id: TRIDENT
+    Id: minecraft:trident
     Display: '&5Agulha Abissal'
     Lore:
       - '&7Ultimate §5Rasgo do Vazio§7.'
@@ -119,7 +119,7 @@ items:
     Skills:
       - skill{s=blood_hunter_profanesoul_void_rend} @self ~onSneakRightClick
   MutagenKit:
-    Id: BREWING_STAND
+    Id: minecraft:brewing_stand
     Display: '&6Kit Mutagênico'
     Lore:
       - '&7Clique direito: abre seleção §6Mutágeno§7.'
@@ -132,7 +132,7 @@ items:
     Skills:
       - skill{s=blood_hunter_mutant_mutagen} @self ~onUse
   CoagulantVial:
-    Id: GLASS_BOTTLE
+    Id: minecraft:glass_bottle
     Display: '&6Frasco Coagulante'
     Lore:
       - '&7Clique direito: ativa §6Coágulo Alquímico§7.'
@@ -145,7 +145,7 @@ items:
     Skills:
       - skill{s=blood_hunter_mutant_coagulant} @self ~onUse
   CatalystInjector:
-    Id: BLAZE_ROD
+    Id: minecraft:blaze_rod
     Display: '&6Injetor Catalítico'
     Lore:
       - '&7Ultimate §6Catalise Suprema§7.'
@@ -158,7 +158,7 @@ items:
     Skills:
       - skill{s=blood_hunter_mutant_supreme_catalysis} @self ~onSneakRightClick
   LycanMoonTalisman:
-    Id: PRISMARINE_CRYSTALS
+    Id: minecraft:prismarine_crystals
     Display: '&4Talismã Lunar'
     Lore:
       - '&7Clique direito: ativa §4Forma do Caçador§7.'
@@ -171,7 +171,7 @@ items:
     Skills:
       - skill{s=blood_hunter_lycan_form} @self ~onUse
   LycanClaw:
-    Id: NETHERITE_SCRAP
+    Id: minecraft:netherite_scrap
     Display: '&4Garra Licana'
     Lore:
       - '&7Clique direito: §4Investida Predatória§7.'
@@ -184,7 +184,7 @@ items:
     Skills:
       - skill{s=blood_hunter_lycan_predatory_leap} @self ~onUse
   HunterFetters:
-    Id: CHAIN
+    Id: minecraft:chain
     Display: '&4Grilhões do Caçador'
     Lore:
       - '&7Ultimate §4Luar Carmesim§7.'

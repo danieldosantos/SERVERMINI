@@ -1,7 +1,7 @@
 # Itens raciais dos halflings — moedas, mantos e amuletos vinculados às skills.
 items:
   HalflingLuckyCoin:
-    Id: GOLD_NUGGET
+    Id: minecraft:gold_nugget
     Display: '&eMoeda da Sorte Halfling'
     Lore:
       - '&7Brilha quando a sorte sorri.'
@@ -16,7 +16,7 @@ items:
       race-lock: 'race_halfling'
       skill: 'Halfling_IniciativaIntima'
   LightfootCloak:
-    Id: LEATHER_CHESTPLATE
+    Id: minecraft:leather_chestplate
     Display: '&aManto dos Pés-Leves'
     Lore:
       - '&7Fibra leve que bebe a luz.'
@@ -29,7 +29,7 @@ items:
       race-lock: 'race_halfling.lightfoot'
       skill: 'Halfling_PassoSilencioso'
   StoutStoneCharm:
-    Id: POLISHED_ANDESITE
+    Id: minecraft:polished_andesite
     Display: '&6Amuleto de Pedra Robusta'
     Lore:
       - '&7Talismã pesado que ancora o portador.'

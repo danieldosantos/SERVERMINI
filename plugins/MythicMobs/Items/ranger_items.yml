@@ -3,7 +3,7 @@
 items:
   # TIER 1
   RangerMarkCharm:
-    Id: ENDER_EYE
+    Id: minecraft:ender_eye
     Display: '&aTalismã da Marca'
     Lore:
       - '&7Ativa &aMarca do Caçador&7 (revela e amplia dano).'
@@ -18,7 +18,7 @@ items:
     Skills:
       - skill{s=ranger_common_mark_of_the_hunter} @self ~onUse
   HunterRicochetBow:
-    Id: BOW
+    Id: minecraft:bow
     Display: '&6Arco de Varredura'
     Lore:
       - '&7Dispara &6Varredura da Presa&7 (ricocheteia no marcado).'
@@ -33,7 +33,7 @@ items:
     Skills:
       - skill{s=ranger_hunter_prey_sweep} @self ~onRightClick
   BeastCommandWhistle:
-    Id: GOAT_HORN
+    Id: minecraft:goat_horn
     Display: '&aApito do Companheiro'
     Lore:
       - '&7Ordena &aApito da Fera&7 (pet foca o marcado).'
@@ -49,7 +49,7 @@ items:
 
   # TIER 2
   RangerTrapKit:
-    Id: TRIPWIRE_HOOK
+    Id: minecraft:tripwire_hook
     Display: '&6Kit de Armadilhas'
     Lore:
       - '&7Posiciona &6Plantar Armadilha&7 (enraiza e causa dano).'
@@ -64,7 +64,7 @@ items:
     Skills:
       - skill{s=ranger_common_trap_plant} @self ~onUse
   HunterSteelGloves:
-    Id: IRON_NUGGET
+    Id: minecraft:iron_nugget
     Display: '&7Garras de Aço'
     Lore:
       - '&7Concede &7Garras de Aço&7 (+dano e velocidade).'
@@ -78,7 +78,7 @@ items:
     Skills:
       - skill{s=ranger_hunter_steel_claws} @self ~onRightClick
   BeastDashHarness:
-    Id: LEATHER_HORSE_ARMOR
+    Id: minecraft:leather_horse_armor
     Display: '&aArnês de Investida'
     Lore:
       - '&7Ativa &aInvestida Coordenada&7 (dash conjunto).'
@@ -95,7 +95,7 @@ items:
 
   # TIER 3
   RangerArrowRainQuiver:
-    Id: ARROW
+    Id: minecraft:arrow
     Display: '&2Aljava da Chuva'
     Lore:
       - '&7Libera &2Chuva de Setas&7 (zona de dano).'
@@ -109,7 +109,7 @@ items:
     Skills:
       - skill{s=ranger_common_arrow_rain} @self ~onSneakRightClick
   HunterExecuteCharm:
-    Id: TOTEM_OF_UNDYING
+    Id: minecraft:totem_of_undying
     Display: '&cÍdolo do Predador'
     Lore:
       - '&7Canaliza &cMatar/Incapacitar&7 (escolha de finalização).'
@@ -123,7 +123,7 @@ items:
     Skills:
       - skill{s=ranger_hunter_execute_or_stun} @self ~onUse
   BeastAlphaWardTotem:
-    Id: MOSSY_COBBLESTONE_WALL
+    Id: minecraft:mossy_cobblestone_wall
     Display: '&aTotem Alfa'
     Lore:
       - '&7Projeta &aProteção Alfa&7 (escudo na fera).'
@@ -139,7 +139,7 @@ items:
 
   # TIER 4
   RangerWildTotem:
-    Id: FLOWERING_AZALEA
+    Id: minecraft:flowering_azalea
     Display: '&5Totem da Mata'
     Lore:
       - '&7Convoca &5Chamado da Mata&7 (aura aliado).'
@@ -153,7 +153,7 @@ items:
     Skills:
       - skill{s=ranger_common_call_of_the_wild} @self ~onUse
   HunterPriorityScope:
-    Id: SPYGLASS
+    Id: minecraft:spyglass
     Display: '&6Mira Prioritária'
     Lore:
       - '&7Ativa &6Alvo Prioritário&7 (+dano global).'
@@ -167,7 +167,7 @@ items:
     Skills:
       - skill{s=ranger_hunter_priority_target} @self ~onUse
   BeastPackFuryTotem:
-    Id: BONE
+    Id: minecraft:bone
     Display: '&cOssada do Bando'
     Lore:
       - '&7Desencadeia &cFúria do Bando&7 (ultimate pet).'

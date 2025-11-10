@@ -1,6 +1,6 @@
 Items:
   EldritchWand:
-    Id: BLAZE_ROD
+    Id: minecraft:blaze_rod
     Display: '&5Varinha Eldritch'
     Lore:
       - '&7Vinculada à classe: class_warlock'
@@ -13,7 +13,7 @@ Items:
         # Delegate to datapack function run as the player so behavior matches existing mcfunction
         - command{c=execute as @trigger_name run function reffects_cd:eldritch} @trigger
   HexTalisman:
-    Id: GHAST_TEAR
+    Id: minecraft:ghast_tear
     Display: '&6Talismã do Hex'
     Lore:
       - '&7Vinculada à classe: class_warlock'

@@ -1,7 +1,7 @@
 # Itens e efeitos raciais do Draconato e linhagens.
 items:
   DraconicCharm:
-    Id: HEART_OF_THE_SEA
+    Id: minecraft:heart_of_the_sea
     Display: '&cAmuleto Dracônico'
     Lore:
       - '&7Canaliza o sopro ancestral.'
@@ -16,7 +16,7 @@ items:
       race-lock: 'race_dragonborn'
       skill: 'Dragonborn_Breath'
   FlameScaleAmulet:
-    Id: BLAZE_POWDER
+    Id: minecraft:blaze_powder
     Display: '&6Escama Ardente'
     Lore:
       - '&7Vibra com calor intenso.'
@@ -27,7 +27,7 @@ items:
       race-lock: 'race_dragonborn.fire'
       skill: 'Dragonfire_Blade'
   FrostShardTalisman:
-    Id: PRISMARINE_CRYSTALS
+    Id: minecraft:prismarine_crystals
     Display: '&bTalismã de Estilhaço Gélido'
     Lore:
       - '&7Gela o ar ao redor.'
@@ -38,7 +38,7 @@ items:
       race-lock: 'race_dragonborn.ice'
       skill: 'Dragonice_Freeze'
   CorrosiveSpineCharm:
-    Id: FERMENTED_SPIDER_EYE
+    Id: minecraft:fermented_spider_eye
     Display: '&2Glândula Corrosiva'
     Lore:
       - '&7Goteja ácido volátil.'
@@ -49,7 +49,7 @@ items:
       race-lock: 'race_dragonborn.acid'
       skill: 'Dragonacid_Focus'
   StormGlandBand:
-    Id: LIGHTNING_ROD
+    Id: minecraft:lightning_rod
     Display: '&9Anel da Tempestade'
     Lore:
       - '&7Crepita com eletricidade azul.'
@@ -60,7 +60,7 @@ items:
       race-lock: 'race_dragonborn.lightning'
       skill: 'Dragonstorm_Dash'
   ToxicDrakeCharm:
-    Id: SLIME_BALL
+    Id: minecraft:slime_ball
     Display: '&aTalismã da Névoa Tóxica'
     Lore:
       - '&7Exala vapores nocivos.'

@@ -1,7 +1,7 @@
 # Itens raciais Tiefling — ativações para habilidades de cada linhagem.
 items:
   AmuletoInfernus:
-    Id: BLAZE_POWDER
+    Id: minecraft:blaze_powder
     Display: '&cAmuleto Infernus'
     Lore:
       - '&7Talismã incandescente ligado às chamas de Asmodeus.'
@@ -17,7 +17,7 @@ items:
       skill: 'Tiefling_ChamaInfernal'
       skript-bind: 'fogo_infernal'
   SigiloAbissal:
-    Id: WITHER_ROSE
+    Id: minecraft:wither_rose
     Display: '&5Sigilo Abissal'
     Lore:
       - '&7Marca do caos que pulsa com energia demoniaca.'
@@ -33,7 +33,7 @@ items:
       skill: 'Tiefling_ExplosaoAbissal'
       skript-bind: 'abismo'
   VeloUmbral:
-    Id: BLACK_CARPET
+    Id: minecraft:black_carpet
     Display: '&8Véu Umbral'
     Lore:
       - '&7Tecidos que absorvem luz e guiam as sombras.'

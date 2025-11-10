@@ -1,7 +1,7 @@
 # Itens raciais dos gnomos e sub-raças.
 items:
   GnomeTinkerTools:
-    Id: STONECUTTER
+    Id: minecraft:stonecutter
     Display: '&dFerramentas Gnomescas'
     Lore:
       - '&7Kit de ajuste rápido para engenhos portáteis.'
@@ -15,7 +15,7 @@ items:
       skill: 'EngenhoRapido'
       racial_item: 'gnome_tinker'
   ForestGnomeCharm:
-    Id: FLOWER_BANNER_PATTERN
+    Id: minecraft:flower_banner_pattern
     Display: '&aAmuleto da Clareira'
     Lore:
       - '&aSussurros que ecoam entre folhas.'
@@ -28,7 +28,7 @@ items:
       skill: 'SussurroAmigoDaFloresta'
       racial_item: 'gnome_forest_charm'
   LeafstepBoots:
-    Id: LEATHER_BOOTS
+    Id: minecraft:leather_boots
     Display: '&2Botas Passo-de-Folha'
     Lore:
       - '&7O couro range como folhas secas prontas para saltar.'
@@ -42,7 +42,7 @@ items:
       skill: 'SaltoDeGalho'
       racial_item: 'gnome_leafstep'
   RockGnomeWrench:
-    Id: IRON_HOE
+    Id: minecraft:iron_hoe
     Display: '&7Chave de Engenho Rochedo'
     Lore:
       - '&7Ferramenta reforçada para blindagens improvisadas.'
@@ -56,7 +56,7 @@ items:
       skill: 'BaluarteImprovisado'
       racial_item: 'gnome_rock_wrench'
   StaticGadgetKit:
-    Id: REDSTONE_LAMP
+    Id: minecraft:redstone_lamp
     Display: '&9Kit de Gadget Estático'
     Lore:
       - '&9Matriz anti-projéteis pronta para ser armada.'

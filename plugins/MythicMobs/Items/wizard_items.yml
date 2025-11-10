@@ -1,6 +1,6 @@
 # Focos de Mago por TIER com binds para ProSkillAPI
 Wizard_T1_Common_Grimoire:
-  Id: WRITABLE_BOOK
+  Id: minecraft:writable_book
   Display: '&9Grimório Aprendiz do Arcanista'
   Lore:
   - '&7Classe: Mago'
@@ -15,7 +15,7 @@ Wizard_T1_Common_Grimoire:
   - skill{s=Wizard_Common_T1_ArcaneShield} @self ~onLeftClick
 
 Wizard_T1_Evocation_Staff:
-  Id: BLAZE_ROD
+  Id: minecraft:blaze_rod
   Display: '&cCajado das Faíscas'
   Lore:
   - '&7Escola: Evocação'
@@ -30,7 +30,7 @@ Wizard_T1_Evocation_Staff:
   - skill{s=Wizard_Evocation_T1_ScorchingRay} @target ~onLeftClick
 
 Wizard_T1_Abjuration_Talisman:
-  Id: HEART_OF_THE_SEA
+  Id: minecraft:heart_of_the_sea
   Display: '&bTalismã do Guardião Rúnico'
   Lore:
   - '&7Escola: Abjuração'
@@ -45,7 +45,7 @@ Wizard_T1_Abjuration_Talisman:
   - skill{s=Wizard_Abjuration_T1_RunicSeal} @self ~onLeftClick
 
 Wizard_T1_Illusion_Focus:
-  Id: AMETHYST_SHARD
+  Id: minecraft:amethyst_shard
   Display: '&dFoco de Miragens'
   Lore:
   - '&7Escola: Ilusão'
@@ -60,7 +60,7 @@ Wizard_T1_Illusion_Focus:
   - skill{s=Wizard_Illusion_T1_InvisibleVeil} @self ~onLeftClick
 
 Wizard_T2_Common_Focus:
-  Id: ENCHANTED_BOOK
+  Id: minecraft:enchanted_book
   Display: '&9Compêndio de Rituais'
   Lore:
   - '&7Classe: Mago'
@@ -75,7 +75,7 @@ Wizard_T2_Common_Focus:
   - skill{s=Wizard_Common_T2_KnowledgeLens} @target ~onRightClickSneak
 
 Wizard_T2_Evocation_Focus:
-  Id: ECHO_SHARD
+  Id: minecraft:echo_shard
   Display: '&cCondutor de Explosões'
   Lore:
   - '&7Escola: Evocação'
@@ -90,7 +90,7 @@ Wizard_T2_Evocation_Focus:
   - skill{s=Wizard_Evocation_T2_EtherealLance} @target ~onLeftClick
 
 Wizard_T2_Abjuration_Signet:
-  Id: PRISMARINE_CRYSTALS
+  Id: minecraft:prismarine_crystals
   Display: '&bSinete da Guarda Arcana'
   Lore:
   - '&7Escola: Abjuração'
@@ -105,7 +105,7 @@ Wizard_T2_Abjuration_Signet:
   - skill{s=Wizard_Abjuration_T2_PrismaticGuardian} @location ~onRightClickSneak
 
 Wizard_T2_Illusion_Orb:
-  Id: ENDER_EYE
+  Id: minecraft:ender_eye
   Display: '&dOrbe das Sombras'
   Lore:
   - '&7Escola: Ilusão'
@@ -120,7 +120,7 @@ Wizard_T2_Illusion_Orb:
   - skill{s=Wizard_Illusion_T2_SmokeCurtain} @location ~onLeftClick
 
 Wizard_T3_Common_Focus:
-  Id: LODESTONE
+  Id: minecraft:lodestone
   Display: '&9Âncora de Foco Arcano'
   Lore:
   - '&7Classe: Mago'
@@ -135,7 +135,7 @@ Wizard_T3_Common_Focus:
   - skill{s=Wizard_Common_T3_AmplifySpell} @self ~onLeftClick
 
 Wizard_T3_Evocation_Crystal:
-  Id: NETHER_STAR
+  Id: minecraft:nether_star
   Display: '&cNúcleo Voltaico'
   Lore:
   - '&7Escola: Evocação'
@@ -150,7 +150,7 @@ Wizard_T3_Evocation_Crystal:
   - skill{s=Wizard_Evocation_T3_SyncDetonation} @self ~onRightClickSneak
 
 Wizard_T3_Abjuration_Wardstone:
-  Id: TURTLE_HELMET
+  Id: minecraft:turtle_helmet
   Display: '&bElmo do Baluarte Vivo'
   Lore:
   - '&7Escola: Abjuração'
@@ -165,7 +165,7 @@ Wizard_T3_Abjuration_Wardstone:
   - skill{s=Wizard_Abjuration_T3_AntimagicShackle} @target ~onLeftClick
 
 Wizard_T3_Illusion_Charm:
-  Id: MUSIC_DISC_STRAD
+  Id: minecraft:music_disc_strad
   Display: '&dCharme do Teatro Sombrio'
   Lore:
   - '&7Escola: Ilusão'
@@ -180,7 +180,7 @@ Wizard_T3_Illusion_Charm:
   - skill{s=Wizard_Illusion_T3_PhantomStep} @self ~onLeftClick
 
 Wizard_T4_Common_Relic:
-  Id: RESPAWN_ANCHOR
+  Id: minecraft:respawn_anchor
   Display: '&9Relíquia da Tempestade Mística'
   Lore:
   - '&7Classe: Mago'
@@ -195,7 +195,7 @@ Wizard_T4_Common_Relic:
   - skill{s=Wizard_Common_T4_Reordering} @self ~onRightClickSneak
 
 Wizard_T4_Evocation_Relic:
-  Id: BLAZE_POWDER
+  Id: minecraft:blaze_powder
   Display: '&cRelicário do Cataclismo'
   Lore:
   - '&7Escola: Evocação'
@@ -210,7 +210,7 @@ Wizard_T4_Evocation_Relic:
   - skill{s=Wizard_Evocation_T4_FireTempest} @location ~onLeftClick
 
 Wizard_T4_Abjuration_Relic:
-  Id: BEACON
+  Id: minecraft:beacon
   Display: '&bBastão da Fortaleza Arcana'
   Lore:
   - '&7Escola: Abjuração'
@@ -225,7 +225,7 @@ Wizard_T4_Abjuration_Relic:
   - skill{s=Wizard_Abjuration_T4_SafeguardSeal} @target ~onRightClickSneak
 
 Wizard_T4_Illusion_Relic:
-  Id: DRAGON_EGG
+  Id: minecraft:dragon_egg
   Display: '&dNexo da Tessitura'
   Lore:
   - '&7Escola: Ilusão'

@@ -1,7 +1,7 @@
 # Itens raciais vinculados às habilidades e permissões LuckPerms.
 items:
   DwarvenFortitudeStone:
-    Id: NETHERITE_BLOCK
+    Id: minecraft:netherite_block
     Display: '&6Pedra da Fortitude'
     Lore:
       - '&7Um fragmento da muralha ancestral.'
@@ -16,7 +16,7 @@ items:
       race-lock: 'race_anao.colina'
       skill: 'FortitudeAncestral'
   MountainBastionCharm:
-    Id: SHULKER_SHELL
+    Id: minecraft:shulker_shell
     Display: '&7Totem da Postura'
     Lore:
       - '&7Pedra que estabiliza o portador.'
@@ -27,7 +27,7 @@ items:
       race-lock: 'race_anao.montanha'
       skill: 'PosturaDePedra'
   DraconicCharm:
-    Id: BLAZE_ROD
+    Id: minecraft:blaze_rod
     Display: '&cTalismã Dracônico'
     Lore:
       - '&6Respira o elemento ancestral.'
@@ -38,7 +38,7 @@ items:
       race-lock: 'race_draconato'
       skill: 'SoproDraconico'
   ElvenMoonbrooch:
-    Id: ECHO_SHARD
+    Id: minecraft:echo_shard
     Display: '&bBroche da Lua Élfica'
     Lore:
       - '&bCanaliza a graça ancestral.'
@@ -50,7 +50,7 @@ items:
       race-lock: 'race_elfo'
       skill: 'FaePassos'
   HighElfCrystal:
-    Id: ENDER_EYE
+    Id: minecraft:ender_eye
     Display: '&dCristal Arcano Alto-Elfo'
     Lore:
       - '&dFoco calibrado para Truques Arcanos.'
@@ -62,7 +62,7 @@ items:
       race-lock: 'race_elfo.alto'
       skill: 'TruqueArcanoSeta'
   ForestLeafCharm:
-    Id: FEATHER
+    Id: minecraft:feather
     Display: '&aAmuleto Folha Silvestre'
     Lore:
       - '&7Exala cheiro de musgo fresco.'
@@ -73,7 +73,7 @@ items:
       race-lock: 'race_elfo.floresta'
       skill: 'SaltoGalho'
   DrowMoonbrooch:
-    Id: AMETHYST_SHARD
+    Id: minecraft:amethyst_shard
     Display: '&5Broche da Lua Profunda'
     Lore:
       - '&5Sussurra segredos das casas subterrâneas.'
@@ -82,7 +82,7 @@ items:
       race-lock: 'race_elfo.drow'
       skill: 'LuzesFeericas'
   GnomeWhistle:
-    Id: MUSIC_DISC_FAR
+    Id: minecraft:music_disc_far
     Display: '&bApito Encantador'
     Lore:
       - '&bChama aliados peludos temporários.'
@@ -91,7 +91,7 @@ items:
       race-lock: 'race_gnomo.floresta'
       skill: 'CantoCativante'
   GnomeGyroCore:
-    Id: REDSTONE_TORCH
+    Id: minecraft:redstone_torch
     Display: '&7Núcleo Girognomo'
     Lore:
       - '&7Energia comprimida para drones protetores.'
@@ -100,7 +100,7 @@ items:
       race-lock: 'race_gnomo.rocha'
       skill: 'EngenhoGnomesco'
   HalflingLuckyCoin:
-    Id: GOLD_NUGGET
+    Id: minecraft:gold_nugget
     Display: '&eMoeda da Sorte Halfling'
     Lore:
       - '&7Brilha quando a sorte sorri.'
@@ -109,7 +109,7 @@ items:
       race-lock: 'race_halfling'
       skill: 'Halfling_IniciativaIntima'
   LightfootCloak:
-    Id: LEATHER_CHESTPLATE
+    Id: minecraft:leather_chestplate
     Display: '&aManto dos Pés-Leves'
     Lore:
       - '&7Fibra leve que bebe a luz.'
@@ -120,7 +120,7 @@ items:
       race-lock: 'race_halfling.lightfoot'
       skill: 'Halfling_PassoSilencioso'
   StoutStoneCharm:
-    Id: POLISHED_ANDESITE
+    Id: minecraft:polished_andesite
     Display: '&6Amuleto de Pedra Robusta'
     Lore:
       - '&7Talismã pesado que ancora o portador.'
@@ -129,7 +129,7 @@ items:
       race-lock: 'race_halfling.stout'
       skill: 'Halfling_ForteComoPedra'
   VersatilityCharm:
-    Id: PRISMARINE_CRYSTALS
+    Id: minecraft:prismarine_crystals
     Display: '&fAmuleto da Versatilidade'
     Lore:
       - '&7Canaliza a adaptabilidade humana.'
@@ -143,7 +143,7 @@ items:
       lp_required: 'race_human'
       skill: 'Human_Versatility_Switch'
   HumanBanner:
-    Id: WHITE_BANNER
+    Id: minecraft:white_banner
     Display: '&fEstandarte de Renome'
     Lore:
       - '&7Marca a liderança humana no campo.'
@@ -158,7 +158,7 @@ items:
       lp_required: 'race_human'
       skill: 'Human_Renown_Shout'
   TalentToken:
-    Id: NETHER_STAR
+    Id: minecraft:nether_star
     Display: '&dToken de Talento'
     Lore:
       - '&dEscolha ou ative o talento da variante.'
@@ -172,7 +172,7 @@ items:
       lp_required: 'race_human.variant'
       skill: 'Human_Talent_Activate'
   HumanMedal:
-    Id: IRON_NUGGET
+    Id: minecraft:iron_nugget
     Display: '&7Medalha do Cidadão'
     Lore:
       - '&7Símbolo de disciplina humana.'
@@ -184,7 +184,7 @@ items:
       lp_required: 'race_human.standard'
       skill: 'Human_Coordinated_Effort'
   HumanSignet:
-    Id: GOLDEN_CARROT
+    Id: minecraft:golden_carrot
     Display: '&6Sinete de Versatilidade'
     Lore:
       - '&6Marca quem domina talentos únicos.'
@@ -197,7 +197,7 @@ items:
       lp_required: 'race_human.variant'
       command: '/versatilidade'
   HalfOrcBattleBrand:
-    Id: IRON_AXE
+    Id: minecraft:iron_axe
     Display: '&4Marca de Guerra'
     Lore:
       - '&4Bate no peito evocando tenacidade.'
@@ -208,7 +208,7 @@ items:
       race-lock: 'race_meioorc'
       skill: 'TenacidadeImplacavel'
   TieflingHellbrand:
-    Id: BLAZE_POWDER
+    Id: minecraft:blaze_powder
     Display: '&cMarca Infernal'
     Lore:
       - '&cCheira a enxofre.'
@@ -217,7 +217,7 @@ items:
       race-lock: 'race_tiefling'
       skill: 'LaminaDasChamas'
   TieflingSparkGlove:
-    Id: LEATHER
+    Id: minecraft:leather
     Display: '&cManopla Ígnea'
     Lore:
       - '&cMantém brasas constantes.'

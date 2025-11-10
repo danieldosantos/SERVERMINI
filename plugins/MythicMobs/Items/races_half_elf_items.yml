@@ -1,7 +1,7 @@
 # Itens raciais focais dos meio-elfos e suas heranças.
 items:
   HalfElfFeather:
-    Id: FEATHER
+    Id: minecraft:feather
     Display: '&dPena do Meio-Elfo &8(Racial)'
     Lore:
       - '&7Pluma leve que simboliza diplomacia versátil.'
@@ -16,7 +16,7 @@ items:
       race-lock: 'race_half_elf'
       skill: 'HalfElf_TatoSocial'
   HighLoreSigil:
-    Id: AMETHYST_SHARD
+    Id: minecraft:amethyst_shard
     Display: '&dSigilo do Sábio Meio-Elfo'
     Lore:
       - '&7Canaliza truques herdados de ancestrais altos elfos.'
@@ -29,7 +29,7 @@ items:
       race-lock: 'race_half_elf.high'
       skill: 'HalfElf_TruqueArcano'
   DrowMoonbrooch:
-    Id: ENDER_PEARL
+    Id: minecraft:ender_pearl
     Display: '&5Broche Lunar Meio-Drow'
     Lore:
       - '&5Pinga luzes púrpuras que denunciam inimigos.'
@@ -42,7 +42,7 @@ items:
       race-lock: 'race_half_elf.drow'
       skill: 'HalfElf_LuzesFeericas'
   GroveCharm:
-    Id: MOSS_BLOCK
+    Id: minecraft:moss_block
     Display: '&2Amuleto do Bosque Meio-Elfo'
     Lore:
       - '&2Folhagem viva que responde a quem honra a floresta.'

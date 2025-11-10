@@ -1,7 +1,7 @@
 # Itens focais do Druida - cada tier possui gatilhos para habilidades ProSkillAPI
 items:
   CajadoBosque_T1:
-    Id: MANGROVE_ROOTS
+    Id: minecraft:mangrove_roots
     Display: '&2Cajado do Bosque Ancestral · Glifo de Raiz Viva [Broto]'
     Lore:
       - '&7Ativa magias comuns T1 (Toque, Lianas, Semente, Espinhos).'
@@ -19,7 +19,7 @@ items:
       - skill{s=Semente_Revigorante} @self ~onLeftClick
       - skill{s=Espinhos_Naturais} @self ~onDrop
   TotemLua_T1:
-    Id: ACACIA_HANGING_SIGN
+    Id: minecraft:acacia_hanging_sign
     Display: '&dTotem da Lua Selvagem [Broto]'
     Lore:
       - '&7Dispara Forma Selvagem básica e buffs felinos.'
@@ -33,7 +33,7 @@ items:
       - skill{s=Forma_Selvagem} @self ~onRightClick
       - skill{s=Uivo_Lunar} @self ~onSneakRightClick
   FeticheTempestade_T1:
-    Id: CONDUIT
+    Id: minecraft:conduit
     Display: '&bFetiche da Tempestade [Broto]'
     Lore:
       - '&7Canaliza rajadas e trovões menores.'
@@ -47,7 +47,7 @@ items:
       - skill{s=Rajada_de_Vento} @self ~onRightClick
       - skill{s=Relampago_Curto} @target ~onSneakRightClick
   CajadoBosque_T2:
-    Id: MANGROVE_WOOD
+    Id: minecraft:mangrove_wood
     Display: '&2Cajado do Bosque Ancestral · Glifo de Raiz Viva [Folhagem]'
     Lore:
       - '&7Cura em área e buffs de mobilidade T2.'
@@ -65,7 +65,7 @@ items:
       - skill{s=Vinhas_Acoitantes} @target ~onLeftClick
       - skill{s=Terra_Abencoada} @self ~onDrop
   TotemLua_T2:
-    Id: CRIMSON_HANGING_SIGN
+    Id: minecraft:crimson_hanging_sign
     Display: '&dTotem da Lua Selvagem [Crescente]'
     Lore:
       - '&7Potencializa Rasgar e Forma Selvagem Avançada.'
@@ -80,7 +80,7 @@ items:
       - skill{s=Rasgar_e_Dilacerar} @target ~onSneakRightClick
       - skill{s=Salto_Predatorio} @self ~onLeftClick
   FeticheTempestade_T2:
-    Id: HEART_OF_THE_SEA
+    Id: minecraft:heart_of_the_sea
     Display: '&bFetiche da Tempestade [Cumulus]'
     Lore:
       - '&7Evoca Turíbulo Tempestuoso e Caminho do Furacão.'
@@ -95,7 +95,7 @@ items:
       - skill{s=Caminho_do_Furacao} @self ~onSneakRightClick
       - skill{s=Impulso_das_Correntes} @self ~onLeftClick
   CajadoBosque_T3:
-    Id: BAMBOO_BLOCK
+    Id: minecraft:bamboo_block
     Display: '&2Cajado do Bosque Ancestral · Glifo de Raiz Viva [Canópia]'
     Lore:
       - '&7Invoca Espíritos Silvestres e cascas ancestrais.'
@@ -113,7 +113,7 @@ items:
       - skill{s=Sopro_de_Renovacao} @target ~onLeftClick
       - skill{s=Parede_de_Terra} @self ~onDrop
   TotemLua_T3:
-    Id: WARPED_HANGING_SIGN
+    Id: minecraft:warped_hanging_sign
     Display: '&dTotem da Lua Selvagem [Gibosa]'
     Lore:
       - '&7Canaliza Forma Selvagem Apex e Frenesi Lunar.'
@@ -128,7 +128,7 @@ items:
       - skill{s=Frenesi_Lunar} @self ~onSneakRightClick
       - skill{s=Mordida_Destrutiva} @target ~onLeftClick
   FeticheTempestade_T3:
-    Id: PRISMARINE_SHARD
+    Id: minecraft:prismarine_shard
     Display: '&bFetiche da Tempestade [Nimbus]'
     Lore:
       - '&7Gera Olho da Tempestade e Ciclone Médio.'
@@ -143,7 +143,7 @@ items:
       - skill{s=Ciclone_Medio} @self ~onSneakRightClick
       - skill{s=Carga_Estatica} @self ~onLeftClick
   CajadoBosque_T4:
-    Id: FLOWERING_AZALEA
+    Id: minecraft:flowering_azalea
     Display: '&2Cajado do Bosque Ancestral · Glifo de Raiz Viva [Ápice]'
     Lore:
       - '&7Libera Chamado da Floresta e Sussurros Antigos.'
@@ -160,7 +160,7 @@ items:
       - skill{s=Sussurros_Antigos} @self ~onSneakRightClick
       - skill{s=Trono_de_Basalto} @self ~onDrop
   TotemLua_T4:
-    Id: CHERRY_HANGING_SIGN
+    Id: minecraft:cherry_hanging_sign
     Display: '&dTotem da Lua Selvagem [Plenilúnio]'
     Lore:
       - '&7Ativa Avatar Lunar e Rugido Primevo.'
@@ -175,7 +175,7 @@ items:
       - skill{s=Rugido_Primevo} @self ~onSneakRightClick
       - skill{s=Garras_Estelares} @self ~onLeftClick
   FeticheTempestade_T4:
-    Id: END_ROD
+    Id: minecraft:end_rod
     Display: '&bFetiche da Tempestade [Supercélula]'
     Lore:
       - '&7Desencadeia Fúria da Tempestade e Trovão Supremo.'

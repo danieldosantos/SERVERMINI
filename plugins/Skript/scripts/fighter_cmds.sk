@@ -107,29 +107,29 @@ command /fighter_ooc <text>:
       send "{@prefix} &7Estado normalizado."
 
 # Bindings para itens MythicMobs
-on leftclick with nether star:
+on left click with nether star:
   if name of player's tool is "&eMedalha do Surto":
     if player has permission "group.class_fighter":
       execute console command "skillapi cast fighter_action_surge %player%"
     else:
       send "{@prefix} &cApenas Guerreiros podem usar isso."
 
-on rightclick with ghast tear:
+on right click with ghast tear:
   if name of player's tool is "&aBroche do Segundo Fôlego":
     if player has permission "group.class_fighter":
       execute console command "skillapi cast fighter_second_wind %player%"
 
-on leftclick with netherite sword:
+on left click with netherite sword:
   if name of player's tool is "&6Lâmina do Coliseu":
     if player has permission "group.class_fighter.champion":
       execute console command "skillapi cast fighter_champion_superior_strike %player%"
 
-on rightclick with shield:
+on right click with shield:
   if name of player's tool is "&aEscudo do Triunfo":
     if player has permission "group.class_fighter.champion":
       execute console command "skillapi cast fighter_champion_unyielding_resilience %player%"
 
-on rightclick with red banner:
+on right click with red banner:
   if name of player's tool is "&eEstandarte do Gladiador":
     if player has permission "group.class_fighter.champion":
       execute console command "skillapi cast fighter_champion_gladiator_challenge %player%"
@@ -144,17 +144,17 @@ on sneak left click with golden helmet:
     if player has permission "group.class_fighter.champion":
       execute console command "skillapi cast fighter_champion_unforgettable_triumph %player%"
 
-on leftclick with string:
+on left click with string:
   if name of player's tool is "&cChicote Desarmante":
     if player has permission "group.class_fighter.battlemaster":
       execute console command "skillapi cast fighter_battlemaster_disarming_strike %player%"
 
-on rightclick with book:
+on right click with book:
   if name of player's tool is "&cManual de Manobras":
     if player has permission "group.class_fighter.battlemaster":
       execute console command "skillapi cast fighter_battlemaster_precise_maneuver %player%"
 
-on rightclick with white banner:
+on right click with white banner:
   if name of player's tool is "&cEstandarte de Comando":
     if player has permission "group.class_fighter.battlemaster":
       execute console command "skillapi cast fighter_battlemaster_tactical_command %player%"
@@ -164,22 +164,22 @@ on sneak left click with iron axe:
     if player has permission "group.class_fighter.battlemaster":
       execute console command "skillapi cast fighter_battlemaster_victory_spin %player%"
 
-on leftclick with netherite sword:
+on left click with netherite sword:
   if name of player's tool is "&bLâmina Rúnica":
     if player has permission "group.class_fighter.eldritch_knight":
       execute console command "skillapi cast fighter_eldritchknight_imbued_strike %player%"
 
-on rightclick with amethyst shard:
+on right click with amethyst shard:
   if name of player's tool is "&bFoco de Runas":
     if player has permission "group.class_fighter.eldritch_knight":
       execute console command "skillapi cast fighter_eldritchknight_runic_weapon %player%"
 
-on rightclick with shield:
+on right click with shield:
   if name of player's tool is "&bSigilo Guardião":
     if player has permission "group.class_fighter.eldritch_knight":
       execute console command "skillapi cast fighter_eldritchknight_arcane_guardian %player%"
 
-on rightclick with lapis lazuli:
+on right click with lapis lazuli:
   if name of player's tool is "&bTotem Estático":
     if player has permission "group.class_fighter.eldritch_knight":
       execute console command "skillapi cast fighter_eldritchknight_static_shield %player%"

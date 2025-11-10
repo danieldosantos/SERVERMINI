@@ -1,6 +1,6 @@
 Items:
   EldritchWand:
-    Id: BLAZE_ROD
+    Id: minecraft:blaze_rod
     Display: '&5Varinha Eldritch &8(Bruxo)'
     Lore:
       - '&7Vinculada à classe: class_warlock'
@@ -22,7 +22,7 @@ Items:
           - potion{type=DAMAGE_RESISTANCE;duration=200;amplifier=0} @trigger
   
   HexTalisman:
-    Id: GHAST_TEAR
+    Id: minecraft:ghast_tear
     Display: '&6Talismã do Hex &8(Bruxo)'
     Lore:
       - '&7Vinculada à classe: class_warlock'
@@ -37,7 +37,7 @@ Items:
         - potion{type=GLOWING;duration=100;amplifier=0} @target
   
   HalfElfFeather:
-    Id: FEATHER
+    Id: minecraft:feather
     Display: '&bPena de Meio-Elfo &8(Racial)'
     Lore:
       - '&7Vinculada à raça: race_half_elf'
@@ -50,7 +50,7 @@ Items:
         - potion{type=SLOW_FALLING;duration=140;amplifier=0} @trigger
         - potion{type=DOLPHINS_GRACE;duration=100;amplifier=0} @trigger
   BerserkerWarHorn:
-    Id: GOAT_HORN
+    Id: minecraft:goat_horn
     Display: '&6Grito Bestial &8(Berserker)'
     Lore:
       - '&7Usar: Clique direito (custa 1 Furia)'
@@ -64,7 +64,7 @@ Items:
         - cooldown{t=75}
 
   BerserkerBattleAxe:
-    Id: IRON_AXE
+    Id: minecraft:iron_axe
     Display: '&6Investida Sanguinaria &8(Berserker)'
     Lore:
       - '&7Usar: Clique direito'
@@ -77,7 +77,7 @@ Items:
         - cooldown{t=45}
 
   BerserkerSpikedShield:
-    Id: SHIELD
+    Id: minecraft:shield
     Display: '&6Retaliacao Frenetica &8(Berserker)'
     Lore:
       - '&7Usar: Clique direito (HP < 50%)'
@@ -90,7 +90,7 @@ Items:
         - cooldown{t=90}
 
   BerserkerBoots:
-    Id: LEATHER_BOOTS
+    Id: minecraft:leather_boots
     Display: '&6Impetus Irrefreavel &8(Berserker)'
     Lore:
       - '&7Usar: Clique direito'
@@ -103,7 +103,7 @@ Items:
         - cooldown{t=60}
 
   BerserkerTotem:
-    Id: TOTEM_OF_UNDYING
+    Id: minecraft:totem_of_undying
     Display: '&6Carnificina Implacavel &8(Berserker)'
     Lore:
       - '&7Usar: Clique direito (canaliza 3s)'

@@ -1,7 +1,7 @@
 # Itens focais do Bardo - Tiers dinâmicos
 items:
   Bard_Knowledge_T1_Focus:
-    Id: WRITABLE_BOOK
+    Id: minecraft:writable_book
     Display: '&bCancioneiro Analítico'
     Lore:
       - '&7Tier 1 - Conhecimento'
@@ -23,7 +23,7 @@ items:
       - command{c="skript run bard_focus_cast knowledge 1 %player%";delay=1} @self ~onRightClick
       - command{c="skript run bard_focus_info knowledge 1 %player%";delay=1} @self ~onSneakRightClick
   Bard_Valor_T1_Focus:
-    Id: GOAT_HORN
+    Id: minecraft:goat_horn
     Display: '&6Tambor de Guerra Inicial'
     Lore:
       - '&7Tier 1 - Valor'
@@ -45,7 +45,7 @@ items:
       - command{c="skript run bard_focus_cast valor 1 %player%";delay=1} @self ~onRightClick
       - command{c="skript run bard_focus_info valor 1 %player%";delay=1} @self ~onSneakRightClick
   Bard_Glamour_T1_Focus:
-    Id: GOLDEN_HELMET
+    Id: minecraft:golden_helmet
     Display: '&5Tiara da Inspiração'
     Lore:
       - '&7Tier 1 - Glamour'
@@ -67,7 +67,7 @@ items:
       - command{c="skript run bard_focus_cast glamour 1 %player%";delay=1} @self ~onRightClick
       - command{c="skript run bard_focus_info glamour 1 %player%";delay=1} @self ~onSneakRightClick
   Bard_Knowledge_T2_Focus:
-    Id: ENCHANTED_BOOK
+    Id: minecraft:enchanted_book
     Display: '&bTratado dos Segredos'
     Lore:
       - '&7Tier 2 - Conhecimento'
@@ -89,7 +89,7 @@ items:
       - command{c="skript run bard_focus_cast knowledge 2 %player%";delay=1} @self ~onRightClick
       - command{c="skript run bard_focus_info knowledge 2 %player%";delay=1} @self ~onSneakRightClick
   Bard_Valor_T2_Focus:
-    Id: BANNER
+    Id: minecraft:banner
     Display: '&6Estandarte de Batalha'
     Lore:
       - '&7Tier 2 - Valor'
@@ -111,7 +111,7 @@ items:
       - command{c="skript run bard_focus_cast valor 2 %player%";delay=1} @self ~onRightClick
       - command{c="skript run bard_focus_info valor 2 %player%";delay=1} @self ~onSneakRightClick
   Bard_Glamour_T2_Focus:
-    Id: AMETHYST_CLUSTER
+    Id: minecraft:amethyst_cluster
     Display: '&5Diadema das Luzes'
     Lore:
       - '&7Tier 2 - Glamour'
@@ -133,7 +133,7 @@ items:
       - command{c="skript run bard_focus_cast glamour 2 %player%";delay=1} @self ~onRightClick
       - command{c="skript run bard_focus_info glamour 2 %player%";delay=1} @self ~onSneakRightClick
   Bard_Knowledge_T3_Focus:
-    Id: ENDER_EYE
+    Id: minecraft:ender_eye
     Display: '&bOrbe da Onisciência'
     Lore:
       - '&7Tier 3 - Conhecimento'
@@ -155,7 +155,7 @@ items:
       - command{c="skript run bard_focus_cast knowledge 3 %player%";delay=1} @self ~onRightClick
       - command{c="skript run bard_focus_info knowledge 3 %player%";delay=1} @self ~onSneakRightClick
   Bard_Valor_T3_Focus:
-    Id: NETHERITE_AXE
+    Id: minecraft:netherite_axe
     Display: '&6Estandarte do Campeão'
     Lore:
       - '&7Tier 3 - Valor'
@@ -177,7 +177,7 @@ items:
       - command{c="skript run bard_focus_cast valor 3 %player%";delay=1} @self ~onRightClick
       - command{c="skript run bard_focus_info valor 3 %player%";delay=1} @self ~onSneakRightClick
   Bard_Glamour_T3_Focus:
-    Id: ALLIUM
+    Id: minecraft:allium
     Display: '&5Lira Sublime'
     Lore:
       - '&7Tier 3 - Glamour'
@@ -199,7 +199,7 @@ items:
       - command{c="skript run bard_focus_cast glamour 3 %player%";delay=1} @self ~onRightClick
       - command{c="skript run bard_focus_info glamour 3 %player%";delay=1} @self ~onSneakRightClick
   Bard_Knowledge_T4_Focus:
-    Id: HEART_OF_THE_SEA
+    Id: minecraft:heart_of_the_sea
     Display: '&bRelíquia Onisciente'
     Lore:
       - '&7Tier 4 - Conhecimento'
@@ -221,7 +221,7 @@ items:
       - command{c="skript run bard_focus_cast knowledge 4 %player%";delay=1} @self ~onRightClick
       - command{c="skript run bard_focus_info knowledge 4 %player%";delay=1} @self ~onSneakRightClick
   Bard_Valor_T4_Focus:
-    Id: TOTEM_OF_UNDYING
+    Id: minecraft:totem_of_undying
     Display: '&6Estandarte dos Heróis'
     Lore:
       - '&7Tier 4 - Valor'
@@ -243,7 +243,7 @@ items:
       - command{c="skript run bard_focus_cast valor 4 %player%";delay=1} @self ~onRightClick
       - command{c="skript run bard_focus_info valor 4 %player%";delay=1} @self ~onSneakRightClick
   Bard_Glamour_T4_Focus:
-    Id: DRAGON_BREATH
+    Id: minecraft:dragon_breath
     Display: '&5Coroa Cintilante'
     Lore:
       - '&7Tier 4 - Glamour'

@@ -1,7 +1,7 @@
 # Itens focais do Feiticeiro
 items:
   ArcaneFocus:
-    Id: AMETHYST_CLUSTER
+    Id: minecraft:amethyst_cluster
     Display: '&5Foco Arcano do Feiticeiro'
     Lore:
       - '&7Clique direito: §5Raio Arcano§7.'
@@ -13,7 +13,7 @@ items:
       class-lock: 'class_sorcerer'
       psapi-skill: 'sorcerer_arcane_bolt'
   ArcaneWaveCrystal:
-    Id: ECHO_SHARD
+    Id: minecraft:echo_shard
     Display: '&5Cristal da Onda Arcana'
     Lore:
       - '&7Clique direito: §5Onda Arcana§7.'
@@ -25,7 +25,7 @@ items:
       class-lock: 'class_sorcerer'
       psapi-skill: 'sorcerer_arcane_wave'
   ArcaneBlinkCharm:
-    Id: ENDER_EYE
+    Id: minecraft:ender_eye
     Display: '&5Talismã do Blink Arcano'
     Lore:
       - '&7Clique direito: §dBlink Arcano§7.'
@@ -38,7 +38,7 @@ items:
       psapi-skill: 'sorcerer_arcane_blink'
 
   DraconicFocus:
-    Id: BLAZE_ROD
+    Id: minecraft:blaze_rod
     Display: '&cFoco Dracônico'
     Lore:
       - '&7Clique direito: §4Sopro Dracônico§7.'
@@ -50,7 +50,7 @@ items:
       class-lock: 'class_sorcerer.draconic'
       psapi-skill: 'sorcerer_draconic_breath'
   DraconicScaleCharm:
-    Id: SHIELD
+    Id: minecraft:shield
     Display: '&cPingente de Escamas'
     Lore:
       - '&7Ativa §4Escamas Manifestas§7 (10s).'
@@ -62,7 +62,7 @@ items:
       class-lock: 'class_sorcerer.draconic'
       psapi-skill: 'sorcerer_draconic_scales'
   DraconicWingTalisman:
-    Id: FEATHER
+    Id: minecraft:feather
     Display: '&cTalismã de Asas Etéreas'
     Lore:
       - '&7Clique direito: §4Asas Etéreas§7.'
@@ -74,7 +74,7 @@ items:
       class-lock: 'class_sorcerer.draconic'
       psapi-skill: 'sorcerer_draconic_wings'
   DraconicHeartGem:
-    Id: NETHERITE_SCRAP
+    Id: minecraft:netherite_scrap
     Display: '&cNúcleo Dracônico'
     Lore:
       - '&7Ativa §4Coração Elemental§7.'
@@ -86,7 +86,7 @@ items:
       class-lock: 'class_sorcerer.draconic'
       psapi-skill: 'sorcerer_draconic_heart'
   DraconicCrown:
-    Id: GOLDEN_HELMET
+    Id: minecraft:golden_helmet
     Display: '&cCoroa do Avatar Dracônico'
     Lore:
       - '&7Ultimate: §4Avatar Dracônico§7 (15s).'
@@ -99,7 +99,7 @@ items:
       psapi-skill: 'sorcerer_draconic_avatar'
 
   WildMagicOrb:
-    Id: ENDER_EYE
+    Id: minecraft:ender_eye
     Display: '&dOrbe do Caos'
     Lore:
       - '&7Clique direito: §dSurto Caótico§7.'
@@ -111,7 +111,7 @@ items:
       class-lock: 'class_sorcerer.wild'
       psapi-skill: 'sorcerer_wild_surge'
   WildMagicRod:
-    Id: BONE
+    Id: minecraft:bone
     Display: '&dCajado do Fluxo Instável'
     Lore:
       - '&7Ativa §dFluxo Instável§7.'
@@ -123,7 +123,7 @@ items:
       class-lock: 'class_sorcerer.wild'
       psapi-skill: 'sorcerer_wild_flux'
   WildMagicHourglass:
-    Id: CLOCK
+    Id: minecraft:clock
     Display: '&dAmpulheta Quântica'
     Lore:
       - '&7Clique direito: §dReversão Quântica§7.'
@@ -135,7 +135,7 @@ items:
       class-lock: 'class_sorcerer.wild'
       psapi-skill: 'sorcerer_wild_reversion'
   WildMagicCape:
-    Id: PURPLE_BANNER
+    Id: minecraft:purple_banner
     Display: '&dCapa Probabilística'
     Lore:
       - '&7Ativa §dVéu Probabilístico§7.'
@@ -147,7 +147,7 @@ items:
       class-lock: 'class_sorcerer.wild'
       psapi-skill: 'sorcerer_wild_veil'
   WildMagicNexus:
-    Id: NETHER_STAR
+    Id: minecraft:nether_star
     Display: '&dNexus Caótico'
     Lore:
       - '&7Ultimate: §dTempestade Caótica§7.'
@@ -160,7 +160,7 @@ items:
       psapi-skill: 'sorcerer_wild_tempest'
 
   StormSorceryFocus:
-    Id: PRISMARINE_SHARD
+    Id: minecraft:prismarine_shard
     Display: '&bFoco da Tempestade'
     Lore:
       - '&7Clique direito: §bDescarga Tempestuosa§7.'
@@ -172,7 +172,7 @@ items:
       class-lock: 'class_sorcerer.storm'
       psapi-skill: 'sorcerer_storm_discharge'
   StormSorceryCharm:
-    Id: PHANTOM_MEMBRANE
+    Id: minecraft:phantom_membrane
     Display: '&bCharm da Rajada'
     Lore:
       - '&7Ativa §bPulso Eólico§7.'
@@ -184,7 +184,7 @@ items:
       class-lock: 'class_sorcerer.storm'
       psapi-skill: 'sorcerer_storm_gale'
   StormSorceryOrb:
-    Id: LAPIS_BLOCK
+    Id: minecraft:lapis_block
     Display: '&bOrbe de Nuvem de Trovões'
     Lore:
       - '&7Cria §bNuvem de Trovões§7.'
@@ -196,7 +196,7 @@ items:
       class-lock: 'class_sorcerer.storm'
       psapi-skill: 'sorcerer_storm_cloud'
   StormSorceryStaff:
-    Id: HEART_OF_THE_SEA
+    Id: minecraft:heart_of_the_sea
     Display: '&bCajado do Condutor Vivo'
     Lore:
       - '&7Ativa §bCondutor Vivo§7 (mana por dano).'
@@ -208,7 +208,7 @@ items:
       class-lock: 'class_sorcerer.storm'
       psapi-skill: 'sorcerer_storm_conduit'
   StormSorceryCrown:
-    Id: DIAMOND_HELMET
+    Id: minecraft:diamond_helmet
     Display: '&bCoroa do Olho da Tempestade'
     Lore:
       - '&7Ultimate: §bOlho da Tempestade§7.'
