@@ -2,6 +2,9 @@
 
 Este repositório reúne a configuração mínima de um servidor Paper focado em reproduzir mecânicas de Dungeons & Dragons 5ª Edição. Os plugins centrais são LuckPerms para permissões/meta, ValhallaMMO para atributos/rolagens, MythicMobs para habilidades e EssentialsX para utilidades gerais.
 
+## Documentação de magias e condições
+- [Implantação de magias e condições](docs/magias-condicoes.md): resumo das listas por classe, efeitos prioritários para MythicMobs e tabela de condições para espelhar em LuckPerms.
+
 ## Capacidade geral do servidor
 - **Atributos principais:** Strength, Dexterity, Constitution, Intelligence, Wisdom e Charisma, todos com intervalo 1–30 e valor inicial 10, mapeados pela ValhallaMMO. Modificadores usam a fórmula `floor((score - 10) / 2)`.【F:valhallammo/config.yml†L1-L44】
 - **Bônus de Proficiência:** tabela completa de níveis 1–20, podendo ser definida por meta de LuckPerms ou pela tabela de fallback configurada.【F:valhallammo/config.yml†L45-L69】
