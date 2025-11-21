@@ -58,13 +58,21 @@ Backgrounds são aplicados como grupos LuckPerms que concedem proficiências e k
 - **Outros backgrounds sugeridos:** guild_artisan, criminal, hermit, folk_hero, noble, outlander, sage, soldier, urchin.【F:luckperms/commands.txt†L497-L497】
 
 ## Truques e Magias
-Habilidades de combate e truques são configurados como skills do MythicMobs e consomem dados da ValhallaMMO (como bônus de proficiência).【F:mythicmobs/skills/dnd_features.yml†L1-L75】
+ Habilidades de combate e truques são configurados como skills do MythicMobs e consomem dados da ValhallaMMO (como bônus de proficiência).【F:mythicmobs/skills/dnd_features.yml†L1-L150】
 - **Fire Bolt (Cantrip):** projétil com trilha de chamas, causa `2 + PB` de dano de fogo e incendeia o alvo.【F:mythicmobs/skills/dnd_features.yml†L32-L44】
 - **Sacred Flame (Cantrip):** rolagem com variação se o alvo tem vantagem marcada; causa `1 + PB` ou `2 + PB` de dano radiante conforme a condição.【F:mythicmobs/skills/dnd_features.yml†L46-L59】
 - **Flurry of Blows (Ki):** gasta 1 ponto de Ki e aplica dois golpes extras baseados no modificador de DEX.【F:mythicmobs/skills/dnd_features.yml†L61-L68】
 - **Action Surge (Fighter):** concede ação adicional com tempo de recarga e mensagem temática.【F:mythicmobs/skills/dnd_features.yml†L12-L24】
 - **Rage (Barbarian):** aumenta dano e resistência por 1 minuto (potions de força e resistência).【F:mythicmobs/skills/dnd_features.yml†L25-L30】
 - **Short Rest Reset:** repõe Ki e zera recargas de Action Surge e Rage, simulando descanso curto.【F:mythicmobs/skills/dnd_features.yml†L69-L75】
+- **Vicious Mockery (Bard Cantrip):** dano psíquico rápido escalando com CHA e PB, além de Enfraquecimento curto no alvo.【F:mythicmobs/skills/dnd_features.yml†L77-L83】
+- **Guidance (Cleric Cantrip):** concede o efeito de Sorte por alguns segundos para reforçar o próximo teste.【F:mythicmobs/skills/dnd_features.yml†L85-L89】
+- **Produce Flame (Druid Cantrip):** projétil de fogo contínuo que usa o modificador de WIS e ateia chamas ao acertar.【F:mythicmobs/skills/dnd_features.yml†L91-L100】
+- **Divine Smite (Paladin):** golpe corpo a corpo com partículas de totem e dano radiante escalado por CHA e PB.【F:mythicmobs/skills/dnd_features.yml†L102-L107】
+- **Hunter's Mark (Ranger):** marca o alvo com brilho, concede bônus temporário de dano e mensagem de feedback.【F:mythicmobs/skills/dnd_features.yml†L109-L114】
+- **Chaos Bolt (Sorcerer):** projétil elétrico com trilha crítica, dano escalado por CHA e levitação curta no alvo atingido.【F:mythicmobs/skills/dnd_features.yml†L116-L124】
+- **Eldritch Blast (Warlock Cantrip):** rajada arcana que empurra o alvo após causar dano escalonado por CHA.【F:mythicmobs/skills/dnd_features.yml†L126-L132】
+- **Magic Missile (Wizard):** três dardos automáticos consecutivos, cada um aplicando dano que soma PB e INT do conjurador.【F:mythicmobs/skills/dnd_features.yml†L134-L140】
 
 ## Como aplicar no servidor
 1. Instale os plugins listados na pasta `plugins/` em um servidor Paper compatível.
