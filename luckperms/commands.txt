@@ -2,25 +2,53 @@
 # Run these in-game or via console. Uses meta for PB, advantage flags, proficiencies, and ancestry/heritage bonuses.
 
 # --- Core meta keys ---
-# Set proficiency bonus per level (optional fallback; ValhallaMMO also maps automatically)
-lp user <player> meta set pb 2
+# Set proficiency bonus per level (fallback in case ValhallaMMO sync is unavailable)
+lp user <player> meta set pb:lvl1 2
+lp user <player> meta set pb:lvl2 2
+lp user <player> meta set pb:lvl3 2
+lp user <player> meta set pb:lvl4 2
+lp user <player> meta set pb:lvl5 3
+lp user <player> meta set pb:lvl6 3
+lp user <player> meta set pb:lvl7 3
+lp user <player> meta set pb:lvl8 3
+lp user <player> meta set pb:lvl9 4
+lp user <player> meta set pb:lvl10 4
+lp user <player> meta set pb:lvl11 4
+lp user <player> meta set pb:lvl12 4
+lp user <player> meta set pb:lvl13 5
+lp user <player> meta set pb:lvl14 5
+lp user <player> meta set pb:lvl15 5
+lp user <player> meta set pb:lvl16 5
+lp user <player> meta set pb:lvl17 6
+lp user <player> meta set pb:lvl18 6
+lp user <player> meta set pb:lvl19 6
+lp user <player> meta set pb:lvl20 6
 
 # Advantage/Disadvantage toggles (temporary, clear on rest)
 lp user <player> meta set condition:advantage true
 lp user <player> meta set condition:disadvantage true
 
+# Clear temporary states
+lp user <player> meta unset condition:advantage
+lp user <player> meta unset condition:disadvantage
+
 # --- Races and subraces ---
-# Example: Wood Elf with +2 DEX, +1 WIS and Darkvision
+# Elven subraces
 lp creategroup race_wood_elf
 lp group race_wood_elf meta set bonus:DEX 2
 lp group race_wood_elf meta set bonus:WIS 1
 lp group race_wood_elf permission set essentials.effect.nightvision true
 lp group race_wood_elf permission set prof.simple_weapons true
 
-# Apply to player
-lp user <player> parent add race_wood_elf
+lp creategroup race_high_elf
+lp group race_high_elf meta set bonus:DEX 2
+lp group race_high_elf meta set bonus:INT 1
+lp group race_high_elf permission set essentials.effect.nightvision true
+lp group race_high_elf permission set prof.long_sword true
+lp group race_high_elf permission set prof.short_sword true
+lp group race_high_elf permission set feature.cantrip_choice true
 
-# Replicate similarly for other ancestries
+# Dwarven subraces
 lp creategroup race_hill_dwarf
 lp group race_hill_dwarf meta set bonus:CON 2
 lp group race_hill_dwarf meta set bonus:WIS 1
@@ -28,15 +56,35 @@ lp group race_hill_dwarf permission set essentials.effect.nightvision true
 lp group race_hill_dwarf permission set prof.battleaxe true
 lp group race_hill_dwarf permission set prof.handaxe true
 
+lp creategroup race_mountain_dwarf
+lp group race_mountain_dwarf meta set bonus:CON 2
+lp group race_mountain_dwarf meta set bonus:STR 2
+lp group race_mountain_dwarf permission set essentials.effect.nightvision true
+lp group race_mountain_dwarf permission set prof.light_armor true
+lp group race_mountain_dwarf permission set prof.medium_armor true
+
+# Halfling subraces
 lp creategroup race_lightfoot_halfling
 lp group race_lightfoot_halfling meta set bonus:DEX 2
 lp group race_lightfoot_halfling meta set bonus:CHA 1
 
+lp creategroup race_stout_halfling
+lp group race_stout_halfling meta set bonus:DEX 2
+lp group race_stout_halfling meta set bonus:CON 1
+lp group race_stout_halfling permission set feature.stout_resilience true
+
+# Gnome subraces
 lp creategroup race_forest_gnome
 lp group race_forest_gnome meta set bonus:INT 2
 lp group race_forest_gnome meta set bonus:DEX 1
 lp group race_forest_gnome permission set essentials.effect.nightvision true
 
+lp creategroup race_rock_gnome
+lp group race_rock_gnome meta set bonus:INT 2
+lp group race_rock_gnome meta set bonus:CON 1
+lp group race_rock_gnome permission set feature.artificers_lore true
+
+# Flexible ancestries
 lp creategroup race_half_elf
 lp group race_half_elf meta set bonus:CHA 2
 lp group race_half_elf meta set bonus:DEX 1
@@ -48,6 +96,7 @@ lp group race_half_orc meta set bonus:STR 2
 lp group race_half_orc meta set bonus:CON 1
 lp group race_half_orc permission set essentials.effect.nightvision true
 lp group race_half_orc permission set prof.martial_weapons true
+lp group race_half_orc permission set feature.savage_attacks true
 
 lp creategroup race_dragonborn
 lp group race_dragonborn meta set bonus:STR 2
@@ -62,10 +111,20 @@ lp group race_human meta set bonus:INT 1
 lp group race_human meta set bonus:WIS 1
 lp group race_human meta set bonus:CHA 1
 
+lp creategroup race_variant_human
+lp group race_variant_human meta set bonus:choice1 1
+lp group race_variant_human meta set bonus:choice2 1
+lp group race_variant_human permission set feature.free_feat true
+
 lp creategroup race_tiefling
 lp group race_tiefling meta set bonus:INT 1
 lp group race_tiefling meta set bonus:CHA 2
 lp group race_tiefling permission set essentials.effect.nightvision true
+lp group race_tiefling permission set feature.hellish_resistance true
+
+# Apply/clear ancestry on a player
+lp user <player> parent remove race_*
+lp user <player> parent add race_wood_elf
 
 # --- Classes (levels as child groups) ---
 # Example Warrior (Fighter) progression; replicate for 11 other classes
@@ -98,7 +157,9 @@ lp group class_fighter_lvl20 permission set feature.extra_attack_3 true
 lp group class_fighter permission set save:STR true
 lp group class_fighter permission set save:CON true
 
-# Apply to player
+# Apply/clear class on a player (sample)
+lp user <player> parent remove class_*
+lp user <player> parent remove subclass_*
 lp user <player> parent add class_fighter_lvl1
 
 # Barbarian progression and features
@@ -486,6 +547,175 @@ lp group class_wizard permission set save:WIS true
 # Apply to player
 lp user <player> parent add class_wizard_lvl1
 
+# --- Subclasses / Archetypes ---
+# Attach to the base class group to layer features. Add/remove as needed when the player chooses a path.
+
+# Fighter archetypes
+lp creategroup subclass_fighter_champion
+lp group subclass_fighter_champion parent add class_fighter
+lp group subclass_fighter_champion permission set feature.improved_critical true
+lp group subclass_fighter_champion permission set feature.additional_fighting_style true
+
+lp creategroup subclass_fighter_battlemaster
+lp group subclass_fighter_battlemaster parent add class_fighter
+lp group subclass_fighter_battlemaster permission set feature.combat_superiority true
+lp group subclass_fighter_battlemaster permission set feature.know_your_enemy true
+
+lp creategroup subclass_fighter_eldritch_knight
+lp group subclass_fighter_eldritch_knight parent add class_fighter
+lp group subclass_fighter_eldritch_knight permission set feature.war_magic true
+lp group subclass_fighter_eldritch_knight permission set feature.eldritch_strike true
+
+# Barbarian paths
+lp creategroup subclass_barbarian_berserker
+lp group subclass_barbarian_berserker parent add class_barbarian
+lp group subclass_barbarian_berserker permission set feature.frenzy true
+lp group subclass_barbarian_berserker permission set feature.mindless_rage true
+
+lp creategroup subclass_barbarian_totem
+lp group subclass_barbarian_totem parent add class_barbarian
+lp group subclass_barbarian_totem permission set feature.totem_spirit true
+lp group subclass_barbarian_totem permission set feature.spirit_walker true
+
+# Cleric domains
+lp creategroup subclass_cleric_life
+lp group subclass_cleric_life parent add class_cleric
+lp group subclass_cleric_life permission set feature.disciple_of_life true
+lp group subclass_cleric_life permission set feature.blessed_healer true
+
+lp creategroup subclass_cleric_light
+lp group subclass_cleric_light parent add class_cleric
+lp group subclass_cleric_light permission set feature.radiance_of_the_dawn true
+lp group subclass_cleric_light permission set feature.potent_spellcasting true
+
+# Bard colleges
+lp creategroup subclass_bard_lore
+lp group subclass_bard_lore parent add class_bard
+lp group subclass_bard_lore permission set feature.additional_magical_secrets true
+lp group subclass_bard_lore permission set feature.peerless_skill true
+
+lp creategroup subclass_bard_valor
+lp group subclass_bard_valor parent add class_bard
+lp group subclass_bard_valor permission set feature.combat_inspiration true
+lp group subclass_bard_valor permission set feature.battle_magic true
+
+# Rogue archetypes
+lp creategroup subclass_rogue_thief
+lp group subclass_rogue_thief parent add class_rogue
+lp group subclass_rogue_thief permission set feature.fast_hands true
+lp group subclass_rogue_thief permission set feature.use_magic_device true
+
+lp creategroup subclass_rogue_assassin
+lp group subclass_rogue_assassin parent add class_rogue
+lp group subclass_rogue_assassin permission set feature.assassinate true
+lp group subclass_rogue_assassin permission set feature.death_strike true
+
+# Monk traditions
+lp creategroup subclass_monk_open_hand
+lp group subclass_monk_open_hand parent add class_monk
+lp group subclass_monk_open_hand permission set feature.quivering_palm true
+lp group subclass_monk_open_hand permission set feature.wholeness_of_body true
+
+lp creategroup subclass_monk_shadow
+lp group subclass_monk_shadow parent add class_monk
+lp group subclass_monk_shadow permission set feature.shadow_step true
+lp group subclass_monk_shadow permission set feature.opportunist true
+
+lp creategroup subclass_monk_four_elements
+lp group subclass_monk_four_elements parent add class_monk
+lp group subclass_monk_four_elements permission set feature.elemental_discipline true
+lp group subclass_monk_four_elements permission set feature.elemental_mastery true
+
+# Wizard schools
+lp creategroup subclass_wizard_evocation
+lp group subclass_wizard_evocation parent add class_wizard
+lp group subclass_wizard_evocation permission set feature.sculpt_spells true
+lp group subclass_wizard_evocation permission set feature.empowered_evocation true
+
+lp creategroup subclass_wizard_necromancy
+lp group subclass_wizard_necromancy parent add class_wizard
+lp group subclass_wizard_necromancy permission set feature.grim_harvest true
+lp group subclass_wizard_necromancy permission set feature.command_undead true
+
+lp creategroup subclass_wizard_abjuration
+lp group subclass_wizard_abjuration parent add class_wizard
+lp group subclass_wizard_abjuration permission set feature.arcane_ward true
+lp group subclass_wizard_abjuration permission set feature.spell_resistance true
+
+lp creategroup subclass_wizard_transmutation
+lp group subclass_wizard_transmutation parent add class_wizard
+lp group subclass_wizard_transmutation permission set feature.transmuters_stone true
+lp group subclass_wizard_transmutation permission set feature.master_transmuter true
+
+# Sorcerous origins
+lp creategroup subclass_sorcerer_draconic
+lp group subclass_sorcerer_draconic parent add class_sorcerer
+lp group subclass_sorcerer_draconic permission set feature.draconic_resilience true
+lp group subclass_sorcerer_draconic permission set feature.draconic_presence true
+
+lp creategroup subclass_sorcerer_wild_magic
+lp group subclass_sorcerer_wild_magic parent add class_sorcerer
+lp group subclass_sorcerer_wild_magic permission set feature.wild_magic_surge true
+lp group subclass_sorcerer_wild_magic permission set feature.spell_bombardment true
+
+# Warlock patrons
+lp creategroup subclass_warlock_fiend
+lp group subclass_warlock_fiend parent add class_warlock
+lp group subclass_warlock_fiend permission set feature.dark_ones_blessing true
+lp group subclass_warlock_fiend permission set feature.hurl_through_hell true
+
+lp creategroup subclass_warlock_archfey
+lp group subclass_warlock_archfey parent add class_warlock
+lp group subclass_warlock_archfey permission set feature.fey_presence true
+lp group subclass_warlock_archfey permission set feature.misty_escape true
+
+lp creategroup subclass_warlock_old_one
+lp group subclass_warlock_old_one parent add class_warlock
+lp group subclass_warlock_old_one permission set feature.awakened_mind true
+lp group subclass_warlock_old_one permission set feature.create_thrall true
+
+# Paladin oaths
+lp creategroup subclass_paladin_devotion
+lp group subclass_paladin_devotion parent add class_paladin
+lp group subclass_paladin_devotion permission set feature.sacred_weapon true
+lp group subclass_paladin_devotion permission set feature.holy_nimbus true
+
+lp creategroup subclass_paladin_ancients
+lp group subclass_paladin_ancients parent add class_paladin
+lp group subclass_paladin_ancients permission set feature.aura_of_warding true
+lp group subclass_paladin_ancients permission set feature.elder_champion true
+
+lp creategroup subclass_paladin_vengeance
+lp group subclass_paladin_vengeance parent add class_paladin
+lp group subclass_paladin_vengeance permission set feature.vow_of_enmity true
+lp group subclass_paladin_vengeance permission set feature.avenging_angel true
+
+# Druid circles
+lp creategroup subclass_druid_land
+lp group subclass_druid_land parent add class_druid
+lp group subclass_druid_land permission set feature.natural_recovery true
+lp group subclass_druid_land permission set feature.natures_ward true
+
+lp creategroup subclass_druid_moon
+lp group subclass_druid_moon parent add class_druid
+lp group subclass_druid_moon permission set feature.combat_wild_shape true
+lp group subclass_druid_moon permission set feature.primal_traveler true
+
+# Ranger conclaves
+lp creategroup subclass_ranger_hunter
+lp group subclass_ranger_hunter parent add class_ranger
+lp group subclass_ranger_hunter permission set feature.hunters_prey true
+lp group subclass_ranger_hunter permission set feature.evasion true
+
+lp creategroup subclass_ranger_beast_master
+lp group subclass_ranger_beast_master parent add class_ranger
+lp group subclass_ranger_beast_master permission set feature.ranger_companion true
+lp group subclass_ranger_beast_master permission set feature.share_spells true
+
+# Apply/remove subclass for a player
+lp user <player> parent add subclass_fighter_champion
+lp user <player> parent remove subclass_* 
+
 # --- Backgrounds ---
 # Example: Acolyte starting kit and skills
 lp creategroup bg_acolyte
@@ -507,6 +737,20 @@ lp group bg_criminal permission set prof.deception true
 lp group bg_criminal permission set prof.stealth true
 lp group bg_criminal permission set kit.criminal true
 lp user <player> parent add bg_criminal
+
+# Charlatan
+lp creategroup bg_charlatan
+lp group bg_charlatan permission set prof.deception true
+lp group bg_charlatan permission set prof.sleight_of_hand true
+lp group bg_charlatan permission set kit.charlatan true
+lp user <player> parent add bg_charlatan
+
+# Entertainer
+lp creategroup bg_entertainer
+lp group bg_entertainer permission set prof.acrobatics true
+lp group bg_entertainer permission set prof.performance true
+lp group bg_entertainer permission set kit.entertainer true
+lp user <player> parent add bg_entertainer
 
 # Hermit
 lp creategroup bg_hermit
@@ -536,6 +780,13 @@ lp group bg_outlander permission set prof.survival true
 lp group bg_outlander permission set kit.outlander true
 lp user <player> parent add bg_outlander
 
+# Sailor
+lp creategroup bg_sailor
+lp group bg_sailor permission set prof.athletics true
+lp group bg_sailor permission set prof.perception true
+lp group bg_sailor permission set kit.sailor true
+lp user <player> parent add bg_sailor
+
 # Sage
 lp creategroup bg_sage
 lp group bg_sage permission set prof.arcana true
@@ -556,3 +807,6 @@ lp group bg_urchin permission set prof.sleight_of_hand true
 lp group bg_urchin permission set prof.stealth true
 lp group bg_urchin permission set kit.urchin true
 lp user <player> parent add bg_urchin
+
+# Clear background on a player
+lp user <player> parent remove bg_*
