@@ -66,7 +66,7 @@ Backgrounds são aplicados como grupos LuckPerms que concedem proficiências e k
 - **Urchin:** Sleight of Hand e Stealth para furtividade urbana, com kit improvisado.【F:luckperms/commands.txt†L553-L558】
 
 ## Truques e Magias
- Habilidades de combate e truques são configurados como skills do MythicMobs e consomem dados da ValhallaMMO (como bônus de proficiência).【F:mythicmobs/skills/dnd_features.yml†L1-L150】
+ Habilidades de combate e truques são configurados como skills do MythicMobs e consomem dados da ValhallaMMO (como bônus de proficiência).【F:mythicmobs/skills/dnd_features.yml†L1-L150】 O pacote inclui apenas um subconjunto essencial de truques e magias para testes rápidos; para adicionar o restante do Livro do Jogador, siga o guia em `mythicmobs/skills/ADDING_SPELLS.md`.
 - **Fire Bolt (Cantrip):** projétil com trilha de chamas, causa `2 + PB` de dano de fogo e incendeia o alvo.【F:mythicmobs/skills/dnd_features.yml†L32-L44】
 - **Sacred Flame (Cantrip):** rolagem com variação se o alvo tem vantagem marcada; causa `1 + PB` ou `2 + PB` de dano radiante conforme a condição.【F:mythicmobs/skills/dnd_features.yml†L46-L59】
 - **Flurry of Blows (Ki):** gasta 1 ponto de Ki e aplica dois golpes extras baseados no modificador de DEX.【F:mythicmobs/skills/dnd_features.yml†L61-L68】
