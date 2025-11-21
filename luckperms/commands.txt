@@ -713,8 +713,8 @@ lp group subclass_ranger_beast_master permission set feature.ranger_companion tr
 lp group subclass_ranger_beast_master permission set feature.share_spells true
 
 # Apply/remove subclass for a player
+lp user <player> parent remove subclass_*
 lp user <player> parent add subclass_fighter_champion
-lp user <player> parent remove subclass_* 
 
 # --- Backgrounds ---
 # Example: Acolyte starting kit and skills
