@@ -1,0 +1,201 @@
+DeidadeEberronBase:
+  Type: WITHER_SKELETON
+  Display: '&6&l{display}'
+  Health: 2000
+  Damage: 25
+  Armor: 12
+  KnockbackResistance: 1
+  Faction: DeusesEberron
+  Options:
+    AlwaysShowName: true
+    PreventLeashing: true
+    PreventRenaming: true
+    Despawn: false
+    Silent: true
+  AIGoalSelectors:
+    - clear
+    - meleeattack{speed=1.4;range=2.5}
+    - randomstroll
+    - lookatplayers
+  TargetSelectors:
+    - clear
+    - players
+    - mobs{faction!=DeusesEberron}
+  Modules:
+    ThreatTable: true
+  Skills:
+    - skill{s=GodlyShield} @self ~onSpawn
+    - skill{s=GodlySmite} @target ~onTimer:100 1
+    - skill{s=GodlyHeal} @self ~onDamaged 0.35
+
+Arawal:
+  Inherit: DeidadeEberronBase
+  Display: 'Arawal, Deusa da Fertilidade'
+  Health: 2050
+  Skills:
+    - skill{s=DomainHarvestBloom} @self ~onTimer:130 1
+    - skill{s=DomainNatureRoots} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Aureon:
+  Inherit: DeidadeEberronBase
+  Display: 'Aureon, Deus da Lei e do Conhecimento'
+  Health: 2150
+  Skills:
+    - skill{s=DomainLawSeal} @PlayersInRadius{r=8} ~onTimer:120 1
+    - skill{s=DomainKnowledgeSilence} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Balinor:
+  Inherit: DeidadeEberronBase
+  Display: 'Balinor, Deus da Caça'
+  Damage: 28
+  Skills:
+    - skill{s=DomainBeastMaul} @target ~onTimer:120 1
+    - skill{s=DomainNatureRoots} @PlayersInRadius{r=9} ~onTimer:160 1
+
+Boldrei:
+  Inherit: DeidadeEberronBase
+  Display: 'Boldrei, Deusa da Comunidade'
+  Health: 2100
+  Skills:
+    - skill{s=DomainHearthGuard} @self ~onTimer:130 1
+    - skill{s=DomainHarvestBloom} @self ~onTimer:170 1
+
+DolArrah:
+  Inherit: DeidadeEberronBase
+  Display: 'Dol Arrah, Deusa da Honra'
+  Health: 2250
+  Damage: 30
+  Skills:
+    - skill{s=DomainSunHonor} @PlayersInRadius{r=10} ~onTimer:120 1
+    - skill{s=DomainWarRally} @self ~onTimer:150 1
+
+DolDorn:
+  Inherit: DeidadeEberronBase
+  Display: 'Dol Dorn, Deus da Força Bracal'
+  Health: 2300
+  Damage: 32
+  Skills:
+    - skill{s=DomainChampionStrike} @target ~onTimer:110 1
+    - skill{s=DomainWarShockwave} @PlayersInRadius{r=9} ~onTimer:150 1
+
+KolKorran:
+  Inherit: DeidadeEberronBase
+  Display: 'Kol Korran, Deus do Comércio'
+  Health: 2050
+  Skills:
+    - skill{s=DomainCoinTrick} @PlayersInRadius{r=9} ~onTimer:130 1
+    - skill{s=DomainFortuneGrace} @self ~onTimer:160 1
+
+Olladra:
+  Inherit: DeidadeEberronBase
+  Display: 'Olladra, Deusa da Sorte'
+  Health: 2050
+  Skills:
+    - skill{s=DomainLuckDance} @self ~onTimer:120 1
+    - skill{s=DomainCharm} @target ~onTimer:150 1
+
+Onatar:
+  Inherit: DeidadeEberronBase
+  Display: 'Onatar, Deus da Forja'
+  Health: 2300
+  Armor: 14
+  Skills:
+    - skill{s=DomainForgeBurst} @PlayersInRadius{r=8} ~onTimer:120 1
+    - skill{s=DomainShieldWall} @self ~onTimer:150 1
+
+ODevorador:
+  Inherit: DeidadeEberronBase
+  Display: 'O Devorador, Deus da Fúria da Natureza'
+  Health: 2250
+  Skills:
+    - skill{s=DomainTempestRend} @PlayersInRadius{r=11} ~onTimer:110 1
+    - skill{s=DomainStormWrath} @PlayersInRadius{r=12} ~onTimer:150 1
+
+AFuria:
+  Inherit: DeidadeEberronBase
+  Display: 'A Fúria, Deusa da Ira'
+  Health: 2300
+  Damage: 32
+  Skills:
+    - skill{s=DomainFuryRampage} @target ~onTimer:120 1
+    - skill{s=DomainWarRally} @self ~onTimer:160 1
+
+OCarcereiro:
+  Inherit: DeidadeEberronBase
+  Display: 'O Carcereiro, Deus da Ganância'
+  Health: 2250
+  Skills:
+    - skill{s=DomainStoneChains} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainDeathSiphon} @PlayersInRadius{r=8} ~onTimer:150 1
+
+OFingido:
+  Inherit: DeidadeEberronBase
+  Display: 'O Fingido, Deus da Traição'
+  Health: 2200
+  Skills:
+    - skill{s=DomainBetrayalBackstab} @target ~onTimer:110 1
+    - skill{s=DomainTrickeryVanish} @self ~onTimer:150 1
+
+ASombra:
+  Inherit: DeidadeEberronBase
+  Display: 'A Sombra, Deus da Magia Negra'
+  Health: 2200
+  Skills:
+    - skill{s=DomainShadowVeil} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainArcaneBurst} @PlayersInRadius{r=9} ~onTimer:150 1
+
+OViajante:
+  Inherit: DeidadeEberronBase
+  Display: 'O Viajante, Divindade do Caos'
+  Health: 2150
+  Skills:
+    - skill{s=DomainTravelerSwap} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainChaosHex} @PlayersInRadius{r=9} ~onTimer:150 1
+
+AChamaPrateada:
+  Inherit: DeidadeEberronBase
+  Display: 'A Chama Prateada'
+  Health: 2250
+  Skills:
+    - skill{s=DomainSilverFlamePurge} @PlayersInRadius{r=11} ~onTimer:120 1
+    - skill{s=DomainLightNova} @PlayersInRadius{r=10} ~onTimer:150 1
+
+OSangueDeVol:
+  Inherit: DeidadeEberronBase
+  Display: 'O Sangue de Vol'
+  Health: 2200
+  Skills:
+    - skill{s=DomainBloodVol} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainDeathSiphon} @PlayersInRadius{r=8} ~onTimer:150 1
+
+CultosDragaoAbaixo:
+  Inherit: DeidadeEberronBase
+  Display: 'Cultos do Dragão Abaixo'
+  Health: 2200
+  Skills:
+    - skill{s=DomainMadnessWhispers} @PlayersInRadius{r=10} ~onTimer:120 1
+    - skill{s=DomainChaosHex} @PlayersInRadius{r=9} ~onTimer:160 1
+
+OCaminhoDaLuz:
+  Inherit: DeidadeEberronBase
+  Display: 'O Caminho da Luz'
+  Health: 2150
+  Skills:
+    - skill{s=DomainPathOfLight} @self ~onTimer:120 1
+    - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onTimer:150 1
+
+ACorteEterna:
+  Inherit: DeidadeEberronBase
+  Display: 'A Corte Eterna'
+  Health: 2150
+  Skills:
+    - skill{s=DomainEternalCourtGrace} @self ~onTimer:130 1
+    - skill{s=DomainWisdomCalm} @self ~onTimer:170 1
+
+OsEspiritosDoPassado:
+  Inherit: DeidadeEberronBase
+  Display: 'Os Espíritos do Passado'
+  Health: 2300
+  Skills:
+    - skill{s=DomainAncestralStrike} @PlayersInRadius{r=8} ~onTimer:120 1
+    - skill{s=DomainWarShockwave} @PlayersInRadius{r=9} ~onTimer:150 1
