@@ -1,0 +1,1074 @@
+# MythicMobs items for PHB Chapter 5 equipment
+# Use /mm items get <ItemName> to spawn or reference in drop tables.
+
+Items:
+  # Armaduras leves
+  PaddedArmor:
+    Id: leather_chestplate
+    Display: '&fAcolchoada'
+    Lore:
+    - '&7CA 11 + DES | Peso 4 kg'
+    - '&7Custo: 5 po | Desvantagem em Furtividade'
+    Options:
+      Color: 140,110,90
+      Unbreakable: true
+      HideFlags: true
+  LeatherArmor:
+    Id: leather_chestplate
+    Display: '&fCouro'
+    Lore:
+    - '&7CA 11 + DES | Peso 5 kg'
+    - '&7Custo: 10 po | Armadura leve sem penalidade'
+    Options:
+      Color: 85,60,40
+      Unbreakable: true
+      HideFlags: true
+  StuddedLeather:
+    Id: leather_chestplate
+    Display: '&fCouro Batido'
+    Lore:
+    - '&7CA 12 + DES | Peso 6.5 kg'
+    - '&7Custo: 45 po | Armadura leve reforçada'
+    Options:
+      Color: 60,40,30
+      Unbreakable: true
+      HideFlags: true
+
+  # Armaduras médias
+  HideArmor:
+    Id: leather_chestplate
+    Display: '&fGibão de Peles'
+    Lore:
+    - '&7CA 12 + DES (máx. +2) | Peso 6 kg'
+    - '&7Custo: 10 po | Armadura média rústica'
+    Options:
+      Color: 100,70,45
+      Unbreakable: true
+      HideFlags: true
+  ChainShirt:
+    Id: chainmail_chestplate
+    Display: '&fCamisão de Malha'
+    Lore:
+    - '&7CA 13 + DES (máx. +2) | Peso 10 kg'
+    - '&7Custo: 50 po | Armadura média silenciosa'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+  ScaleMail:
+    Id: chainmail_chestplate
+    Display: '&fBrunea'
+    Lore:
+    - '&7CA 14 + DES (máx. +2) | Peso 22.5 kg'
+    - '&7Custo: 50 po | Desvantagem em Furtividade'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+  Breastplate:
+    Id: iron_chestplate
+    Display: '&fPeitoral'
+    Lore:
+    - '&7CA 14 + DES (máx. +2) | Peso 10 kg'
+    - '&7Custo: 400 po | Armadura média flexível'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+  HalfPlate:
+    Id: iron_chestplate
+    Display: '&fMeia-Armadura'
+    Lore:
+    - '&7CA 15 + DES (máx. +2) | Peso 20 kg'
+    - '&7Custo: 750 po | Desvantagem em Furtividade'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+
+  # Armaduras pesadas e escudo
+  RingMail:
+    Id: chainmail_chestplate
+    Display: '&fCota de Anéis'
+    Lore:
+    - '&7CA 14 | Peso 20 kg'
+    - '&7Custo: 30 po | Desvantagem em Furtividade'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+  ChainMail:
+    Id: chainmail_chestplate
+    Display: '&fCota de Malha'
+    Lore:
+    - '&7CA 16 | Peso 27.5 kg'
+    - '&7Custo: 75 po | For 13 | Desvantagem em Furtividade'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+  Splint:
+    Id: iron_chestplate
+    Display: '&fCota de Talas'
+    Lore:
+    - '&7CA 17 | Peso 30 kg'
+    - '&7Custo: 200 po | For 15 | Desvantagem em Furtividade'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+  PlateArmor:
+    Id: netherite_chestplate
+    Display: '&fArmadura de Placas'
+    Lore:
+    - '&7CA 18 | Peso 32.5 kg'
+    - '&7Custo: 1.500 po | For 15 | Desvantagem em Furtividade'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+  Shield:
+    Id: shield
+    Display: '&fEscudo'
+    Lore:
+    - '&7+2 CA | Peso 3 kg'
+    - '&7Custo: 10 po | Usa uma mão'
+    Options:
+      Unbreakable: true
+      HideFlags: true
+
+  # Armas simples corpo a corpo
+  Club:
+    Id: wooden_hoe
+    Display: '&fPorrete'
+    Lore:
+    - '&71d4 concussão | Leve'
+    - '&7Custo: 1 pp | Peso 1 kg'
+  GreatClub:
+    Id: wooden_axe
+    Display: '&fClava Grande'
+    Lore:
+    - '&71d8 concussão | Pesada, Duas mãos'
+    - '&7Custo: 2 pp | Peso 5 kg'
+  Dagger:
+    Id: iron_sword
+    Display: '&fAdaga'
+    Lore:
+    - '&71d4 perfurante | Acuidade, Leve, Arremesso 6/18'
+    - '&7Custo: 2 po | Peso 0.5 kg'
+  Handaxe:
+    Id: stone_axe
+    Display: '&fMachadinha'
+    Lore:
+    - '&71d6 cortante | Leve, Arremesso 6/18'
+    - '&7Custo: 5 po | Peso 1 kg'
+  Javelin:
+    Id: trident
+    Display: '&fAzagaia'
+    Lore:
+    - '&71d6 perfurante | Arremesso 9/36'
+    - '&7Custo: 5 pp | Peso 1 kg'
+  LightHammer:
+    Id: stone_pickaxe
+    Display: '&fMartelo Leve'
+    Lore:
+    - '&71d4 concussão | Leve, Arremesso 6/18'
+    - '&7Custo: 2 po | Peso 1 kg'
+  Mace:
+    Id: iron_shovel
+    Display: '&fMaça'
+    Lore:
+    - '&71d6 concussão | Simples'
+    - '&7Custo: 5 po | Peso 2 kg'
+  Quarterstaff:
+    Id: stick
+    Display: '&fBordão'
+    Lore:
+    - '&71d6 concussão | Versátil 1d8'
+    - '&7Custo: 2 pp | Peso 2 kg'
+  Sickle:
+    Id: wooden_sword
+    Display: '&fFoice Curta'
+    Lore:
+    - '&71d4 cortante | Leve'
+    - '&7Custo: 1 po | Peso 1 kg'
+  Spear:
+    Id: iron_sword
+    Display: '&fLança'
+    Lore:
+    - '&71d6 perfurante | Arremesso 6/18, Versátil 1d8'
+    - '&7Custo: 1 po | Peso 1.5 kg'
+
+  # Armas simples à distância
+  LightCrossbow:
+    Id: crossbow
+    Display: '&fBesta Leve'
+    Lore:
+    - '&71d8 perfurante | Munição 24/96, Recarga, Duas mãos'
+    - '&7Custo: 25 po | Peso 2.5 kg'
+  Shortbow:
+    Id: bow
+    Display: '&fArco Curto'
+    Lore:
+    - '&71d6 perfurante | Munição 24/96, Duas mãos'
+    - '&7Custo: 25 po | Peso 1 kg'
+  Dart:
+    Id: firework_star
+    Display: '&fDardo'
+    Lore:
+    - '&71d4 perfurante | Acuidade, Arremesso 6/18'
+    - '&7Custo: 5 pc | Peso 0.1 kg'
+  Sling:
+    Id: lead
+    Display: '&fFunda'
+    Lore:
+    - '&71d4 concussão | Munição 9/36'
+    - '&7Custo: 1 pp | Peso —'
+
+  # Armas marciais corpo a corpo
+  Battleaxe:
+    Id: iron_axe
+    Display: '&fMachado de Batalha'
+    Lore:
+    - '&71d8 cortante | Versátil 1d10'
+    - '&7Custo: 10 po | Peso 2 kg'
+  Flail:
+    Id: flint_and_steel
+    Display: '&fMangual'
+    Lore:
+    - '&71d8 concussão | Simples de usar'
+    - '&7Custo: 10 po | Peso 1 kg'
+  Glaive:
+    Id: diamond_axe
+    Display: '&fGlaive'
+    Lore:
+    - '&71d10 cortante | Pesada, Alcance, Duas mãos'
+    - '&7Custo: 20 po | Peso 3 kg'
+  Greataxe:
+    Id: diamond_axe
+    Display: '&fMachado Grande'
+    Lore:
+    - '&71d12 cortante | Pesada, Duas mãos'
+    - '&7Custo: 30 po | Peso 3.5 kg'
+  Greatsword:
+    Id: diamond_sword
+    Display: '&fEspada Grande'
+    Lore:
+    - '&72d6 cortante | Pesada, Duas mãos'
+    - '&7Custo: 50 po | Peso 3 kg'
+  Halberd:
+    Id: iron_axe
+    Display: '&fAlabarda'
+    Lore:
+    - '&71d10 cortante | Pesada, Alcance, Duas mãos'
+    - '&7Custo: 20 po | Peso 3 kg'
+  Lance:
+    Id: trident
+    Display: '&fLança de Montaria'
+    Lore:
+    - '&71d12 perfurante | Alcance, Especial'
+    - '&7Custo: 10 po | Peso 3 kg'
+  Longsword:
+    Id: iron_sword
+    Display: '&fEspada Longa'
+    Lore:
+    - '&71d8 cortante | Versátil 1d10'
+    - '&7Custo: 15 po | Peso 1.5 kg'
+  Maul:
+    Id: iron_pickaxe
+    Display: '&fMalho'
+    Lore:
+    - '&72d6 concussão | Pesada, Duas mãos'
+    - '&7Custo: 10 po | Peso 5 kg'
+  Morningstar:
+    Id: iron_shovel
+    Display: '&fMaça Estrela'
+    Lore:
+    - '&71d8 perfurante | Marcial'
+    - '&7Custo: 15 po | Peso 2 kg'
+  Pike:
+    Id: iron_sword
+    Display: '&fLança Longa'
+    Lore:
+    - '&71d10 perfurante | Pesada, Alcance, Duas mãos'
+    - '&7Custo: 5 po | Peso 4 kg'
+  Rapier:
+    Id: iron_sword
+    Display: '&fRapieira'
+    Lore:
+    - '&71d8 perfurante | Acuidade'
+    - '&7Custo: 25 po | Peso 1 kg'
+  Scimitar:
+    Id: iron_sword
+    Display: '&fCimitarra'
+    Lore:
+    - '&71d6 cortante | Acuidade, Leve'
+    - '&7Custo: 25 po | Peso 1.5 kg'
+  Shortsword:
+    Id: iron_sword
+    Display: '&fEspada Curta'
+    Lore:
+    - '&71d6 perfurante | Acuidade, Leve'
+    - '&7Custo: 10 po | Peso 1 kg'
+  Trident:
+    Id: trident
+    Display: '&fTridente'
+    Lore:
+    - '&71d6 perfurante | Arremesso 6/18, Versátil 1d8'
+    - '&7Custo: 5 po | Peso 2 kg'
+  WarPick:
+    Id: stone_pickaxe
+    Display: '&fPicareta de Guerra'
+    Lore:
+    - '&71d8 perfurante | Marcial'
+    - '&7Custo: 5 po | Peso 1 kg'
+  Warhammer:
+    Id: iron_pickaxe
+    Display: '&fMartelo de Guerra'
+    Lore:
+    - '&71d8 concussão | Versátil 1d10'
+    - '&7Custo: 15 po | Peso 1 kg'
+  Whip:
+    Id: lead
+    Display: '&fChicote'
+    Lore:
+    - '&71d4 cortante | Acuidade, Alcance'
+    - '&7Custo: 2 po | Peso 1.5 kg'
+
+  # Armas marciais à distância
+  Blowgun:
+    Id: crossbow
+    Display: '&fZarabatana'
+    Lore:
+    - '&71 perfurante | Munição 7.5/30, Recarga'
+    - '&7Custo: 10 po | Peso 0.5 kg'
+  HandCrossbow:
+    Id: crossbow
+    Display: '&fBesta de Mão'
+    Lore:
+    - '&71d6 perfurante | Munição 9/36, Leve, Recarga'
+    - '&7Custo: 75 po | Peso 1.5 kg'
+  HeavyCrossbow:
+    Id: crossbow
+    Display: '&fBesta Pesada'
+    Lore:
+    - '&71d10 perfurante | Munição 30/120, Pesada, Recarga, Duas mãos'
+    - '&7Custo: 50 po | Peso 4.5 kg'
+  Longbow:
+    Id: bow
+    Display: '&fArco Longo'
+    Lore:
+    - '&71d8 perfurante | Munição 45/180, Pesada, Duas mãos'
+    - '&7Custo: 50 po | Peso 1 kg'
+  Net:
+    Id: cobweb
+    Display: '&fRede'
+    Lore:
+    - '&7Impede alvo Pequeno/Médio | Arremesso 1.5/4.5'
+    - '&7Custo: 1 po | Peso 1.5 kg'
+
+  # Consumíveis e munições
+  AcidFlask:
+    Id: potion
+    Display: '&2Ácido (frasco)'
+    Lore:
+    - '&72d6 ácido em ataque improvisado (alcance 6 m)'
+    - '&7Custo: 25 po | Peso 0.5 kg'
+    Options:
+      HideFlags: true
+  AlchemistsFire:
+    Id: potion
+    Display: '&6Fogo Alquímico'
+    Lore:
+    - '&7Inflama 1d4 fogo/turno até DES CD 10 apagar'
+    - '&7Custo: 50 po | Peso 0.5 kg'
+    Options:
+      HideFlags: true
+  HolyWater:
+    Id: potion
+    Display: '&bÁgua Benta'
+    Lore:
+    - '&72d6 radiante contra mortos-vivos/corruptores'
+    - '&7Custo: 25 po | Peso 0.5 kg | Ritual 1h'
+    Options:
+      HideFlags: true
+  BasicPoison:
+    Id: potion
+    Display: '&2Veneno Básico'
+    Lore:
+    - '&71d4 veneno (CON CD 10) | Dura 1 min na lâmina'
+    - '&7Custo: 100 po'
+    Options:
+      HideFlags: true
+  HealingPotion:
+    Id: potion
+    Display: '&dPoção de Cura'
+    Lore:
+    - '&72d4 + 2 PV ao beber (Ação)'
+    - '&7Custo: 50 po | Peso 0.25 kg'
+    Options:
+      HideFlags: true
+  ArrowBundle:
+    Id: arrow
+    Display: '&fFlechas (20)'
+    Amount: 20
+    Lore:
+    - '&7Munição para arcos | Peso 0.5 kg'
+    - '&7Custo: 1 po'
+  BoltBundle:
+    Id: crossbow_bolt
+    Display: '&fVirotes (20)'
+    Amount: 20
+    Lore:
+    - '&7Munição para bestas | Peso 0.75 kg'
+    - '&7Custo: 1 po'
+  SlingBullets:
+    Id: clay_ball
+    Display: '&fBalas de Funda (20)'
+    Amount: 20
+    Lore:
+    - '&7Peso 0.75 kg | Custo: 4 pc'
+  BlowgunNeedles:
+    Id: paper
+    Display: '&fDardos de Zarabatana (50)'
+    Amount: 50
+    Lore:
+    - '&7Peso 0.5 kg | Custo: 1 po'
+
+  # Ferramentas e kits
+  Abacus:
+    Id: comparator
+    Display: '&fÁbaco'
+    Lore:
+    - '&7Custo: 2 po | Peso 1 kg'
+  BallBearings:
+    Id: iron_nugget
+    Display: '&fEsferas de Metal (1000)'
+    Lore:
+    - '&7Área 3 m: DES CD 10 ou cair'
+    - '&7Custo: 1 po | Peso 1 kg'
+  Caltrops:
+    Id: pointed_dripstone
+    Display: '&fEstrepes (20)'
+    Lore:
+    - '&7Área 1.5 m: DES CD 15 ou parar (1 perf.)'
+    - '&7Custo: 1 po | Peso 1 kg'
+  ClimbingKit:
+    Id: leather_horse_armor
+    Display: '&fKit de Escalada'
+    Lore:
+    - '&7Ancoragem limita quedas a 7.5 m'
+    - '&7Custo: 25 po | Peso 6 kg'
+  HealersKit:
+    Id: book
+    Display: '&fKit de Primeiros Socorros'
+    Lore:
+    - '&710 usos: estabiliza sem teste de Medicina'
+    - '&7Custo: 5 po | Peso 1.5 kg'
+  DisguiseKit:
+    Id: leather_helmet
+    Display: '&fKit de Disfarce'
+    Lore:
+    - '&7Custo: 25 po | Peso 1.5 kg | Proficiência em disfarces'
+  ForgeryKit:
+    Id: writable_book
+    Display: '&fKit de Falsificação'
+    Lore:
+    - '&7Custo: 15 po | Peso 2.5 kg | Proficiência em forjar documentos'
+  HerbalismKit:
+    Id: flower_pot
+    Display: '&fKit de Herbalismo'
+    Lore:
+    - '&7Custo: 5 po | Peso 1.5 kg | Necessário para antídotos/curas'
+  PoisonersKit:
+    Id: brewing_stand
+    Display: '&fKit de Venenos'
+    Lore:
+    - '&7Custo: 50 po | Peso 1 kg | Criação/aplicação de venenos'
+  ThievesTools:
+    Id: tripwire_hook
+    Display: '&fFerramentas de Ladrão'
+    Lore:
+    - '&7Custo: 25 po | Peso 0.5 kg | Desarmar e arrombar'
+  NavigatorsTools:
+    Id: compass
+    Display: '&fFerramentas de Navegação'
+    Lore:
+    - '&7Custo: 25 po | Peso 1 kg | Evita se perder no mar'
+  SmithTools:
+    Id: anvil
+    Display: '&fFerramentas de Ferreiro'
+    Lore:
+    - '&7Custo: 20 po | Peso 4 kg | Proficiência de artesão'
+  CarpenterTools:
+    Id: iron_axe
+    Display: '&fFerramentas de Carpinteiro'
+    Lore:
+    - '&7Custo: 8 po | Peso 3 kg'
+  CartographerTools:
+    Id: map
+    Display: '&fFerramentas de Cartógrafo'
+    Lore:
+    - '&7Custo: 15 po | Peso 3 kg'
+  CobblerTools:
+    Id: leather_boots
+    Display: '&fFerramentas de Sapateiro'
+    Lore:
+    - '&7Custo: 5 po | Peso 2.5 kg'
+  CookUtensils:
+    Id: bowl
+    Display: '&fUtensílios de Cozinheiro'
+    Lore:
+    - '&7Custo: 1 po | Peso 4 kg'
+  GlassblowerTools:
+    Id: glass
+    Display: '&fFerramentas de Vidreiro'
+    Lore:
+    - '&7Custo: 30 po | Peso 2.5 kg'
+  JewelerTools:
+    Id: amethyst_shard
+    Display: '&fFerramentas de Joalheiro'
+    Lore:
+    - '&7Custo: 25 po | Peso 1 kg'
+  LeatherworkerTools:
+    Id: leather
+    Display: '&fFerramentas de Coureiro'
+    Lore:
+    - '&7Custo: 5 po | Peso 2.5 kg'
+  MasonTools:
+    Id: stone
+    Display: '&fFerramentas de Pedreiro'
+    Lore:
+    - '&7Custo: 10 po | Peso 4 kg'
+  PainterSupplies:
+    Id: painting
+    Display: '&fFerramentas de Pintor'
+    Lore:
+    - '&7Custo: 10 po | Peso 2.5 kg'
+  PotterTools:
+    Id: clay_ball
+    Display: '&fFerramentas de Oleiro'
+    Lore:
+    - '&7Custo: 10 po | Peso 1.5 kg'
+  TinkerTools:
+    Id: redstone
+    Display: '&fFerramentas de Funileiro'
+    Lore:
+    - '&7Custo: 50 po | Peso 5 kg'
+  WeaverTools:
+    Id: string
+    Display: '&fFerramentas de Costureiro'
+    Lore:
+    - '&7Custo: 1 po | Peso 2.5 kg'
+  WoodcarverTools:
+    Id: stick
+    Display: '&fFerramentas de Entalhador'
+    Lore:
+    - '&7Custo: 1 po | Peso 2.5 kg'
+  BrewersSupplies:
+    Id: potion
+    Display: '&fSuprimentos de Cervejeiro'
+    Lore:
+    - '&7Custo: 20 po | Peso 4.5 kg'
+    Options:
+      HideFlags: true
+  CalligrapherSupplies:
+    Id: feather
+    Display: '&fSuprimentos de Caligrafia'
+    Lore:
+    - '&7Custo: 10 po | Peso 2.5 kg'
+  AlchemistSupplies:
+    Id: brewing_stand
+    Display: '&fSuprimentos de Alquimista'
+    Lore:
+    - '&7Custo: 50 po | Peso 4 kg'
+
+  # Focos e tomos
+  ArcaneFocusOrb:
+    Id: ender_pearl
+    Display: '&dFoco Arcano (Orbe)'
+    Lore:
+    - '&7Custo: 20 po | Peso 1.5 kg'
+    - '&7Canaliza magias arcanas'
+  ArcaneFocusWand:
+    Id: blaze_rod
+    Display: '&dFoco Arcano (Varinha)'
+    Lore:
+    - '&7Custo: 10 po | Peso 0.5 kg'
+  ArcaneFocusStaff:
+    Id: stick
+    Display: '&dFoco Arcano (Cajado)'
+    Lore:
+    - '&7Custo: 5 po | Peso 2 kg'
+  ArcaneFocusCrystal:
+    Id: amethyst_shard
+    Display: '&dFoco Arcano (Cristal)'
+    Lore:
+    - '&7Custo: 10 po | Peso 0.5 kg'
+  DruidicFocusTotem:
+    Id: carved_pumpkin
+    Display: '&2Foco Druídico (Totem)'
+    Lore:
+    - '&7Custo: 1 po | Peso —'
+  DruidicFocusStaff:
+    Id: stick
+    Display: '&2Foco Druídico (Cajado)'
+    Lore:
+    - '&7Custo: 5 po | Peso 2 kg'
+  DruidicFocusWand:
+    Id: stick
+    Display: '&2Foco Druídico (Varinha de Teixo)'
+    Lore:
+    - '&7Custo: 10 po | Peso 0.5 kg'
+  Spellbook:
+    Id: book
+    Display: '&bGrimório'
+    Lore:
+    - '&7Livro em branco para magias | 100 páginas'
+    - '&7Custo: 50 po | Peso 1.5 kg'
+
+  # Itens de aventura gerais
+  Backpack:
+    Id: leather
+    Display: '&fMochila'
+    Lore:
+    - '&7Capacidade 30 cm³ / 15 kg'
+    - '&7Custo: 2 po | Peso 2.5 kg'
+  Bedroll:
+    Id: white_bed
+    Display: '&fSaco de Dormir'
+    Lore:
+    - '&7Custo: 1 po | Peso 3.5 kg'
+  Blanket:
+    Id: white_carpet
+    Display: '&fCobertor de Inverno'
+    Lore:
+    - '&7Custo: 5 pp | Peso 1.5 kg'
+  RopeHemp:
+    Id: lead
+    Display: '&fCorda de Cânhamo (15 m)'
+    Lore:
+    - '&7CA 17 para romper | Custo: 1 po | Peso 5 kg'
+  RopeSilk:
+    Id: string
+    Display: '&fCorda de Seda (15 m)'
+    Lore:
+    - '&7CA 20 para romper | Custo: 10 po | Peso 2.5 kg'
+  Chain3m:
+    Id: chain
+    Display: '&fCorrente (3 m)'
+    Lore:
+    - '&7Custo: 5 po | Peso 5 kg | CA 20 para romper'
+  Piton:
+    Id: iron_ingot
+    Display: '&fPíton'
+    Lore:
+    - '&7Custo: 5 pc | Usado para fixar cordas'
+  Crowbar:
+    Id: stick
+    Display: '&fPé de Cabra'
+    Lore:
+    - '&7Vantagem em testes de Força como alavanca'
+    - '&7Custo: 2 po | Peso 2.5 kg'
+  Hammer:
+    Id: stone_pickaxe
+    Display: '&fMartelo'
+    Lore:
+    - '&7Custo: 1 po | Peso 1.5 kg'
+  Mallet:
+    Id: iron_pickaxe
+    Display: '&fMarreta'
+    Lore:
+    - '&7Custo: 2 po | Peso 5 kg'
+  Shovel:
+    Id: wooden_shovel
+    Display: '&fPá'
+    Lore:
+    - '&7Custo: 2 po | Peso 2.5 kg'
+  IronSpikes:
+    Id: iron_nugget
+    Display: '&fPregos de Ferro (10)'
+    Lore:
+    - '&7Custo: 1 po | Peso 2.5 kg'
+  Lock:
+    Id: tripwire_hook
+    Display: '&fFechadura'
+    Lore:
+    - '&7Custo: 10 po | Peso 0.5 kg | Destreza CD 15 para arrombar'
+  Manacles:
+    Id: chain
+    Display: '&fAlgemas'
+    Lore:
+    - '&7DES CD 20 para escapar | FOR CD 20 para quebrar'
+    - '&7Custo: 2 po | Peso 2 kg'
+  HuntingTrap:
+    Id: string
+    Display: '&fArmadilha de Caça'
+    Lore:
+    - '&7DES CD 13 ou 1d4 perf. e preso'
+    - '&7Custo: 5 po | Peso 12.5 kg'
+  BearTrap:
+    Id: anvil
+    Display: '&fAríete Portátil'
+    Lore:
+    - '&7+4 em testes de FOR para arrombar portas'
+    - '&7Custo: 4 po | Peso 17.5 kg'
+  FishingTackle:
+    Id: fishing_rod
+    Display: '&fEquipamento de Pescaria'
+    Lore:
+    - '&7Custo: 1 po | Peso 2 kg'
+  SignalWhistle:
+    Id: echo_shard
+    Display: '&fApito de Advertência'
+    Lore:
+    - '&7Custo: 25 po | Peso 0.5 kg'
+  GrapplingHook:
+    Id: tripwire_hook
+    Display: '&fArpéu'
+    Lore:
+    - '&7Custo: 2 po | Peso 2 kg'
+  Hourglass:
+    Id: clock
+    Display: '&fAmpulheta'
+    Lore:
+    - '&7Custo: 25 po | Peso 0.5 kg'
+  IronPot:
+    Id: cauldron
+    Display: '&fPanela de Ferro'
+    Lore:
+    - '&7Custo: 2 po | Peso 5 kg | Capacidade 4 L'
+  MessKit:
+    Id: bowl
+    Display: '&fKit de Refeição'
+    Lore:
+    - '&7Custo: 2 pp | Peso 0.5 kg'
+  Tinderbox:
+    Id: flint_and_steel
+    Display: '&fCaixa de Fogo'
+    Lore:
+    - '&7Acender tochas em 1 ação; outros fogos em 1 minuto'
+    - '&7Custo: 5 pp | Peso 0.5 kg'
+  Torch:
+    Id: torch
+    Display: '&fTocha'
+    Lore:
+    - '&7Dura 1h | Luz 6 m / Penumbra 6 m'
+    - '&7Custo: 1 pc | Peso 0.5 kg'
+  Lamp:
+    Id: lantern
+    Display: '&fLâmpada'
+    Lore:
+    - '&7Luz 4.5 m / Penumbra 9 m por 6h (óleo)'
+    - '&7Custo: 5 pp | Peso 0.5 kg'
+  HoodedLantern:
+    Id: lantern
+    Display: '&fLanterna Coberta'
+    Lore:
+    - '&7Luz 9 m / Penumbra 9 m por 6h; fechar para 1.5 m'
+    - '&7Custo: 5 po | Peso 1 kg'
+  BullseyeLantern:
+    Id: lantern
+    Display: '&fLanterna Furta-Fogo'
+    Lore:
+    - '&7Cone 18 m luz plena por 6h'
+    - '&7Custo: 10 po | Peso 1 kg'
+  OilFlask:
+    Id: potion
+    Display: '&6Óleo (frasco)'
+    Lore:
+    - '&7Queima 5 dano se inflamado; dura 1 min no alvo'
+    - '&7Custo: 1 pp | Peso 0.5 kg'
+    Options:
+      HideFlags: true
+  InkBottle:
+    Id: black_dye
+    Display: '&fTinta (30 ml)'
+    Lore:
+    - '&7Custo: 10 po'
+  Quill:
+    Id: feather
+    Display: '&fCaneta Tinteiro'
+    Lore:
+    - '&7Custo: 2 pc'
+  PaperSheet:
+    Id: paper
+    Display: '&fPapel (folha)'
+    Lore:
+    - '&7Custo: 2 pp'
+  ParchmentSheet:
+    Id: paper
+    Display: '&fPergaminho (folha)'
+    Lore:
+    - '&7Custo: 1 pp'
+  Book:
+    Id: book
+    Display: '&fLivro'
+    Lore:
+    - '&7Custo: 25 po | Peso 2.5 kg'
+  MapCase:
+    Id: bundle
+    Display: '&fPorta Mapas/Pergaminhos'
+    Lore:
+    - '&7Custo: 1 po | Peso 0.5 kg'
+  ScrollCase:
+    Id: bundle
+    Display: '&fPorta Virotes'
+    Lore:
+    - '&7Armazena até 20 virotes | Custo: 1 po | Peso 0.5 kg'
+  Waterskin:
+    Id: bundle
+    Display: '&fCantil'
+    Lore:
+    - '&7Capacidade 2 L | Custo: 2 pp | Peso 2.5 kg'
+  Rations:
+    Id: bread
+    Display: '&fRações de Viagem (1 dia)'
+    Lore:
+    - '&7Custo: 5 pp | Peso 1 kg'
+  Bottle:
+    Id: glass_bottle
+    Display: '&fGarrafa de Vidro'
+    Lore:
+    - '&7Capacidade 750 ml | Custo: 1 po | Peso 1 kg'
+  Vial:
+    Id: glass_bottle
+    Display: '&fFrasco'
+    Lore:
+    - '&7Capacidade 120 ml | Custo: 2 pc | Peso 1 kg'
+  Jug:
+    Id: brick
+    Display: '&fJarra'
+    Lore:
+    - '&7Capacidade 5 L | Custo: 4 pc | Peso 2 kg'
+  Bucket:
+    Id: bucket
+    Display: '&fBalde'
+    Lore:
+    - '&7Capacidade 12 L | Custo: 5 pc | Peso 1 kg'
+  Barrel:
+    Id: barrel
+    Display: '&fBarril'
+    Lore:
+    - '&7Capacidade 160 L | Custo: 2 po | Peso 35 kg'
+  Chest:
+    Id: chest
+    Display: '&fBaú'
+    Lore:
+    - '&7Custo: 5 po | Peso 12.5 kg | Capacidade 3.5 m³'
+  Basket:
+    Id: bundle
+    Display: '&fCesto'
+    Lore:
+    - '&7Capacidade 60 cm³ | Custo: 4 pp | Peso 1 kg'
+  BottleInk:
+    Id: glass_bottle
+    Display: '&fPerfume (frasco)'
+    Lore:
+    - '&7Custo: 5 po'
+  Soap:
+    Id: snowball
+    Display: '&fSabão'
+    Lore:
+    - '&7Custo: 2 pc'
+  Chalk:
+    Id: bone_meal
+    Display: '&fGiz'
+    Lore:
+    - '&7Custo: 1 pc'
+  Candle:
+    Id: candle
+    Display: '&fVela'
+    Lore:
+    - '&7Dura 1h | Luz 1.5 m'
+    - '&7Custo: 1 pc'
+  Tent:
+    Id: white_wool
+    Display: '&fTenda (2 pessoas)'
+    Lore:
+    - '&7Custo: 2 po | Peso 10 kg'
+  ClothingCommon:
+    Id: leather_chestplate
+    Display: '&fRoupas Comuns'
+    Lore:
+    - '&7Custo: 5 pp | Peso 1.5 kg'
+    Options:
+      Color: 120,120,120
+      HideFlags: true
+  ClothingTravelers:
+    Id: leather_chestplate
+    Display: '&fRoupas de Viajante'
+    Lore:
+    - '&7Custo: 2 po | Peso 2 kg'
+    Options:
+      Color: 90,70,50
+      HideFlags: true
+  ClothingEntertainer:
+    Id: leather_chestplate
+    Display: '&fRoupas de Entretenimento'
+    Lore:
+    - '&7Custo: 5 po | Peso 2 kg'
+    Options:
+      Color: 180,40,180
+      HideFlags: true
+  ClothingFine:
+    Id: leather_chestplate
+    Display: '&fRoupas Finas'
+    Lore:
+    - '&7Custo: 15 po | Peso 3 kg'
+    Options:
+      Color: 30,30,120
+      HideFlags: true
+  Cloak:
+    Id: leather_chestplate
+    Display: '&fManto'
+    Lore:
+    - '&7Custo: 1 po | Peso 2 kg'
+    Options:
+      Color: 40,40,40
+      HideFlags: true
+  HolySymbolAmulet:
+    Id: amethyst_shard
+    Display: '&fSímbolo Sagrado (Amuleto)'
+    Lore:
+    - '&7Custo: 5 po | Peso 0.5 kg'
+  HolySymbolEmblem:
+    Id: banner_pattern
+    Display: '&fSímbolo Sagrado (Emblema)'
+    Lore:
+    - '&7Custo: 5 po | Peso —'
+  HolySymbolReliquary:
+    Id: chest
+    Display: '&fRelicário'
+    Lore:
+    - '&7Custo: 5 po | Peso 1 kg'
+  SignetRing:
+    Id: gold_nugget
+    Display: '&fSinete'
+    Lore:
+    - '&7Custo: 5 po'
+  Bell:
+    Id: bell
+    Display: '&fSino'
+    Lore:
+    - '&7Custo: 1 po'
+  SealingWax:
+    Id: honeycomb
+    Display: '&fParafina/Lacre'
+    Lore:
+    - '&7Custo: 5 pp'
+  Spyglass:
+    Id: spyglass
+    Display: '&fLuneta'
+    Lore:
+    - '&7Amplia 2x | Custo: 1.000 po | Peso 0.5 kg'
+  MagnifyingGlass:
+    Id: spyglass
+    Display: '&fLente de Aumento'
+    Lore:
+    - '&7Custo: 100 po | Ajuda a inspecionar e acender fogo'
+  Mirror:
+    Id: iron_ingot
+    Display: '&fEspelho de Aço'
+    Lore:
+    - '&7Custo: 5 po | Peso 0.25 kg'
+  RopePulley:
+    Id: chain
+    Display: '&fRoldana e Polia'
+    Lore:
+    - '&7Eleva 4x o peso normal | Custo: 1 po | Peso 2.5 kg'
+  Ladder:
+    Id: stick
+    Display: '&fEscada (3 m)'
+    Lore:
+    - '&7Custo: 1 pp | Peso 12.5 kg'
+  Pole:
+    Id: stick
+    Display: '&fVara (3 m)'
+    Lore:
+    - '&7Custo: 5 pc | Peso 3.5 kg'
+  BallAndChain:
+    Id: lead
+    Display: '&fAlgibeira'
+    Lore:
+    - '&7Capacidade 15 cm³ | Custo: 5 po | Peso 0.5 kg'
+  Pouch:
+    Id: leather
+    Display: '&fBolsa'
+    Lore:
+    - '&7Custo: 5 po | Peso 0.5 kg'
+  Bag:
+    Id: bundle
+    Display: '&fSaco'
+    Lore:
+    - '&7Capacidade 30 cm³ | Custo: 1 pc | Peso 0.25 kg'
+  ComponentPouch:
+    Id: bundle
+    Display: '&fBolsa de Componentes'
+    Lore:
+    - '&7À prova d''água para componentes de magia'
+    - '&7Custo: 25 po | Peso 1 kg'
+  Saddlebag:
+    Id: leather_horse_armor
+    Display: '&fAlforje'
+    Lore:
+    - '&7Custo: 4 po | Peso 4 kg'
+  SaddlePack:
+    Id: saddle
+    Display: '&fSela de Viagem'
+    Lore:
+    - '&7Custo: 10 po | Peso 12.5 kg'
+  SaddleMilitary:
+    Id: saddle
+    Display: '&fSela Militar'
+    Lore:
+    - '&7Vantagem para ficar montado | Custo: 20 po | Peso 15 kg'
+  SaddleExotic:
+    Id: saddle
+    Display: '&fSela Exótica'
+    Lore:
+    - '&7Para montarias voadoras/aquáticas | Custo: 60 po | Peso 20 kg'
+
+  # Pacotes prontos
+  EntertainerPack:
+    Id: bundle
+    Display: '&ePacote de Artista'
+    Lore:
+    - '&7Mochila, saco de dormir, 2 fantasias'
+    - '&75 velas, 5 dias de rações, cantil'
+    - '&7Kit de disfarce | Custo: 40 po'
+  BurglarsPack:
+    Id: bundle
+    Display: '&ePacote de Assaltante'
+    Lore:
+    - '&71.000 esferas, linha 3 m, sino, 5 velas'
+    - '&7Pé de cabra, martelo, 10 pítons'
+    - '&7Lanterna coberta, 2 óleos, 5 rações, caixa de fogo, cantil'
+    - '&7Corda de cânhamo 15 m | Custo: 16 po'
+  DungeoneerPack:
+    Id: bundle
+    Display: '&ePacote de Aventureiro'
+    Lore:
+    - '&7Mochila, pé de cabra, martelo, 10 pítons'
+    - '&710 tochas, caixa de fogo, 10 dias de rações, cantil'
+    - '&7Corda de cânhamo 15 m | Custo: 12 po'
+  DiplomatPack:
+    Id: bundle
+    Display: '&ePacote de Diplomata'
+    Lore:
+    - '&7Baú, 2 porta mapas, roupas finas, vidro de tinta, caneta'
+    - '&7Lâmpada, 2 óleos, 5 papéis, perfume, parafina, sabão'
+    - '&7Custo: 39 po'
+  ScholarPack:
+    Id: bundle
+    Display: '&ePacote de Estudioso'
+    Lore:
+    - '&7Mochila, livro de estudo, tinta, caneta'
+    - '&710 pergaminhos, saco de areia, pequena faca'
+    - '&7Custo: 40 po'
+  ExplorerPack:
+    Id: bundle
+    Display: '&ePacote de Explorador'
+    Lore:
+    - '&7Mochila, saco de dormir, kit de refeição'
+    - '&7Caixa de fogo, 10 tochas, 10 dias de rações, cantil'
+    - '&7Corda de cânhamo 15 m | Custo: 10 po'
+  PriestPack:
+    Id: bundle
+    Display: '&ePacote de Sacerdote'
+    Lore:
+    - '&7Mochila, cobertor, 10 velas, caixa de fogo'
+    - '&7Caixa de esmolas, 2 incensos + incensário, vestes'
+    - '&72 dias de rações, cantil | Custo: 19 po'

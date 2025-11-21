@@ -4,6 +4,7 @@ Este repositório reúne a configuração mínima de um servidor Paper focado em
 
 ## Documentação de magias e condições
 - [Implantação de magias e condições](docs/magias-condicoes.md): resumo das listas por classe, efeitos prioritários para MythicMobs e tabela de condições para espelhar em LuckPerms.
+- [Equipamentos do Livro do Jogador](docs/equipamentos.md): custos, pesos e propriedades de armas, armaduras, kits e montarias do capítulo 5 para replicar loots e lojas. Os itens já estão definidos no MythicMobs em `mythicmobs/items/dnd_equipment.yml` para spawnar via `/mm items get <ItemName>` ou reutilizar em tabelas de loot.
 
 ## Capacidade geral do servidor
 - **Atributos principais:** Strength, Dexterity, Constitution, Intelligence, Wisdom e Charisma, todos com intervalo 1–30 e valor inicial 10, mapeados pela ValhallaMMO. Modificadores usam a fórmula `floor((score - 10) / 2)`.【F:valhallammo/config.yml†L1-L44】
