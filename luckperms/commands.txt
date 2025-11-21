@@ -101,7 +101,390 @@ lp group class_fighter permission set save:CON true
 # Apply to player
 lp user <player> parent add class_fighter_lvl1
 
-# Repeat parent ladder and feature permissions for: barbarian, bard, cleric, druid, monk, paladin, ranger, rogue, sorcerer, warlock, wizard.
+# Barbarian progression and features
+lp creategroup class_barbarian
+lp creategroup class_barbarian_lvl1
+lp creategroup class_barbarian_lvl2
+lp creategroup class_barbarian_lvl3
+lp creategroup class_barbarian_lvl5
+lp creategroup class_barbarian_lvl10
+lp creategroup class_barbarian_lvl15
+lp creategroup class_barbarian_lvl20
+
+# Parent chain
+lp group class_barbarian_lvl1 parent add class_barbarian
+lp group class_barbarian_lvl2 parent add class_barbarian_lvl1
+lp group class_barbarian_lvl3 parent add class_barbarian_lvl2
+lp group class_barbarian_lvl5 parent add class_barbarian_lvl3
+lp group class_barbarian_lvl10 parent add class_barbarian_lvl5
+lp group class_barbarian_lvl15 parent add class_barbarian_lvl10
+lp group class_barbarian_lvl20 parent add class_barbarian_lvl15
+
+# Features
+lp group class_barbarian_lvl1 permission set feature.rage true
+lp group class_barbarian_lvl2 permission set feature.reckless_attack true
+lp group class_barbarian_lvl3 permission set feature.danger_sense true
+lp group class_barbarian_lvl5 permission set feature.extra_attack true
+lp group class_barbarian_lvl10 permission set feature.brutal_critical true
+lp group class_barbarian_lvl15 permission set feature.relentless_rage true
+lp group class_barbarian_lvl20 permission set feature.primal_champion true
+
+# Saving throw proficiencies
+lp group class_barbarian permission set save:STR true
+lp group class_barbarian permission set save:CON true
+
+# Apply to player
+lp user <player> parent add class_barbarian_lvl1
+
+# Bard progression and features
+lp creategroup class_bard
+lp creategroup class_bard_lvl1
+lp creategroup class_bard_lvl2
+lp creategroup class_bard_lvl3
+lp creategroup class_bard_lvl5
+lp creategroup class_bard_lvl10
+lp creategroup class_bard_lvl15
+lp creategroup class_bard_lvl20
+
+# Parent chain
+lp group class_bard_lvl1 parent add class_bard
+lp group class_bard_lvl2 parent add class_bard_lvl1
+lp group class_bard_lvl3 parent add class_bard_lvl2
+lp group class_bard_lvl5 parent add class_bard_lvl3
+lp group class_bard_lvl10 parent add class_bard_lvl5
+lp group class_bard_lvl15 parent add class_bard_lvl10
+lp group class_bard_lvl20 parent add class_bard_lvl15
+
+# Features
+lp group class_bard_lvl1 permission set feature.bardic_inspiration true
+lp group class_bard_lvl2 permission set feature.jack_of_all_trades true
+lp group class_bard_lvl3 permission set feature.expertise true
+lp group class_bard_lvl5 permission set feature.font_of_inspiration true
+lp group class_bard_lvl10 permission set feature.magical_secrets true
+lp group class_bard_lvl15 permission set feature.superior_inspiration true
+lp group class_bard_lvl20 permission set feature.bard_capstone true
+
+# Saving throw proficiencies
+lp group class_bard permission set save:DEX true
+lp group class_bard permission set save:CHA true
+
+# Apply to player
+lp user <player> parent add class_bard_lvl1
+
+# Cleric progression and features
+lp creategroup class_cleric
+lp creategroup class_cleric_lvl1
+lp creategroup class_cleric_lvl2
+lp creategroup class_cleric_lvl3
+lp creategroup class_cleric_lvl5
+lp creategroup class_cleric_lvl10
+lp creategroup class_cleric_lvl15
+lp creategroup class_cleric_lvl20
+
+# Parent chain
+lp group class_cleric_lvl1 parent add class_cleric
+lp group class_cleric_lvl2 parent add class_cleric_lvl1
+lp group class_cleric_lvl3 parent add class_cleric_lvl2
+lp group class_cleric_lvl5 parent add class_cleric_lvl3
+lp group class_cleric_lvl10 parent add class_cleric_lvl5
+lp group class_cleric_lvl15 parent add class_cleric_lvl10
+lp group class_cleric_lvl20 parent add class_cleric_lvl15
+
+# Features
+lp group class_cleric_lvl1 permission set feature.divine_domain true
+lp group class_cleric_lvl2 permission set feature.channel_divinity true
+lp group class_cleric_lvl3 permission set feature.potent_spellcasting true
+lp group class_cleric_lvl5 permission set feature.destroy_undead true
+lp group class_cleric_lvl10 permission set feature.divine_intervention true
+lp group class_cleric_lvl15 permission set feature.empowered_healing true
+lp group class_cleric_lvl20 permission set feature.improved_intervention true
+
+# Saving throw proficiencies
+lp group class_cleric permission set save:WIS true
+lp group class_cleric permission set save:CHA true
+
+# Apply to player
+lp user <player> parent add class_cleric_lvl1
+
+# Druid progression and features
+lp creategroup class_druid
+lp creategroup class_druid_lvl1
+lp creategroup class_druid_lvl2
+lp creategroup class_druid_lvl3
+lp creategroup class_druid_lvl5
+lp creategroup class_druid_lvl10
+lp creategroup class_druid_lvl15
+lp creategroup class_druid_lvl20
+
+# Parent chain
+lp group class_druid_lvl1 parent add class_druid
+lp group class_druid_lvl2 parent add class_druid_lvl1
+lp group class_druid_lvl3 parent add class_druid_lvl2
+lp group class_druid_lvl5 parent add class_druid_lvl3
+lp group class_druid_lvl10 parent add class_druid_lvl5
+lp group class_druid_lvl15 parent add class_druid_lvl10
+lp group class_druid_lvl20 parent add class_druid_lvl15
+
+# Features
+lp group class_druid_lvl1 permission set feature.druidic true
+lp group class_druid_lvl2 permission set feature.wild_shape true
+lp group class_druid_lvl3 permission set feature.circle_spells true
+lp group class_druid_lvl5 permission set feature.primal_strike true
+lp group class_druid_lvl10 permission set feature.elemental_shapes true
+lp group class_druid_lvl15 permission set feature.timed_wild_shape true
+lp group class_druid_lvl20 permission set feature.archdruid true
+
+# Saving throw proficiencies
+lp group class_druid permission set save:INT true
+lp group class_druid permission set save:WIS true
+
+# Apply to player
+lp user <player> parent add class_druid_lvl1
+
+# Monk progression and features
+lp creategroup class_monk
+lp creategroup class_monk_lvl1
+lp creategroup class_monk_lvl2
+lp creategroup class_monk_lvl3
+lp creategroup class_monk_lvl5
+lp creategroup class_monk_lvl10
+lp creategroup class_monk_lvl15
+lp creategroup class_monk_lvl20
+
+# Parent chain
+lp group class_monk_lvl1 parent add class_monk
+lp group class_monk_lvl2 parent add class_monk_lvl1
+lp group class_monk_lvl3 parent add class_monk_lvl2
+lp group class_monk_lvl5 parent add class_monk_lvl3
+lp group class_monk_lvl10 parent add class_monk_lvl5
+lp group class_monk_lvl15 parent add class_monk_lvl10
+lp group class_monk_lvl20 parent add class_monk_lvl15
+
+# Features
+lp group class_monk_lvl1 permission set feature.martial_arts true
+lp group class_monk_lvl2 permission set feature.ki_pool true
+lp group class_monk_lvl3 permission set feature.deflect_missiles true
+lp group class_monk_lvl5 permission set feature.extra_attack true
+lp group class_monk_lvl10 permission set feature.purity_of_body true
+lp group class_monk_lvl15 permission set feature.diamond_soul true
+lp group class_monk_lvl20 permission set feature.perfect_self true
+
+# Saving throw proficiencies
+lp group class_monk permission set save:STR true
+lp group class_monk permission set save:DEX true
+
+# Apply to player
+lp user <player> parent add class_monk_lvl1
+
+# Paladin progression and features
+lp creategroup class_paladin
+lp creategroup class_paladin_lvl1
+lp creategroup class_paladin_lvl2
+lp creategroup class_paladin_lvl3
+lp creategroup class_paladin_lvl5
+lp creategroup class_paladin_lvl10
+lp creategroup class_paladin_lvl15
+lp creategroup class_paladin_lvl20
+
+# Parent chain
+lp group class_paladin_lvl1 parent add class_paladin
+lp group class_paladin_lvl2 parent add class_paladin_lvl1
+lp group class_paladin_lvl3 parent add class_paladin_lvl2
+lp group class_paladin_lvl5 parent add class_paladin_lvl3
+lp group class_paladin_lvl10 parent add class_paladin_lvl5
+lp group class_paladin_lvl15 parent add class_paladin_lvl10
+lp group class_paladin_lvl20 parent add class_paladin_lvl15
+
+# Features
+lp group class_paladin_lvl1 permission set feature.lay_on_hands true
+lp group class_paladin_lvl2 permission set feature.divine_smite true
+lp group class_paladin_lvl3 permission set feature.divine_health true
+lp group class_paladin_lvl5 permission set feature.extra_attack true
+lp group class_paladin_lvl10 permission set feature.aura_of_courage true
+lp group class_paladin_lvl15 permission set feature.cleansing_touch true
+lp group class_paladin_lvl20 permission set feature.holy_nimbus true
+
+# Saving throw proficiencies
+lp group class_paladin permission set save:WIS true
+lp group class_paladin permission set save:CHA true
+
+# Apply to player
+lp user <player> parent add class_paladin_lvl1
+
+# Ranger progression and features
+lp creategroup class_ranger
+lp creategroup class_ranger_lvl1
+lp creategroup class_ranger_lvl2
+lp creategroup class_ranger_lvl3
+lp creategroup class_ranger_lvl5
+lp creategroup class_ranger_lvl10
+lp creategroup class_ranger_lvl15
+lp creategroup class_ranger_lvl20
+
+# Parent chain
+lp group class_ranger_lvl1 parent add class_ranger
+lp group class_ranger_lvl2 parent add class_ranger_lvl1
+lp group class_ranger_lvl3 parent add class_ranger_lvl2
+lp group class_ranger_lvl5 parent add class_ranger_lvl3
+lp group class_ranger_lvl10 parent add class_ranger_lvl5
+lp group class_ranger_lvl15 parent add class_ranger_lvl10
+lp group class_ranger_lvl20 parent add class_ranger_lvl15
+
+# Features
+lp group class_ranger_lvl1 permission set feature.favored_enemy true
+lp group class_ranger_lvl2 permission set feature.natural_explorer true
+lp group class_ranger_lvl3 permission set feature.primeval_awareness true
+lp group class_ranger_lvl5 permission set feature.extra_attack true
+lp group class_ranger_lvl10 permission set feature.lands_stride true
+lp group class_ranger_lvl15 permission set feature.vanish true
+lp group class_ranger_lvl20 permission set feature.foe_slayer true
+
+# Saving throw proficiencies
+lp group class_ranger permission set save:STR true
+lp group class_ranger permission set save:DEX true
+
+# Apply to player
+lp user <player> parent add class_ranger_lvl1
+
+# Rogue progression and features
+lp creategroup class_rogue
+lp creategroup class_rogue_lvl1
+lp creategroup class_rogue_lvl2
+lp creategroup class_rogue_lvl3
+lp creategroup class_rogue_lvl5
+lp creategroup class_rogue_lvl10
+lp creategroup class_rogue_lvl15
+lp creategroup class_rogue_lvl20
+
+# Parent chain
+lp group class_rogue_lvl1 parent add class_rogue
+lp group class_rogue_lvl2 parent add class_rogue_lvl1
+lp group class_rogue_lvl3 parent add class_rogue_lvl2
+lp group class_rogue_lvl5 parent add class_rogue_lvl3
+lp group class_rogue_lvl10 parent add class_rogue_lvl5
+lp group class_rogue_lvl15 parent add class_rogue_lvl10
+lp group class_rogue_lvl20 parent add class_rogue_lvl15
+
+# Features
+lp group class_rogue_lvl1 permission set feature.sneak_attack true
+lp group class_rogue_lvl2 permission set feature.cunning_action true
+lp group class_rogue_lvl3 permission set feature.assassinate true
+lp group class_rogue_lvl5 permission set feature.uncanny_dodge true
+lp group class_rogue_lvl10 permission set feature.evasion true
+lp group class_rogue_lvl15 permission set feature.slippery_mind true
+lp group class_rogue_lvl20 permission set feature.stroke_of_luck true
+
+# Saving throw proficiencies
+lp group class_rogue permission set save:DEX true
+lp group class_rogue permission set save:INT true
+
+# Apply to player
+lp user <player> parent add class_rogue_lvl1
+
+# Sorcerer progression and features
+lp creategroup class_sorcerer
+lp creategroup class_sorcerer_lvl1
+lp creategroup class_sorcerer_lvl2
+lp creategroup class_sorcerer_lvl3
+lp creategroup class_sorcerer_lvl5
+lp creategroup class_sorcerer_lvl10
+lp creategroup class_sorcerer_lvl15
+lp creategroup class_sorcerer_lvl20
+
+# Parent chain
+lp group class_sorcerer_lvl1 parent add class_sorcerer
+lp group class_sorcerer_lvl2 parent add class_sorcerer_lvl1
+lp group class_sorcerer_lvl3 parent add class_sorcerer_lvl2
+lp group class_sorcerer_lvl5 parent add class_sorcerer_lvl3
+lp group class_sorcerer_lvl10 parent add class_sorcerer_lvl5
+lp group class_sorcerer_lvl15 parent add class_sorcerer_lvl10
+lp group class_sorcerer_lvl20 parent add class_sorcerer_lvl15
+
+# Features
+lp group class_sorcerer_lvl1 permission set feature.spellcasting true
+lp group class_sorcerer_lvl2 permission set feature.font_of_magic true
+lp group class_sorcerer_lvl3 permission set feature.metamagic true
+lp group class_sorcerer_lvl5 permission set feature.sorcery_points true
+lp group class_sorcerer_lvl10 permission set feature.elemental_affinity true
+lp group class_sorcerer_lvl15 permission set feature.arcane_overload true
+lp group class_sorcerer_lvl20 permission set feature.sorcerous_restoration true
+
+# Saving throw proficiencies
+lp group class_sorcerer permission set save:CON true
+lp group class_sorcerer permission set save:CHA true
+
+# Apply to player
+lp user <player> parent add class_sorcerer_lvl1
+
+# Warlock progression and features
+lp creategroup class_warlock
+lp creategroup class_warlock_lvl1
+lp creategroup class_warlock_lvl2
+lp creategroup class_warlock_lvl3
+lp creategroup class_warlock_lvl5
+lp creategroup class_warlock_lvl10
+lp creategroup class_warlock_lvl15
+lp creategroup class_warlock_lvl20
+
+# Parent chain
+lp group class_warlock_lvl1 parent add class_warlock
+lp group class_warlock_lvl2 parent add class_warlock_lvl1
+lp group class_warlock_lvl3 parent add class_warlock_lvl2
+lp group class_warlock_lvl5 parent add class_warlock_lvl3
+lp group class_warlock_lvl10 parent add class_warlock_lvl5
+lp group class_warlock_lvl15 parent add class_warlock_lvl10
+lp group class_warlock_lvl20 parent add class_warlock_lvl15
+
+# Features
+lp group class_warlock_lvl1 permission set feature.pact_magic true
+lp group class_warlock_lvl2 permission set feature.eldritch_invocations true
+lp group class_warlock_lvl3 permission set feature.pact_boon true
+lp group class_warlock_lvl5 permission set feature.mystic_arcanum true
+lp group class_warlock_lvl10 permission set feature.fiendish_resilience true
+lp group class_warlock_lvl15 permission set feature.hurl_through_hell true
+lp group class_warlock_lvl20 permission set feature.eldritch_master true
+
+# Saving throw proficiencies
+lp group class_warlock permission set save:WIS true
+lp group class_warlock permission set save:CHA true
+
+# Apply to player
+lp user <player> parent add class_warlock_lvl1
+
+# Wizard progression and features
+lp creategroup class_wizard
+lp creategroup class_wizard_lvl1
+lp creategroup class_wizard_lvl2
+lp creategroup class_wizard_lvl3
+lp creategroup class_wizard_lvl5
+lp creategroup class_wizard_lvl10
+lp creategroup class_wizard_lvl15
+lp creategroup class_wizard_lvl20
+
+# Parent chain
+lp group class_wizard_lvl1 parent add class_wizard
+lp group class_wizard_lvl2 parent add class_wizard_lvl1
+lp group class_wizard_lvl3 parent add class_wizard_lvl2
+lp group class_wizard_lvl5 parent add class_wizard_lvl3
+lp group class_wizard_lvl10 parent add class_wizard_lvl5
+lp group class_wizard_lvl15 parent add class_wizard_lvl10
+lp group class_wizard_lvl20 parent add class_wizard_lvl15
+
+# Features
+lp group class_wizard_lvl1 permission set feature.arcane_recovery true
+lp group class_wizard_lvl2 permission set feature.arcane_tradition true
+lp group class_wizard_lvl3 permission set feature.sculpt_spells true
+lp group class_wizard_lvl5 permission set feature.arcane_ward true
+lp group class_wizard_lvl10 permission set feature.empowered_evocation true
+lp group class_wizard_lvl15 permission set feature.overchannel true
+lp group class_wizard_lvl20 permission set feature.signature_spell true
+
+# Saving throw proficiencies
+lp group class_wizard permission set save:INT true
+lp group class_wizard permission set save:WIS true
+
+# Apply to player
+lp user <player> parent add class_wizard_lvl1
 
 # --- Backgrounds ---
 # Example: Acolyte starting kit and skills

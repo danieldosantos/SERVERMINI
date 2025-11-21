@@ -22,7 +22,7 @@ As entradas de LuckPerms criam grupos de raça com bônus de atributo e algumas 
 - **Tiefling:** +1 INT, +2 CHA, Visão no Escuro.【F:luckperms/commands.txt†L65-L68】
 
 ## Classes
-LuckPerms organiza classes por escadas de nível que herdam permissões e concedem características. O exemplo implementado é o **Fighter (Guerreiro)**; os demais (barbarian, bard, cleric, druid, monk, paladin, ranger, rogue, sorcerer, warlock, wizard) devem seguir o mesmo padrão.【F:luckperms/commands.txt†L70-L105】
+LuckPerms organiza classes por escadas de nível que herdam permissões e concedem características. Todas as 12 classes básicas estão mapeadas com cadeias de grupos de nível e proficiências de salvaguarda.【F:luckperms/commands.txt†L70-L487】
 
 - **Fighter:**
   - Estrutura de grupos de nível 1–20 encadeados para herdar características.【F:luckperms/commands.txt†L72-L88】
@@ -30,12 +30,32 @@ LuckPerms organiza classes por escadas de nível que herdam permissões e conced
   - Salvaguardas: proficiência em testes de STR e CON.【F:luckperms/commands.txt†L97-L99】
   - Skills correspondentes no MythicMobs: Action Surge concede ação extra e partículas; Extra Attack aplica múltiplos ataques.【F:mythicmobs/skills/dnd_features.yml†L3-L24】
 
-- **Outras Classes (estrutura a replicar):** barbarian (inclui Rage), bard, cleric, druid, monk (usa recurso de Ki e Flurry of Blows), paladin, ranger, rogue, sorcerer, warlock, wizard.【F:luckperms/commands.txt†L104-L105】【F:mythicmobs/skills/dnd_features.yml†L25-L75】
+- **Barbarian:** Rage, Reckless Attack e Danger Sense logo no início; Extra Attack no nível 5 e capstone Primal Champion no 20.【F:luckperms/commands.txt†L107-L132】 Salvaguardas em STR e CON.【F:luckperms/commands.txt†L134-L135】
+
+- **Bard:** Bardic Inspiration, Jack of All Trades e Expertise nas primeiras camadas, com Magical Secrets e Superior Inspiration como marcos superiores.【F:luckperms/commands.txt†L140-L161】 Salvaguardas em DEX e CHA.【F:luckperms/commands.txt†L163-L164】
+
+- **Cleric:** Divine Domain, Channel Divinity, Destroy Undead e melhorias de Divine Intervention ao longo dos níveis.【F:luckperms/commands.txt†L170-L191】 Salvaguardas em WIS e CHA.【F:luckperms/commands.txt†L193-L194】
+
+- **Druid:** Druidic e Wild Shape de base, com evolução para Primal Strike, Elemental Shapes e Archdruid no nível 20.【F:luckperms/commands.txt†L200-L221】 Salvaguardas em INT e WIS.【F:luckperms/commands.txt†L223-L224】
+
+- **Monk:** Martial Arts, Ki pool, Deflect Missiles, Extra Attack e toques de alto nível como Diamond Soul e Perfect Self.【F:luckperms/commands.txt†L230-L251】 Salvaguardas em STR e DEX.【F:luckperms/commands.txt†L253-L254】
+
+- **Paladin:** Lay on Hands, Divine Smite, Extra Attack, auras de proteção/coragem e Holy Nimbus como capstone.【F:luckperms/commands.txt†L260-L281】 Salvaguardas em WIS e CHA.【F:luckperms/commands.txt†L283-L284】
+
+- **Ranger:** Favored Enemy, Natural Explorer, Primeval Awareness, Extra Attack e culmina em Foe Slayer no nível 20.【F:luckperms/commands.txt†L290-L311】 Salvaguardas em STR e DEX.【F:luckperms/commands.txt†L313-L314】
+
+- **Rogue:** Sneak Attack, Cunning Action, Assassinate, Uncanny Dodge, Evasion e Stroke of Luck no final.【F:luckperms/commands.txt†L320-L341】 Salvaguardas em DEX e INT.【F:luckperms/commands.txt†L343-L344】
+
+- **Sorcerer:** Spellcasting, Font of Magic, Metamagic, Elemental Affinity e capstone Sorcerous Restoration.【F:luckperms/commands.txt†L350-L371】 Salvaguardas em CON e CHA.【F:luckperms/commands.txt†L373-L374】
+
+- **Warlock:** Pact Magic, Eldritch Invocations, Pact Boon, Mystic Arcanum e Eldritch Master no topo.【F:luckperms/commands.txt†L380-L401】 Salvaguardas em WIS e CHA.【F:luckperms/commands.txt†L403-L404】
+
+- **Wizard:** Arcane Recovery e Tradition iniciais; Arcane Ward, Overchannel e Signature Spell como destaques de nível alto.【F:luckperms/commands.txt†L410-L431】 Salvaguardas em INT e WIS.【F:luckperms/commands.txt†L433-L434】
 
 ## Backgrounds (BG)
-Backgrounds são aplicados como grupos LuckPerms que concedem proficiências e kits.【F:luckperms/commands.txt†L106-L114】
-- **Acolyte:** proficiências em Insight e Religion, mais kit inicial temático.【F:luckperms/commands.txt†L108-L112】
-- **Outros backgrounds sugeridos:** guild_artisan, criminal, hermit, folk_hero, noble, outlander, sage, soldier, urchin.【F:luckperms/commands.txt†L114-L114】
+Backgrounds são aplicados como grupos LuckPerms que concedem proficiências e kits.【F:luckperms/commands.txt†L489-L497】
+- **Acolyte:** proficiências em Insight e Religion, mais kit inicial temático.【F:luckperms/commands.txt†L490-L495】
+- **Outros backgrounds sugeridos:** guild_artisan, criminal, hermit, folk_hero, noble, outlander, sage, soldier, urchin.【F:luckperms/commands.txt†L497-L497】
 
 ## Truques e Magias
 Habilidades de combate e truques são configurados como skills do MythicMobs e consomem dados da ValhallaMMO (como bônus de proficiência).【F:mythicmobs/skills/dnd_features.yml†L1-L75】
