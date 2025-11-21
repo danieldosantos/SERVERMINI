@@ -1,0 +1,107 @@
+DomainHarvestBounty:
+  Skills:
+    - heal{amount=80} @self
+    - potion{type=REGENERATION;duration=200;lvl=1} @self
+    - effect:particles{p=happy_villager;amount=35;hS=0.8;vS=0.7;speed=0.1} @self
+
+DomainNatureBurst:
+  Skills:
+    - damage{amount=34;cause=magic} @PlayersInRadius{r=10}
+    - potion{type=SLOW;duration=140;lvl=1} @PlayersInRadius{r=10}
+    - effect:particles{p=block;material=GRASS_BLOCK;amount=30;hS=1;vS=0.8;speed=0.1} @self
+
+DomainDeathMark:
+  Skills:
+    - potion{type=WEAKNESS;duration=160;lvl=1} @target
+    - damage{amount=32;cause=magic;ignoreArmor=true} @target
+    - effect:particles{p=ash;amount=25;hS=0.6;vS=0.5;speed=0.1} @target
+
+DomainSoulDrain:
+  Skills:
+    - damage{amount=30;cause=magic;ignoreArmor=true} @PlayersInRadius{r=8}
+    - heal{amount=20} @self
+    - effect:particles{p=soul;amount=30;hS=0.8;vS=0.7;speed=0.2} @self
+
+DomainSunFlare:
+  Skills:
+    - damage{amount=34;cause=magic} @PlayersInRadius{r=10}
+    - potion{type=BLINDNESS;duration=100;lvl=1} @PlayersInRadius{r=10}
+    - effect:particles{p=firework;amount=25;hS=0.9;vS=0.7;speed=0.2} @self
+
+DomainRiverGuard:
+  Skills:
+    - potion{type=RESISTANCE;duration=180;lvl=2} @self
+    - potion{type=ABSORPTION;duration=160;lvl=1} @self
+    - effect:particles{p=bubble;amount=30;hS=0.8;vS=0.7;speed=0.1} @self
+
+DomainTideBind:
+  Skills:
+    - root{d=120} @PlayersInRadius{r=9}
+    - damage{amount=30;cause=magic} @PlayersInRadius{r=9}
+    - effect:particles{p=bubble_column_up;amount=30;hS=0.8;vS=0.6;speed=0.1} @self
+
+DomainRestorativeWave:
+  Skills:
+    - heal{amount=70} @self
+    - potion{type=REGENERATION;duration=160;lvl=1} @self
+    - effect:particles{p=heart;amount=25;hS=0.8;vS=0.7;speed=0.1} @self
+
+DomainMountainGuard:
+  Skills:
+    - potion{type=RESISTANCE;duration=200;lvl=2} @self
+    - potion{type=ABSORPTION;duration=180;lvl=2} @self
+    - effect:particles{p=block;material=STONE;amount=35;hS=0.7;vS=0.6;speed=0.1} @self
+
+DomainStoneQuake:
+  Skills:
+    - knockback{velocity=1.1} @PlayersInRadius{r=9}
+    - damage{amount=34;cause=entity_attack} @PlayersInRadius{r=9}
+    - effect:particles{p=block;material=COBBLESTONE;amount=35;hS=0.9;vS=0.7;speed=0.1} @self
+
+DomainForgeStrike:
+  Skills:
+    - damage{amount=34;cause=entity_attack;ignoreArmor=true} @target
+    - ignite{ticks=80} @target
+    - effect:particles{p=block;material=IRON_BLOCK;amount=25;hS=0.6;vS=0.5;speed=0.1} @target
+
+DomainSwiftStep:
+  Skills:
+    - potion{type=SPEED;duration=200;lvl=2} @self
+    - potion{type=LUCK;duration=200;lvl=1} @self
+    - effect:particles{p=cloud;amount=20;hS=0.7;vS=0.5;speed=0.1} @self
+
+DomainSeaVeil:
+  Skills:
+    - potion{type=WATER_BREATHING;duration=220;lvl=1} @self
+    - potion{type=RESISTANCE;duration=180;lvl=1} @self
+    - effect:particles{p=water_splash;amount=30;hS=0.8;vS=0.7;speed=0.1} @self
+
+DomainStormPull:
+  Skills:
+    - pull{v=1.1} @PlayersInRadius{r=10}
+    - damage{amount=32;cause=magic} @PlayersInRadius{r=10}
+    - effect:lightning @PlayersInRadius{r=10}
+
+DomainFateSnare:
+  Skills:
+    - root{d=100} @PlayersInRadius{r=9}
+    - potion{type=SLOW;duration=120;lvl=1} @PlayersInRadius{r=9}
+    - effect:particles{p=totem_of_undying;amount=20;hS=0.6;vS=0.5;speed=0.1} @self
+
+DomainBloodRaven:
+  Skills:
+    - damage{amount=32;cause=magic} @PlayersInRadius{r=9}
+    - potion{type=WEAKNESS;duration=120;lvl=1} @PlayersInRadius{r=9}
+    - effect:particles{p=crit_magic;amount=25;hS=0.8;vS=0.7;speed=0.15} @self
+
+DomainSilverHand:
+  Skills:
+    - damage{amount=34;cause=entity_attack;ignoreArmor=true} @target
+    - potion{type=SLOW;duration=120;lvl=1} @target
+    - effect:particles{p=flash;amount=20;hS=0.4;vS=0.3;speed=0.1} @target
+
+DomainWordSilence:
+  Skills:
+    - potion{type=WEAKNESS;duration=140;lvl=1} @PlayersInRadius{r=9}
+    - potion{type=SLOW;duration=120;lvl=1} @PlayersInRadius{r=9}
+    - effect:sound{s=entity.player.levelup;v=0.8;p=0.5} @self

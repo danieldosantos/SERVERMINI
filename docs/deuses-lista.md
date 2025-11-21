@@ -1,0 +1,214 @@
+# Lista de divindades mencionadas
+
+## Reinos Esquecidos
+- Auril
+- Azuth
+- Bane
+- Beshaba
+- Bhaal
+- Chauntea
+- Cyric
+- Deneir
+- Eldath
+- Gond
+- Helm
+- Ilmater
+- Kelemvor
+- Lathander
+- Leira
+- Lliira
+- Loviatar
+- Malar
+- Mask
+- Mielikki
+- Milil
+- Myrkil
+- Mystra
+- Oghma
+- Savras
+- Selûne
+- Shar
+- Silvanus
+- Sune
+- Talona
+- Talos
+- Tempus
+- Torm
+- Tymora
+- Tyr
+- Umberlee
+- Waukeen
+
+## Greyhawk
+- Beory
+- Boccob
+- Celestian
+- Ehlonna
+- Erythnul
+- Fharlangh
+- Heironeous
+- Hextor
+- Kord
+- Incabulos
+- Istus
+- Iuz
+- Nerull
+- Obad-Hai
+- Olidammara
+- Pelor
+- Pholtus
+- Ralishaz
+- Rao
+- St. Cuthberth
+- Tharizdun
+- Trithereon
+- Ulaa
+- Vecna
+- Wee Jass
+
+## Dragonlance
+- Paladine
+- Branchala
+- Habbakuk
+- Kiri-Jolith
+- Majere
+- Mishakal
+- Solinari
+- Gilean
+- Chislev
+- Rerorx
+- Shinare
+- Sirrion
+- Zivilyn
+- Lunitari
+- Takhisis
+- Chemosh
+- Hiddukel
+- Morgion
+- Sargonnas
+- Zeboim
+- Nuitari
+
+## Eberron
+- Arawal
+- Aureon
+- Balinor
+- Boldrei
+- Dol Arrah
+- Dol Dorn
+- Kol Korran
+- Olladra
+- Onatar
+- O Devorador
+- A Fúria
+- O Carcereiro
+- O Fingido
+- A Sombra
+- O Viajante
+- A Chama Prateada
+- O Sangue de Vol
+- Cultos do Dragão Abaixo
+- O Caminho da Luz
+- A Corte Eterna
+- Os Espíritos do Passado
+
+## Divindades não-humanas
+- Bahamut
+- Blipdoolpoolp
+- Corellon Larethian
+- Sashelas das Profundezas
+- Eadro
+- Garl Glitergold
+- Grolantor
+- Gruumsh
+- Hruggek
+- Kurtlmak
+- Laogzed
+- Lolth
+- Maglubiyet
+- Moradin
+- Rllifane Rallathil
+- Sehanine Moonbow
+- Sekolah
+- Semuanya
+- Skerrit
+- Skoraeus Ossos de Pedra
+- Surtur
+- Thrym
+- Tiamat
+- Yondalla
+
+## Panteão Celta
+- O Daghdha
+- Arawn
+- Belenus
+- Brigantia
+- Diancecht
+- Dunatis
+- Goibhniu
+- Lugh
+- Manannan mac Lir
+- Math Mathonwy
+- Morrigan
+- Nuada
+- Oghma
+- Silvanus
+
+## Panteão Grego
+- Zeus
+- Afrodite
+- Apolo
+- Ares
+- Artêmis
+- Atena
+- Demeter
+- Dionísio
+- Hades
+- Hecate
+- Hefesto
+- Hera
+- Hércules
+- Hermes
+- Hestia
+- Nike
+- Pã
+- Poseidon
+- Tyche
+
+## Panteão Egípcio
+- Re-Horakhty
+- Anúbis
+- Apep
+- Bast
+- Bes
+- Hathor
+- Imhotep
+- Isis
+- Nephthys
+- Osíris
+- Ptah
+- Set
+- Sobek
+- Thoth
+
+## Panteão Nórdico
+- Odin
+- Aegir
+- Balder
+- Forseti
+- Frey
+- Freya
+- Frigga
+- Heimdall
+- Hel
+- Hermod
+- Loki
+- Njord
+- Odur
+- Sif
+- Sakadi
+- Surtur
+- Thor
+- Thrym
+- Tyr
+- Uller
