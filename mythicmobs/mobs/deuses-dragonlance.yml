@@ -1,0 +1,199 @@
+DeidadeDragonlanceBase:
+  Type: WITHER_SKELETON
+  Display: '&6&l{display}'
+  Health: 2000
+  Damage: 25
+  Armor: 12
+  KnockbackResistance: 1
+  Faction: DeusesDragonlance
+  Options:
+    AlwaysShowName: true
+    PreventLeashing: true
+    PreventRenaming: true
+    Despawn: false
+    Silent: true
+  AIGoalSelectors:
+    - clear
+    - meleeattack{speed=1.4;range=2.5}
+    - randomstroll
+    - lookatplayers
+  TargetSelectors:
+    - clear
+    - players
+    - mobs{faction!=DeusesDragonlance}
+  Modules:
+    ThreatTable: true
+  Skills:
+    - skill{s=GodlyShield} @self ~onSpawn
+    - skill{s=GodlySmite} @target ~onTimer:100 1
+    - skill{s=GodlyHeal} @self ~onDamaged 0.35
+
+Paladine:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Paladine, Deus Soberano'
+  Health: 2350
+  Damage: 30
+  Skills:
+    - skill{s=DomainWarRally} @self ~onTimer:110 1
+    - skill{s=DomainDragonfireSmite} @PlayersInRadius{r=10} ~onTimer:130 1
+
+Branchala:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Branchala, Deus da Música'
+  Health: 2050
+  Skills:
+    - skill{s=DomainSongCharm} @PlayersInRadius{r=9} ~onTimer:130 1
+    - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Habbakuk:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Habbakuk, Deus do Mar e Vida Animal'
+  Health: 2150
+  Skills:
+    - skill{s=DomainSeaMaelstrom} @PlayersInRadius{r=11} ~onTimer:120 1
+    - skill{s=DomainNatureRoots} @PlayersInRadius{r=10} ~onTimer:150 1
+
+KiriJolith:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Kiri-Jolith, Deus da Honra'
+  Health: 2300
+  Damage: 30
+  Skills:
+    - skill{s=DomainWarRally} @self ~onTimer:120 1
+    - skill{s=DomainWarShockwave} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Majere:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Majere, Deus da Ordem'
+  Health: 2150
+  Skills:
+    - skill{s=DomainKnowledgeSilence} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=GodlyHeal} @self ~onTimer:150 1
+
+Mishakal:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Mishakal, Deusa da Cura'
+  Health: 2100
+  Skills:
+    - skill{s=GodlyHeal} @self ~onTimer:120 1
+    - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Solinari:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Solinari, Deus da Magia Boa'
+  Health: 2100
+  Skills:
+    - skill{s=DomainArcaneBurst} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainMagicPulse} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Gilean:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Gilean, Deus do Conhecimento'
+  Health: 2150
+  Skills:
+    - skill{s=DomainKnowledgeSilence} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Chislev:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Chislev, Deusa da Natureza'
+  Skills:
+    - skill{s=DomainNatureRoots} @PlayersInRadius{r=10} ~onTimer:120 1
+    - skill{s=DomainWisdomCalm} @self ~onTimer:160 1
+
+Rerorx:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Rerorx, Deus da Forja'
+  Health: 2250
+  Armor: 14
+  Skills:
+    - skill{s=DomainForgeHammer} @PlayersInRadius{r=8} ~onTimer:120 1
+    - skill{s=DomainShieldWall} @self ~onTimer:150 1
+
+Shinare:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Shinare, Deusa do Comércio'
+  Health: 2050
+  Skills:
+    - skill{s=DomainFortuneGrace} @self ~onTimer:130 1
+    - skill{s=DomainCharm} @target ~onTimer:150 1
+
+Sirrion:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Sirrion, Deus do Fogo'
+  Health: 2200
+  Skills:
+    - skill{s=DomainFlameCascade} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainDragonfireSmite} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Zivilyn:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Zivilyn, Deus da Sabedoria'
+  Health: 2150
+  Skills:
+    - skill{s=DomainWisdomCalm} @self ~onTimer:130 1
+    - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Lunitari:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Lunitari, Deusa da Magia Neutra'
+  Health: 2100
+  Skills:
+    - skill{s=DomainMagicPulse} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainTrickeryVanish} @self ~onTimer:150 1
+
+Takhisis:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Takhisis, Deusa da Noite'
+  Health: 2350
+  Skills:
+    - skill{s=DomainNightfallShroud} @PlayersInRadius{r=10} ~onTimer:110 1
+    - skill{s=DomainShadowStep} @target ~onTimer:140 1
+
+Chemosh:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Chemosh, Deus dos Mortos-Vivos'
+  Health: 2250
+  Skills:
+    - skill{s=DomainDeathSiphon} @PlayersInRadius{r=8} ~onTimer:120 1
+    - skill{s=DomainShadowStep} @target ~onTimer:150 1
+
+Hiddukel:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Hiddukel, Deus das Mentiras'
+  Health: 2150
+  Skills:
+    - skill{s=DomainTrickeryVanish} @self ~onTimer:120 1
+    - skill{s=DomainChaosHex} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Morgion:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Morgion, Deus das Doenças'
+  Skills:
+    - skill{s=DomainRotPlague} @PlayersInRadius{r=10} ~onTimer:120 1
+    - skill{s=DomainDeathSiphon} @PlayersInRadius{r=8} ~onTimer:150 1
+
+Sargonnas:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Sargonnas, Deus da Vingança'
+  Health: 2300
+  Damage: 30
+  Skills:
+    - skill{s=DomainFlameCascade} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainWarRally} @self ~onTimer:150 1
+
+Zeboim:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Zeboim, Deusa do Mar e das Tormentas'
+  Health: 2300
+  Skills:
+    - skill{s=DomainStormWrath} @PlayersInRadius{r=12} ~onTimer:120 1
+    - skill{s=DomainSeaMaelstrom} @PlayersInRadius{r=10} ~onTimer:150 1
+
+Nuitari:
+  Inherit: DeidadeDragonlanceBase
+  Display: 'Nuitari, Deus da Magia Negra'
+  Health: 2200
+  Skills:
+    - skill{s=DomainMagicPulse} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainArcaneBurst} @PlayersInRadius{r=9} ~onTimer:150 1
