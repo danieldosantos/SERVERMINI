@@ -73,3 +73,78 @@ ShortRestReset:
   - cooldown{skill=ActionSurge;time=0}
   - cooldown{skill=BarbarianRage;time=0}
   - message{m="Short Rest complete: resources refreshed."}
+
+Cantrip.ViciousMockery:
+  Cooldown: 6
+  Skills:
+  - message{m="You unleash a Vicious Mockery!"} @target
+  - damage{amount="1 + <caster.pb> + <caster.mod:CHA>";type=MAGIC}
+  - potion{type=WEAKNESS;duration=120;level=0} @target
+
+Cantrip.Guidance:
+  Cooldown: 10
+  Skills:
+  - potion{type=LUCK;duration=200;level=0} @target
+  - message{m="Guidance: add <caster.pb> to your next check."} @target
+
+Cantrip.ProduceFlame:
+  Cooldown: 0
+  Skills:
+  - projectile{onTick=ProduceFlameTrail;onHit=ProduceFlameHit;v=20;i=1;hR=0.5;vR=0.5}
+
+ProduceFlameTrail:
+  Skills:
+  - effect:particles{p=campfire_signal_smoke;amount=5;speed=0.02}
+
+ProduceFlameHit:
+  Skills:
+  - damage{amount="1 + <caster.pb> + <caster.mod:WIS>";type=FIRE}
+  - ignite{ticks=40}
+
+Spell.DivineSmite:
+  Cooldown: 8
+  Skills:
+  - effect:particles{p=totem;amount=20;hS=0.5;vS=0.5}
+  - damage{amount="3 + <caster.pb> + <caster.mod:CHA>";type=HOLY}
+  - message{m="Divine Smite radiates through your strike."} @self
+
+Spell.HuntersMark:
+  Cooldown: 30
+  Skills:
+  - potion{type=GLOWING;duration=600;level=0} @target
+  - potion{type=INCREASE_DAMAGE;duration=200;level=0} @self
+  - message{m="Hunter's Mark applied: deal +<caster.pb> damage to this target."} @self
+
+Spell.ChaosBolt:
+  Cooldown: 8
+  Skills:
+  - projectile{onTick=ChaosBoltTrail;onHit=ChaosBoltHit;v=25;i=1;hR=0.5;vR=0.5}
+
+ChaosBoltTrail:
+  Skills:
+  - effect:particles{p=crit;amount=4;speed=0.05}
+
+ChaosBoltHit:
+  Skills:
+  - damage{amount="4 + <caster.pb> + <caster.mod:CHA>";type=LIGHTNING}
+  - potion{type=LEVITATION;duration=40;level=0} @target
+
+Cantrip.EldritchBlast:
+  Cooldown: 0
+  Skills:
+  - projectile{onHit=EldritchBlastHit;v=30;i=1;hR=0.3;vR=0.3}
+
+EldritchBlastHit:
+  Skills:
+  - damage{amount="2 + <caster.pb> + <caster.mod:CHA>";ia=true}
+  - throw{velocity=6;velocityY=1} @target
+
+Spell.MagicMissile:
+  Cooldown: 10
+  Skills:
+  - repeat{amount=3;delay=2;skills=[MagicMissileBolt]} @target
+  - effect:particlesphere{particle=enchanted_hit;amount=20;radius=1}
+
+MagicMissileBolt:
+  Skills:
+  - damage{amount="1 + <caster.pb> + <caster.mod:INT>";ia=true}
