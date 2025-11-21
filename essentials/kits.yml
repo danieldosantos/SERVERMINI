@@ -1,0 +1,70 @@
+# EssentialsX kits for PHB backgrounds and starter gear
+kits:
+  acolyte:
+    delay: 86400
+    items:
+    - stick 1 name:"Símbolo Sagrado" lore:"Usado para canalizar fé"
+    - torch 5
+    - book 2 name:"Pergaminho Sagrado"
+    - incense 3
+    - bread 5
+  guild_artisan:
+    delay: 86400
+    items:
+    - stone_pickaxe 1 enchant:unbreaking:1
+    - stone_axe 1
+    - paper 10
+    - emerald 5
+  criminal:
+    delay: 86400
+    items:
+    - stone_sword 1 name:"Lâmina Oculta"
+    - lead 1 name:"Corda"
+    - torch 2
+    - bread 3
+  hermit:
+    delay: 86400
+    items:
+    - stick 1 name:"Bastão de Ermitão"
+    - bowl 1
+    - mushroom_stew 2
+    - paper 1 name:"Notas de Pesquisa"
+  folk_hero:
+    delay: 86400
+    items:
+    - wooden_sword 1 name:"Arma Simples" enchant:unbreaking:1
+    - shield 1
+    - leather_boots 1
+    - bread 5
+  noble:
+    delay: 86400
+    items:
+    - iron_sword 1 name:"Espada de Família"
+    - compass 1
+    - gold_ingot 10
+  outlander:
+    delay: 86400
+    items:
+    - stone_axe 1
+    - bow 1
+    - arrow 20
+    - cooked_beef 5
+  sage:
+    delay: 86400
+    items:
+    - book 3
+    - compass 1
+    - spyglass 1
+  soldier:
+    delay: 86400
+    items:
+    - iron_sword 1
+    - shield 1
+    - chainmail_chestplate 1
+    - bread 4
+  urchin:
+    delay: 86400
+    items:
+    - wooden_sword 1
+    - bread 3
+    - stick 1 name:"Ferramentas de Ladrão" lore:"Improvisadas"

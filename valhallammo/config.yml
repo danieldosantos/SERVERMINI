@@ -1,0 +1,97 @@
+# ValhallaMMO configuration tuned for D&D 5e core rules
+stats:
+  strength:
+    display-name: "Strength"
+    key: STR
+    default: 10
+    min: 1
+    max: 30
+  dexterity:
+    display-name: "Dexterity"
+    key: DEX
+    default: 10
+    min: 1
+    max: 30
+  constitution:
+    display-name: "Constitution"
+    key: CON
+    default: 10
+    min: 1
+    max: 30
+  intelligence:
+    display-name: "Intelligence"
+    key: INT
+    default: 10
+    min: 1
+    max: 30
+  wisdom:
+    display-name: "Wisdom"
+    key: WIS
+    default: 10
+    min: 1
+    max: 30
+  charisma:
+    display-name: "Charisma"
+    key: CHA
+    default: 10
+    min: 1
+    max: 30
+
+# Core derived values used by other plugins
+modifiers:
+  # D&D 5e modifier formula: floor((score - 10) / 2)
+  expression: "floor((score - 10) / 2)"
+
+proficiency-bonus:
+  # LuckPerms will attach player meta "pb". This table mirrors PHB progression.
+  # When meta is absent fallback to level-based map below.
+  default-source: meta:pb
+  level-table:
+    1: 2
+    2: 2
+    3: 2
+    4: 2
+    5: 3
+    6: 3
+    7: 3
+    8: 3
+    9: 4
+    10: 4
+    11: 4
+    12: 4
+    13: 5
+    14: 5
+    15: 5
+    16: 5
+    17: 6
+    18: 6
+    19: 6
+    20: 6
+
+checks:
+  saving-throws:
+    # Each saving throw uses the relevant modifier and applies proficiency when tagged by LuckPerms meta (e.g. save:wis = true)
+    formula: "d20 + modifier + (has_prof ? proficiency : 0)"
+    advantage-flag: meta:condition:advantage
+    disadvantage-flag: meta:condition:disadvantage
+  skill-checks:
+    # Replace <skill_mod> dynamically via MythicMobs variable injection
+    formula: "d20 + <skill_mod> + (has_prof ? proficiency : 0)"
+    advantage-flag: meta:condition:advantage
+    disadvantage-flag: meta:condition:disadvantage
+
+combat:
+  # Hit Points are simplified: base 8 + CON modifier per level, can be overridden by class meta.
+  hp-formula: "base_hp + level * (hit_die + con_modifier)"
+  base_hp: 8
+  hit_die: 5
+  armor-class:
+    formula: "10 + dex_modifier + armor_bonus"
+
+resources:
+  # Monk Ki resource simulated as a Valhalla resource for MythicMobs to query/consume
+  ki:
+    max-per-level: 1
+    regen:
+      trigger: short_rest
+      amount: max
