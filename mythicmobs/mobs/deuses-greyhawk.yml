@@ -1,0 +1,229 @@
+DeidadeGreyhawkBase:
+  Type: WITHER_SKELETON
+  Display: '&6&l{display}'
+  Health: 2000
+  Damage: 25
+  Armor: 12
+  KnockbackResistance: 1
+  Faction: DeusesGreyhawk
+  Options:
+    AlwaysShowName: true
+    PreventLeashing: true
+    PreventRenaming: true
+    Despawn: false
+    Silent: true
+  AIGoalSelectors:
+    - clear
+    - meleeattack{speed=1.4;range=2.5}
+    - randomstroll
+    - lookatplayers
+  TargetSelectors:
+    - clear
+    - players
+    - mobs{faction!=DeusesGreyhawk}
+  Modules:
+    ThreatTable: true
+  Skills:
+    - skill{s=GodlyShield} @self ~onSpawn
+    - skill{s=GodlySmite} @target ~onTimer:110 1
+    - skill{s=GodlyHeal} @self ~onDamaged 0.35
+
+Beory:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Beory, Deusa da Natureza'
+  Skills:
+    - skill{s=DomainNatureRoots} @PlayersInRadius{r=11} ~onTimer:120 1
+    - skill{s=GodlyHeal} @self ~onTimer:150 1
+
+Boccob:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Boccob, Deus da Magia'
+  Health: 2150
+  Skills:
+    - skill{s=DomainKnowledgeSilence} @PlayersInRadius{r=10} ~onTimer:110 1
+    - skill{s=DomainArcaneBurst} @PlayersInRadius{r=9} ~onTimer:140 1
+
+Celestian:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Celestian, Deus das Estrelas'
+  Health: 2050
+  Skills:
+    - skill{s=DomainStarlightNova} @PlayersInRadius{r=10} ~onTimer:130 1
+    - skill{s=DomainTravelBlink} @self ~onTimer:140 1
+
+Ehlonna:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Ehlonna, Deusa das Florestas'
+  Skills:
+    - skill{s=DomainNatureRoots} @PlayersInRadius{r=10} ~onTimer:120 1
+    - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onDamaged 0.30
+
+Erythnul:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Erythnul, Deus da Matança'
+  Health: 2300
+  Damage: 30
+  Skills:
+    - skill{s=DomainWarShockwave} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainFuryCharge} @target ~onTimer:90 1
+
+Fharlangh:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Fharlangh, Deus das Viagens'
+  Health: 2050
+  Skills:
+    - skill{s=DomainTravelBlink} @self ~onTimer:120 1
+    - skill{s=DomainCharm} @target ~onTimer:150 1
+
+Heironeous:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Heironeous, Deus da Cavalaria'
+  Health: 2250
+  Skills:
+    - skill{s=DomainWarRally} @self ~onTimer:120 1
+    - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onDamaged 0.25
+
+Hextor:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Hextor, Deus da Discórdia'
+  Health: 2300
+  Damage: 32
+  Skills:
+    - skill{s=DomainWarShockwave} @PlayersInRadius{r=9} ~onTimer:110 1
+    - skill{s=DomainFuryCharge} @target ~onTimer:90 1
+
+Kord:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Kord, Deus do Atletismo'
+  Health: 2300
+  Damage: 32
+  Skills:
+    - skill{s=DomainStormWrath} @PlayersInRadius{r=13} ~onTimer:120 1
+    - skill{s=DomainFuryCharge} @target ~onTimer:85 1
+
+Incabulos:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Incabulos, Deus da Peste'
+  Skills:
+    - skill{s=DomainRotPlague} @PlayersInRadius{r=10} ~onTimer:120 1
+    - skill{s=DomainDeathSiphon} @PlayersInRadius{r=8} ~onTimer:140 1
+
+Istus:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Istus, Deusa do Destino'
+  Health: 2100
+  Skills:
+    - skill{s=DomainFateSnare} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainCharm} @target ~onTimer:150 1
+
+Iuz:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Iuz, Deus da Dor'
+  Health: 2250
+  Skills:
+    - skill{s=DomainShadowStep} @target ~onTimer:110 1
+    - skill{s=DomainDeathSiphon} @PlayersInRadius{r=8} ~onTimer:130 1
+
+Nerull:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Nerull, Deus da Morte'
+  Health: 2200
+  Skills:
+    - skill{s=DomainDeathSiphon} @PlayersInRadius{r=8} ~onTimer:110 1
+    - skill{s=DomainShadowStep} @target ~onDamaged 0.30
+
+Obad-Hai:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Obad-Hai, Deus da Natureza'
+  Skills:
+    - skill{s=DomainNatureRoots} @PlayersInRadius{r=11} ~onTimer:110 1
+    - skill{s=DomainFuryChargeShort} @target ~onTimer:140 1
+
+Olidammara:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Olidammara, Deus da Orgia'
+  Health: 2050
+  Skills:
+    - skill{s=DomainTrickeryVanish} @self ~onTimer:130 1
+    - skill{s=DomainCharm} @target ~onTimer:150 1
+
+Pelor:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Pelor, Deus do Sol'
+  Health: 2150
+  Skills:
+    - skill{s=DomainLightNova} @PlayersInRadius{r=10} ~onTimer:110 1
+    - skill{s=GodlyHeal} @self ~onTimer:150 1
+
+Pholtus:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Pholtus, Deus da Luz e Lei'
+  Health: 2150
+  Skills:
+    - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onTimer:110 1
+    - skill{s=DomainKnowledgeSilence} @PlayersInRadius{r=8} ~onTimer:150 1
+
+Ralishaz:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Ralishaz, Deus da Má Sorte'
+  Skills:
+    - skill{s=DomainTrickeryVanish} @self ~onTimer:130 1
+    - skill{s=DomainChaosHex} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Rao:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Rao, Deus da Paz'
+  Health: 2050
+  Skills:
+    - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onTimer:130 1
+    - skill{s=GodlyHeal} @self ~onTimer:140 1
+
+StCuthberth:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'St. Cuthberth, Deus do Zelo'
+  Health: 2300
+  Armor: 14
+  Skills:
+    - skill{s=DomainWarShockwave} @PlayersInRadius{r=8} ~onTimer:120 1
+    - skill{s=DomainShieldWall} @self ~onTimer:150 1
+
+Tharizdun:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Tharizdun, Deus da Escuridão'
+  Health: 2300
+  Skills:
+    - skill{s=DomainShadowStep} @target ~onTimer:110 1
+    - skill{s=DomainDeathSiphon} @PlayersInRadius{r=9} ~onTimer:130 1
+
+Trithereon:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Trithereon, Deus da Liberdade'
+  Health: 2250
+  Skills:
+    - skill{s=DomainFreedomBurst} @PlayersInRadius{r=8} ~onTimer:130 1
+    - skill{s=DomainFuryCharge} @target ~onTimer:100 1
+
+Ulaa:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Ulaa, Deusa das Montanhas'
+  Health: 2300
+  Armor: 15
+  Skills:
+    - skill{s=DomainShieldWall} @self ~onTimer:120 1
+    - skill{s=DomainWarShockwave} @PlayersInRadius{r=8} ~onTimer:150 1
+
+Vecna:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Vecna, Deus dos Segredos'
+  Health: 2200
+  Skills:
+    - skill{s=DomainKnowledgeSilence} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainShadowStep} @target ~onTimer:130 1
+
+WeeJass:
+  Inherit: DeidadeGreyhawkBase
+  Display: 'Wee Jass, Deusa da Magia e Morte'
+  Health: 2200
+  Skills:
+    - skill{s=DomainArcaneBurst} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainDeathSiphon} @PlayersInRadius{r=8} ~onTimer:150 1

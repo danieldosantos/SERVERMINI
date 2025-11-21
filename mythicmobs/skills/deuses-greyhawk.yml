@@ -1,0 +1,36 @@
+DomainStarlightNova:
+  Skills:
+    - effect:particles{p=star;amount=50;hS=1.2;vS=1;speed=0.2} @self
+    - damage{amount=34;cause=magic;ignoreArmor=true} @PlayersInRadius{r=10}
+    - potion{type=GLOWING;duration=180;lvl=1} @PlayersInRadius{r=10}
+
+DomainTravelBlink:
+  Skills:
+    - teleport{spread=6} @self
+    - potion{type=SPEED;duration=120;lvl=2} @self
+    - effect:particles{p=portal;amount=30;hS=1;vS=0.8;speed=0.2} @self
+
+DomainFateSnare:
+  Skills:
+    - root{d=80} @PlayersInRadius{r=9}
+    - potion{type=SLOW;duration=140;lvl=2} @PlayersInRadius{r=9}
+    - effect:particles{p=enchantment_table;amount=30;hS=1;vS=0.7;speed=0.2} @self
+
+DomainRotPlague:
+  Skills:
+    - potion{type=POISON;duration=160;lvl=2} @PlayersInRadius{r=10}
+    - potion{type=WITHER;duration=80;lvl=1} @PlayersInRadius{r=10}
+    - damage{amount=24;cause=magic} @PlayersInRadius{r=10}
+    - effect:particles{p=poof;amount=45;hS=1;vS=0.6;speed=0.1} @self
+
+DomainChaosHex:
+  Skills:
+    - potion{type=CONFUSION;duration=160;lvl=0} @PlayersInRadius{r=9}
+    - potion{type=WEAKNESS;duration=160;lvl=1} @PlayersInRadius{r=9}
+    - effect:particles{p=witch;amount=30;hS=1;vS=0.6;speed=0.3} @self
+
+DomainFreedomBurst:
+  Skills:
+    - knockback{velocity=1.4} @PlayersInRadius{r=8}
+    - potion{type=SPEED;duration=200;lvl=2} @self
+    - effect:particles{p=cloud;amount=40;hS=1.2;vS=0.8;speed=0.2} @self
