@@ -494,4 +494,65 @@ lp group bg_acolyte permission set prof.religion true
 lp group bg_acolyte permission set kit.acolyte true
 lp user <player> parent add bg_acolyte
 
-# Other backgrounds: guild_artisan, criminal, hermit, folk_hero, noble, outlander, sage, soldier, urchin.
+# Guild Artisan
+lp creategroup bg_guild_artisan
+lp group bg_guild_artisan permission set prof.insight true
+lp group bg_guild_artisan permission set prof.persuasion true
+lp group bg_guild_artisan permission set kit.guild_artisan true
+lp user <player> parent add bg_guild_artisan
+
+# Criminal
+lp creategroup bg_criminal
+lp group bg_criminal permission set prof.deception true
+lp group bg_criminal permission set prof.stealth true
+lp group bg_criminal permission set kit.criminal true
+lp user <player> parent add bg_criminal
+
+# Hermit
+lp creategroup bg_hermit
+lp group bg_hermit permission set prof.medicine true
+lp group bg_hermit permission set prof.religion true
+lp group bg_hermit permission set kit.hermit true
+lp user <player> parent add bg_hermit
+
+# Folk Hero
+lp creategroup bg_folk_hero
+lp group bg_folk_hero permission set prof.animal_handling true
+lp group bg_folk_hero permission set prof.survival true
+lp group bg_folk_hero permission set kit.folk_hero true
+lp user <player> parent add bg_folk_hero
+
+# Noble
+lp creategroup bg_noble
+lp group bg_noble permission set prof.history true
+lp group bg_noble permission set prof.persuasion true
+lp group bg_noble permission set kit.noble true
+lp user <player> parent add bg_noble
+
+# Outlander
+lp creategroup bg_outlander
+lp group bg_outlander permission set prof.athletics true
+lp group bg_outlander permission set prof.survival true
+lp group bg_outlander permission set kit.outlander true
+lp user <player> parent add bg_outlander
+
+# Sage
+lp creategroup bg_sage
+lp group bg_sage permission set prof.arcana true
+lp group bg_sage permission set prof.history true
+lp group bg_sage permission set kit.sage true
+lp user <player> parent add bg_sage
+
+# Soldier
+lp creategroup bg_soldier
+lp group bg_soldier permission set prof.athletics true
+lp group bg_soldier permission set prof.intimidation true
+lp group bg_soldier permission set kit.soldier true
+lp user <player> parent add bg_soldier
+
+# Urchin
+lp creategroup bg_urchin
+lp group bg_urchin permission set prof.sleight_of_hand true
+lp group bg_urchin permission set prof.stealth true
+lp group bg_urchin permission set kit.urchin true
+lp user <player> parent add bg_urchin

@@ -53,9 +53,17 @@ LuckPerms organiza classes por escadas de nível que herdam permissões e conced
 - **Wizard:** Arcane Recovery e Tradition iniciais; Arcane Ward, Overchannel e Signature Spell como destaques de nível alto.【F:luckperms/commands.txt†L410-L431】 Salvaguardas em INT e WIS.【F:luckperms/commands.txt†L433-L434】
 
 ## Backgrounds (BG)
-Backgrounds são aplicados como grupos LuckPerms que concedem proficiências e kits.【F:luckperms/commands.txt†L489-L497】
+Backgrounds são aplicados como grupos LuckPerms que concedem proficiências e kits.【F:luckperms/commands.txt†L489-L548】
 - **Acolyte:** proficiências em Insight e Religion, mais kit inicial temático.【F:luckperms/commands.txt†L490-L495】
-- **Outros backgrounds sugeridos:** guild_artisan, criminal, hermit, folk_hero, noble, outlander, sage, soldier, urchin.【F:luckperms/commands.txt†L497-L497】
+- **Guild Artisan:** Insight e Persuasion para representar negociação e ofício, com kit de ferramentas de artesão.【F:luckperms/commands.txt†L497-L502】
+- **Criminal:** Deception e Stealth para infiltração e mentiras, com kit furtivo.【F:luckperms/commands.txt†L504-L509】
+- **Hermit:** Medicine e Religion para o eremita estudioso, com kit de isolamento e pesquisa.【F:luckperms/commands.txt†L511-L516】
+- **Folk Hero:** Animal Handling e Survival para o herói rural, com kit de campo.【F:luckperms/commands.txt†L518-L523】
+- **Noble:** History e Persuasion para diplomacia e erudição, com kit de nobreza.【F:luckperms/commands.txt†L525-L530】
+- **Outlander:** Athletics e Survival para exploração e resistência, com kit de viajante.【F:luckperms/commands.txt†L532-L537】
+- **Sage:** Arcana e History para conhecimento arcano e acadêmico, com kit de pesquisa.【F:luckperms/commands.txt†L539-L544】
+- **Soldier:** Athletics e Intimidation para combate e presença marcial, com kit militar.【F:luckperms/commands.txt†L546-L551】
+- **Urchin:** Sleight of Hand e Stealth para furtividade urbana, com kit improvisado.【F:luckperms/commands.txt†L553-L558】
 
 ## Truques e Magias
  Habilidades de combate e truques são configurados como skills do MythicMobs e consomem dados da ValhallaMMO (como bônus de proficiência).【F:mythicmobs/skills/dnd_features.yml†L1-L150】
