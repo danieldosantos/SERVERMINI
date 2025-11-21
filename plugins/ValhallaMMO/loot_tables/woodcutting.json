@@ -1,0 +1,200 @@
+{
+  "key": "woodcutting",
+  "pools": {
+    "rare": {
+      "parentTable": "woodcutting",
+      "key": "rare",
+      "entries": {
+        "8a8c905a-fed5-47b2-8c73-0943c9e8092b": {
+          "uuid": "8a8c905a-fed5-47b2-8c73-0943c9e8092b",
+          "parentPool": "rare",
+          "drop": "rO0ABXNyABpvcmcuYnVra2l0LnV0aWwuaW8uV3JhcHBlcvJQR+zxEm8FAgABTAADbWFwdAAPTGph\r\ndmEvdXRpbC9NYXA7eHBzcgA1Y29tLmdvb2dsZS5jb21tb24uY29sbGVjdC5JbW11dGFibGVNYXAk\r\nU2VyaWFsaXplZEZvcm0AAAAAAAAAAAIAAkwABGtleXN0ABJMamF2YS9sYW5nL09iamVjdDtMAAZ2\r\nYWx1ZXNxAH4ABHhwdXIAE1tMamF2YS5sYW5nLk9iamVjdDuQzlifEHMpbAIAAHhwAAAABHQAAj09\r\ndAABdnQABHR5cGV0AARtZXRhdXEAfgAGAAAABHQAHm9yZy5idWtraXQuaW52ZW50b3J5Lkl0ZW1T\r\ndGFja3NyABFqYXZhLmxhbmcuSW50ZWdlchLioKT3gYc4AgABSQAFdmFsdWV4cgAQamF2YS5sYW5n\r\nLk51bWJlcoaslR0LlOCLAgAAeHAAABBddAAMR09MREVOX0FQUExFc3EAfgAAc3EAfgADdXEAfgAG\r\nAAAABHEAfgAIdAAJbWV0YS10eXBldAAMZGlzcGxheS1uYW1ldAARY3VzdG9tLW1vZGVsLWRhdGF1\r\ncQB+AAYAAAAEdAAISXRlbU1ldGF0AApVTlNQRUNJRklDdACSeyJ0ZXh0IjoiIiwiZXh0cmEiOlsi\r\nPCIseyJ0ZXh0IjoibGFuZy5tYXRlcmlhbC1jcnlzdGFsLWFwcGxlPiIsImNsaWNrRXZlbnQiOnsi\r\nYWN0aW9uIjoib3Blbl91cmwiLCJ2YWx1ZSI6Imh0dHA6Ly9sYW5nLm1hdGVyaWFsLWNyeXN0YWwt\r\nYXBwbGU+In19XX1zcQB+AABzcQB+AAN1cQB+AAYAAAAFcQB+AAh0AAZmbG9hdHN0AAVmbGFnc3QA\r\nB3N0cmluZ3N0AAZjb2xvcnN1cQB+AAYAAAAFdAAPQ3VzdG9tTW9kZWxEYXRhc3IAJmphdmEudXRp\r\nbC5Db2xsZWN0aW9ucyRVbm1vZGlmaWFibGVMaXN0/A8lMbXsjhACAAFMAARsaXN0dAAQTGphdmEv\r\ndXRpbC9MaXN0O3hyACxqYXZhLnV0aWwuQ29sbGVjdGlvbnMkVW5tb2RpZmlhYmxlQ29sbGVjdGlv\r\nbhlCAIDLXvceAgABTAABY3QAFkxqYXZhL3V0aWwvQ29sbGVjdGlvbjt4cHNyABNqYXZhLnV0aWwu\r\nQXJyYXlMaXN0eIHSHZnHYZ0DAAFJAARzaXpleHAAAAABdwQAAAABc3IAD2phdmEubGFuZy5GbG9h\r\ndNrtyaLbPPDsAgABRgAFdmFsdWV4cQB+AA9J8+3weHEAfgArc3EAfgAlc3EAfgAqAAAAAHcEAAAA\r\nAHhxAH4AL3NxAH4AJXNxAH4AKgAAAAB3BAAAAAB4cQB+ADFzcgARamF2YS51dGlsLkNvbGxTZXJX\r\njqu2OhuoEQMAAUkAA3RhZ3hwAAAABHcEAAAAAHg=\r\n",
+          "baseQuantityMin": 1,
+          "baseQuantityMax": 1,
+          "quantityMinFortuneBase": 0.0,
+          "quantityMaxFortuneBase": 0.0,
+          "predicates": [
+            {
+              "PRED_TYPE": "me.athlaeos.valhallammo.loot.predicates.implementations.LuckFilter",
+              "DATA": {
+                "from": 20,
+                "inverted": false
+              }
+            }
+          ],
+          "chance": 5.0E-5,
+          "chanceQuality": 1.0E-5,
+          "weight": 10.0,
+          "weightQuality": 10.0,
+          "guaranteedPresent": false,
+          "modifiers": [
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.food.EffectNullification",
+              "DATA": {
+                "name": "food_nullify_effects",
+                "priority": "SOONEST"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.food.FoodValueSet",
+              "DATA": {
+                "food": 10,
+                "name": "food_value",
+                "priority": "SOONEST"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.food.SaturationValueSet",
+              "DATA": {
+                "saturation": 20.0,
+                "name": "food_saturation",
+                "priority": "SOONEST"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.item_misc.FlagVanillaAdd",
+              "DATA": {
+                "flag": "HIDE_POTION_EFFECTS",
+                "name": "flag_hide_potion_effects",
+                "priority": "SOONEST"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.potion_effects.PotionEffectAdd",
+              "DATA": {
+                "effect": "ENCHANTING_QUALITY",
+                "value": 50.1,
+                "duration": 600,
+                "charges": -1,
+                "smallIncrement": 1.0,
+                "bigIncrement": 10.0,
+                "icon": "ENCHANTING_TABLE",
+                "name": "potion_effect_add_enchanting_quality",
+                "priority": "SOON"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.potion_effects.PotionEffectAdd",
+              "DATA": {
+                "effect": "ALCHEMY_QUALITY",
+                "value": 50.1,
+                "duration": 600,
+                "charges": -1,
+                "smallIncrement": 1.0,
+                "bigIncrement": 10.0,
+                "icon": "BREWING_STAND",
+                "name": "potion_effect_add_alchemy_quality",
+                "priority": "SOON"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.potion_effects.PotionEffectAdd",
+              "DATA": {
+                "effect": "ANVIL_QUALITY_FLAT",
+                "value": 50.099999999999994,
+                "duration": 600,
+                "charges": -1,
+                "smallIncrement": 1.0,
+                "bigIncrement": 10.0,
+                "icon": "ANVIL",
+                "name": "potion_effect_add_anvil_quality_flat",
+                "priority": "SOON"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.potion_effects.PotionEffectAdd",
+              "DATA": {
+                "effect": "SMITHING_QUALITY",
+                "value": 50.0,
+                "duration": 600,
+                "charges": -1,
+                "smallIncrement": 1.0,
+                "bigIncrement": 10.0,
+                "icon": "ANVIL",
+                "name": "potion_effect_add_smithing_quality",
+                "priority": "SOON"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.potion_effects.PotionEffectAdd",
+              "DATA": {
+                "effect": "FAST_DIGGING",
+                "value": 1.0,
+                "duration": 4800,
+                "charges": -1,
+                "smallIncrement": 0.01,
+                "bigIncrement": 0.25,
+                "icon": "GOLDEN_PICKAXE",
+                "name": "potion_effect_add_fast_digging",
+                "priority": "NEUTRAL"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.potion_effects.PotionEffectAdd",
+              "DATA": {
+                "effect": "SPEED",
+                "value": 1.0,
+                "duration": 4800,
+                "charges": -1,
+                "smallIncrement": 0.01,
+                "bigIncrement": 0.25,
+                "icon": "SUGAR",
+                "name": "potion_effect_add_speed",
+                "priority": "NEUTRAL"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.potion_effects.PotionEffectAdd",
+              "DATA": {
+                "effect": "LUCK",
+                "value": 0.0,
+                "duration": 1800,
+                "charges": -1,
+                "smallIncrement": 0.01,
+                "bigIncrement": 0.25,
+                "icon": "RABBIT_FOOT",
+                "name": "potion_effect_add_luck",
+                "priority": "NEUTRAL"
+              }
+            }
+          ],
+          "predicateSelection": "ALL"
+        },
+        "8c96724a-1f39-41dc-a951-43f9bfc18338": {
+          "uuid": "8c96724a-1f39-41dc-a951-43f9bfc18338",
+          "parentPool": "rare",
+          "drop": "rO0ABXNyABpvcmcuYnVra2l0LnV0aWwuaW8uV3JhcHBlcvJQR+zxEm8FAgABTAADbWFwdAAPTGph\r\ndmEvdXRpbC9NYXA7eHBzcgA1Y29tLmdvb2dsZS5jb21tb24uY29sbGVjdC5JbW11dGFibGVNYXAk\r\nU2VyaWFsaXplZEZvcm0AAAAAAAAAAAIAAkwABGtleXN0ABJMamF2YS9sYW5nL09iamVjdDtMAAZ2\r\nYWx1ZXNxAH4ABHhwdXIAE1tMamF2YS5sYW5nLk9iamVjdDuQzlifEHMpbAIAAHhwAAAAA3QAAj09\r\ndAABdnQABHR5cGV1cQB+AAYAAAADdAAeb3JnLmJ1a2tpdC5pbnZlbnRvcnkuSXRlbVN0YWNrc3IA\r\nEWphdmEubGFuZy5JbnRlZ2VyEuKgpPeBhzgCAAFJAAV2YWx1ZXhyABBqYXZhLmxhbmcuTnVtYmVy\r\nhqyVHQuU4IsCAAB4cAAAEF10AAxHT0xERU5fQVBQTEU=\r\n",
+          "baseQuantityMin": 1,
+          "baseQuantityMax": 1,
+          "quantityMinFortuneBase": 0.0,
+          "quantityMaxFortuneBase": 1.0,
+          "predicates": [
+            {
+              "PRED_TYPE": "me.athlaeos.valhallammo.loot.predicates.implementations.LuckFilter",
+              "DATA": {
+                "from": 10,
+                "inverted": false
+              }
+            }
+          ],
+          "chance": 3.9E-4,
+          "chanceQuality": 2.0E-4,
+          "weight": 10.0,
+          "weightQuality": 10.0,
+          "guaranteedPresent": false,
+          "modifiers": [],
+          "predicateSelection": "ALL"
+        }
+      },
+      "predicates": [],
+      "weighted": false,
+      "weightedRolls": 1,
+      "bonusLuckRolls": 0.5,
+      "dropChance": 1.0,
+      "dropLuckChance": 0.0,
+      "predicateSelection": "ANY"
+    }
+  },
+  "icon": "CHEST",
+  "vanillaLootPreservationType": "KEEP"
+}
