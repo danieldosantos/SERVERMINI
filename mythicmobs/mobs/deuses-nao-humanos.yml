@@ -1,0 +1,227 @@
+DeidadeNaoHumanaBase:
+  Type: WITHER_SKELETON
+  Display: '&6&l{display}'
+  Health: 2000
+  Damage: 25
+  Armor: 12
+  KnockbackResistance: 1
+  Faction: DeusesNaoHumanos
+  Options:
+    AlwaysShowName: true
+    PreventLeashing: true
+    PreventRenaming: true
+    Despawn: false
+    Silent: true
+  AIGoalSelectors:
+    - clear
+    - meleeattack{speed=1.4;range=2.5}
+    - randomstroll
+    - lookatplayers
+  TargetSelectors:
+    - clear
+    - players
+    - mobs{faction!=DeusesNaoHumanos}
+  Modules:
+    ThreatTable: true
+  Skills:
+    - skill{s=GodlyShield} @self ~onSpawn
+    - skill{s=GodlySmite} @target ~onTimer:100 1
+    - skill{s=GodlyHeal} @self ~onDamaged 0.35
+
+Bahamut:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Bahamut, Deus Dragão do Bem'
+  Health: 2400
+  Damage: 32
+  Armor: 14
+  Skills:
+    - skill{s=DomainPlatinumBreath} @PlayersInRadius{r=10} ~onTimer:120 1
+    - skill{s=DomainJusticeWard} @self ~onTimer:160 1
+
+Blipdoolpoolp:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Blipdoolpoolp, Deusa dos Kuo-Toa'
+  Skills:
+    - skill{s=DomainAbyssTide} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainCrushingShell} @target ~onTimer:150 1
+
+CorellonLarethian:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Corellon Larethian, Divindade Élfica'
+  Health: 2150
+  Skills:
+    - skill{s=DomainArcaneVolley} @PlayersInRadius{r=10} ~onTimer:120 1
+    - skill{s=DomainGraceStep} @self ~onTimer:150 1
+
+SashelasDasProfundezas:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Sashelas das Profundezas, Deus do Mar Élfico'
+  Skills:
+    - skill{s=DomainSeaCaller} @PlayersInRadius{r=10} ~onTimer:120 1
+    - skill{s=DomainTideHeal} @self ~onTimer:160 1
+
+Eadro:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Eadro, Divindade do Povo do Mar'
+  Skills:
+    - skill{s=DomainCurrentsPull} @PlayersInRadius{r=9} ~onTimer:110 1
+    - skill{s=DomainShellGuard} @self ~onTimer:150 1
+
+GarlGlitergold:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Garl Glitergold, Deus Gnomo da Trapaça'
+  Health: 2050
+  Skills:
+    - skill{s=DomainGoldenPrank} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainLuckyEscape} @self ~onTimer:160 1
+
+Grolantor:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Grolantor, Deus Gigante da Colina'
+  Health: 2300
+  Damage: 32
+  Skills:
+    - skill{s=DomainClubQuake} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainHillFortitude} @self ~onTimer:150 1
+
+Gruumsh:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Gruumsh, Deus Orc da Guerra'
+  Health: 2350
+  Damage: 34
+  Skills:
+    - skill{s=DomainOneEyeRage} @target ~onTimer:110 1
+    - skill{s=DomainWarShockwave} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Hruggek:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Hruggek, Deus Bugbear da Violência'
+  Health: 2250
+  Damage: 32
+  Skills:
+    - skill{s=DomainAmbushStrike} @target ~onTimer:110 1
+    - skill{s=DomainFearHowl} @PlayersInRadius{r=8} ~onTimer:150 1
+
+Kurtlmak:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Kurtlmak, Deus Kobold da Guerra'
+  Skills:
+    - skill{s=DomainTunnelTrap} @PlayersInRadius{r=8} ~onTimer:120 1
+    - skill{s=DomainPackAssault} @target ~onTimer:140 1
+
+Laogzed:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Laogzed, Deus Troglodita da Fome'
+  Skills:
+    - skill{s=DomainCorrosiveHunger} @PlayersInRadius{r=8} ~onTimer:110 1
+    - skill{s=DomainStenchCloud} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Lolth:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Lolth, Deusa Drow das Aranhas'
+  Health: 2200
+  Skills:
+    - skill{s=DomainWebSnare} @PlayersInRadius{r=10} ~onTimer:110 1
+    - skill{s=DomainVenomBite} @target ~onTimer:150 1
+
+Maglubiyet:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Maglubiyet, Deus Goblinoide da Guerra'
+  Health: 2300
+  Damage: 32
+  Skills:
+    - skill{s=DomainGoblinWarcry} @PlayersInRadius{r=10} ~onTimer:120 1
+    - skill{s=DomainWarRally} @self ~onTimer:160 1
+
+Moradin:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Moradin, Deus Anão da Criação'
+  Health: 2350
+  Armor: 14
+  Skills:
+    - skill{s=DomainAnvilGuard} @self ~onTimer:120 1
+    - skill{s=DomainForgeBurst} @PlayersInRadius{r=8} ~onTimer:150 1
+
+RllifaneRallathil:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Rillifane Rallathil, Deus Élfico das Florestas'
+  Skills:
+    - skill{s=DomainForestWard} @self ~onTimer:130 1
+    - skill{s=DomainNatureRoots} @PlayersInRadius{r=9} ~onTimer:150 1
+
+SehanineMoonbow:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Sehanine Moonbow, Deusa Élfica da Lua'
+  Health: 2100
+  Skills:
+    - skill{s=DomainMoonGlimmer} @PlayersInRadius{r=10} ~onTimer:120 1
+    - skill{s=DomainPhaseShift} @self ~onTimer:160 1
+
+Sekolah:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Sekolah, Deus Sahuagin da Caça'
+  Health: 2250
+  Damage: 32
+  Skills:
+    - skill{s=DomainBloodShark} @target ~onTimer:120 1
+    - skill{s=DomainSeaCaller} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Semuanya:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Semuanya, Divindade Lagarto da Sobrevivência'
+  Skills:
+    - skill{s=DomainScaleRenewal} @self ~onTimer:130 1
+    - skill{s=DomainTailWhip} @PlayersInRadius{r=8} ~onTimer:160 1
+
+Skerrit:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Skerrit, Deus Centauro da Natureza'
+  Health: 2200
+  Skills:
+    - skill{s=DomainStampede} @PlayersInRadius{r=10} ~onTimer:110 1
+    - skill{s=DomainForestWard} @self ~onTimer:160 1
+
+SkoraeusOssosDePedra:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Skoraeus Ossos de Pedra, Deus Gigante da Arte'
+  Health: 2300
+  Armor: 14
+  Skills:
+    - skill{s=DomainStoneGaze} @PlayersInRadius{r=9} ~onTimer:120 1
+    - skill{s=DomainStoneChains} @PlayersInRadius{r=9} ~onTimer:160 1
+
+Surtur:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Surtur, Deus Gigante do Fogo'
+  Health: 2400
+  Damage: 34
+  Skills:
+    - skill{s=DomainFlameTitan} @PlayersInRadius{r=10} ~onTimer:110 1
+    - skill{s=DomainShieldWall} @self ~onTimer:150 1
+
+Thrym:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Thrym, Deus Gigante do Gelo'
+  Health: 2400
+  Damage: 34
+  Skills:
+    - skill{s=DomainFrostHammer} @PlayersInRadius{r=10} ~onTimer:110 1
+    - skill{s=DomainFrostAura} @PlayersInRadius{r=9} ~onTimer:150 1
+
+Tiamat:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Tiamat, Deusa Dragão Cromática'
+  Health: 2600
+  Damage: 36
+  Armor: 15
+  Skills:
+    - skill{s=DomainChromaticRuin} @PlayersInRadius{r=12} ~onTimer:110 1
+    - skill{s=DomainDragonTerror} @PlayersInRadius{r=11} ~onTimer:150 1
+
+Yondalla:
+  Inherit: DeidadeNaoHumanaBase
+  Display: 'Yondalla, Deusa Halfling da Proteção'
+  Health: 2150
+  Skills:
+    - skill{s=DomainHearthBlessing} @self ~onTimer:120 1
+    - skill{s=DomainGraceStep} @self ~onTimer:170 1

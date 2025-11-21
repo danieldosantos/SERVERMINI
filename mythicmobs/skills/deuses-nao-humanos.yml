@@ -1,0 +1,233 @@
+DomainPlatinumBreath:
+  Skills:
+    - effect:lightning @PlayersInRadius{r=10}
+    - damage{amount=40;cause=magic;ignoreArmor=true} @PlayersInRadius{r=10}
+    - potion{type=WEAKNESS;duration=120;lvl=2} @PlayersInRadius{r=10}
+
+DomainJusticeWard:
+  Skills:
+    - potion{type=RESISTANCE;duration=200;lvl=2} @self
+    - potion{type=ABSORPTION;duration=180;lvl=2} @self
+    - effect:particles{p=enchanted_hit;amount=30;hS=0.7;vS=0.6;speed=0.1} @self
+
+DomainAbyssTide:
+  Skills:
+    - damage{amount=32;cause=magic} @PlayersInRadius{r=9}
+    - potion{type=SLOW;duration=140;lvl=2} @PlayersInRadius{r=9}
+    - effect:particles{p=bubble_column_up;amount=35;hS=0.8;vS=0.7;speed=0.2} @self
+
+DomainCrushingShell:
+  Skills:
+    - knockback{velocity=1.3} @target
+    - damage{amount=30;cause=entity_attack} @target
+    - effect:sound{s=block.stone.fall;v=1;p=0.8} @self
+
+DomainArcaneVolley:
+  Skills:
+    - projectile{type=SMALL_FIREBALL;amount=6;velocity=1.2;spread=0.4;hR=2;vR=2} @PlayersInRadius{r=10}
+    - damage{amount=32;cause=magic} @PlayersInRadius{r=10}
+
+DomainGraceStep:
+  Skills:
+    - potion{type=SPEED;duration=200;lvl=2} @self
+    - potion{type=REGENERATION;duration=120;lvl=1} @self
+    - effect:particles{p=cloud;amount=20;hS=0.7;vS=0.5;speed=0.1} @self
+
+DomainSeaCaller:
+  Skills:
+    - damage{amount=34;cause=magic} @PlayersInRadius{r=10}
+    - potion{type=SLOW;duration=120;lvl=1} @PlayersInRadius{r=10}
+    - effect:particles{p=bubble;amount=30;hS=0.9;vS=0.8;speed=0.1} @self
+
+DomainTideHeal:
+  Skills:
+    - heal{amount=70} @self
+    - potion{type=WATER_BREATHING;duration=200;lvl=1} @self
+    - effect:particles{p=water_splash;amount=35;hS=0.8;vS=0.7;speed=0.2} @self
+
+DomainCurrentsPull:
+  Skills:
+    - pull{v=1.1} @PlayersInRadius{r=9}
+    - damage{amount=30;cause=magic} @PlayersInRadius{r=9}
+    - effect:particles{p=bubble_pop;amount=25;hS=0.7;vS=0.6;speed=0.2} @self
+
+DomainShellGuard:
+  Skills:
+    - potion{type=RESISTANCE;duration=180;lvl=2} @self
+    - potion{type=ABSORPTION;duration=140;lvl=1} @self
+    - effect:particles{p=block;material=PRISMARINE;amount=25;hS=0.6;vS=0.5;speed=0.1} @self
+
+DomainGoldenPrank:
+  Skills:
+    - potion{type=CONFUSION;duration=120;lvl=0} @PlayersInRadius{r=9}
+    - potion{type=BLINDNESS;duration=80;lvl=0} @PlayersInRadius{r=9}
+    - effect:sound{s=entity.villager.celebrate;v=1;p=1.2} @self
+
+DomainLuckyEscape:
+  Skills:
+    - teleport{spread=6} @self
+    - potion{type=LUCK;duration=200;lvl=1} @self
+    - effect:particles{p=crit_magic;amount=25;hS=0.7;vS=0.6;speed=0.2} @self
+
+DomainClubQuake:
+  Skills:
+    - knockback{velocity=1.2} @PlayersInRadius{r=9}
+    - damage{amount=34;cause=entity_attack} @PlayersInRadius{r=9}
+    - effect:particles{p=block;material=DIRT;amount=35;hS=0.9;vS=0.7;speed=0.1} @self
+
+DomainHillFortitude:
+  Skills:
+    - potion{type=RESISTANCE;duration=200;lvl=2} @self
+    - potion{type=ABSORPTION;duration=160;lvl=2} @self
+    - effect:sound{s=entity.iron_golem.repair;v=1;p=0.8} @self
+
+DomainOneEyeRage:
+  Skills:
+    - damage{amount=36;cause=entity_attack;ignoreArmor=true} @target
+    - potion{type=INCREASE_DAMAGE;duration=140;lvl=2} @self
+    - effect:particles{p=angry_villager;amount=25;hS=0.6;vS=0.4;speed=0.1} @self
+
+DomainAmbushStrike:
+  Skills:
+    - teleport{to=target;spread=0.4} @self
+    - damage{amount=32;cause=entity_attack} @target
+    - potion{type=WEAKNESS;duration=80;lvl=1} @target
+
+DomainFearHowl:
+  Skills:
+    - potion{type=CONFUSION;duration=120;lvl=0} @PlayersInRadius{r=8}
+    - potion{type=SLOW;duration=120;lvl=1} @PlayersInRadius{r=8}
+    - effect:sound{s=entity.wolf.howl;v=1;p=0.5} @self
+
+DomainTunnelTrap:
+  Skills:
+    - root{d=120} @PlayersInRadius{r=8}
+    - damage{amount=30;cause=magic} @PlayersInRadius{r=8}
+    - effect:particles{p=block;material=STONE;amount=30;hS=0.6;vS=0.5;speed=0.1} @self
+
+DomainPackAssault:
+  Skills:
+    - damage{amount=32;cause=entity_attack} @target
+    - potion{type=INCREASE_DAMAGE;duration=120;lvl=1} @self
+    - effect:sound{s=entity.wolf.growl;v=1;p=0.8} @self
+
+DomainCorrosiveHunger:
+  Skills:
+    - damage{amount=32;cause=magic;ignoreArmor=true} @PlayersInRadius{r=8}
+    - potion{type=POISON;duration=140;lvl=1} @PlayersInRadius{r=8}
+    - effect:particles{p=dripping_honey;amount=25;hS=0.6;vS=0.5;speed=0.1} @self
+
+DomainStenchCloud:
+  Skills:
+    - potion{type=CONFUSION;duration=140;lvl=0} @PlayersInRadius{r=9}
+    - potion{type=WEAKNESS;duration=120;lvl=1} @PlayersInRadius{r=9}
+    - effect:particles{p=smoke;amount=30;hS=0.9;vS=0.7;speed=0.15} @self
+
+DomainWebSnare:
+  Skills:
+    - root{d=120} @PlayersInRadius{r=10}
+    - damage{amount=30;cause=magic} @PlayersInRadius{r=10}
+    - effect:particles{p=string;amount=35;hS=1;vS=0.8;speed=0.05} @self
+
+DomainVenomBite:
+  Skills:
+    - damage{amount=34;cause=entity_attack} @target
+    - potion{type=POISON;duration=120;lvl=2} @target
+    - effect:particles{p=crit;amount=20;hS=0.5;vS=0.4;speed=0.1} @self
+
+DomainGoblinWarcry:
+  Skills:
+    - potion{type=INCREASE_DAMAGE;duration=160;lvl=2} @self
+    - potion{type=SPEED;duration=160;lvl=1} @self
+    - effect:sound{s=entity.pillager.celebrate;v=1;p=0.7} @self
+
+DomainAnvilGuard:
+  Skills:
+    - potion{type=RESISTANCE;duration=220;lvl=2} @self
+    - heal{amount=60} @self
+    - effect:particles{p=block;material=IRON_BLOCK;amount=30;hS=0.6;vS=0.5;speed=0.1} @self
+
+DomainForestWard:
+  Skills:
+    - heal{amount=70} @self
+    - potion{type=REGENERATION;duration=160;lvl=1} @self
+    - effect:particles{p=happy_villager;amount=30;hS=0.7;vS=0.6;speed=0.1} @self
+
+DomainMoonGlimmer:
+  Skills:
+    - potion{type=BLINDNESS;duration=100;lvl=1} @PlayersInRadius{r=10}
+    - damage{amount=30;cause=magic} @PlayersInRadius{r=10}
+    - effect:particles{p=dragon_breath;amount=25;hS=0.8;vS=0.7;speed=0.15} @self
+
+DomainPhaseShift:
+  Skills:
+    - teleport{spread=5} @self
+    - potion{type=LEVITATION;duration=80;lvl=0} @PlayersInRadius{r=9}
+    - effect:particles{p=portal;amount=30;hS=0.9;vS=0.8;speed=0.2} @self
+
+DomainBloodShark:
+  Skills:
+    - damage{amount=34;cause=entity_attack;ignoreArmor=true} @target
+    - potion{type=WITHER;duration=100;lvl=1} @target
+    - effect:sound{s=entity.drowned.hurt;v=1;p=0.6} @self
+
+DomainScaleRenewal:
+  Skills:
+    - heal{amount=60} @self
+    - potion{type=RESISTANCE;duration=160;lvl=1} @self
+    - effect:particles{p=slime;amount=25;hS=0.6;vS=0.5;speed=0.1} @self
+
+DomainTailWhip:
+  Skills:
+    - knockback{velocity=1.1} @PlayersInRadius{r=8}
+    - damage{amount=30;cause=entity_attack} @PlayersInRadius{r=8}
+    - effect:sound{s=entity.zombie.attack_wooden_door;v=1;p=0.9} @self
+
+DomainStampede:
+  Skills:
+    - damage{amount=34;cause=entity_attack} @PlayersInRadius{r=10}
+    - knockback{velocity=1.2} @PlayersInRadius{r=10}
+    - potion{type=SPEED;duration=140;lvl=2} @self
+
+DomainStoneGaze:
+  Skills:
+    - potion{type=SLOW;duration=140;lvl=2} @PlayersInRadius{r=9}
+    - damage{amount=32;cause=magic} @PlayersInRadius{r=9}
+    - effect:particles{p=block;material=STONE;amount=25;hS=0.7;vS=0.6;speed=0.05} @self
+
+DomainFlameTitan:
+  Skills:
+    - effect:lightning @PlayersInRadius{r=10}
+    - damage{amount=38;cause=magic;ignoreArmor=true} @PlayersInRadius{r=10}
+    - ignite{ticks=100} @PlayersInRadius{r=10}
+
+DomainFrostHammer:
+  Skills:
+    - damage{amount=38;cause=magic;ignoreArmor=true} @PlayersInRadius{r=10}
+    - potion{type=SLOW;duration=140;lvl=2} @PlayersInRadius{r=10}
+    - effect:particles{p=snowflake;amount=30;hS=0.8;vS=0.7;speed=0.1} @self
+
+DomainFrostAura:
+  Skills:
+    - potion{type=SLOW;duration=160;lvl=1} @PlayersInRadius{r=9}
+    - damage{amount=30;cause=magic} @PlayersInRadius{r=9}
+    - effect:particles{p=cloud;amount=25;hS=0.8;vS=0.6;speed=0.08} @self
+
+DomainChromaticRuin:
+  Skills:
+    - damage{amount=42;cause=magic;ignoreArmor=true} @PlayersInRadius{r=12}
+    - potion{type=WEAKNESS;duration=120;lvl=2} @PlayersInRadius{r=12}
+    - potion{type=POISON;duration=120;lvl=1} @PlayersInRadius{r=12}
+    - ignite{ticks=100} @PlayersInRadius{r=12}
+
+DomainDragonTerror:
+  Skills:
+    - potion{type=CONFUSION;duration=120;lvl=0} @PlayersInRadius{r=11}
+    - knockback{velocity=1.3} @PlayersInRadius{r=11}
+    - effect:sound{s=entity.ender_dragon.growl;v=1;p=0.6} @self
+
+DomainHearthBlessing:
+  Skills:
+    - heal{amount=70} @self
+    - potion{type=ABSORPTION;duration=180;lvl=2} @self
+    - effect:particles{p=heart;amount=30;hS=0.7;vS=0.6;speed=0.1} @self
