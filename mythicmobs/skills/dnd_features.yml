@@ -1,0 +1,75 @@
+# MythicMobs skill pack representing D&D 5e class features and cantrips
+
+ExtraAttack:
+  Skills:
+  - skill{s=ExtraAttackApply} @self ~onUse
+
+ExtraAttackApply:
+  Cooldown: 0
+  Skills:
+  - repeat{amount=2;cooldown=0} @target ~onAttack
+
+ActionSurge:
+  Cooldown: 60
+  Skills:
+  - effect:particlesphere{particle=reddust;amount=50;radius=2}
+  - skill{s=GrantBonusAction} @self
+
+GrantBonusAction:
+  TriggerConditions:
+  - offgcd true
+  Skills:
+  - message{m="Action Surge! You gain an extra Action this turn."}
+  - gcd{ticks=20}
+
+BarbarianRage:
+  Cooldown: 1200
+  Skills:
+  - potion{type=INCREASE_DAMAGE;duration=1200;level=1}
+  - potion{type=DAMAGE_RESISTANCE;duration=1200;level=1}
+  - message{m="You enter Rage for 1 minute (+2 dmg, resistance)."}
+
+Cantrip.Firebolt:
+  Cooldown: 0
+  Skills:
+  - projectile{onTick=FireboltTrail;onHit=FireboltHit;v=25;i=1;hR=0.5;vR=0.5}
+
+FireboltTrail:
+  Skills:
+  - effect:particles{p=flame;amount=4;speed=0.01}
+
+FireboltHit:
+  Skills:
+  - damage{amount="2 + <caster.pb>";ia=true}
+  - ignite{ticks=40}
+
+Cantrip.SacredFlame:
+  Cooldown: 0
+  Skills:
+  - skill{s=SacredFlameRoll} @target
+
+SacredFlameRoll:
+  TargetConditions:
+  - compare{a="<target.meta:condition:advantage>";b=true;comp==;fail=SacredFlameNormal}
+  Skills:
+  - damage{amount="2 + <caster.pb>";ia=true}
+
+SacredFlameNormal:
+  Skills:
+  - damage{amount="1 + <caster.pb>";ia=true}
+
+Ki.FlurryOfBlows:
+  Conditions:
+  - resource{resource=ki;amount=1}
+  Cooldown: 10
+  Skills:
+  - consume{resource=ki;amount=1}
+  - repeat{amount=2;delay=2;skills=[damage{amount="1 + <caster.mod:DEX>";type=BLUNT}]} @target
+
+ShortRestReset:
+  Cooldown: 0
+  Skills:
+  - resource{resource=ki;amount=max;operation=set} @self
+  - cooldown{skill=ActionSurge;time=0}
+  - cooldown{skill=BarbarianRage;time=0}
+  - message{m="Short Rest complete: resources refreshed."}

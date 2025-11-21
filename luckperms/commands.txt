@@ -1,0 +1,114 @@
+# LuckPerms command plan for D&D 5e structure
+# Run these in-game or via console. Uses meta for PB, advantage flags, proficiencies, and ancestry/heritage bonuses.
+
+# --- Core meta keys ---
+# Set proficiency bonus per level (optional fallback; ValhallaMMO also maps automatically)
+lp user <player> meta set pb 2
+
+# Advantage/Disadvantage toggles (temporary, clear on rest)
+lp user <player> meta set condition:advantage true
+lp user <player> meta set condition:disadvantage true
+
+# --- Races and subraces ---
+# Example: Wood Elf with +2 DEX, +1 WIS and Darkvision
+lp creategroup race_wood_elf
+lp group race_wood_elf meta set bonus:DEX 2
+lp group race_wood_elf meta set bonus:WIS 1
+lp group race_wood_elf permission set essentials.effect.nightvision true
+lp group race_wood_elf permission set prof.simple_weapons true
+
+# Apply to player
+lp user <player> parent add race_wood_elf
+
+# Replicate similarly for other ancestries
+lp creategroup race_hill_dwarf
+lp group race_hill_dwarf meta set bonus:CON 2
+lp group race_hill_dwarf meta set bonus:WIS 1
+lp group race_hill_dwarf permission set essentials.effect.nightvision true
+lp group race_hill_dwarf permission set prof.battleaxe true
+lp group race_hill_dwarf permission set prof.handaxe true
+
+lp creategroup race_lightfoot_halfling
+lp group race_lightfoot_halfling meta set bonus:DEX 2
+lp group race_lightfoot_halfling meta set bonus:CHA 1
+
+lp creategroup race_forest_gnome
+lp group race_forest_gnome meta set bonus:INT 2
+lp group race_forest_gnome meta set bonus:DEX 1
+lp group race_forest_gnome permission set essentials.effect.nightvision true
+
+lp creategroup race_half_elf
+lp group race_half_elf meta set bonus:CHA 2
+lp group race_half_elf meta set bonus:DEX 1
+lp group race_half_elf meta set bonus:CON 1
+lp group race_half_elf permission set essentials.effect.nightvision true
+
+lp creategroup race_half_orc
+lp group race_half_orc meta set bonus:STR 2
+lp group race_half_orc meta set bonus:CON 1
+lp group race_half_orc permission set essentials.effect.nightvision true
+lp group race_half_orc permission set prof.martial_weapons true
+
+lp creategroup race_dragonborn
+lp group race_dragonborn meta set bonus:STR 2
+lp group race_dragonborn meta set bonus:CHA 1
+lp group race_dragonborn permission set prof.breath_weapon true
+
+lp creategroup race_human
+lp group race_human meta set bonus:STR 1
+lp group race_human meta set bonus:DEX 1
+lp group race_human meta set bonus:CON 1
+lp group race_human meta set bonus:INT 1
+lp group race_human meta set bonus:WIS 1
+lp group race_human meta set bonus:CHA 1
+
+lp creategroup race_tiefling
+lp group race_tiefling meta set bonus:INT 1
+lp group race_tiefling meta set bonus:CHA 2
+lp group race_tiefling permission set essentials.effect.nightvision true
+
+# --- Classes (levels as child groups) ---
+# Example Warrior (Fighter) progression; replicate for 11 other classes
+lp creategroup class_fighter
+lp creategroup class_fighter_lvl1
+lp creategroup class_fighter_lvl2
+lp creategroup class_fighter_lvl3
+lp creategroup class_fighter_lvl4
+lp creategroup class_fighter_lvl5
+lp creategroup class_fighter_lvl11
+lp creategroup class_fighter_lvl20
+
+# Parent chain
+lp group class_fighter_lvl1 parent add class_fighter
+lp group class_fighter_lvl2 parent add class_fighter_lvl1
+lp group class_fighter_lvl3 parent add class_fighter_lvl2
+lp group class_fighter_lvl4 parent add class_fighter_lvl3
+lp group class_fighter_lvl5 parent add class_fighter_lvl4
+lp group class_fighter_lvl11 parent add class_fighter_lvl5
+lp group class_fighter_lvl20 parent add class_fighter_lvl11
+
+# Features unlocked
+lp group class_fighter_lvl1 permission set feature.second_wind true
+lp group class_fighter_lvl2 permission set feature.action_surge true
+lp group class_fighter_lvl5 permission set feature.extra_attack true
+lp group class_fighter_lvl11 permission set feature.extra_attack_2 true
+lp group class_fighter_lvl20 permission set feature.extra_attack_3 true
+
+# Saving throw proficiencies
+lp group class_fighter permission set save:STR true
+lp group class_fighter permission set save:CON true
+
+# Apply to player
+lp user <player> parent add class_fighter_lvl1
+
+# Repeat parent ladder and feature permissions for: barbarian, bard, cleric, druid, monk, paladin, ranger, rogue, sorcerer, warlock, wizard.
+
+# --- Backgrounds ---
+# Example: Acolyte starting kit and skills
+lp creategroup bg_acolyte
+lp group bg_acolyte permission set prof.insight true
+lp group bg_acolyte permission set prof.religion true
+lp group bg_acolyte permission set kit.acolyte true
+lp user <player> parent add bg_acolyte
+
+# Other backgrounds: guild_artisan, criminal, hermit, folk_hero, noble, outlander, sage, soldier, urchin.
