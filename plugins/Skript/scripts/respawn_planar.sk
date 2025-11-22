@@ -10,43 +10,46 @@ options:
     safe_z: 0
 
 on death:
-    set {_world} to player's world
-    
+    set {_world} to world of victim
+
     # Lista dos mundos onde a morte resulta em punição planar
-    if {_world} is "elemental_fire" or {_world} is "elemental_air" or {_world} is "elemental_water" or {_world} is "elemental_earth" or {_world} is "umbra":
-        
+    if name of {_world} is "elemental_fire" or name of {_world} is "elemental_air" or name of {_world} is "elemental_water" or name of {_world} is "elemental_earth" or name of {_world} is "umbra":
+
+        if victim is not a player:
+            stop
+
         # Impede o respawn padrão e inicia o processamento
         cancel event
-        
+
         # Teleporta o jogador imediatamente (ou no próximo tick para evitar bugs de respawn)
         wait 1 tick
-        teleport player to location ({@safe_x}, {@safe_y}, {@safe_z}) in world "{@safe_world}"
-        
-        send title "&cCONEXÃO QUEBRADA" to player for 10 ticks with fadein 5 ticks and fadeout 5 ticks
-        
-        # Restaura a vida e aplica a punição temática
-        set player's health to 10 # Define a vida do jogador para 5 corações (metade)
+        teleport victim to location ({@safe_x}, {@safe_y}, {@safe_z}) in world "{@safe_world}"
 
-        if {_world} is "umbra":
+        send title "&cCONEXÃO QUEBRADA" to victim for 10 ticks with fadein 5 ticks and fadeout 5 ticks
+
+        # Restaura a vida e aplica a punição temática
+        set victim's health to 10 # Define a vida do jogador para 5 corações (metade)
+
+        if name of {_world} is "umbra":
             # Punição: Desgaste (Wither) e Lentidão.
-            apply wither to player for 30 seconds
-            apply slowness 2 to player for 60 seconds
-            send "&8Sua essência foi drenada pelo Plano das Sombras. Você sente o desgaste planar." to player
-            
-        else if {_world} is "elemental_fire":
+            apply wither to victim for 30 seconds
+            apply slowness 2 to victim for 60 seconds
+            send "&8Sua essência foi drenada pelo Plano das Sombras. Você sente o desgaste planar." to victim
+
+        else if name of {_world} is "elemental_fire":
             # Punição: Fraqueza (Weakness) e Confusão, representando o trauma do calor.
-            apply weakness to player for 45 seconds
-            apply confusion to player for 30 seconds
-            send "&cO inferno elemental queimou sua força. Seus golpes estão fracos." to player
-            
+            apply weakness to victim for 45 seconds
+            apply confusion to victim for 30 seconds
+            send "&cO inferno elemental queimou sua força. Seus golpes estão fracos." to victim
+
         else: # Para os demais Planos Elementais
             # Punição: Lentidão e Cansaço (Fatigue).
-            apply slowness 1 to player for 60 seconds
-            apply mining fatigue 1 to player for 60 seconds
-            send "&6A turbulência planar te jogou para fora. Você está exausto e lento." to player
+            apply slowness 1 to victim for 60 seconds
+            apply mining fatigue 1 to victim for 60 seconds
+            send "&6A turbulência planar te jogou para fora. Você está exausto e lento." to victim
 
         # Limpa o inventário (opcional, se quiser que ele perca tudo)
         # clear player's inventory
 
         # Remove todos os buffs/debuffs ativos que não foram aplicados no script (para evitar bugs)
-        remove all potion effects from player
+        remove all potion effects from victim
