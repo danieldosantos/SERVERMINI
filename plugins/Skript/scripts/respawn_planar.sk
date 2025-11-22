@@ -11,9 +11,10 @@ options:
 
 on death:
     set {_world} to name of world of victim
+    set {_dangerousWorlds::*} to "elemental_fire", "elemental_air", "elemental_water", "elemental_earth", "umbra"
 
     # Lista dos mundos onde a morte resulta em punição planar
-    if {_world} is "elemental_fire" or {_world} is "elemental_air" or {_world} is "elemental_water" or {_world} is "elemental_earth" or {_world} is "umbra":
+    if {_world} is in {_dangerousWorlds::*}:
 
         if victim is not a player:
             stop
@@ -29,6 +30,9 @@ on death:
 
         # Restaura a vida e aplica a punição temática
         set victim's health to 10 # Define a vida do jogador para 5 corações (metade)
+
+        # Remove todos os buffs/debuffs antes de aplicar os novos
+        remove all potion effects from victim
 
         if {_world} is "umbra":
             # Punição: Desgaste (Wither) e Lentidão.
@@ -50,6 +54,3 @@ on death:
 
         # Limpa o inventário (opcional, se quiser que ele perca tudo)
         # clear player's inventory
-
-        # Remove todos os buffs/debuffs antes de aplicar os novos
-        remove all potion effects from victim
