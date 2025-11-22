@@ -30,3 +30,8 @@ Guia rapido para subir o servidor Paper com os plugins de DnD que estao neste re
 - Start com porta custom: adicione `--port 25565` (mude o numero se precisar).
 - Parar: digite `stop` no console.
 - Backup recomendado antes de atualizar: `world/`, `world_nether/`, `world_the_end/` e `plugins/` (configs e dados).
+
+## Solução de problemas comuns
+- **EssentialsX avisando "você está executando uma versão de servidor não suportada"**: use um build de desenvolvimento mais
+  recente do EssentialsX compatível com a sua versão do Paper. Baixe o jar atualizado e substitua em `plugins/EssentialsX*.jar`.
+  Se o aviso continuar, verifique se o servidor realmente está na versão mais recente do Paper 1.21.4 e reinicie.
