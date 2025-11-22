@@ -1,8 +1,33 @@
-[16:55:54] [main/INFO]: Loading Minecraft 1.21.1 with Fabric Loader 0.18.1
-[16:55:54] [main/INFO]: Loading 4 mods:
+[17:04:15] [main/INFO]: Loading Minecraft 1.21.1 with Fabric Loader 0.18.1
+[17:04:16] [main/INFO]: Loading 4 mods:
 	- fabricloader 0.18.1
 	   \-- mixinextras 0.5.0
 	- java 21
 	- minecraft 1.21.1
-[16:55:54] [main/INFO]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/daniel/Documents/Server%20do%20mine/libraries/net/fabricmc/sponge-mixin/0.16.5+mixin.0.8.7/sponge-mixin-0.16.5+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
-[16:56:04] [main/INFO]: You need to agree to the EULA in order to run the server. Go to eula.txt for more info.
+[17:04:16] [main/INFO]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/daniel/Documents/Server%20do%20mine/libraries/net/fabricmc/sponge-mixin/0.16.5+mixin.0.8.7/sponge-mixin-0.16.5+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
+[17:04:25] [main/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[17:04:26] [main/INFO]: No existing world data, creating new world
+[17:04:28] [main/INFO]: Loaded 1290 recipes
+[17:04:28] [main/INFO]: Loaded 1399 advancements
+[17:04:28] [Server thread/INFO]: Starting minecraft server version 1.21.1
+[17:04:28] [Server thread/INFO]: Loading properties
+[17:04:28] [Server thread/INFO]: Default game type: SURVIVAL
+[17:04:28] [Server thread/INFO]: Generating keypair
+[17:04:28] [Server thread/INFO]: Starting Minecraft server on *:25565
+[17:04:29] [Server thread/INFO]: Using default channel type
+[17:04:29] [Server thread/INFO]: Preparing level "world"
+[17:04:33] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[17:04:33] [Worker-Main-10/INFO]: Preparing spawn area: 2%
+[17:04:33] [Worker-Main-8/INFO]: Preparing spawn area: 2%
+[17:04:34] [Worker-Main-9/INFO]: Preparing spawn area: 2%
+[17:04:34] [Worker-Main-3/INFO]: Preparing spawn area: 8%
+[17:04:35] [Worker-Main-7/INFO]: Preparing spawn area: 18%
+[17:04:35] [Worker-Main-11/INFO]: Preparing spawn area: 18%
+[17:04:36] [Worker-Main-5/INFO]: Preparing spawn area: 51%
+[17:04:36] [Worker-Main-8/INFO]: Preparing spawn area: 61%
+[17:04:36] [Server thread/INFO]: Time elapsed: 3610 ms
+[17:04:36] [Server thread/INFO]: Done (7.457s)! For help, type "help"
+[17:06:20] [User Authenticator #1/INFO]: Disconnecting danieldosantos88 (/192.168.1.8:41820): Failed to verify username!
+[17:06:20] [User Authenticator #1/ERROR]: Username 'danieldosantos88' tried to join with an invalid session
+[17:06:20] [Server thread/INFO]: danieldosantos88 (/192.168.1.8:41820) lost connection: Failed to verify username!
+[17:14:40] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 3520ms or 70 ticks behind
