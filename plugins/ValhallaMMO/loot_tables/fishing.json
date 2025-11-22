@@ -217,7 +217,12 @@
           ],
           "predicateSelection": "ALL"
         }
-      }
+      },
+      "weighted": false,
+      "weightedRolls": 0,
+      "bonusLuckRolls": 0.0,
+      "dropChance": 0.0,
+      "dropLuckChance": 0.0
     }
   }
 }
