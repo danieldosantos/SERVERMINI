@@ -16,7 +16,7 @@ astral:
     currency: '@vault-economy'
   environment: normal
   gamemode: survival
-  generator: Flat
+  generator: ''
   hidden: false
   hunger: true
   keep-spawn-in-memory: true
@@ -54,7 +54,7 @@ elemental_air:
     currency: '@vault-economy'
   environment: normal
   gamemode: survival
-  generator: Void
+  generator: ''
   hidden: false
   hunger: true
   keep-spawn-in-memory: true
@@ -211,7 +211,7 @@ faeria:
     currency: '@vault-economy'
   environment: normal
   gamemode: survival
-  generator: Flat
+  generator: ''
   hidden: false
   hunger: true
   keep-spawn-in-memory: true
