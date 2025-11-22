@@ -184,7 +184,7 @@ on death of living entity:
     if attacker is a player:
         if victim is a player:
             stop
-        if attacker is in creative mode:
+        if game mode of attacker is creative:
             stop
         if victim is a monster:
             add_class_xp(attacker, {@xp-kill-hostile})
@@ -192,18 +192,18 @@ on death of living entity:
             add_class_xp(attacker, {@xp-kill-passive})
 
 on break of stone or deepslate or coal ore or iron ore or copper ore or gold ore or lapis ore or redstone ore or diamond ore or emerald ore or nether gold ore or nether quartz ore or ancient debris:
-    if player's gamemode is survival or player's gamemode is adventure:
+    if game mode of player is survival or adventure:
         add_class_xp(player, {@xp-mine-ore})
 
 on break of oak log or spruce log or birch log or jungle log or acacia log or dark oak log or mangrove log or cherry log or warped stem or crimson stem:
-    if player's gamemode is survival or player's gamemode is adventure:
+    if game mode of player is survival or adventure:
         add_class_xp(player, {@xp-mine-log})
 
 on craft:
-    if player's gamemode is survival or player's gamemode is adventure:
+    if game mode of player is survival or adventure:
         add_class_xp(player, {@xp-craft})
 
 on breed:
-    if player's gamemode is survival or player's gamemode is adventure:
+    if game mode of player is survival or adventure:
         add_class_xp(player, {@xp-breed})
 
