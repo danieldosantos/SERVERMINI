@@ -12,6 +12,6 @@ on death of player:
 
 on respawn of player:
     if {respawn.planar::%player%} is set:
-        clear all potion effects of player
-        teleport player to location ({@safe_x}, {@safe_y}, {@safe_z}) in world "{@safe_world}"
+        clear all potion effects of event-player
+        teleport event-player to location ({@safe_x}, {@safe_y}, {@safe_z}) in world "{@safe_world}"
         delete {respawn.planar::%player%}
