@@ -1,9 +1,9 @@
 DeidadeBase:
   Type: WITHER_SKELETON
   Display: '&6&l{display}'
-  Health: 2000
-  Damage: 25
-  Armor: 12
+  Health: 2600
+  Damage: 40
+  Armor: 16
   KnockbackResistance: 1
   Faction: DeusesReinos
   Options:
@@ -27,12 +27,15 @@ DeidadeBase:
     - skill{s=GodlyShield} @self ~onSpawn
     - skill{s=GodlySmite} @target ~onTimer:100 1
     - skill{s=GodlyHeal} @self ~onDamaged 0.35
+    - skill{s=DivineElementalFury} @PlayersInRadius{r=12} ~onTimer:140 1
+    - skill{s=DivineMythicAura} @self ~onTimer:120 1
+    - skill{s=DivineCripplingWave} @PlayersInRadius{r=10} ~onTimer:180 1
 
 # Domínio: Inverno/Tempestade
 Auril:
   Inherit: DeidadeBase
   Display: 'Auril, Deusa do Inverno'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainStormWrath} @PlayersInRadius{r=12} ~onTimer:120 1
     - skill{s=DomainFrostNova} @self ~onDamaged 0.25
@@ -40,8 +43,8 @@ Auril:
 Talos:
   Inherit: DeidadeBase
   Display: 'Talos, Deus das Tempestades'
-  Health: 2300
-  Damage: 30
+  Health: 2900
+  Damage: 45
   Skills:
     - skill{s=DomainStormWrath} @PlayersInRadius{r=14} ~onTimer:110 1
     - skill{s=DomainFuryCharge} @target ~onTimer:80 1
@@ -49,7 +52,7 @@ Talos:
 Umberlee:
   Inherit: DeidadeBase
   Display: 'Umberlee, Deusa do Mar'
-  Health: 2100
+  Health: 2700
   Skills:
     - skill{s=DomainStormWrath} @PlayersInRadius{r=12} ~onTimer:130 1
     - skill{s=DomainSeaPull} @PlayersInRadius{r=10} ~onTimer:160 1
@@ -58,7 +61,7 @@ Umberlee:
 Lathander:
   Inherit: DeidadeBase
   Display: 'Lathander, Deus do Nascimento'
-  Health: 2000
+  Health: 2600
   Skills:
     - skill{s=DomainLightNova} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=GodlyHeal} @self ~onTimer:160 1
@@ -66,7 +69,7 @@ Lathander:
 Sune:
   Inherit: DeidadeBase
   Display: 'Sune, Deusa do Amor'
-  Health: 1950
+  Health: 2550
   Skills:
     - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onTimer:130 1
     - skill{s=DomainCharm} @target ~onTimer:150 1
@@ -81,7 +84,7 @@ Chauntea:
 Ilmater:
   Inherit: DeidadeBase
   Display: 'Ilmater, Deus do Flagelo'
-  Health: 2050
+  Health: 2650
   Skills:
     - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onTimer:140 1
     - skill{s=GodlyHeal} @self ~onTimer:140 1
@@ -97,8 +100,8 @@ Selune:
 Bane:
   Inherit: DeidadeBase
   Display: 'Bane, Deus da Tirania'
-  Health: 2400
-  Damage: 32
+  Health: 3000
+  Damage: 47
   Skills:
     - skill{s=DomainWarRally} @self ~onTimer:120 1
     - skill{s=DomainFuryCharge} @target ~onTimer:90 1
@@ -106,8 +109,8 @@ Bane:
 Tempus:
   Inherit: DeidadeBase
   Display: 'Tempus, Deus da Guerra'
-  Health: 2300
-  Damage: 30
+  Health: 2900
+  Damage: 45
   Skills:
     - skill{s=DomainWarRally} @self ~onTimer:110 1
     - skill{s=DomainWarShockwave} @PlayersInRadius{r=8} ~onTimer:140 1
@@ -115,7 +118,7 @@ Tempus:
 Torm:
   Inherit: DeidadeBase
   Display: 'Torm, Deus da Coragem'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainWarRally} @self ~onTimer:120 1
     - skill{s=DomainLightNova} @PlayersInRadius{r=8} ~onDamaged 0.30
@@ -123,7 +126,7 @@ Torm:
 Tyr:
   Inherit: DeidadeBase
   Display: 'Tyr, Deus da Justiça'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainWarShockwave} @PlayersInRadius{r=9} ~onTimer:120 1
     - skill{s=DomainLightNova} @PlayersInRadius{r=9} ~onDamaged 0.25
@@ -139,7 +142,7 @@ Bhaal:
 Kelemvor:
   Inherit: DeidadeBase
   Display: 'Kelemvor, Deus dos Mortos'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainDeathSiphon} @PlayersInRadius{r=8} ~onTimer:130 1
     - skill{s=DomainSilence} @PlayersInRadius{r=8} ~onTimer:170 1
@@ -147,7 +150,7 @@ Kelemvor:
 Myrkul:
   Inherit: DeidadeBase
   Display: 'Myrkul, Deus da Morte'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainDeathSiphon} @PlayersInRadius{r=9} ~onTimer:110 1
     - skill{s=DomainShadowStep} @target ~onTimer:150 1
@@ -170,7 +173,7 @@ Silvanus:
 Mielikki:
   Inherit: DeidadeBase
   Display: 'Mielikki, Deusa das Florestas'
-  Health: 2050
+  Health: 2650
   Skills:
     - skill{s=DomainNatureRoots} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainFuryCharge} @target ~onTimer:140 1
@@ -178,7 +181,7 @@ Mielikki:
 Eldath:
   Inherit: DeidadeBase
   Display: 'Eldath, Deusa da Paz'
-  Health: 1900
+  Health: 2500
   Skills:
     - skill{s=DomainNatureRoots} @PlayersInRadius{r=9} ~onTimer:130 1
     - skill{s=DomainSilence} @PlayersInRadius{r=8} ~onDamaged 0.20
@@ -186,8 +189,8 @@ Eldath:
 Malar:
   Inherit: DeidadeBase
   Display: 'Malar, Deus da Caça'
-  Health: 2100
-  Damage: 28
+  Health: 2700
+  Damage: 43
   Skills:
     - skill{s=DomainFuryCharge} @target ~onTimer:80 1
     - skill{s=DomainNatureRoots} @PlayersInRadius{r=8} ~onDamaged 0.30
@@ -276,8 +279,8 @@ Gond:
 Helm:
   Inherit: DeidadeBase
   Display: 'Helm, Deus da Proteção'
-  Health: 2300
-  Armor: 15
+  Health: 2900
+  Armor: 19
   Skills:
     - skill{s=DomainShieldWall} @self ~onTimer:120 1
     - skill{s=DomainKnowledgeSilence} @PlayersInRadius{r=8} ~onTimer:150 1
@@ -320,8 +323,8 @@ Milil:
 MystraGuardiao:
   Type: IRON_GOLEM
   Display: '&bGuardião de Mystra'
-  Health: 1500
-  Damage: 20
+  Health: 2100
+  Damage: 35
   Faction: DeusesReinos
   AIGoalSelectors:
     - clear

@@ -1,9 +1,9 @@
 DeidadeGregaBase:
   Type: WITHER_SKELETON
   Display: '&6&l{display}'
-  Health: 2000
-  Damage: 25
-  Armor: 12
+  Health: 2600
+  Damage: 40
+  Armor: 16
   KnockbackResistance: 1
   Faction: DeusesGregos
   Options:
@@ -27,11 +27,14 @@ DeidadeGregaBase:
     - skill{s=GodlyShield} @self ~onSpawn
     - skill{s=GodlySmite} @target ~onTimer:100 1
     - skill{s=GodlyHeal} @self ~onDamaged 0.35
+    - skill{s=DivineElementalFury} @PlayersInRadius{r=12} ~onTimer:140 1
+    - skill{s=DivineMythicAura} @self ~onTimer:120 1
+    - skill{s=DivineCripplingWave} @PlayersInRadius{r=10} ~onTimer:180 1
 
 Zeus:
   Inherit: DeidadeGregaBase
   Display: 'Zeus, Senhor dos Céus'
-  Health: 2400
+  Health: 3000
   Skills:
     - skill{s=DomainThunderWrath} @PlayersInRadius{r=12} ~onTimer:110 1
     - skill{s=DomainSkyCommand} @PlayersInRadius{r=10} ~onTimer:160 1
@@ -39,7 +42,7 @@ Zeus:
 Afrodite:
   Inherit: DeidadeGregaBase
   Display: 'Afrodite, Deusa do Amor e Beleza'
-  Health: 2050
+  Health: 2650
   Skills:
     - skill{s=DomainLoveCharm} @PlayersInRadius{r=9} ~onTimer:120 1
     - skill{s=DomainRadiantGrace} @self ~onTimer:160 1
@@ -47,7 +50,7 @@ Afrodite:
 Apolo:
   Inherit: DeidadeGregaBase
   Display: 'Apolo, Deus da Luz e Cura'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainSunBeam} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainMelodicHeal} @self ~onTimer:170 1
@@ -55,8 +58,8 @@ Apolo:
 Ares:
   Inherit: DeidadeGregaBase
   Display: 'Ares, Deus da Guerra'
-  Health: 2300
-  Damage: 30
+  Health: 2900
+  Damage: 45
   Skills:
     - skill{s=DomainWarCleave} @PlayersInRadius{r=9} ~onTimer:110 1
     - skill{s=DomainBattleFrenzy} @self ~onTimer:160 1
@@ -64,7 +67,7 @@ Ares:
 Artemis:
   Inherit: DeidadeGregaBase
   Display: 'Artêmis, Deusa da Caça'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainHuntVolley} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainMoonSnare} @PlayersInRadius{r=9} ~onTimer:170 1
@@ -72,8 +75,8 @@ Artemis:
 Atena:
   Inherit: DeidadeGregaBase
   Display: 'Atena, Deusa da Sabedoria e Guerra'
-  Health: 2250
-  Armor: 14
+  Health: 2850
+  Armor: 18
   Skills:
     - skill{s=DomainWisdomWard} @self ~onTimer:120 1
     - skill{s=DomainStrategicSmite} @PlayersInRadius{r=9} ~onTimer:160 1
@@ -81,7 +84,7 @@ Atena:
 Demeter:
   Inherit: DeidadeGregaBase
   Display: 'Demeter, Deusa da Agricultura'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainHarvestShield} @self ~onTimer:120 1
     - skill{s=DomainBountyRoots} @PlayersInRadius{r=9} ~onTimer:170 1
@@ -89,7 +92,7 @@ Demeter:
 Dionisio:
   Inherit: DeidadeGregaBase
   Display: 'Dionísio, Deus da Alegria e Vinho'
-  Health: 2100
+  Health: 2700
   Skills:
     - skill{s=DomainRevelryConfuse} @PlayersInRadius{r=9} ~onTimer:130 1
     - skill{s=DomainLifeSip} @self ~onTimer:170 1
@@ -97,7 +100,7 @@ Dionisio:
 Hades:
   Inherit: DeidadeGregaBase
   Display: 'Hades, Senhor do Submundo'
-  Health: 2300
+  Health: 2900
   Skills:
     - skill{s=DomainUnderworldChains} @PlayersInRadius{r=9} ~onTimer:110 1
     - skill{s=DomainSoulReap} @PlayersInRadius{r=8} ~onTimer:170 1
@@ -105,7 +108,7 @@ Hades:
 Hecate:
   Inherit: DeidadeGregaBase
   Display: 'Hecate, Deusa da Magia e da Lua'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainArcaneVeil} @self ~onTimer:130 1
     - skill{s=DomainShadowBolt} @PlayersInRadius{r=9} ~onTimer:170 1
@@ -113,8 +116,8 @@ Hecate:
 Hefesto:
   Inherit: DeidadeGregaBase
   Display: 'Hefesto, Deus da Forja'
-  Health: 2250
-  Armor: 14
+  Health: 2850
+  Armor: 18
   Skills:
     - skill{s=DomainForgeBurst} @PlayersInRadius{r=8} ~onTimer:120 1
     - skill{s=DomainMoltenStrike} @target ~onTimer:170 1
@@ -122,7 +125,7 @@ Hefesto:
 Hera:
   Inherit: DeidadeGregaBase
   Display: 'Hera, Deusa do Casamento e Intriga'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainOathBind} @PlayersInRadius{r=9} ~onTimer:120 1
     - skill{s=DomainRegalCommand} @PlayersInRadius{r=9} ~onTimer:170 1
@@ -130,8 +133,8 @@ Hera:
 Hercules:
   Inherit: DeidadeGregaBase
   Display: 'Hércules, Campeão da Força'
-  Health: 2300
-  Damage: 32
+  Health: 2900
+  Damage: 47
   Skills:
     - skill{s=DomainMightyLeap} @self ~onTimer:110 1
     - skill{s=DomainLionStrike} @PlayersInRadius{r=8} ~onTimer:160 1
@@ -139,7 +142,7 @@ Hercules:
 Hermes:
   Inherit: DeidadeGregaBase
   Display: 'Hermes, Mensageiro Alado'
-  Health: 2100
+  Health: 2700
   Skills:
     - skill{s=DomainSwiftWinds} @self ~onTimer:120 1
     - skill{s=DomainCaduceusStrike} @PlayersInRadius{r=9} ~onTimer:170 1
@@ -147,7 +150,7 @@ Hermes:
 Hestia:
   Inherit: DeidadeGregaBase
   Display: 'Hestia, Guardiã do Lar'
-  Health: 2100
+  Health: 2700
   Skills:
     - skill{s=DomainHearthGuard} @self ~onTimer:130 1
     - skill{s=DomainWarmGlow} @PlayersInRadius{r=8} ~onTimer:170 1
@@ -155,8 +158,8 @@ Hestia:
 Nike:
   Inherit: DeidadeGregaBase
   Display: 'Nike, Deusa da Vitória'
-  Health: 2150
-  Damage: 28
+  Health: 2750
+  Damage: 43
   Skills:
     - skill{s=DomainVictoryCry} @self ~onTimer:120 1
     - skill{s=DomainDecisiveStrike} @PlayersInRadius{r=8} ~onTimer:170 1
@@ -164,7 +167,7 @@ Nike:
 Pa:
   Inherit: DeidadeGregaBase
   Display: 'Pã, Deus da Natureza'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainWildPanic} @PlayersInRadius{r=9} ~onTimer:120 1
     - skill{s=DomainForestStride} @self ~onTimer:170 1
@@ -172,7 +175,7 @@ Pa:
 Poseidon:
   Inherit: DeidadeGregaBase
   Display: 'Poseidon, Deus do Mar'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainSeaFury} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainTidalShield} @self ~onTimer:170 1
@@ -180,7 +183,7 @@ Poseidon:
 Tyche:
   Inherit: DeidadeGregaBase
   Display: 'Tyche, Deusa da Sorte'
-  Health: 2100
+  Health: 2700
   Skills:
     - skill{s=DomainLuckTwist} @PlayersInRadius{r=9} ~onTimer:120 1
     - skill{s=DomainFateBoons} @self ~onTimer:170 1

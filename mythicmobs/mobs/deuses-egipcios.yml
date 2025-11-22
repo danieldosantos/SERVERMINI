@@ -1,9 +1,9 @@
 DeidadeEgipciaBase:
   Type: WITHER_SKELETON
   Display: '&6&l{display}'
-  Health: 2000
-  Damage: 25
-  Armor: 12
+  Health: 2600
+  Damage: 40
+  Armor: 16
   KnockbackResistance: 1
   Faction: DeusesEgipcios
   Options:
@@ -27,11 +27,14 @@ DeidadeEgipciaBase:
     - skill{s=GodlyShield} @self ~onSpawn
     - skill{s=GodlySmite} @target ~onTimer:100 1
     - skill{s=GodlyHeal} @self ~onDamaged 0.35
+    - skill{s=DivineElementalFury} @PlayersInRadius{r=12} ~onTimer:140 1
+    - skill{s=DivineMythicAura} @self ~onTimer:120 1
+    - skill{s=DivineCripplingWave} @PlayersInRadius{r=10} ~onTimer:180 1
 
 ReHorakhty:
   Inherit: DeidadeEgipciaBase
   Display: 'Re-Horakhty, Senhor do Sol'
-  Health: 2350
+  Health: 2950
   Skills:
     - skill{s=DomainSolarFlare} @PlayersInRadius{r=11} ~onTimer:120 1
     - skill{s=DomainSunriseBlessing} @self ~onTimer:170 1
@@ -39,7 +42,7 @@ ReHorakhty:
 Anubis:
   Inherit: DeidadeEgipciaBase
   Display: 'Anúbis, Guardião dos Mortos'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainJackalJudgment} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainUnderworldGuide} @PlayersInRadius{r=9} ~onTimer:170 1
@@ -47,7 +50,7 @@ Anubis:
 Apep:
   Inherit: DeidadeEgipciaBase
   Display: 'Apep, Serpente do Caos'
-  Health: 2300
+  Health: 2900
   Skills:
     - skill{s=DomainSerpentFlame} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainChaosShroud} @self ~onTimer:170 1
@@ -55,7 +58,7 @@ Apep:
 Bast:
   Inherit: DeidadeEgipciaBase
   Display: 'Bast, Deusa dos Gatos e Vingança'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainFelineGrace} @self ~onTimer:120 1
     - skill{s=DomainVengefulClaws} @PlayersInRadius{r=9} ~onTimer:170 1
@@ -63,7 +66,7 @@ Bast:
 Bes:
   Inherit: DeidadeEgipciaBase
   Display: 'Bes, Protetor da Sorte'
-  Health: 2100
+  Health: 2700
   Skills:
     - skill{s=DomainLuckyWard} @self ~onTimer:130 1
     - skill{s=DomainRevelerStomp} @PlayersInRadius{r=9} ~onTimer:180 1
@@ -71,7 +74,7 @@ Bes:
 Hathor:
   Inherit: DeidadeEgipciaBase
   Display: 'Hathor, Deusa do Amor e Alegria'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainJoyousRadiance} @PlayersInRadius{r=9} ~onTimer:130 1
     - skill{s=DomainMotherlyGrace} @self ~onTimer:180 1
@@ -79,7 +82,7 @@ Hathor:
 Imhotep:
   Inherit: DeidadeEgipciaBase
   Display: 'Imhotep, Mestre da Medicina e Ofícios'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainMedicInsight} @PlayersInRadius{r=9} ~onTimer:130 1
     - skill{s=DomainStoneWard} @self ~onTimer:180 1
@@ -87,7 +90,7 @@ Imhotep:
 Isis:
   Inherit: DeidadeEgipciaBase
   Display: 'Isis, Deusa da Magia e Fertilidade'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainArcaneWings} @PlayersInRadius{r=10} ~onTimer:130 1
     - skill{s=DomainHealingWaters} @self ~onTimer:180 1
@@ -95,7 +98,7 @@ Isis:
 Nephthys:
   Inherit: DeidadeEgipciaBase
   Display: 'Nephthys, Guardiã dos Mortos e Luto'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainMourningVeil} @PlayersInRadius{r=9} ~onTimer:130 1
     - skill{s=DomainTwilightComfort} @self ~onTimer:180 1
@@ -103,7 +106,7 @@ Nephthys:
 Osiris:
   Inherit: DeidadeEgipciaBase
   Display: 'Osíris, Senhor do Submundo e Renascimento'
-  Health: 2300
+  Health: 2900
   Skills:
     - skill{s=DomainVerdantBind} @PlayersInRadius{r=10} ~onTimer:130 1
     - skill{s=DomainRebirthSurge} @self ~onTimer:180 1
@@ -111,7 +114,7 @@ Osiris:
 Ptah:
   Inherit: DeidadeEgipciaBase
   Display: 'Ptah, Artífice Divino'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainCreatorAegis} @self ~onTimer:130 1
     - skill{s=DomainForgeSpark} @PlayersInRadius{r=9} ~onTimer:180 1
@@ -119,7 +122,7 @@ Ptah:
 Set:
   Inherit: DeidadeEgipciaBase
   Display: 'Set, Senhor das Tempestades Desérticas'
-  Health: 2300
+  Health: 2900
   Skills:
     - skill{s=DomainDesertStorm} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainSandblind} @PlayersInRadius{r=9} ~onTimer:180 1
@@ -127,7 +130,7 @@ Set:
 Sobek:
   Inherit: DeidadeEgipciaBase
   Display: 'Sobek, Deidade dos Rios e Crocodilos'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainRiverRend} @PlayersInRadius{r=10} ~onTimer:130 1
     - skill{s=DomainScalyGuard} @self ~onTimer:180 1
@@ -135,7 +138,7 @@ Sobek:
 Thoth:
   Inherit: DeidadeEgipciaBase
   Display: 'Thoth, Deus do Conhecimento e Sabedoria'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainLunarInsight} @PlayersInRadius{r=9} ~onTimer:130 1
     - skill{s=DomainScrollBlast} @PlayersInRadius{r=9} ~onTimer:180 1
