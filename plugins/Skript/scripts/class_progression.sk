@@ -1,0 +1,208 @@
+# Sistema de XP de classe para D&D 5e em Minecraft
+# - Ganha XP de classe ao jogar: matar mobs, minerar, craftar e reproduzir animais.
+# - Ao atingir o próximo limiar de XP, troca automaticamente o grupo LuckPerms para class_<classe>_lvl<nivel>.
+# - Use /classe <nome> para definir a classe ativa do personagem.
+
+options:
+    # Tabela oficial de XP por nível (D&D 5e). Índice corresponde ao nível.
+    lvl_1: 0
+    lvl_2: 300
+    lvl_3: 900
+    lvl_4: 2700
+    lvl_5: 6500
+    lvl_6: 14000
+    lvl_7: 23000
+    lvl_8: 34000
+    lvl_9: 48000
+    lvl_10: 64000
+    lvl_11: 85000
+    lvl_12: 100000
+    lvl_13: 120000
+    lvl_14: 140000
+    lvl_15: 165000
+    lvl_16: 195000
+    lvl_17: 225000
+    lvl_18: 265000
+    lvl_19: 305000
+    lvl_20: 355000
+
+    # XP por ação de jogo
+    xp-kill-hostile: 45
+    xp-kill-passive: 18
+    xp-mine-ore: 22
+    xp-mine-log: 10
+    xp-craft: 8
+    xp-breed: 25
+
+    # Lista de classes válidas (sem acentos). Deve casar com os grupos LuckPerms class_<slug>_lvlN
+    classes: Barbarian, Bard, Cleric, Druid, Fighter, Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard
+
+
+function class_threshold(level: number) :: number:
+    set {_l} to floor({_level})
+    if {_l} <= 1:
+        return {@lvl_1}
+    if {_l} = 2:
+        return {@lvl_2}
+    if {_l} = 3:
+        return {@lvl_3}
+    if {_l} = 4:
+        return {@lvl_4}
+    if {_l} = 5:
+        return {@lvl_5}
+    if {_l} = 6:
+        return {@lvl_6}
+    if {_l} = 7:
+        return {@lvl_7}
+    if {_l} = 8:
+        return {@lvl_8}
+    if {_l} = 9:
+        return {@lvl_9}
+    if {_l} = 10:
+        return {@lvl_10}
+    if {_l} = 11:
+        return {@lvl_11}
+    if {_l} = 12:
+        return {@lvl_12}
+    if {_l} = 13:
+        return {@lvl_13}
+    if {_l} = 14:
+        return {@lvl_14}
+    if {_l} = 15:
+        return {@lvl_15}
+    if {_l} = 16:
+        return {@lvl_16}
+    if {_l} = 17:
+        return {@lvl_17}
+    if {_l} = 18:
+        return {@lvl_18}
+    if {_l} = 19:
+        return {@lvl_19}
+    return {@lvl_20}
+
+
+function class_slug(className: text) :: text:
+    set {_slug} to lowercase {_className}
+    replace all " " with "_" in {_slug}
+    return {_slug}
+
+
+function class_level(p: player, className: text) :: number:
+    set {_lvl} to {class.level.%uuid of {_p}%.%className%}
+    if {_lvl} is not set:
+        set {_lvl} to 1
+    return {_lvl}
+
+
+function set_class_level(p: player, className: text, newLevel: number):
+    set {class.level.%uuid of {_p}%.%className%} to floor({_newLevel})
+
+
+function apply_class_group(p: player, className: text, level: number):
+    set {_slug} to class_slug({_className})
+    # Remove qualquer nível anterior desta classe para evitar sobreposição.
+    loop 20 times:
+        set {_idx} to loop-number
+        execute console command "lp user %uuid of {_p}% parent remove class_%{_slug}%_lvl%{_idx}%"
+    execute console command "lp user %uuid of {_p}% parent add class_%{_slug}%_lvl%{_level}%"
+
+
+function set_active_class(p: player, className: text):
+    set {_normalized} to lowercase {_className}
+    set {_valid::*} to split {@classes} at ", "
+    set {_match} to false
+    loop {_valid::*}:
+        if lowercase loop-value is {_normalized}:
+            set {_className} to loop-value
+            set {_match} to true
+            stop loop
+    if {_match} is false:
+        send "&cClasse inválida. Use: {@classes}" to {_p}
+        stop
+    set {_previous} to {class.active.%uuid of {_p}%}
+    if {_previous} is set and {_previous} is not {_className}:
+        set {_oldSlug} to class_slug({_previous})
+        loop 20 times:
+            execute console command "lp user %uuid of {_p}% parent remove class_%{_oldSlug}%_lvl%loop-number%"
+    set {class.active.%uuid of {_p}%} to {_className}
+    # Garante nível 1 se ainda não houver progresso salvo.
+    set {_lvl} to class_level({_p}, {_className})
+    set_class_level({_p}, {_className}, {_lvl})
+    apply_class_group({_p}, {_className}, {_lvl})
+    send "&aClasse ativa definida para &e%{_className}% &7(nível %{_lvl}%)." to {_p}
+
+
+function add_class_xp(p: player, amount: number):
+    if amount <= 0:
+        stop
+    set {_class} to {class.active.%uuid of {_p}%}
+    if {_class} is not set:
+        stop
+    add amount to {class.xp.%uuid of {_p}%.%{_class}%}
+    set {_xp} to {class.xp.%uuid of {_p}%.%{_class}%}
+    set {_level} to class_level({_p}, {_class})
+    set {_leveledUp} to false
+    while {_level} < 20:
+        set {_next} to class_threshold({_level} + 1)
+        if {_xp} < {_next}:
+            stop loop
+        add 1 to {_level}
+        set {_leveledUp} to true
+    if {_leveledUp} is true:
+        set_class_level({_p}, {_class}, {_level})
+        apply_class_group({_p}, {_class}, {_level})
+        send "&6&lParabéns! &eSua classe &6%{_class}% &eagora é nível &a%{_level}%&e!" to {_p}
+    else:
+        if {_level} < 20:
+            set {_next} to class_threshold({_level} + 1)
+            set {_currentThreshold} to class_threshold({_level})
+            if {_next} > {_currentThreshold}:
+                set {_progress} to round((({_xp} - {_currentThreshold}) / ({_next} - {_currentThreshold})) * 100, 1)
+                set {_target} to {_level} + 1
+                send action bar from {_p} formatted as "&eClasse &6%{_class}% &7| XP: &f%{_xp}% &7(&a%{_progress}%&7 para o nível %{_target}%&7)"
+
+
+command /classe [<text>]:
+    permission: classxp.use
+    trigger:
+        if arg-1 is not set:
+            if {class.active.%uuid of player%} is set:
+                set {_c} to {class.active.%uuid of player%}
+                set {_lvl} to class_level(player, {_c})
+                set {_xp} to {class.xp.%uuid of player%.%{_c}%}
+                send "&eClasse atual: &6%{_c}% &7| Nível &a%{_lvl}% &7| XP &f%{_xp}%"
+            else:
+                send "&cVocê ainda não escolheu uma classe. Use /classe <nome>." 
+            stop
+        set {_className} to arg-1 parsed as text
+        set_active_class(player, {_className})
+
+
+# Fontes de XP
+on death of entity:
+    if attacker is a player:
+        if victim is a player:
+            stop
+        if attacker is in creative mode:
+            stop
+        if victim is a monster:
+            add_class_xp(attacker, {@xp-kill-hostile})
+        else:
+            add_class_xp(attacker, {@xp-kill-passive})
+
+on break of stone, deepslate, coal ore, iron ore, copper ore, gold ore, lapis ore, redstone ore, diamond ore, emerald ore, nether gold ore, nether quartz ore, ancient debris:
+    if player is in survival mode or player is in adventure mode:
+        add_class_xp(player, {@xp-mine-ore})
+
+on break of oak log, spruce log, birch log, jungle log, acacia log, dark oak log, mangrove log, cherry log, warped stem, crimson stem:
+    if player is in survival mode or player is in adventure mode:
+        add_class_xp(player, {@xp-mine-log})
+
+on craft:
+    if player is in survival mode or player is in adventure mode:
+        add_class_xp(player, {@xp-craft})
+
+on breed:
+    if player is in survival mode or player is in adventure mode:
+        add_class_xp(player, {@xp-breed})
+

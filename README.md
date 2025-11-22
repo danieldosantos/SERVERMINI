@@ -56,6 +56,11 @@ LuckPerms organiza classes por escadas de nível que herdam permissões e conced
 
 - **Wizard:** Arcane Recovery e Tradition iniciais; Arcane Ward, Overchannel e Signature Spell como destaques de nível alto.【F:luckperms/commands.txt†L410-L431】 Salvaguardas em INT e WIS.【F:luckperms/commands.txt†L433-L434】
 
+## Sistema de XP de classe
+- O progresso de classe agora é automático via `plugins/Skript/scripts/class_progression.sk`: ganhar XP ao matar mobs, minerar, craftar e reproduzir animais.
+- O comando `/classe <nome>` define a classe ativa (ex.: Fighter, Barbarian). O script remove grupos antigos da classe e aplica o grupo LuckPerms correto (`class_<classe>_lvlN`) conforme o nível.
+- A tabela de XP por nível segue os valores oficiais de D&D 5e (níveis 1–20). A barra de ação mostra o progresso para o próximo nível enquanto se joga.
+
 ## Backgrounds (BG)
 Backgrounds são aplicados como grupos LuckPerms que concedem proficiências e kits.【F:luckperms/commands.txt†L489-L548】
 - **Acolyte:** proficiências em Insight e Religion, mais kit inicial temático.【F:luckperms/commands.txt†L490-L495】
