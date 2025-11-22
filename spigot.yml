@@ -161,6 +161,8 @@ world-settings:
     end-portal-sound-radius: 0
     dragon-death-sound-radius: 0
     verbose: false
+  worldeditregentempworld:
+    verbose: false
 players:
   disable-saving: false
 config-version: 12
