@@ -162,4 +162,62 @@
               "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.item_misc.SmithingQualitySet",
               "DATA": {
                 "quality": 135,
-         
+                "name": "smithing_quality_set",
+                "priority": "SOON"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.item_misc.SmithingQualityRandomized",
+              "DATA": {
+                "lowerBound": -0.2,
+                "upperBound": 0.2,
+                "name": "smithing_quality_randomize",
+                "priority": "SOONISH"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.item_stats.DefaultAttributeScale",
+              "DATA": {
+                "mode": "MULTIPLIER",
+                "amplifier": 0.5,
+                "skillRange": 215.0,
+                "rangeOffset": 85.0,
+                "minimum": 1.0,
+                "skillToScaleWith": "SMITHING",
+                "skillEfficiency": 1.0,
+                "minimumValue": 0.0,
+                "attribute": "GENERIC_ARMOR",
+                "icon": "IRON_CHESTPLATE",
+                "name": "attribute_scale_generic_armor",
+                "priority": "NEUTRAL"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.item_stats.DurabilityScale",
+              "DATA": {
+                "mode": "MULTIPLIER",
+                "amplifier": 2.0,
+                "skillRange": 215.0,
+                "rangeOffset": 85.0,
+                "minimum": 1.0,
+                "skillToScaleWith": "SMITHING",
+                "skillEfficiency": 1.0,
+                "minimumValue": 0.0,
+                "name": "durability_scale",
+                "priority": "LATER"
+              }
+            },
+            {
+              "MOD_TYPE": "me.athlaeos.valhallammo.crafting.dynamicitemmodifiers.implementations.item_misc.DurabilityRandomized",
+              "DATA": {
+                "name": "durability_randomize",
+                "priority": "LAST"
+              }
+            }
+          ],
+          "predicateSelection": "ALL"
+        }
+      }
+    }
+  }
+}
