@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quest_items:toxic_vial"
+    },
+    {
+      "item": "bosses_of_mass_destruction:void_thorn"
+    },
+    {
+      "item": "quest_items:sack_of_magic_dust"
+    }
+  ],
+  "result": {
+    "id": "endrem:witch_eye"
+  }
+}

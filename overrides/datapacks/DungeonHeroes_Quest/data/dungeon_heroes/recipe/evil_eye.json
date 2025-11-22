@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quest_items:aether_essence"
+    },
+    {
+      "item": "quest_items:silver_feather"
+    },
+    {
+      "item": "quest_items:golden_lantern"
+    }
+  ],
+  "result": {
+    "id": "endrem:evil_eye"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "bosses_of_mass_destruction:ancient_anima"
+    },
+    {
+      "item": "quest_items:frozen_grail"
+    },
+    {
+      "item": "quest_items:frozen_skull"
+    }
+  ],
+  "result": {
+    "id": "endrem:cold_eye"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quest_items:wither_ribcage"
+    },
+    {
+      "item": "bosses_of_mass_destruction:blazing_eye"
+    },
+    {
+      "item": "quest_items:molten_tablet"
+    }
+  ],
+  "result": {
+    "id": "endrem:nether_eye"
+  }
+}

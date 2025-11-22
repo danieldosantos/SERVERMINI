@@ -1,0 +1,84 @@
+{
+  "values": [
+    {
+      "id": "betternether:obsidian_breaker",
+      "required": false
+    },
+    {
+      "id": "eternal_starlight:poisoning",
+      "required": false
+    },
+    {
+      "id": "eternal_starlight:soul_snatcher",
+      "required": false
+    },
+    {
+      "id": "eternal_starlight:fearless",
+      "required": false
+    },
+    {
+      "id": "eternal_starlight:fertile",
+      "required": false
+    },
+    {
+      "id": "eternal_starlight:glacial_sowing",
+      "required": false
+    },
+    {
+      "id": "eternal_starlight:tearing",
+      "required": false
+    },
+    {
+      "id": "nova_structures:ghasted",
+      "required": false
+    },
+    {
+      "id": "nova_structures:gravity",
+      "required": false
+    },
+    {
+      "id": "nova_structures:outreach",
+      "required": false
+    },
+    {
+      "id": "nova_structures:piercing",
+      "required": false
+    },
+    {
+      "id": "nova_structures:power",
+      "required": false
+    },
+    {
+      "id": "nova_structures:traveler",
+      "required": false
+    },
+    {
+      "id": "nova_structures:shulker_boss",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:backstabbing",
+      "required": false
+    },
+    {
+      "id": "dungeons_arise:discharge",
+      "required": false
+    },
+    {
+      "id": "dungeons_arise:ensnaring",
+      "required": false
+    },
+    {
+      "id": "dungeons_arise:lolths_curse",
+      "required": false
+    },
+    {
+      "id": "dungeons_arise:purification",
+      "required": false
+    },
+    {
+      "id": "dungeons_arise:voltaic_shot",
+      "required": false
+    }
+  ]
+}

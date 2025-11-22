@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quest_items:unholy_candle"
+    },
+    {
+      "item": "quest_items:red_urn"
+    },
+    {
+      "item": "formidulus:deer_skull"
+    }
+  ],
+  "result": {
+    "id": "endrem:lost_eye"
+  }
+}

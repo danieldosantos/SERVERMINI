@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quest_items:magnificent_clam_shell"
+    },
+    {
+      "item": "quest_items:deep_see_crystal"
+    },
+    {
+      "item": "quest_items:black_pearl"
+    }
+  ],
+  "result": {
+    "id": "endrem:guardian_eye"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "values": [
+    "#dungeon_difficulty:level_1",
+    "nova_structures:creeping_crypt",
+    "nova_structures:undead_crypt",
+    "nova_structures:jungle_ruins",
+    "nova_structures:desert_ruins",
+    "nova_structures:shrine_combat_tier_1",
+    "nova_structures:shrine_combat_tier_2",
+    "betterdeserttemples:desert_temple",
+    "betterjungletemples:jungle_temple",
+    "terralith:desert_outpost",
+    "terralith:mage_tower",
+    "dungeons_arise:abandoned_temple"
+  ]
+}

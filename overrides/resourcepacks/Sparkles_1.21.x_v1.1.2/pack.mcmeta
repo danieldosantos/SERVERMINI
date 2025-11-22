@@ -1,0 +1,73 @@
+{
+    "pack": {
+        "pack_format": 15,
+        "supported_formats": [
+            15,
+            46
+        ],
+        "description": [
+            {
+                "text": "§lS",
+                "color": "#f0c636"
+            },
+            {
+                "text": "§lp",
+                "color": "#26cc85"
+            },
+            {
+                "text": "§la",
+                "color": "#268bcc"
+            },
+            {
+                "text": "§lr",
+                "color": "#dc76db"
+            },
+            {
+                "text": "§lk",
+                "color": "#aa6cea"
+            },
+            {
+                "text": "§ll",
+                "color": "#ea9dd0"
+            },
+            {
+                "text": "§le",
+                "color": "#9de9ea"
+            },
+            {
+                "text": "§ls",
+                "color": "#e78d58"
+            },
+            {
+                "text": " - Textures/l10n\nCreated by ",
+                "color": "gray"
+            },
+            {
+                "text": "Stardust Labs",
+                "color": "#683edd"
+            }
+        ]
+    },
+    "overlays": {
+        "entries": [
+            {
+                "formats": {
+                    "min_inclusive": 32,
+                    "max_inclusive": 46
+                },
+                "directory": "1-20-5-overlay"
+            },
+            {
+                "formats": 46,
+                "directory": "1-21-4-overlay"
+            },
+            {
+                "formats": {
+                    "min_inclusive": 15,
+                    "max_inclusive": 22
+                },
+                "directory": "wolf-overlay"
+            }
+        ]
+    }
+}

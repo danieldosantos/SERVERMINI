@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quest_items:warden_ears"
+    },
+    {
+      "item": "quest_items:wicked_tentacle"
+    },
+    {
+      "item": "quest_items:steel_heart"
+    }
+  ],
+  "result": {
+    "id": "endrem:black_eye"
+  }
+}

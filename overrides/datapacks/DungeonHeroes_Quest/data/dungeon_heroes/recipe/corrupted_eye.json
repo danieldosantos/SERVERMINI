@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quest_items:shackles"
+    },
+    {
+      "item": "quest_items:corruption_orb"
+    },
+    {
+      "item": "quest_items:evil_codex"
+    }
+  ],
+  "result": {
+    "id": "endrem:corrupted_eye"
+  }
+}

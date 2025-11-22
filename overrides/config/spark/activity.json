@@ -1,0 +1,93 @@
+[
+  {
+    "user": {
+      "type": "player",
+      "name": "Daedelus",
+      "uniqueId": "8f160ea5-fe0a-43cc-a32b-22e542006bd9"
+    },
+    "time": 1761601159910,
+    "type": "Profiler",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/m7lPjTkgbs"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "Daedelus",
+      "uniqueId": "8f160ea5-fe0a-43cc-a32b-22e542006bd9"
+    },
+    "time": 1760707854588,
+    "type": "Profiler",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/KftA8mQbLN"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "Daedelus",
+      "uniqueId": "8f160ea5-fe0a-43cc-a32b-22e542006bd9"
+    },
+    "time": 1760707746727,
+    "type": "Profiler",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/ot2UzqU7Sx"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "Daedelus",
+      "uniqueId": "8f160ea5-fe0a-43cc-a32b-22e542006bd9"
+    },
+    "time": 1760707409652,
+    "type": "Profiler",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/71JZEHFdiQ"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "Daedelus",
+      "uniqueId": "8f160ea5-fe0a-43cc-a32b-22e542006bd9"
+    },
+    "time": 1760706934038,
+    "type": "Profiler",
+    "data": {
+      "type": "file",
+      "value": "C:\\Users\\zsolt\\curseforge\\minecraft\\Instances\\Dungeon Heroes\\config\\spark\\profile-2025-10-17_15.15.33.sparkprofile"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "Daedelus",
+      "uniqueId": "8f160ea5-fe0a-43cc-a32b-22e542006bd9"
+    },
+    "time": 1760706510182,
+    "type": "Profiler",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/JGNROIhskN"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "Daedelus",
+      "uniqueId": "8f160ea5-fe0a-43cc-a32b-22e542006bd9"
+    },
+    "time": 1756828545660,
+    "type": "Profiler",
+    "data": {
+      "type": "file",
+      "value": "C:\\Users\\zsolt\\curseforge\\minecraft\\Instances\\Dungeon Heroes\\config\\spark\\profile-2025-09-02_17.55.45.sparkprofile"
+    }
+  }
+]

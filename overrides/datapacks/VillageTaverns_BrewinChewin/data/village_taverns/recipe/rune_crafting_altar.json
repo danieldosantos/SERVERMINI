@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "U": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "pattern": [
+    "I#I",
+    "IUI",
+    "###"
+  ],
+  "result": {
+    "id": "village_taverns:barrel"
+  }
+}

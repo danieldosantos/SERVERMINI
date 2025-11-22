@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quest_items:pharaohs_mask"
+    },
+    {
+      "item": "quest_items:desert_rose"
+    },
+    {
+      "item": "quest_items:ancient_king_scepter"
+    }
+  ],
+  "result": {
+    "id": "endrem:old_eye"
+  }
+}

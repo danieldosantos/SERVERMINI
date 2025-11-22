@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quest_items:skeletal_hand"
+    },
+    {
+      "item": "quest_items:undead_essence"
+    },
+    {
+      "item": "quest_items:rotten_heart"
+    }
+  ],
+  "result": {
+    "id": "endrem:undead_eye"
+  }
+}

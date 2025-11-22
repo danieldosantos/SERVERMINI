@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:bastion_remnant",
+    "minecraft:fortress",
+    "betterfortresses:fortress",
+    "nova_structures:nether_port",
+    "nova_structures:nether_keep",
+    "nova_structures:hamlet",
+    "nova_structures:piglin_outstation",
+    "betternether:pyramid",
+    "betternether:nether_city"
+  ]
+}
