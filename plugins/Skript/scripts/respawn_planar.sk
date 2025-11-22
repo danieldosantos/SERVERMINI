@@ -10,7 +10,7 @@ on death of player:
     if {_world} is in {_dangerousWorlds::*}:
         set {respawn.planar::%victim%} to true
 
-on respawn of player:
+on respawn:
     if {respawn.planar::%player%} is set:
         clear all potion effects of event-player
         teleport event-player to location ({@safe_x}, {@safe_y}, {@safe_z}) in world "{@safe_world}"
