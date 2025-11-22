@@ -4,11 +4,14 @@ options:
   safe_y: 65
   safe_z: 0
 
-on death:
+on death of player:
     set {_world} to name of world of victim
     set {_dangerousWorlds::*} to "elemental_fire", "elemental_air", "elemental_water", "elemental_earth" and "umbra"
     if {_world} is in {_dangerousWorlds::*}:
-        # remova efeitos (jeito simples)
-        loop all potion effects of victim:
-            remove potion effect loop-value from victim
-        teleport victim to location ({@safe_x}, {@safe_y}, {@safe_z}) in world "{@safe_world}"
+        set {respawn.planar::%victim%} to true
+
+on respawn of player:
+    if {respawn.planar::%player%} is set:
+        clear all potion effects of player
+        teleport player to location ({@safe_x}, {@safe_y}, {@safe_z}) in world "{@safe_world}"
+        delete {respawn.planar::%player%}
