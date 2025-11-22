@@ -88,14 +88,14 @@ function class_slug(className: text) :: text:
 
 
 function class_level(p: player, className: text) :: number:
-    set {_lvl} to {class.level.%uuid of {_p}%.%className%}
+    set {_lvl} to {class.level.%uuid of {_p}%.%{_className}%}
     if {_lvl} is not set:
         set {_lvl} to 1
     return {_lvl}
 
 
 function set_class_level(p: player, className: text, newLevel: number):
-    set {class.level.%uuid of {_p}%.%className%} to floor({_newLevel})
+    set {class.level.%uuid of {_p}%.%{_className}%} to floor({_newLevel})
 
 
 function apply_class_group(p: player, className: text, level: number):
@@ -109,7 +109,7 @@ function apply_class_group(p: player, className: text, level: number):
 
 function set_active_class(p: player, className: text):
     set {_normalized} to lowercase {_className}
-    set {_valid::*} to split {@classes} at ", "
+    set {_valid::*} to split "{@classes}" at ", "
     set {_match} to false
     loop {_valid::*}:
         if lowercase loop-value is {_normalized}:
@@ -120,10 +120,11 @@ function set_active_class(p: player, className: text):
         send "&cClasse inválida. Use: {@classes}" to {_p}
         stop
     set {_previous} to {class.active.%uuid of {_p}%}
-    if {_previous} is set and {_previous} is not {_className}:
-        set {_oldSlug} to class_slug({_previous})
-        loop 20 times:
-            execute console command "lp user %uuid of {_p}% parent remove class_%{_oldSlug}%_lvl%loop-number%"
+    if {_previous} is set:
+        if {_previous} is not {_className}:
+            set {_oldSlug} to class_slug({_previous})
+            loop 20 times:
+                execute console command "lp user %uuid of {_p}% parent remove class_%{_oldSlug}%_lvl%loop-number%"
     set {class.active.%uuid of {_p}%} to {_className}
     # Garante nível 1 se ainda não houver progresso salvo.
     set {_lvl} to class_level({_p}, {_className})
@@ -133,12 +134,12 @@ function set_active_class(p: player, className: text):
 
 
 function add_class_xp(p: player, amount: number):
-    if amount <= 0:
+    if {_amount} <= 0:
         stop
     set {_class} to {class.active.%uuid of {_p}%}
     if {_class} is not set:
         stop
-    add amount to {class.xp.%uuid of {_p}%.%{_class}%}
+    add {_amount} to {class.xp.%uuid of {_p}%.%{_class}%}
     set {_xp} to {class.xp.%uuid of {_p}%.%{_class}%}
     set {_level} to class_level({_p}, {_class})
     set {_leveledUp} to false
@@ -159,7 +160,7 @@ function add_class_xp(p: player, amount: number):
             if {_next} > {_currentThreshold}:
                 set {_progress} to round((({_xp} - {_currentThreshold}) / ({_next} - {_currentThreshold})) * 100, 1)
                 set {_target} to {_level} + 1
-                send action bar from {_p} formatted as "&eClasse &6%{_class}% &7| XP: &f%{_xp}% &7(&a%{_progress}%&7 para o nível %{_target}%&7)"
+                send action bar "&eClasse &6%{_class}% &7| XP: &f%{_xp}% &7(&a%{_progress}%&7 para o nível %{_target}%&7)" to {_p}
 
 
 command /classe [<text>]:
@@ -174,12 +175,12 @@ command /classe [<text>]:
             else:
                 send "&cVocê ainda não escolheu uma classe. Use /classe <nome>." 
             stop
-        set {_className} to arg-1 parsed as text
+        set {_className} to arg-1
         set_active_class(player, {_className})
 
 
 # Fontes de XP
-on death of entity:
+on death of living entity:
     if attacker is a player:
         if victim is a player:
             stop
@@ -190,19 +191,19 @@ on death of entity:
         else:
             add_class_xp(attacker, {@xp-kill-passive})
 
-on break of stone, deepslate, coal ore, iron ore, copper ore, gold ore, lapis ore, redstone ore, diamond ore, emerald ore, nether gold ore, nether quartz ore, ancient debris:
-    if player is in survival mode or player is in adventure mode:
+on break of stone or deepslate or coal ore or iron ore or copper ore or gold ore or lapis ore or redstone ore or diamond ore or emerald ore or nether gold ore or nether quartz ore or ancient debris:
+    if player's gamemode is survival or player's gamemode is adventure:
         add_class_xp(player, {@xp-mine-ore})
 
-on break of oak log, spruce log, birch log, jungle log, acacia log, dark oak log, mangrove log, cherry log, warped stem, crimson stem:
-    if player is in survival mode or player is in adventure mode:
+on break of oak log or spruce log or birch log or jungle log or acacia log or dark oak log or mangrove log or cherry log or warped stem or crimson stem:
+    if player's gamemode is survival or player's gamemode is adventure:
         add_class_xp(player, {@xp-mine-log})
 
 on craft:
-    if player is in survival mode or player is in adventure mode:
+    if player's gamemode is survival or player's gamemode is adventure:
         add_class_xp(player, {@xp-craft})
 
 on breed:
-    if player is in survival mode or player is in adventure mode:
+    if player's gamemode is survival or player's gamemode is adventure:
         add_class_xp(player, {@xp-breed})
 
