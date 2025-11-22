@@ -97,3 +97,7 @@ Backgrounds são aplicados como grupos LuckPerms que concedem proficiências e k
 3. Copie `mythicmobs/skills/dnd_features.yml` para `MythicMobs/Skills/` e recarregue o MythicMobs.
 4. Execute os comandos de `luckperms/commands.txt` (ajustando `<player>`) para criar grupos de raças, classes e backgrounds.
 
+## Atalho para abrir os atributos no cliente vanilla
+- O comando `/c` foi adicionado como alias para `/valhalla profile`, abrindo a interface de atributos do ValhallaMMO sem depender de cliente modificado.【F:commands.yml†L4-L8】
+- Os valores iniciais continuam baseados na configuração de D&D (10 em cada atributo, mínimo 1, máximo 30) e recebem os bônus raciais definidos no LuckPerms ao entrar no servidor.【F:valhallammo/config.yml†L1-L34】【F:luckperms/commands.txt†L12-L68】
+
