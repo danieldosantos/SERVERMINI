@@ -263,6 +263,7 @@
                     "value": 0.0,
                     "duration": 900,
                     "charges": -1,
+                    "quality": 0.0,
                     "smallIncrement": 0.01,
                     "bigIncrement": 0.25,
                     "icon": "SLIME_BLOCK",
