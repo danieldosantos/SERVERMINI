@@ -6,9 +6,9 @@ options:
 
 on death:
     set {_world} to name of world of victim
-    set {_dangerousWorlds::*} to "elemental_fire", "elemental_air", "elemental_water", "elemental_earth", "umbra"
+    set {_dangerousWorlds::*} to "elemental_fire", "elemental_air", "elemental_water", "elemental_earth" and "umbra"
     if {_world} is in {_dangerousWorlds::*}:
         # remova efeitos (jeito simples)
-        loop all effects of victim:
+        loop all potion effects of victim:
             clear loop-value from victim
         teleport victim to location ({@safe_x}, {@safe_y}, {@safe_z}) in world "{@safe_world}"
