@@ -1,9 +1,9 @@
 DeidadeNordicaBase:
   Type: WITHER_SKELETON
   Display: '&6&l{display}'
-  Health: 2000
-  Damage: 25
-  Armor: 12
+  Health: 2600
+  Damage: 40
+  Armor: 16
   KnockbackResistance: 1
   Faction: DeusesNordicos
   Options:
@@ -27,11 +27,14 @@ DeidadeNordicaBase:
     - skill{s=GodlyShield} @self ~onSpawn
     - skill{s=GodlySmite} @target ~onTimer:100 1
     - skill{s=GodlyHeal} @self ~onDamaged 0.35
+    - skill{s=DivineElementalFury} @PlayersInRadius{r=12} ~onTimer:140 1
+    - skill{s=DivineMythicAura} @self ~onTimer:120 1
+    - skill{s=DivineCripplingWave} @PlayersInRadius{r=10} ~onTimer:180 1
 
 Odin:
   Inherit: DeidadeNordicaBase
   Display: 'Odin, Pai de Todos'
-  Health: 2350
+  Health: 2950
   Skills:
     - skill{s=DomainAllfatherSight} @PlayersInRadius{r=11} ~onTimer:120 1
     - skill{s=DomainRavensFury} @PlayersInRadius{r=10} ~onTimer:170 1
@@ -39,7 +42,7 @@ Odin:
 Aegir:
   Inherit: DeidadeNordicaBase
   Display: 'Aegir, Senhor dos Mares'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainAegirWave} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainSeaMaelstrom} @PlayersInRadius{r=10} ~onTimer:180 1
@@ -47,7 +50,7 @@ Aegir:
 Balder:
   Inherit: DeidadeNordicaBase
   Display: 'Balder, Brilho da Beleza'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainRadiantGrace} @PlayersInRadius{r=9} ~onTimer:120 1
     - skill{s=DomainPeacefulWard} @self ~onTimer:180 1
@@ -55,7 +58,7 @@ Balder:
 Forseti:
   Inherit: DeidadeNordicaBase
   Display: 'Forseti, Juiz Divino'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainJusticeHammer} @PlayersInRadius{r=10} ~onTimer:130 1
     - skill{s=DomainTranquilLaw} @self ~onTimer:180 1
@@ -63,7 +66,7 @@ Forseti:
 Frey:
   Inherit: DeidadeNordicaBase
   Display: 'Frey, Senhor do Sol e Fertilidade'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainGoldenHarvest} @PlayersInRadius{r=10} ~onTimer:130 1
     - skill{s=DomainSunBlade} @PlayersInRadius{r=10} ~onTimer:180 1
@@ -71,7 +74,7 @@ Frey:
 Freya:
   Inherit: DeidadeNordicaBase
   Display: 'Freya, Deusa do Amor e Guerra'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainValkyrieFervor} @self ~onTimer:130 1
     - skill{s=DomainLoveWard} @PlayersInRadius{r=9} ~onTimer:180 1
@@ -79,7 +82,7 @@ Freya:
 Frigga:
   Inherit: DeidadeNordicaBase
   Display: 'Frigga, Guardiã do Lar e Destino'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainMotherGuard} @self ~onTimer:130 1
     - skill{s=DomainForesight} @PlayersInRadius{r=9} ~onTimer:180 1
@@ -87,7 +90,7 @@ Frigga:
 Heimdall:
   Inherit: DeidadeNordicaBase
   Display: 'Heimdall, Vigia da Bifrost'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainBifrostSignal} @PlayersInRadius{r=10} ~onTimer:130 1
     - skill{s=DomainWatchfulGuard} @self ~onTimer:180 1
@@ -95,7 +98,7 @@ Heimdall:
 Hel:
   Inherit: DeidadeNordicaBase
   Display: 'Hel, Senhora de Niflheim'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainHelChill} @PlayersInRadius{r=10} ~onTimer:130 1
     - skill{s=DomainUnderworldGrip} @PlayersInRadius{r=9} ~onTimer:180 1
@@ -103,7 +106,7 @@ Hel:
 Hermod:
   Inherit: DeidadeNordicaBase
   Display: 'Hermod, Mensageiro Veloz'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainSwiftCourier} @self ~onTimer:120 1
     - skill{s=DomainFortuneStep} @PlayersInRadius{r=9} ~onTimer:180 1
@@ -111,7 +114,7 @@ Hermod:
 Loki:
   Inherit: DeidadeNordicaBase
   Display: 'Loki, Tecelão de Trapaças'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainTricksterFlame} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainChaosSnare} @PlayersInRadius{r=10} ~onTimer:180 1
@@ -119,7 +122,7 @@ Loki:
 Njord:
   Inherit: DeidadeNordicaBase
   Display: 'Njord, Senhor dos Ventos e Mares'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainTideBlessing} @self ~onTimer:130 1
     - skill{s=DomainWindSlash} @PlayersInRadius{r=10} ~onTimer:180 1
@@ -127,7 +130,7 @@ Njord:
 Odur:
   Inherit: DeidadeNordicaBase
   Display: 'Odur, Brilho do Sol'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainSolarStride} @self ~onTimer:120 1
     - skill{s=DomainBlazingSphere} @PlayersInRadius{r=9} ~onTimer:180 1
@@ -135,7 +138,7 @@ Odur:
 Sif:
   Inherit: DeidadeNordicaBase
   Display: 'Sif, Guerreira das Colheitas'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainGoldenShield} @self ~onTimer:130 1
     - skill{s=DomainWarfieldQuake} @PlayersInRadius{r=10} ~onTimer:180 1
@@ -143,7 +146,7 @@ Sif:
 Sakadi:
   Inherit: DeidadeNordicaBase
   Display: 'Sakadi, Guardiã das Montanhas'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainMountainGuard} @self ~onTimer:130 1
     - skill{s=DomainAvalancheCrash} @PlayersInRadius{r=10} ~onTimer:180 1
@@ -151,7 +154,7 @@ Sakadi:
 Surtur:
   Inherit: DeidadeNordicaBase
   Display: 'Surtur, Titã do Fogo'
-  Health: 2300
+  Health: 2900
   Skills:
     - skill{s=DomainFlameTitan} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainLavaBurst} @PlayersInRadius{r=10} ~onTimer:180 1
@@ -159,7 +162,7 @@ Surtur:
 Thor:
   Inherit: DeidadeNordicaBase
   Display: 'Thor, Senhor do Trovão'
-  Health: 2300
+  Health: 2900
   Skills:
     - skill{s=DomainThunderSmash} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainStormCrash} @PlayersInRadius{r=10} ~onTimer:180 1
@@ -167,7 +170,7 @@ Thor:
 Thrym:
   Inherit: DeidadeNordicaBase
   Display: 'Thrym, Gigante do Gelo'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainIceGrasp} @PlayersInRadius{r=10} ~onTimer:130 1
     - skill{s=DomainGlacialRoar} @PlayersInRadius{r=10} ~onTimer:180 1
@@ -175,7 +178,7 @@ Thrym:
 Tyr:
   Inherit: DeidadeNordicaBase
   Display: 'Tyr, Senhor da Coragem e Justiça'
-  Health: 2250
+  Health: 2850
   Skills:
     - skill{s=DomainValorBanner} @self ~onTimer:130 1
     - skill{s=DomainJusticeStrike} @PlayersInRadius{r=10} ~onTimer:180 1
@@ -183,7 +186,7 @@ Tyr:
 Uller:
   Inherit: DeidadeNordicaBase
   Display: 'Uller, Arqueiro do Inverno'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainHunterMark} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainWinterArrow} @PlayersInRadius{r=10} ~onTimer:180 1

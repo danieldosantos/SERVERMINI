@@ -1,9 +1,9 @@
 DeidadeNaoHumanaBase:
   Type: WITHER_SKELETON
   Display: '&6&l{display}'
-  Health: 2000
-  Damage: 25
-  Armor: 12
+  Health: 2600
+  Damage: 40
+  Armor: 16
   KnockbackResistance: 1
   Faction: DeusesNaoHumanos
   Options:
@@ -27,13 +27,16 @@ DeidadeNaoHumanaBase:
     - skill{s=GodlyShield} @self ~onSpawn
     - skill{s=GodlySmite} @target ~onTimer:100 1
     - skill{s=GodlyHeal} @self ~onDamaged 0.35
+    - skill{s=DivineElementalFury} @PlayersInRadius{r=12} ~onTimer:140 1
+    - skill{s=DivineMythicAura} @self ~onTimer:120 1
+    - skill{s=DivineCripplingWave} @PlayersInRadius{r=10} ~onTimer:180 1
 
 Bahamut:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Bahamut, Deus Dragão do Bem'
-  Health: 2400
-  Damage: 32
-  Armor: 14
+  Health: 3000
+  Damage: 47
+  Armor: 18
   Skills:
     - skill{s=DomainPlatinumBreath} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainJusticeWard} @self ~onTimer:160 1
@@ -48,7 +51,7 @@ Blipdoolpoolp:
 CorellonLarethian:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Corellon Larethian, Divindade Élfica'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainArcaneVolley} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainGraceStep} @self ~onTimer:150 1
@@ -70,7 +73,7 @@ Eadro:
 GarlGlitergold:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Garl Glitergold, Deus Gnomo da Trapaça'
-  Health: 2050
+  Health: 2650
   Skills:
     - skill{s=DomainGoldenPrank} @PlayersInRadius{r=9} ~onTimer:120 1
     - skill{s=DomainLuckyEscape} @self ~onTimer:160 1
@@ -78,8 +81,8 @@ GarlGlitergold:
 Grolantor:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Grolantor, Deus Gigante da Colina'
-  Health: 2300
-  Damage: 32
+  Health: 2900
+  Damage: 47
   Skills:
     - skill{s=DomainClubQuake} @PlayersInRadius{r=9} ~onTimer:120 1
     - skill{s=DomainHillFortitude} @self ~onTimer:150 1
@@ -87,8 +90,8 @@ Grolantor:
 Gruumsh:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Gruumsh, Deus Orc da Guerra'
-  Health: 2350
-  Damage: 34
+  Health: 2950
+  Damage: 49
   Skills:
     - skill{s=DomainOneEyeRage} @target ~onTimer:110 1
     - skill{s=DomainWarShockwave} @PlayersInRadius{r=9} ~onTimer:150 1
@@ -96,8 +99,8 @@ Gruumsh:
 Hruggek:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Hruggek, Deus Bugbear da Violência'
-  Health: 2250
-  Damage: 32
+  Health: 2850
+  Damage: 47
   Skills:
     - skill{s=DomainAmbushStrike} @target ~onTimer:110 1
     - skill{s=DomainFearHowl} @PlayersInRadius{r=8} ~onTimer:150 1
@@ -119,7 +122,7 @@ Laogzed:
 Lolth:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Lolth, Deusa Drow das Aranhas'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainWebSnare} @PlayersInRadius{r=10} ~onTimer:110 1
     - skill{s=DomainVenomBite} @target ~onTimer:150 1
@@ -127,8 +130,8 @@ Lolth:
 Maglubiyet:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Maglubiyet, Deus Goblinoide da Guerra'
-  Health: 2300
-  Damage: 32
+  Health: 2900
+  Damage: 47
   Skills:
     - skill{s=DomainGoblinWarcry} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainWarRally} @self ~onTimer:160 1
@@ -136,8 +139,8 @@ Maglubiyet:
 Moradin:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Moradin, Deus Anão da Criação'
-  Health: 2350
-  Armor: 14
+  Health: 2950
+  Armor: 18
   Skills:
     - skill{s=DomainAnvilGuard} @self ~onTimer:120 1
     - skill{s=DomainForgeBurst} @PlayersInRadius{r=8} ~onTimer:150 1
@@ -152,7 +155,7 @@ RllifaneRallathil:
 SehanineMoonbow:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Sehanine Moonbow, Deusa Élfica da Lua'
-  Health: 2100
+  Health: 2700
   Skills:
     - skill{s=DomainMoonGlimmer} @PlayersInRadius{r=10} ~onTimer:120 1
     - skill{s=DomainPhaseShift} @self ~onTimer:160 1
@@ -160,8 +163,8 @@ SehanineMoonbow:
 Sekolah:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Sekolah, Deus Sahuagin da Caça'
-  Health: 2250
-  Damage: 32
+  Health: 2850
+  Damage: 47
   Skills:
     - skill{s=DomainBloodShark} @target ~onTimer:120 1
     - skill{s=DomainSeaCaller} @PlayersInRadius{r=9} ~onTimer:150 1
@@ -176,7 +179,7 @@ Semuanya:
 Skerrit:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Skerrit, Deus Centauro da Natureza'
-  Health: 2200
+  Health: 2800
   Skills:
     - skill{s=DomainStampede} @PlayersInRadius{r=10} ~onTimer:110 1
     - skill{s=DomainForestWard} @self ~onTimer:160 1
@@ -184,8 +187,8 @@ Skerrit:
 SkoraeusOssosDePedra:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Skoraeus Ossos de Pedra, Deus Gigante da Arte'
-  Health: 2300
-  Armor: 14
+  Health: 2900
+  Armor: 18
   Skills:
     - skill{s=DomainStoneGaze} @PlayersInRadius{r=9} ~onTimer:120 1
     - skill{s=DomainStoneChains} @PlayersInRadius{r=9} ~onTimer:160 1
@@ -193,8 +196,8 @@ SkoraeusOssosDePedra:
 Surtur:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Surtur, Deus Gigante do Fogo'
-  Health: 2400
-  Damage: 34
+  Health: 3000
+  Damage: 49
   Skills:
     - skill{s=DomainFlameTitan} @PlayersInRadius{r=10} ~onTimer:110 1
     - skill{s=DomainShieldWall} @self ~onTimer:150 1
@@ -202,8 +205,8 @@ Surtur:
 Thrym:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Thrym, Deus Gigante do Gelo'
-  Health: 2400
-  Damage: 34
+  Health: 3000
+  Damage: 49
   Skills:
     - skill{s=DomainFrostHammer} @PlayersInRadius{r=10} ~onTimer:110 1
     - skill{s=DomainFrostAura} @PlayersInRadius{r=9} ~onTimer:150 1
@@ -211,9 +214,9 @@ Thrym:
 Tiamat:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Tiamat, Deusa Dragão Cromática'
-  Health: 2600
-  Damage: 36
-  Armor: 15
+  Health: 3200
+  Damage: 51
+  Armor: 19
   Skills:
     - skill{s=DomainChromaticRuin} @PlayersInRadius{r=12} ~onTimer:110 1
     - skill{s=DomainDragonTerror} @PlayersInRadius{r=11} ~onTimer:150 1
@@ -221,7 +224,7 @@ Tiamat:
 Yondalla:
   Inherit: DeidadeNaoHumanaBase
   Display: 'Yondalla, Deusa Halfling da Proteção'
-  Health: 2150
+  Health: 2750
   Skills:
     - skill{s=DomainHearthBlessing} @self ~onTimer:120 1
     - skill{s=DomainGraceStep} @self ~onTimer:170 1
