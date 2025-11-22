@@ -61,9 +61,9 @@
                 "DATA": {
                     "effect": "WEAVING",
                     "value": 0.0,
+                    "quality": 0.0,
                     "duration": 900,
                     "charges": -1,
-                    "quality": 0.0,
                     "smallIncrement": 0.01,
                     "bigIncrement": 0.25,
                     "icon": "COBWEB",
@@ -161,9 +161,9 @@
                 "DATA": {
                     "effect": "INFESTED",
                     "value": 0.0,
+                    "quality": 0.0,
                     "duration": 900,
                     "charges": -1,
-                    "quality": 0.0,
                     "smallIncrement": 0.01,
                     "bigIncrement": 0.25,
                     "icon": "STONE",
@@ -261,9 +261,9 @@
                 "DATA": {
                     "effect": "OOZING",
                     "value": 0.0,
+                    "quality": 0.0,
                     "duration": 900,
                     "charges": -1,
-                    "quality": 0.0,
                     "smallIncrement": 0.01,
                     "bigIncrement": 0.25,
                     "icon": "SLIME_BLOCK",
@@ -361,9 +361,9 @@
                 "DATA": {
                     "effect": "WIND_CHARGED",
                     "value": 0.0,
+                    "quality": 0.0,
                     "duration": 900,
                     "charges": -1,
-                    "quality": 0.0,
                     "smallIncrement": 0.01,
                     "bigIncrement": 0.25,
                     "icon": "TNT",
