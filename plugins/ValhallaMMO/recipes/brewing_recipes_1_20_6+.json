@@ -1,4 +1,4 @@
-[
+﻿[
     {
         "name": "brew_weaving_potion",
         "ingredient": {
@@ -400,3 +400,4 @@
         "unlockedForEveryone": true
     }
 ]
+
