@@ -6244,6 +6244,8 @@ MM_MANTO_NEGRO:
   # Aparência falsa (camuflagem simples)
   - potion{t=INVISIBILITY;d=80;lvl=0} @self ~onTimer:300 0.4
 
+
+
 MM_MANTOR:
   Type: PHANTOM
   Display: 'Mantor'
@@ -6286,7 +6288,6 @@ MM_MEDUSA:
   # Olhar petrificante: retarda e enraíza alvos próximos
   - potion{t=SLOW;d=100;lvl=5} @PlayersInRadius{r=9} ~onTimer:200 0.5
   - root{d=40} @PlayersInRadius{r=9} ~onTimer:200 0.35
-
 
 MM_MEIO_DRAGAO_BASE:
   Type: VINDICATOR
