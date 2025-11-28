@@ -6036,14 +6036,33 @@ MM_LICH:
   Type: ZOMBIE
   Display: 'Lich'
   Health: 135
-  Damage: 22
+  Damage: 10
   Faction: undead
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=22;type=PHYSICAL} @target ~onAttack 0.8
+  # Resistências sobrenaturais (frio, elétrico, necrose e expulsão)
+  - potion{t=DAMAGE_RESISTANCE;d=200;lvl=1} @self ~onTimer:200 0.6
+  - potion{t=ABSORPTION;d=160;lvl=1} @self ~onTimer:220 0.35
+  # Rejuvenescimento e foco mágico
+  - healpercent{p=6} @self ~onTimer:160 0.3
+  - potion{t=REGENERATION;d=120;lvl=1} @self ~onTimer:200 0.25
+  # Toque Paralisante
+  - damage{a=10;type=COLD} @target ~onAttack 0.9
+  - root{d=60} @target ~onAttack 0.6
+  - potion{t=SLOW;d=100;lvl=3} @target ~onAttack 0.6
+  # Olhar aterrorizante
+  - potion{t=WEAKNESS;d=120;lvl=1} @PlayersInRadius{r=6} ~onTimer:160 0.45
+  - potion{t=CONFUSION;d=80;lvl=1} @PlayersInRadius{r=6} ~onTimer:160 0.45
+  # Romper Vida (explosão necrótica)
+  - damage{a=30;type=WITHER} @PlayersInRadius{r=6} ~onTimer:120 0.55
+  - potion{t=WITHER;d=120;lvl=1} @PlayersInRadius{r=6} ~onTimer:120 0.55
+  # Magias de alto círculo (dardo de morte, desintegrar, paralisia)
+  - damage{a=45;type=WITHER} @PlayersInRadius{r=18;limit=1;sort=random} ~onTimer:180 0.45
+  - damage{a=36;type=MAGIC} @PlayersInRadius{r=18;limit=1;sort=random} ~onTimer:220 0.35
+  - potion{t=BLINDNESS;d=100;lvl=1} @PlayersInRadius{r=12;limit=1;sort=random} ~onTimer:200 0.4
 
 
 MM_GOSMAOCRE:
@@ -6056,8 +6075,18 @@ MM_GOSMAOCRE:
     MovementSpeed: 0.12
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - ACID 0.8
+  - MAGIC 0.9
+  - LIGHTNING 0
+  - SLASH 0
   Skills:
-  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+  # Forma corrosiva: pseudópode ácido
+  - damage{a=9;type=WITHER} @target ~onAttack 0.85
+  - potion{t=SLOW;d=80;lvl=1} @target ~onAttack 0.45
+  # Amorfo + escalada: desacelera e prende alvos em espaços estreitos
+  - root{d=40} @PlayersInRadius{r=2} ~onTimer:160 0.25
+  - potion{t=BLINDNESS;d=40;lvl=0} @PlayersInRadius{r=2} ~onTimer:160 0.25
 
 
 MM_LIMOCINZENTO:
@@ -6070,8 +6099,89 @@ MM_LIMOCINZENTO:
     MovementSpeed: 0.12
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - ACID 0.7
+  - FIRE 0.7
+  - MAGIC 0.9
+  - FALL 0.8
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Aparência falsa: surpreende alvos parados
+  - potion{t=WEAKNESS;d=60;lvl=1} @target ~onAttack 0.5
+  - damage{a=4;type=WITHER} @target ~onAttack 0.9
+  # Corroer metal/armadura
+  - potion{t=SLOW;d=60;lvl=2} @PlayersInRadius{r=3;conditions=[armor]} ~onTimer:200 0.35
+  - potion{t=MINING_FATIGUE;d=80;lvl=1} @PlayersInRadius{r=3;conditions=[holdingitem]} ~onTimer:200 0.35
+
+MM_LIMOCINZENTO_PSIQUICO:
+  Type: SLIME
+  Display: 'Limo Cinzento Psiônico'
+  Health: 28
+  Damage: 5
+  Faction: ooze
+  Options:
+    MovementSpeed: 0.13
+    FollowRange: 20
+    PreventOtherDrops: true
+  DamageModifiers:
+  - ACID 0.7
+  - FIRE 0.7
+  - MAGIC 0.85
+  Skills:
+  # Esmagamento psíquico
+  - damage{a=10;type=MAGIC} @PlayersInRadius{r=18;limit=1;sort=random} ~onTimer:160 0.4
+  - potion{t=CONFUSION;d=80;lvl=0} @PlayersInRadius{r=18;limit=1;sort=random} ~onTimer:160 0.35
+  # Ataque ácido básico
+  - damage{a=5;type=WITHER} @target ~onAttack 0.85
+
+MM_CUBOGELATINOSO:
+  Type: SLIME
+  Display: 'Cubo Gelatinoso'
+  Health: 84
+  Damage: 10
+  Faction: ooze
+  Options:
+    MovementSpeed: 0.14
+    FollowRange: 18
+    PreventOtherDrops: true
+  DamageModifiers:
+  - ACID 0
+  - MAGIC 0.9
+  - KNOCKBACK 0.3
+  Skills:
+  # Transparente: chance de surpreender e retardar
+  - potion{t=SLOW;d=80;lvl=3} @PlayersInRadius{r=2.5} ~onTimer:120 0.45
+  - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInRadius{r=2.5} ~onTimer:160 0.35
+  # Pseudópode ácido
+  - damage{a=10;type=WITHER} @target ~onAttack 0.9
+  # Engolfar: dano ácido recorrente em alvos próximos
+  - damage{a=21;type=WITHER} @PlayersInRadius{r=2} ~onTimer:120 0.35
+  - root{d=40} @PlayersInRadius{r=2} ~onTimer:120 0.35
+
+MM_PUDIMNEGRO:
+  Type: SLIME
+  Display: 'Pudim Negro'
+  Health: 85
+  Damage: 12
+  Faction: ooze
+  Options:
+    MovementSpeed: 0.2
+    FollowRange: 20
+    PreventOtherDrops: true
+  DamageModifiers:
+  - ACID 0
+  - FIRE 0
+  - FROST 0
+  - LIGHTNING 0
+  - SLASH 0
+  Skills:
+  # Pseudópode corrosivo
+  - damage{a=24;type=WITHER} @target ~onAttack 0.85
+  - potion{t=WEAKNESS;d=60;lvl=1} @target ~onAttack 0.6
+  # Forma corrosiva: reflexo ácido
+  - damage{a=4;type=WITHER} @trigger ~onDamaged 0.7
+  # Amorfo: dividir e sufocar em espaços estreitos
+  - root{d=40} @PlayersInRadius{r=2.5} ~onTimer:140 0.3
+  - potion{t=SLOW;d=100;lvl=2} @PlayersInRadius{r=2.5} ~onTimer:140 0.3
 
 
 MM_MAGMIN:
