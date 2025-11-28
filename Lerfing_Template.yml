@@ -4619,32 +4619,36 @@ MM_LAMIA:
 
 
 MM_HOMEM_JAVALI:
-  Type: ZOMBIE
+  Type: PIGLIN_BRUTE
   Display: 'Homem-javali'
   Health: 78
   Damage: 10
-  Faction: neutral
+  Faction: lycanthrope
   Options:
-    MovementSpeed: 0.36  # 9 m (12 m javali)
+    MovementSpeed: 0.22  # 9 m (12 m javali)
     FollowRange: 22
     PreventOtherDrops: true
+    KnockbackResistance: 0.2
+  Equipment:
+  - IRON_AXE HAND
   Skills:
   # Malho ou presas
   - damage{a=10;type=BLUNT} @target ~onAttack 1
   - damage{a=10;type=SLASHING} @target ~onAttack 0.8
   # Investida curta
   - leap{v=1} @self ~onAttack 0.4
+  - knockback{strength=1} @target ~onAttack 0.45
   - potion{t=SLOW;d=100;lvl=1} @target ~onAttack 0.35
 
 
 MM_HOMEM_RATO:
-  Type: ZOMBIE
+  Type: SILVERFISH
   Display: 'Homem-rato'
   Health: 33
   Damage: 5
-  Faction: neutral
+  Faction: lycanthrope
   Options:
-    MovementSpeed: 0.36  # 9 m
+    MovementSpeed: 0.28  # 9 m
     FollowRange: 22
     PreventOtherDrops: true
   Skills:
@@ -4659,15 +4663,17 @@ MM_HOMEM_RATO:
 
 
 MM_HOMEM_TIGRE:
-  Type: ZOMBIE
+  Type: OCELOT
   Display: 'Homem-tigre'
   Health: 120
-  Damage: 8
-  Faction: neutral
+  Damage: 13
+  Faction: lycanthrope
   Options:
-    MovementSpeed: 0.38  # 9 m (12 m tigre)
+    MovementSpeed: 0.32  # 9 m (12 m tigre)
     FollowRange: 24
     PreventOtherDrops: true
+  Equipment:
+  - IRON_SWORD HAND
   Skills:
   # Garras / mordida
   - damage{a=7;type=SLASHING} @target ~onAttack 1
@@ -4681,15 +4687,16 @@ MM_HOMEM_TIGRE:
 
 
 MM_HOMEM_URSO:
-  Type: ZOMBIE
+  Type: POLAR_BEAR
   Display: 'Homem-urso'
   Health: 135
   Damage: 13
-  Faction: neutral
+  Faction: lycanthrope
   Options:
-    MovementSpeed: 0.34  # 9 m
+    MovementSpeed: 0.26  # 9 m
     FollowRange: 24
     PreventOtherDrops: true
+    KnockbackResistance: 0.35
   Skills:
   # Machado / garras / mordida
   - damage{a=10;type=SLASHING} @target ~onAttack 0.9
@@ -4700,18 +4707,20 @@ MM_HOMEM_URSO:
 
 
 MM_LOBISOMEM:
-  Type: ZOMBIE
+  Type: WOLF
   Display: 'Lobisomem'
   Health: 58
-  Damage: 7
-  Faction: neutral
+  Damage: 8
+  Faction: lycanthrope
   Options:
-    MovementSpeed: 0.38  # 9 m (12 m lobo)
+    MovementSpeed: 0.3  # 9 m (12 m lobo)
     FollowRange: 22
     PreventOtherDrops: true
+  Equipment:
+  - IRON_SWORD HAND
   Skills:
   # Garras / mordida / lança
-  - damage{a=7;type=SLASHING} @target ~onAttack 1
+  - damage{a=8;type=SLASHING} @target ~onAttack 1
   - damage{a=6;type=PIERCING} @target ~onAttack 0.8
   - damage{a=5;type=PIERCING} @target ~onAttack 0.6
   # Derrubar com salto
