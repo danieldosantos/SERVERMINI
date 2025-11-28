@@ -6036,14 +6036,33 @@ MM_LICH:
   Type: ZOMBIE
   Display: 'Lich'
   Health: 135
-  Damage: 22
+  Damage: 10
   Faction: undead
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=22;type=PHYSICAL} @target ~onAttack 0.8
+  # Resistências sobrenaturais (frio, elétrico, necrose e expulsão)
+  - potion{t=DAMAGE_RESISTANCE;d=200;lvl=1} @self ~onTimer:200 0.6
+  - potion{t=ABSORPTION;d=160;lvl=1} @self ~onTimer:220 0.35
+  # Rejuvenescimento e foco mágico
+  - healpercent{p=6} @self ~onTimer:160 0.3
+  - potion{t=REGENERATION;d=120;lvl=1} @self ~onTimer:200 0.25
+  # Toque Paralisante
+  - damage{a=10;type=COLD} @target ~onAttack 0.9
+  - root{d=60} @target ~onAttack 0.6
+  - potion{t=SLOW;d=100;lvl=3} @target ~onAttack 0.6
+  # Olhar aterrorizante
+  - potion{t=WEAKNESS;d=120;lvl=1} @PlayersInRadius{r=6} ~onTimer:160 0.45
+  - potion{t=CONFUSION;d=80;lvl=1} @PlayersInRadius{r=6} ~onTimer:160 0.45
+  # Romper Vida (explosão necrótica)
+  - damage{a=30;type=WITHER} @PlayersInRadius{r=6} ~onTimer:120 0.55
+  - potion{t=WITHER;d=120;lvl=1} @PlayersInRadius{r=6} ~onTimer:120 0.55
+  # Magias de alto círculo (dardo de morte, desintegrar, paralisia)
+  - damage{a=45;type=WITHER} @PlayersInRadius{r=18;limit=1;sort=random} ~onTimer:180 0.45
+  - damage{a=36;type=MAGIC} @PlayersInRadius{r=18;limit=1;sort=random} ~onTimer:220 0.35
+  - potion{t=BLINDNESS;d=100;lvl=1} @PlayersInRadius{r=12;limit=1;sort=random} ~onTimer:200 0.4
 
 
 MM_GOSMAOCRE:
