@@ -1288,14 +1288,54 @@ MM_DEMILICH:
   Type: ZOMBIE
   Display: 'Demilich'
   Health: 80
-  Damage: 13
+  Damage: 14
   Faction: undead
   Options:
-    MovementSpeed: 0.0
-    FollowRange: 18
+    MovementSpeed: 0.3  # voo 9 m, planar/hover
+    FollowRange: 28
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: false
+  Skills:
+  # Ataque base necrotico
+  - damage{a=14;type=NECROTIC} @target ~onAttack 0.8
+  # Uivo (recarga): dano em area + medo/lento
+  - damage{a=26;type=NECROTIC} @PlayersInRadius{r=9} ~onTimer:320 1
+  - potion{t=WITHER;d=60;lvl=2} @PlayersInRadius{r=9} ~onTimer:320 1
+  - potion{t=SLOW;d=80;lvl=2} @PlayersInRadius{r=9} ~onTimer:320 1
+  # Drenar Vida: curta distancia e cura
+  - damage{a=18;type=NECROTIC} @PlayersInRadius{r=3} ~onAttack 0.8
+  - heal{amount=12} @self ~onAttack 0.6
+  # Drenar Energia: wither forte em area curta
+  - potion{t=WITHER;d=140;lvl=2} @PlayersInRadius{r=9} ~onTimer:200 0.5
+  - potion{t=WEAKNESS;d=140;lvl=1} @PlayersInRadius{r=9} ~onTimer:200 0.5
+  # Maldicao Vil: enfraquece um alvo
+  - potion{t=WEAKNESS;d=200;lvl=2} @target ~onAttack 0.4
+  - potion{t=SLOW;d=200;lvl=1} @target ~onAttack 0.4
+  # Nuvem de Poeira: cegueira corpo a corpo
+  - potion{t=BLINDNESS;d=80;lvl=0} @PlayersInRadius{r=3} ~onTimer:120 0.5
+  # Resistencia/Anulacao: escudo curto quando atingido
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onDamaged 0.4
+  # Voo erratico: teleport curto para reposicionar
+  - teleport{spread=1;radius=4} @self ~onTimer:140 0.4
+
+
+MM_BARLGURA:
+  Type: VEX
+  Display: 'Barlgura'
+  Health: 68
+  Damage: 12
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.42
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=13;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=12;type=PHYSICAL} @target ~onAttack 0.9
+  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.6
+  - knockback{strength=1.2} @target ~onAttack 0.6
+  - teleport{spread=1;radius=5} @target ~onTimer:140 0.4
+  - potion{t=INCREASE_DAMAGE;d=80;lvl=1} @self ~onDamaged{c=healthbelow{p=50}} 0.5
 
 
 MM_CHASME:
@@ -1305,25 +1345,39 @@ MM_CHASME:
   Damage: 14
   Faction: fiend
   Options:
-    MovementSpeed: 0.24
-    FollowRange: 18
+    MovementSpeed: 0.6  # voo rápido
+    FollowRange: 28
     PreventOtherDrops: true
+    NoGravity: true
   Skills:
-  - damage{a=14;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=12;type=PHYSICAL} @target ~onAttack 0.8
+  - potion{t=POISON;d=100;lvl=1} @target ~onAttack 0.7
+  # Zumbido letárgico
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=18} ~onTimer:160 0.6
+  - potion{t=WEAKNESS;d=120;lvl=1} @PlayersInRadius{r=18} ~onTimer:160 0.6
+  - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInRadius{r=18} ~onTimer:160 0.5
+  - teleport{spread=1;radius=5} @self ~onTimer:200 0.3
 
 
 MM_DRETCH:
   Type: VEX
   Display: 'Dretch'
   Health: 18
-  Damage: 3
+  Damage: 5
   Faction: fiend
   Options:
-    MovementSpeed: 0.24
+    MovementSpeed: 0.26
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=5;type=PHYSICAL} @target ~onAttack 0.9
+  # Nuvem fétida
+  - potion{t=POISON;d=100;lvl=0} @PlayersInRadius{r=6} ~onTimer:200 0.7
+  - potion{t=WEAKNESS;d=100;lvl=0} @PlayersInRadius{r=6} ~onTimer:200 0.7
+  - damage{a=4;type=POISON} @PlayersInRadius{r=6} ~onTimer:200 0.5
+  # Dissolve em miasma
+  - damage{a=6;type=NECROTIC} @PlayersInRadius{r=4} ~onDeath 1
+  - potion{t=POISON;d=120;lvl=1} @PlayersInRadius{r=4} ~onDeath 1
 
 
 MM_GLABREZU:
@@ -1333,11 +1387,41 @@ MM_GLABREZU:
   Damage: 26
   Faction: fiend
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.36
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=26;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=18;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=12;type=NECROTIC} @target ~onAttack 0.6
+  # Maldição tentadora
+  - potion{t=WEAKNESS;d=120;lvl=2} @target ~onAttack 0.5
+  - potion{t=SLOW;d=120;lvl=1} @target ~onAttack 0.5
+  # Resiliência demoníaca
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:220 0.4
+  # Caos mental curto alcance
+  - potion{t=BLINDNESS;d=80;lvl=0} @PlayersInRadius{r=10} ~onTimer:200 0.4
+
+
+MM_GORISTRO:
+  Type: VEX
+  Display: 'Goristro'
+  Health: 310
+  Damage: 30
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 28
+    PreventOtherDrops: true
+    KnockbackResistance: 1
+  Skills:
+  - damage{a=30;type=PHYSICAL} @target ~onAttack 0.85
+  - knockback{strength=1.6} @target ~onAttack 0.8
+  # Pisotear em area
+  - damage{a=20;type=PHYSICAL} @PlayersInRadius{r=4} ~onTimer:140 0.6
+  - potion{t=SLOW;d=80;lvl=2} @PlayersInRadius{r=4} ~onTimer:140 0.6
+  # Investida brutal
+  - teleport{spread=0;radius=3} @target ~onTimer:200 0.4
+  - damage{a=24;type=PHYSICAL} @PlayersInRadius{r=3} ~onTimer:200 0.4
 
 
 MM_HEZROU:
@@ -1347,11 +1431,18 @@ MM_HEZROU:
   Damage: 23
   Faction: fiend
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.32
+    FollowRange: 22
     PreventOtherDrops: true
   Skills:
   - damage{a=23;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=8;type=POISON} @target ~onAttack 0.6
+  # Fedor nauseante
+  - potion{t=POISON;d=140;lvl=1} @PlayersInRadius{r=8} ~onTimer:140 0.6
+  - potion{t=WEAKNESS;d=140;lvl=1} @PlayersInRadius{r=8} ~onTimer:140 0.6
+  - potion{t=SLOW;d=80;lvl=1} @PlayersInRadius{r=8} ~onTimer:140 0.5
+  # Pele resistente
+  - potion{t=DAMAGE_RESISTANCE;d=80;lvl=1} @self ~onDamaged 0.4
 
 
 MM_MANES:
@@ -1361,11 +1452,143 @@ MM_MANES:
   Damage: 3
   Faction: fiend
   Options:
-    MovementSpeed: 0.24
-    FollowRange: 18
+    MovementSpeed: 0.22
+    FollowRange: 14
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=3;type=NECROTIC} @target ~onAttack 0.9
+  - potion{t=WEAKNESS;d=80;lvl=0} @PlayersInRadius{r=4} ~onAttack 0.5
+  # Dissipar em vapor fétido
+  - damage{a=6;type=NECROTIC} @PlayersInRadius{r=3} ~onDeath 1
+  - potion{t=POISON;d=120;lvl=0} @PlayersInRadius{r=3} ~onDeath 1
+
+
+MM_DEMONIODASSOMBRAS:
+  Type: VEX
+  Display: 'Demônio das Sombras'
+  Health: 66
+  Damage: 10
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.54  # 9 m andar/voo
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
+  Skills:
+  # Garras psíquicas
+  - damage{a=10;type=PSYCHIC} @target ~onAttack 0.8
+  # Golpe mais forte quando sai das sombras (chance maior)
+  - damage{a=17;type=PSYCHIC} @target ~onAttack 0.5
+  # Passo sombrio / reposicionamento curto
+  - teleport{spread=0;radius=6} @target ~onTimer:160 0.4
+  # Ocultar-se na penumbra: invisibilidade periódica
+  - potion{t=INVISIBILITY;d=100;lvl=1} @self ~onTimer:200 0.5
+  # Toque sombrio deixa alvo enfraquecido
+  - potion{t=WEAKNESS;d=120;lvl=1} @target ~onAttack 0.5
+  # Sensibilidade à luz (simulada com lentidão ocasional)
+  - potion{t=SLOW;d=80;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DEVORADORINTELECTO:
+  Type: VEX
+  Display: 'Devorador de Intelecto'
+  Health: 21
+  Damage: 7
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.36  # 12 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    Silent: true
+  Skills:
+  # Garras
+  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.9
+  # Devorar Intelecto (dano psíquico + enfraquecer)
+  - damage{a=11;type=PSYCHIC} @target ~onAttack 0.8
+  - potion{t=WEAKNESS;d=120;lvl=2} @target ~onAttack 0.6
+  - potion{t=SLOW;d=100;lvl=1} @target ~onAttack 0.5
+  # Ladrão de corpo: reposiciona em cima do alvo
+  - teleport{spread=0;radius=2} @target ~onAttack 0.4
+  - heal{amount=8} @self ~onKill 1
+  # Detectar senciência: marca alvos próximos
+  - potion{t=GLOWING;d=80;lvl=0} @PlayersInRadius{r=24} ~onTimer:220 0.4
+  # Furtividade: invisibilidade curta
+  - potion{t=INVISIBILITY;d=80;lvl=1} @self ~onTimer:260 0.3
+
+
+MM_DEVORADORMENTES:
+  Type: VEX
+  Display: 'Devorador de Mentes'
+  Health: 71
+  Damage: 15
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 28
+    PreventOtherDrops: true
+    Silent: false
+  Skills:
+  # Tentaculos psionicos: dano e atordoar/segurar
+  - damage{a=15;type=PSYCHIC} @target ~onAttack 0.8
+  - potion{t=SLOW;d=100;lvl=2} @target ~onAttack 0.6
+  - root{d=60} @target ~onAttack 0.4
+  # Extrair cerebro: golpe pesado quando alvo ja esta preso
+  - damage{a=32;type=PHYSICAL} @target ~onAttack 0.4
+  - heal{amount=12} @self ~onKill 1
+  # Rajada mental em cone
+  - damage{a=22;type=PSYCHIC} @PlayersInRadius{r=12} ~onTimer:220 0.6
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=12} ~onTimer:220 0.6
+  - potion{t=SLOW;d=120;lvl=2} @PlayersInRadius{r=12} ~onTimer:220 0.6
+  # Levitar/evadir
+  - potion{t=SLOW_FALLING;d=120;lvl=1} @self ~onTimer:200 0.3
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.3
+  # Detectar pensamentos: marcar alvos
+  - potion{t=GLOWING;d=80;lvl=0} @PlayersInRadius{r=24} ~onTimer:240 0.3
+
+
+MM_MARILITH:
+  Type: VEX
+  Display: 'Marilith'
+  Health: 189
+  Damage: 22
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.42
+    FollowRange: 26
+    PreventOtherDrops: true
+    KnockbackResistance: 0.5
+  Skills:
+  # Enxurrada de golpes
+  - damage{a=16;type=PHYSICAL} @target ~onAttack 0.9
+  - damage{a=10;type=PHYSICAL} @target ~onAttack 0.7
+  - damage{a=10;type=PHYSICAL} @target ~onAttack 0.6
+  # Parada/defesa
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:160 0.4
+  - potion{t=INCREASE_DAMAGE;d=120;lvl=1} @self ~onTimer:160 0.4
+  - teleport{spread=1;radius=5} @self ~onTimer:120 0.3
+
+
+MM_NALFESHNEE:
+  Type: VEX
+  Display: 'Nalfeshnee'
+  Health: 184
+  Damage: 24
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.3
+    FollowRange: 26
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  - damage{a=24;type=PHYSICAL} @target ~onAttack 0.8
+  # Luz de pavor
+  - damage{a=12;type=NECROTIC} @PlayersInRadius{r=10} ~onTimer:180 0.6
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=10} ~onTimer:180 0.6
+  - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInRadius{r=10} ~onTimer:180 0.6
+  # Resistência profana
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.4
 
 
 MM_VROCK:
@@ -1375,11 +1598,74 @@ MM_VROCK:
   Damage: 17
   Faction: fiend
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.54  # voo 18 m
+    FollowRange: 26
     PreventOtherDrops: true
+    NoGravity: true
   Skills:
   - damage{a=17;type=PHYSICAL} @target ~onAttack 0.8
+  # Esporos tóxicos
+  - potion{t=POISON;d=120;lvl=1} @PlayersInRadius{r=4} ~onTimer:200 0.7
+  - potion{t=WITHER;d=80;lvl=1} @PlayersInRadius{r=4} ~onTimer:200 0.7
+  # Grito ensurdecedor
+  - damage{a=10;type=NECROTIC} @PlayersInRadius{r=14} ~onTimer:260 0.6
+  - potion{t=SLOW;d=80;lvl=2} @PlayersInRadius{r=14} ~onTimer:260 0.6
+  - potion{t=WEAKNESS;d=80;lvl=1} @PlayersInRadius{r=14} ~onTimer:260 0.6
+
+
+MM_YOCHLOL:
+  Type: VEX
+  Display: 'Yochlol'
+  Health: 136
+  Damage: 12
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    Silent: false
+  Skills:
+  # Ataques múltiplos: pancadas/mandíbulas com veneno forte
+  - damage{a=12;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=18;type=POISON} @target ~onAttack 0.7
+  - potion{t=POISON;d=100;lvl=2} @target ~onAttack 0.6
+  # Forma de névoa tóxica: nuvem curta, incapacitante
+  - potion{t=INVISIBILITY;d=80;lvl=1} @self ~onTimer:220 0.4
+  - potion{t=RESISTANCE;d=80;lvl=1} @self ~onTimer:220 0.4
+  - potion{t=POISON;d=80;lvl=2} @PlayersInRadius{r=3} ~onTimer:220 0.5
+  - potion{t=SLOW;d=80;lvl=2} @PlayersInRadius{r=3} ~onTimer:220 0.5
+  # Teia / controle
+  - root{d=80} @target ~onAttack 0.4
+  - potion{t=WEAKNESS;d=120;lvl=1} @target ~onAttack 0.4
+  # Escalada aracnídea simulada com salto/teleport curto
+  - teleport{spread=0;radius=5} @self ~onTimer:140 0.3
+  # Resistência mágica breve
+  - potion{t=DAMAGE_RESISTANCE;d=80;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_BALOR:
+  Type: VEX
+  Display: 'Balor'
+  Health: 262
+  Damage: 32
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.48
+    FollowRange: 30
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  # Espada flamejante
+  - damage{a=32;type=FIRE} @target ~onAttack 0.8
+  - damage{a=18;type=LIGHTNING} @target ~onAttack 0.6
+  # Chicote e puxão curto
+  - damage{a=20;type=FIRE} @PlayersInRadius{r=6} ~onTimer:140 0.6
+  # Aura flamejante
+  - damage{a=10;type=FIRE} @PlayersInRadius{r=2} ~onTimer:40 1
+  # Teleporte
+  - teleport{spread=0;radius=8} @self ~onTimer:160 0.4
+  # Explosão de morte
+  - damage{a=70;type=FIRE} @PlayersInRadius{r=9} ~onDeath 1
 
 
 MM_DIABOFARPADO:
@@ -1389,221 +1675,1924 @@ MM_DIABOFARPADO:
   Damage: 18
   Faction: fiend
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=18;type=PHYSICAL} @target ~onAttack 0.8
+  # Garras (2x) e cauda farpada
+  - damage{a=10;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=10;type=PIERCING} @target ~onAttack 0.7
+  - damage{a=14;type=PIERCING} @target ~onAttack 0.6
+  # Couro farpado: devolve dano a quem agride/agarrar
+  - damage{a=6;type=PIERCING} @target ~onDamaged 0.6
+  # Arremessar chamas
+  - damage{a=10;type=FIRE} @PlayersInRadius{r=18} ~onTimer:120 0.6
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.3
+  # Visão diabólica / controle curto (cegueira leve)
+  - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInRadius{r=6} ~onTimer:200 0.3
 
 
 MM_DIABOBARBADO:
   Type: VEX
   Display: 'Diabo Barbado'
   Health: 52
-  Damage: 9
+  Damage: 10
   Faction: fiend
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 22
     PreventOtherDrops: true
   Skills:
-  - damage{a=9;type=PHYSICAL} @target ~onAttack 0.8
+  # Barba venenosa (bloqueia cura)
+  - damage{a=8;type=PIERCING} @target ~onAttack 0.8
+  - potion{t=POISON;d=120;lvl=1} @target ~onAttack 0.6
+  - potion{t=WITHER;d=120;lvl=1} @target ~onAttack 0.6
+  # Glaive com ferida infernal (sangramento)
+  - damage{a=12;type=SLASHING} @target ~onAttack 0.7
+  - potion{t=WITHER;d=160;lvl=1} @target ~onAttack 0.6
+  # Resistencia à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.3
+  # Resolucao (coragem): remove medo
+  - cleanse{type=FEAR} @self ~onTimer:160 0.4
+
+
+MM_DIABODOSOSSOS:
+  Type: VEX
+  Display: 'Diabo dos Ossos'
+  Health: 142
+  Damage: 18
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.36  # 12 m
+    FollowRange: 26
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  # Garras (2x) e ferrão
+  - damage{a=8;type=SLASHING} @target ~onAttack 0.9
+  - damage{a=8;type=SLASHING} @target ~onAttack 0.7
+  - damage{a=13;type=PIERCING} @target ~onAttack 0.6
+  - potion{t=POISON;d=140;lvl=2} @target ~onAttack 0.6
+  - potion{t=WITHER;d=120;lvl=1} @target ~onAttack 0.5
+  # Arma de haste com gancho (variação)
+  - damage{a=17;type=PIERCING} @target ~onAttack 0.4
+  - root{d=80} @target ~onAttack 0.4
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.3
+  # Visão diabólica / controle próximo
+  - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInRadius{r=6} ~onTimer:200 0.3
+
+
+MM_SENHORPROFUNDEZAS:
+  Type: VEX
+  Display: 'Senhor das Profundezas'
+  Health: 300
+  Damage: 30
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.3  # 9 m, voo 18 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  # Aura de medo
+  - potion{t=WEAKNESS;d=80;lvl=2} @PlayersInRadius{r=6} ~onTimer:120 0.7
+  - potion{t=SLOW;d=80;lvl=2} @PlayersInRadius{r=6} ~onTimer:120 0.7
+  # Ferrão venenoso (nega cura)
+  - damage{a=22;type=PIERCING} @target ~onAttack 0.6
+  - damage{a=21;type=POISON} @target ~onAttack 0.6
+  - potion{t=WITHER;d=200;lvl=2} @target ~onAttack 0.6
+  # Garras
+  - damage{a=17;type=SLASHING} @target ~onAttack 0.7
+  # Maça infernal
+  - damage{a=24;type=BLUDGEONING} @target ~onAttack 0.8
+  - damage{a=21;type=FIRE} @target ~onAttack 0.8
+  # Cauda
+  - damage{a=24;type=BLUDGEONING} @target ~onAttack 0.6
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_AZUL_ADULTO:
+  Type: PHANTOM
+  Display: 'Dragão Azul Adulto'
+  Health: 225
+  Damage: 18
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 36
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida com raio
+  - damage{a=18;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=10;type=LIGHTNING} @target ~onAttack 0.7
+  # Garras
+  - damage{a=14;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=16;type=BLUDGEONING} @target ~onAttack 0.6
+  # Sopro elétrico (linha)
+  - damage{a=66;type=LIGHTNING} @PlayersInRadius{r=16} ~onTimer:240 0.6
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=16} ~onTimer:240 0.6
+  # Golpe de asas
+  - damage{a=14;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:180 0.6
+  - knockback{strength=1.4} @PlayersInRadius{r=4} ~onTimer:180 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_AZUL_JOVEM:
+  Type: PHANTOM
+  Display: 'Dragão Azul Jovem'
+  Health: 152
+  Damage: 16
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Mordida com raio
+  - damage{a=16;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=10;type=LIGHTNING} @target ~onAttack 0.7
+  # Garras
+  - damage{a=12;type=SLASHING} @target ~onAttack 0.7
+  # Sopro elétrico (linha média)
+  - damage{a=55;type=LIGHTNING} @PlayersInRadius{r=12} ~onTimer:240 0.6
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=12} ~onTimer:240 0.6
+  # Golpe de asas simples
+  - damage{a=12;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  - knockback{strength=1.2} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_AZUL_FILHOTE:
+  Type: PHANTOM
+  Display: 'Dragão Azul Filhote'
+  Health: 52
+  Damage: 8
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Mordida com raio
+  - damage{a=8;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=6;type=LIGHTNING} @target ~onAttack 0.7
+  # Sopro elétrico curto
+  - damage{a=22;type=LIGHTNING} @PlayersInRadius{r=8} ~onTimer:240 0.6
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=80;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRAGAO_BRANCO_ANCIAO:
+  Type: PHANTOM
+  Display: 'Dragão Branco Ancião'
+  Health: 333
+  Damage: 19
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m, escavação/natação iguais
+    FollowRange: 40
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida congelante
+  - damage{a=19;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=9;type=COLD} @target ~onAttack 0.8
+  # Garras
+  - damage{a=15;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=17;type=BLUDGEONING} @target ~onAttack 0.7
+  # Sopro congelante (cone longo)
+  - damage{a=72;type=COLD} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  - potion{t=SLOW;d=100;lvl=2} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  # Golpe de asas
+  - damage{a=15;type=BLUDGEONING} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  - knockback{strength=1.5} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  # Andar no gelo (ignora slow): buff de speed em frio
+  - potion{t=SPEED;d=80;lvl=1} @self ~onTimer:200 0.3
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_BRANCO_ADULTO:
+  Type: PHANTOM
+  Display: 'Dragão Branco Adulto'
+  Health: 200
+  Damage: 17
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 36
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida congelante
+  - damage{a=17;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=8;type=COLD} @target ~onAttack 0.8
+  # Garras
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=15;type=BLUDGEONING} @target ~onAttack 0.6
+  # Sopro congelante (cone médio)
+  - damage{a=54;type=COLD} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  - potion{t=SLOW;d=80;lvl=2} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  # Golpe de asas
+  - damage{a=13;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  - knockback{strength=1.3} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  # Andar no gelo: buff de speed em frio
+  - potion{t=SPEED;d=80;lvl=1} @self ~onTimer:200 0.3
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_BRANCO_JOVEM:
+  Type: PHANTOM
+  Display: 'Dragão Branco Jovem'
+  Health: 133
+  Damage: 15
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Mordida congelante
+  - damage{a=15;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=8;type=COLD} @target ~onAttack 0.7
+  # Garras
+  - damage{a=11;type=SLASHING} @target ~onAttack 0.7
+  # Sopro congelante (cone curto)
+  - damage{a=45;type=COLD} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  - potion{t=SLOW;d=80;lvl=1} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  # Golpe de asas simples
+  - damage{a=11;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  - knockback{strength=1.1} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  # Andar no gelo: buff de speed em frio
+  - potion{t=SPEED;d=80;lvl=1} @self ~onTimer:200 0.3
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_BRANCO_FILHOTE:
+  Type: PHANTOM
+  Display: 'Dragão Branco Filhote'
+  Health: 32
+  Damage: 7
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Mordida com frio
+  - damage{a=7;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=4;type=COLD} @target ~onAttack 0.7
+  # Sopro congelante curto
+  - damage{a=22;type=COLD} @PlayersInRadius{r=8} ~onTimer:240 0.6
+  # Andar no gelo: buff de speed em frio
+  - potion{t=SPEED;d=80;lvl=1} @self ~onTimer:200 0.3
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=80;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRAGAO_NEGRO_ANCIAO:
+  Type: PHANTOM
+  Display: 'Dragão Negro Ancião'
+  Health: 367
+  Damage: 19
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 40
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida ácida
+  - damage{a=19;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=9;type=POISON} @target ~onAttack 0.8
+  # Garras
+  - damage{a=15;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=17;type=BLUDGEONING} @target ~onAttack 0.7
+  # Sopro ácido (linha longa)
+  - damage{a=67;type=POISON} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  - potion{t=WITHER;d=120;lvl=2} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  # Golpe de asas
+  - damage{a=15;type=BLUDGEONING} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  - knockback{strength=1.5} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_NEGRO_ADULTO:
+  Type: PHANTOM
+  Display: 'Dragão Negro Adulto'
+  Health: 195
+  Damage: 17
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 36
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida ácida
+  - damage{a=17;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=8;type=POISON} @target ~onAttack 0.8
+  # Garras
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=15;type=BLUDGEONING} @target ~onAttack 0.6
+  # Sopro ácido (linha média)
+  - damage{a=54;type=POISON} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  - potion{t=WITHER;d=100;lvl=2} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  # Golpe de asas
+  - damage{a=13;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  - knockback{strength=1.3} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_NEGRO_JOVEM:
+  Type: PHANTOM
+  Display: 'Dragão Negro Jovem'
+  Health: 127
+  Damage: 15
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Mordida ácida
+  - damage{a=15;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=8;type=POISON} @target ~onAttack 0.7
+  # Garras
+  - damage{a=11;type=SLASHING} @target ~onAttack 0.7
+  # Sopro ácido (linha curta)
+  - damage{a=49;type=POISON} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  - potion{t=WITHER;d=80;lvl=2} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  # Golpe de asas leve
+  - damage{a=11;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  - knockback{strength=1.1} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_NEGRO_FILHOTE:
+  Type: PHANTOM
+  Display: 'Dragão Negro Filhote'
+  Health: 33
+  Damage: 7
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Mordida ácida
+  - damage{a=7;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=4;type=POISON} @target ~onAttack 0.7
+  # Sopro ácido curto
+  - damage{a=22;type=POISON} @PlayersInRadius{r=8} ~onTimer:240 0.6
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=80;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRAGAO_VERDE_ANCIAO:
+  Type: PHANTOM
+  Display: 'Dragão Verde Ancião'
+  Health: 385
+  Damage: 19
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 40
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida venenosa
+  - damage{a=19;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=10;type=POISON} @target ~onAttack 0.8
+  # Garras
+  - damage{a=15;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=17;type=BLUDGEONING} @target ~onAttack 0.7
+  # Sopro venenoso (cone longo)
+  - damage{a=77;type=POISON} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  # Golpe de asas
+  - damage{a=15;type=BLUDGEONING} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  - knockback{strength=1.5} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_VERDE_ADULTO:
+  Type: PHANTOM
+  Display: 'Dragão Verde Adulto'
+  Health: 207
+  Damage: 17
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 36
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida venenosa
+  - damage{a=17;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=8;type=POISON} @target ~onAttack 0.8
+  # Garras
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=15;type=BLUDGEONING} @target ~onAttack 0.6
+  # Sopro venenoso (cone médio)
+  - damage{a=56;type=POISON} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  # Golpe de asas
+  - damage{a=13;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  - knockback{strength=1.3} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_VERDE_JOVEM:
+  Type: PHANTOM
+  Display: 'Dragão Verde Jovem'
+  Health: 136
+  Damage: 15
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Mordida venenosa
+  - damage{a=15;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=8;type=POISON} @target ~onAttack 0.7
+  # Garras
+  - damage{a=11;type=SLASHING} @target ~onAttack 0.7
+  # Sopro venenoso (cone curto)
+  - damage{a=42;type=POISON} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  - potion{t=WEAKNESS;d=80;lvl=2} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  # Golpe de asas leve
+  - damage{a=11;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  - knockback{strength=1.1} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_VERDE_FILHOTE:
+  Type: PHANTOM
+  Display: 'Dragão Verde Filhote'
+  Health: 38
+  Damage: 7
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Mordida venenosa
+  - damage{a=7;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=5;type=POISON} @target ~onAttack 0.7
+  # Sopro venenoso curto
+  - damage{a=21;type=POISON} @PlayersInRadius{r=8} ~onTimer:240 0.6
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=80;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRAGAO_VERMELHO_ANCIAO:
+  Type: PHANTOM
+  Display: 'Dragão Vermelho Ancião'
+  Health: 546
+  Damage: 21
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m, escalada 12 m
+    FollowRange: 40
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=140;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=140;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida flamejante
+  - damage{a=21;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=14;type=FIRE} @target ~onAttack 0.8
+  # Garras
+  - damage{a=17;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=19;type=BLUDGEONING} @target ~onAttack 0.7
+  # Sopro flamejante (cone longo)
+  - damage{a=91;type=FIRE} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  - potion{t=WITHER;d=120;lvl=2} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  # Golpe de asas
+  - damage{a=17;type=BLUDGEONING} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  - knockback{strength=1.6} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=160;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_VERMELHO_ADULTO:
+  Type: PHANTOM
+  Display: 'Dragão Vermelho Adulto'
+  Health: 256
+  Damage: 19
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 36
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida flamejante
+  - damage{a=19;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=10;type=FIRE} @target ~onAttack 0.8
+  # Garras
+  - damage{a=15;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=17;type=BLUDGEONING} @target ~onAttack 0.6
+  # Sopro flamejante (cone médio)
+  - damage{a=63;type=FIRE} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  - potion{t=WITHER;d=100;lvl=2} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  # Golpe de asas
+  - damage{a=15;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  - knockback{strength=1.4} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_VERMELHO_JOVEM:
+  Type: PHANTOM
+  Display: 'Dragão Vermelho Jovem'
+  Health: 178
+  Damage: 17
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Mordida flamejante
+  - damage{a=17;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=7;type=FIRE} @target ~onAttack 0.8
+  # Garras
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.7
+  # Sopro flamejante (cone curto)
+  - damage{a=56;type=FIRE} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  - potion{t=WITHER;d=80;lvl=2} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  # Golpe de asas leve
+  - damage{a=13;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  - knockback{strength=1.2} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_VERMELHO_FILHOTE:
+  Type: PHANTOM
+  Display: 'Dragão Vermelho Filhote'
+  Health: 75
+  Damage: 9
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Mordida flamejante
+  - damage{a=9;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=3;type=FIRE} @target ~onAttack 0.8
+  # Sopro flamejante curto
+  - damage{a=24;type=FIRE} @PlayersInRadius{r=8} ~onTimer:240 0.6
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRAGAO_BRONZE_ANCIAO:
+  Type: PHANTOM
+  Display: 'Dragão de Bronze Ancião'
+  Health: 444
+  Damage: 20
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m, natação 12 m
+    FollowRange: 40
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida
+  - damage{a=20;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=16;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=18;type=BLUDGEONING} @target ~onAttack 0.7
+  # Sopro elétrico (linha longa)
+  - damage{a=88;type=LIGHTNING} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  # Sopro repulsivo (empurrão)
+  - knockback{strength=2.0} @PlayersInRadius{r=9} ~onTimer:240 0.5
+  # Golpe de asas
+  - damage{a=16;type=BLUDGEONING} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  - knockback{strength=1.5} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_BRONZE_ADULTO:
+  Type: PHANTOM
+  Display: 'Dragão de Bronze Adulto'
+  Health: 212
+  Damage: 18
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 36
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida
+  - damage{a=18;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=14;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=16;type=BLUDGEONING} @target ~onAttack 0.6
+  # Sopro elétrico (linha média)
+  - damage{a=66;type=LIGHTNING} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  # Sopro repulsivo
+  - knockback{strength=1.8} @PlayersInRadius{r=9} ~onTimer:240 0.5
+  # Golpe de asas
+  - damage{a=14;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  - knockback{strength=1.3} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_BRONZE_JOVEM:
+  Type: PHANTOM
+  Display: 'Dragão de Bronze Jovem'
+  Health: 142
+  Damage: 16
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Mordida
+  - damage{a=16;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=12;type=SLASHING} @target ~onAttack 0.7
+  # Sopro elétrico (linha curta)
+  - damage{a=55;type=LIGHTNING} @PlayersInRadius{r=12} ~onTimer:240 0.6
+  # Sopro repulsivo
+  - knockback{strength=1.6} @PlayersInRadius{r=9} ~onTimer:240 0.5
+  # Golpe de asas leve
+  - damage{a=12;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  - knockback{strength=1.1} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_BRONZE_FILHOTE:
+  Type: PHANTOM
+  Display: 'Dragão de Bronze Filhote'
+  Health: 32
+  Damage: 8
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Mordida
+  - damage{a=8;type=PIERCING} @target ~onAttack 0.9
+  # Sopro elétrico curto
+  - damage{a=16;type=LIGHTNING} @PlayersInRadius{r=8} ~onTimer:240 0.6
+  # Sopro repulsivo curto
+  - knockback{strength=1.2} @PlayersInRadius{r=6} ~onTimer:240 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=80;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRAGAO_COBRE_ANCIAO:
+  Type: PHANTOM
+  Display: 'Dragão de Cobre Ancião'
+  Health: 350
+  Damage: 19
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m, escalada 12 m
+    FollowRange: 40
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida
+  - damage{a=19;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=15;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=17;type=BLUDGEONING} @target ~onAttack 0.7
+  # Sopro ácido (linha longa)
+  - damage{a=63;type=POISON} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  # Sopro retardante (controla ações)
+  - potion{t=SLOW;d=140;lvl=2} @PlayersInRadius{r=18} ~onTimer:240 0.5
+  # Golpe de asas
+  - damage{a=15;type=BLUDGEONING} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  - knockback{strength=1.5} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_COBRE_ADULTO:
+  Type: PHANTOM
+  Display: 'Dragão de Cobre Adulto'
+  Health: 184
+  Damage: 17
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m, escalada 12 m
+    FollowRange: 36
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida
+  - damage{a=17;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=15;type=BLUDGEONING} @target ~onAttack 0.6
+  # Sopro ácido (linha média)
+  - damage{a=54;type=POISON} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  # Sopro retardante
+  - potion{t=SLOW;d=120;lvl=2} @PlayersInRadius{r=14} ~onTimer:240 0.5
+  # Golpe de asas
+  - damage{a=13;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  - knockback{strength=1.3} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_COBRE_JOVEM:
+  Type: PHANTOM
+  Display: 'Dragão de Cobre Jovem'
+  Health: 119
+  Damage: 15
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Mordida
+  - damage{a=15;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=11;type=SLASHING} @target ~onAttack 0.7
+  # Sopro ácido (linha curta)
+  - damage{a=40;type=POISON} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  # Sopro retardante
+  - potion{t=SLOW;d=100;lvl=2} @PlayersInRadius{r=10} ~onTimer:240 0.5
+  # Golpe de asas leve
+  - damage{a=11;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  - knockback{strength=1.1} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_COBRE_FILHOTE:
+  Type: PHANTOM
+  Display: 'Dragão de Cobre Filhote'
+  Health: 22
+  Damage: 7
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.36  # 9 m, escalada 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Mordida
+  - damage{a=7;type=PIERCING} @target ~onAttack 0.9
+  # Sopro ácido curto
+  - damage{a=18;type=POISON} @PlayersInRadius{r=8} ~onTimer:240 0.6
+  # Sopro retardante curto
+  - potion{t=SLOW;d=80;lvl=1} @PlayersInRadius{r=6} ~onTimer:240 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=80;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRAGAO_LATAO_ANCIAO:
+  Type: PHANTOM
+  Display: 'Dragão de Latão Ancião'
+  Health: 297
+  Damage: 19
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m, escavação 12 m
+    FollowRange: 40
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida
+  - damage{a=19;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=15;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=17;type=BLUDGEONING} @target ~onAttack 0.7
+  # Sopro flamejante (linha longa)
+  - damage{a=56;type=FIRE} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  # Sopro adormecente
+  - potion{t=SLOW;d=120;lvl=2} @PlayersInRadius{r=9} ~onTimer:240 0.5
+  # Golpe de asas
+  - damage{a=15;type=BLUDGEONING} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  - knockback{strength=1.5} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_LATAO_ADULTO:
+  Type: PHANTOM
+  Display: 'Dragão de Latão Adulto'
+  Health: 172
+  Damage: 17
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m, escavação 12 m
+    FollowRange: 36
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida
+  - damage{a=17;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=15;type=BLUDGEONING} @target ~onAttack 0.6
+  # Sopro flamejante (linha média)
+  - damage{a=49;type=FIRE} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  # Sopro adormecente
+  - potion{t=SLOW;d=100;lvl=2} @PlayersInRadius{r=9} ~onTimer:240 0.5
+  # Golpe de asas
+  - damage{a=13;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  - knockback{strength=1.3} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_LATAO_JOVEM:
+  Type: PHANTOM
+  Display: 'Dragão de Latão Jovem'
+  Health: 110
+  Damage: 15
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m, escavação 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Mordida
+  - damage{a=15;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=11;type=SLASHING} @target ~onAttack 0.7
+  # Sopro flamejante (linha curta)
+  - damage{a=42;type=FIRE} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  # Sopro adormecente
+  - potion{t=SLOW;d=80;lvl=2} @PlayersInRadius{r=9} ~onTimer:240 0.5
+  # Golpe de asas leve
+  - damage{a=11;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  - knockback{strength=1.1} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_LATAO_FILHOTE:
+  Type: PHANTOM
+  Display: 'Dragão de Latão Filhote'
+  Health: 16
+  Damage: 7
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.36  # 9 m, escavação 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Mordida
+  - damage{a=7;type=PIERCING} @target ~onAttack 0.9
+  # Sopro flamejante curto
+  - damage{a=14;type=FIRE} @PlayersInRadius{r=8} ~onTimer:240 0.6
+  # Sopro adormecente curto
+  - potion{t=SLOW;d=80;lvl=1} @PlayersInRadius{r=6} ~onTimer:240 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=80;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRAGAO_OURO_ANCIAO:
+  Type: PHANTOM
+  Display: 'Dragão de Ouro Ancião'
+  Health: 546
+  Damage: 21
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m, natação 12 m
+    FollowRange: 40
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=140;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=140;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida
+  - damage{a=21;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=17;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=19;type=BLUDGEONING} @target ~onAttack 0.7
+  # Sopro flamejante (cone longo)
+  - damage{a=71;type=FIRE} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  # Sopro enfraquecedor
+  - potion{t=WEAKNESS;d=140;lvl=2} @PlayersInRadius{r=18} ~onTimer:240 0.5
+  # Golpe de asas
+  - damage{a=17;type=BLUDGEONING} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  - knockback{strength=1.6} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=160;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_OURO_ADULTO:
+  Type: PHANTOM
+  Display: 'Dragão de Ouro Adulto'
+  Health: 256
+  Damage: 19
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 36
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida
+  - damage{a=19;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=15;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=17;type=BLUDGEONING} @target ~onAttack 0.6
+  # Sopro flamejante (cone médio)
+  - damage{a=66;type=FIRE} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  # Sopro enfraquecedor
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=14} ~onTimer:240 0.5
+  # Golpe de asas
+  - damage{a=15;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  - knockback{strength=1.4} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_OURO_JOVEM:
+  Type: PHANTOM
+  Display: 'Dragão de Ouro Jovem'
+  Health: 178
+  Damage: 17
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Mordida
+  - damage{a=17;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.7
+  # Sopro flamejante (cone curto)
+  - damage{a=55;type=FIRE} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  # Sopro enfraquecedor
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=10} ~onTimer:240 0.5
+  # Golpe de asas leve
+  - damage{a=13;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  - knockback{strength=1.2} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_OURO_FILHOTE:
+  Type: PHANTOM
+  Display: 'Dragão de Ouro Filhote'
+  Health: 60
+  Damage: 9
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.36  # 9 m, natação 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Mordida
+  - damage{a=9;type=PIERCING} @target ~onAttack 0.9
+  # Sopro flamejante curto
+  - damage{a=22;type=FIRE} @PlayersInRadius{r=8} ~onTimer:240 0.6
+  # Sopro enfraquecedor curto
+  - potion{t=WEAKNESS;d=80;lvl=1} @PlayersInRadius{r=6} ~onTimer:240 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRAGAO_PRATA_ANCIAO:
+  Type: PHANTOM
+  Display: 'Dragão de Prata Ancião'
+  Health: 487
+  Damage: 21
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 40
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=140;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=140;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida
+  - damage{a=21;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=17;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=19;type=BLUDGEONING} @target ~onAttack 0.7
+  # Sopro congelante (cone longo)
+  - damage{a=67;type=COLD} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  # Sopro paralisante
+  - potion{t=SLOW;d=160;lvl=3} @PlayersInRadius{r=18} ~onTimer:240 0.5
+  # Golpe de asas
+  - damage{a=17;type=BLUDGEONING} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  - knockback{strength=1.6} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=160;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_PRATA_ADULTO:
+  Type: PHANTOM
+  Display: 'Dragão de Prata Adulto'
+  Health: 243
+  Damage: 19
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 36
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida
+  - damage{a=19;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=15;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=17;type=BLUDGEONING} @target ~onAttack 0.6
+  # Sopro congelante (cone médio)
+  - damage{a=58;type=COLD} @PlayersInRadius{r=14} ~onTimer:240 0.6
+  # Sopro paralisante
+  - potion{t=SLOW;d=140;lvl=2} @PlayersInRadius{r=14} ~onTimer:240 0.5
+  # Golpe de asas
+  - damage{a=15;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  - knockback{strength=1.4} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  # Resistência lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_PRATA_JOVEM:
+  Type: PHANTOM
+  Display: 'Dragão de Prata Jovem'
+  Health: 168
+  Damage: 17
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Mordida
+  - damage{a=17;type=PIERCING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.7
+  # Sopro congelante (cone curto)
+  - damage{a=54;type=COLD} @PlayersInRadius{r=10} ~onTimer:240 0.6
+  # Sopro paralisante
+  - potion{t=SLOW;d=120;lvl=2} @PlayersInRadius{r=10} ~onTimer:240 0.5
+  # Golpe de asas leve
+  - damage{a=13;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  - knockback{strength=1.2} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_PRATA_FILHOTE:
+  Type: PHANTOM
+  Display: 'Dragão de Prata Filhote'
+  Health: 45
+  Damage: 9
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Mordida
+  - damage{a=9;type=PIERCING} @target ~onAttack 0.9
+  # Sopro congelante curto
+  - damage{a=18;type=COLD} @PlayersInRadius{r=8} ~onTimer:240 0.6
+  # Sopro paralisante curto
+  - potion{t=SLOW;d=80;lvl=1} @PlayersInRadius{r=6} ~onTimer:240 0.5
+  # Resistência simples
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRIADE:
+  Type: ALLAY
+  Display: 'Dríade'
+  Health: 22
+  Damage: 8
+  Faction: fey
+  Options:
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+    Silent: false
+  Skills:
+  # Clava / bordão místico
+  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+  # Encanto feérico (enfraquece e imobiliza levemente)
+  - potion{t=WEAKNESS;d=200;lvl=1} @target ~onAttack 0.6
+  - root{d=80} @target ~onAttack 0.5
+  # Caminhar em árvores (teleporte curto)
+  - teleport{spread=0;radius=6} @self ~onTimer:200 0.4
+  # Magia da floresta: cura leve e brilhos
+  - heal{amount=4} @PlayersInRadius{r=6} ~onTimer:240 0.4
+  - potion{t=GLOWING;d=80;lvl=0} @PlayersInRadius{r=10} ~onTimer:240 0.3
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DRAGAO_FADA:
+  Type: PHANTOM
+  Display: 'Dragão-fada'
+  Health: 14
+  Damage: 17
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.12  # 3 m
+    FollowRange: 18
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+    Silent: true
+  Skills:
+  # Mordida pequena, precisa alta
+  - damage{a=17;type=PIERCING} @target ~onAttack 0.8
+  # Sopro de euforia: confusão/controle
+  - potion{t=CONFUSION;d=140;lvl=1} @target ~onTimer:240 0.6
+  # Invisibilidade superior
+  - potion{t=INVISIBILITY;d=200;lvl=1} @self ~onTimer:200 0.7
+  # Conjuração inata básica (simulada com efeitos leves)
+  - potion{t=GLOWING;d=100;lvl=0} @PlayersInRadius{r=8} ~onTimer:240 0.3
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DIABODASCORRENTES:
+  Type: VEX
+  Display: 'Diabo das Correntes'
+  Health: 85
+  Damage: 11
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+  Skills:
+  # Correntes (2x) com agarrão e dano contínuo
+  - damage{a=11;type=SLASHING} @target ~onAttack 0.8
+  - root{d=100} @target ~onAttack 0.7
+  - damage{a=7;type=PIERCING} @target ~onTimer:40 0.7
+  # Correntes animadas: ataques extras em intervalo
+  - damage{a=11;type=SLASHING} @PlayersInRadius{r=12} ~onTimer:200 0.6
+  - root{d=60} @PlayersInRadius{r=12} ~onTimer:200 0.6
+  # Dissimulação enervante (medo curto)
+  - potion{t=WEAKNESS;d=80;lvl=1} @PlayersInRadius{r=9} ~onTimer:160 0.5
+  - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInRadius{r=9} ~onTimer:160 0.5
+  # Resistência mágica simulada
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_ERINIA:
+  Type: VEX
+  Display: 'Erínia'
+  Health: 153
+  Damage: 18
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 28
+    PreventOtherDrops: true
+    NoGravity: true  # voo 27 m
+  Skills:
+  # Espada longa (veneno extra)
+  - damage{a=21;type=SLASHING} @target ~onAttack 0.8
+  - potion{t=POISON;d=120;lvl=2} @target ~onAttack 0.7
+  # Arco longo envenenado
+  - damage{a=20;type=PIERCING} @PlayersInRadius{r=40} ~onTimer:120 0.6
+  - potion{t=POISON;d=120;lvl=2} @PlayersInRadius{r=40} ~onTimer:120 0.6
+  # Corda de estrangulamento (variação de controle)
+  - root{d=140} @target ~onAttack 0.4
+  - potion{t=WEAKNESS;d=140;lvl=1} @target ~onAttack 0.4
+  # Aparar / resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.3
+  # Mobilidade aérea: dash/teleport curto
+  - teleport{spread=1;radius=6} @self ~onTimer:160 0.3
+
+
+MM_DIABODECHIFRES:
+  Type: VEX
+  Display: 'Diabo de Chifres'
+  Health: 178
+  Damage: 22
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.2  # 6 m
+    FollowRange: 28
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Garfo (2x) e cauda
+  - damage{a=15;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=15;type=PIERCING} @target ~onAttack 0.7
+  - damage{a=14;type=PIERCING} @target ~onAttack 0.6
+  - potion{t=WITHER;d=160;lvl=2} @target ~onAttack 0.5
+  # Arremessar chamas
+  - damage{a=14;type=FIRE} @PlayersInRadius{r=18} ~onTimer:140 0.6
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.3
+  # Visão diabólica / controle leve
+  - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInRadius{r=6} ~onTimer:200 0.3
+
+
+MM_DIABODOGELO:
+  Type: VEX
+  Display: 'Diabo do Gelo'
+  Health: 180
+  Damage: 24
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.36  # 12 m
+    FollowRange: 30
+    PreventOtherDrops: true
+  Skills:
+  # Mordida / garras / cauda com frio
+  - damage{a=22;type=COLD} @target ~onAttack 0.8
+  - damage{a=20;type=COLD} @target ~onAttack 0.7
+  - damage{a=22;type=COLD} @target ~onAttack 0.6
+  # Variação: lança de gelo (perfurante + frio + lentidão forte)
+  - damage{a=24;type=PIERCING} @target ~onAttack 0.5
+  - damage{a=15;type=COLD} @target ~onAttack 0.5
+  - potion{t=SLOW;d=140;lvl=2} @target ~onAttack 0.5
+  - potion{t=WEAKNESS;d=140;lvl=1} @target ~onAttack 0.4
+  # Muralha de gelo (explosão fria em área)
+  - damage{a=35;type=COLD} @PlayersInRadius{r=10} ~onTimer:260 0.6
+  - potion{t=SLOW;d=120;lvl=2} @PlayersInRadius{r=10} ~onTimer:260 0.6
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @self ~onTimer:200 0.3
 
 
 MM_DIABRETE:
   Type: VEX
   Display: 'Diabrete'
   Health: 10
-  Damage: 3
+  Damage: 5
   Faction: fiend
   Options:
-    MovementSpeed: 0.24
-    FollowRange: 18
+    MovementSpeed: 0.24  # 6 m
+    FollowRange: 20
+    PreventOtherDrops: true
+    NoGravity: true  # voo 12 m
+    Silent: false
+  Skills:
+  # Ferrão envenenado
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=10;type=POISON} @target ~onAttack 0.7
+  # Invisibilidade curta
+  - potion{t=INVISIBILITY;d=140;lvl=1} @self ~onTimer:220 0.5
+  # Metamorfo: mobilidade extra (teleport curto)
+  - teleport{spread=1;radius=4} @self ~onTimer:200 0.3
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=80;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_LEMURE:
+  Type: VEX
+  Display: 'Lêmure'
+  Health: 13
+  Damage: 2
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.18  # 4,5 m
+    FollowRange: 10
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=2;type=PHYSICAL} @target ~onAttack 0.9
+  # Rejuvenescimento simples: cura lenta
+  - heal{amount=2} @self ~onTimer:200 0.3
 
 
 MM_DIABODOSESPINHOS:
   Type: VEX
   Display: 'Diabo Dos Espinhos'
   Health: 22
-  Damage: 4
+  Damage: 7
   Faction: fiend
   Options:
-    MovementSpeed: 0.24
-    FollowRange: 18
+    MovementSpeed: 0.24  # 6 m
+    FollowRange: 22
     PreventOtherDrops: true
+    NoGravity: true  # voo 12 m
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Mordida
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.8
+  # Garfo curto
+  - damage{a=3;type=PIERCING} @target ~onAttack 0.7
+  # Espinhos de cauda (ranged)
+  - damage{a=7;type=PIERCING} @PlayersInRadius{r=16} ~onTimer:80 0.7
+  - damage{a=6;type=FIRE} @PlayersInRadius{r=16} ~onTimer:80 0.7
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=80;lvl=1} @self ~onTimer:200 0.3
+  # Sobrevoo: reposicionamento aéreo
+  - teleport{spread=1;radius=5} @self ~onTimer:160 0.3
 
 
 MM_ALOSSAURO:
   Type: WOLF
   Display: 'Alossauro'
   Health: 51
-  Damage: 8
+  Damage: 15
   Faction: beast
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 22
     PreventOtherDrops: true
   Skills:
-  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+  # Mordida
+  - damage{a=15;type=PIERCING} @target ~onAttack 0.8
+  # Garra
+  - damage{a=8;type=SLASHING} @target ~onAttack 0.7
+  # Bote: derruba e ganha ataque extra
+  - knockback{strength=1.2} @target ~onAttack 0.5
+  - damage{a=10;type=SLASHING} @target ~onAttack 0.5
+  # Salto curto para perseguir
+  - teleport{spread=0;radius=3} @self ~onTimer:160 0.3
 
 
 MM_ANQUILOSSAURO:
   Type: WOLF
   Display: 'Anquilossauro'
   Health: 68
-  Damage: 11
+  Damage: 18
   Faction: beast
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 20
     PreventOtherDrops: true
   Skills:
-  - damage{a=11;type=PHYSICAL} @target ~onAttack 0.8
+  # Cauda pesada
+  - damage{a=18;type=BLUDGEONING} @target ~onAttack 0.9
+  - knockback{strength=1.4} @target ~onAttack 0.6
 
 
 MM_PLESIOSSAURO:
   Type: WOLF
   Display: 'Plesiossauro'
   Health: 68
-  Damage: 11
+  Damage: 14
   Faction: beast
   Options:
-    MovementSpeed: 0.24
-    FollowRange: 18
+    MovementSpeed: 0.24  # 6 m, natação 12 m simulada
+    FollowRange: 22
     PreventOtherDrops: true
   Skills:
-  - damage{a=11;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=14;type=PIERCING} @target ~onAttack 0.8
+  # Pescoço flexível: alcance extra (teleport leve)
+  - teleport{spread=0;radius=3} @self ~onTimer:200 0.3
 
 
 MM_TIRANOSSAURO:
   Type: WOLF
   Display: 'Tiranossauro'
   Health: 136
-  Damage: 23
+  Damage: 33
   Faction: beast
   Options:
-    MovementSpeed: 0.6
-    FollowRange: 18
+    MovementSpeed: 0.6  # 15 m
+    FollowRange: 26
     PreventOtherDrops: true
   Skills:
-  - damage{a=23;type=PHYSICAL} @target ~onAttack 0.8
+  # Mordida (agarrar)
+  - damage{a=33;type=PIERCING} @target ~onAttack 0.8
+  - root{d=80} @target ~onAttack 0.6
+  # Cauda (segundo alvo)
+  - damage{a=20;type=BLUDGEONING} @PlayersInRadius{r=3} ~onTimer:160 0.6
+  # Passo pesado
+  - knockback{strength=1.3} @PlayersInRadius{r=3} ~onTimer:160 0.5
 
 
 MM_PTERANODONTE:
   Type: WOLF
   Display: 'Pteranodonte'
   Health: 13
-  Damage: 3
+  Damage: 6
   Faction: beast
   Options:
-    MovementSpeed: 0.12
-    FollowRange: 18
+    MovementSpeed: 0.54  # voo 18 m
+    FollowRange: 20
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.8
+  # Mergulho rápido
+  - teleport{spread=0;radius=4} @self ~onTimer:160 0.3
+
+
+MM_TRICERATOPS:
+  Type: WOLF
+  Display: 'Tricerátops'
+  Health: 95
+  Damage: 24
+  Faction: beast
+  Options:
+    MovementSpeed: 0.6  # 15 m
+    FollowRange: 20
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Chifres (investida)
+  - damage{a=24;type=PIERCING} @target ~onAttack 0.8
+  - knockback{strength=1.4} @target ~onAttack 0.6
+  # Pisotear se alvo estiver caído
+  - damage{a=22;type=BLUDGEONING} @PlayersInRadius{r=2} ~onTimer:160 0.5
+
+
+MM_DRACOLICH_AZUL_ADULTO:
+  Type: PHANTOM
+  Display: 'Dracolich Azul Adulto'
+  Health: 225
+  Damage: 23
+  Faction: undead
+  Options:
+    MovementSpeed: 0.36  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.5
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.5
+  # Mordida com relâmpago
+  - damage{a=18;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=8;type=LIGHTNING} @target ~onAttack 0.7
+  # Garras
+  - damage{a=14;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=16;type=BLUDGEONING} @target ~onAttack 0.6
+  # Sopro elétrico (linha longa)
+  - damage{a=66;type=LIGHTNING} @PlayersInRadius{r=18} ~onTimer:260 0.6
+  - potion{t=SLOW;d=100;lvl=2} @PlayersInRadius{r=18} ~onTimer:260 0.6
+  # Bater asas / repelir
+  - damage{a=14;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:160 0.6
+  - knockback{strength=1.4} @PlayersInRadius{r=4} ~onTimer:160 0.6
+  # Resistência à magia / necrose
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+  - potion{t=FIRE_RESISTANCE;d=200;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRAGAO_VERMELHO_SOMBRAS_JOVEM:
+  Type: PHANTOM
+  Display: 'Dragão Vermelho das Sombras Jovem'
+  Health: 178
+  Damage: 17
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.36  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+    Silent: false
+  Skills:
+  # Sombra viva / furtividade sombria: invisibilidade breve em escuridão
+  - potion{t=INVISIBILITY;d=120;lvl=1} @self ~onTimer:200 0.5
+  # Mordida necrótica
+  - damage{a=17;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=6;type=NECROTIC} @target ~onAttack 0.7
+  # Garras
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.7
+  # Sopro sombrio (cone curto, necrose)
+  - damage{a=56;type=NECROTIC} @PlayersInRadius{r=9} ~onTimer:260 0.6
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=9} ~onTimer:260 0.6
+  # Sensibilidade à luz: autodebuff de lentidão em luz (simples)
+  - potion{t=SLOW;d=80;lvl=1} @self ~onTimer:200 0.3
+  # Resistência à magia simulada
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.3
+
+
+MM_DRAGAO_AZUL_ANCIAO:
+  Type: PHANTOM
+  Display: 'Dragão Azul Ancião'
+  Health: 481
+  Damage: 20
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 40
+    PreventOtherDrops: true
+    NoGravity: true  # voo 24 m
+  Skills:
+  # Presença aterradora
+  - potion{t=WEAKNESS;d=140;lvl=2} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  - potion{t=SLOW;d=140;lvl=1} @PlayersInRadius{r=36} ~onTimer:200 0.6
+  # Mordida com raio
+  - damage{a=20;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=12;type=LIGHTNING} @target ~onAttack 0.8
+  # Garras
+  - damage{a=16;type=SLASHING} @target ~onAttack 0.7
+  # Cauda
+  - damage{a=18;type=BLUDGEONING} @target ~onAttack 0.7
+  # Sopro elétrico (linha longa)
+  - damage{a=88;type=LIGHTNING} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=18} ~onTimer:240 0.6
+  # Golpe de asas / derrubar
+  - damage{a=16;type=BLUDGEONING} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  - knockback{strength=1.6} @PlayersInRadius{r=5} ~onTimer:180 0.6
+  # Resistência lendária simulada / magia
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
 
 
 MM_DRIDER:
   Type: SPIDER
   Display: 'Drider'
   Health: 123
-  Damage: 20
+  Damage: 15
   Faction: monster
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 26
     PreventOtherDrops: true
+    Silent: false
   Skills:
-  - damage{a=20;type=PHYSICAL} @target ~onAttack 0.8
+  # Mordida venenosa
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=9;type=POISON} @target ~onAttack 0.7
+  # Espada longa
+  - damage{a=8;type=SLASHING} @target ~onAttack 0.7
+  # Arco longo envenenado
+  - damage{a=7;type=PIERCING} @PlayersInRadius{r=18} ~onTimer:120 0.6
+  - damage{a=4;type=POISON} @PlayersInRadius{r=18} ~onTimer:120 0.6
+  # Escalada aracnidea / andar em teias (teleporte/impulso curto)
+  - teleport{spread=0;radius=4} @self ~onTimer:160 0.4
+  # Magias inerentes (escuro/faerie fire)
+  - potion{t=BLINDNESS;d=100;lvl=0} @PlayersInRadius{r=12} ~onTimer:200 0.5
+  - potion{t=GLOWING;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:200 0.5
+  # Sensibilidade à luz (autodebuff leve)
+  - potion{t=WEAKNESS;d=80;lvl=1} @self ~onTimer:240 0.3
+  # Resistência à magia simulada / ancestralidade
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
 
 
 MM_DUERGAR:
   Type: ZOMBIE
   Display: 'Duergar'
   Health: 26
-  Damage: 4
+  Damage: 6
   Faction: neutral
   Options:
-    MovementSpeed: 0.28
+    MovementSpeed: 0.25  # 7,5 m
     FollowRange: 18
     PreventOtherDrops: true
+    Silent: false
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Picareta de guerra
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.8
+  # Azagaia (melee/range)
+  - damage{a=5;type=PIERCING} @PlayersInRadius{r=12} ~onTimer:140 0.6
+  # Aumentar: buff de força/dano
+  - potion{t=INCREASE_DAMAGE;d=200;lvl=1} @self ~onTimer:240 0.5
+  - potion{t=STRENGTH;d=200;lvl=1} @self ~onTimer:240 0.5
+  # Invisibilidade curta
+  - potion{t=INVISIBILITY;d=200;lvl=1} @self ~onTimer:260 0.4
+  # Resistência duergar (veneno/magia)
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:220 0.4
 
 
 MM_DUPLO:
   Type: SPIDER
   Display: 'Duplo'
   Health: 52
-  Damage: 9
+  Damage: 7
   Faction: monster
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 22
     PreventOtherDrops: true
+    Silent: false
   Skills:
-  - damage{a=9;type=PHYSICAL} @target ~onAttack 0.8
+  # Pancada
+  - damage{a=7;type=BLUDGEONING} @target ~onAttack 0.8
+  # Ataque surpresa (dano extra no primeiro hit)
+  - damage{a=10;type=PHYSICAL} @target ~onAttack{c=firststrike} 1
+  # Emboscador: invis/stealth curta
+  - potion{t=INVISIBILITY;d=120;lvl=1} @self ~onTimer:200 0.4
+  # Ler pensamentos: marca alvo para bônus
+  - potion{t=GLOWING;d=120;lvl=0} @target ~onAttack 0.5
+  # Resistência a encantamento simulada
+  - potion{t=RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
 
 
 MM_ELEMENTALDATERRA:
   Type: BLAZE
   Display: 'Elemental Da Terra'
   Health: 126
-  Damage: 21
+  Damage: 14
   Faction: elemental
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m, escavação 9 m
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=21;type=PHYSICAL} @target ~onAttack 0.8
+  # Pancada pesada
+  - damage{a=14;type=BLUDGEONING} @target ~onAttack 0.8
+  # Deslizar na terra (teleport curto)
+  - teleport{spread=0;radius=4} @self ~onTimer:200 0.4
+  # Monstro de cerco: mais dano em estruturas
+  - damage{a=10;type=BLUDGEONING} @MobsInRadius{r=3;types=FALLING_BLOCK} ~onTimer:200 0.5
+  # Resistência/petrificar improvável
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
 
 
 MM_ELEMENTALDOAR:
   Type: BLAZE
   Display: 'Elemental Do Ar'
   Health: 90
-  Damage: 15
+  Damage: 14
   Faction: elemental
   Options:
-    MovementSpeed: 0.0
-    FollowRange: 18
+    MovementSpeed: 0.9  # voo 27 m
+    FollowRange: 24
     PreventOtherDrops: true
+    NoGravity: true
   Skills:
-  - damage{a=15;type=PHYSICAL} @target ~onAttack 0.8
+  # Pancada
+  - damage{a=14;type=BLUDGEONING} @target ~onAttack 0.8
+  # Vendaval (arremesso)
+  - damage{a=15;type=BLUDGEONING} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  - knockback{strength=1.4} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  # Forma de ar: atravessar espaços
+  - teleport{spread=0;radius=3} @self ~onTimer:160 0.4
+  # Resistência
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
 
 
 MM_ELEMENTALDOFOGO:
   Type: BLAZE
   Display: 'Elemental Do Fogo'
   Health: 102
-  Damage: 17
+  Damage: 10
   Faction: elemental
   Options:
-    MovementSpeed: 0.6
-    FollowRange: 18
+    MovementSpeed: 0.6  # 15 m
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=17;type=PHYSICAL} @target ~onAttack 0.8
+  # Toque flamejante
+  - damage{a=10;type=FIRE} @target ~onAttack 0.8
+  # Incendiar contato
+  - potion{t=FIRE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+  - damage{a=5;type=FIRE} @PlayersInRadius{r=2} ~onTimer:120 0.6
+  # Luz/forma de fogo
+  - potion{t=GLOWING;d=120;lvl=0} @self ~onTimer:200 0.3
+  # Vulnerabilidade à água (simulada com autolento)
+  - potion{t=SLOW;d=100;lvl=1} @self ~onDamaged{c=involves{type=WATER}} 1
+
+
+MM_ELEMENTALDAAGUA:
+  Type: BLAZE
+  Display: 'Elemental Da Água'
+  Health: 114
+  Damage: 13
+  Faction: elemental
+  Options:
+    MovementSpeed: 0.36  # 9 m, natação 27 m
+    FollowRange: 24
+    PreventOtherDrops: true
+  Skills:
+  # Pancada
+  - damage{a=13;type=BLUDGEONING} @target ~onAttack 0.8
+  # Engolfar/agarre em área curta
+  - damage{a=13;type=BLUDGEONING} @PlayersInRadius{r=3} ~onTimer:200 0.6
+  - root{d=100} @PlayersInRadius{r=3} ~onTimer:200 0.6
+  # Forma de água: teleporte curto
+  - teleport{spread=0;radius=4} @self ~onTimer:200 0.4
+  # Resistência
+  - potion{t=DAMAGE_RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_EMPIRICO:
+  Type: PHANTOM
+  Display: 'Empírico'
+  Health: 313
+  Damage: 31
+  Faction: celestial
+  Options:
+    MovementSpeed: 0.5  # 15 m
+    FollowRange: 40
+    PreventOtherDrops: true
+    NoGravity: true  # voo 15 m
+    Silent: false
+  Skills:
+  # Marreta estonteante
+  - damage{a=31;type=BLUDGEONING} @target ~onAttack 0.8
+  - potion{t=SLOW;d=80;lvl=2} @target ~onAttack 0.7
+  # Raio elementar (escolha randômica simplificada como thunder)
+  - damage{a=24;type=LIGHTNING} @PlayersInRadius{r=20} ~onTimer:160 0.6
+  # Incentivar aliados (vantagens simuladas com resistência)
+  - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @AlliesInRadius{r=36} ~onTimer:200 0.5
+  - cleanse{type=FEAR} @AlliesInRadius{r=36} ~onTimer:200 0.5
+  # Ataque de terremoto (area knockdown)
+  - damage{a=15;type=BLUDGEONING} @PlayersInRadius{r=18} ~onTimer:200 0.5
+  - knockback{strength=1.5} @PlayersInRadius{r=18} ~onTimer:200 0.5
+  # Resistências mágicas/lendárias simuladas
+  - potion{t=DAMAGE_RESISTANCE;d=160;lvl=1} @self ~onTimer:200 0.4
 
 
 MM_DROW:
   Type: ZOMBIE
   Display: 'Drow'
   Health: 13
-  Damage: 3
+  Damage: 5
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 22
+    PreventOtherDrops: true
+  Skills:
+  # Espada curta
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.8
+  # Besta de mao com veneno/incapacitar
+  - damage{a=5;type=PIERCING} @PlayersInRadius{r=14} ~onTimer:160 0.6
+  - potion{t=POISON;d=200;lvl=1} @PlayersInRadius{r=14} ~onTimer:160 0.6
+  # Globos de luz / fogo das fadas / escuridao
+  - potion{t=GLOWING;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:240 0.4
+  - potion{t=BLINDNESS;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:240 0.4
+  # Sensibilidade a luz: autodebuff leve
+  - potion{t=WEAKNESS;d=80;lvl=1} @self ~onTimer:240 0.3
+
+
+MM_DROW_ARCANO:
+  Type: ZOMBIE
+  Display: 'Drow Arcano'
+  Health: 45
+  Damage: 6
   Faction: neutral
   Options:
     MovementSpeed: 0.36
-    FollowRange: 18
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Cajado envenenado
+  - damage{a=6;type=BLUDGEONING} @target ~onAttack 0.8
+  - damage{a=3;type=POISON} @target ~onAttack 0.7
+  # Magias inerentes: globos, escuridao, fogo das fadas
+  - potion{t=GLOWING;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:240 0.4
+  - potion{t=BLINDNESS;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:240 0.4
+  # Invocar demonio (quasit/sombra) simplificado com summon
+  - summon{type=MM_DEVORADORINTELECTO;amount=1;radius=3;yo=0} @self ~onTimer:1200 0.2
+  # Sensibilidade a luz
+  - potion{t=WEAKNESS;d=80;lvl=1} @self ~onTimer:240 0.3
+  # Resistencias magicas
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_DROW_GUERREIRO_ELITE:
+  Type: ZOMBIE
+  Display: 'Drow Guerreiro de Elite'
+  Health: 71
+  Damage: 12
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 24
+    PreventOtherDrops: true
+  Skills:
+  # Espada curta dupla com veneno
+  - damage{a=12;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=10;type=POISON} @target ~onAttack 0.7
+  # Besta de mao envenenada
+  - damage{a=7;type=PIERCING} @PlayersInRadius{r=14} ~onTimer:180 0.6
+  - potion{t=POISON;d=200;lvl=1} @PlayersInRadius{r=14} ~onTimer:180 0.6
+  # Globos / escuridao / fogo das fadas
+  - potion{t=GLOWING;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:240 0.4
+  - potion{t=BLINDNESS;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:240 0.4
+  # Aparar (buff de resistencia breve)
+  - potion{t=DAMAGE_RESISTANCE;d=60;lvl=1} @self ~onDamaged 0.5
+  # Sensibilidade a luz
+  - potion{t=WEAKNESS;d=80;lvl=1} @self ~onTimer:240 0.3
+
+
+MM_DROW_SACERDOTISA:
+  Type: ZOMBIE
+  Display: 'Drow Sacerdotisa de Lolth'
+  Health: 71
+  Damage: 5
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 26
+    PreventOtherDrops: true
+  Skills:
+  # Acoite envenenado
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=17;type=POISON} @target ~onAttack 0.7
+  # Magias: escuridao/faerie fire, veneno, cura
+  - potion{t=BLINDNESS;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:240 0.5
+  - potion{t=GLOWING;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:240 0.5
+  - potion{t=POISON;d=160;lvl=1} @PlayersInRadius{r=8} ~onTimer:220 0.5
+  - heal{amount=10} @AlliesInRadius{r=8} ~onTimer:200 0.4
+  # Invocar demonio (yochlol simplificado como summon devorador)
+  - summon{type=MM_DEMILICH;amount=1;radius=3;yo=0} @self ~onTimer:1600 0.15
+  # Sensibilidade a luz
+  - potion{t=WEAKNESS;d=80;lvl=1} @self ~onTimer:240 0.3
+  # Resistência magica
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
 
 
 MM_DROWARCANO:
@@ -1634,6 +3623,118 @@ MM_DROWGUERREIRODEELITE:
   - damage{a=12;type=PHYSICAL} @target ~onAttack 0.8
 
 
+MM_HORRORGANCHO:
+  Type: SPIDER
+  Display: 'Horror de Gancho'
+  Health: 75
+  Damage: 11
+  Faction: monster
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=11;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_ESPETO_INFECTADO:
+  Type: SPIDER
+  Display: 'Espeto Infectado'
+  Health: 11
+  Damage: 8
+  Faction: plant
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_GALHO_INFECTADO:
+  Type: SPIDER
+  Display: 'Galho Infectado'
+  Health: 4
+  Damage: 3
+  Faction: plant
+  Options:
+    MovementSpeed: 0.24
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_VINHA_INFECTADA:
+  Type: SPIDER
+  Display: 'Vinha Infectada'
+  Health: 26
+  Damage: 9
+  Faction: plant
+  Options:
+    MovementSpeed: 0.18
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=9;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_INUMANO:
+  Type: SPIDER
+  Display: 'Inumano'
+  Health: 45
+  Damage: 6
+  Faction: undead
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_KENKU:
+  Type: SPIDER
+  Display: 'Kenku'
+  Health: 13
+  Damage: 6
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_KOBOLD:
+  Type: SPIDER
+  Display: 'Kobold'
+  Health: 5
+  Damage: 4
+  Faction: kobold
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_KOBOLD_ALADO:
+  Type: SPIDER
+  Display: 'Kobold Alado'
+  Health: 7
+  Damage: 5
+  Faction: kobold
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=5;type=PHYSICAL} @target ~onAttack 0.8
+
+
 MM_DROWSACERDOTISADELOLTH:
   Type: ZOMBIE
   Display: 'Drow Sacerdotisa De Lolth'
@@ -1652,14 +3753,72 @@ MM_ENTE:
   Type: CREEPER
   Display: 'Ente'
   Health: 138
-  Damage: 23
+  Damage: 16
   Faction: plant
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=23;type=PHYSICAL} @target ~onAttack 0.8
+  # Pancada dupla
+  - damage{a=16;type=BLUDGEONING} @target ~onAttack 0.8
+  # Animar arvores (invoca 1-2 entes aliados)
+  - summon{type=MM_ENTE;amount=1;radius=6;yo=0} @self ~onTimer:1600 0.3
+  # Vulnerabilidade a fogo (autodebuff quando atingido por fogo)
+  - potion{t=WEAKNESS;d=120;lvl=2} @self ~onDamaged{c=involves{type=FIRE}} 1
+  # Resistência a dano físico (simulada)
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_ANDROESFINGE:
+  Type: BLAZE
+  Display: 'Androesfinge'
+  Health: 199
+  Damage: 17
+  Faction: monstrosity
+  Options:
+    MovementSpeed: 0.4  # 12 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Garras
+  - damage{a=17;type=SLASHING} @target ~onAttack 0.8
+  # Rugido (escalonado, simplificado em debuffs e dano)
+  - potion{t=WEAKNESS;d=100;lvl=2} @PlayersInRadius{r=150} ~onTimer:320 0.6
+  - potion{t=BLINDNESS;d=100;lvl=0} @PlayersInRadius{r=150} ~onTimer:320 0.6
+  - damage{a=44;type=SONIC} @PlayersInRadius{r=60} ~onTimer:320 0.6
+  - knockback{strength=1.2} @PlayersInRadius{r=10} ~onTimer:320 0.6
+  # Teleporte curto (lendária)
+  - teleport{spread=0;radius=18} @self ~onTimer:200 0.4
+  # Magias chave: dissipar / banimento (simples)
+  - potion{t=BLINDNESS;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:260 0.4
+  - potion{t=WEAKNESS;d=140;lvl=2} @PlayersInRadius{r=12} ~onTimer:260 0.4
+  # Resistência mágica/lendária simulada
+  - potion{t=DAMAGE_RESISTANCE;d=160;lvl=1} @self ~onTimer:200 0.4
+
+
+MM_GINOESFINGE:
+  Type: BLAZE
+  Display: 'Ginoesfinge'
+  Health: 136
+  Damage: 13
+  Faction: monstrosity
+  Options:
+    MovementSpeed: 0.4  # 12 m
+    FollowRange: 30
+    PreventOtherDrops: true
+    NoGravity: true  # voo 18 m
+  Skills:
+  # Garras
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.8
+  # Magias: ilusões e banimento leve
+  - potion{t=BLINDNESS;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:240 0.5
+  - potion{t=WEAKNESS;d=120;lvl=1} @PlayersInRadius{r=12} ~onTimer:240 0.5
+  # Teleporte curto
+  - teleport{spread=0;radius=12} @self ~onTimer:200 0.4
+  # Resistência e armas mágicas simuladas
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
 
 
 MM_ESPANTALHO:
@@ -1669,81 +3828,143 @@ MM_ESPANTALHO:
   Damage: 6
   Faction: construct
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 20
     PreventOtherDrops: true
   Skills:
-  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+  # Garras (2x)
+  - damage{a=6;type=SLASHING} @target ~onAttack 0.8
+  # Olhar aterrorizante / medo
+  - potion{t=WEAKNESS;d=100;lvl=1} @PlayersInRadius{r=9} ~onTimer:200 0.6
+  - potion{t=BLINDNESS;d=80;lvl=0} @PlayersInRadius{r=9} ~onTimer:200 0.6
+  # Aparência falsa: invis breve
+  - potion{t=INVISIBILITY;d=100;lvl=1} @self ~onTimer:260 0.4
+  # Vulnerável a fogo (autodebuff)
+  - potion{t=WEAKNESS;d=120;lvl=2} @self ~onDamaged{c=involves{type=FIRE}} 1
+  # Resistência a fisico n-magico
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
 
 
 MM_ESPECTRO:
   Type: ZOMBIE
   Display: 'Espectro'
   Health: 22
-  Damage: 4
+  Damage: 10
   Faction: undead
   Options:
-    MovementSpeed: 0.0
-    FollowRange: 18
+    MovementSpeed: 0.0  # incorporeo, usa voo
+    FollowRange: 22
     PreventOtherDrops: true
+    NoGravity: true
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Drenar vida (necrotico + reduzir max HP via wither)
+  - damage{a=10;type=NECROTIC} @target ~onAttack 0.8
+  - potion{t=WITHER;d=140;lvl=1} @target ~onAttack 0.6
+  # Movimento incorporeo: teleporte curto
+  - teleport{spread=0;radius=4} @self ~onTimer:200 0.4
+  # Sensibilidade ao sol (autodebuff leve)
+  - potion{t=WEAKNESS;d=80;lvl=1} @self ~onTimer:240 0.3
 
 
 MM_ESQUELETODEMINOTAURO:
   Type: ZOMBIE
   Display: 'Esqueleto De Minotauro'
   Health: 67
-  Damage: 11
+  Damage: 17
   Faction: undead
   Options:
     MovementSpeed: 0.48
-    FollowRange: 18
+    FollowRange: 22
     PreventOtherDrops: true
   Skills:
-  - damage{a=11;type=PHYSICAL} @target ~onAttack 0.8
+  # Machado grande
+  - damage{a=17;type=SLASHING} @target ~onAttack 0.8
+  # Chifre / investida
+  - damage{a=13;type=PIERCING} @target ~onAttack 0.7
+  - knockback{strength=1.4} @target ~onAttack 0.6
 
 
 MM_ESQUELETODECAVALODEGUERRA:
   Type: ZOMBIE
   Display: 'Esqueleto De Cavalo De Guerra'
   Health: 22
-  Damage: 4
+  Damage: 11
   Faction: undead
   Options:
     MovementSpeed: 0.72
-    FollowRange: 18
+    FollowRange: 22
     PreventOtherDrops: true
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Cascos
+  - damage{a=11;type=BLUDGEONING} @target ~onAttack 0.8
+
+
+MM_ESQUELETO:
+  Type: ZOMBIE
+  Display: 'Esqueleto'
+  Health: 13
+  Damage: 5
+  Faction: undead
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=5;type=PIERCING} @PlayersInRadius{r=18} ~onTimer:180 0.6
 
 
 MM_ESTRANGULADOR:
   Type: SPIDER
   Display: 'Estrangulador'
   Health: 93
-  Damage: 16
+  Damage: 22
   Faction: monster
   Options:
-    MovementSpeed: 0.12
-    FollowRange: 18
+    MovementSpeed: 0.12  # 3 m, escalada 3 m
+    FollowRange: 26
     PreventOtherDrops: true
+    Silent: true
   Skills:
-  - damage{a=16;type=PHYSICAL} @target ~onAttack 0.8
+  # Mordida
+  - damage{a=22;type=PIERCING} @target ~onAttack 0.7
+  # Gavinha agarrar e enfraquecer
+  - root{d=120} @PlayersInRadius{r=15} ~onTimer:120 0.6
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=15} ~onTimer:120 0.6
+  # Molinete: puxa alvos
+  - pull{r=15;to=self} @PlayersInRadius{r=15} ~onTimer:180 0.5
+  # Aparência falsa / furtividade
+  - potion{t=INVISIBILITY;d=120;lvl=1} @self ~onTimer:260 0.4
+  # Escalada
+  - teleport{spread=0;radius=4} @self ~onTimer:200 0.4
+  # Resistência rochosa
+  - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @self ~onTimer:200 0.4
 
 
 MM_ETTERCAP:
   Type: SPIDER
   Display: 'Ettercap'
   Health: 44
-  Damage: 7
+  Damage: 11
   Faction: monster
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m, escalada 9 m
+    FollowRange: 22
     PreventOtherDrops: true
+    Silent: false
   Skills:
-  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.8
+  # Mordida peçonhenta
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=4;type=POISON} @target ~onAttack 0.7
+  # Garras ou garrote de teia
+  - damage{a=7;type=SLASHING} @target ~onAttack 0.7
+  - root{d=140} @target ~onAttack 0.4
+  # Teia: prende a distância
+  - root{d=140} @PlayersInRadius{r=12} ~onTimer:200 0.6
+  # Sentido de teia: marca alvos
+  - potion{t=GLOWING;d=100;lvl=0} @PlayersInRadius{r=18} ~onTimer:240 0.4
+  # Escalada / andar em teia
+  - teleport{spread=0;radius=4} @self ~onTimer:200 0.4
 
 
 MM_ETTIN:
@@ -1761,73 +3982,217 @@ MM_ETTIN:
 
 
 MM_FANTASMA:
-  Type: ZOMBIE
+  Type: PHANTOM
   Display: 'Fantasma'
   Health: 45
-  Damage: 8
+  Damage: 17
   Faction: undead
   Options:
-    MovementSpeed: 0.0
-    FollowRange: 18
+    MovementSpeed: 0.0  # voo 12 m
+    FollowRange: 24
     PreventOtherDrops: true
+    NoGravity: true
   Skills:
-  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+  # Toque degradante
+  - damage{a=17;type=NECROTIC} @target ~onAttack 0.8
+  # Aspecto horripilante
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=18} ~onTimer:220 0.5
+  # Possessao (simplificada como stun curto)
+  - stun{d=60} @target ~onTimer:320 0.4
+  # Movimento etereo / teleporte curto
+  - teleport{spread=0;radius=4} @self ~onTimer:200 0.4
+  # Sensibilidade à luz
+  - potion{t=WEAKNESS;d=80;lvl=1} @self ~onTimer:240 0.3
+
+
+MM_FOGOFATUO:
+  Type: ALLAY
+  Display: 'Fogo-Fátuo'
+  Health: 22
+  Damage: 5
+  Faction: undead
+  Options:
+    MovementSpeed: 0.5  # voo 15 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
+  DamageModifiers:
+  - LIGHTNING 0
+  - POISON 0
+  - ACID 0.5
+  - FIRE 0.5
+  - COLD 0.5
+  - MAGIC 0.5
+  - PROJECTILE 0.5
+  Skills:
+  # Choque e forma etérea
+  - damage{a=5;type=LIGHTNING} @target ~onAttack 1
+  # Consumir vida (executa alvos à beira da morte)
+  - damage{a=10;type=TRUE} @target ?target.health<=4 ~onAttack 0.8
+  - heal{a=10} @self ?target.health<=4 ~onAttack 0.8
+  # Invisibilidade curta e luz variável
+  - potion{t=INVISIBILITY;d=120;lvl=1;overwrite=true} @self ~onTimer:140 0.6
 
 
 MM_FOMORI:
   Type: ZOMBIE
   Display: 'Fomori'
   Health: 149
-  Damage: 25
+  Damage: 19
   Faction: giant
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 26
     PreventOtherDrops: true
+  DamageModifiers:
+  - PROJECTILE 0.8
   Skills:
-  - damage{a=25;type=PHYSICAL} @target ~onAttack 0.8
+  # Clava grande
+  - damage{a=19;type=BLUNT} @target ~onAttack 1
+  # Olho Mal (dano psiquico)
+  - damage{a=27;type=MAGIC} @PlayersInRadius{r=18} ~onTimer:200 0.6
+  # Maldição do Olho Mal: lentidão e fraqueza prolongadas
+  - potion{t=SLOW;d=200;lvl=1} @PlayersInRadius{r=18} ~onTimer:380 0.5
+  - potion{t=WEAKNESS;d=200;lvl=1} @PlayersInRadius{r=18} ~onTimer:380 0.5
+
+
+MM_FLUMPH:
+  Type: ALLAY
+  Display: 'Flumph'
+  Health: 7
+  Damage: 4
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.05  # 1,5 m, voo 9 m
+    FollowRange: 16
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
+  Skills:
+  # Gavi​nhas com acido
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=2;type=ACID} @target ~onAttack 0.6
+  # Rajada fedorenta (1/dia simplificado por cooldown longo)
+  - potion{t=POISON;d=200;lvl=1} @PlayersInRadius{r=5} ~onTimer:1600 1
+  # Telepatia e resistencia mental (simulado)
+  - potion{t=RESISTANCE;d=120;lvl=1} @self ~onTimer:200 0.4
+  # Vulnerabilidade psiquica nao simulada diretamente
 
 
 MM_FUNGOVIOLETA:
   Type: CREEPER
   Display: 'Fungo Violeta'
   Health: 18
-  Damage: 3
+  Damage: 4
   Faction: plant
   Options:
-    MovementSpeed: 0.04
+    MovementSpeed: 0.05  # 1,5 m
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # 1d4 toques necróticos
+  - damage{a=4;type=NECROTIC} @target ~onAttack 1.0
+  - repeat{c=3;delay=5;skill={damage{a=4;type=NECROTIC} @target}} ~onAttack 0.5
 
 
 MM_GUINCHADOR:
   Type: CREEPER
   Display: 'Guinchador'
   Health: 13
-  Damage: 3
+  Damage: 0
   Faction: plant
   Options:
     MovementSpeed: 0.0
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Guincho de alarme ao detectar luz ou proximidade
+  - sound{s=entity.phantom.hurt;v=1;p=0.7} @PlayersInRadius{r=20} ~onDamaged 1
+  - sound{s=entity.phantom.ambient;v=1;p=1.2} @PlayersInRadius{r=20} ~onTimer:120 0.8
+  - potion{t=GLOWING;d=100;lvl=0} @PlayersInRadius{r=12} ~onTimer:200 0.6
+  - potion{t=SLOW;d=60;lvl=1} @PlayersInRadius{r=8} ~onDamaged 0.6
+
+
+MM_ESPOROGAS:
+  Type: ALLAY
+  Display: 'Esporo de Gás'
+  Health: 1
+  Damage: 1
+  Faction: plant
+  Options:
+    MovementSpeed: 0.08  # voo 3 m
+    FollowRange: 8
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
+  DamageModifiers:
+  - PROJECTILE 0
+  Skills:
+  # Explosão da morte
+  - damage{a=10;type=POISON} @PlayersInRadius{r=6} ~onDeath 1
+  - potion{t=POISON;d=200;lvl=1} @PlayersInRadius{r=6} ~onDeath 1
+  # Toque infectante
+  - damage{a=1;type=POISON} @target ~onAttack 1
+  - potion{t=POISON;d=200;lvl=1} @target ~onAttack 1
 
 
 MM_GALEBDUHR:
   Type: BLAZE
   Display: 'Galeb Duhr'
   Health: 85
-  Damage: 14
+  Damage: 12
+  Faction: elemental
+  Options:
+    MovementSpeed: 0.18  # 4,5 m (9 m rolando)
+    FollowRange: 22
+    PreventOtherDrops: true
+  DamageModifiers:
+  - PROJECTILE 0.8
+  Skills:
+  # Pancada
+  - damage{a=12;type=BLUNT} @target ~onAttack 1
+  # Investida rolante
+  - damage{a=7;type=BLUNT} @target ?targetdistance<=4 ~onAttack 0.6
+  # Animar pedregulhos: convoca 2 aliados rochosos temporariamente
+  - summon{t=MM_GALEBDUHR_MINION;amount=2;radius=6;ol=10} @self ~onTimer:1600 1
+  # Aparência falsa
+  - potion{t=INVISIBILITY;d=200;lvl=1;overwrite=true} @self ~onTimer:320 0.3
+
+MM_GALEBDUHR_MINION:
+  Type: BLAZE
+  Display: 'Pedregulho Animado'
+  Health: 30
+  Damage: 8
   Faction: elemental
   Options:
     MovementSpeed: 0.16
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=14;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=8;type=BLUNT} @target ~onAttack 1
+
+
+MM_GARGULA:
+  Type: BLAZE
+  Display: 'Gárgula'
+  Health: 52
+  Damage: 10
+  Faction: elemental
+  Options:
+    MovementSpeed: 0.36  # 9 m, voo 18 m
+    FollowRange: 20
+    PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - POISON 0
+  - PROJECTILE 0.6
+  Skills:
+  # Mordida e garras
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=5;type=SLASHING} @target ~onAttack 0.9
+  # Aparência falsa / vigia imóvel
+  - potion{t=INVISIBILITY;d=200;lvl=1;overwrite=true} @self ~onTimer:240 0.3
 
 
 MM_GARRARASTEJANTE:
@@ -1838,10 +4203,1114 @@ MM_GARRARASTEJANTE:
   Faction: undead
   Options:
     MovementSpeed: 0.24
+    FollowRange: 16
+    PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
+  Skills:
+  - damage{a=3;type=BLUNT} @target ~onAttack 0.8
+
+
+MM_CAVALEIRO_GITHYANKI:
+  Type: ZOMBIE
+  Display: 'Cavaleiro Githyanki'
+  Health: 91
+  Damage: 13
+  Faction: psionic
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 22
+    PreventOtherDrops: true
+  DamageModifiers:
+  - MAGIC 0.8
+  Skills:
+  # Espada grande prateada (2 ataques)
+  - damage{a=13;type=SLASHING} @target ~onAttack 1
+  - damage{a=10;type=MAGIC} @target ~onAttack 0.8
+  # Passo nebuloso / salto
+  - potion{t=LEVITATION;d=60;lvl=1} @self ~onTimer:280 0.4
+  # Telecinesia curta
+  - pull{v=1} @PlayersInRadius{r=8} ~onTimer:240 0.3
+
+
+MM_GUERREIRO_GITHYANKI:
+  Type: ZOMBIE
+  Display: 'Guerreiro Githyanki'
+  Health: 49
+  Damage: 9
+  Faction: psionic
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+  Skills:
+  # Espada grande (2 ataques) com dano psíquico leve
+  - damage{a=9;type=SLASHING} @target ~onAttack 1
+  - damage{a=7;type=MAGIC} @target ~onAttack 0.7
+  # Salto / passo nebuloso leve
+  - leap{v=1.1} @self ~onTimer:260 0.4
+
+
+MM_MONGE_GITHZERAI:
+  Type: ZOMBIE
+  Display: 'Monge Githzerai'
+  Health: 38
+  Damage: 6
+  Faction: psionic
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+  DamageModifiers:
+  - MAGIC 0.8
+  Skills:
+  # Dois golpes desarmados
+  - damage{a=6;type=BLUNT} @target ~onAttack 1
+  - damage{a=9;type=MAGIC} @target ~onAttack 0.8
+  # Defesa psíquica (escudo)
+  - potion{t=ABSORPTION;d=120;lvl=1} @self ~onTimer:220 0.4
+
+
+MM_ZERTH_GITHZERAI:
+  Type: ZOMBIE
+  Display: 'Zerth Githzerai'
+  Health: 84
+  Damage: 11
+  Faction: psionic
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 22
+    PreventOtherDrops: true
+  DamageModifiers:
+  - MAGIC 0.8
+  Skills:
+  # Dois golpes desarmados com dano psíquico maior
+  - damage{a=11;type=BLUNT} @target ~onAttack 1
+  - damage{a=13;type=MAGIC} @target ~onAttack 0.8
+  # Assassino fantasmagórico / medo leve
+  - potion{t=CONFUSION;d=120;lvl=1} @PlayersInRadius{r=8} ~onTimer:320 0.3
+  # Viagem planar simplificada (teleporte curto)
+  - teleport{spread=0;radius=6} @self ~onTimer:260 0.4
+
+
+MM_GNOLL:
+  Type: ZOMBIE
+  Display: 'Gnoll'
+  Health: 22
+  Damage: 5
+  Faction: gnoll
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+  Skills:
+  # Lança / arco longo
+  - damage{a=5;type=PIERCING} @target ~onAttack 1
+  # Mordida no frenesi
+  - damage{a=4;type=PIERCING} @target ?target.health<=6 ~onAttack 0.5
+  # Frenesi: avanço curto
+  - leap{v=0.8} @self ~onTimer:260 0.4
+
+
+MM_GNOLL_LIDER:
+  Type: ZOMBIE
+  Display: 'Líder de Matilha Gnoll'
+  Health: 49
+  Damage: 8
+  Faction: gnoll
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 22
+    PreventOtherDrops: true
+  Skills:
+  # Glaive / arco longo (dois ataques)
+  - damage{a=8;type=SLASHING} @target ~onAttack 1
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.8
+  # Mordida de frenesi
+  - damage{a=5;type=PIERCING} @target ?target.health<=8 ~onAttack 0.6
+  # Incitar frenesi em aliados próximos
+  - potion{t=STRENGTH;d=100;lvl=1} @MobsInRadius{r=8;types=ZOMBIE} ~onTimer:320 0.5
+
+
+MM_GNOLL_PRESA:
+  Type: ZOMBIE
+  Display: 'Presa de Yeenoghu'
+  Health: 65
+  Damage: 7
+  Faction: gnoll
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+  Skills:
+  # Mordida venenosa + garras (3 ataques)
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=7;type=POISON} @target ~onAttack 0.6
+  - damage{a=7;type=SLASHING} @target ~onAttack 0.9
+  - damage{a=7;type=SLASHING} @target ~onAttack 0.9
+  # Frenesi de avanço
+  - leap{v=1.0} @self ~onTimer:200 0.5
+
+
+MM_SVIRFNEBLIN:
+  Type: ZOMBIE
+  Display: 'Gnomo das Profundezas'
+  Health: 16
+  Damage: 6
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.24  # 6 m
+    FollowRange: 20
+    PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0.8
+  Skills:
+  # Picareta de guerra
+  - damage{a=6;type=PIERCING} @target ~onAttack 1
+  # Dardo envenenado
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=4;type=POISON} @target ~onAttack 0.6
+  # Camuflagem rochosa / nublar
+  - potion{t=INVISIBILITY;d=100;lvl=1;overwrite=true} @self ~onTimer:260 0.4
+  # Esperteza gnômica (resistência leve)
+  - potion{t=RESISTANCE;d=120;lvl=1} @self ~onTimer:240 0.3
+
+
+MM_GOBLIN:
+  Type: ZOMBIE
+  Display: 'Goblin'
+  Health: 7
+  Damage: 5
+  Faction: goblin
+  Options:
+    MovementSpeed: 0.36  # 9 m
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Cimitarra / arco curto
+  - damage{a=5;type=SLASHING} @target ~onAttack 1
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.8
+  # Escapada ágil
+  - leap{v=0.9} @self ~onTimer:220 0.4
+
+
+MM_CHEFE_GOBLIN:
+  Type: ZOMBIE
+  Display: 'Chefe Goblin'
+  Health: 21
+  Damage: 5
+  Faction: goblin
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+  Skills:
+  # Cimitarra (2 golpes, segundo mais fraco)
+  - damage{a=5;type=SLASHING} @target ~onAttack 1
+  - damage{a=3;type=SLASHING} @target ~onAttack 0.8
+  # Azagaia opcional
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.5
+  # Redirecionar (simulado como teleporte curto)
+  - teleport{spread=0;radius=4} @self ~onDamaged 0.4
+
+
+MM_GRELL:
+  Type: PHANTOM
+  Display: 'Grell'
+  Health: 55
+  Damage: 7
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.36  # voo 9 m
+    FollowRange: 18
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
+  DamageModifiers:
+  - LIGHTNING 0
+  - PROJECTILE 0.8
+  Skills:
+  # Tentáculos (paralisia) e bico
+  - damage{a=7;type=PIERCING} @target ~onAttack 1
+  - potion{t=SLOW;d=120;lvl=2} @target ~onAttack 0.6
+  - damage{a=7;type=PIERCING} @target ~onAttack 0.8
+  # Levitação/teleporte curto
+  - teleport{spread=0;radius=4} @self ~onTimer:240 0.4
+
+
+MM_GRICK:
+  Type: SPIDER
+  Display: 'Grick'
+  Health: 27
+  Damage: 9
+  Faction: monster
+  Options:
+    MovementSpeed: 0.36  # 9 m, escalada 9 m
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  # Tentáculos e bico
+  - damage{a=9;type=SLASHING} @target ~onAttack 1
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.8
+  # Camuflagem rochosa
+  - potion{t=INVISIBILITY;d=120;lvl=1;overwrite=true} @self ~onTimer:280 0.3
+
+
+MM_GRICK_ALFA:
+  Type: SPIDER
+  Display: 'Grick Alfa'
+  Health: 75
+  Damage: 22
+  Faction: monster
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 22
+    PreventOtherDrops: true
+  Skills:
+  # Cauda, tentáculos e bico
+  - damage{a=11;type=BLUNT} @target ~onAttack 1
+  - damage{a=22;type=SLASHING} @target ~onAttack 0.9
+  - damage{a=13;type=PIERCING} @target ~onAttack 0.7
+  # Camuflagem rochosa
+  - potion{t=INVISIBILITY;d=120;lvl=1;overwrite=true} @self ~onTimer:240 0.3
+
+
+MM_GRIFFO:
+  Type: PHANTOM
+  Display: 'Grifo'
+  Health: 59
+  Damage: 11
+  Faction: beast
+  Options:
+    MovementSpeed: 0.8  # voo 24 m
+    FollowRange: 26
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  # Bico e garras
+  - damage{a=8;type=PIERCING} @target ~onAttack 1
+  - damage{a=11;type=SLASHING} @target ~onAttack 0.9
+  # Visão aguçada (marcar alvo)
+  - potion{t=GLOWING;d=120;lvl=0} @target ~onAttack 0.3
+
+
+MM_GRIMLOCK:
+  Type: ZOMBIE
+  Display: 'Grimlock'
+  Health: 11
+  Damage: 5
+  Faction: monster
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  DamageModifiers:
+  - BLINDNESS 0
+  Skills:
+  # Clava de osso com cravos
+  - damage{a=7;type=BLUNT} @target ~onAttack 1
+  # Audição/olfato aguçados (detectar)
+  - potion{t=GLOWING;d=60;lvl=0} @PlayersInRadius{r=12} ~onTimer:260 0.4
+
+
+MM_GUARDIAO_ESCUDO:
+  Type: IRON_GOLEM
+  Display: 'Guardião do Escudo'
+  Health: 142
+  Damage: 11
+  Faction: construct
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 24
+    PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
+  - MAGIC 0.7
+  Skills:
+  # Punhos (2 ataques)
+  - damage{a=11;type=BLUNT} @target ~onAttack 1
+  # Regeneração simulada
+  - heal{a=10} @self ~onTimer:200 0.6
+  # Escudo para o mestre (buff curto)
+  - potion{t=RESISTANCE;d=100;lvl=1} @PlayersInRadius{r=2} ~onTimer:200 0.5
+
+
+MM_HARPIA:
+  Type: PHANTOM
+  Display: 'Harpia'
+  Health: 38
+  Damage: 6
+  Faction: monster
+  Options:
+    MovementSpeed: 0.48  # 6 m, voo 12 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  # Garras e clava
+  - damage{a=6;type=SLASHING} @target ~onAttack 1
+  - damage{a=3;type=BLUNT} @target ~onAttack 0.8
+  # Canção sedutora (puxão e lentidão)
+  - pull{v=1} @PlayersInRadius{r=24} ~onTimer:220 0.5
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=24} ~onTimer:220 0.5
+
+
+MM_HIDRA:
+  Type: PHANTOM
+  Display: 'Hidra'
+  Health: 172
+  Damage: 10
+  Faction: beast
+  Options:
+    MovementSpeed: 0.36  # 9 m, natação 9 m
+    FollowRange: 26
+    PreventOtherDrops: true
+  DamageModifiers:
+  - PROJECTILE 0.8
+  Skills:
+  # Mordidas múltiplas (5 cabeças base)
+  - damage{a=10;type=PIERCING} @PlayersInRadius{r=3} ~onTimer:80 1
+  - damage{a=10;type=PIERCING} @PlayersInRadius{r=3} ~onTimer:80 1
+  - damage{a=10;type=PIERCING} @PlayersInRadius{r=3} ~onTimer:80 1
+  - damage{a=10;type=PIERCING} @PlayersInRadius{r=3} ~onTimer:80 1
+  - damage{a=10;type=PIERCING} @PlayersInRadius{r=3} ~onTimer:80 1
+  # Crescimento de cabeças / cura leve
+  - heal{a=10} @self ~onTimer:260 0.5
+
+
+MM_HOMEM_CHACAL:
+  Type: ZOMBIE
+  Display: 'Homem-chacal'
+  Health: 18
+  Damage: 5
+  Faction: monster
+  Options:
+    MovementSpeed: 0.36  # 12 m
+    FollowRange: 22
+    PreventOtherDrops: true
+  Skills:
+  # Mordida ou cimitarra
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=5;type=SLASHING} @target ~onAttack 0.8
+  # Olhar adormecente
+  - potion{t=SLOW;d=200;lvl=4} @PlayersInRadius{r=9} ~onTimer:320 0.5
+  - stun{d=60} @PlayersInRadius{r=9} ~onTimer:320 0.3
+  # Tática de matilha: pequeno impulso
+  - potion{t=STRENGTH;d=80;lvl=0} @MobsInRadius{r=8;types=ZOMBIE} ~onTimer:280 0.4
+  - leap{v=0.9} @self ~onTimer:260 0.4
+
+
+MM_LAMIA:
+  Type: ZOMBIE
+  Display: 'Lâmia'
+  Health: 97
+  Damage: 14
+  Faction: monster
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+  Skills:
+  # Garras / adaga
+  - damage{a=14;type=SLASHING} @target ~onAttack 1
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.6
+  # Toque intoxicante: enfraquece
+  - potion{t=WEAKNESS;d=200;lvl=1} @PlayersInRadius{r=5} ~onAttack 0.35
+
+
+MM_HOMEM_JAVALI:
+  Type: ZOMBIE
+  Display: 'Homem-javali'
+  Health: 78
+  Damage: 10
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36  # 9 m (12 m javali)
+    FollowRange: 22
+    PreventOtherDrops: true
+  Skills:
+  # Malho ou presas
+  - damage{a=10;type=BLUNT} @target ~onAttack 1
+  - damage{a=10;type=SLASHING} @target ~onAttack 0.8
+  # Investida curta
+  - leap{v=1} @self ~onAttack 0.4
+  - potion{t=SLOW;d=100;lvl=1} @target ~onAttack 0.35
+
+
+MM_HOMEM_RATO:
+  Type: ZOMBIE
+  Display: 'Homem-rato'
+  Health: 33
+  Damage: 5
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 22
+    PreventOtherDrops: true
+  Skills:
+  # Espada curta / besta
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.5
+  # Mordida licantropa
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.6
+  - potion{t=POISON;d=120;lvl=0} @target ~onAttack 0.5
+  # Furtividade leve
+  - potion{t=INVISIBILITY;d=40;lvl=0} @self ~onTimer:400 0.2
+
+
+MM_HOMEM_TIGRE:
+  Type: ZOMBIE
+  Display: 'Homem-tigre'
+  Health: 120
+  Damage: 8
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.38  # 9 m (12 m tigre)
+    FollowRange: 24
+    PreventOtherDrops: true
+  Skills:
+  # Garras / mordida
+  - damage{a=7;type=SLASHING} @target ~onAttack 1
+  - damage{a=8;type=PIERCING} @target ~onAttack 0.6
+  # Cimitarra / arco longo
+  - damage{a=6;type=SLASHING} @target ~onAttack 0.8
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.5
+  # Bote: derrubar
+  - potion{t=SLOW;d=100;lvl=1} @target ~onAttack 0.35
+  - throw{v=6;vy=-8} @target ~onAttack 0.35
+
+
+MM_HOMEM_URSO:
+  Type: ZOMBIE
+  Display: 'Homem-urso'
+  Health: 135
+  Damage: 13
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.34  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+  Skills:
+  # Machado / garras / mordida
+  - damage{a=10;type=SLASHING} @target ~onAttack 0.9
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.8
+  - damage{a=15;type=PIERCING} @target ~onAttack 0.6
+  # Rugido leve
+  - potion{t=WEAKNESS;d=80;lvl=1} @PlayersInRadius{r=5} ~onTimer:260 0.35
+
+
+MM_LOBISOMEM:
+  Type: ZOMBIE
+  Display: 'Lobisomem'
+  Health: 58
+  Damage: 7
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.38  # 9 m (12 m lobo)
+    FollowRange: 22
+    PreventOtherDrops: true
+  Skills:
+  # Garras / mordida / lança
+  - damage{a=7;type=SLASHING} @target ~onAttack 1
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.6
+  # Derrubar com salto
+  - leap{v=1} @self ~onAttack 0.4
+  - potion{t=SLOW;d=100;lvl=1} @target ~onAttack 0.35
+
+
+MM_HOMUNCULO:
+  Type: ALLAY
+  Display: 'Homúnculo'
+  Health: 5
+  Damage: 1
+  Faction: construct
+  Options:
+    MovementSpeed: 0.4  # 12 m voo
+    FollowRange: 18
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
+  DamageModifiers:
+  - POISON 0
+  Skills:
+  # Mordida venenosa
+  - damage{a=1;type=PIERCING} @target ~onAttack 1
+  - potion{t=POISON;d=200;lvl=1} @target ~onAttack 0.8
+  - potion{t=SLOW;d=120;lvl=2} @target ~onAttack 0.4
+  # Vínculo telepático (leve visão brilhante)
+  - potion{t=GLOWING;d=80;lvl=0} @self ~onTimer:200 0.4
+
+
+MM_HORROR_ELMO:
+  Type: IRON_GOLEM
+  Display: 'Horror de Elmo'
+  Health: 60
+  Damage: 8
+  Faction: construct
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - PROJECTILE 0.6
+  - MAGIC 0.7
+  Skills:
+  # Espada longa (2 golpes)
+  - damage{a=8;type=SLASHING} @target ~onAttack 1
+  - damage{a=8;type=SLASHING} @target ~onAttack 0.8
+  # Imunidade mágica simulada (resistência)
+  - potion{t=ABSORPTION;d=120;lvl=1} @self ~onTimer:240 0.4
+  # Ataque aéreo contra conjuradores
+  - pull{v=1} @PlayersInRadius{r=10} ~onTimer:260 0.3
+
+
+MM_HORRORGANCHO:
+  Type: PHANTOM
+  Display: 'Horror de Gancho'
+  Health: 75
+  Damage: 11
+  Faction: monster
+  Options:
+    MovementSpeed: 0.36  # 9 m, escalada 9 m
+    FollowRange: 22
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  # Ganchos perfurantes (2 ataques)
+  - damage{a=11;type=PIERCING} @target ~onAttack 1
+  - damage{a=11;type=PIERCING} @target ~onAttack 0.9
+  # Audição aguçada / eco localização (marcar)
+  - potion{t=GLOWING;d=80;lvl=0} @PlayersInRadius{r=12} ~onTimer:240 0.4
+  # Escalada/retirada rápida
+  - leap{v=1.0} @self ~onTimer:260 0.4
+
+
+MM_ESPETO_INFECTADO:
+  Type: PHANTOM
+  Display: 'Espeto Infectado'
+  Health: 11
+  Damage: 8
+  Faction: plant
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  # Garras e agulhas
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=8;type=PIERCING} @PlayersInRadius{r=12} ~onTimer:220 0.6
+  # Pólen de alerta
+  - sound{s=block.bamboo.hit;v=1;p=1.2} @PlayersInRadius{r=16} ~onDamaged 0.6
+
+
+MM_GALHO_INFECTADO:
+  Type: PHANTOM
+  Display: 'Galho Infectado'
+  Health: 4
+  Damage: 3
+  Faction: plant
+  Options:
+    MovementSpeed: 0.24  # 6 m
+    FollowRange: 16
+    PreventOtherDrops: true
+  DamageModifiers:
+  - FIRE 1.5
+  Skills:
+  # Garras
+  - damage{a=3;type=PIERCING} @target ~onAttack 0.9
+  # Aparência falsa
+  - potion{t=INVISIBILITY;d=120;lvl=1;overwrite=true} @self ~onTimer:260 0.4
+
+
+MM_VINHA_INFECTADA:
+  Type: PHANTOM
+  Display: 'Vinha Infectada'
+  Health: 26
+  Damage: 9
+  Faction: plant
+  Options:
+    MovementSpeed: 0.18  # 3 m
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  # Constrição
+  - damage{a=9;type=BLUNT} @target ~onAttack 0.9
+  - pull{v=0.6} @PlayersInRadius{r=6} ~onAttack 0.8
+  # Plantas constritoras
+  - root{d=80} @PlayersInRadius{r=8} ~onTimer:320 0.5
+  - potion{t=SLOW;d=160;lvl=1} @PlayersInRadius{r=8} ~onTimer:320 0.5
+
+
+MM_INUMANO:
+  Type: ZOMBIE
+  Display: 'Inumano'
+  Health: 45
+  Damage: 6
+  Faction: undead
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 24
+    PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
+  - MAGIC 0.8
+  Skills:
+  # Espada longa / arco
+  - damage{a=6;type=SLASHING} @target ~onAttack 1
+  - damage{a=6;type=PIERCING} @PlayersInRadius{r=18} ~onTimer:200 0.6
+  # Drenar vida
+  - damage{a=5;type=NECROTIC} @target ~onAttack 0.8
+  - potion{t=WEAKNESS;d=120;lvl=1} @target ~onAttack 0.6
+  # Levantar zumbis breves em torno
+  - summon{t=MM_ZUMBI;amount=2;radius=6;ol=8} @self ~onKill 0.6
+
+
+MM_KENKU:
+  Type: ZOMBIE
+  Display: 'Kenku'
+  Health: 13
+  Damage: 6
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 20
+    PreventOtherDrops: true
+  Skills:
+  # Espada curta e arco curto
+  - damage{a=6;type=PIERCING} @target ~onAttack 1
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.8
+  # Emboscador: ofuscar alvo
+  - potion{t=BLINDNESS;d=60;lvl=0} @target ~onAttack 0.3
+
+
+MM_KOBOLD:
+  Type: ZOMBIE
+  Display: 'Kobold'
+  Health: 5
+  Damage: 4
+  Faction: kobold
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  # Adaga / funda
+  - damage{a=4;type=PIERCING} @target ~onAttack 1
+  - damage{a=4;type=BLUNT} @target ~onAttack 0.8
+  # Tática de matilha
+  - potion{t=STRENGTH;d=80;lvl=0} @MobsInRadius{r=6;types=ZOMBIE} ~onTimer:240 0.4
+
+
+MM_KOBOLD_ALADO:
+  Type: PHANTOM
+  Display: 'Kobold Alado'
+  Health: 7
+  Damage: 5
+  Faction: kobold
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 20
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  # Adaga e pedra arremessada
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=6;type=BLUNT} @PlayersInRadius{r=10} ~onTimer:200 0.6
+  # Voo evasivo
+  - leap{v=1.0} @self ~onTimer:260 0.4
+
+
+MM_KRAKEN:
+  Type: GIANT
+  Display: 'Kraken'
+  Health: 472
+  Damage: 23
+  Faction: beast
+  Options:
+    MovementSpeed: 0.24  # 6 m, natação 18 m
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - PROJECTILE 0.7
+  - MAGIC 0.8
+  Skills:
+  # Mordida e tentáculos
+  - damage{a=23;type=PIERCING} @target ~onAttack 1
+  - damage{a=20;type=BLUNT} @target ~onAttack 1
+  # Tempestade elétrica
+  - damage{a=22;type=LIGHTNING} @PlayersInRadius{r=20} ~onTimer:200 0.6
+  # Nuvem de tinta venenosa
+  - potion{t=POISON;d=160;lvl=2} @PlayersInRadius{r=12} ~onDamaged 0.5
+  # Correnteza forte (empurrão)
+  - push{v=1.2} @PlayersInRadius{r=14} ~onTimer:240 0.5
+
+
+MM_KUOTOA:
+  Type: ZOMBIE
+  Display: 'Kuo-toa'
+  Health: 18
+  Damage: 4
+  Faction: kuo-toa
+  Options:
+    MovementSpeed: 0.36  # 9 m, natação 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+  Skills:
+  # Mordida / lança / rede
+  - damage{a=3;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=4;type=PIERCING} @target ~onAttack 1
+  # Escorregadio / percepção (leve marca)
+  - potion{t=GLOWING;d=80;lvl=0} @PlayersInRadius{r=8} ~onDamaged 0.4
+
+
+MM_KUOTOA_ACOITADOR:
+  Type: ZOMBIE
+  Display: 'Açoitador Kuo-toa'
+  Health: 65
+  Damage: 5
+  Faction: kuo-toa
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 22
+    PreventOtherDrops: true
+  Skills:
+  # Mordida e bastão pinçado (2 ataques)
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=5;type=PIERCING} @target ~onAttack 1
+  # Grapple curto (bastão)
+  - pull{v=0.8} @PlayersInRadius{r=6} ~onAttack 0.6
+
+
+MM_KUOTOA_MONITOR:
+  Type: ZOMBIE
+  Display: 'Monitor Kuo-toa'
+  Health: 65
+  Damage: 5
+  Faction: kuo-toa
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 22
+    PreventOtherDrops: true
+  Skills:
+  # Mordida e dois golpes desarmados
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=5;type=BLUNT} @target ~onAttack 1
+  - damage{a=5;type=BLUNT} @target ~onAttack 0.9
+  # Silenciamento breve (sem reações)
+  - potion{t=SLOW;d=60;lvl=4} @target ~onAttack 0.5
+
+
+MM_KUOTOA_ARCEBISPO:
+  Type: ZOMBIE
+  Display: 'Arcebispo Kuo-toa'
+  Health: 97
+  Damage: 6
+  Faction: kuo-toa
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 24
+    PreventOtherDrops: true
+  DamageModifiers:
+  - MAGIC 0.8
+  Skills:
+  # Cetro / golpe desarmado
+  - damage{a=6;type=BLUNT} @target ~onAttack 1
+  - damage{a=14;type=LIGHTNING} @target ~onAttack 0.6
+  # Magias de clérigo simuladas
+  - heal{a=10} @self ~onTimer:260 0.5
+  - potion{t=RESISTANCE;d=120;lvl=1} @self ~onTimer:260 0.5
+
+
+MM_HIPOGRIFO:
+  Type: PHANTOM
+  Display: 'Hipogrifo'
+  Health: 19
+  Damage: 8
+  Faction: beast
+  Options:
+    MovementSpeed: 0.64  # 12 m, voo 18 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  # Bico e garras
+  - damage{a=8;type=PIERCING} @target ~onAttack 1
+  - damage{a=10;type=SLASHING} @target ~onAttack 0.9
+  # Visão aguçada (marca leve)
+  - potion{t=GLOWING;d=100;lvl=0} @target ~onAttack 0.3
+
+
+MM_HOBGOBLIN:
+  Type: ZOMBIE
+  Display: 'Hobgoblin'
+  Health: 11
+  Damage: 5
+  Faction: goblin
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+  Skills:
+  # Espada longa / arco longo
+  - damage{a=5;type=SLASHING} @target ~onAttack 1
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.7
+  # Vantagem marcial (buff leve se aliado próximo)
+  - potion{t=STRENGTH;d=80;lvl=1} @MobsInRadius{r=2;types=ZOMBIE} ~onTimer:220 0.4
+
+
+MM_HOBGOBLIN_CAPITAO:
+  Type: ZOMBIE
+  Display: 'Hobgoblin Capitão'
+  Health: 39
+  Damage: 9
+  Faction: goblin
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 22
+    PreventOtherDrops: true
+  Skills:
+  # Espada grande (2 ataques)
+  - damage{a=9;type=SLASHING} @target ~onAttack 1
+  - damage{a=9;type=SLASHING} @target ~onAttack 0.8
+  # Liderança (buff aliados)
+  - potion{t=STRENGTH;d=100;lvl=1} @MobsInRadius{r=8;types=ZOMBIE} ~onTimer:320 0.5
+
+
+MM_HOBGOBLIN_SENHOR:
+  Type: ZOMBIE
+  Display: 'Hobgoblin Senhor da Guerra'
+  Health: 97
+  Damage: 7
+  Faction: goblin
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 24
+    PreventOtherDrops: true
+  Skills:
+  # Espada longa (3 ataques)
+  - damage{a=7;type=SLASHING} @target ~onAttack 1
+  - damage{a=7;type=SLASHING} @target ~onAttack 1
+  - damage{a=7;type=SLASHING} @target ~onAttack 1
+  # Pancada de escudo
+  - knockback{strength=1} @target ~onAttack 0.6
+  # Liderança forte
+  - potion{t=STRENGTH;d=120;lvl=2} @MobsInRadius{r=10;types=ZOMBIE} ~onTimer:320 0.6
+
+
+MM_GOLEM_BARRO:
+  Type: IRON_GOLEM
+  Display: 'Golem de Barro'
+  Health: 133
+  Damage: 16
+  Faction: construct
+  Options:
+    MovementSpeed: 0.24  # 6 m
+    FollowRange: 24
+    PreventOtherDrops: true
+  DamageModifiers:
+  - ACID 0
+  - POISON 0
+  - MAGIC 0.7
+  Skills:
+  # Pancada (2 ataques) e redução de PV
+  - damage{a=16;type=BLUNT} @target ~onAttack 1
+  - potion{t=WEAKNESS;d=120;lvl=2} @PlayersInRadius{r=4} ~onTimer:260 0.4
+  # Fúria: buff curto quando ferido
+  - potion{t=INCREASE_DAMAGE;d=100;lvl=1} @self ?self.health<=60 ~onTimer:200 0.5
+  # Velocidade breve
+  - potion{t=SPEED;d=80;lvl=1} @self ~onTimer:260 0.3
+
+
+MM_GOLEM_CARNE:
+  Type: IRON_GOLEM
+  Display: 'Golem de Carne'
+  Health: 93
+  Damage: 13
+  Faction: construct
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 22
+    PreventOtherDrops: true
+  DamageModifiers:
+  - LIGHTNING 0
+  - POISON 0
+  - FIRE 1.2
+  Skills:
+  # Pancadas (2 ataques)
+  - damage{a=13;type=BLUNT} @target ~onAttack 1
+  # Aversão a fogo (lentidão leve ao ser queimado)
+  - potion{t=SLOW;d=80;lvl=1} @self ~onDamaged{c=involves{type=FIRE}} 1
+  # Fúria se ferido
+  - potion{t=INCREASE_DAMAGE;d=100;lvl=1} @self ?self.health<=40 ~onTimer:200 0.5
+  # Absorção de eletricidade simulada (cura ao tomar choque)
+  - heal{a=8} @self ~onDamaged{c=involves{type=LIGHTNING}} 1
+
+
+MM_GOLEM_FERRO:
+  Type: IRON_GOLEM
+  Display: 'Golem de Ferro'
+  Health: 210
+  Damage: 20
+  Faction: construct
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 28
+    PreventOtherDrops: true
+  DamageModifiers:
+  - FIRE 0
+  - POISON 0
+  - PROJECTILE 0.6
+  Skills:
+  # Pancada / espada (2 ataques)
+  - damage{a=20;type=BLUNT} @target ~onAttack 1
+  - damage{a=23;type=SLASHING} @target ~onAttack 0.8
+  # Sopro venenoso (cone curto)
+  - damage{a=45;type=POISON} @PlayersInRadius{r=5} ~onTimer:320 0.6
+
+
+MM_GOLEM_PEDRA:
+  Type: IRON_GOLEM
+  Display: 'Golem de Pedra'
+  Health: 178
+  Damage: 19
+  Faction: construct
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 26
+    PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
+  - PROJECTILE 0.8
+  Skills:
+  # Pancada (2 ataques)
+  - damage{a=19;type=BLUNT} @target ~onAttack 1
+  # Lentidão mágica
+  - potion{t=SLOW;d=120;lvl=2} @PlayersInRadius{r=4} ~onTimer:260 0.5
+
+
+MM_GORGON:
+  Type: COW
+  Display: 'Górgon'
+  Health: 114
+  Damage: 18
+  Faction: beast
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 24
+    PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
+  Skills:
+  # Chifres e cascos
+  - damage{a=18;type=PIERCING} @target ~onAttack 1
+  - damage{a=16;type=BLUNT} @target ~onAttack 0.8
+  # Investida atropeladora
+  - knockback{strength=1.2} @target ~onAttack 0.6
+  # Sopro petrificante (cone curto)
+  - potion{t=SLOWNESS;d=100;lvl=3} @PlayersInRadius{r=4} ~onTimer:320 0.5
+  - potion{t=BLINDNESS;d=60;lvl=1} @PlayersInRadius{r=4} ~onTimer:320 0.4
+
+MM_DAO:
+  Type: BLAZE
+  Display: 'Dao'
+  Health: 187
+  Damage: 15
+  Faction: genie
+  Options:
+    MovementSpeed: 0.36  # 9 m, escavação
+    FollowRange: 28
+    PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - POISON 0
+  - FALL 0.6
+  Skills:
+  # Punho / malho
+  - damage{a=15;type=BLUNT} @target ~onAttack 0.9
+  - damage{a=20;type=BLUNT} @target ~onAttack 0.6
+  # Derrubar com malho
+  - knockback{strength=1} @target ~onAttack 0.3
+  # Moldar pedra / mover terra (controle)
+  - blockmask{mat=stone;radius=3;duration=80} @self ~onTimer:260 0.4
+  # Invisibilidade breve
+  - potion{t=INVISIBILITY;d=120;lvl=1;overwrite=true} @self ~onTimer:320 0.3
+
+
+MM_DJINNI:
+  Type: PHANTOM
+  Display: 'Djinni'
+  Health: 161
+  Damage: 12
+  Faction: genie
+  Options:
+    MovementSpeed: 0.9  # voo 27 m
+    FollowRange: 28
+    PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - LIGHTNING 0
+  - SONIC_BOOM 0
+  Skills:
+  # Cimitarra com trovão/relâmpago
+  - damage{a=12;type=SLASHING} @target ~onAttack 1
+  - damage{a=3;type=LIGHTNING} @target ~onAttack 0.8
+  # Vendaval de contenção
+  - pull{v=1.1} @PlayersInRadius{r=4} ~onTimer:200 0.6
+  - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=4} ~onTimer:200 0.5
+  # Invisibilidade curta
+  - potion{t=INVISIBILITY;d=120;lvl=1;overwrite=true} @self ~onTimer:320 0.3
+
+
+MM_EFREETI:
+  Type: BLAZE
+  Display: 'Efreeti'
+  Health: 200
+  Damage: 13
+  Faction: genie
+  Options:
+    MovementSpeed: 0.72  # 18 m voo
+    FollowRange: 28
+    PreventOtherDrops: true
+  DamageModifiers:
+  - FIRE 0
+  - POISON 0
+  Skills:
+  # Cimitarra flamejante
+  - damage{a=13;type=SLASHING} @target ~onAttack 1
+  - damage{a=7;type=FIRE} @target ~onAttack 0.9
+  # Arremesso de chamas
+  - damage{a=17;type=FIRE} @PlayersInRadius{r=12} ~onTimer:200 0.6
+  # Invisibilidade curta
+  - potion{t=INVISIBILITY;d=120;lvl=1;overwrite=true} @self ~onTimer:320 0.3
+
+
+MM_MARID:
+  Type: BLAZE
+  Display: 'Marid'
+  Health: 229
+  Damage: 13
+  Faction: genie
+  Options:
+    MovementSpeed: 0.72  # natação 27 m, voo 18 m
+    FollowRange: 28
+    PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - FIRE 1.25
+  - POISON 0
+  - LIGHTNING 0
+  - COLD 0
+  Skills:
+  # Tridente
+  - damage{a=13;type=PIERCING} @target ~onAttack 1
+  # Jato de água
+  - damage{a=21;type=BLUNT} @PlayersInRadius{r=10} ~onTimer:200 0.6
+  - knockback{strength=1.2} @PlayersInRadius{r=10} ~onTimer:200 0.6
+  # Névoa / invisibilidade curta
+  - potion{t=INVISIBILITY;d=120;lvl=1;overwrite=true} @self ~onTimer:320 0.3
 
 
 MM_GIGANTEDACOLINA:
@@ -1851,11 +5320,14 @@ MM_GIGANTEDACOLINA:
   Damage: 18
   Faction: giant
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=18;type=PHYSICAL} @target ~onAttack 0.8
+  # Clava grande (2 ataques)
+  - damage{a=18;type=BLUNT} @target ~onAttack 1
+  # Arremesso de pedra
+  - damage{a=21;type=BLUNT} @PlayersInRadius{r=20} ~onTimer:200 0.6
 
 
 MM_GIGANTEDATEMPESTADE:
@@ -1865,67 +5337,101 @@ MM_GIGANTEDATEMPESTADE:
   Damage: 30
   Faction: giant
   Options:
-    MovementSpeed: 0.6
-    FollowRange: 18
+    MovementSpeed: 0.6  # 15 m
+    FollowRange: 32
     PreventOtherDrops: true
+  DamageModifiers:
+  - LIGHTNING 0
+  - SONIC_BOOM 0
+  - FALL 0.5
   Skills:
-  - damage{a=30;type=PHYSICAL} @target ~onAttack 0.8
+  # Espada grande (2 ataques)
+  - damage{a=30;type=SLASHING} @target ~onAttack 1
+  # Arremesso de pedra
+  - damage{a=35;type=BLUNT} @PlayersInRadius{r=24} ~onTimer:200 0.6
+  # Golpe de relâmpago
+  - damage{a=54;type=LIGHTNING} @PlayersInRadius{r=6} ~onTimer:320 0.6
+  # Resistência a quedas
+  - potion{t=JUMP;d=140;lvl=2} @self ~onTimer:240 0.3
 
 
 MM_GIGANTEDASNUVENS:
   Type: ZOMBIE
   Display: 'Gigante Das Nuvens'
   Health: 200
-  Damage: 30
+  Damage: 21
   Faction: giant
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 28
     PreventOtherDrops: true
   Skills:
-  - damage{a=30;type=PHYSICAL} @target ~onAttack 0.8
+  # Maça estrela (2 ataques)
+  - damage{a=21;type=PIERCING} @target ~onAttack 1
+  # Arremesso de pedra
+  - damage{a=30;type=BLUNT} @PlayersInRadius{r=24} ~onTimer:200 0.6
+  # Névoa e voo curto
+  - potion{t=SLOW_FALLING;d=140;lvl=1} @self ~onTimer:240 0.4
+  - potion{t=LEVITATION;d=60;lvl=1} @self ~onTimer:320 0.3
 
 
 MM_GIGANTEDEPEDRA:
   Type: ZOMBIE
   Display: 'Gigante De Pedra'
   Health: 126
-  Damage: 21
+  Damage: 19
   Faction: giant
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=21;type=PHYSICAL} @target ~onAttack 0.8
+  # Clava grande (2 ataques)
+  - damage{a=19;type=BLUNT} @target ~onAttack 1
+  # Arremesso de pedra
+  - damage{a=28;type=BLUNT} @PlayersInRadius{r=24} ~onTimer:200 0.6
+  # Camuflagem em rocha
+  - potion{t=INVISIBILITY;d=120;lvl=1;overwrite=true} @self ~onTimer:260 0.3
 
 
 MM_GIGANTEDOFOGO:
   Type: ZOMBIE
   Display: 'Gigante Do Fogo'
   Health: 162
-  Damage: 27
+  Damage: 28
   Faction: giant
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
     PreventOtherDrops: true
+  DamageModifiers:
+  - FIRE 0
   Skills:
-  - damage{a=27;type=PHYSICAL} @target ~onAttack 0.8
+  # Espada grande (2 ataques)
+  - damage{a=28;type=SLASHING} @target ~onAttack 1
+  # Arremesso de pedra
+  - damage{a=29;type=BLUNT} @PlayersInRadius{r=24} ~onTimer:200 0.6
+  # Aura quente
+  - damage{a=5;type=FIRE} @PlayersInRadius{r=3} ~onTimer:160 0.5
 
 
 MM_GIGANTEDOGELO:
   Type: ZOMBIE
   Display: 'Gigante Do Gelo'
   Health: 138
-  Damage: 23
+  Damage: 25
   Faction: giant
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 24
     PreventOtherDrops: true
+  DamageModifiers:
+  - COLD 0
   Skills:
-  - damage{a=23;type=PHYSICAL} @target ~onAttack 0.8
+  # Machado grande (2 ataques)
+  - damage{a=25;type=SLASHING} @target ~onAttack 1
+  # Arremesso de pedra
+  - damage{a=28;type=BLUNT} @PlayersInRadius{r=24} ~onTimer:200 0.6
 
 
 MM_CAVALEIROGITHYANKI:
@@ -2138,6 +5644,49 @@ MM_GRIFO:
   - damage{a=10;type=PHYSICAL} @target ~onAttack 0.8
 
 
+MM_HOMEM_CHACAL:
+  Type: SPIDER
+  Display: 'Homem-chacal'
+  Health: 18
+  Damage: 5
+  Faction: monster
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=5;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_LAMIA:
+  Type: SPIDER
+  Display: 'Lâmia'
+  Health: 97
+  Damage: 14
+  Faction: monster
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=14;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_HOMUNCULO:
+  Type: SPIDER
+  Display: 'Homúnculo'
+  Health: 5
+  Damage: 1
+  Faction: construct
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  - damage{a=1;type=PHYSICAL} @target ~onAttack 0.8
+
+
 MM_GRIMLOCK:
   Type: ZOMBIE
   Display: 'Grimlock'
@@ -2192,6 +5741,62 @@ MM_HIPOGRIFO:
     PreventOtherDrops: true
   Skills:
   - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_HORRORGANCHO:
+  Type: SPIDER
+  Display: 'Horror de Gancho'
+  Health: 75
+  Damage: 11
+  Faction: monster
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=11;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_ESPETO_INFECTADO:
+  Type: SPIDER
+  Display: 'Espeto Infectado'
+  Health: 11
+  Damage: 8
+  Faction: plant
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_GALHO_INFECTADO:
+  Type: SPIDER
+  Display: 'Galho Infectado'
+  Health: 4
+  Damage: 3
+  Faction: plant
+  Options:
+    MovementSpeed: 0.24
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_VINHA_INFECTADA:
+  Type: SPIDER
+  Display: 'Vinha Infectada'
+  Health: 26
+  Damage: 9
+  Faction: plant
+  Options:
+    MovementSpeed: 0.18
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=9;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_HOBGOBLIN:
@@ -2346,6 +5951,48 @@ MM_ARCEBISPOKUOTOA:
     PreventOtherDrops: true
   Skills:
   - damage{a=16;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_KUOTOA:
+  Type: ZOMBIE
+  Display: 'Kuo-Toa'
+  Health: 18
+  Damage: 4
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_KUOTOAACOITADOR:
+  Type: ZOMBIE
+  Display: 'Açoitador Kuo-Toa'
+  Health: 65
+  Damage: 8
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_KUOTOAMONITOR:
+  Type: ZOMBIE
+  Display: 'Monitor Kuo-Toa'
+  Health: 65
+  Damage: 10
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  - damage{a=10;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_HOMEMJAVALI:
