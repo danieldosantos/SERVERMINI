@@ -174,7 +174,7 @@ Owl:
   Damage: 1
   Faction: beast
   Options:
-    MovementSpeed: 0.32
+    MovementSpeed: 0.35
     FollowRange: 14
     PreventOtherDrops: true
   Skills:
@@ -188,7 +188,7 @@ Raven:
   Damage: 1
   Faction: beast
   Options:
-    MovementSpeed: 0.32
+    MovementSpeed: 0.35
     FollowRange: 14
     PreventOtherDrops: true
   Skills:
@@ -202,11 +202,12 @@ Crocodile:
   Damage: 7
   Faction: beast
   Options:
-    MovementSpeed: 0.24
+    MovementSpeed: 0.2
     FollowRange: 16
     PreventOtherDrops: true
   Skills:
-  - potion{t=SLOW;d=60;lvl=1} @target ~onAttack 0.5
+  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.8
+  - root{d=40} @target ~onAttack 0.6
 
 Imp:
   Type: VEX
@@ -242,7 +243,7 @@ Hawk:
   Damage: 1
   Faction: beast
   Options:
-    MovementSpeed: 0.34
+    MovementSpeed: 0.38
     FollowRange: 14
     PreventOtherDrops: true
   Skills:
@@ -256,7 +257,7 @@ Cat:
   Damage: 1
   Faction: beast
   Options:
-    MovementSpeed: 0.26
+    MovementSpeed: 0.32
     FollowRange: 12
     PreventOtherDrops: true
   Skills:
@@ -267,28 +268,30 @@ Boar:
   Type: PIG
   Display: 'Javali'
   Health: 11
-  Damage: 7
+  Damage: 4
   Faction: beast
   Options:
-    MovementSpeed: 0.28
+    MovementSpeed: 0.32
     FollowRange: 14
     PreventOtherDrops: true
   Skills:
-  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  - knockback{strength=0.7} @target ~onAttack 0.5
 
 
 Lion:
   Type: POLAR_BEAR
   Display: 'Leao'
   Health: 26
-  Damage: 12
+  Damage: 8
   Faction: beast
   Options:
     MovementSpeed: 0.32
     FollowRange: 22
     PreventOtherDrops: true
   Skills:
-  - knockback{strength=1} @target ~onAttack 0.4
+  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+  - knockback{strength=0.8} @target ~onAttack 0.5
 
 WolfDND:
   Type: WOLF
@@ -362,14 +365,15 @@ Panther:
   Type: OCELOT
   Display: 'Pantera'
   Health: 13
-  Damage: 10
+  Damage: 6
   Faction: beast
   Options:
-    MovementSpeed: 0.34
+    MovementSpeed: 0.38
     FollowRange: 20
     PreventOtherDrops: true
   Skills:
-  - knockback{strength=0.8} @target ~onAttack 0.4
+  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+  - knockback{strength=0.6} @target ~onAttack 0.5
 
 Quasit:
   Type: VEX
@@ -416,14 +420,15 @@ PoisonousSnake:
   Type: BEE
   Display: 'Serpente Venenosa'
   Health: 2
-  Damage: 4
+  Damage: 1
   Faction: beast
   Options:
-    MovementSpeed: 0.25
+    MovementSpeed: 0.3
     FollowRange: 14
     PreventOtherDrops: true
   Skills:
-  - potion{t=POISON;d=120;lvl=1} @target ~onAttack 0.6
+  - damage{a=1;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=5;type=POISON} @target ~onAttack 0.8
 
 Sprite:
   Type: ALLAY
@@ -499,22 +504,25 @@ MM_AARAKOCRA:
   Type: PHANTOM
   Display: 'Aarakocra'
   Health: 13
-  Damage: 5
+  Damage: 4
   Faction: fey
   Options:
-    MovementSpeed: 0.6  # Voo 15 m → cerca de 0.6; mergulhador rápido
-    FollowRange: 24
+    MovementSpeed: 0.5  # voo 15 m
+    FollowRange: 28
     PreventOtherDrops: true
     NoGravity: true
     Silent: false
   Equipment:
   - STONE_SWORD HAND
+  - STONE_SWORD OFFHAND
   Skills:
-  # Ataque de mergulho: dano extra ao atacar enquanto no ar
-  - damage{a=3} @target ~onAttack{conditions=[inair{}]}
-  # Convocação (representação simples da dança de invocação de elemental do ar)
-  - summon{type=MM_ELEMENTAL_DO_AR;amount=1;radius=3;yo=0} @self ~onTimer:1200 0.05
-  # Partículas de vento
+  # Talões: dano leve em mergulho
+  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=2;type=PHYSICAL} @target ~onAttack{conditions=[inair{}]} 0.6
+  # Voo de reconhecimento: rapidez temporária
+  - potion{t=SPEED;d=120;lvl=1} @self ~onTimer:200 0.5
+  # Convocação simples de elemental do ar (1/dia)
+  - summon{type=MM_ELEMENTAL_DO_AR;amount=1;radius=3;yo=0} @self ~onTimer:2400 0.15
   - effect:particles{particle=cloud;amount=10;hS=0.5;vS=0.2;speed=0.1} @self ~onTimer:40
 
 MM_ABOCANHADORMATRAQUEANTE:
@@ -689,86 +697,79 @@ MM_ANOMALIADAGUA:
 MM_APARICAO:
   Type: PHANTOM
   Display: 'Aparicao'
-  Health: 67
-  Damage: 15
+  Health: 45
+  Damage: 10
   Faction: undead
   Options:
-    MovementSpeed: 0.0  # Incorpórea, flutua
+    MovementSpeed: 0.0
     FollowRange: 24
     PreventOtherDrops: true
     NoGravity: true
     Silent: true
   Skills:
-  # Movimento incorpóreo: fase rápida (teleporte curto)
-  - teleport{spread=1;radius=8} @self ~onTimer:80 0.5
-  # Drenar Vida
-  - damage{a=21;type=NECROTIC} @target ~onAttack 0.8
-  - potion{t=WITHER;d=100;lvl=1} @target ~onAttack 0.5
-  # Criar Espectro (invoca um espectro auxiliar, limitado pela chance)
-  - summon{type=ZOMBIE;amount=1;radius=2;yo=0} @self ~onKill 0.6
-  # Sensibilidade à luz: enfraquece em ambiente iluminado (simples debuff)
-  - potion{t=WEAKNESS;d=80;lvl=0} @self ~onTimer:120 0.4
-  # Aura de terror: pequeno slow em quem se aproxima
-  - potion{t=SLOW;d=60;lvl=1} @PlayersInRadius{r=4} ~onTimer:60 0.4
+  # Movimento incorpóreo
+  - teleport{spread=1;radius=8} @self ~onTimer:120 0.4
+  # Drenar Vida (Toque Horripilante)
+  - damage{a=10;type=NECROTIC} @target ~onAttack 0.85
+  - potion{t=WITHER;d=80;lvl=1} @target ~onAttack 0.6
+  # Possessão: raízes curtas e dano periódico
+  - root{d=40} @target ~onAttack 0.25
+  - damage{a=6;type=NECROTIC} @target ~onTimer:40 0.25
+  # Cria Espectro
+  - summon{type=ZOMBIE;amount=1;radius=2;yo=0} @self ~onKill 0.5
+  # Terror gelado
+  - potion{t=SLOW;d=80;lvl=1} @PlayersInRadius{r=4} ~onTimer:80 0.4
 
 MM_ARBUSTOERRANTE:
   Type: CREEPER
   Display: 'Arbusto Errante'
-  Health: 136
-  Damage: 13
+  Health: 10
+  Damage: 3
   Faction: plant
   Options:
-    MovementSpeed: 0.24  # 6 m andar
-    FollowRange: 20
+    MovementSpeed: 0.2  # 6 m
+    FollowRange: 12
     PreventOtherDrops: true
     Silent: true
   Skills:
-  # Resistências: frio/fogo reduzidos, eletricidade cura
-  - potion{t=FIRE_RESISTANCE;d=160;lvl=0} @self ~onSpawn
-  - heal{amount=10} @self ~onDamaged{c=damage{types=LIGHTNING}} 1
-  # Pancada dupla
-  - repeat{amount=1;delay=5;skills=[damage{a=13;type=PHYSICAL} @target]} @self ~onAttack 0.7
-  # Agarrar e engolfar
-  - root{d=60} @target ~onAttack 0.5
-  - damage{a=13;type=PHYSICAL} @target ~onTimer:40 0.6
-  # Camuflagem/espera: invisibilidade leve
-  - potion{t=INVISIBILITY;d=80;lvl=0} @self ~onTimer:200 0.25
-  # Adormecer/reerguer: cura lenta ao ficar parado
-  - heal{amount=4} @self ~onTimer:100
+  # Camuflagem natural
+  - potion{t=INVISIBILITY;d=120;lvl=0} @self ~onTimer:200 0.35
+  # Pancada da planta
+  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.9
 
 MM_ANKHEG:
   Type: SILVERFISH
   Display: 'Ankheg'
   Health: 39
-  Damage: 9
+  Damage: 10
   Faction: monster
   Options:
-    MovementSpeed: 0.36  # 9 m andar
+    MovementSpeed: 0.36
     FollowRange: 22
     PreventOtherDrops: true
   Skills:
   # Mordida: dano cortante + ácido
-  - damage{a=9;type=PHYSICAL} @target ~onAttack 0.8
-  - damage{a=3;type=ACID} @target ~onAttack 0.8
-  # Agarrão simples: enraiza o alvo
-  - root{d=40} @target ~onAttack 0.4
-  # Rajada de ácido (recarrega 6 simulada por timer)
-  - projectile{bullet=SmallFireball;onhit=[damage{a=10;type=ACID} @PlayersInLine{length=9;width=1.5}]} @target ~onTimer:160 0.35
-  # Túnel/escavação: breve invisibilidade para simular enterrado
+  - damage{a=10;type=PHYSICAL} @target ~onAttack 0.85
+  - damage{a=5;type=ACID} @target ~onAttack 0.85
+  # Agarrão simples
+  - root{d=40} @target ~onAttack 0.45
+  # Rajada de ácido (recarga 6)
+  - projectile{bullet=SmallFireball;onhit=[damage{a=11;type=ACID} @PlayersInLine{length=9;width=1.5}]} @target ~onTimer:180 0.35
+  # Escavar
   - potion{t=INVISIBILITY;d=40;lvl=0} @self ~onTimer:140 0.25
 
-MM_ARBUSTOERRANTE:
+MM_ARBUSTOERRANTE_ELITE:
   Type: CREEPER
-  Display: 'Arbusto Errante'
-  Health: 136
-  Damage: 23
+  Display: 'Arbusto Errante (Elite)'
+  Health: 27
+  Damage: 6
   Faction: plant
   Options:
     MovementSpeed: 0.24
-    FollowRange: 18
+    FollowRange: 16
     PreventOtherDrops: true
   Skills:
-  - damage{a=23;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.9
 
 
 MM_AZER:
@@ -3440,17 +3441,18 @@ MM_ARANHAINTERPLANAR:
 
 
 MM_ARANHALOBOGIGANTE:
-  Type: WOLF
+  Type: SPIDER
   Display: 'Aranha-Lobo Gigante'
-  Health: 11
-  Damage: 3
+  Health: 26
+  Damage: 7
   Faction: beast
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.36
+    FollowRange: 20
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.8
+  - potion{t=POISON;d=60;lvl=1} @target ~onAttack 0.4
 
 
 MM_ARBUSTODESPERTO:
@@ -3468,13 +3470,13 @@ MM_ARBUSTODESPERTO:
 
 
 MM_ARMINHO:
-  Type: WOLF
+  Type: RABBIT
   Display: 'Arminho'
   Health: 1
   Damage: 3
   Faction: beast
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.42
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
@@ -3482,63 +3484,67 @@ MM_ARMINHO:
 
 
 MM_ARMINHOGIGANTE:
-  Type: WOLF
+  Type: OCELOT
   Display: 'Arminho Gigante'
   Health: 9
-  Damage: 3
+  Damage: 4
   Faction: beast
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.5
+    FollowRange: 20
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  - potion{t=WEAKNESS;d=40;lvl=0} @target ~onAttack 0.25
 
 
 MM_BALEIAASSASSINA:
-  Type: WOLF
+  Type: DOLPHIN
   Display: 'Baleia Assassina'
   Health: 90
-  Damage: 15
+  Damage: 17
   Faction: beast
   Options:
-    MovementSpeed: 0.0
-    FollowRange: 18
+    MovementSpeed: 0.5
+    FollowRange: 26
     PreventOtherDrops: true
   Skills:
-  - damage{a=15;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=17;type=PHYSICAL} @target ~onAttack 0.8
+  - knockback{strength=1.2} @target ~onAttack 0.5
 
 
 MM_BESOURODEFOGOGIGANTE:
-  Type: WOLF
+  Type: SILVERFISH
   Display: 'Besouro De Fogo Gigante'
   Health: 4
-  Damage: 3
+  Damage: 2
   Faction: beast
   Options:
     MovementSpeed: 0.36
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=2;type=PHYSICAL} @target ~onAttack 0.8
+  - effect:particles{particle=flame;amount=6;hS=0.2;vS=0.1;speed=0.02} @self ~onTimer:40
 
 
 MM_BICODEMACHADO:
-  Type: WOLF
+  Type: CHICKEN
   Display: 'Bico De Machado'
   Health: 19
-  Damage: 3
+  Damage: 6
   Faction: beast
   Options:
     MovementSpeed: 0.6
-    FollowRange: 18
+    FollowRange: 22
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+  - knockback{strength=0.6} @target ~onAttack 0.4
 
 
 MM_BODE:
-  Type: WOLF
+  Type: GOAT
   Display: 'Bode'
   Health: 4
   Damage: 3
@@ -3552,21 +3558,22 @@ MM_BODE:
 
 
 MM_BODEGIGANTE:
-  Type: WOLF
+  Type: GOAT
   Display: 'Bode Gigante'
   Health: 19
-  Damage: 3
+  Damage: 6
   Faction: beast
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.5
+    FollowRange: 20
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+  - knockback{strength=1} @target ~onAttack 0.45
 
 
 MM_CAMELO:
-  Type: WOLF
+  Type: LLAMA
   Display: 'Camelo'
   Health: 15
   Damage: 3
@@ -3580,31 +3587,33 @@ MM_CAMELO:
 
 
 MM_CARANGUEJO:
-  Type: WOLF
+  Type: TURTLE
   Display: 'Caranguejo'
   Health: 2
-  Damage: 3
+  Damage: 1
   Faction: beast
   Options:
     MovementSpeed: 0.24
-    FollowRange: 18
+    FollowRange: 14
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=1;type=PHYSICAL} @target ~onAttack 0.8
+  - potion{t=RESISTANCE;d=80;lvl=0} @self ~onTimer:140 0.5
 
 
 MM_CARANGUEJOGIGANTE:
-  Type: WOLF
+  Type: TURTLE
   Display: 'Caranguejo Gigante'
   Health: 13
-  Damage: 3
+  Damage: 4
   Faction: beast
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.28
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  - root{d=40} @target ~onAttack 0.35
 
 
 MM_CAVALODECARGA:
@@ -3650,45 +3659,47 @@ MM_CAVALODEMONTARIA:
 
 
 MM_CAVALOMARINHO:
-  Type: WOLF
+  Type: COD
   Display: 'Cavalo Marinho'
   Health: 1
-  Damage: 3
+  Damage: 1
   Faction: beast
   Options:
-    MovementSpeed: 0.0
-    FollowRange: 18
+    MovementSpeed: 0.2
+    FollowRange: 12
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=1;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_CAVALOMARINHOGIGANTE:
-  Type: WOLF
+  Type: SALMON
   Display: 'Cavalo Marinho Gigante'
   Health: 16
-  Damage: 3
+  Damage: 5
   Faction: beast
   Options:
-    MovementSpeed: 0.0
+    MovementSpeed: 0.32
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=5;type=PHYSICAL} @target ~onAttack 0.8
+  - knockback{strength=0.5} @target ~onAttack 0.35
 
 
 MM_CENTOPEIAGIGANTE:
-  Type: WOLF
+  Type: SILVERFISH
   Display: 'Centopeia Gigante'
   Health: 4
-  Damage: 3
+  Damage: 4
   Faction: beast
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.48
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  - potion{t=POISON;d=80;lvl=1} @target ~onAttack 0.45
 
 
 MM_CHACAL:
@@ -3698,155 +3709,167 @@ MM_CHACAL:
   Damage: 3
   Faction: beast
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.4
+    FollowRange: 16
     PreventOtherDrops: true
   Skills:
   - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_COBRACONSTRITORA:
-  Type: WOLF
+  Type: SILVERFISH
   Display: 'Cobra Constritora'
   Health: 13
-  Damage: 3
+  Damage: 7
   Faction: beast
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.3
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=5;type=PHYSICAL} @target ~onAttack 0.8
+  - root{d=60} @target ~onAttack 0.45
 
 
 MM_COBRACONSTRITORAGIGANTE:
-  Type: WOLF
+  Type: SILVERFISH
   Display: 'Cobra Constritora Gigante'
   Health: 60
-  Damage: 10
+  Damage: 12
   Faction: beast
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.32
+    FollowRange: 22
     PreventOtherDrops: true
   Skills:
-  - damage{a=10;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=9;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=6;type=BLUDGEONING} @target ~onAttack 0.6
+  - root{d=80} @target ~onAttack 0.5
 
 
 MM_COBRAVOADORA:
-  Type: WOLF
+  Type: PARROT
   Display: 'Cobra Voadora'
   Health: 5
-  Damage: 3
+  Damage: 4
   Faction: beast
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.5
+    FollowRange: 20
+    NoGravity: true
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=3;type=POISON} @target ~onAttack 0.6
 
 
 MM_CORUJA:
-  Type: WOLF
+  Type: PARROT
   Display: 'Coruja'
   Health: 1
-  Damage: 3
+  Damage: 1
   Faction: beast
   Options:
-    MovementSpeed: 0.04
-    FollowRange: 18
+    MovementSpeed: 0.32
+    FollowRange: 16
+    NoGravity: true
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=1;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_CORUJAGIGANTE:
-  Type: WOLF
+  Type: PARROT
   Display: 'Coruja Gigante'
   Health: 19
-  Damage: 3
+  Damage: 8
   Faction: beast
   Options:
-    MovementSpeed: 0.04
-    FollowRange: 18
+    MovementSpeed: 0.48
+    FollowRange: 22
+    NoGravity: true
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+  - knockback{strength=0.8} @target ~onAttack 0.45
 
 
 MM_CORVO:
-  Type: WOLF
+  Type: PARROT
   Display: 'Corvo'
   Health: 1
-  Damage: 3
+  Damage: 1
   Faction: beast
   Options:
-    MovementSpeed: 0.12
-    FollowRange: 18
+    MovementSpeed: 0.32
+    FollowRange: 14
+    NoGravity: true
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=1;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_CROCODILO:
-  Type: WOLF
+  Type: TURTLE
   Display: 'Crocodilo'
   Health: 19
-  Damage: 3
+  Damage: 7
   Faction: beast
   Options:
     MovementSpeed: 0.24
-    FollowRange: 18
+    FollowRange: 16
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.8
+  - potion{t=SLOW;d=60;lvl=1} @target ~onAttack 0.4
 
 
 MM_CROCODILOGIGANTE:
-  Type: WOLF
+  Type: TURTLE
   Display: 'Crocodilo Gigante'
   Health: 85
-  Damage: 14
+  Damage: 17
   Faction: beast
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.3
+    FollowRange: 22
     PreventOtherDrops: true
   Skills:
-  - damage{a=14;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=17;type=PHYSICAL} @target ~onAttack 0.8
+  - knockback{strength=1.2} @target ~onAttack 0.5
 
 
 MM_ELEFANTE:
-  Type: WOLF
+  Type: RAVAGER
   Display: 'Elefante'
   Health: 76
   Damage: 13
   Faction: beast
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.36
+    FollowRange: 22
     PreventOtherDrops: true
   Skills:
   - damage{a=13;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_ENXAMEDECORVOS:
-  Type: WOLF
+  Type: PARROT
   Display: 'Enxame De Corvos'
   Health: 24
   Damage: 4
   Faction: beast
   Options:
-    MovementSpeed: 0.12
+    MovementSpeed: 0.32
     FollowRange: 18
+    NoGravity: true
     PreventOtherDrops: true
   Skills:
   - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_ENXAMEDEINSETOS:
-  Type: WOLF
+  Type: SILVERFISH
   Display: 'Enxame De Insetos'
   Health: 22
   Damage: 4
@@ -3860,28 +3883,29 @@ MM_ENXAMEDEINSETOS:
 
 
 MM_ENXAMEDEMORCEGOS:
-  Type: WOLF
+  Type: BAT
   Display: 'Enxame De Morcegos'
   Health: 22
   Damage: 4
   Faction: beast
   Options:
-    MovementSpeed: 0.0
+    MovementSpeed: 0.3
     FollowRange: 18
+    NoGravity: true
     PreventOtherDrops: true
   Skills:
   - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_ENXAMEDEPIRANHAS:
-  Type: WOLF
+  Type: SALMON
   Display: 'Enxame De Piranhas'
   Health: 28
   Damage: 5
   Faction: beast
   Options:
-    MovementSpeed: 0.0
-    FollowRange: 18
+    MovementSpeed: 0.32
+    FollowRange: 20
     PreventOtherDrops: true
   Skills:
   - damage{a=5;type=PHYSICAL} @target ~onAttack 0.8
