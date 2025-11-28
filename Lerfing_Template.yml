@@ -6244,6 +6244,29 @@ MM_MANTO_NEGRO:
   # Aparência falsa (camuflagem simples)
   - potion{t=INVISIBILITY;d=80;lvl=0} @self ~onTimer:300 0.4
 
+
+MM_MANTO_NEGRO:
+  Type: BAT
+  Display: 'Manto Negro'
+  Health: 22
+  Damage: 6
+  Faction: monster
+  Options:
+    MovementSpeed: 0.3  # voo 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
+  Skills:
+  # Esmagar e engolfar
+  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.85
+  - root{d=40} @target ~onAttack 0.6
+  - potion{t=BLINDNESS;d=80;lvl=0} @target ~onAttack 0.6
+  # Aura de escuridão
+  - potion{t=BLINDNESS;d=100;lvl=0} @PlayersInRadius{r=5} ~onTimer:240 0.5
+  # Aparência falsa (camuflagem simples)
+  - potion{t=INVISIBILITY;d=80;lvl=0} @self ~onTimer:300 0.4
+
 MM_MANTOR:
   Type: PHANTOM
   Display: 'Mantor'
