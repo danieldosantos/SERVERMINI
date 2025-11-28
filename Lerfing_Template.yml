@@ -6188,20 +6188,90 @@ MM_MAGMIN:
   Type: BLAZE
   Display: 'Magmin'
   Health: 9
-  Damage: 3
+  Damage: 7
   Faction: elemental
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.36  # 9 m
     FollowRange: 18
     PreventOtherDrops: true
+    ImmuneToFire: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Toque flamejante
+  - damage{a=7;type=FIRE} @target ~onAttack 0.85
+  # Explosão da morte
+  - damage{a=7;type=FIRE} @PlayersInRadius{r=3} ~onDeath 1
+  - effect:particles{particle=flame;amount=12;hS=0.4;vS=0.2;speed=0.08} @self ~onDamaged 0.6
 
 
 MM_MANTICORA:
-  Type: SPIDER
+  Type: PHANTOM
   Display: 'Manticora'
   Health: 68
+  Damage: 11
+  Faction: monster
+  Options:
+    MovementSpeed: 0.5  # voo 15 m
+    FollowRange: 26
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  # Multiataque: mordida + garras
+  - repeat{amount=1;delay=6;skills=[damage{a=7;type=PHYSICAL} @target;damage{a=6;type=PHYSICAL} @target]} @self ~onAttack 0.85
+  # Espinhos de cauda (3 disparos rápidos)
+  - repeat{amount=2;delay=4;skills=[projectile{bullet=Arrow;onhit=[damage{a=7;type=PHYSICAL} @target]}]} @self ~onAttack{conditions=[distance{d=>8}]} 0.75
+  # Mobilidade aérea simples
+  - leap{velocity=0.9;velocityY=0.3} @self ~onTimer:120 0.5
+
+MM_MANTO_NEGRO:
+  Type: BAT
+  Display: 'Manto Negro'
+  Health: 22
+  Damage: 6
+  Faction: monster
+  Options:
+    MovementSpeed: 0.3  # voo 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
+  Skills:
+  # Esmagar e engolfar
+  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.85
+  - root{d=40} @target ~onAttack 0.6
+  - potion{t=BLINDNESS;d=80;lvl=0} @target ~onAttack 0.6
+  # Aura de escuridão
+  - potion{t=BLINDNESS;d=100;lvl=0} @PlayersInRadius{r=5} ~onTimer:240 0.5
+  # Aparência falsa (camuflagem simples)
+  - potion{t=INVISIBILITY;d=80;lvl=0} @self ~onTimer:300 0.4
+
+MM_MANTOR:
+  Type: PHANTOM
+  Display: 'Mantor'
+  Health: 78
+  Damage: 10
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.42  # voo 12 m
+    FollowRange: 26
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
+  Skills:
+  # Aparência falsa (ficar imóvel)
+  - potion{t=INVISIBILITY;d=80;lvl=0} @self ~onTimer:260 0.35
+  # Mordida que prende e cega
+  - repeat{amount=1;delay=6;skills=[damage{a=10;type=PHYSICAL} @target;root{d=40} @target;potion{t=BLINDNESS;d=80;lvl=0} @target]} @self ~onAttack 0.85
+  # Golpe de cauda
+  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.65
+  # Gemido assombroso
+  - potion{t=CONFUSION;d=60;lvl=1} @PlayersInRadius{r=18} ~onTimer:200 0.55
+  # Duplicatas ilusórias
+  - potion{t=INVISIBILITY;d=60;lvl=0} @self ~onTimer:120 0.4
+
+MM_MEDUSA:
+  Type: SPIDER
+  Display: 'Medusa'
+  Health: 127
   Damage: 11
   Faction: monster
   Options:
@@ -6209,39 +6279,96 @@ MM_MANTICORA:
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=11;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataque corpo a corpo: cabelo de serpente + espada curta
+  - repeat{amount=1;delay=8;skills=[damage{a=4;type=PHYSICAL} @target;damage{a=14;type=POISON} @target;damage{a=5;type=PHYSICAL} @target]} @self ~onAttack{conditions=[distance{d=<=4}]} 0.85
+  # Arco longo envenenado à distância
+  - projectile{bullet=Arrow;onhit=[damage{a=6;type=PHYSICAL} @target;damage{a=7;type=POISON} @target]} @target ~onAttack{conditions=[distance{d=>6}]} 0.7
+  # Olhar petrificante: retarda e enraíza alvos próximos
+  - potion{t=SLOW;d=100;lvl=5} @PlayersInRadius{r=9} ~onTimer:200 0.5
+  - root{d=40} @PlayersInRadius{r=9} ~onTimer:200 0.35
 
 
-MM_MEDUSA:
-  Type: SPIDER
-  Display: 'Medusa'
-  Health: 127
-  Damage: 21
-  Faction: monster
+MM_MEIO_DRAGAO_BASE:
+  Type: VINDICATOR
+  Display: 'Meio-Dragao (Modelo)'
+  Health: 50
+  Damage: 9
+  Faction: dragonkin
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.32
+    FollowRange: 22
     PreventOtherDrops: true
+    KnockbackResistance: 0.2
+  DamageModifiers:
+  - FIRE 0.8
+  - MAGIC 1
   Skills:
-  - damage{a=21;type=PHYSICAL} @target ~onAttack 0.8
+  # Golpe corporal padrão
+  - damage{a=9;type=PHYSICAL} @target ~onAttack 0.85
+  # Arma de sopro genérica (ajuste o tipo de dano conforme a cor)
+  - damage{a=18;type=FIRE} @PlayersInCone{r=4;angle=70} ~onTimer:220 0.6
+
+
+MM_MEIO_DRAGAO_VERMELHO_VETERANO:
+  Type: WITHER_SKELETON
+  Display: 'Meio-Dragao Vermelho Veterano'
+  Health: 65
+  Damage: 11
+  Faction: dragonkin
+  Equipment:
+  - DIAMOND_SWORD HAND
+  - SHIELD OFFHAND
+  - DIAMOND_HELMET HEAD
+  - DIAMOND_CHESTPLATE CHEST
+  - DIAMOND_LEGGINGS LEGS
+  - DIAMOND_BOOTS FEET
+  Options:
+    MovementSpeed: 0.3
+    FollowRange: 24
+    PreventOtherDrops: true
+    MaxCombatDistance: 32
+    KnockbackResistance: 0.3
+  DamageModifiers:
+  - FIRE 0.5
+  - FIRE_TICK 0.5
+  Skills:
+  # Multiataque de espadas
+  - repeat{amount=1;delay=6;skills=[damage{a=7;type=PHYSICAL} @target;damage{a=7;type=PHYSICAL} @target;damage{a=6;type=PHYSICAL} @target]} @self ~onAttack 0.9
+  # Besta pesada simples
+  - projectile{bullet=Arrow;onhit=[damage{a=6;type=PHYSICAL} @target]} @target ~onAttack{conditions=[distance{d=>10}]} 0.45
+  # Aparar (pequena defesa reativa)
+  - potion{t=RESISTANCE;d=40;lvl=1} @self ~onDamaged 0.3
+  # Sopro flamejante
+  - damage{a=24;type=FIRE} @PlayersInCone{r=4;angle=70} ~onTimer:260 0.75
 
 
 MM_MEPHITDAPOEIRA:
-  Type: BLAZE
+  Type: VEX
   Display: 'Mephit Da Poeira'
   Health: 17
-  Damage: 3
+  Damage: 4
   Faction: elemental
   Options:
     MovementSpeed: 0.36
     FollowRange: 18
     PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - FIRE 1.5
+  - POISON 0
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Garras rápidas
+  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.9
+  # Conjuração inata (sono simples)
+  - potion{t=SLOW;d=160;lvl=3} @target ~onTimer:320 0.3
+  # Sopro cegante
+  - potion{t=BLINDNESS;d=80;lvl=0} @PlayersInRadius{r=4} ~onTimer:200 0.55
+  # Explosão de poeira na morte
+  - potion{t=BLINDNESS;d=120;lvl=0} @PlayersInRadius{r=2} ~onDeath 1
 
 
 MM_MEPHITDOGELO:
-  Type: BLAZE
+  Type: VEX
   Display: 'Mephit Do Gelo'
   Health: 21
   Damage: 4
@@ -6250,12 +6377,26 @@ MM_MEPHITDOGELO:
     MovementSpeed: 0.36
     FollowRange: 18
     PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - FIRE 1.5
+  - BLUNT 1.3
+  - POISON 0
+  - FIRE_TICK 1.5
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Garras geladas
+  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.7
+  - damage{a=2;type=FROST} @target ~onAttack 0.7
+  # Aparência falsa
+  - potion{t=INVISIBILITY;d=100;lvl=0} @self ~onTimer:260 0.35
+  # Sopro congelante
+  - damage{a=5;type=FROST} @PlayersInCone{r=4;angle=60} ~onTimer:200 0.55
+  # Explosão de farpas de gelo
+  - damage{a=4;type=PHYSICAL} @PlayersInRadius{r=2} ~onDeath 1
 
 
 MM_MEPHITDOMAGMA:
-  Type: BLAZE
+  Type: VEX
   Display: 'Mephit Do Magma'
   Health: 22
   Damage: 4
@@ -6264,12 +6405,26 @@ MM_MEPHITDOMAGMA:
     MovementSpeed: 0.36
     FollowRange: 18
     PreventOtherDrops: true
+    NoGravity: true
+    ImmuneToFire: true
+  DamageModifiers:
+  - FIRE 0
+  - POISON 0
+  - FROST 1.5
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Garras incandescentes
+  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.7
+  - damage{a=2;type=FIRE} @target ~onAttack 0.7
+  # Sopro flamejante
+  - damage{a=7;type=FIRE} @PlayersInCone{r=4;angle=60} ~onTimer:200 0.55
+  # Conjuração inata: esquentar metal
+  - potion{t=WEAKNESS;d=80;lvl=1} @PlayersInRadius{r=4} ~onTimer:320 0.35
+  # Explosão de lava
+  - damage{a=7;type=FIRE} @PlayersInRadius{r=2} ~onDeath 1
 
 
 MM_MEPHITDALAMA:
-  Type: BLAZE
+  Type: VEX
   Display: 'Mephit Da Lama'
   Health: 27
   Damage: 4
@@ -6278,12 +6433,20 @@ MM_MEPHITDALAMA:
     MovementSpeed: 0.24
     FollowRange: 18
     PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Punhos viscosos
+  - damage{a=4;type=BLUNT} @target ~onAttack 0.9
+  # Sopro de lama
+  - root{d=60} @target ~onTimer:220 0.55
+  # Explosão pegajosa ao morrer
+  - root{d=60} @PlayersInRadius{r=2;ignore=Boss} ~onDeath 1
 
 
 MM_MEPHITDOVAPOR:
-  Type: BLAZE
+  Type: VEX
   Display: 'Mephit Do Vapor'
   Health: 21
   Damage: 4
@@ -6292,8 +6455,46 @@ MM_MEPHITDOVAPOR:
     MovementSpeed: 0.36
     FollowRange: 18
     PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - FIRE 0
+  - POISON 0
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Garras escaldantes
+  - damage{a=2;type=PHYSICAL} @target ~onAttack 0.8
+  - damage{a=2;type=FIRE} @target ~onAttack 0.8
+  # Nublar (leve ocultação)
+  - potion{t=INVISIBILITY;d=60;lvl=0} @self ~onTimer:260 0.4
+  # Sopro de vapor
+  - damage{a=4;type=FIRE} @PlayersInCone{r=4;angle=60} ~onTimer:200 0.55
+  # Nuvem de vapor na morte
+  - damage{a=4;type=FIRE} @PlayersInRadius{r=2} ~onDeath 1
+
+
+MM_MEPHITDAFUMACA:
+  Type: VEX
+  Display: 'Mephit Da Fumaca'
+  Health: 22
+  Damage: 4
+  Faction: elemental
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - FIRE 0.8
+  - FROST 0
+  - POISON 0
+  Skills:
+  # Garras enfumaçadas
+  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.9
+  # Globos de luz (truque luminoso)
+  - potion{t=GLOWING;d=80;lvl=0} @PlayersInRadius{r=6} ~onTimer:260 0.35
+  # Sopro incinerante (cegueira)
+  - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInCone{r=4;angle=60} ~onTimer:200 0.55
+  # Nuvem de fumaça ao morrer
+  - potion{t=BLINDNESS;d=100;lvl=0} @PlayersInRadius{r=2} ~onDeath 1
 
 
 MM_MICONIDEBROTO:
@@ -6306,8 +6507,16 @@ MM_MICONIDEBROTO:
     MovementSpeed: 0.12
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Punho com toxina
+  - damage{a=1;type=PHYSICAL} @target ~onAttack 0.85
+  - damage{a=2;type=POISON} @target ~onAttack 0.85
+  # Esporos harmoniosos (comunicação/pequena cura)
+  - potion{t=REGENERATION;d=80;lvl=0} @Faction{f=plant;r=9} ~onTimer:320 0.35
+  # Esporos angustiantes (alerta aliados)
+  - potion{t=SPEED;d=80;lvl=1} @Faction{f=plant;r=24} ~onDamaged 0.6
 
 
 MM_SERVOESPOROQUAGGOTH:
@@ -6320,8 +6529,14 @@ MM_SERVOESPOROQUAGGOTH:
     MovementSpeed: 0.24
     FollowRange: 18
     PreventOtherDrops: true
+    Silent: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+  # Garras do servo
+  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.85
+  # Resistência entorpecida
+  - potion{t=RESISTANCE;d=60;lvl=1} @self ~onDamaged 0.4
 
 
 MM_MICONIDEADULTO:
@@ -6334,8 +6549,14 @@ MM_MICONIDEADULTO:
     MovementSpeed: 0.24
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Golpe esporulado
+  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.85
+  - damage{a=3;type=POISON} @target ~onAttack 0.7
+  # Esporos pacificadores
+  - potion{t=WEAKNESS;d=80;lvl=1} @PlayersInRadius{r=6} ~onTimer:260 0.4
 
 
 MM_MICONIDESOBERANO:
@@ -6348,8 +6569,16 @@ MM_MICONIDESOBERANO:
     MovementSpeed: 0.36
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=10;type=PHYSICAL} @target ~onAttack 0.8
+  # Golpe de soberano
+  - damage{a=10;type=PHYSICAL} @target ~onAttack 0.85
+  - damage{a=4;type=POISON} @target ~onAttack 0.7
+  # Esporos harmoniosos fortalecidos
+  - potion{t=REGENERATION;d=120;lvl=1} @Faction{f=plant;r=10} ~onTimer:240 0.4
+  # Animar servo esporo (invocação simples)
+  - summon{type=MM_SERVOESPOROQUAGGOTH;amount=1;radius=4} @self ~onTimer:620 0.35
 
 
 MM_MINOTAURO:
