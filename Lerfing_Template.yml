@@ -6188,20 +6188,90 @@ MM_MAGMIN:
   Type: BLAZE
   Display: 'Magmin'
   Health: 9
-  Damage: 3
+  Damage: 7
   Faction: elemental
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.36  # 9 m
     FollowRange: 18
     PreventOtherDrops: true
+    ImmuneToFire: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Toque flamejante
+  - damage{a=7;type=FIRE} @target ~onAttack 0.85
+  # Explosão da morte
+  - damage{a=7;type=FIRE} @PlayersInRadius{r=3} ~onDeath 1
+  - effect:particles{particle=flame;amount=12;hS=0.4;vS=0.2;speed=0.08} @self ~onDamaged 0.6
 
 
 MM_MANTICORA:
-  Type: SPIDER
+  Type: PHANTOM
   Display: 'Manticora'
   Health: 68
+  Damage: 11
+  Faction: monster
+  Options:
+    MovementSpeed: 0.5  # voo 15 m
+    FollowRange: 26
+    PreventOtherDrops: true
+    NoGravity: true
+  Skills:
+  # Multiataque: mordida + garras
+  - repeat{amount=1;delay=6;skills=[damage{a=7;type=PHYSICAL} @target;damage{a=6;type=PHYSICAL} @target]} @self ~onAttack 0.85
+  # Espinhos de cauda (3 disparos rápidos)
+  - repeat{amount=2;delay=4;skills=[projectile{bullet=Arrow;onhit=[damage{a=7;type=PHYSICAL} @target]}]} @self ~onAttack{conditions=[distance{d=>8}]} 0.75
+  # Mobilidade aérea simples
+  - leap{velocity=0.9;velocityY=0.3} @self ~onTimer:120 0.5
+
+MM_MANTO_NEGRO:
+  Type: BAT
+  Display: 'Manto Negro'
+  Health: 22
+  Damage: 6
+  Faction: monster
+  Options:
+    MovementSpeed: 0.3  # voo 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
+  Skills:
+  # Esmagar e engolfar
+  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.85
+  - root{d=40} @target ~onAttack 0.6
+  - potion{t=BLINDNESS;d=80;lvl=0} @target ~onAttack 0.6
+  # Aura de escuridão
+  - potion{t=BLINDNESS;d=100;lvl=0} @PlayersInRadius{r=5} ~onTimer:240 0.5
+  # Aparência falsa (camuflagem simples)
+  - potion{t=INVISIBILITY;d=80;lvl=0} @self ~onTimer:300 0.4
+
+MM_MANTOR:
+  Type: PHANTOM
+  Display: 'Mantor'
+  Health: 78
+  Damage: 10
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.42  # voo 12 m
+    FollowRange: 26
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
+  Skills:
+  # Aparência falsa (ficar imóvel)
+  - potion{t=INVISIBILITY;d=80;lvl=0} @self ~onTimer:260 0.35
+  # Mordida que prende e cega
+  - repeat{amount=1;delay=6;skills=[damage{a=10;type=PHYSICAL} @target;root{d=40} @target;potion{t=BLINDNESS;d=80;lvl=0} @target]} @self ~onAttack 0.85
+  # Golpe de cauda
+  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.65
+  # Gemido assombroso
+  - potion{t=CONFUSION;d=60;lvl=1} @PlayersInRadius{r=18} ~onTimer:200 0.55
+  # Duplicatas ilusórias
+  - potion{t=INVISIBILITY;d=60;lvl=0} @self ~onTimer:120 0.4
+
+MM_MEDUSA:
+  Type: SPIDER
+  Display: 'Medusa'
+  Health: 127
   Damage: 11
   Faction: monster
   Options:
@@ -6209,21 +6279,13 @@ MM_MANTICORA:
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=11;type=PHYSICAL} @target ~onAttack 0.8
-
-
-MM_MEDUSA:
-  Type: SPIDER
-  Display: 'Medusa'
-  Health: 127
-  Damage: 21
-  Faction: monster
-  Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=21;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataque corpo a corpo: cabelo de serpente + espada curta
+  - repeat{amount=1;delay=8;skills=[damage{a=4;type=PHYSICAL} @target;damage{a=14;type=POISON} @target;damage{a=5;type=PHYSICAL} @target]} @self ~onAttack{conditions=[distance{d=<=4}]} 0.85
+  # Arco longo envenenado à distância
+  - projectile{bullet=Arrow;onhit=[damage{a=6;type=PHYSICAL} @target;damage{a=7;type=POISON} @target]} @target ~onAttack{conditions=[distance{d=>6}]} 0.7
+  # Olhar petrificante: retarda e enraíza alvos próximos
+  - potion{t=SLOW;d=100;lvl=5} @PlayersInRadius{r=9} ~onTimer:200 0.5
+  - root{d=40} @PlayersInRadius{r=9} ~onTimer:200 0.35
 
 
 MM_MEPHITDAPOEIRA:
