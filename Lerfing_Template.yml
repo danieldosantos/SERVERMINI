@@ -6556,8 +6556,17 @@ MM_MICONIDEADULTO:
   # Golpe esporulado
   - damage{a=4;type=PHYSICAL} @target ~onAttack 0.85
   - damage{a=3;type=POISON} @target ~onAttack 0.7
-  # Esporos pacificadores
-  - potion{t=WEAKNESS;d=80;lvl=1} @PlayersInRadius{r=6} ~onTimer:260 0.4
+  # Fraqueza solar (debilidade periódica)
+  - potion{t=WEAKNESS;d=120;lvl=0} @self ~onTimer:260 0.35
+  - potion{t=SLOW;d=120;lvl=0} @self ~onTimer:260 0.35
+  # Esporos angustiantes (alerta aliados)
+  - potion{t=SPEED;d=80;lvl=1} @Faction{f=plant;r=24} ~onDamaged 0.6
+  - potion{t=RESISTANCE;d=80;lvl=0} @Faction{f=plant;r=24} ~onDamaged 0.5
+  # Esporos pacificadores (atordoamento curto)
+  - stun{d=60} @PlayersInRadius{r=4} ~onTimer:260 0.4
+  # Esporos harmoniosos (telepatia simulada como cura em grupo)
+  - potion{t=REGENERATION;d=120;lvl=0} @Faction{f=plant;r=9} ~onTimer:320 0.4
+  - potion{t=ABSORPTION;d=120;lvl=0} @Faction{f=plant;r=9} ~onTimer:320 0.25
 
 
 MM_MICONIDESOBERANO:
@@ -6576,10 +6585,22 @@ MM_MICONIDESOBERANO:
   # Golpe de soberano
   - damage{a=10;type=PHYSICAL} @target ~onAttack 0.85
   - damage{a=4;type=POISON} @target ~onAttack 0.7
+  # Fraqueza solar (debilidade periódica)
+  - potion{t=WEAKNESS;d=140;lvl=1} @self ~onTimer:240 0.4
+  - potion{t=SLOW;d=140;lvl=0} @self ~onTimer:240 0.4
+  # Esporos angustiantes (alerta aliados)
+  - potion{t=SPEED;d=100;lvl=1} @Faction{f=plant;r=28} ~onDamaged 0.6
+  - potion{t=RESISTANCE;d=100;lvl=1} @Faction{f=plant;r=28} ~onDamaged 0.5
   # Esporos harmoniosos fortalecidos
   - potion{t=REGENERATION;d=120;lvl=1} @Faction{f=plant;r=10} ~onTimer:240 0.4
+  - potion{t=ABSORPTION;d=120;lvl=1} @Faction{f=plant;r=10} ~onTimer:240 0.3
   # Animar servo esporo (invocação simples)
   - summon{type=MM_SERVOESPOROQUAGGOTH;amount=1;radius=4} @self ~onTimer:620 0.35
+  # Esporos alucinógenos (envenena e incapacita levemente)
+  - potion{t=CONFUSION;d=100;lvl=0} @PlayersInRadius{r=4} ~onTimer:260 0.45
+  - potion{t=POISON;d=80;lvl=0} @PlayersInRadius{r=4} ~onTimer:260 0.45
+  # Esporos pacificadores (atordoamento curto)
+  - stun{d=60} @PlayersInRadius{r=5} ~onTimer:240 0.4
 
 
 MM_MINOTAURO:
@@ -6589,11 +6610,49 @@ MM_MINOTAURO:
   Damage: 13
   Faction: monster
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.52
+    FollowRange: 20
     PreventOtherDrops: true
   Skills:
-  - damage{a=13;type=PHYSICAL} @target ~onAttack 0.8
+  # Machado grande (ataque principal)
+  - repeat{amount=1;delay=4;skills=[damage{a=17;type=PHYSICAL} @target]} @self ~onAttack 0.7
+  # Chifrada brutal
+  - damage{a=13;type=PIERCE} @target ~onAttack 0.7
+  - knockback{strength=1.2} @target ~onAttack 0.6
+  # Descuidado: força extra, mas fácil de acertar (resistência leve removida)
+  - potion{t=INCREASE_DAMAGE;d=120;lvl=1} @self ~onTimer:220 0.45
+  - potion{t=GLOWING;d=120;lvl=0} @self ~onTimer:220 0.45
+  # Investida: avanço rápido seguido de dano adicional
+  - leap{velocity=1.1;velocityY=0.3} @self ~onTimer:200 0.5
+  - damage{a=9;type=PIERCE} @target ~onAttack{conditions=[inair{}]} 0.6
+  - knockback{strength=1.5} @target ~onAttack{conditions=[inair{}]} 0.5
+  - potion{t=SLOW;d=60;lvl=1} @target ~onAttack{conditions=[inair{}]} 0.35
+
+MM_MIMICO:
+  Type: SLIME
+  Display: 'Mimico'
+  Health: 58
+  Damage: 7
+  Faction: aberration
+  Options:
+    Size: 2
+    MovementSpeed: 0.24
+    FollowRange: 14
+    PreventOtherDrops: true
+    Silent: true
+  DamageModifiers:
+  - POISON 0.5
+  Skills:
+  # Aparência falsa: imobilidade pontual
+  - potion{t=INVISIBILITY;d=100;lvl=0} @self ~onTimer:320 0.3
+  # Adesivo: prende quem toca
+  - root{d=80} @target ~onAttack 0.7
+  - potion{t=SLOW;d=120;lvl=1} @target ~onAttack 0.7
+  # Pseudópode: golpe contundente
+  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.9
+  # Mordida ácida
+  - damage{a=4;type=POISON} @target ~onAttack 0.6
+  - effect:particles{particle=dripping_honey;amount=8;hS=0.3;vS=0.3;speed=0.1} @self ~onTimer:40
 
 
 MM_MONODRONE:
