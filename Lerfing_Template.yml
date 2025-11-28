@@ -6904,11 +6904,11 @@ MM_PERFURADOR:
   - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
 
 
-MM_PERYTON:
-  Type: SPIDER
-  Display: 'Peryton'
-  Health: 33
-  Damage: 6
+  MM_PERYTON:
+    Type: SPIDER
+    Display: 'Peryton'
+    Health: 33
+    Damage: 6
   Faction: monster
   Options:
     MovementSpeed: 0.24
@@ -6918,10 +6918,28 @@ MM_PERYTON:
   - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
 
 
-MM_PESADELO:
-  Type: VEX
-  Display: 'Pesadelo'
-  Health: 68
+  MM_PEGASO:
+    Type: HORSE
+    Display: 'Pegaso'
+    Health: 59
+    Damage: 11
+    Faction: celestial
+    Options:
+      MovementSpeed: 0.56
+      FollowRange: 24
+      PreventOtherDrops: true
+      NoGravity: true
+      Silent: false
+    Skills:
+    - leap{velocity=1.1;velocityY=0.6} @self ~onAttack 0.6
+    - damage{a=11;type=PHYSICAL} @target ~onAttack 0.85
+    - potion{t=SPEED;d=160;lvl=1} @self ~onSpawn
+
+
+  MM_PESADELO:
+    Type: VEX
+    Display: 'Pesadelo'
+    Health: 68
   Damage: 11
   Faction: fiend
   Options:
@@ -7310,11 +7328,11 @@ MM_ZUMBI:
   - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
 
 
-MM_OGROZUMBI:
-  Type: ZOMBIE
-  Display: 'Ogro Zumbi'
-  Health: 85
-  Damage: 14
+  MM_OGROZUMBI:
+    Type: ZOMBIE
+    Display: 'Ogro Zumbi'
+    Health: 85
+    Damage: 14
   Faction: undead
   Options:
     MovementSpeed: 0.36
@@ -7324,11 +7342,29 @@ MM_OGROZUMBI:
   - damage{a=14;type=PHYSICAL} @target ~onAttack 0.8
 
 
-MM_OBSERVADORZUMBI:
-  Type: ZOMBIE
-  Display: 'Observador Zumbi'
-  Health: 93
-  Damage: 16
+  MM_OBSERVADOR:
+    Type: GHAST
+    Display: 'Observador'
+    Health: 180
+    Damage: 18
+    Faction: aberration
+    Options:
+      MovementSpeed: 0.12
+      FollowRange: 28
+      PreventOtherDrops: true
+      NoGravity: true
+      Silent: false
+    Skills:
+    - projectile{bullet=SmallFireball;onhit=[damage{a=22;type=FORCE} @target;potion{t=BLINDNESS;d=80;lvl=0} @target]} @target ~onTimer:120 0.7
+    - damage{a=18;type=NECROTIC} @target ~onAttack 0.75
+    - pull{v=0.8} @target ~onTimer:160 0.4
+
+
+  MM_OBSERVADORZUMBI:
+    Type: ZOMBIE
+    Display: 'Observador Zumbi'
+    Health: 93
+    Damage: 16
   Faction: undead
   Options:
     MovementSpeed: 0.0
