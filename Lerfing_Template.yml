@@ -7014,17 +7014,25 @@ MM_TAPETESUFOCADOR:
 
 
 MM_TIRANODAMORTE:
-  Type: ZOMBIE
+  Type: GHAST
   Display: 'Tirano Da Morte'
   Health: 187
-  Damage: 30
+  Damage: 20
   Faction: undead
   Options:
-    MovementSpeed: 0.0
-    FollowRange: 18
+    MovementSpeed: 0.14
+    FollowRange: 32
     PreventOtherDrops: true
+    NoGravity: true
+    Silent: false
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=30;type=PHYSICAL} @target ~onAttack 0.8
+  - projectile{bullet=WitherSkull;onhit=[damage{a=26;type=NECROTIC} @target;potion{t=WITHER;d=80;lvl=1} @target]} @target ~onTimer:90 0.65
+  - projectile{bullet=SmallFireball;onhit=[damage{a=22;type=FORCE} @target;potion{t=SLOW;d=80;lvl=2} @target]} @target ~onTimer:120 0.55
+  - potion{t=WITHER;d=120;lvl=1} @PlayersInRadius{r=10} ~onTimer:150 0.55
+  - summon{t=MM_ZUMBI;amount=1;radius=4} @self ~onKill 0.75
+  - damage{a=20;type=NECROTIC} @target ~onAttack 0.8
 
 
 MM_OGRO:
@@ -7577,11 +7585,11 @@ MM_ZUMBI:
   - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
 
 
-  MM_OGROZUMBI:
-    Type: ZOMBIE
-    Display: 'Ogro Zumbi'
-    Health: 85
-    Damage: 14
+MM_OGROZUMBI:
+  Type: ZOMBIE
+  Display: 'Ogro Zumbi'
+  Health: 85
+  Damage: 14
   Faction: undead
   Options:
     MovementSpeed: 0.36
@@ -7591,29 +7599,52 @@ MM_ZUMBI:
   - damage{a=14;type=PHYSICAL} @target ~onAttack 0.8
 
 
-  MM_OBSERVADOR:
-    Type: GHAST
-    Display: 'Observador'
-    Health: 180
-    Damage: 18
-    Faction: aberration
-    Options:
-      MovementSpeed: 0.12
-      FollowRange: 28
-      PreventOtherDrops: true
-      NoGravity: true
-      Silent: false
-    Skills:
-    - projectile{bullet=SmallFireball;onhit=[damage{a=22;type=FORCE} @target;potion{t=BLINDNESS;d=80;lvl=0} @target]} @target ~onTimer:120 0.7
-    - damage{a=18;type=NECROTIC} @target ~onAttack 0.75
-    - pull{v=0.8} @target ~onTimer:160 0.4
+MM_OBSERVADOR:
+  Type: GHAST
+  Display: 'Observador'
+  Health: 180
+  Damage: 14
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.16
+    FollowRange: 32
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: false
+  DamageModifiers:
+  - FALL 0
+  Skills:
+  - projectile{bullet=SmallFireball;onhit=[damage{a=22;type=FORCE} @target;potion{t=BLINDNESS;d=80;lvl=0} @target]} @target ~onTimer:120 0.7
+  - projectile{bullet=ShulkerBullet;onhit=[damage{a=20;type=NECROTIC} @target;root{d=40} @target]} @target ~onTimer:80 0.65
+  - potion{t=SLOW;d=120;lvl=3} @PlayersInRadius{r=10} ~onTimer:140 0.45
+  - pull{v=0.8} @target ~onTimer:160 0.45
+  - damage{a=18;type=NECROTIC} @target ~onAttack 0.75
 
 
-  MM_OBSERVADORZUMBI:
-    Type: ZOMBIE
-    Display: 'Observador Zumbi'
-    Health: 93
-    Damage: 16
+MM_ESPECTADOR:
+  Type: VEX
+  Display: 'Espectador'
+  Health: 39
+  Damage: 6
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.24
+    FollowRange: 22
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: false
+  Skills:
+  - projectile{bullet=Snowball;onhit=[potion{t=CONFUSION;d=80;lvl=1} @target]} @target ~onTimer:90 0.7
+  - projectile{bullet=SpectralArrow;onhit=[root{d=40} @target]} @target ~onTimer:110 0.55
+  - projectile{bullet=SmallFireball;onhit=[potion{t=FEAR;d=60;lvl=0} @target;knockback{strength=0.5} @target]} @target ~onTimer:130 0.45
+  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+
+
+MM_OBSERVADORZUMBI:
+  Type: ZOMBIE
+  Display: 'Observador Zumbi'
+  Health: 93
+  Damage: 16
   Faction: undead
   Options:
     MovementSpeed: 0.0
