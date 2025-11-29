@@ -4873,7 +4873,7 @@ MM_INUMANO:
   - damage{a=5;type=NECROTIC} @target ~onAttack 0.8
   - potion{t=WEAKNESS;d=120;lvl=1} @target ~onAttack 0.6
   # Levantar zumbis breves em torno
-  - summon{t=MM_ZUMBI;amount=2;radius=6;ol=8} @self ~onKill 0.6
+  - summon{t=ZombieDND;amount=2;radius=6;ol=8} @self ~onKill 0.6
 
 
 MM_KENKU:
@@ -7031,7 +7031,7 @@ MM_TIRANODAMORTE:
   - projectile{bullet=WitherSkull;onhit=[damage{a=26;type=NECROTIC} @target;potion{t=WITHER;d=80;lvl=1} @target]} @target ~onTimer:90 0.65
   - projectile{bullet=SmallFireball;onhit=[damage{a=22;type=FORCE} @target;potion{t=SLOW;d=80;lvl=2} @target]} @target ~onTimer:120 0.55
   - potion{t=WITHER;d=120;lvl=1} @PlayersInRadius{r=10} ~onTimer:150 0.55
-  - summon{t=MM_ZUMBI;amount=1;radius=4} @self ~onKill 0.75
+  - summon{t=ZombieDND;amount=1;radius=4} @self ~onKill 0.75
   - damage{a=20;type=NECROTIC} @target ~onAttack 0.8
 
 
@@ -8029,6 +8029,7 @@ MM_SHADOW:
 
 
 
+<<<<<<< HEAD
 MM_SPRITE:
   Type: VEX
   Display: '&aSprite'
@@ -8117,6 +8118,8 @@ MM_PIXIET:
 
 
 
+=======
+>>>>>>> 2b09c2e64b5ea082cf9fafe3642475af23fafd53
 MM_STIRGE:
   Type: BAT
   Display: '&4Stirge'
@@ -9518,6 +9521,7 @@ MM_ULTROLOTH:
     - summon{type=MM_ULTROLOTH;amount=1;radius=10} @self ~onTimer:1300 0.15
 
 
+<<<<<<< HEAD
 MM_ZUMBI:
   Type: ZOMBIE
   Display: '&a&lZumbi'
@@ -9553,6 +9557,13 @@ MM_OGRO_ZUMBI:
   Display: '&2&lOgro Zumbi'
   Health: 130
   Damage: 16
+=======
+MM_OGROZUMBI:
+  Type: ZOMBIE
+  Display: 'Ogro Zumbi'
+  Health: 85
+  Damage: 14
+>>>>>>> 2b09c2e64b5ea082cf9fafe3642475af23fafd53
   Faction: undead
 
   Options:
@@ -9742,20 +9753,6 @@ MM_ARANHA:
     PreventOtherDrops: true
   Skills:
   - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
-
-
-MM_ARANHAGIGANTE:
-  Type: WOLF
-  Display: 'Aranha Gigante'
-  Health: 26
-  Damage: 4
-  Faction: beast
-  Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_ARANHAINTERPLANAR:
@@ -9962,34 +9959,6 @@ MM_CAVALODECARGA:
   - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
 
 
-MM_CAVALODEGUERRA:
-  Type: WOLF
-  Display: 'Cavalo De Guerra'
-  Health: 19
-  Damage: 3
-  Faction: beast
-  Options:
-    MovementSpeed: 0.72
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
-
-
-MM_CAVALODEMONTARIA:
-  Type: WOLF
-  Display: 'Cavalo De Montaria'
-  Health: 13
-  Damage: 3
-  Faction: beast
-  Options:
-    MovementSpeed: 0.72
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
-
-
 MM_CAVALOMARINHO:
   Type: COD
   Display: 'Cavalo Marinho'
@@ -10048,21 +10017,6 @@ MM_CHACAL:
   - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
 
 
-MM_COBRACONSTRITORA:
-  Type: SILVERFISH
-  Display: 'Cobra Constritora'
-  Health: 13
-  Damage: 7
-  Faction: beast
-  Options:
-    MovementSpeed: 0.3
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=5;type=PHYSICAL} @target ~onAttack 0.8
-  - root{d=60} @target ~onAttack 0.45
-
-
 MM_COBRACONSTRITORAGIGANTE:
   Type: SILVERFISH
   Display: 'Cobra Constritora Gigante'
@@ -10095,21 +10049,6 @@ MM_COBRAVOADORA:
   - damage{a=3;type=POISON} @target ~onAttack 0.6
 
 
-MM_CORUJA:
-  Type: PARROT
-  Display: 'Coruja'
-  Health: 1
-  Damage: 1
-  Faction: beast
-  Options:
-    MovementSpeed: 0.32
-    FollowRange: 16
-    NoGravity: true
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=1;type=PHYSICAL} @target ~onAttack 0.8
-
-
 MM_CORUJAGIGANTE:
   Type: PARROT
   Display: 'Coruja Gigante'
@@ -10124,36 +10063,6 @@ MM_CORUJAGIGANTE:
   Skills:
   - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
   - knockback{strength=0.8} @target ~onAttack 0.45
-
-
-MM_CORVO:
-  Type: PARROT
-  Display: 'Corvo'
-  Health: 1
-  Damage: 1
-  Faction: beast
-  Options:
-    MovementSpeed: 0.32
-    FollowRange: 14
-    NoGravity: true
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=1;type=PHYSICAL} @target ~onAttack 0.8
-
-
-MM_CROCODILO:
-  Type: TURTLE
-  Display: 'Crocodilo'
-  Health: 19
-  Damage: 7
-  Faction: beast
-  Options:
-    MovementSpeed: 0.24
-    FollowRange: 16
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.8
-  - potion{t=SLOW;d=60;lvl=1} @target ~onAttack 0.4
 
 
 MM_CROCODILOGIGANTE:
@@ -10565,20 +10474,6 @@ MM_POLVOGIGANTE:
   - damage{a=9;type=PHYSICAL} @target ~onAttack 0.8
 
 
-MM_RATO:
-  Type: WOLF
-  Display: 'Rato'
-  Health: 1
-  Damage: 3
-  Faction: beast
-  Options:
-    MovementSpeed: 0.24
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
-
-
 MM_RATOGIGANTE:
   Type: WOLF
   Display: 'Rato Gigante'
@@ -10607,20 +10502,6 @@ MM_RINOCERONTE:
   - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
 
 
-MM_SAPO:
-  Type: WOLF
-  Display: 'Sapo'
-  Health: 1
-  Damage: 3
-  Faction: beast
-  Options:
-    MovementSpeed: 0.24
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
-
-
 MM_SAPOGIGANTE:
   Type: WOLF
   Display: 'Sapo Gigante'
@@ -10633,20 +10514,6 @@ MM_SAPOGIGANTE:
     PreventOtherDrops: true
   Skills:
   - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
-
-
-MM_SERPENTEVENENOSA:
-  Type: WOLF
-  Display: 'Serpente Venenosa'
-  Health: 2
-  Damage: 3
-  Faction: beast
-  Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_SERPENTEVENENOSAGIGANTE:
@@ -10691,20 +10558,6 @@ MM_TEXUGOGIGANTE:
   - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
 
 
-MM_TIGRE:
-  Type: WOLF
-  Display: 'Tigre'
-  Health: 37
-  Damage: 6
-  Faction: beast
-  Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
-
-
 MM_TIGREDENTESDESABRE:
   Type: WOLF
   Display: 'Tigre Dentes-De-Sabre'
@@ -10717,20 +10570,6 @@ MM_TIGREDENTESDESABRE:
     PreventOtherDrops: true
   Skills:
   - damage{a=10;type=PHYSICAL} @target ~onAttack 0.8
-
-
-MM_URSOMARROM:
-  Type: WOLF
-  Display: 'Urso Marrom'
-  Health: 34
-  Damage: 6
-  Faction: beast
-  Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
 
 
 MM_URSONEGRO:
