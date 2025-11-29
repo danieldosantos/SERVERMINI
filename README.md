@@ -18,3 +18,31 @@ Este diretório contém os arquivos de servidor para o modpack **Dungeon Heroes*
 4. **Inicie o servidor:** execute `start.sh` (Linux/macOS) ou `start.bat` (Windows) para rodar o `fabric-server-launch.jar` com a memória recomendada. Ajuste os valores `-Xms` e `-Xmx` se tiver menos RAM disponível.
 
 > Observação: usar `server.jar` (Paper) não carregará os mods Fabric listados no manifest. Escolha-o apenas para um servidor de plugins sem mods Fabric.
+
+## Manual rápido de comandos para jogadores
+
+Os comandos abaixo são os mais úteis assim que você entra no servidor. Alguns dependem de permissões ou de plugins/mods presentes; caso não funcionem, peça ajuda a um moderador.
+
+### Navegação e ajuda
+- `/help` – lista de comandos disponíveis para você e pequenos resumos de uso.
+- `/list` – mostra quem está online e quantos jogadores estão conectados.
+- `/info` ou `/motd` – exibe regras e links úteis, quando configurados pela staff.
+
+### Comunicação
+- `/msg <jogador> <mensagem>` – envia mensagem privada para outro jogador.
+- `/r <mensagem>` – responde a quem falou com você por mensagem privada.
+- `/me <ação>` – envia uma mensagem em estilo de narração para o chat global.
+
+### Navegação rápida (se permitido)
+- `/spawn` – teleporta para o ponto principal do servidor.
+- `/sethome` e `/home` – define um ponto pessoal e volta para ele rapidamente.
+- `/tpa <jogador>`, `/tpahere <jogador>`, `/tpaccept` e `/tpdeny` – pedidos de teleporte para outros jogadores.
+
+### Reclamações e suporte
+- `/report <jogador> <motivo>` – abre um ticket para a staff (use em casos de bug, grief ou conduta inadequada).
+- `/rules` – relembra as regras oficiais do servidor.
+
+### Etiqueta recomendada
+- Evite spam no chat e use `/msg` para conversas privadas prolongadas.
+- Use `/help` para confirmar sintaxe de comandos antes de testar em situação crítica.
+- Se um comando não funcionar, confirme com a staff se ele está liberado para sua categoria de jogador.
