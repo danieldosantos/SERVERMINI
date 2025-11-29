@@ -1,0 +1,34 @@
+[13:58:35] [ServerMain/INFO]: [bootstrap] Running Java 21 (Java HotSpot(TM) 64-Bit Server VM 21.0.9+7-LTS-338; Oracle Corporation null) on Windows 10 10.0 (amd64)
+[13:58:35] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.1-133-ver/1.21.1@3cb8529 (2025-03-28T16:14:36Z) for Minecraft 1.21.1
+[13:58:36] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[13:58:36] [ServerMain/INFO]: [PluginInitializerManager] Initialized 0 plugins
+[13:58:40] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[13:58:42] [ServerMain/INFO]: Loaded 1290 recipes
+[13:58:42] [ServerMain/INFO]: Loaded 1399 advancements
+[13:58:42] [Server thread/INFO]: Starting minecraft server version 1.21.1
+[13:58:42] [Server thread/INFO]: Loading properties
+[13:58:43] [Server thread/INFO]: This server is running Paper version 1.21.1-133-ver/1.21.1@3cb8529 (2025-03-28T16:14:36Z) (Implementing API version 1.21.1-R0.1-SNAPSHOT)
+[13:58:43] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[13:58:44] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[13:58:44] [Server thread/INFO]: Using 4 threads for Netty based IO
+[13:58:44] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using 1 I/O threads, 3 worker threads, and population gen parallelism of 3 threads
+[13:58:44] [Server thread/INFO]: Default game type: SURVIVAL
+[13:58:44] [Server thread/INFO]: Generating keypair
+[13:58:44] [Server thread/INFO]: Starting Minecraft server on *:25565
+[13:58:45] [Server thread/INFO]: Using default channel type
+[13:58:45] [Server thread/INFO]: Paper: Using Java compression from Velocity.
+[13:58:45] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
+[13:58:45] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[13:58:45] [Server thread/INFO]: Preparing level "world"
+[13:58:45] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[13:58:46] [Server thread/INFO]: Time elapsed: 885 ms
+[13:58:46] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[13:58:46] [Server thread/INFO]: Time elapsed: 104 ms
+[13:58:46] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[13:58:46] [Server thread/INFO]: Time elapsed: 67 ms
+[13:58:46] [Server thread/INFO]: [spark] Starting background profiler...
+[13:58:46] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows10/amd64), so the built-in Java engine will be used instead.
+[13:58:46] [Server thread/INFO]: Done preparing level "world" (1.557s)
+[13:58:46] [Server thread/INFO]: Running delayed init tasks
+[13:58:46] [Server thread/INFO]: Done (12.270s)! For help, type "help"
+[13:58:46] [Server thread/INFO]: Timings Reset
