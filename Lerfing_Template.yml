@@ -7494,10 +7494,20 @@ MM_RAKSHASA:
   Faction: fiend
   Options:
     MovementSpeed: 0.48
-    FollowRange: 18
+    FollowRange: 22
     PreventOtherDrops: true
+  DamageModifiers:
+  - MAGIC 0.25 # Imunidade a magia inferior
+  - PROJECTILE 0.85
+  - HOLY 1.25
   Skills:
-  - damage{a=18;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataques múltiplos de garra e maldição de pesadelos
+  - repeat{amount=1;delay=6;skills=[damage{a=12;type=SLASHING} @target;damage{a=12;type=SLASHING} @target;potion{t=WEAKNESS;d=200;lvl=1} @target;potion{t=SLOW;d=200;lvl=0} @target]} @self ~onAttack 0.9
+  - potion{t=HUNGER;d=400;lvl=1} @target ~onAttack 0.5
+  # Truques ilusórios e fuga
+  - potion{t=INVISIBILITY;d=120;lvl=1;overwrite=true} @self ~onTimer:180 0.55
+  - potion{t=CONFUSION;d=120;lvl=0} @PlayersInRadius{r=10} ~onTimer:220 0.4
+  - cleanse{type=NEGATIVE;amount=2} @self ~onTimer:200 0.55
 
 
 MM_REMORHAZJOVEM:
@@ -7508,10 +7518,21 @@ MM_REMORHAZJOVEM:
   Faction: monster
   Options:
     MovementSpeed: 0.36
-    FollowRange: 18
+    FollowRange: 22
     PreventOtherDrops: true
+  DamageModifiers:
+  - FIRE 0
+  - LAVA 0
+  - ICE 0
   Skills:
-  - damage{a=16;type=PHYSICAL} @target ~onAttack 0.8
+  # Corpo aquecido
+  - damage{a=7;type=FIRE} @trigger ~onDamaged 1
+  - ignite{ticks=60} @trigger ~onDamaged 0.65
+  # Mordida flamejante
+  - damage{a=20;type=PIERCING} @target ~onAttack 1
+  - damage{a=7;type=FIRE} @target ~onAttack 1
+  # Investida subterrânea curta
+  - leap{velocity=0.9;duration=20} @self ~onTimer:160 0.35
 
 
 MM_REMORHAZ:
@@ -7522,10 +7543,51 @@ MM_REMORHAZ:
   Faction: monster
   Options:
     MovementSpeed: 0.36
-    FollowRange: 18
+    FollowRange: 24
     PreventOtherDrops: true
+  DamageModifiers:
+  - FIRE 0
+  - LAVA 0
+  - ICE 0
   Skills:
-  - damage{a=30;type=PHYSICAL} @target ~onAttack 0.8
+  # Corpo aquecido
+  - damage{a=10;type=FIRE} @trigger ~onDamaged 1
+  - ignite{ticks=80} @trigger ~onDamaged 0.75
+  # Mordida devastadora
+  - damage{a=40;type=PIERCING} @target ~onAttack 1
+  - damage{a=10;type=FIRE} @target ~onAttack 1
+  # Engolir simplificado: imobiliza e corrói
+  - root{d=60} @target ~onAttack 0.45
+  - damage{a=21;type=ACID} @target ~onTimer:160 0.35
+
+
+MM_RESSURGIDO:
+  Type: ZOMBIE
+  Display: 'Ressurgido'
+  Health: 136
+  Damage: 11
+  Faction: undead
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 24
+    PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
+  - WITHER 0
+  - MAGIC 0.85
+  - PROJECTILE 0.9
+  Skills:
+  # Regeneração incessante
+  - heal{a=10} @self ~onTimer:100 1
+  # Punhos vingativos
+  - damage{a=11;type=BLUNT} @target ~onAttack 1
+  - damage{a=14;type=TRUE} @target ~onAttack 0.6
+  - root{d=60} @target ~onAttack 0.35
+  # Olhar vingativo
+  - stun{d=60} @target ~onTimer:200 0.45
+  - potion{t=SLOW;d=200;lvl=1} @target ~onTimer:200 0.45
+  # Rastreador infalível
+  - potion{t=GLOWING;d=80;lvl=0} @PlayersInRadius{r=18} ~onTimer:220 0.5
 
 
 MM_ROCA:
