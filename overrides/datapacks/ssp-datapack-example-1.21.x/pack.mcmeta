@@ -1,7 +1,0 @@
-{
-  "pack": {
-    "description": "Example datapack for a parallel Overworld dimension leveraging Server Sided Portals",
-    "pack_format": 48,
-    "supported_formats": [48, 61]
-  }
-}
