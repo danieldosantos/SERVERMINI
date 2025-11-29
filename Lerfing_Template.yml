@@ -7391,18 +7391,76 @@ MM_ROCA:
   - damage{a=30;type=PHYSICAL} @target ~onAttack 0.8
 
 
+MM_SAHUAGIN:
+  Type: DROWNED
+  Display: 'Sahuagin'
+  Health: 22
+  Damage: 6
+  Faction: sahuagin
+  Options:
+    MovementSpeed: 0.36  # 9 m em terra, natação 12 m
+    FollowRange: 20
+    PreventOtherDrops: true
+  Equipment:
+  - TRIDENT HAND
+  Skills:
+  # Lança e mordida
+  - damage{a=6;type=PIERCING} @target ~onAttack 1
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.75
+  # Azagaia arremessada
+  - projectile{bullet=Trident;onhit=[damage{a=6;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>8}]} 0.5
+  # Frenesi sanguíneo: golpe extra ocasional
+  - damage{a=3;type=PIERCING} @target ~onAttack 0.35
+
+
+MM_SAHUAGINBARAO:
+  Type: DROWNED
+  Display: 'Barão Sahuagin'
+  Health: 76
+  Damage: 12
+  Faction: sahuagin
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 24
+    PreventOtherDrops: true
+    KnockbackResistance: 0.15
+  Equipment:
+  - TRIDENT HAND
+  - SHIELD OFFHAND
+  Skills:
+  # Multiataque com tridente e garras
+  - repeat{amount=2;delay=6;skills=[damage{a=12;type=PIERCING} @target]} @self ~onAttack 0.9
+  - damage{a=7;type=SLASHING} @target ~onAttack 0.9
+  # Mordida reforçada
+  - damage{a=9;type=PIERCING} @target ~onAttack 0.65
+  # Comando das marés: fortalece sahuagins próximos
+  - potion{t=STRENGTH;d=140;lvl=1} @MobsInRadius{r=10;types=DROWNED} ~onTimer:260 0.65
+  # Dardo arremessado
+  - projectile{bullet=Trident;onhit=[damage{a=12;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>10}]} 0.45
+
+
 MM_SACERDOTISASAHUAGIN:
-  Type: ZOMBIE
+  Type: DROWNED
   Display: 'Sacerdotisa Sahuagin'
   Health: 33
   Damage: 6
-  Faction: neutral
+  Faction: sahuagin
   Options:
     MovementSpeed: 0.36
-    FollowRange: 18
+    FollowRange: 20
     PreventOtherDrops: true
+  Equipment:
+  - TRIDENT HAND
   Skills:
-  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+  # Tridente e mordida
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.85
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.65
+  # Raio oracular (golpe à distância)
+  - projectile{bullet=Snowball;onhit=[damage{a=10;type=RADIANT} @target]} @target ~onTimer:200 0.55
+  # Oração de furor
+  - potion{t=STRENGTH;d=120;lvl=0} @MobsInRadius{r=8;types=DROWNED} ~onTimer:260 0.55
+  # Maré prendente
+  - root{d=60} @target ~onTimer:260 0.35
 
 
 MM_SERPENTEDEFOGO:
