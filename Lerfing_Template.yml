@@ -7335,6 +7335,30 @@ MM_PIXIE:
   - effect:particles{particle=happy_villager;amount=8;hS=0.4;vS=0.2;speed=0.02} @self ~onTimer:40
 
 
+MM_PSEUDODRAGAO:
+  Type: ALLAY
+  Display: 'Pseudodragão'
+  Health: 7
+  Damage: 4
+  Faction: dragon
+  Options:
+    MovementSpeed: 0.38  # voo 18 m
+    FollowRange: 20
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: false
+  DamageModifiers:
+  - MAGIC 0.85
+  Skills:
+  # Ferrão venenoso capaz de derrubar alvos
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.9
+  - potion{t=POISON;d=1200;lvl=0} @target ~onAttack 0.75
+  - stun{d=200} @target ~onAttack 0.35
+  # Mordida ágil complementando os ataques
+  - repeat{amount=1;delay=10;skills=[damage{a=4;type=PIERCING} @target]} @self ~onAttack 0.6
+  # Sentidos aguçados e alerta constante
+  - potion{t=NIGHT_VISION;d=12000;lvl=0;overwrite=true} @self ~onSpawn
+
 MM_POVODOMAR:
   Type: ZOMBIE
   Display: 'Povo do Mar'
@@ -7421,28 +7445,45 @@ MM_QUAGGOTH:
   Type: ZOMBIE
   Display: 'Quaggoth'
   Health: 45
-  Damage: 8
+  Damage: 6
   Faction: neutral
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.36  # 9 m, escalada 9 m
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataques múltiplos de garras serrilhadas
+  - damage{a=6;type=SLASHING} @target ~onAttack 0.95
+  - repeat{amount=1;delay=6;skills=[damage{a=6;type=SLASHING} @target]} @self ~onAttack 0.85
+  # Ferimento enfurecedor: mais dano e força quando perto da morte
+  - potion{t=STRENGTH;d=200;lvl=1;overwrite=true} @self ?self.health<=10 ~onDamaged 0.75
+  - damage{a=7;type=SLASHING} @target ?self.health<=10 ~onAttack 0.7
 
 
 MM_QUIMERA:
-  Type: SPIDER
+  Type: PHANTOM
   Display: 'Quimera'
   Health: 114
-  Damage: 19
+  Damage: 11
   Faction: monster
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.4  # 9 m, voo 18 m
+    FollowRange: 22
     PreventOtherDrops: true
+    NoGravity: true
+    Silent: false
   Skills:
-  - damage{a=19;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataques múltiplos: mordida, chifres e garras
+  - damage{a=11;type=PIERCING} @target ~onAttack 0.95
+  - repeat{amount=1;delay=6;skills=[damage{a=10;type=PIERCE} @target;damage{a=11;type=SLASHING} @target]} @self ~onAttack 0.85
+  # Sopro flamejante (recarrega simulada)
+  - damage{a=31;type=FIRE} @PlayersInRadius{r=6} ~onTimer:200 0.55
+  - ignite{ticks=80} @PlayersInRadius{r=6} ~onTimer:200 0.55
+  # Investida aérea com asas poderosas
+  - knockback{strength=0.9} @PlayersInRadius{r=4} ~onTimer:160 0.45
+  - damage{a=8;type=BLUNT} @PlayersInRadius{r=4} ~onTimer:160 0.45
 
 
 MM_RAKSHASA:
