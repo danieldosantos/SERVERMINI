@@ -7591,17 +7591,26 @@ MM_RESSURGIDO:
 
 
 MM_ROCA:
-  Type: SPIDER
+  Type: PHANTOM
   Display: 'Roca'
   Health: 248
-  Damage: 30
+  Damage: 27
   Faction: monster
   Options:
-    MovementSpeed: 0.24
-    FollowRange: 18
+    MovementSpeed: 0.7  # voo 36 m
+    FollowRange: 30
     PreventOtherDrops: true
+    NoGravity: true
+    KnockbackResistance: 0.35
   Skills:
-  - damage{a=30;type=PHYSICAL} @target ~onAttack 0.8
+  # Visão aguçada
+  - potion{t=NIGHT_VISION;d=220;lvl=0} @self ~onTimer:200
+  # Ataques múltiplos (bicada e garras)
+  - damage{a=27;type=PIERCING} @target ~onAttack 0.8
+  - repeat{amount=1;delay=4;skills=[damage{a=23;type=SLASHING} @target;root{d=60} @target]} @self ~onAttack 0.75
+  # Mergulho predatório: investida rápida
+  - potion{t=SPEED;d=80;lvl=1} @self ~onTimer:200 0.4
+  - effect:particles{particle=cloud;amount=12;hS=1;vS=0.6;speed=0.15} @self ~onTimer:40
 
 
 MM_SAHUAGIN:
@@ -7614,16 +7623,20 @@ MM_SAHUAGIN:
     MovementSpeed: 0.36  # 9 m em terra, natação 12 m
     FollowRange: 20
     PreventOtherDrops: true
+    Silent: false
   Equipment:
   - TRIDENT HAND
   Skills:
-  # Lança e mordida
-  - damage{a=6;type=PIERCING} @target ~onAttack 1
-  - damage{a=4;type=PIERCING} @target ~onAttack 0.75
+  # Lança, garras e mordida
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=4;type=SLASHING} @target ~onAttack 0.75
+  - damage{a=3;type=PIERCING} @target ~onAttack 0.65
   # Azagaia arremessada
-  - projectile{bullet=Trident;onhit=[damage{a=6;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>8}]} 0.5
-  # Frenesi sanguíneo: golpe extra ocasional
-  - damage{a=3;type=PIERCING} @target ~onAttack 0.35
+  - projectile{bullet=Trident;onhit=[damage{a=6;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>8}]} 0.55
+  # Frenesi de sangue
+  - repeat{amount=1;delay=2;skills=[damage{a=3;type=PIERCING} @target]} @self ~onAttack 0.4
+  # Afinidade aquática simples
+  - potion{t=DOLPHINS_GRACE;d=120;lvl=0} @self ~onTimer:160
 
 
 MM_SAHUAGINBARAO:
@@ -7637,19 +7650,23 @@ MM_SAHUAGINBARAO:
     FollowRange: 24
     PreventOtherDrops: true
     KnockbackResistance: 0.15
+    Silent: false
   Equipment:
   - TRIDENT HAND
   - SHIELD OFFHAND
   Skills:
-  # Multiataque com tridente e garras
-  - repeat{amount=2;delay=6;skills=[damage{a=12;type=PIERCING} @target]} @self ~onAttack 0.9
+  # Multiataque com tridente, garras e mordida
+  - repeat{amount=1;delay=6;skills=[damage{a=12;type=PIERCING} @target]} @self ~onAttack 0.95
   - damage{a=7;type=SLASHING} @target ~onAttack 0.9
-  # Mordida reforçada
-  - damage{a=9;type=PIERCING} @target ~onAttack 0.65
+  - damage{a=9;type=PIERCING} @target ~onAttack 0.7
+  # Frenesi sanguíneo reforçado
+  - repeat{amount=1;delay=2;skills=[damage{a=6;type=PIERCING} @target]} @self ~onAttack 0.55
   # Comando das marés: fortalece sahuagins próximos
-  - potion{t=STRENGTH;d=140;lvl=1} @MobsInRadius{r=10;types=DROWNED} ~onTimer:260 0.65
+  - potion{t=STRENGTH;d=160;lvl=1} @MobsInRadius{r=10;types=DROWNED} ~onTimer:240 0.65
   # Dardo arremessado
-  - projectile{bullet=Trident;onhit=[damage{a=12;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>10}]} 0.45
+  - projectile{bullet=Trident;onhit=[damage{a=12;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>10}]} 0.5
+  # Bênção das profundezas
+  - potion{t=WATER_BREATHING;d=200;lvl=0} @self ~onTimer:200
 
 
 MM_SACERDOTISASAHUAGIN:
@@ -7662,32 +7679,48 @@ MM_SACERDOTISASAHUAGIN:
     MovementSpeed: 0.36
     FollowRange: 20
     PreventOtherDrops: true
+    Silent: false
   Equipment:
   - TRIDENT HAND
   Skills:
   # Tridente e mordida
-  - damage{a=6;type=PIERCING} @target ~onAttack 0.85
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.9
   - damage{a=5;type=PIERCING} @target ~onAttack 0.65
-  # Raio oracular (golpe à distância)
+  # Magias divinas simplificadas
   - projectile{bullet=Snowball;onhit=[damage{a=10;type=RADIANT} @target]} @target ~onTimer:200 0.55
-  # Oração de furor
+  - potion{t=HEAL;d=1;lvl=0} @MobsInRadius{r=6;types=DROWNED} ~onTimer:260 0.4
   - potion{t=STRENGTH;d=120;lvl=0} @MobsInRadius{r=8;types=DROWNED} ~onTimer:260 0.55
   # Maré prendente
-  - root{d=60} @target ~onTimer:260 0.35
+  - root{d=60} @target ~onTimer:240 0.4
+  # Frenesi ritual
+  - repeat{amount=1;delay=2;skills=[damage{a=4;type=PIERCING} @target]} @self ~onAttack 0.4
 
 
 MM_SERPENTEDEFOGO:
   Type: BLAZE
   Display: 'Serpente De Fogo'
   Health: 22
-  Damage: 4
+  Damage: 6
   Faction: elemental
   Options:
     MovementSpeed: 0.36
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - FIRE 0
+  - FIRE_TICK 0
+  - LAVA 0
+  - PROJECTILE 0.85
+  - ICE 1.25
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Corpo ardente
+  - damage{a=3;type=FIRE} @PlayersInRadius{r=1.5} ~onDamaged 0.8
+  # Ataques múltiplos (mordida e cauda)
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=4;type=BLUNT} @target ~onAttack 0.8
+  - damage{a=6;type=FIRE} @target ~onAttack 0.8
+  # Fagulhas e partículas
+  - effect:particles{particle=flame;amount=10;hS=0.4;vS=0.3;speed=0.1} @self ~onTimer:20
 
 
 MM_SOMBRA:
