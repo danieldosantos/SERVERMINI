@@ -1,0 +1,384 @@
+[14:13:45] [ServerMain/INFO]: [bootstrap] Running Java 21 (Java HotSpot(TM) 64-Bit Server VM 21.0.9+7-LTS-338; Oracle Corporation null) on Windows 10 10.0 (amd64)
+[14:13:45] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.1-133-ver/1.21.1@3cb8529 (2025-03-28T16:14:36Z) for Minecraft 1.21.1
+[14:13:45] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[14:13:46] [ServerMain/INFO]: [PluginInitializerManager] Initialized 2 plugins
+[14:13:46] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (2):
+ - ModelEngine (R4.0.8), MythicMobs (5.10.0-${CI_COMMIT_SHORT_SHA})
+[14:13:50] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[14:13:52] [ServerMain/INFO]: Loaded 1290 recipes
+[14:13:52] [ServerMain/INFO]: Loaded 1399 advancements
+[14:13:52] [Server thread/INFO]: Starting minecraft server version 1.21.1
+[14:13:52] [Server thread/INFO]: Loading properties
+[14:13:52] [Server thread/INFO]: This server is running Paper version 1.21.1-133-ver/1.21.1@3cb8529 (2025-03-28T16:14:36Z) (Implementing API version 1.21.1-R0.1-SNAPSHOT)
+[14:13:53] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[14:13:53] [Server thread/INFO]: Using 4 threads for Netty based IO
+[14:13:53] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[14:13:54] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using 1 I/O threads, 3 worker threads, and population gen parallelism of 3 threads
+[14:13:54] [Server thread/INFO]: Default game type: SURVIVAL
+[14:13:54] [Server thread/INFO]: Generating keypair
+[14:13:54] [Server thread/INFO]: Starting Minecraft server on *:25565
+[14:13:54] [Server thread/INFO]: Using default channel type
+[14:13:54] [Server thread/INFO]: Paper: Using Java compression from Velocity.
+[14:13:54] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loading 4 libraries... please wait
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-api\4.16.0\adventure-api-4.16.0.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-key\4.16.0\adventure-key-4.16.0.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\examination-api\1.3.0\examination-api-1.3.0.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\examination-string\1.3.0\examination-string-1.3.0.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\org\jetbrains\annotations\24.1.0\annotations-24.1.0.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-platform-bukkit\4.3.2\adventure-platform-bukkit-4.3.2.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-platform-api\4.3.2\adventure-platform-api-4.3.2.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-text-serializer-bungeecord\4.3.2\adventure-text-serializer-bungeecord-4.3.2.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-text-serializer-legacy\4.13.1\adventure-text-serializer-legacy-4.13.1.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-nbt\4.13.1\adventure-nbt-4.13.1.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-text-serializer-gson-legacy-impl\4.13.1\adventure-text-serializer-gson-legacy-impl-4.13.1.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-platform-facet\4.3.2\adventure-platform-facet-4.3.2.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-platform-viaversion\4.3.2\adventure-platform-viaversion-4.3.2.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-text-minimessage\4.16.0\adventure-text-minimessage-4.16.0.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-text-serializer-gson\4.16.0\adventure-text-serializer-gson-4.16.0.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-text-serializer-json\4.16.0\adventure-text-serializer-json-4.16.0.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\option\1.0.0\option-1.0.0.jar
+[14:13:54] [Server thread/INFO]: [SpigotLibraryLoader] [MythicMobs] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\com\google\code\gson\gson\2.8.0\gson-2.8.0.jar
+[14:13:55] [Server thread/INFO]: [SpigotLibraryLoader] [ModelEngine] Loading 3 libraries... please wait
+[14:13:55] [Server thread/INFO]: [SpigotLibraryLoader] [ModelEngine] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-api\4.14.0\adventure-api-4.14.0.jar
+[14:13:55] [Server thread/INFO]: [SpigotLibraryLoader] [ModelEngine] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-key\4.14.0\adventure-key-4.14.0.jar
+[14:13:55] [Server thread/INFO]: [SpigotLibraryLoader] [ModelEngine] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\examination-api\1.3.0\examination-api-1.3.0.jar
+[14:13:55] [Server thread/INFO]: [SpigotLibraryLoader] [ModelEngine] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\examination-string\1.3.0\examination-string-1.3.0.jar
+[14:13:55] [Server thread/INFO]: [SpigotLibraryLoader] [ModelEngine] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\org\jetbrains\annotations\24.0.1\annotations-24.0.1.jar
+[14:13:55] [Server thread/INFO]: [SpigotLibraryLoader] [ModelEngine] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-text-serializer-gson\4.14.0\adventure-text-serializer-gson-4.14.0.jar
+[14:13:55] [Server thread/INFO]: [SpigotLibraryLoader] [ModelEngine] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-text-serializer-json\4.14.0\adventure-text-serializer-json-4.14.0.jar
+[14:13:55] [Server thread/INFO]: [SpigotLibraryLoader] [ModelEngine] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\com\google\code\gson\gson\2.8.0\gson-2.8.0.jar
+[14:13:55] [Server thread/INFO]: [SpigotLibraryLoader] [ModelEngine] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-text-serializer-bungeecord\4.3.0\adventure-text-serializer-bungeecord-4.3.0.jar
+[14:13:55] [Server thread/INFO]: [SpigotLibraryLoader] [ModelEngine] Loaded library C:\Users\daniel\Documents\SERVERMINI\libraries\net\kyori\adventure-text-serializer-legacy\4.13.0\adventure-text-serializer-legacy-4.13.0.jar
+[14:13:55] [Server thread/INFO]: [MythicMobs] Loading server plugin MythicMobs v5.10.0-${CI_COMMIT_SHORT_SHA}
+[14:13:55] [Server thread/INFO]: [LumineUtils] (io.lumine.mythic.bukkit.utils.) is bound to plugin MythicMobs - io.lumine.mythic.bukkit.MythicBukkit
+[14:13:55] [Server thread/INFO]: [MythicMobs] §x§f§f§0§0§0§0M§x§f§f§6§6§0§0y§x§f§f§c§c§0§0t§x§c§b§f§f§0§0h§x§6§5§f§f§0§0i§x§0§0§f§f§0§0c§x§0§0§f§f§6§6 §x§0§0§f§f§c§bE§x§0§0§c§b§f§fn§x§0§0§6§5§f§fa§x§0§0§0§0§f§fb§x§6§6§0§0§f§fl§x§c§c§0§0§f§fe§x§f§f§0§0§c§cd§x§f§f§0§0§6§6!
+[14:13:55] [Server thread/INFO]: [ModelEngine] Loading server plugin ModelEngine vR4.0.8
+[14:13:55] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[14:13:55] [Server thread/INFO]: [ModelEngine] Enabling ModelEngine vR4.0.8
+[14:13:55] [Server thread/WARN]: [ModelEngine] [S] Unable to read the model ID cache file. If the file is missing, ignore this warning.
+[14:13:55] [Server thread/INFO]: Preparing level "world"
+[14:13:56] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[14:13:56] [Server thread/INFO]: Time elapsed: 931 ms
+[14:13:56] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[14:13:57] [Server thread/INFO]: Time elapsed: 104 ms
+[14:13:57] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[14:13:57] [Server thread/INFO]: Time elapsed: 67 ms
+[14:13:57] [Server thread/INFO]: [MythicMobs] Enabling MythicMobs v5.10.0-${CI_COMMIT_SHORT_SHA}
+[14:13:57] [Server thread/INFO]: [MythicMobs] Loading MythicMobs for Paper (MC: 1.21.1)...
+[14:13:57] [Server thread/INFO]: [MythicMobs] The server is running Paper; enabled Paper exclusive functionality
+[14:14:01] [Server thread/INFO]: [MythicMobs] Loading Packs...
+[14:14:01] [Server thread/INFO]: [MythicMobs] Loading Items...
+[14:14:01] [Server thread/INFO]: [MythicMobs] Loading Item Groups...
+[14:14:01] [Server thread/INFO]: [MythicMobs] Loading Skills...
+[14:14:01] [Server thread/WARN]: [MythicMobs] ✗ Configuration Error: Particle 'wither' is not supported by this version
+[14:14:01] [Server thread/WARN]: [MythicMobs] ✗ Configuration Error: Particle 'web' is not supported by this version
+[14:14:02] [Server thread/ERROR]: Cannot load plugins\MythicMobs\mobs\ExampleMobs.yml
+org.bukkit.configuration.InvalidConfigurationException: while scanning a simple key
+ in 'reader', line 8032, column 1:
+    <<<<<<< HEAD
+    ^
+could not find expected ':'
+ in 'reader', line 8033, column 1:
+    MM_SPRITE:
+    ^
+
+	at org.bukkit.configuration.file.YamlConfiguration.loadFromString(YamlConfiguration.java:112) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.configuration.file.FileConfiguration.load(FileConfiguration.java:160) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.configuration.file.FileConfiguration.load(FileConfiguration.java:128) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(YamlConfiguration.java:310) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.core.config.IOLoader.reloadCustomConfig(IOLoader.java:80) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.core.config.IOLoader.<init>(IOLoader.java:49) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.core.mobs.MobExecutor.loadMobs(MobExecutor.java:109) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.core.config.ConfigExecutor.load(ConfigExecutor.java:455) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.bukkit.MythicBukkit.enable(MythicBukkit.java:202) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.bukkit.utils.plugin.LuminePlugin.onEnable(LuminePlugin.java:81) ~[MythicMobs-5.10.0.jar:?]
+	at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:288) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at io.papermc.paper.plugin.manager.PaperPluginInstanceManager.enablePlugin(PaperPluginInstanceManager.java:202) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.enablePlugin(PaperPluginManagerImpl.java:109) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.java:520) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.craftbukkit.CraftServer.enablePlugin(CraftServer.java:641) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at org.bukkit.craftbukkit.CraftServer.enablePlugins(CraftServer.java:590) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.loadWorld0(MinecraftServer.java:753) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.loadLevel(MinecraftServer.java:515) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:329) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1214) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:329) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
+Caused by: org.yaml.snakeyaml.scanner.ScannerException: while scanning a simple key
+ in 'reader', line 8032, column 1:
+    <<<<<<< HEAD
+    ^
+could not find expected ':'
+ in 'reader', line 8033, column 1:
+    MM_SPRITE:
+    ^
+
+	at org.yaml.snakeyaml.scanner.ScannerImpl.stalePossibleSimpleKeys(ScannerImpl.java:502) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.scanner.ScannerImpl.needMoreTokens(ScannerImpl.java:307) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.scanner.ScannerImpl.checkToken(ScannerImpl.java:237) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.parser.ParserImpl$ParseIndentlessSequenceEntryKey.produce(ParserImpl.java:586) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.parser.ParserImpl.peekEvent(ParserImpl.java:161) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:57) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:43) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:136) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:116) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeScalarNode(Composer.java:241) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:205) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeSequenceNode(Composer.java:277) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:207) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.getNode(Composer.java:131) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.getSingleNode(Composer.java:157) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.Yaml.compose(Yaml.java:575) ~[snakeyaml-2.2.jar:?]
+	at org.bukkit.configuration.file.YamlConfiguration.loadFromString(YamlConfiguration.java:105) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	... 21 more
+[14:14:02] [Server thread/ERROR]: Cannot load plugins\MythicMobs\mobs\ExampleMobs.yml
+org.bukkit.configuration.InvalidConfigurationException: while scanning a simple key
+ in 'reader', line 8032, column 1:
+    <<<<<<< HEAD
+    ^
+could not find expected ':'
+ in 'reader', line 8033, column 1:
+    MM_SPRITE:
+    ^
+
+	at org.bukkit.configuration.file.YamlConfiguration.loadFromString(YamlConfiguration.java:112) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.configuration.file.FileConfiguration.load(FileConfiguration.java:160) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.configuration.file.FileConfiguration.load(FileConfiguration.java:128) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(YamlConfiguration.java:310) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.core.config.IOLoader.reloadCustomConfig(IOLoader.java:80) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.core.config.IOLoader.<init>(IOLoader.java:56) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.core.config.IOHandler.getSaveLoad(IOHandler.java:46) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.core.mobs.MobExecutor.loadMobs(MobExecutor.java:113) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.core.config.ConfigExecutor.load(ConfigExecutor.java:455) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.bukkit.MythicBukkit.enable(MythicBukkit.java:202) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.bukkit.utils.plugin.LuminePlugin.onEnable(LuminePlugin.java:81) ~[MythicMobs-5.10.0.jar:?]
+	at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:288) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at io.papermc.paper.plugin.manager.PaperPluginInstanceManager.enablePlugin(PaperPluginInstanceManager.java:202) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.enablePlugin(PaperPluginManagerImpl.java:109) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.java:520) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.craftbukkit.CraftServer.enablePlugin(CraftServer.java:641) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at org.bukkit.craftbukkit.CraftServer.enablePlugins(CraftServer.java:590) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.loadWorld0(MinecraftServer.java:753) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.loadLevel(MinecraftServer.java:515) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:329) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1214) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:329) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
+Caused by: org.yaml.snakeyaml.scanner.ScannerException: while scanning a simple key
+ in 'reader', line 8032, column 1:
+    <<<<<<< HEAD
+    ^
+could not find expected ':'
+ in 'reader', line 8033, column 1:
+    MM_SPRITE:
+    ^
+
+	at org.yaml.snakeyaml.scanner.ScannerImpl.stalePossibleSimpleKeys(ScannerImpl.java:502) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.scanner.ScannerImpl.needMoreTokens(ScannerImpl.java:307) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.scanner.ScannerImpl.checkToken(ScannerImpl.java:237) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.parser.ParserImpl$ParseIndentlessSequenceEntryKey.produce(ParserImpl.java:586) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.parser.ParserImpl.peekEvent(ParserImpl.java:161) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:57) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:43) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:136) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:116) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeScalarNode(Composer.java:241) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:205) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeSequenceNode(Composer.java:277) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:207) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.getNode(Composer.java:131) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.getSingleNode(Composer.java:157) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.Yaml.compose(Yaml.java:575) ~[snakeyaml-2.2.jar:?]
+	at org.bukkit.configuration.file.YamlConfiguration.loadFromString(YamlConfiguration.java:105) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	... 22 more
+[14:14:02] [Server thread/WARN]: org.bukkit.configuration.InvalidConfigurationException: while scanning a simple key
+[14:14:02] [Server thread/WARN]:  in 'reader', line 8032, column 1:
+[14:14:02] [Server thread/WARN]:     <<<<<<< HEAD
+[14:14:02] [Server thread/WARN]:     ^
+[14:14:02] [Server thread/WARN]: could not find expected ':'
+[14:14:02] [Server thread/WARN]:  in 'reader', line 8033, column 1:
+[14:14:02] [Server thread/WARN]:     MM_SPRITE:
+[14:14:02] [Server thread/WARN]:     ^
+[14:14:02] [Server thread/WARN]: 
+[14:14:02] [Server thread/WARN]: 	at org.bukkit.configuration.file.YamlConfiguration.loadFromString(YamlConfiguration.java:112)
+[14:14:02] [Server thread/WARN]: 	at org.bukkit.configuration.file.FileConfiguration.load(FileConfiguration.java:160)
+[14:14:02] [Server thread/WARN]: 	at org.bukkit.configuration.file.FileConfiguration.load(FileConfiguration.java:128)
+[14:14:02] [Server thread/WARN]: 	at MythicMobs-5.10.0.jar//io.lumine.mythic.core.config.MythicConfigImpl.<init>(MythicConfigImpl.java:54)
+[14:14:02] [Server thread/WARN]: 	at MythicMobs-5.10.0.jar//io.lumine.mythic.core.config.MythicConfigImpl.<init>(MythicConfigImpl.java:45)
+[14:14:02] [Server thread/WARN]: 	at MythicMobs-5.10.0.jar//io.lumine.mythic.core.mobs.MobExecutor.loadMobs(MobExecutor.java:124)
+[14:14:02] [Server thread/WARN]: 	at MythicMobs-5.10.0.jar//io.lumine.mythic.core.config.ConfigExecutor.load(ConfigExecutor.java:455)
+[14:14:02] [Server thread/WARN]: 	at MythicMobs-5.10.0.jar//io.lumine.mythic.bukkit.MythicBukkit.enable(MythicBukkit.java:202)
+[14:14:02] [Server thread/WARN]: 	at MythicMobs-5.10.0.jar//io.lumine.mythic.bukkit.utils.plugin.LuminePlugin.onEnable(LuminePlugin.java:81)
+[14:14:02] [Server thread/WARN]: 	at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:288)
+[14:14:02] [Server thread/WARN]: 	at io.papermc.paper.plugin.manager.PaperPluginInstanceManager.enablePlugin(PaperPluginInstanceManager.java:202)
+[14:14:02] [Server thread/WARN]: 	at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.enablePlugin(PaperPluginManagerImpl.java:109)
+[14:14:02] [Server thread/WARN]: 	at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.java:520)
+[14:14:02] [Server thread/WARN]: 	at org.bukkit.craftbukkit.CraftServer.enablePlugin(CraftServer.java:641)
+[14:14:02] [Server thread/WARN]: 	at org.bukkit.craftbukkit.CraftServer.enablePlugins(CraftServer.java:590)
+[14:14:02] [Server thread/WARN]: 	at net.minecraft.server.MinecraftServer.loadWorld0(MinecraftServer.java:753)
+[14:14:02] [Server thread/WARN]: 	at net.minecraft.server.MinecraftServer.loadLevel(MinecraftServer.java:515)
+[14:14:02] [Server thread/WARN]: 	at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:329)
+[14:14:02] [Server thread/WARN]: 	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1214)
+[14:14:02] [Server thread/WARN]: 	at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:329)
+[14:14:02] [Server thread/WARN]: 	at java.base/java.lang.Thread.run(Thread.java:1583)
+[14:14:02] [Server thread/WARN]: Caused by: while scanning a simple key
+[14:14:02] [Server thread/WARN]:  in 'reader', line 8032, column 1:
+[14:14:02] [Server thread/WARN]:     <<<<<<< HEAD
+[14:14:02] [Server thread/WARN]:     ^
+[14:14:02] [Server thread/WARN]: could not find expected ':'
+[14:14:02] [Server thread/WARN]:  in 'reader', line 8033, column 1:
+[14:14:02] [Server thread/WARN]:     MM_SPRITE:
+[14:14:02] [Server thread/WARN]:     ^
+[14:14:02] [Server thread/WARN]: 
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.scanner.ScannerImpl.stalePossibleSimpleKeys(ScannerImpl.java:502)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.scanner.ScannerImpl.needMoreTokens(ScannerImpl.java:307)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.scanner.ScannerImpl.checkToken(ScannerImpl.java:237)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.parser.ParserImpl$ParseIndentlessSequenceEntryKey.produce(ParserImpl.java:586)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.parser.ParserImpl.peekEvent(ParserImpl.java:161)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:57)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:43)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:136)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:116)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeScalarNode(Composer.java:241)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:205)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeSequenceNode(Composer.java:277)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:207)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.getNode(Composer.java:131)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.composer.Composer.getSingleNode(Composer.java:157)
+[14:14:02] [Server thread/WARN]: 	at org.yaml.snakeyaml.Yaml.compose(Yaml.java:575)
+[14:14:02] [Server thread/WARN]: 	at org.bukkit.configuration.file.YamlConfiguration.loadFromString(YamlConfiguration.java:105)
+[14:14:02] [Server thread/WARN]: 	... 20 more
+[14:14:02] [Server thread/ERROR]: Cannot load C:\Users\daniel\Documents\SERVERMINI\plugins\MythicMobs\mobs\ExampleMobs.yml
+org.bukkit.configuration.InvalidConfigurationException: while scanning a simple key
+ in 'reader', line 8032, column 1:
+    <<<<<<< HEAD
+    ^
+could not find expected ':'
+ in 'reader', line 8033, column 1:
+    MM_SPRITE:
+    ^
+
+	at org.bukkit.configuration.file.YamlConfiguration.loadFromString(YamlConfiguration.java:112) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.configuration.file.FileConfiguration.load(FileConfiguration.java:160) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.configuration.file.FileConfiguration.load(FileConfiguration.java:128) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(YamlConfiguration.java:310) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.bukkit.utils.config.properties.types.NodeListProp.getNodes(NodeListProp.java:43) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.core.mobs.MobExecutor.loadMobs(MobExecutor.java:126) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.core.config.ConfigExecutor.load(ConfigExecutor.java:455) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.bukkit.MythicBukkit.enable(MythicBukkit.java:202) ~[MythicMobs-5.10.0.jar:?]
+	at MythicMobs-5.10.0.jar/io.lumine.mythic.bukkit.utils.plugin.LuminePlugin.onEnable(LuminePlugin.java:81) ~[MythicMobs-5.10.0.jar:?]
+	at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:288) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at io.papermc.paper.plugin.manager.PaperPluginInstanceManager.enablePlugin(PaperPluginInstanceManager.java:202) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.enablePlugin(PaperPluginManagerImpl.java:109) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.java:520) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.craftbukkit.CraftServer.enablePlugin(CraftServer.java:641) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at org.bukkit.craftbukkit.CraftServer.enablePlugins(CraftServer.java:590) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.loadWorld0(MinecraftServer.java:753) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.loadLevel(MinecraftServer.java:515) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:329) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1214) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:329) ~[paper-1.21.1.jar:1.21.1-133-3cb8529]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
+Caused by: org.yaml.snakeyaml.scanner.ScannerException: while scanning a simple key
+ in 'reader', line 8032, column 1:
+    <<<<<<< HEAD
+    ^
+could not find expected ':'
+ in 'reader', line 8033, column 1:
+    MM_SPRITE:
+    ^
+
+	at org.yaml.snakeyaml.scanner.ScannerImpl.stalePossibleSimpleKeys(ScannerImpl.java:502) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.scanner.ScannerImpl.needMoreTokens(ScannerImpl.java:307) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.scanner.ScannerImpl.checkToken(ScannerImpl.java:237) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.parser.ParserImpl$ParseIndentlessSequenceEntryKey.produce(ParserImpl.java:586) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.parser.ParserImpl.peekEvent(ParserImpl.java:161) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:57) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:43) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:136) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:116) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeScalarNode(Composer.java:241) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:205) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeSequenceNode(Composer.java:277) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:207) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.getNode(Composer.java:131) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.composer.Composer.getSingleNode(Composer.java:157) ~[snakeyaml-2.2.jar:?]
+	at org.yaml.snakeyaml.Yaml.compose(Yaml.java:575) ~[snakeyaml-2.2.jar:?]
+	at org.bukkit.configuration.file.YamlConfiguration.loadFromString(YamlConfiguration.java:105) ~[paper-mojangapi-1.21.1-R0.1-SNAPSHOT.jar:?]
+	... 20 more
+[14:14:02] [Server thread/INFO]: [MythicMobs] Loading Drop Tables...
+[14:14:02] [Server thread/INFO]: [MythicMobs] Loading Random Spawns...
+[14:14:02] [Server thread/INFO]: [MythicMobs] Loading Spawn Blocks...
+[14:14:02] [Server thread/WARN]: [MythicMobs] ✗ Configuration Error in Mechanic summon
+[14:14:02] [Server thread/WARN]: [MythicMobs] --| Skill: SummonSkeletons | File: C:\Users\daniel\Documents\SERVERMINI\plugins\MythicMobs\skills\ExampleSkills.yml
+[14:14:02] [Server thread/WARN]: [MythicMobs] --| Error Message: The 'type' attribute must be a valid MythicMob or MythicEntity type.
+[14:14:02] [Server thread/WARN]: [MythicMobs] --| Mechanic Line: summon{mob=SkeletalMinion;amount=2;noise=5}
+[14:14:02] [Server thread/WARN]: [MythicMobs] ✗ Configuration Error in Mechanic summon
+[14:14:02] [Server thread/WARN]: [MythicMobs] --| Skill: SummonSkeletons | File: C:\Users\daniel\Documents\SERVERMINI\plugins\MythicMobs\skills\ExampleSkills.yml
+[14:14:02] [Server thread/WARN]: [MythicMobs] --| Error Message: The 'type' attribute must be a valid MythicMob or MythicEntity type.
+[14:14:02] [Server thread/WARN]: [MythicMobs] --| Mechanic Line: summon{mob=SkeletalMinion;amount=2;noise=5}
+[14:14:02] [Server thread/WARN]: [MythicMobs] ✗ Configuration Error in Mechanic summon
+[14:14:02] [Server thread/WARN]: [MythicMobs] --| Skill: SummonSkeletons | File: C:\Users\daniel\Documents\SERVERMINI\plugins\MythicMobs\skills\ExampleSkills.yml
+[14:14:02] [Server thread/WARN]: [MythicMobs] --| Error Message: The 'type' attribute must be a valid MythicMob or MythicEntity type.
+[14:14:02] [Server thread/WARN]: [MythicMobs] --| Mechanic Line: summon{mob=SkeletalMinion;amount=2;noise=5}
+[14:14:02] [Server thread/INFO]: [MythicMobs] ✓ Loaded 3 mobs.
+[14:14:02] [Server thread/INFO]: [MythicMobs] ✓ Loaded 3 vanilla mob overrides.
+[14:14:02] [Server thread/INFO]: [MythicMobs] ✓ Loaded 0 mob stacks.
+[14:14:02] [Server thread/INFO]: [MythicMobs] ✓ Loaded 11 skills.
+[14:14:02] [Server thread/INFO]: [MythicMobs] ✓ Loaded 0 random spawns.
+[14:14:02] [Server thread/INFO]: [MythicMobs] ✓ Loaded 3 mythic items.
+[14:14:02] [Server thread/INFO]: [MythicMobs] ✓ Loaded 2 drop tables.
+[14:14:02] [Server thread/INFO]: [MythicMobs] ✓ Loaded 0 mob spawners.
+[14:14:02] [Server thread/INFO]: [MythicMobs] MythicMobs configuration file loaded successfully.
+[14:14:02] [Server thread/INFO]: [MythicMobs] Started up bStats Metrics
+[14:14:02] [Server thread/INFO]: [MythicMobs] ✓ MythicMobs v5.10.0 ( build ${CI_COMMIT_SHORT_SHA} ) has been successfully loaded!
+[14:14:03] [Server thread/INFO]: [MythicMobs] Model Engine Compatibility Loaded.
+[14:14:03] [Server thread/INFO]: [ModelEngine] [S] Compatibility applied: MythicMobs
+[14:14:03] [Server thread/INFO]: [spark] Starting background profiler...
+[14:14:03] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows10/amd64), so the built-in Java engine will be used instead.
+[14:14:03] [Server thread/INFO]: Done preparing level "world" (7.817s)
+[14:14:03] [Server thread/INFO]: Running delayed init tasks
+[14:14:03] [Craft Scheduler Thread - 3 - ModelEngine/INFO]: [ModelEngine] [A] 
+[14:14:03] [Craft Scheduler Thread - 3 - ModelEngine/INFO]: [ModelEngine] [A] [Importing models]
+[14:14:03] [Craft Scheduler Thread - 3 - ModelEngine/WARN]: [ModelEngine] [A] Unable to read the model ID cache file. If the file is missing, ignore this warning.
+[14:14:03] [Craft Scheduler Thread - 3 - ModelEngine/INFO]: [ModelEngine] [A] Generator Profiled:
+[14:14:03] [Craft Scheduler Thread - 3 - ModelEngine/INFO]: [ModelEngine] [A]  - Import Phase: 66.679.442,3ms
+[14:14:03] [Craft Scheduler Thread - 3 - ModelEngine/INFO]: [ModelEngine] [A]  - Assets Phase: 0,0ms
+[14:14:03] [Craft Scheduler Thread - 3 - ModelEngine/INFO]: [ModelEngine] [A]  - Zipping Phase: 66.679.448,6ms
+[14:14:03] [Server thread/WARN]: [MythicMobs] ✗ Config Error for Targeter line 'Damager': Failed to load custom targeter DAMAGER
+[14:14:03] [Server thread/WARN]: [MythicMobs] ✗ Config Error for Targeter line 'Damager': Failed to load custom targeter DAMAGER
+[14:14:03] [Server thread/INFO]: Done (19.469s)! For help, type "help"
+[14:14:03] [Server thread/INFO]: Timings Reset
