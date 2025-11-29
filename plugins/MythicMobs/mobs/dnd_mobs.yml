@@ -1,0 +1,119 @@
+# --- dnd_mobs.yml corrigido para MythicMobs ---
+
+GiantEagle:
+  Type: PHANTOM
+  Display: 'Águia Gigante'
+  Health: 26
+  Damage: 10
+  Faction: beast
+  Options:
+    MovementSpeed: 0.42
+    FollowRange: 32
+    PreventOtherDrops: true
+  Skills:
+    - damage{amount=7;type=PHYSICAL} @Target ~onAttack 0.8
+
+GiantSpider:
+  Type: SPIDER
+  Display: 'Aranha Gigante'
+  Health: 26
+  Damage: 7
+  Faction: beast
+  Options:
+    MovementSpeed: 0.3
+    FollowRange: 22
+    PreventOtherDrops: true
+  Skills:
+    - potion{t=POISON;d=100;lvl=1} @Target ~onAttack 0.6
+
+Warhorse:
+  Type: HORSE
+  Display: 'Cavalo de Guerra'
+  Health: 19
+  Damage: 11
+  Faction: beast
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 20
+    PreventOtherDrops: true
+  Skills:
+    - damage{amount=11;type=PHYSICAL} @Target ~onAttack 0.5
+
+RidingHorse:
+  Type: HORSE
+  Display: 'Cavalo de Montaria'
+  Health: 13
+  Damage: 9
+  Faction: beast
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 16
+    PreventOtherDrops: true
+  Skills:
+    - damage{amount=9;type=PHYSICAL} @Target ~onAttack 0.8
+
+ConstrictorSnake:
+  Type: SILVERFISH
+  Display: 'Cobra Constritora'
+  Health: 13
+  Damage: 7
+  Faction: beast
+  Options:
+    MovementSpeed: 0.18
+    FollowRange: 14
+    PreventOtherDrops: true
+  Skills:
+    - potion{t=SLOW;d=60;lvl=1} @Target ~onAttack 0.5
+
+Owl:
+  Type: PARROT
+  Display: 'Coruja'
+  Health: 1
+  Damage: 1
+  Faction: beast
+  Options:
+    MovementSpeed: 0.35
+    FollowRange: 14
+    PreventOtherDrops: true
+  Skills:
+    - damage{amount=1;type=PHYSICAL} @Target ~onAttack 0.8
+
+Raven:
+  Type: PARROT
+  Display: 'Corvo'
+  Health: 1
+  Damage: 1
+  Faction: beast
+  Options:
+    MovementSpeed: 0.35
+    FollowRange: 14
+    PreventOtherDrops: true
+  Skills:
+    - damage{amount=1;type=PHYSICAL} @Target ~onAttack 0.8
+
+Crocodile:
+  Type: TURTLE
+  Display: 'Crocodilo'
+  Health: 19
+  Damage: 7
+  Faction: beast
+  Options:
+    MovementSpeed: 0.2
+    FollowRange: 16
+    PreventOtherDrops: true
+  Skills:
+    - damage{amount=7;type=PHYSICAL} @Target ~onAttack 0.8
+    - potion{t=SLOW;d=40;lvl=1} @Target ~onAttack 0.6
+
+Imp:
+  Type: VEX
+  Display: 'Diabrete'
+  Health: 10
+  Damage: 6
+  Faction: fiend
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 24
+    PreventOtherDrops: true
+  Skills:
+    - potion{t=POISON;d=80;lvl=1} @Target ~onAttack 0.4

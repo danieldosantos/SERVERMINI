@@ -1,5 +1,0 @@
-MM_TARRASQUE_REFLECT:
-  Skills:
-    # Pequena chance de refletir dano à distância/mágico no atacante
-    - damage{a=16;type=MAGIC} @damager
-    - potion{t=CONFUSION;d=60;lvl=0} @damager

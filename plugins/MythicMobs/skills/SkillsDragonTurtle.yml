@@ -1,6 +1,0 @@
-MM_DRAGON_TURTLE_ENRAGE:
-  Skills:
-    # Pequena cura + buff quando é muito ferida
-    - healpercent{p=5} @self
-    - potion{t=DAMAGE_RESISTANCE;d=160;lvl=0} @self
-    - potion{t=INCREASE_DAMAGE;d=160;lvl=0} @self

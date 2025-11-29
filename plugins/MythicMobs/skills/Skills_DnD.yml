@@ -1,0 +1,290 @@
+# --- Skills DnD corrigido para MythicMobs ---
+
+SmashAttack:
+  Cooldown: 8
+  Conditions:
+    - targetwithin{d=25}
+  Skills:
+    - message{m="<mob.name><&co> Hahahah! I will crush you, fool!"} @PlayersInRadius{r=40}
+    - teleport @target
+    - effect:sound{s=mob.endermen.portal;volume=1.0;pitch=0.5} @target
+    - delay 10
+    - damage{amount=5;ignorearmor=true} @PlayersInRadius{r=5}
+    - throw{velocity=10;velocityY=5} @PlayersInRadius{r=5}
+    - effect:explosion @Self
+
+SummonSkeletons:
+  Cooldown: 15
+  Skills:
+    - message{m="<caster.name><&co> Arise, my minions!"} @PlayersInRadius{r=40}
+    - delay 20
+    - summon{mob=SKELETON;amount=2;noise=5} @Self
+    - delay 20
+    - summon{mob=SKELETON;amount=2;noise=5} @Self
+    - delay 20
+    - summon{mob=SKELETON;amount=2;noise=5} @Self
+
+AngrySludgePoison:
+  Cooldown: 10
+  Skills:
+    - potion{type=POISON;lvl=2;duration=100} @PlayersInRadius{r=15}
+    - effect:particles{p=happyVillager;amount=1000;hSpread=15;ySpread=1;speed=0;yOffset=0.5} @Self
+
+ZUMBI_FORTITUDE:
+  Skills:
+    - heal{a=1} @Self
+    - potion{t=REGENERATION;d=40;lvl=1} @Self
+    - message{m="&2O zumbi se recusa a cair!"} @PlayersInRadius{r=15}
+
+RAIO_PARALISANTE_ZUMBI:
+  Skills:
+    - effect:particles{p=spell;amount=30;speed=0.1} @Target
+    - potion{t=SLOW;d=80;lvl=4} @Target
+    - message{m="&bVocê é afetado pelo Raio Paralisante!"} @Target
+
+RAIO_APAVORANTE_ZUMBI:
+  Skills:
+    - effect:particles{p=smoke;amount=35;speed=0.15} @Target
+    - potion{t=CONFUSION;d=100;lvl=0} @Target
+    - potion{t=WEAKNESS;d=60;lvl=1} @Target
+
+RAIO_ENERVANTE_ZUMBI:
+  Skills:
+    - effect:particles{p=smoke;amount=40} @Target
+    - damage{a=22;type=WITHER} @Target
+
+RAIO_DESINTEGRADOR_ZUMBI:
+  Skills:
+    - effect:particles{p=endrod;amount=60} @Target
+    - damage{a=30;type=MAGIC} @Target
+    - ignite @Target
+    - potion{t=WITHER;d=80;lvl=1} @Target
+
+ARANHA_TEIA:
+  Skills:
+    - potion{t=SLOW;d=160;lvl=3} @Target
+    - effect:particles{p=spore_blossom_air;amount=20;hS=0.5;vS=0.5} @Target
+
+CULTISTA_EXPLOSAO_SOMBRIA:
+  Skills:
+    - effect:particles{p=smoke_large;amount=40;speed=0.2} @Self
+    - damage{a=14;type=NECROTIC} @PlayersInRadius{r=4}
+
+DRUIDA_BORDAO_MISTICO:
+  Skills:
+    - damage{a=10} @Target
+    - potion{t=SLOW;d=40;lvl=1} @Target
+
+DRUIDA_CRIAR_CHAMAS:
+  Skills:
+    - ignite @Target
+    - damage{a=8;type=FIRE} @Target
+
+DRUIDA_CONSTRICAO:
+  Skills:
+    - potion{t=SLOW;d=80;lvl=3} @Target
+
+DRUIDA_ONDA_TROVEJANTE:
+  Skills:
+    - lightning @Target
+    - damage{a=14;type=LIGHTNING} @Target
+
+DRUIDA_PASSOS_LONGOS:
+  Skills:
+    - potion{t=SPEED;d=120;lvl=2} @Self
+
+DRUIDA_PELE_ARVORE:
+  Skills:
+    - potion{t=DAMAGE_RESISTANCE;d=200;lvl=1} @Self
+
+DRUIDA_MENSAGEIRO_ANIMAL:
+  Skills:
+    - summon{mob=WOLF;amount=1;radius=3} @Self
+
+ESPIAO_MULTI_ESPADA_CURTA:
+  Skills:
+    - damage{a=7} @Target
+    - delay 6
+    - damage{a=7} @Target
+
+ESPIAO_BESTA_MAO:
+  Skills:
+    - projectile{bulletType=ARROW;velocity=2;onHit=damage{a=8}} @Target
+
+ESPIAO_ATAQUE_FURTIVO:
+  Skills:
+    - potion{t=BLINDNESS;d=40;lvl=0} @Target
+    - damage{a=12} @Target
+
+ESPIAO_ACAO_ARDILOSA:
+  Skills:
+    - potion{t=SPEED;d=80;lvl=2} @Self
+
+ESPIAO_FUGA_EMERGENCIA:
+  Skills:
+    - potion{t=INVISIBILITY;d=60;lvl=0} @Self
+
+FANATICO_MULTI_ADAGA:
+  Skills:
+    - damage{a=6} @Target
+    - delay 5
+    - damage{a=6} @Target
+
+FANATICO_CHAMA_SAGRADA:
+  Skills:
+    - damage{a=10;type=FIRE} @Target
+    - ignite @Target
+
+FANATICO_INFLIGIR_FERIMENTOS:
+  Skills:
+    - damage{a=11;type=NECROTIC} @Target
+
+FANATICO_ARMA_ESPIRITUAL:
+  Skills:
+    - summon{mob=VEX;amount=1} @Target
+
+FANATICO_IMOBILIZAR_PESSOA:
+  Skills:
+    - potion{t=SLOW;d=120;lvl=4} @Target
+
+FANATICO_ESCUDO_DA_FE:
+  Skills:
+    - potion{t=DAMAGE_RESISTANCE;d=160;lvl=1} @Self
+
+FANATICO_DEVOCao_SOMBRIA:
+  Skills:
+    - heal{a=8} @Self
+    - potion{t=REGENERATION;d=80;lvl=1} @Self
+
+FURIOSO_DESCUIDADO_ON:
+  Skills:
+    - potion{t=INCREASE_DAMAGE;d=160;lvl=2} @Self
+
+FURIOSO_GRITO_FURIA:
+  Skills:
+    - effect:particles{p=angry_villager;amount=30} @Self
+    - potion{t=INCREASE_DAMAGE;d=120;lvl=1} @AllPlayers{r=6}
+
+GLADIADOR_MULTI_CORPO:
+  Skills:
+    - damage{a=8} @Target
+    - delay 5
+    - damage{a=8} @Target
+
+GLADIADOR_MULTI_LANCA_DIST:
+  Skills:
+    - projectile{bulletType=TRIDENT;velocity=2;onHit=damage{a=11}} @Target
+
+GLADIADOR_ESCUDO_GOLPE:
+  Skills:
+    - damage{a=5} @Target
+    - potion{t=SLOW;d=40;lvl=1} @Target
+
+GLADIADOR_BRAVURA:
+  Skills:
+    - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @Self
+
+GLADIADOR_APARAR:
+  Skills:
+    - potion{t=RESISTANCE;d=80;lvl=1} @Self
+
+GUARDA_LANCA_ARREMESSO:
+  Skills:
+    - projectile{bulletType=TRIDENT;velocity=2;onHit=damage{a=12}} @Target
+
+TRIBAL_LANCA_ARREMESSO:
+  Skills:
+    - projectile{bulletType=ARROW;velocity=2;onHit=damage{a=9}} @Target
+
+TRIBAL_TATICAS_MATILHA:
+  Skills:
+    - potion{t=INCREASE_DAMAGE;d=120;lvl=1} @Self
+
+NOBRE_APARAR:
+  Skills:
+    - potion{t=DAMAGE_RESISTANCE;d=100;lvl=1} @Self
+
+NOBRE_CHAMAR_GUARDAS:
+  Skills:
+    - summon{mob=GUARDA;amount=2;radius=4} @Self
+
+PLEBEU_FUGIR:
+  Skills:
+    - potion{t=SPEED;d=100;lvl=2} @Self
+
+RUFIAO_MULTI_MACA:
+  Skills:
+    - damage{a=7} @Target
+    - delay 6
+    - damage{a=7} @Target
+
+RUFIAO_BESTA_PESADA:
+  Skills:
+    - projectile{bulletType=ARROW;velocity=3;onHit=damage{a=11}} @Target
+
+RUFIAO_TATICAS_MATILHA:
+  Skills:
+    - potion{t=INCREASE_DAMAGE;d=120;lvl=1} @Self
+
+SACERDOTE_CHAMA_SAGRADA:
+  Skills:
+    - damage{a=9;type=HOLY} @Target
+
+SACERDOTE_RAIO_TELEGUIADO:
+  Skills:
+    - lightning @Target
+    - damage{a=12} @Target
+
+SACERDOTE_CURAR_FERIMENTOS:
+  Skills:
+    - heal{a=12} @Self
+
+SACERDOTE_ESPIRITOS_GUARDIOES:
+  Skills:
+    - potion{t=DAMAGE_RESISTANCE;d=160;lvl=1} @Self
+
+SACERDOTE_ARMA_ESPIRITUAL:
+  Skills:
+    - summon{mob=VEX;amount=1} @Target
+
+SACERDOTE_SANTUARIO:
+  Skills:
+    - potion{t=ABSORPTION;d=160;lvl=1} @Self
+
+SACERDOTE_EMINENCIA_DIVINA:
+  Skills:
+    - potion{t=INCREASE_DAMAGE;d=120;lvl=1} @Self
+
+VETERANO_MULTI_ESPADAS:
+  Skills:
+    - damage{a=8} @Target
+    - delay 6
+    - damage{a=8} @Target
+
+VETERANO_ESPADA_CURTA:
+  Skills:
+    - damage{a=9} @Target
+
+VETERANO_BESTA_PESADA:
+  Skills:
+    - projectile{bulletType=ARROW;velocity=2.5;onHit=damage{a=12}} @Target
+
+VETERANO_POSTURA_DEFENSIVA:
+  Skills:
+    - potion{t=DAMAGE_RESISTANCE;d=140;lvl=1} @Self
+
+MM_DRAGON_TURTLE_ENRAGE:
+  Skills:
+    - healpercent{p=5} @Self
+    - potion{t=DAMAGE_RESISTANCE;d=160;lvl=0} @Self
+    - potion{t=INCREASE_DAMAGE;d=160;lvl=0} @Self
+
+MM_TARRASQUE_REFLECT:
+  Skills:
+    - damage{a=16;type=MAGIC} @damager
+    - potion{t=CONFUSION;d=60;lvl=0} @damager
+
+MM_WYVERN_ENRAGE:
+  Skills:
+    - potion{t=INCREASE_DAMAGE;d=160;lvl=1} @Self
+    - potion{t=SPEED;d=160;lvl=0} @Self
