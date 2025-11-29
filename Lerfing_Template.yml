@@ -7098,59 +7098,97 @@ MM_ONI:
 
 
 MM_ORC:
-  Type: ZOMBIE
+  Type: VINDICATOR
   Display: 'Orc'
   Health: 15
-  Damage: 3
-  Faction: neutral
+  Damage: 9
+  Faction: orc
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.36  # 9 m
     FollowRange: 18
     PreventOtherDrops: true
+  Equipment:
+  - IRON_AXE HAND
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Machado grande
+  - damage{a=9;type=SLASHING} @target ~onAttack 0.9
+  # Azagaia arremessada quando o alvo está longe
+  - projectile{bullet=Arrow;onhit=[damage{a=6;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>8}]} 0.55
+  # Agressivo: investida curta para fechar distância
+  - potion{t=SPEED;d=60;lvl=0} @self ~onTimer:220 0.5
 
 
 MM_COMANDANTEDEGUERRAORC:
-  Type: ZOMBIE
+  Type: VINDICATOR
   Display: 'Comandante De Guerra Orc'
   Health: 93
-  Damage: 16
-  Faction: neutral
+  Damage: 14
+  Faction: orc
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 22
     PreventOtherDrops: true
+  Equipment:
+  - IRON_AXE HAND
   Skills:
-  - damage{a=16;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataques múltiplos com machado
+  - repeat{amount=1;delay=8;skills=[damage{a=14;type=SLASHING} @target]} @self ~onAttack 0.9
+  # Fúria de Gruumsh: dano extra em cada golpe
+  - damage{a=4;type=FORCE} @target ~onAttack 0.9
+  # Lança arremessada como opção de alcance
+  - projectile{bullet=Arrow;onhit=[damage{a=12;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>6}]} 0.45
+  # Grito de Guerra: fortalece orcs próximos e concede ataque extra
+  - potion{t=STRENGTH;d=120;lvl=1} @MobsInRadius{r=9;types=VINDICATOR} ~onTimer:800 1
+  - damage{a=14;type=SLASHING} @target ~onTimer:800 0.9
 
 
 MM_ORCOLHODEGRUUMSH:
-  Type: ZOMBIE
+  Type: EVOKER
   Display: 'Orc Olho De Gruumsh'
   Health: 45
-  Damage: 8
-  Faction: neutral
+  Damage: 11
+  Faction: orc
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 20
     PreventOtherDrops: true
+  Equipment:
+  - IRON_SWORD HAND
   Skills:
-  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+  # Lança sagrada (arma espiritual) em linha reta
+  - projectile{bullet=Trident;onhit=[damage{a=10;type=FORCE} @target]} @target ~onTimer:200 0.5
+  # Golpe com lança ou espada
+  - damage{a=11;type=PIERCING} @target ~onAttack 0.85
+  # Fúria de Gruumsh: dano divino adicional
+  - damage{a=4;type=DIVINE} @target ~onAttack 0.85
+  # Comando/Grito: enraíza e assusta o alvo
+  - root{d=40} @target ~onTimer:240 0.35
+  - potion{t=WEAKNESS;d=100;lvl=0} @target ~onTimer:240 0.35
+  # Bênção simples para aliados orcs próximos
+  - potion{t=STRENGTH;d=140;lvl=0} @MobsInRadius{r=8;types=VINDICATOR} ~onTimer:300 0.45
 
 
 MM_OROG:
-  Type: ZOMBIE
+  Type: VINDICATOR
   Display: 'Orog'
   Health: 42
-  Damage: 7
-  Faction: neutral
+  Damage: 10
+  Faction: orc
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 20
     PreventOtherDrops: true
+    KnockbackResistance: 0.25
+  Equipment:
+  - IRON_AXE HAND
+  - IRON_HELMET HEAD
   Skills:
-  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.8
+  # Machado grande (multiataque)
+  - repeat{amount=1;delay=6;skills=[damage{a=10;type=SLASHING} @target]} @self ~onAttack 0.9
+  # Azagaia para alcance médio
+  - projectile{bullet=Arrow;onhit=[damage{a=7;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>7}]} 0.5
+  # Disciplina marcial: resistência curta
+  - potion{t=RESISTANCE;d=80;lvl=0} @self ~onTimer:260 0.5
 
 
 MM_PANTERADESLOCADORA:
