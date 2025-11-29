@@ -6662,11 +6662,16 @@ MM_MONODRONE:
   Damage: 3
   Faction: construct
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.36  # 9 m e voo 9 m
     FollowRange: 18
     PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Adaga ou azagaia (ataque simples)
+  - damage{a=3;type=PIERCING} @target ~onAttack 0.6
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.4
 
 
 MM_BIDRONE:
@@ -6676,11 +6681,17 @@ MM_BIDRONE:
   Damage: 3
   Faction: construct
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.36  # 9 m
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataques Múltiplos (2 ataques)
+  - damage{a=3;type=BLUNT} @target ~onAttack 1
+  - repeat{amount=1;delay=6;skills=[damage{a=3;type=BLUNT} @target]} @self ~onAttack 0.8
+  # Arremesso de azagaia ocasional
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.35
 
 
 MM_TRIDRONE:
@@ -6690,11 +6701,17 @@ MM_TRIDRONE:
   Damage: 3
   Faction: construct
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.36  # 9 m
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataques Múltiplos (3 punhos)
+  - damage{a=3;type=BLUNT} @target ~onAttack 1
+  - repeat{amount=2;delay=5;skills=[damage{a=3;type=BLUNT} @target]} @self ~onAttack 0.8
+  # Azagaias para suporte a distância
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.35
 
 
 MM_QUADRONE:
@@ -6704,11 +6721,18 @@ MM_QUADRONE:
   Damage: 4
   Faction: construct
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m e voo 9 m
+    FollowRange: 24
     PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Punhos coordenados (2 ataques)
+  - damage{a=4;type=BLUNT} @target ~onAttack 1
+  - repeat{amount=1;delay=6;skills=[damage{a=4;type=BLUNT} @target]} @self ~onAttack 0.85
+  # Rajada de arco curto (4 flechas)
+  - projectile{bulletType=ARROW;amount=4;velocity=22;spread=0.8;onHit=[damage{a=5;type=PIERCING}]} @target ~onTimer:120 0.6
 
 
 MM_PENTADRONE:
@@ -6718,11 +6742,19 @@ MM_PENTADRONE:
   Damage: 5
   Faction: construct
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 24
     PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=5;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataques Múltiplos (5 braços)
+  - damage{a=5;type=BLUNT} @target ~onAttack 1
+  - repeat{amount=4;delay=5;skills=[damage{a=5;type=BLUNT} @target]} @self ~onAttack 0.85
+  # Gás Paralisante (cone 9 m, recarga simulada)
+  - effect:particles{particle=cloud;amount=30;hS=3;vS=1;speed=0.05} @self ~onTimer:200 0.6
+  - potion{t=SLOW;d=120;lvl=3} @PlayersInRadius{r=9;ignore=construct} ~onTimer:200 0.6
+  - stun{d=60} @PlayersInRadius{r=9;ignore=construct} ~onTimer:200 0.45
 
 
 MM_MONSTRODAFERRUGEM:
