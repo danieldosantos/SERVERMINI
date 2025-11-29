@@ -7337,30 +7337,84 @@ MM_PIXIE:
 
 MM_POVODOMAR:
   Type: ZOMBIE
-  Display: 'Povo Do Mar'
+  Display: 'Povo do Mar'
   Health: 11
   Damage: 3
   Faction: neutral
   Options:
-    MovementSpeed: 0.12
+    MovementSpeed: 0.12  # 3 m em terra; nadadores rápidos em água
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Anfíbio: respira debaixo d'água
+  - potion{t=WATER_BREATHING;d=12000;lvl=0;overwrite=true} @self ~onSpawn 1
+  # Lança leve (corpo-a-corpo ou arremesso)
+  - damage{a=3;type=PIERCING} @target ~onAttack 0.8
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.35
 
 
 MM_POVOLAGARTO:
   Type: ZOMBIE
   Display: 'Povo Lagarto'
   Health: 22
-  Damage: 4
+  Damage: 5
   Faction: neutral
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.36  # 9 m e natação 9 m
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataques múltiplos (mordida + clava ou escudo com cravos)
+  - damage{a=5;type=PIERCING} @target ~onAttack 1
+  - repeat{amount=1;delay=8;skills=[damage{a=5;type=BLUNT} @target]} @self ~onAttack 0.85
+  # Azagaia para ameaçar alvos distantes
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.35
+
+
+MM_POVOLAGARTOXAMA:
+  Type: ZOMBIE
+  Display: 'Xamã do Povo Lagarto'
+  Health: 27
+  Damage: 5
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36  # 9 m e natação 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+  Skills:
+  # Fôlego longo próximo ao de crocodilos
+  - potion{t=WATER_BREATHING;d=12000;lvl=0;overwrite=true} @self ~onSpawn 1
+  # Mordida e garras (ataques múltiplos)
+  - damage{a=5;type=PIERCING} @target ~onAttack 1
+  - repeat{amount=1;delay=8;skills=[damage{a=4;type=SLASHING} @target]} @self ~onAttack 0.85
+  # Truques druidas: enredar e veneno
+  - root{d=60} @target ~onAttack 0.25
+  - potion{t=POISON;d=80;lvl=1} @target ~onAttack 0.25
+  # Forma de crocodilo reforçando força
+  - potion{t=STRENGTH;d=160;lvl=0;overwrite=true} @self ~onTimer:200 0.5
+
+
+MM_REIPOVOLAGARTO:
+  Type: ZOMBIE
+  Display: 'Rei do Povo Lagarto'
+  Health: 78
+  Damage: 12
+  Faction: neutral
+  Options:
+    MovementSpeed: 0.36  # 9 m e natação 9 m
+    FollowRange: 22
+    PreventOtherDrops: true
+    KnockbackResistance: 0.2
+  Skills:
+  # Liderança brutal
+  - potion{t=STRENGTH;d=200;lvl=1;overwrite=true} @self ~onSpawn 1
+  # Ataques múltiplos: mordida e garras/tridente
+  - damage{a=6;type=PIERCING} @target ~onAttack 1
+  - repeat{amount=1;delay=8;skills=[damage{a=5;type=SLASHING} @target]} @self ~onAttack 0.85
+  # Tridente pesado com as duas mãos
+  - damage{a=7;type=PIERCING} @target ~onAttack 0.45
+  # Resistência obstinada
+  - potion{t=RESISTANCE;d=140;lvl=1} @self ~onDamaged 0.3
 
 
 MM_QUAGGOTH:
