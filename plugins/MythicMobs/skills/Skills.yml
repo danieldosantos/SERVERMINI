@@ -21,7 +21,7 @@ RAIO_APAVORANTE_ZUMBI:
 # DANO NECRÓTICO
 RAIO_ENERVANTE_ZUMBI:
   Skills:
-    - effect:particles{p=wither;amount=40} @target
+    - effect:particles{p=smoke;amount=40} @target
     - damage{a=22;type=WITHER} @target
 
 # DESINTEGRAÇÃO
@@ -35,4 +35,4 @@ RAIO_DESINTEGRADOR_ZUMBI:
 ARANHA_TEIA:
   Skills:
     - potion{t=SLOW;d=160;lvl=3} @target
-    - effect:particles{p=web;a=20;hS=0.5;vS=0.5} @target
+    - effect:particles{p=spore_blossom_air;a=20;hS=0.5;vS=0.5} @target

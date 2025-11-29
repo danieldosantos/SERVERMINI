@@ -8029,7 +8029,6 @@ MM_SHADOW:
 
 
 
-<<<<<<< HEAD
 MM_SPRITE:
   Type: VEX
   Display: '&aSprite'
@@ -8118,8 +8117,6 @@ MM_PIXIET:
 
 
 
-=======
->>>>>>> 2b09c2e64b5ea082cf9fafe3642475af23fafd53
 MM_STIRGE:
   Type: BAT
   Display: '&4Stirge'
@@ -8381,7 +8378,7 @@ MM_TROLL:
     # FÚRIA CONTRA FOGO/ÁCIDO (VERSÃO SIMPLIFICADA)
     # ===========================
     # Quando leva dano, chance de focar no atacante (especialmente útil pra magos/arqueiros)
-    - threat{t=+40} @Damager ~onDamaged 0.6
+    - threat{t=+40} @damager ~onDamaged 0.6
     - potion{t=INCREASE_DAMAGE;d=80;lvl=0} @self ~onDamaged 0.4
 
     # ===========================
@@ -9521,7 +9518,6 @@ MM_ULTROLOTH:
     - summon{type=MM_ULTROLOTH;amount=1;radius=10} @self ~onTimer:1300 0.15
 
 
-<<<<<<< HEAD
 MM_ZUMBI:
   Type: ZOMBIE
   Display: '&a&lZumbi'
@@ -9557,13 +9553,6 @@ MM_OGRO_ZUMBI:
   Display: '&2&lOgro Zumbi'
   Health: 130
   Damage: 16
-=======
-MM_OGROZUMBI:
-  Type: ZOMBIE
-  Display: 'Ogro Zumbi'
-  Health: 85
-  Damage: 14
->>>>>>> 2b09c2e64b5ea082cf9fafe3642475af23fafd53
   Faction: undead
 
   Options:
