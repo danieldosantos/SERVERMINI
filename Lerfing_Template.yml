@@ -7191,39 +7191,64 @@ MM_OROG:
   - potion{t=RESISTANCE;d=80;lvl=0} @self ~onTimer:260 0.5
 
 
+MM_OTYUGH:
+  Type: SLIME
+  Display: 'Otyugh'
+  Health: 114
+  Damage: 12
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.18  # desloc. 9 m
+    FollowRange: 18
+    PreventOtherDrops: true
+  Skills:
+  # Mordida infectada
+  - damage{a=12;type=PIERCING} @target ~onAttack 0.85
+  - potion{t=POISON;d=160;lvl=0} @target ~onAttack 0.45
+  # Tentáculos agarram e imobilizam
+  - root{d=60} @target ~onAttack 0.35
+  # Pancada com tentáculos em área curta
+  - damage{a=10;type=BLUDGEONING} @PlayersInRadius{r=3} ~onTimer:200 0.3
+  - effect:particles{particle=slime;amount=12;hS=0.4;vS=0.2;speed=0.06} @self ~onTimer:60
+
 MM_PANTERADESLOCADORA:
   Type: SPIDER
   Display: 'Pantera Deslocadora'
   Health: 85
-  Damage: 14
+  Damage: 7
   Faction: monster
   Options:
     MovementSpeed: 0.48
-    FollowRange: 18
+    FollowRange: 22
     PreventOtherDrops: true
   Skills:
-  - damage{a=14;type=PHYSICAL} @target ~onAttack 0.8
-
+  # Multiataque dos tentáculos serrilhados
+  - repeat{amount=1;delay=6;skills=[damage{a=7;type=BLUDGEONING} @target;damage{a=6;type=PIERCING} @target]} @self ~onAttack 0.85
+  # Deslocamento ilusório: resistência leve
+  - potion{t=RESISTANCE;d=120;lvl=0} @self ~onTimer:200 0.6
+  - effect:particles{particle=portal;amount=8;hS=0.6;vS=0.3;speed=0.1} @self ~onTimer:60
 
 MM_PERFURADOR:
   Type: SPIDER
   Display: 'Perfurador'
   Health: 22
-  Damage: 4
+  Damage: 6
   Faction: monster
   Options:
     MovementSpeed: 0.04
-    FollowRange: 18
+    FollowRange: 16
     PreventOtherDrops: true
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Queda perfurante
+  - leap{velocity=0.8;velocityY=1.2} @self ~onTimer:140 0.55
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.9
+  - potion{t=SLOW;d=60;lvl=0} @target ~onAttack 0.35
 
-
-  MM_PERYTON:
-    Type: SPIDER
-    Display: 'Peryton'
-    Health: 33
-    Damage: 6
+MM_PERYTON:
+  Type: SPIDER
+  Display: 'Peryton'
+  Health: 33
+  Damage: 6
   Faction: monster
   Options:
     MovementSpeed: 0.24
@@ -7232,29 +7257,28 @@ MM_PERFURADOR:
   Skills:
   - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
 
+MM_PEGASO:
+  Type: HORSE
+  Display: 'Pegaso'
+  Health: 59
+  Damage: 11
+  Faction: celestial
+  Options:
+    MovementSpeed: 0.56
+    FollowRange: 24
+    PreventOtherDrops: true
+    NoGravity: true
+    Silent: false
+  Skills:
+  - leap{velocity=1.1;velocityY=0.6} @self ~onAttack 0.6
+  - damage{a=11;type=BLUDGEONING} @target ~onAttack 0.85
+  - potion{t=SPEED;d=160;lvl=1} @self ~onSpawn
+  - potion{t=SLOW_FALLING;d=160;lvl=0} @self ~onTimer:200 0.7
 
-  MM_PEGASO:
-    Type: HORSE
-    Display: 'Pegaso'
-    Health: 59
-    Damage: 11
-    Faction: celestial
-    Options:
-      MovementSpeed: 0.56
-      FollowRange: 24
-      PreventOtherDrops: true
-      NoGravity: true
-      Silent: false
-    Skills:
-    - leap{velocity=1.1;velocityY=0.6} @self ~onAttack 0.6
-    - damage{a=11;type=PHYSICAL} @target ~onAttack 0.85
-    - potion{t=SPEED;d=160;lvl=1} @self ~onSpawn
-
-
-  MM_PESADELO:
-    Type: VEX
-    Display: 'Pesadelo'
-    Health: 68
+MM_PESADELO:
+  Type: VEX
+  Display: 'Pesadelo'
+  Health: 68
   Damage: 11
   Faction: fiend
   Options:
@@ -7263,7 +7287,6 @@ MM_PERFURADOR:
     PreventOtherDrops: true
   Skills:
   - damage{a=11;type=PHYSICAL} @target ~onAttack 0.8
-
 
 MM_PIXIE:
   Type: ALLAY
