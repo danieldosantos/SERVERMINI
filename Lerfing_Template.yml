@@ -7039,42 +7039,62 @@ MM_OGRO:
   Type: ZOMBIE
   Display: 'Ogro'
   Health: 59
-  Damage: 10
+  Damage: 13
   Faction: giant
   Options:
-    MovementSpeed: 0.48
+    MovementSpeed: 0.48  # 12 m
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=10;type=PHYSICAL} @target ~onAttack 0.8
+  # Clava grande
+  - damage{a=13;type=BLUNT} @target ~onAttack 0.95
+  - knockback{strength=0.5} @target ~onAttack 0.35
+  # Azagaia arremessada contra alvos distantes
+  - projectile{bullet=Arrow;onhit=[damage{a=11;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>8}]} 0.55
 
 
 MM_MEIOOGRO:
   Type: ZOMBIE
   Display: 'Meio-Ogro'
   Health: 30
-  Damage: 5
+  Damage: 12
   Faction: giant
   Options:
-    MovementSpeed: 0.36
+    MovementSpeed: 0.36  # 9 m
     FollowRange: 18
     PreventOtherDrops: true
   Skills:
-  - damage{a=5;type=PHYSICAL} @target ~onAttack 0.8
+  # Machado de batalha (uma mão)
+  - damage{a=12;type=SLASHING} @target ~onAttack 0.8
+  # Golpe com duas mãos para um ataque mais pesado
+  - damage{a=14;type=SLASHING} @target ~onAttack 0.45
+  # Azagaia arremessada quando o alvo está longe
+  - projectile{bullet=Arrow;onhit=[damage{a=10;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>8}]} 0.55
 
 
 MM_ONI:
   Type: ZOMBIE
   Display: 'Oni'
   Health: 110
-  Damage: 18
+  Damage: 15
   Faction: giant
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.36  # 9 m, voo 9 m
+    FollowRange: 24
     PreventOtherDrops: true
   Skills:
-  - damage{a=18;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataques múltiplos com glaive ou garras
+  - damage{a=15;type=SLASHING} @target ~onAttack 0.7
+  - repeat{amount=1;delay=6;skills=[damage{a=9;type=SLASHING} @target]} @self ~onAttack 0.7
+  # Golpes de garra isolados quando próximo
+  - damage{a=9;type=SLASHING} @target ~onAttack 0.5
+  # Regeneração
+  - heal{a=10} @self ~onTimer:100 0.9
+  # Magia inata: escuridão e invisibilidade
+  - potion{t=BLINDNESS;d=100;lvl=0} @PlayersInRadius{r=10} ~onTimer:260 0.35
+  - potion{t=INVISIBILITY;d=200;lvl=0} @self ~onTimer:200 0.4
+  # Cone de frio improvisado
+  - projectile{bullet=Snowball;onhit=[damage{a=32;type=FROST} @PlayersInRadius{r=4};potion{t=SLOW;d=160;lvl=2} @PlayersInRadius{r=4}]} @target ~onTimer:320 0.4
 
 
 MM_ORC:
