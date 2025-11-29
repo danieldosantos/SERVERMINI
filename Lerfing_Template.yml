@@ -6761,14 +6761,76 @@ MM_MONSTRODAFERRUGEM:
   Type: SPIDER
   Display: 'Monstro Da Ferrugem'
   Health: 27
-  Damage: 4
+  Damage: 5
   Faction: monster
   Options:
     MovementSpeed: 0.48
+    FollowRange: 20
+    PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0.8
+  Skills:
+  # Mordida perfurante
+  - damage{a=5;type=PIERCING} @target ~onAttack 0.9
+  # Ferrugem corrosiva: enfraquece equipamentos metálicos
+  - damage{a=4;type=ACID} @target ~onAttack 0.8
+  - potion{t=WEAKNESS;d=140;lvl=1} @target ~onAttack 0.6
+  - effect:particles{particle=falling_dust;color=#b87333;amount=10;hS=0.4;vS=0.2;speed=0.02} @self ~onAttack 0.8
+  # Farejar metal: surtos de velocidade enquanto caça
+  - potion{t=SPEED;d=80;lvl=1} @self ~onTimer:120 0.5
+
+MM_MUMIA:
+  Type: HUSK
+  Display: 'Mumia'
+  Health: 58
+  Damage: 10
+  Faction: undead
+  Options:
+    MovementSpeed: 0.22
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - FIRE 1.25
+  - PHYSICAL 0.9
+  - PROJECTILE 0.9
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+  # Punho pútrido: impacto e necrose
+  - damage{a=10;type=BLUNT} @target ~onAttack 0.9
+  - damage{a=10;type=NECROTIC} @target ~onAttack 0.7
+  # Podridão da múmia
+  - potion{t=WITHER;d=140;lvl=1} @target ~onAttack 0.6
+  - potion{t=HUNGER;d=160;lvl=1} @target ~onAttack 0.6
+  # Olhar desesperador: assusta e retarda
+  - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=6;ignore=undead} ~onTimer:140 0.45
+  - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInRadius{r=6;ignore=undead} ~onTimer:140 0.35
+  - effect:particles{particle=falling_dust;color=#c2a165;amount=8;hS=0.5;vS=0.3;speed=0.02} @self ~onTimer:80
+
+MM_SENHORDASMUMIAS:
+  Type: HUSK
+  Display: 'Senhor Das Mumias'
+  Health: 97
+  Damage: 14
+  Faction: undead
+  Options:
+    MovementSpeed: 0.24
+    FollowRange: 24
+    PreventOtherDrops: true
+  DamageModifiers:
+  - FIRE 1.25
+  - MAGIC 0.75
+  - PROJECTILE 0.85
+  Skills:
+  # Punho pútrido potente
+  - damage{a=14;type=BLUNT} @target ~onAttack 0.95
+  - damage{a=18;type=NECROTIC} @target ~onAttack 0.75
+  - potion{t=WITHER;d=200;lvl=2} @target ~onAttack 0.65
+  # Olhar desesperador reforçado
+  - potion{t=SLOW;d=140;lvl=2} @PlayersInRadius{r=8;ignore=undead} ~onTimer:160 0.45
+  - stun{d=40} @PlayersInRadius{r=8;ignore=undead} ~onTimer:160 0.35
+  # Vendaval de areia: cegueira e desgaste em área
+  - effect:particles{particle=falling_dust;color=#ad8a5f;amount=18;hS=1.5;vS=0.8;speed=0.05} @self ~onTimer:120 0.5
+  - potion{t=BLINDNESS;d=80;lvl=0} @PlayersInRadius{r=6;ignore=undead} ~onTimer:120 0.4
+  - damage{a=6;type=NECROTIC} @PlayersInRadius{r=6;ignore=undead} ~onTimer:120 0.35
 
 
 MM_235:
