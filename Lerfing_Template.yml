@@ -7723,6 +7723,259 @@ MM_SERPENTEDEFOGO:
   - effect:particles{particle=flame;amount=10;hS=0.4;vS=0.3;speed=0.1} @self ~onTimer:20
 
 
+MM_SALAMANDRA:
+  Type: BLAZE
+  Display: 'Salamandra'
+  Health: 90
+  Damage: 13
+  Faction: elemental
+  Options:
+    MovementSpeed: 0.36  # 9 m
+    FollowRange: 24
+    PreventOtherDrops: true
+    KnockbackResistance: 0.2
+  DamageModifiers:
+  - FIRE 0
+  - FIRE_TICK 0
+  - LAVA 0
+  - ICE 1.25
+  - PROJECTILE 0.85
+  Skills:
+  # Corpo ardente
+  - damage{a=3;type=FIRE} @PlayersInRadius{r=1.5} ~onDamaged 0.85
+  # Ataques múltiplos: lança e cauda
+  - repeat{amount=1;delay=4;skills=[damage{a=13;type=PIERCING} @target;damage{a=3;type=FIRE} @target]} @self ~onAttack 0.9
+  - repeat{amount=1;delay=8;skills=[damage{a=11;type=BLUNT} @target;damage{a=7;type=FIRE} @target;root{d=60} @target]} @self ~onAttack 0.75
+  # Armas ardentes
+  - effect:particles{particle=flame;amount=12;hS=0.5;vS=0.4;speed=0.12} @self ~onTimer:30
+
+
+MM_SATIRO:
+  Type: GOAT
+  Display: 'Sátiro'
+  Health: 31
+  Damage: 6
+  Faction: fey
+  Options:
+    MovementSpeed: 0.48  # 12 m
+    FollowRange: 22
+    PreventOtherDrops: true
+    KnockbackResistance: 0.05
+  Equipment:
+  - IRON_SWORD HAND
+  Skills:
+  # Cabeçada ou espada curta
+  - damage{a=6;type=BLUNT} @target ~onAttack 0.55
+  - damage{a=6;type=PIERCING} @target ~onAttack 0.7
+  # Arco curto improvisado
+  - projectile{bullet=Arrow;onhit=[damage{a=6;type=PIERCING} @target]} @target ~onAttack{conditions=[distance{d=>10}]} 0.6
+  # Resistência à magia
+  - potion{t=DAMAGE_RESISTANCE;d=160;lvl=0} @self ~onTimer:220 0.45
+  # Flauta de Pã: encanto ou medo
+  - potion{t=CONFUSION;d=120;lvl=1} @PlayersInRadius{r=12} ~onTimer:260 0.3
+  - potion{t=WEAKNESS;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:260 0.25
+
+
+MM_SIRENIDEO:
+  Type: DROWNED
+  Display: 'Sirenídeo'
+  Health: 45
+  Damage: 11
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.2  # 3 m em terra, natação 12 m com graça dos golfinhos
+    FollowRange: 22
+    PreventOtherDrops: true
+    Silent: false
+  Equipment:
+  - TRIDENT HAND
+  Skills:
+  # Respiração aquática e natação
+  - potion{t=WATER_BREATHING;d=200;lvl=0} @self ~onTimer:160
+  - potion{t=DOLPHINS_GRACE;d=200;lvl=0} @self ~onTimer:160
+  # Ataques múltiplos: mordida, garras e arpão
+  - damage{a=8;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=9;type=SLASHING} @target ~onAttack 0.8
+  - projectile{bullet=Trident;onhit=[damage{a=11;type=PIERCING} @target;pull{v=0.9} @target]} @target ~onAttack{conditions=[distance{d=>8}]} 0.65
+  # Ferocidade costeira
+  - repeat{amount=1;delay=4;skills=[damage{a=5;type=PIERCING} @target]} @self ~onAttack 0.55
+
+
+MM_SLAADVERMELHO:
+  Type: RAVAGER
+  Display: 'Slaad Vermelho'
+  Health: 93
+  Damage: 12
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 26
+    PreventOtherDrops: true
+    KnockbackResistance: 0.25
+  DamageModifiers:
+  - FIRE 0.7
+  - FIRE_TICK 0.7
+  - LAVA 0.7
+  - ICE 0.7
+  - LIGHTNING 0.7
+  - MAGIC 0.85
+  Skills:
+  # Regeneração
+  - heal{a=10} @self ~onTimer:100 1
+  # Ataques múltiplos
+  - damage{a=8;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=7;type=SLASHING} @target ~onAttack 0.85
+  - repeat{amount=1;delay=4;skills=[damage{a=7;type=SLASHING} @target]} @self ~onAttack 0.7
+  # Garra infectante
+  - potion{t=POISON;d=160;lvl=0} @target ~onAttack 0.35
+
+
+MM_SLAADAZUL:
+  Type: RAVAGER
+  Display: 'Slaad Azul'
+  Health: 123
+  Damage: 15
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 26
+    PreventOtherDrops: true
+    KnockbackResistance: 0.3
+  DamageModifiers:
+  - FIRE 0.7
+  - FIRE_TICK 0.7
+  - LAVA 0.7
+  - ICE 0.7
+  - LIGHTNING 0.7
+  - MAGIC 0.85
+  Skills:
+  # Regeneração
+  - heal{a=10} @self ~onTimer:100 1
+  # Mordida e garras poderosas
+  - damage{a=12;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=12;type=SLASHING} @target ~onAttack 0.85
+  - repeat{amount=1;delay=4;skills=[damage{a=12;type=SLASHING} @target]} @self ~onAttack 0.75
+  # Febre do caos
+  - potion{t=WITHER;d=120;lvl=0} @target ~onAttack 0.35
+
+
+MM_SLAADVERDE:
+  Type: RAVAGER
+  Display: 'Slaad Verde'
+  Health: 127
+  Damage: 11
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 28
+    PreventOtherDrops: true
+    KnockbackResistance: 0.3
+  DamageModifiers:
+  - FIRE 0.7
+  - FIRE_TICK 0.7
+  - LAVA 0.7
+  - ICE 0.7
+  - LIGHTNING 0.7
+  - MAGIC 0.8
+  Skills:
+  # Regeneração
+  - heal{a=10} @self ~onTimer:100 1
+  # Ataques corpo a corpo
+  - damage{a=11;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=7;type=SLASHING} @target ~onAttack 0.8
+  - repeat{amount=1;delay=4;skills=[damage{a=7;type=BLUNT} @target]} @self ~onAttack 0.7
+  # Arremessar chamas
+  - projectile{bullet=SmallFireball;onhit=[damage{a=10;type=FIRE} @target]} @target ~onTimer:120 0.65
+  # Medo psíquico
+  - potion{t=CONFUSION;d=140;lvl=0} @PlayersInRadius{r=10} ~onTimer:220 0.45
+
+
+MM_SLAADCINZA:
+  Type: RAVAGER
+  Display: 'Slaad Cinza'
+  Health: 127
+  Damage: 13
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 30
+    PreventOtherDrops: true
+    KnockbackResistance: 0.32
+  DamageModifiers:
+  - FIRE 0.7
+  - FIRE_TICK 0.7
+  - LAVA 0.7
+  - ICE 0.7
+  - LIGHTNING 0.7
+  - MAGIC 0.75
+  Equipment:
+  - DIAMOND_SWORD HAND
+  Skills:
+  # Regeneração
+  - heal{a=10} @self ~onTimer:100 1
+  # Lâmina mágica e garras
+  - damage{a=10;type=SLASHING} @target ~onAttack 0.9
+  - damage{a=13;type=SLASHING} @target ~onAttack 0.85
+  - repeat{amount=1;delay=4;skills=[damage{a=13;type=SLASHING} @target]} @self ~onAttack 0.75
+  # Magias inatas
+  - projectile{bullet=SmallFireball;onhit=[damage{a=14;type=FIRE} @target]} @target ~onTimer:160 0.6
+  - potion{t=INVISIBILITY;d=160;lvl=0} @self ~onTimer:220 0.35
+  - potion{t=SLOW_FALLING;d=160;lvl=0} @self ~onTimer:220 0.35
+
+
+MM_SLAADAMORTE:
+  Type: RAVAGER
+  Display: 'Slaad da Morte'
+  Health: 170
+  Damage: 17
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 32
+    PreventOtherDrops: true
+    KnockbackResistance: 0.35
+  DamageModifiers:
+  - FIRE 0.7
+  - FIRE_TICK 0.7
+  - LAVA 0.7
+  - ICE 0.7
+  - LIGHTNING 0.7
+  - MAGIC 0.7
+  Skills:
+  # Regeneração
+  - heal{a=10} @self ~onTimer:100 1
+  # Corte e mordida necrótica
+  - damage{a=12;type=SLASHING} @target ~onAttack 0.9
+  - damage{a=9;type=PIERCING} @target ~onAttack 0.9
+  - damage{a=7;type=NECROTIC} @target ~onAttack 0.8
+  - repeat{amount=1;delay=4;skills=[damage{a=12;type=SLASHING} @target;damage{a=7;type=NECROTIC} @target]} @self ~onAttack 0.75
+  # Magias inatas
+  - projectile{bullet=SmallFireball;onhit=[damage{a=14;type=FIRE} @target]} @target ~onTimer:140 0.6
+  - potion{t=WEAKNESS;d=180;lvl=1} @PlayersInRadius{r=10} ~onTimer:220 0.45
+
+
+MM_LARVASLAAD:
+  Type: SLIME
+  Display: 'Larva Slaad'
+  Health: 10
+  Damage: 4
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 18
+    PreventOtherDrops: true
+  DamageModifiers:
+  - FIRE 0.7
+  - FIRE_TICK 0.7
+  - LAVA 0.7
+  - ICE 0.7
+  - LIGHTNING 0.7
+  - MAGIC 0.85
+  Skills:
+  - damage{a=4;type=PIERCING} @target ~onAttack 0.85
+  - potion{t=POISON;d=80;lvl=0} @target ~onAttack 0.4
+
+
 MM_SOMBRA:
   Type: ZOMBIE
   Display: 'Sombra'
