@@ -1,0 +1,38 @@
+ZUMBI_FORTITUDE:
+  Skills:
+    - heal{a=1} @self
+    - potion{t=REGENERATION;d=40;lvl=1} @self
+    - message{m="&2O zumbi se recusa a cair!"} @PlayersInRadius{r=15}
+
+# PARALISA
+RAIO_PARALISANTE_ZUMBI:
+  Skills:
+    - effect:particles{p=spell;amount=30;speed=0.1} @target
+    - potion{t=SLOW;d=80;lvl=4} @target
+    - message{m="&bVocê é afetado pelo Raio Paralisante!"} @target
+
+# MEDO
+RAIO_APAVORANTE_ZUMBI:
+  Skills:
+    - effect:particles{p=smoke;amount=35;speed=0.15} @target
+    - potion{t=CONFUSION;d=100;lvl=0} @target
+    - potion{t=WEAKNESS;d=60;lvl=1} @target
+
+# DANO NECRÓTICO
+RAIO_ENERVANTE_ZUMBI:
+  Skills:
+    - effect:particles{p=wither;amount=40} @target
+    - damage{a=22;type=WITHER} @target
+
+# DESINTEGRAÇÃO
+RAIO_DESINTEGRADOR_ZUMBI:
+  Skills:
+    - effect:particles{p=endrod;amount=60} @target
+    - damage{a=30;type=MAGIC} @target
+    - ignite{ticks=60} @target
+    - potion{t=WITHER;d=80;lvl=1} @target
+
+ARANHA_TEIA:
+  Skills:
+    - potion{t=SLOW;d=160;lvl=3} @target
+    - effect:particles{p=web;a=20;hS=0.5;vS=0.5} @target

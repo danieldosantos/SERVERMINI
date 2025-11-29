@@ -1,0 +1,4 @@
+MM_WYVERN_ENRAGE:
+  Skills:
+    - potion{t=INCREASE_DAMAGE;d=160;lvl=1} @self
+    - potion{t=SPEED;d=160;lvl=0} @self

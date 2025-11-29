@@ -7976,242 +7976,1647 @@ MM_LARVASLAAD:
   - potion{t=POISON;d=80;lvl=0} @target ~onAttack 0.4
 
 
-MM_SOMBRA:
-  Type: ZOMBIE
-  Display: 'Sombra'
-  Health: 16
-  Damage: 3
+MM_SHADOW:
+  Type: VEX
+  Display: '&8Sombra'
+  Health: 24
+  Damage: 6
   Faction: undead
+
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.38
+    FollowRange: 20
     PreventOtherDrops: true
+    Silent: true
+    PreventRandomEquipment: true
+
+  DamageModifiers:
+  # Vulnerabilidade (radiante/“sagrado”)
+  - HOLY 1.50          # vulnerável a dano sagrado/radiante
+  # Imunidades
+  - NECROTIC 0.0       # imune a necrótico
+  - POISON 0.0         # imune a veneno
+  # Resistências (elementos e dano físico não-mágico)
+  - ACID 0.5
+  - LIGHTNING 0.5
+  - FIRE 0.5
+  - COLD 0.5
+  - THUNDER 0.5
+  - BLUDGEONING 0.5
+  - PIERCING 0.5
+  - SLASHING 0.5
+
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataque principal – Drenar Força (dano necrótico + fraqueza)
+  - damage{a=8;type=NECROTIC} @target ~onAttack 1
+  - potion{t=WEAKNESS;d=200;lvl=1} @target ~onAttack 0.9
+  - potion{t=SLOW;d=120;lvl=0} @target ~onAttack 0.6
+
+  # Furtividade Sombria – some na escuridão
+  # Fica invisível periodicamente, simulando se esconder nas sombras
+  - potion{t=INVISIBILITY;d=80;lvl=1;overwrite=true} @self ~onTimer:120 0.7
+
+  # Fraqueza Solar – enfraquece “no sol” (versão simples)
+  # Se quiser, pode ativar isso só de dia usando condições depois.
+  - potion{t=WEAKNESS;d=100;lvl=0} @self ~onTimer:80 0.8
+
+  # Nova Sombra – cria outra sombra ao matar alguém
+  # Representa a sombra se erguendo do corpo da vítima
+  - summon{type=MM_SHADOW;amount=1;radius=1} @self ~onKill 0.7
+
+  # Natureza morta-viva – limpa alguns debuffs, como criatura “etérea”
+  - cleanse{type=NEGATIVE;amount=1} @self ~onTimer:200 0.5
+
 
 
 MM_SPRITE:
-  Type: ALLAY
-  Display: 'Sprite'
-  Health: 2
+  Type: VEX
+  Display: '&aSprite'
+  Health: 8
   Damage: 3
   Faction: fey
+
   Options:
-    MovementSpeed: 0.12
+    MovementSpeed: 0.42
     FollowRange: 18
     PreventOtherDrops: true
+    Silent: true
+    PreventRandomEquipment: true
+
+  DamageModifiers:
+    # Voa e é bem frágil, mas domina venenos
+    - POISON 0.0      # imune a veneno
+    - FALL 0.0        # não sofre dano de queda
+    - MAGIC 0.9
+    - PROJECTILE 1.0
+
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+    # Arco curto – flecha envenenada
+    - damage{a=3;type=PIERCING} @target ~onAttack 1
+    - potion{t=POISON;d=140;lvl=0} @target ~onAttack 0.9
+
+    # Efeito sonífero – chance do alvo "apagar"
+    - stun{d=60} @target ~onAttack 0.35
+    - potion{t=SLOW;d=200;lvl=3} @target ~onAttack 0.35
+    - potion{t=WEAKNESS;d=200;lvl=1} @target ~onAttack 0.35
+
+    # Invisibilidade – some na floresta depois de alguns instantes
+    - potion{t=INVISIBILITY;d=80;lvl=1;overwrite=true} @self ~onTimer:120 0.7
+
+    # Visão do Coração – “julga” o coração e marca quem está sendo observado
+    - potion{t=GLOWING;d=120;lvl=0} @NearestPlayer{r=12} ~onTimer:200 0.6
+    - potion{t=SLOW;d=60;lvl=1} @NearestPlayer{r=12} ~onTimer:200 0.4
+
+    # Fuga da batalha – dá um salto para longe quando leva dano
+    - leap{v=1.1;yi=0.6} @self ~onDamaged 0.4
+
+
+MM_PIXIET:
+  Type: VEX
+  Display: '&dPixie Travessa'
+  Health: 12
+  Damage: 1
+  Faction: fey
+
+  Options:
+    MovementSpeed: 0.45
+    FollowRange: 20
+    Silent: false
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  DamageModifiers:
+    - POISON 0.0
+    - FALL 0.0
+    - MAGIC 0.7
+    - PROJECTILE 1.0
+
+  Skills:
+    # "Cutucada" leve — só pra iniciar o caos
+    - damage{a=1;type=PIERCING} @target ~onAttack 0.5
+
+    # Confusão em área — deixa os intrusos tontos
+    - potion{t=CONFUSION;d=160;lvl=1} @PlayersInRadius{r=8} ~onTimer:160 0.7
+
+    # Lentidão + pulos descontrolados
+    - potion{t=SLOW;d=160;lvl=1} @PlayersInRadius{r=8} ~onTimer:180 0.6
+    - potion{t=JUMP;d=160;lvl=2} @PlayersInRadius{r=8} ~onTimer:180 0.6
+
+    # Brilho feérico — revela os jogadores com pó mágico
+    - potion{t=GLOWING;d=140;lvl=0} @PlayersInRadius{r=10} ~onTimer:200 0.6
+
+    # Risadas Loucas — náusea individual aleatória
+    - potion{t=CONFUSION;d=100;lvl=0} @RandomPlayer{r=12} ~onTimer:120 0.6
+
+    # Invisibilidade Travessa — fica invisível e reposiciona
+    - potion{t=INVISIBILITY;d=100;lvl=1;overwrite=true} @self ~onTimer:120 0.75
+    - leap{v=1.4;yi=0.8} @self ~onTimer:120 0.6
+
+    # Foguete de pó mágico — fuga ao tomar dano
+    - leap{v=1.5;yi=1.1} @self ~onDamaged 0.8
+
 
 
 MM_STIRGE:
-  Type: WOLF
-  Display: 'Stirge'
-  Health: 2
+  Type: BAT
+  Display: '&4Stirge'
+  Health: 6
   Damage: 3
   Faction: beast
-  Options:
-    MovementSpeed: 0.12
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
 
-
-MM_THRIKREEN:
-  Type: ZOMBIE
-  Display: 'Thri-Kreen'
-  Health: 33
-  Damage: 6
-  Faction: neutral
   Options:
     MovementSpeed: 0.48
-    FollowRange: 18
+    FollowRange: 16
+    Silent: false
     PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+
+  DamageModifiers:
+    - FALL 0.0
+    - POISON 1.2
+    - MAGIC 1.0
+    - PROJECTILE 1.0
+
   Skills:
-  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+
+    # Ataque inicial — perfuração
+    - damage{a=4;type=PIERCING} @target ~onAttack 1
+
+    # "Prender" no alvo (simula agarrar)
+    - stun{d=40} @target ~onAttack 0.4
+    - potion{t=SLOW;d=60;lvl=2} @target ~onAttack 0.6
+
+    # DRENAR SANGUE — dano contínuo enquanto grudado
+    - repeat{amount=5;delay=20;skills=[
+        damage{a=3;type=NECROTIC} @target
+      ]} @target ~onAttack 0.45
+
+    # Solta após a drenagem (fuga)
+    - leap{v=1.2;yi=0.8} @self ~onAttack 0.45
+
+    # Enxame — em chance de matar alguém, chama outros stirges
+    - summon{type=MM_STIRGE;amount=2;radius=3} @self ~onKill 0.45
 
 
-MM_TROGLODITA:
-  Type: ZOMBIE
-  Display: 'Troglodita'
-  Health: 13
-  Damage: 3
-  Faction: neutral
+MM_THRI_KREEN:
+  Type: HUSK
+  Display: '&eThri-Kreen'
+  Health: 40
+  Damage: 7
+  Faction: desert
+
   Options:
     MovementSpeed: 0.36
+    FollowRange: 24
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+
+  DamageModifiers:
+    - POISON 0.5
+    - FALL 0.5
+    - PROJECTILE 1.0
+    - MAGIC 1.0
+
+  Skills:
+    # ===========================
+    # ATAQUE BÁSICO – GARRAS
+    # ===========================
+    - damage{a=8;type=SLASHING} @target ~onAttack 1
+
+    # MORDIDA VENENOSA – chance de aplicar veneno/paralisia
+    - damage{a=4;type=PIERCING} @target ~onAttack 0.6
+    - potion{t=POISON;d=140;lvl=0} @target ~onAttack 0.6
+    - stun{d=40} @target ~onAttack 0.3
+
+    # CARAPAÇA DE CAMALEÃO – furtividade melhorada
+    - potion{t=INVISIBILITY;d=80;lvl=0;overwrite=true} @self ~onTimer:200 0.4
+    - potion{t=SPEED;d=80;lvl=0} @self ~onTimer:200 0.4
+
+    # SALTO PARADO – grande salto, com ou sem corrida
+    - leap{v=1.6;yi=0.9} @self ~onTimer:120 0.6
+
+    # ===========================
+    # VARIANTE ARMADA (GYTHKA / CHATKCHA)
+    # ===========================
+    # Gythka – golpe de haste
+    - damage{a=10;type=SLASHING} @target ~onAttack 0.4
+    # Chatkcha – arremesso cortante
+    - projectile{onHit=[
+        damage{a=8;type=SLASHING} @target
+      ]} @target ~onTimer:140 0.5
+
+    # ===========================
+    # VARIANTE PSIÔNICA – poderes mentais
+    # ===========================
+    # “Mãos mágicas invisíveis” (empurrão leve)
+    - throw{v=0.7;vy=0.3} @RandomPlayer{r=10} ~onTimer:160 0.4
+
+    # Nublar – fica mais difícil de acertar
+    - potion{t=BLINDNESS;d=60;lvl=0} @NearestPlayer{r=10} ~onTimer:200 0.3
+    - potion{t=INVISIBILITY;d=60;lvl=0;overwrite=true} @self ~onTimer:200 0.3
+
+MM_TRIBULO_BRUTAL:
+  Type: WARDEN
+  Display: '&4Tríbulo Brutal'
+  Health: 180
+  Damage: 14
+  Faction: subterranean
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 24
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    KnockbackResistance: 1.0
+    Silent: false
+    AlwaysShowName: true
+
+  DamageModifiers:
+    - BLUDGEONING 0.7
+    - SLASHING 0.7
+    - PIERCING 0.7
+    - MAGIC 0.9
+    - PROJECTILE 1.0
+
+  Skills:
+    # ===========================
+    # ESCAVADOR – surge do chão
+    # ===========================
+    - leap{v=1.0;yi=0.8} @self ~onTimer:140 0.6
+
+    # ===========================
+    # OLHAR DE CONFUSÃO
+    # ===========================
+    - potion{t=CONFUSION;d=120;lvl=0} @PlayersInRadius{r=10} ~onTimer:120 0.6
+    - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=10} ~onTimer:120 0.5
+
+    # ===========================
+    # MULTIATAQUE – GARRAS + MANDÍBULAS
+    # ===========================
+    # Garras (2 golpes fortes)
+    - damage{a=14;type=SLASHING} @target ~onAttack 1
+    - damage{a=14;type=SLASHING} @target ~onAttack 0.7
+
+    # Mandíbulas – mordida brutal
+    - damage{a=20;type=SLASHING} @target ~onAttack 0.5
+
+    # ===========================
+    # ABALO SUBTERRÂNEO
+    # ===========================
+    - effect:explosion @self ~onTimer:160 0.5
+    - damage{a=12;type=BLUDGEONING} @PlayersInRadius{r=6} ~onTimer:160 0.5
+
+
+
+MM_TROGLODYTE:
+  Type: ZOMBIE
+  Display: '&2Troglodita'
+  Health: 24
+  Damage: 5
+  Faction: subterranean
+
+  Options:
+    MovementSpeed: 0.32
     FollowRange: 18
     PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+
+  DamageModifiers:
+    - POISON 0.5
+    - MAGIC 1.0
+    - PROJECTILE 1.0
+
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+    # ===========================
+    # ATAQUES BÁSICOS – MORDIDA + GARRAS
+    # ===========================
+    # Mordida
+    - damage{a=6;type=PIERCING} @target ~onAttack 0.8
+    # Garras (dois golpes “simulados”)
+    - damage{a=5;type=SLASHING} @target ~onAttack 1
+    - damage{a=5;type=SLASHING} @target ~onAttack 0.6
+
+    # ===========================
+    # FEDOR – aura de veneno em volta
+    # ===========================
+    - potion{t=POISON;d=60;lvl=0} @PlayersInRadius{r=2} ~onTimer:40 0.8
+    - potion{t=WEAKNESS;d=60;lvl=0} @PlayersInRadius{r=2} ~onTimer:40 0.6
+
+    # ===========================
+    # PELE DE CAMALEÃO – furtividade melhorada
+    # ===========================
+    - potion{t=INVISIBILITY;d=60;lvl=0;overwrite=true} @self ~onTimer:200 0.4
+    - potion{t=SPEED;d=60;lvl=0} @self ~onTimer:200 0.4
+
+    # ===========================
+    # SENSIBILIDADE À LUZ – fica “mais fraco” de vez em quando
+    # (simulação simples da desvantagem na luz do sol)
+    # ===========================
+    - potion{t=WEAKNESS;d=80;lvl=0} @self ~onTimer:160 0.5
+    - potion{t=SLOW;d=80;lvl=0} @self ~onTimer:160 0.4
+
 
 
 MM_TROLL:
-  Type: ZOMBIE
-  Display: 'Troll'
-  Health: 84
-  Damage: 14
+  Type: GIANT
+  Display: '&2Troll'
+  Health: 180
+  Damage: 10
   Faction: giant
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 24
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    KnockbackResistance: 0.9
+    Silent: false
+    AlwaysShowName: true
+
+  DamageModifiers:
+    # Troll é difícil de derrubar, mas tem medo de fogo/ácido
+    - BLUDGEONING 0.8
+    - SLASHING 0.8
+    - PIERCING 0.8
+    - POISON 0.7
+    # Fogo/ácido “cancela” a regeneração na lore (você pode tratar isso em mecânicas extras)
+    - FIRE 1.1
+    - LAVA 1.1
+    - MAGIC 1.0
+    - PROJECTILE 1.0
+
+  Skills:
+    # ===========================
+    # ATAQUES BÁSICOS – MORDIDA + GARRAS
+    # ===========================
+    # Mordida
+    - damage{a=12;type=PIERCING} @target ~onAttack 0.8
+    # Duas Garras “simuladas”
+    - damage{a=14;type=SLASHING} @target ~onAttack 1
+    - damage{a=14;type=SLASHING} @target ~onAttack 0.7
+
+    # ===========================
+    # REGENERAÇÃO
+    # ===========================
+    # Cura contínua – Regeneração (10+ PV por turno no D&D)
+    - heal{a=6} @self ~onTimer:20 1.0
+
+    # ===========================
+    # FARO AGUÇADO
+    # ===========================
+    # Pequeno “buff” de velocidade pra simular caçada por cheiro
+    - potion{t=SPEED;d=80;lvl=0} @self ~onTimer:160 0.5
+
+    # ===========================
+    # FÚRIA CONTRA FOGO/ÁCIDO (VERSÃO SIMPLIFICADA)
+    # ===========================
+    # Quando leva dano, chance de focar no atacante (especialmente útil pra magos/arqueiros)
+    - threat{t=+40} @Damager ~onDamaged 0.6
+    - potion{t=INCREASE_DAMAGE;d=80;lvl=0} @self ~onDamaged 0.4
+
+    # ===========================
+    # TROLL FURIOSO – QUANDO ESTÁ QUASE MORRENDO
+    # ===========================
+    - skill{s=MM_TROLL_ENRAGE} @self ~onDamaged 0.25
+
+
+
+MM_UNICORN:
+  Type: HORSE
+  Display: '&f&lUnicórnio'
+  Health: 140
+  Damage: 10
+  Faction: celestial
+
+  Options:
+    MovementSpeed: 0.38
+    FollowRange: 24
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.4
+
+  DamageModifiers:
+    # Natureza celestial e pura
+    - POISON 0.0          # imune a veneno
+    - WITHER 0.0
+    - MAGIC 0.8
+    - FIRE 0.9
+    - PROJECTILE 1.0
+    - BLUDGEONING 1.0
+    - PIERCING 1.0
+    - SLASHING 1.0
+
+  Skills:
+    # ===========================
+    # ATAQUES BÁSICOS – CASCOS + CHIFRE
+    # ===========================
+
+    # Cascos – ataque físico de impacto
+    - damage{a=14;type=BLUDGEONING} @target ~onAttack 0.9
+
+    # Chifre – ataque perfurante “sagrado”
+    - damage{a=12;type=PIERCING} @target ~onAttack 1.0
+
+    # Investida do Chifre – se estiver correndo, causa dano extra e derruba
+    - damage{a=18;type=PIERCING} @target ~onAttack 0.4
+    - throw{v=1.2;vy=0.6} @target ~onAttack 0.4
+
+    # ===========================
+    # TOQUE CURATIVO (versão em combate)
+    # ===========================
+    # Cura aliados bons em volta periodicamente
+    - heal{a=12} @PlayersInRadius{r=10} ~onTimer:160 0.7
+    - cleanse{type=NEGATIVE;amount=2} @PlayersInRadius{r=10} ~onTimer:160 0.7
+
+    # ===========================
+    # AURA SAGRADA DA FLORESTA
+    # ===========================
+    # Pequeno buff defensivo constante para aliados próximos
+    - potion{t=DAMAGE_RESISTANCE;d=120;lvl=0} @PlayersInRadius{r=12} ~onTimer:140 0.6
+    - potion{t=REGENERATION;d=80;lvl=0} @PlayersInRadius{r=12} ~onTimer:180 0.4
+
+    # Escudo cintilante – versão simples do Escudo Cintilante lendário
+    - potion{t=ABSORPTION;d=120;lvl=1} @NearestPlayer{r=12} ~onTimer:200 0.5
+
+    # ===========================
+    # PROTEGIDO PELA MAGIA
+    # ===========================
+    # Simula Resistência à Magia
+    - potion{t=DAMAGE_RESISTANCE;d=80;lvl=0} @self ~onTimer:160 0.5
+
+    # ===========================
+    # “TELEPORTE” SAGRADO (VERSÃO SIMPLIFICADA)
+    # ===========================
+    # Some e se reposiciona, como se fosse se teleportar
+    - potion{t=INVISIBILITY;d=60;lvl=1;overwrite=true} @self ~onTimer:200 0.5
+    - leap{v=1.6;yi=1.0} @self ~onTimer:200 0.5
+
+MM_OWLBEAR:
+  Type: POLAR_BEAR
+  Display: '&6Urso-Coruja'
+  Health: 110
+  Damage: 10
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 24
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.7
+
+  DamageModifiers:
+    - PROJECTILE 1.0
+    - MAGIC 1.0
+    - BLUDGEONING 0.9
+    - SLASHING 0.9
+    - PIERCING 0.9
+
+  Skills:
+    # ===========================
+    # ATAQUES BÁSICOS – BICADA + GARRAS
+    # ===========================
+
+    # Bicada – ataque perfurante
+    - damage{a=12;type=PIERCING} @target ~onAttack 0.9
+
+    # Garras – ataque cortante pesado
+    - damage{a=16;type=SLASHING} @target ~onAttack 0.8
+
+    # Fúria de Urso-Coruja – chance de segundo golpe de garras
+    - damage{a=10;type=SLASHING} @target ~onAttack 0.5
+
+    # ===========================
+    # VISÃO E FARO AGUÇADOS
+    # ===========================
+    # Pequenos buffs pra simular percepção absurda
+    - potion{t=SPEED;d=80;lvl=0} @self ~onTimer:160 0.5
+    - potion{t=NIGHT_VISION;d=200;lvl=0} @self ~onTimer:200 0.6
+
+    # ===========================
+    # INVESTIDA SELVAGEM
+    # ===========================
+    # Avanço rápido + dano extra, bom pra emboscar
+    - leap{v=1.4;yi=0.8} @self ~onTimer:120 0.6
+    - damage{a=18;type=BLUDGEONING} @target ~onAttack 0.4
+    - throw{v=1.0;vy=0.4} @target ~onAttack 0.4
+
+    # ===========================
+    # GUINCHO ATERRADOR
+    # ===========================
+    # Roar que enfraquece e atrapalha as presas
+    - potion{t=WEAKNESS;d=120;lvl=1} @PlayersInRadius{r=10} ~onTimer:200 0.6
+    - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=10} ~onTimer:200 0.5
+
+MM_VAMPIRE:
+  Type: VINDICATOR
+  Display: '&4&lVampiro'
+  Health: 260
+  Damage: 12
+  Faction: undead
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 30
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.9
+
+  DamageModifiers:
+    # Resistências vampíricas
+    - POISON 0.0
+    - WITHER 0.5
+    - MAGIC 0.8
+    - PROJECTILE 0.9
+    - BLUDGEONING 0.7
+    - SLASHING 0.7
+    - PIERCING 0.7
+    # fraqueza leve a dano "sagrado"
+    - HOLY 1.25
+
+  Skills:
+    # ===========================
+    # ATAQUES – GOLPE + MORDIDA
+    # ===========================
+
+    # Golpe desarmado / pancada
+    - damage{a=14;type=BLUDGEONING} @target ~onAttack 1.0
+
+    # Mordida – dano perfurante + necrótico + roubo de vida
+    - damage{a=6;type=PIERCING} @target ~onAttack 0.5
+    - damage{a=10;type=NECROTIC} @target ~onAttack 0.5
+    - heal{a=8} @self ~onAttack 0.5
+
+    # ===========================
+    # ENFEITIÇAR (CHARM)
+    # ===========================
+    # “Controla” mentalmente por confusão/fragilidade
+    - potion{t=WEAKNESS;d=160;lvl=1} @NearestPlayer{r=12} ~onTimer:180 0.6
+    - potion{t=CONFUSION;d=120;lvl=0} @NearestPlayer{r=12} ~onTimer:180 0.5
+
+    # ===========================
+    # REGENERAÇÃO
+    # ===========================
+    # Cura constante enquanto não está sendo “queimado”
+    - heal{a=10} @self ~onTimer:20 1.0
+
+    # ===========================
+    # FILHOS DA NOITE
+    # ===========================
+    # Convoca lobos/morcegos como no traço “Filhos da Noite”
+    - summon{type=WOLF;amount=3;radius=6} @self ~onTimer:240 0.5
+    - summon{type=BAT;amount=4;radius=6} @self ~onTimer:260 0.4
+
+    # ===========================
+    # MOVIMENTO – ESCALADA ARACNÍDEA / FUGA
+    # ===========================
+    # Simula mover rápido, subir, reposicionar
+    - leap{v=1.4;yi=0.9} @self ~onTimer:120 0.6
+
+    # ===========================
+    # NEBLINA DE ESCAPADA (VERSÃO SIMPLIFICADA)
+    # ===========================
+    # Quando apanha muito, some e recua
+    - potion{t=INVISIBILITY;d=80;lvl=1;overwrite=true} @self ~onDamaged 0.4
+    - leap{v=1.8;yi=1.0} @self ~onDamaged 0.4
+
+    # ===========================
+    # AURA DE MEDO
+    # ===========================
+    - potion{t=SLOW;d=80;lvl=1} @PlayersInRadius{r=10} ~onTimer:200 0.5
+    - potion{t=WEAKNESS;d=80;lvl=1} @PlayersInRadius{r=10} ~onTimer:200 0.5
+
+MM_VAMPIRE_SPAWN:
+  Type: ZOMBIE
+  Display: '&8Cria Vampírica'
+  Health: 140
+  Damage: 9
+  Faction: undead
+
+  Options:
+    MovementSpeed: 0.33
+    FollowRange: 24
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.7
+
+  DamageModifiers:
+    - POISON 0.0
+    - WITHER 0.5
+    - MAGIC 0.9
+    - PROJECTILE 0.9
+    - BLUDGEONING 0.8
+    - SLASHING 0.8
+    - PIERCING 0.8
+    - HOLY 1.25
+
+  Skills:
+    # ===========================
+    # ATAQUES – GARRAS + MORDIDA
+    # ===========================
+    # Garras
+    - damage{a=10;type=SLASHING} @target ~onAttack 1.0
+
+    # Mordida – dano necrótico menor + roubo de vida
+    - damage{a=5;type=PIERCING} @target ~onAttack 0.5
+    - damage{a=7;type=NECROTIC} @target ~onAttack 0.5
+    - heal{a=5} @self ~onAttack 0.5
+
+    # ===========================
+    # REGENERAÇÃO DA CRIA
+    # ===========================
+    - heal{a=6} @self ~onTimer:20 1.0
+
+    # ===========================
+    # ESCALADA / MOBILIDADE
+    # ===========================
+    - leap{v=1.3;yi=0.8} @self ~onTimer:140 0.5
+
+    # ===========================
+    # FEROZ EM GRUPO
+    # ===========================
+    # Quando um jogador morre perto, chance de surgir outra cria
+    - summon{type=MM_VAMPIRE_SPAWN;amount=1;radius=4} @self ~onKill 0.35
+
+MM_CARRION_CRAWLER:
+  Type: CAVE_SPIDER
+  Display: '&2Verme da Carniça'
+  Health: 60
+  Damage: 6
+  Faction: subterranean
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 24
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.6
+
+  DamageModifiers:
+    - POISON 0.5
+    - MAGIC 1.0
+    - PROJECTILE 1.0
+    - BLUDGEONING 0.9
+    - SLASHING 0.9
+    - PIERCING 0.9
+
+  Skills:
+    # ===========================
+    # ATAQUES – TENTÁCULOS + MORDIDA
+    # ===========================
+
+    # Tentáculos – veneno paralisante
+    - damage{a=5;type=POISON} @target ~onAttack 0.9
+    - potion{t=POISON;d=120;lvl=0} @target ~onAttack 0.8
+    - stun{d=40} @target ~onAttack 0.6
+
+    # Mordida – dano físico perfurante
+    - damage{a=9;type=PIERCING} @target ~onAttack 0.7
+
+    # ===========================
+    # FARO AGUÇADO
+    # ===========================
+    - potion{t=NIGHT_VISION;d=200;lvl=0} @self ~onTimer:200 0.6
+    - potion{t=SPEED;d=80;lvl=0} @self ~onTimer:160 0.5
+
+    # ===========================
+    # ESCALADA ARACNÍDEA
+    # ===========================
+    # Simula se movimentar por paredes e tetos
+    - leap{v=1.0;yi=0.7} @self ~onTimer:140 0.6
+
+MM_PURPLE_WORM:
+  Type: RAVAGER
+  Display: '&5&lVerme Púrpura'
+  Health: 420
+  Damage: 20
+  Faction: subterranean
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 32
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 1.0
+
+  DamageModifiers:
+    - BLUDGEONING 0.7
+    - SLASHING 0.7
+    - PIERCING 0.7
+    - MAGIC 0.9
+    - PROJECTILE 0.9
+    - POISON 0.5
+
+  Skills:
+    # ===========================
+    # ATAQUES – MORDIDA + FERRÃO
+    # ===========================
+
+    # Mordida – dano pesadão
+    - damage{a=28;type=PIERCING} @target ~onAttack 1.0
+
+    # Chance de "engolir" – dano ácido contínuo
+    - repeat{amount=6;delay=20;skills=[
+        damage{a=10;type=ACID} @target
+      ]} @target ~onAttack 0.4
+
+    # Ferrão de cauda – veneno brutal
+    - damage{a=22;type=PIERCING} @target ~onAttack 0.7
+    - damage{a=30;type=POISON} @target ~onAttack 0.5
+    - potion{t=POISON;d=160;lvl=1} @target ~onAttack 0.5
+
+    # ===========================
+    # ESCAVADOR / SURGIR DO SOLO
+    # ===========================
+    - leap{v=1.5;yi=1.0} @self ~onTimer:120 0.6
+    - effect:explosion @self ~onTimer:120 0.5
+    - damage{a=16;type=BLUDGEONING} @PlayersInRadius{r=5} ~onTimer:120 0.5
+
+    # ===========================
+    # TERROR DO SUBTERRÂNEO
+    # ===========================
+    # Aura de pânico leve
+    - potion{t=WEAKNESS;d=80;lvl=1} @PlayersInRadius{r=10} ~onTimer:180 0.5
+    - potion{t=SLOW;d=80;lvl=1} @PlayersInRadius{r=10} ~onTimer:180 0.5
+
+    # ===========================
+    # FÚRIA QUANDO FERIDO
+    # ===========================
+    - skill{s=MM_PURPLE_WORM_ENRAGE} @self ~onDamaged 0.3
+
+MM_WYVERN:
+  Type: PHANTOM
+  Display: '&5&lWyvern'
+  Health: 160
+  Damage: 10
+  Faction: dragon
+
   Options:
     MovementSpeed: 0.36
-    FollowRange: 18
+    FollowRange: 32
     PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.7
+
+  DamageModifiers:
+    - PROJECTILE 0.9
+    - MAGIC 1.0
+    - BLUDGEONING 1.0
+    - SLASHING 1.0
+    - PIERCING 1.0
+    - POISON 0.5   # resistência leve a veneno
+
   Skills:
-  - damage{a=14;type=PHYSICAL} @target ~onAttack 0.8
+    # ===========================
+    # ATAQUES BÁSICOS – MORDIDA, GARRAS E FERRÃO
+    # ===========================
 
+    # Mordida – dano perfurante padrão
+    - damage{a=14;type=PIERCING} @target ~onAttack 1.0
 
-MM_URSOCORUJA:
-  Type: SPIDER
-  Display: 'Urso-Coruja'
-  Health: 59
-  Damage: 10
-  Faction: monster
-  Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
-    PreventOtherDrops: true
-  Skills:
-  - damage{a=10;type=PHYSICAL} @target ~onAttack 0.8
+    # Garras – usado como segundo impacto
+    - damage{a=16;type=SLASHING} @target ~onAttack 0.7
 
+    # Ferrão – ataque perigoso de cauda com veneno forte
+    - damage{a=12;type=PIERCING} @target ~onAttack 0.6
+    - damage{a=20;type=POISON} @target ~onAttack 0.5
+    - potion{t=POISON;d=160;lvl=1} @target ~onAttack 0.5
+
+    # ===========================
+    # CAÇADOR AÉREO / INVESTIDA
+    # ===========================
+    # Simula um mergulho de ataque vindo de cima
+    - leap{v=1.6;yi=0.9} @self ~onTimer:120 0.7
+    - damage{a=10;type=BLUDGEONING} @PlayersInRadius{r=3} ~onTimer:120 0.5
+
+    # ===========================
+    # FÚRIA DO WYVERN
+    # ===========================
+    # Fica mais perigoso quando apanha
+    - skill{s=MM_WYVERN_ENRAGE} @self ~onDamaged 0.3
 
 MM_XORN:
-  Type: BLAZE
-  Display: 'Xorn'
-  Health: 73
-  Damage: 12
+  Type: SILVERFISH
+  Display: '&7&lXorn'
+  Health: 130
+  Damage: 9
   Faction: elemental
+
   Options:
-    MovementSpeed: 0.24
-    FollowRange: 18
+    MovementSpeed: 0.28
+    FollowRange: 20
     PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.8
+
+  DamageModifiers:
+    # resistência a cortante e perfurante não-mágicos (simulação)
+    - SLASHING 0.7
+    - PIERCING 0.7
+    - BLUDGEONING 1.0
+    - PROJECTILE 0.9
+    - MAGIC 1.0
+
   Skills:
-  - damage{a=12;type=PHYSICAL} @target ~onAttack 0.8
+    # ===========================
+    # MULTIATAQUES – 3 GARRAS + 1 MORDIDA
+    # ===========================
+    # Garras (3 hits “simulados”)
+    - damage{a=7;type=SLASHING} @target ~onAttack 1.0
+    - damage{a=7;type=SLASHING} @target ~onAttack 0.8
+    - damage{a=7;type=SLASHING} @target ~onAttack 0.6
+
+    # Mordida
+    - damage{a=12;type=PIERCING} @target ~onAttack 0.7
+
+    # ===========================
+    # CAMUFLAGEM ROCHOSA
+    # ===========================
+    # Usa furtividade e resistência extra de vez em quando
+    - potion{t=INVISIBILITY;d=80;lvl=0;overwrite=true} @self ~onTimer:200 0.4
+    - potion{t=DAMAGE_RESISTANCE;d=120;lvl=0;overwrite=true} @self ~onTimer:200 0.5
+
+    # ===========================
+    # DESLIZAR NA TERRA (MOB SUMINDO E REAPARECENDO)
+    # ===========================
+    - potion{t=INVISIBILITY;d=40;lvl=0;overwrite=true} @self ~onTimer:140 0.5
+    - teleport{spread=6} @self ~onTimer:140 0.5
+
+    # ===========================
+    # SENTIR TESOURO (FLAVOR)
+    # ===========================
+    # Só efeito visual / clima, como se tivesse “farejando gemas”
+    - effect:particles{p=ENCHANT;amount=15;speed=0.1;hS=0.5;vS=0.5} @self ~onTimer:100 0.7
+
 
 
 MM_YETI:
-  Type: SPIDER
-  Display: 'Yeti'
-  Health: 51
+  Type: POLAR_BEAR
+  Display: '&b&lYeti'
+  Health: 60
   Damage: 8
-  Faction: monster
+  Faction: frostbeast
+
   Options:
-    MovementSpeed: 0.2
-    FollowRange: 18
+    MovementSpeed: 0.32
+    FollowRange: 24
     PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.7
+
+  DamageModifiers:
+    # Imune a frio (não existe tipo COLD no MC, então deixamos neutro)
+    - FIRE 1.25         # medo de fogo -> toma mais dano de fogo
+    - PROJECTILE 1.0
+    - MAGIC 1.0
+    - BLUDGEONING 1.0
+    - SLASHING 1.0
+    - PIERCING 1.0
+
   Skills:
-  - damage{a=8;type=PHYSICAL} @target ~onAttack 0.8
+    # ===========================
+    # GARRAS GELADAS (2 ataques por rodada no D&D)
+    # ===========================
+    - damage{a=9;type=SLASHING} @target ~onAttack 1.0
+    - damage{a=6;type=FROST} @target ~onAttack 0.9
+    - potion{t=SLOW;d=60;lvl=0} @target ~onAttack 0.7
 
+    # ===========================
+    # OLHAR CONGELANTE (versão simples)
+    # ===========================
+    # Congela / paralisa por um curto período
+    - damage{a=10;type=FROST} @PlayersInRadius{r=8} ~onTimer:180 0.5
+    - stun{d=40} @PlayersInRadius{r=8} ~onTimer:180 0.4
+    - potion{t=SLOW;d=80;lvl=1} @PlayersInRadius{r=8} ~onTimer:180 0.6
 
-MM_YETIS:
-  Type: ZOMBIE
-  Display: 'Yetis'
-  Health: 137
-  Damage: 23
-  Faction: neutral
+    # ===========================
+    # CAMUFLAGEM NA NEVE (furtividade / aproximação)
+    # ===========================
+    - potion{t=INVISIBILITY;d=60;lvl=0;overwrite=true} @self ~onTimer:200 0.3
+    - potion{t=SPEED;d=60;lvl=0} @self ~onTimer:200 0.4
+
+    # ===========================
+    # MEDO DE FOGO
+    # ===========================
+    # Quando leva dano de fogo, fica "desorientado" (fraqueza + lentidão)
+    # (Ideal: usar condition damagecause=FIRE se sua versão do MythicMobs suportar)
+    - potion{t=WEAKNESS;d=80;lvl=1} @self ~onDamaged 0.6
+    - potion{t=SLOW;d=80;lvl=1} @self ~onDamaged 0.6
+
+MM_ABOMINABLE_YETI:
+  Type: IRON_GOLEM
+  Display: '&3&lYeti Abominável'
+  Health: 260
+  Damage: 16
+  Faction: frostbeast_elder
+
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.30
+    FollowRange: 28
     PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 1.0
+
+  DamageModifiers:
+    - FIRE 1.35          # ainda mais medo de fogo
+    - PROJECTILE 0.9
+    - MAGIC 1.0
+    - BLUDGEONING 1.0
+    - SLASHING 0.9
+    - PIERCING 0.9
+
   Skills:
-  - damage{a=23;type=PHYSICAL} @target ~onAttack 0.8
+    # ===========================
+    # GARRAS GIGANTES
+    # ===========================
+    - damage{a=16;type=SLASHING} @target ~onAttack 1.0
+    - damage{a=10;type=FROST} @target ~onAttack 0.9
+    - potion{t=SLOW;d=80;lvl=1} @target ~onAttack 0.7
 
+    # ===========================
+    # OLHAR CONGELANTE (versão forte)
+    # ===========================
+    - damage{a=20;type=FROST} @PlayersInRadius{r=10} ~onTimer:160 0.5
+    - stun{d=60} @PlayersInRadius{r=10} ~onTimer:160 0.5
+    - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=10} ~onTimer:160 0.7
 
-MM_YUANTIPUROSANGUE:
-  Type: ZOMBIE
-  Display: 'Yuan-Ti Puro-Sangue'
-  Health: 40
-  Damage: 7
-  Faction: neutral
+    # ===========================
+    # SOPRO CONGELANTE (cone adaptado pra AoE)
+    # ===========================
+    - damage{a=28;type=FROST} @PlayersInRadius{r=8} ~onTimer:220 0.4
+    - potion{t=SLOW;d=140;lvl=2} @PlayersInRadius{r=8} ~onTimer:220 0.4
+
+    # ===========================
+    # FÚRIA DA MONTANHA (quando apanha)
+    # ===========================
+    - potion{t=INCREASE_DAMAGE;d=160;lvl=1} @self ~onDamaged 0.3
+    - potion{t=DAMAGE_RESISTANCE;d=160;lvl=0} @self ~onDamaged 0.3
+
+    # ===========================
+    # MEDO DE FOGO (versão ainda pior)
+    # ===========================
+    - potion{t=WEAKNESS;d=100;lvl=1} @self ~onDamaged 0.6
+    - potion{t=SLOW;d=100;lvl=2} @self ~onDamaged 0.6
+
+MM_YUAN_TI_ABOMINACAO:
+  Type: ZOMBIFIED_PIGLIN
+  Display: '&2&lYuan-ti Abominação'
+  Health: 140
+  Damage: 10
+  Faction: yuan_ti
+
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.34
+    FollowRange: 28
     PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.8
+
+  DamageModifiers:
+    - POISON 0.0      # imune a veneno
+    - WITHER 0.5
+    - MAGIC 0.8
+    - PROJECTILE 1.0
+    - SLASHING 1.0
+    - PIERCING 1.0
+    - BLUDGEONING 1.0
+
   Skills:
-  - damage{a=7;type=PHYSICAL} @target ~onAttack 0.8
+    # ===========================
+    # ATAQUES CORPO A CORPO: MORDIDA / CONSTRIÇÃO / CIMIÇARRA
+    # ===========================
+    # Mordida venenosa
+    - damage{a=10;type=PIERCING} @target ~onAttack 0.7
+    - damage{a=8;type=POISON} @target ~onAttack 0.7
+    - potion{t=POISON;d=80;lvl=0} @target ~onAttack 0.6
+
+    # Constrição – puxa e “segura” o alvo
+    - pull{v=1.5} @target ~onAttack 0.4
+    - stun{d=40} @target ~onAttack 0.4
+
+    # Golpe de cimitarra “normal”
+    - damage{a=12;type=SLASHING} @target ~onAttack 0.8
+
+    # ===========================
+    # ARQUEIRO VENENOSO (versão simples do arco longo)
+    # ===========================
+    # Quando tiver alvo um pouco longe, aplica veneno/slow pra simular flecha envenenada
+    - damage{a=10;type=PIERCING} @NearestPlayer{r=16} ~onTimer:80 0.6
+    - damage{a=8;type=POISON} @NearestPlayer{r=16} ~onTimer:80 0.6
+    - potion{t=SLOW;d=80;lvl=1} @NearestPlayer{r=16} ~onTimer:80 0.6
+
+    # ===========================
+    # MAGIA INATA – SUGESTÃO / MEDO
+    # ===========================
+    # Sugestão – confunde e enfraquece 1 alvo
+    - potion{t=CONFUSION;d=160;lvl=0} @NearestPlayer{r=12} ~onTimer:200 0.6
+    - potion{t=WEAKNESS;d=160;lvl=1} @NearestPlayer{r=12} ~onTimer:200 0.6
+
+    # Medo – faz a galera correr
+    - potion{t=SLOW;d=60;lvl=1} @PlayersInRadius{r=10} ~onTimer:260 0.4
+    - potion{t=BLINDNESS;d=40;lvl=0} @PlayersInRadius{r=10} ~onTimer:260 0.4
+
+    # ===========================
+    # RESISTÊNCIA À MAGIA
+    # ===========================
+    - potion{t=DAMAGE_RESISTANCE;d=120;lvl=0} @self ~onTimer:160 0.7
+
+    # ===========================
+    # FORMA DE COBRA (metamorfo “fake”)
+    # ===========================
+    # Finge que “vira serpente” ganhando velocidade e invisibilidade
+    - potion{t=INVISIBILITY;d=80;lvl=0;overwrite=true} @self ~onTimer:220 0.4
+    - potion{t=SPEED;d=80;lvl=1} @self ~onTimer:220 0.4
+
+MM_YUAN_TI_MESTICO:
+  Type: HUSK
+  Display: '&a&lYuan-ti Mestiço'
+  Health: 80
+  Damage: 8
+  Faction: yuan_ti
+
+  Options:
+    MovementSpeed: 0.35
+    FollowRange: 26
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+
+  DamageModifiers:
+    - POISON 0.0
+    - WITHER 0.5
+    - MAGIC 0.9
+    - PROJECTILE 1.0
+    - SLASHING 1.0
+    - PIERCING 1.0
+    - BLUDGEONING 1.0
+
+  Skills:
+    # ===========================
+    # MORDIDA / BRAÇOS DE COBRA
+    # ===========================
+    - damage{a=7;type=PIERCING} @target ~onAttack 0.8
+    - damage{a=6;type=POISON} @target ~onAttack 0.8
+    - potion{t=POISON;d=80;lvl=0} @target ~onAttack 0.7
+
+    # ===========================
+    # CIMIÇARRA
+    # ===========================
+    - damage{a=9;type=SLASHING} @target ~onAttack 0.7
+
+    # ===========================
+    # ARCO VENENOSO
+    # ===========================
+    - damage{a=7;type=PIERCING} @NearestPlayer{r=20} ~onTimer:90 0.6
+    - damage{a=6;type=POISON} @NearestPlayer{r=20} ~onTimer:90 0.6
+    - potion{t=SLOW;d=60;lvl=0} @NearestPlayer{r=20} ~onTimer:90 0.6
+
+    # ===========================
+    # CONSTRIÇÃO (para o tipo 3)
+    # ===========================
+    - pull{v=1.2} @target ~onAttack 0.4
+    - stun{d=30} @target ~onAttack 0.4
+
+    # ===========================
+    # SUGESTÃO (versão controlinho mental)
+    # ===========================
+    - potion{t=CONFUSION;d=120;lvl=0} @NearestPlayer{r=12} ~onTimer:220 0.5
+
+    # ===========================
+    # ASTÚCIA DA SERPENTE – furtividade
+    # ===========================
+    - potion{t=INVISIBILITY;d=60;lvl=0;overwrite=true} @self ~onTimer:200 0.4
+    - potion{t=SPEED;d=60;lvl=0} @self ~onTimer:200 0.4
+
+MM_YUAN_TI_PURO_SANGUE:
+  Type: PILLAGER
+  Display: '&e&lYuan-ti Puro-sangue'
+  Health: 55
+  Damage: 6
+  Faction: yuan_ti
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 24
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+
+  DamageModifiers:
+    - POISON 0.0
+    - WITHER 0.5
+    - MAGIC 0.9
+    - PROJECTILE 1.0
+    - SLASHING 1.0
+    - PIERCING 1.0
+    - BLUDGEONING 1.0
+
+  Skills:
+    # ===========================
+    # ATAQUES BÁSICOS – CIMIÇARRA / ADAGA
+    # ===========================
+    - damage{a=7;type=SLASHING} @target ~onAttack 0.8
+
+    # ===========================
+    # FLECHA ENVENENADA
+    # ===========================
+    - damage{a=7;type=PIERCING} @NearestPlayer{r=22} ~onTimer:70 0.8
+    - damage{a=6;type=POISON} @NearestPlayer{r=22} ~onTimer:70 0.8
+    - potion{t=POISON;d=80;lvl=0} @NearestPlayer{r=22} ~onTimer:70 0.7
+
+    # ===========================
+    # MAGIA INATA – RAJADA DE VENENO / SUGESTÃO
+    # ===========================
+    # Rajada de veneno
+    - damage{a=10;type=POISON} @PlayersInRadius{r=8} ~onTimer:160 0.5
+    - potion{t=WEAKNESS;d=60;lvl=0} @PlayersInRadius{r=8} ~onTimer:160 0.5
+
+    # Sugestão – confunde 1 alvo
+    - potion{t=CONFUSION;d=100;lvl=0} @NearestPlayer{r=10} ~onTimer:220 0.4
+
+    # ===========================
+    # INFILTRADOR – DISFARCE / FUGA
+    # ===========================
+    - potion{t=INVISIBILITY;d=80;lvl=0;overwrite=true} @self ~onTimer:240 0.4
+    - potion{t=SPEED;d=80;lvl=1} @self ~onTimer:240 0.4
 
 
 MM_ARCANALOTH:
-  Type: VEX
-  Display: 'Arcanaloth'
-  Health: 104
-  Damage: 17
-  Faction: fiend
+  Type: EVOKER
+  Display: '&5&lArcanaloth'
+  Health: 120
+  Damage: 8
+  Faction: yugoloth
+
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.34
+    FollowRange: 28
     PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.4
+
+  DamageModifiers:
+    # Resistências do statblock
+    - FIRE 0.5
+    - LAVA 0.5
+    - FREEZE 0.5
+    - POISON 0.0        # imune a veneno
+    - MAGIC 0.7
+    - PROJECTILE 0.9
+    - WITHER 0.0        # usando como “ácido/veneno forte”
+    - BLUDGEONING 0.8
+    - SLASHING 0.8
+    - PIERCING 0.8
+
   Skills:
-  - damage{a=17;type=PHYSICAL} @target ~onAttack 0.8
+    # ===========================
+    # ATAQUE BÁSICO – GARRAS
+    # ===========================
+    - damage{a=10;type=SLASHING} @target ~onAttack 0.9
+    - damage{a=8;type=POISON} @target ~onAttack 0.7
+    - potion{t=POISON;d=60;lvl=0} @target ~onAttack 0.6
+
+    # ===========================
+    # “RESISTÊNCIA À MAGIA”
+    # ===========================
+    - potion{t=DAMAGE_RESISTANCE;d=140;lvl=0} @self ~onTimer:160 0.8
+    - potion{t=FIRE_RESISTANCE;d=140;lvl=0} @self ~onTimer:200 0.7
+
+    # ===========================
+    # MAGIAS OFENSIVAS
+    # ===========================
+    # Bola de fogo
+    - damage{a=18;type=FIRE} @PlayersInRadius{r=6} ~onTimer:160 0.7
+    - ignite{ticks=80} @PlayersInRadius{r=6} ~onTimer:160 0.7
+
+    # Corrente de relâmpagos
+    - damage{a=16;type=LIGHTNING} @NearestPlayers{r=18;amount=3} ~onTimer:200 0.6
+
+    # Dedo da morte (single target forte)
+    - damage{a=26;type=WITHER} @NearestPlayer{r=18} ~onTimer:260 0.4
+    - potion{t=WEAKNESS;d=80;lvl=1} @NearestPlayer{r=18} ~onTimer:260 0.4
+
+    # Medo
+    - potion{t=SLOW;d=80;lvl=1} @PlayersInRadius{r=10} ~onTimer:220 0.5
+    - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInRadius{r=10} ~onTimer:220 0.5
+
+    # ===========================
+    # UTILIDADE / DEFESA
+    # ===========================
+    - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInRadius{r=6} ~onDamaged 0.5
+    - potion{t=INVISIBILITY;d=80;lvl=0;overwrite=true} @self ~onTimer:240 0.5
+    - potion{t=ABSORPTION;d=120;lvl=1} @self ~onTimer:220 0.5
+
+    # ===========================
+    # TELEPORTE PLANAR
+    # ===========================
+    - teleport{radius=10} @self ~onDamaged 0.4
+    - teleport{radius=15} @self ~onTimer:200 0.3
+
+    # ===========================
+    # INVOCAR YUGOLOTH (VARIAÇÃO DO LIVRO)
+    # ===========================
+    # Aproxima “Invocar Yugoloth (1/dia) – 40% de chance”
+    - summon{type=MM_ARCANALOTH;amount=1;radius=6} @self ~onTimer:600 0.4
+
+
 
 
 MM_MEZZOLOTH:
-  Type: VEX
-  Display: 'Mezzoloth'
-  Health: 75
-  Damage: 12
-  Faction: fiend
+  Type: DROWNED
+  Display: '&6&lMezzoloth'
+  Health: 85
+  Damage: 9
+  Faction: yugoloth
+
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.36
+    FollowRange: 24
     PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.6
+
+  DamageModifiers:
+    - FIRE 0.5
+    - FREEZE 0.5
+    - POISON 0.0      # imune a veneno
+    - WITHER 0.0
+    - MAGIC 0.7
+    - PROJECTILE 0.9
+    - BLUDGEONING 0.8
+    - SLASHING 0.8
+    - PIERCING 0.8
+
   Skills:
-  - damage{a=12;type=PHYSICAL} @target ~onAttack 0.8
+    # ===========================
+    # ATAQUES – GARRAS + TRIDENTE
+    # ===========================
+    - damage{a=10;type=SLASHING} @target ~onAttack 0.9
+    - damage{a=9;type=PIERCING} @target ~onAttack 0.8
+
+    # “lançar” tridente em alvo distante
+    - damage{a=8;type=PIERCING} @FurthestPlayer{r=18} ~onTimer:100 0.6
+
+    # ===========================
+    # NUVEM TÓXICA (névoa mortal / vapores)
+    # ===========================
+    - damage{a=8;type=POISON} @PlayersInRadius{r=6} ~onTimer:160 0.7
+    - potion{t=POISON;d=100;lvl=0} @PlayersInRadius{r=6} ~onTimer:160 0.7
+    - potion{t=SLOW;d=60;lvl=0} @PlayersInRadius{r=6} ~onTimer:160 0.6
+
+    # ===========================
+    # MAGIA INATA – ESCURIDÃO / DISSIPAR
+    # ===========================
+    - potion{t=BLINDNESS;d=40;lvl=0} @PlayersInRadius{r=5} ~onTimer:200 0.5
+    - cleanse{type=POSITIVE;amount=2} @PlayersInRadius{r=8} ~onTimer:220 0.5
+
+    # ===========================
+    # RESISTÊNCIA À MAGIA
+    # ===========================
+    - potion{t=DAMAGE_RESISTANCE;d=120;lvl=0} @self ~onTimer:180 0.7
+
+    # ===========================
+    # TELEPORTE TÁTICO
+    # ===========================
+    - teleport{radius=8} @self ~onDamaged 0.4
+    - teleport{radius=10} @self ~onTimer:220 0.3
+
+    # ===========================
+    # INVOCAR YUGOLOTH (VARIAÇÃO DO LIVRO)
+    # ===========================
+    # Aproxima “30% de chance de invocar 1 mezzoloth”
+    - summon{type=MM_MEZZOLOTH;amount=1;radius=5} @self ~onTimer:700 0.3
+
+
 
 
 MM_NYCALOTH:
-  Type: VEX
-  Display: 'Nycaloth'
-  Health: 123
-  Damage: 20
-  Faction: fiend
+  Type: PHANTOM
+  Display: '&2&lNycaloth'
+  Health: 220
+  Damage: 14
+  Faction: yugoloth
+
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.38
+    FollowRange: 28
     PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.6
+    # Phantom já voa por padrão
+
+  DamageModifiers:
+    # Resistências / imunidades do statblock
+    - FIRE 0.5
+    - FREEZE 0.5
+    - POISON 0.0      # imune a veneno
+    - WITHER 0.0      # usando como “ácido/veneno forte”
+    - MAGIC 0.7
+    - PROJECTILE 0.9
+    - BLUDGEONING 0.8
+    - SLASHING 0.8
+    - PIERCING 0.8
+
   Skills:
-  - damage{a=20;type=PHYSICAL} @target ~onAttack 0.8
+    # ===========================
+    # ATAQUES – GARRAS E MACHADO
+    # ===========================
+    # Garras – cortes rápidos
+    - damage{a=12;type=SLASHING} @target ~onAttack 0.9
+
+    # Ferimento sobrenatural (sangramento contínuo)
+    - damage{a=4;type=SLASHING} @target ~onAttack 0.6
+    - potion{t=POISON;d=80;lvl=0} @target ~onAttack 0.5
+
+    # Machado grande – golpe brutal
+    - damage{a=20;type=SLASHING} @target ~onAttack 0.5
+
+    # ===========================
+    # CONJURAÇÃO INATA – ESCURIDÃO / DISSIPAR / INVISIBILIDADE
+    # ===========================
+    # “Escuridão” / confusão
+    - potion{t=BLINDNESS;d=60;lvl=0} @PlayersInRadius{r=8} ~onTimer:200 0.6
+
+    # “Dissipar magia” (limpa buffs de jogadores)
+    - cleanse{type=POSITIVE;amount=2} @PlayersInRadius{r=10} ~onTimer:220 0.5
+
+    # Invisibilidade (pessoal)
+    - potion{t=INVISIBILITY;d=100;lvl=0;overwrite=true} @self ~onTimer:240 0.6
+
+    # Reflexos / esquiva mágica (simula Reflexes)
+    - potion{t=SPEED;d=80;lvl=1} @self ~onDamaged 0.5
+
+    # ===========================
+    # RESISTÊNCIA À MAGIA
+    # ===========================
+    - potion{t=DAMAGE_RESISTANCE;d=140;lvl=0} @self ~onTimer:180 0.8
+
+    # ===========================
+    # TELEPORTE TÁTICO
+    # ===========================
+    # “Ataca e some”
+    - teleport{radius=10} @self ~onAttack 0.4
+    - teleport{radius=12} @self ~onDamaged 0.5
+    - teleport{radius=15} @self ~onTimer:220 0.3
+
+    # ===========================
+    # “ATAQUE AÉREO”
+    # ===========================
+    # Se tiver alvo longe, ele mergulha
+    - leap{v=1.4;yi=0.8} @self ~onTimer:120 0.5
+
+    # ===========================
+    # INVOCAR YUGOLOTH (VARIAÇÃO DO LIVRO)
+    # Nycaloth – 50% de chance de chamar 1d4 mezzoloths ou 1 nycaloth
+    # ===========================
+    # Aproxima: 25% chance mezzoloth / 20% nycaloth numa janela longa
+    - summon{type=MM_MEZZOLOTH;amount=2to4;radius=6} @self ~onTimer:800 0.25
+    - summon{type=MM_NYCALOTH;amount=1;radius=6} @self ~onTimer:900 0.20
+
 
 
 MM_ULTROLOTH:
-  Type: VEX
-  Display: 'Ultroloth'
-  Health: 153
-  Damage: 26
-  Faction: fiend
+  Type: ILLUSIONER
+  Display: '&5&lUltroloth'
+  Health: 260
+  Damage: 12
+  Faction: yugoloth
+
   Options:
     MovementSpeed: 0.36
-    FollowRange: 18
+    FollowRange: 30
     PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    AlwaysShowName: true
+    KnockbackResistance: 0.5
+
+  DamageModifiers:
+    - FIRE 0.5
+    - FREEZE 0.5
+    - POISON 0.0        # imune a veneno
+    - WITHER 0.0
+    - MAGIC 0.6
+    - PROJECTILE 0.8
+    - BLUDGEONING 0.8
+    - SLASHING 0.8
+    - PIERCING 0.8
+
   Skills:
-  - damage{a=26;type=PHYSICAL} @target ~onAttack 0.8
+    # ===========================
+    # ESPADA LONGA / CORPO-A-CORPO
+    # ===========================
+    - damage{a=13;type=SLASHING} @target ~onAttack 0.9
+    - damage{a=6;type=FIRE} @target ~onAttack 0.4
+
+    # Buff marcial (simula ataques múltiplos mais perigosos)
+    - potion{t=INCREASE_DAMAGE;d=80;lvl=1} @self ~onTimer:200 0.5
+
+    # ===========================
+    # OLHAR HIPNÓTICO
+    # ===========================
+    # Stun / confusão forte em alvo próximo
+    - potion{t=SLOW;d=80;lvl=2} @NearestPlayer{r=10} ~onTimer:160 0.6
+    - potion{t=BLINDNESS;d=60;lvl=0} @NearestPlayer{r=10} ~onTimer:160 0.6
+    - potion{t=WEAKNESS;d=80;lvl=1} @NearestPlayer{r=10} ~onTimer:200 0.5
+
+    # ===========================
+    # MAGIAS INATAS
+    # ===========================
+    # Muralha de Fogo – dano em área
+    - damage{a=16;type=FIRE} @PlayersInRadius{r=8} ~onTimer:220 0.6
+    - ignite{ticks=100} @PlayersInRadius{r=8} ~onTimer:220 0.6
+
+    # Tempestade de Fogo – burst pesado mais raro
+    - damage{a=26;type=FIRE} @PlayersInRadius{r=10} ~onTimer:360 0.4
+    - ignite{ticks=140} @PlayersInRadius{r=10} ~onTimer:360 0.4
+
+    # Medo / sugestão em massa (controle de grupo)
+    - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=12} ~onTimer:260 0.5
+    - potion{t=NAUSEA;d=100;lvl=0} @PlayersInRadius{r=12} ~onTimer:260 0.5
+
+    # Invisibilidade / escape
+    - potion{t=INVISIBILITY;d=80;lvl=0;overwrite=true} @self ~onTimer:240 0.5
+
+    # Clarividência / “radar” (só flavor – speed & night vision)
+    - potion{t=SPEED;d=120;lvl=1} @self ~onTimer:300 0.5
+    - potion{t=NIGHT_VISION;d=300;lvl=0} @self ~onSpawn 1.0
+
+    # ===========================
+    # RESISTÊNCIA À MAGIA
+    # ===========================
+    - potion{t=DAMAGE_RESISTANCE;d=160;lvl=1} @self ~onTimer:200 0.8
+
+    # ===========================
+    # TELEPORTE DE COMANDANTE
+    # ===========================
+    - teleport{radius=10} @self ~onDamaged 0.5
+    - teleport{radius=14} @self ~onTimer:220 0.4
+
+    # ===========================
+    # INVOCAR YUGOLOTH (VAR LIVRO)
+    # Ultroloth – 50% chance de invocar:
+    #   1d6 mezzoloths, 1d4 nycaloths ou 1 ultroloth
+    # ===========================
+    # Quebrei em 3 “slots” com chances menores:
+    - summon{type=MM_MEZZOLOTH;amount=2to6;radius=6} @self ~onTimer:900 0.25
+    - summon{type=MM_NYCALOTH;amount=1to3;radius=8} @self ~onTimer:1000 0.2
+    - summon{type=MM_ULTROLOTH;amount=1;radius=10} @self ~onTimer:1300 0.15
 
 
 MM_ZUMBI:
   Type: ZOMBIE
-  Display: 'Zumbi'
-  Health: 22
+  Display: '&a&lZumbi'
+  Health: 28
   Damage: 4
   Faction: undead
+
   Options:
-    MovementSpeed: 0.24
-    FollowRange: 18
+    MovementSpeed: 0.23
+    FollowRange: 20
+    AlwaysShowName: false
+    PreventRandomEquipment: true
     PreventOtherDrops: true
+    Despawn: false
+
+  DamageModifiers:
+    - POISON 0.0
+    - WITHER 0.2
+    - MAGIC 0.9
+    - FIRE 1.1
+
   Skills:
-  - damage{a=4;type=PHYSICAL} @target ~onAttack 0.8
+    # Pancada
+    - damage{a=4;type=BLUDGEONING} @target ~onAttack
+
+    # Fortitude de Morto-Vivo – volta com 1 HP às vezes
+    - skill{s=ZUMBI_FORTITUDE} @self ~onDeath 0.30
 
 
-MM_OGROZUMBI:
-  Type: ZOMBIE
-  Display: 'Ogro Zumbi'
-  Health: 85
-  Damage: 14
+
+MM_OGRO_ZUMBI:
+  Type: IRON_GOLEM
+  Display: '&2&lOgro Zumbi'
+  Health: 130
+  Damage: 16
   Faction: undead
+
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.22
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventRandomEquipment: true
     PreventOtherDrops: true
+    KnockbackResistance: 0.6
+
+  DamageModifiers:
+    - POISON 0.0
+    - WITHER 0.2
+    - FIRE 1.1
+    - MAGIC 0.85
+
   Skills:
-  - damage{a=14;type=PHYSICAL} @target ~onAttack 0.8
+    # Grande Pancada (Maça Estrela)
+    - damage{a=18;type=BLUDGEONING} @target ~onAttack
+
+    # Impacto em área
+    - damage{a=10;type=BLUDGEONING} @PlayersInRadius{r=4} ~onAttack 0.4
+
+    # Fortitude Morto-Vivo
+    - skill{s=ZUMBI_FORTITUDE} @self ~onDeath 0.35
+
+    # Rugido Intimidante
+    - potion{t=SLOW;d=60;lvl=1} @PlayersInRadius{r=6} ~onTimer:160 0.5
+
+
+MM_OBSERVADOR_ZUMBI:
+  Type: PHANTOM
+  Display: '&5&lObservador Zumbi'
+  Health: 160
+  Damage: 8
+  Faction: undead
+
+  Options:
+    MovementSpeed: 0.22
+    FollowRange: 30
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    KnockbackResistance: 0.8
+    NoGravity: true
+
+  DamageModifiers:
+    - POISON 0.0
+    - WITHER 0.3
+    - MAGIC 0.9
+    - FIRE 1.1
+
+  Skills:
+    # Mordida
+    - damage{a=14;type=PIERCING} @target ~onAttack
+
+    # Ciclo de Raios (aleatório a cada 4s)
+    - skill{s=RAIO_PARALISANTE_ZUMBI} @NearestPlayer ~onTimer:80 0.25
+    - skill{s=RAIO_APAVORANTE_ZUMBI} @NearestPlayer ~onTimer:80 0.25
+    - skill{s=RAIO_ENERVANTE_ZUMBI} @NearestPlayer ~onTimer:80 0.25
+    - skill{s=RAIO_DESINTEGRADOR_ZUMBI} @NearestPlayer ~onTimer:80 0.15
+
+    # Fortitude Morto-Vivo
+    - skill{s=ZUMBI_FORTITUDE} @self ~onDeath 0.30
 
 
 MM_OBSERVADOR:
@@ -9622,3 +11027,3085 @@ MM_VETERANO:
   - damage{a=10;type=PHYSICAL} @target ~onAttack 0.8
 
 
+MM_SUCCUBUS:
+  Type: VEX
+  Display: '&dSúcubo'
+  Health: 72
+  Damage: 6
+  Faction: fiend
+
+  Options:
+    MovementSpeed: 0.40
+    FollowRange: 24
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Silent: false
+    Despawn: false
+
+  DamageModifiers:
+    # Resistências infernais
+    - FIRE 0.5
+    - COLD 0.5
+    - LIGHTNING 0.5
+    - POISON 0.5
+    - BLUDGEONING 0.6
+    - PIERCING 0.6
+    - SLASHING 0.6
+    # Fraqueza a dano sagrado
+    - HOLY 1.25
+
+  Skills:
+    # Garras – ataque físico básico
+    - damage{a=7;type=SLASHING} @target ~onAttack 1
+
+    # ENFEITIÇAR – charm mental (confusão e fraqueza)
+    - potion{t=WEAKNESS;d=160;lvl=1} @target ~onAttack 0.45
+    - potion{t=CONFUSION;d=120;lvl=0} @target ~onAttack 0.4
+    - potion{t=BLINDNESS;d=80;lvl=0} @target ~onAttack 0.25
+
+    # Visão e Marca da Alma – marca a vítima “ligada” a ela
+    - potion{t=GLOWING;d=200;lvl=0} @NearestPlayer{r=18} ~onTimer:200 0.6
+
+    # BEIJO DRENADOR – dano psíquico + cura (golpe de execução)
+    - damage{a=24;type=PSYCHIC} @target ~onAttack 0.25
+    - heal{a=12} @self ~onAttack 0.25
+
+    # FORMA ETÉREA – some e se reposiciona
+    - potion{t=INVISIBILITY;d=100;lvl=1;overwrite=true} @self ~onTimer:160 0.7
+    - leap{v=1.4;yi=0.9} @self ~onTimer:160 0.7
+
+    # Sussurros Corruptores – enfraquece a mente em área
+    - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=10} ~onTimer:200 0.5
+    - potion{t=HUNGER;d=140;lvl=0} @PlayersInRadius{r=10} ~onTimer:200 0.4
+
+    # Retirada Elegante – foge quando apanha muito
+    - leap{v=1.8;yi=1.0} @self ~onDamaged 0.5
+    - potion{t=INVISIBILITY;d=80;lvl=1;overwrite=true} @self ~onDamaged 0.5
+
+    # Chamado Infernal – chance de chamar um aliado demoníaco
+    - summon{type=MM_RAKSHASA;amount=1;radius=4} @self ~onKill 0.25
+
+
+MM_INCUBUS:
+  Type: VEX
+  Display: '&5Íncubo'
+  Health: 78
+  Damage: 8
+  Faction: fiend
+
+  Options:
+    MovementSpeed: 0.42
+    FollowRange: 24
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Silent: false
+    Despawn: false
+
+  DamageModifiers:
+    # Resistências infernais
+    - FIRE 0.5
+    - COLD 0.5
+    - LIGHTNING 0.5
+    - POISON 0.5
+    - BLUDGEONING 0.6
+    - PIERCING 0.6
+    - SLASHING 0.6
+    # Fraqueza a dano sagrado
+    - HOLY 1.25
+
+  Skills:
+    # Espada/Garra infernal – ataque corpo a corpo mais agressivo
+    - damage{a=10;type=SLASHING} @target ~onAttack 1
+
+    # Domínio da Vontade – enfraquece a mente e a defesa do alvo
+    - potion{t=WEAKNESS;d=160;lvl=1} @target ~onAttack 0.4
+    - potion{t=SLOW;d=120;lvl=1} @target ~onAttack 0.35
+
+    # Marca do Tentador – destaca o alvo principal
+    - potion{t=GLOWING;d=160;lvl=0} @NearestPlayer{r=18} ~onTimer:180 0.6
+
+    # BEIJO DRENADOR – dano psíquico + roubo de vida
+    - damage{a=26;type=PSYCHIC} @target ~onAttack 0.3
+    - heal{a=14} @self ~onAttack 0.3
+
+    # Fúria Infernal – ataque em área em momento aleatório
+    - damage{a=8;type=FIRE} @PlayersInRadius{r=4} ~onTimer:200 0.5
+    - potion{t=CONFUSION;d=80;lvl=0} @PlayersInRadius{r=4} ~onTimer:200 0.4
+
+    # Passo Etéreo – “teleporta” reposicionando com invisibilidade
+    - potion{t=INVISIBILITY;d=80;lvl=1;overwrite=true} @self ~onTimer:140 0.6
+    - leap{v=1.6;yi=1.0} @self ~onTimer:140 0.6
+
+    # Retirada Sombria – fuga quando está em perigo
+    - leap{v=2.0;yi=1.1} @self ~onDamaged 0.5
+    - potion{t=INVISIBILITY;d=60;lvl=1;overwrite=true} @self ~onDamaged 0.5
+
+    # Chamado das Profundezas – pode chamar demônios aliados
+    - summon{type=MM_RAKSHASA;amount=1;radius=4} @self ~onKill 0.2
+
+MM_TARRASQUE:
+  Type: RAVAGER
+  Display: '&c&lTarrasque'
+  Health: 1200
+  Damage: 40
+  Faction: titan
+
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 40
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    KnockbackResistance: 1.0
+    AlwaysShowName: true
+
+  DamageModifiers:
+    # Imunidades principais
+    - FIRE 0.0
+    - POISON 0.0
+    - MAGIC 0.5       # forte resistência mágica geral
+    # Resistência brutal a dano físico
+    - BLUDGEONING 0.3
+    - PIERCING 0.3
+    - SLASHING 0.3
+    # Explosões um pouco reduzidas
+    - EXPLOSION 0.5
+
+  Skills:
+    # ===========================
+    # ATAQUES PRINCIPAIS
+    # ===========================
+
+    # Mordida – dano altíssimo em corpo a corpo
+    - damage{a=50;type=PIERCING} @target ~onAttack 1
+
+    # Garras – dano em área frontal (multi-ataques “garras”)
+    - cone{radius=5;angle=90;ys=0;ye=3;hnp=false;hnp=true;skill=[
+        damage{a=32;type=SLASHING} @EntitiesInCone{}
+      ]} @self ~onAttack 0.6
+
+    # Chifres – ataque de impacto que lança o alvo pra trás
+    - damage{a=38;type=PIERCING} @target ~onAttack 0.4
+    - throw{v=1.5;vy=0.6} @target ~onAttack 0.4
+
+    # Cauda – golpe em área atrás dele
+    - radius{r=6;os=180;oe=360;skill=[
+        damage{a=28;type=BLUDGEONING} @EntitiesInRadius{}
+        ;potion{t=SLOW;d=100;lvl=1} @EntitiesInRadius{}
+      ]} @self ~onTimer:80 0.7
+
+    # ===========================
+    # PRESENÇA ATERRADORA
+    # ===========================
+    # Medo em área, simulando o teste de Sabedoria
+    - potion{t=CONFUSION;d=120;lvl=0} @PlayersInRadius{r=20} ~onTimer:160 0.6
+    - potion{t=WEAKNESS;d=160;lvl=1} @PlayersInRadius{r=20} ~onTimer:160 0.6
+    - potion{t=SLOW;d=120;lvl=1} @PlayersInRadius{r=20} ~onTimer:160 0.5
+
+    # ===========================
+    # ENGOLIR (VERSÃO SIMPLIFICADA)
+    # ===========================
+    # “Engole” o alvo: grande dano + dano ácido contínuo
+    - damage{a=45;type=PIERCING} @target ~onAttack 0.3
+    - repeat{amount=6;delay=20;skills=[
+        damage{a=12;type=ACID} @target
+      ]} @target ~onAttack 0.3
+
+    # ===========================
+    # CARAPAÇA REFLEXIVA (ANTI-MAGIA)
+    # ===========================
+    # Chance de “anular” parte do dano à distância / mágico
+    - skill{s=MM_TARRASQUE_REFLECT} @self ~onDamaged 0.4
+
+    # ===========================
+    # RESISTÊNCIA LENDÁRIA
+    # ===========================
+    # Se tomar muito dano de uma vez, se “cura” parcialmente
+    - healpercent{p=8} @self ~onDamaged 0.25
+
+    # ===========================
+    # MONSTRO DE CERCO (VERSÃO SIMPLES)
+    # ===========================
+    # Passadas sísmicas causando dano em volta (ideal perto de construções)
+    - effect:explosion @self ~onTimer:120 0.5
+    - damage{a=18;type=BLUDGEONING} @PlayersInRadius{r=6} ~onTimer:120 0.5
+
+MM_DRAGON_TURTLE:
+  Type: TURTLE
+  Display: '&2Tartaruga-Dragão'
+  Health: 520
+  Damage: 20
+  Faction: dragon
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 32
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    KnockbackResistance: 1.0
+    Silent: false
+    AlwaysShowName: true
+
+  DamageModifiers:
+    # Resistência a fogo (sopro de vapor)
+    - FIRE 0.5
+    # Dragão colossal com carapaça
+    - BLUDGEONING 0.6
+    - PIERCING 0.6
+    - SLASHING 0.6
+    # Vive na água
+    - DROWNING 0.0
+    # Um pouco resistente à magia geral
+    - MAGIC 0.8
+    - PROJECTILE 0.85
+
+  Skills:
+    # ===========================
+    # ATAQUES PRINCIPAIS
+    # ===========================
+
+    # Mordida – ataque principal (perfuração pesada)
+    - damage{a=32;type=PIERCING} @target ~onAttack 1
+
+    # GARRAS – dano em área frontal curta (simula dois ataques de garra)
+    - cone{radius=5;angle=70;ys=0;ye=3;hnp=false;skill=[
+        damage{a=20;type=SLASHING} @EntitiesInCone{}
+      ]} @self ~onAttack 0.6
+
+    # Cauda – grande impacto atrás, com knockback
+    - radius{r=6;os=150;oe=210;skill=[
+        damage{a=26;type=BLUDGEONING} @EntitiesInRadius{}
+        ;throw{v=1.4;vy=0.6} @EntitiesInRadius{}
+      ]} @self ~onTimer:80 0.7
+
+    # ===========================
+    # SOPRO DE VAPOR (RECARREGA)
+    # ===========================
+    # Versão simplificada: cone de fogo/“vapor” na frente
+    - cone{radius=12;angle=80;ys=0;ye=4;hnp=false;skill=[
+        damage{a=34;type=FIRE} @EntitiesInCone{}
+        ;potion{t=SLOW;d=120;lvl=1} @EntitiesInCone{}
+      ]} @self ~onTimer:200 0.7
+
+    # ===========================
+    # PODER DO TITÃ DOS MARES
+    # ===========================
+    # Ondas sísmicas – dano em área ao redor (bom contra construções/jogadores)
+    - effect:explosion @self ~onTimer:140 0.5
+    - damage{a=16;type=BLUDGEONING} @PlayersInRadius{r=7} ~onTimer:140 0.5
+
+    # Ira das Profundezas – fica mais perigosa quando perde muita vida
+    - skill{s=MM_DRAGON_TURTLE_ENRAGE} @self ~onDamaged 0.25
+
+MM_ABUTRE:
+  Type: PARROT
+  Display: '&6&lAbutre'
+  Health: 8
+  Damage: 3
+  Faction: fera_hostil
+
+  Options:
+    MovementSpeed: 0.25
+    FollowRange: 24
+    AlwaysShowName: false
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    NoGravity: true
+
+  DamageModifiers:
+    - FALL 0.0
+    - PROJECTILE 0.9
+    - POISON 0.0
+
+  Skills:
+    # Bicada
+    - damage{a=3;type=PIERCING} @target ~onAttack
+
+
+MM_ABUTRE_GIGANTE:
+  Type: PHANTOM
+  Display: '&4&lAbutre Gigante'
+  Health: 30
+  Damage: 6
+  Faction: fera_maligna
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 32
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    KnockbackResistance: 0.5
+    NoGravity: true
+
+  DamageModifiers:
+    - POISON 0.0
+    - WITHER 0.5
+    - PROJECTILE 0.8
+    - MAGIC 1.0
+
+  Skills:
+    # Bicada brutal
+    - damage{a=7;type=PIERCING} @target ~onAttack
+
+
+MM_AGUIA:
+  Type: PARROT
+  Display: '&f&lÁguia'
+  Health: 6
+  Damage: 3
+  Faction: fera_neutra
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 24
+    AlwaysShowName: false
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    NoGravity: true
+
+  DamageModifiers:
+    - FALL 0.0
+    - PROJECTILE 1.0
+
+  Skills:
+    # Garras rápidas
+    - damage{a=3;type=SLASH} @target ~onAttack
+
+
+MM_AGUIA_GIGANTE:
+  Type: PHANTOM
+  Display: '&e&lÁguia Gigante'
+  Health: 40
+  Damage: 7
+  Faction: guardiao_celeste
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 32
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    KnockbackResistance: 0.4
+    NoGravity: true
+
+  DamageModifiers:
+    - FALL 0.0
+    - PROJECTILE 0.7
+    - MAGIC 1.0
+
+  Skills:
+    # Investida com garras
+    - damage{a=7;type=SLASH} @target ~onAttack
+
+MM_ARANHA_GIGANTE:
+  Type: SPIDER
+  Display: "&2&lAranha Gigante"
+  Health: 26
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.6
+    CanClimb: true
+
+  DamageModifiers:
+    - POISON 0.5
+    - FIRE 1.4
+
+  Skills:
+    # Mordida venenosa
+    - damage{a=7;type=PIERCING} @target ~onAttack
+    - potion{t=POISON;d=160;lvl=1} @target ~onAttack 0.7
+
+    # Teia imobilizante
+    - skill{s=ARANHA_TEIA} @NearestPlayer ~onTimer:140 0.5
+
+
+
+MM_ARANHA_INTERPLANAR:
+  Type: SPIDER
+  Display: "&5&lAranha Interplanar"
+  Health: 32
+  Damage: 9
+  Faction: monstrosity
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    CanClimb: true
+    NoGravity: true
+
+  DamageModifiers:
+    - MAGIC 0.6
+    - FIRE 1.1
+
+  Skills:
+    # Mordida etérea venenosa
+    - damage{a=9;type=PIERCING} @target ~onAttack
+    - potion{t=POISON;d=200;lvl=1} @target ~onAttack 0.75
+
+    # Salto etéreo (teleporte curto)
+    - teleport{spread=6;radius=6} @self ~onTimer:180 0.6
+
+
+
+MM_ARANHA_LOBO_GIGANTE:
+  Type: SPIDER
+  Display: "&2&lAranha-Lobo Gigante"
+  Health: 11
+  Damage: 4
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.38
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    CanClimb: true
+
+  Skills:
+    # Mordida cruel
+    - damage{a=4;type=PIERCING} @target ~onAttack
+    - potion{t=POISON;d=120;lvl=1} @target ~onAttack 0.6
+
+
+
+MM_ARBUSTO_DESPERTO:
+  Type: BUSH
+  Display: "&a&lArbusto Desperto"
+  Health: 10
+  Damage: 2
+  Faction: plant
+
+  Options:
+    MovementSpeed: 0.20
+    FollowRange: 12
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.4
+
+  DamageModifiers:
+    - FIRE 1.6
+    - PIERCING 0.6
+
+  Skills:
+    # Rasgar
+    - damage{a=2;type=SLASHING} @target ~onAttack
+
+
+
+MM_ARMINHO:
+  Type: RABBIT
+  Display: "&f&lArminho"
+  Health: 1
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.40
+    FollowRange: 10
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordiscada rápida
+    - damage{a=1;type=PIERCING} @target ~onAttack
+
+
+
+MM_ARMINHO_GIGANTE:
+  Type: RABBIT
+  Display: "&7&lArminho Gigante"
+  Health: 9
+  Damage: 5
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.42
+    FollowRange: 15
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida forte
+    - damage{a=5;type=PIERCING} @target ~onAttack
+
+MM_BABILINO:
+  Type: OCELOT
+  Display: "&6&lBabuíno"
+  Health: 6
+  Damage: 3
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida rápida
+    - damage{a=3;type=PIERCING} @target ~onAttack
+
+
+
+MM_BALEIA_ASSASSINA:
+  Type: DOLPHIN
+  Display: "&9&lBaleia Assassina"
+  Health: 90
+  Damage: 10
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 32
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    Silent: true
+
+  DamageModifiers:
+    - DROWNING 0.0
+    - FIRE 1.4
+
+  Skills:
+    # Mordida poderosa
+    - damage{a=12;type=PIERCING} @target ~onAttack
+    # Investida aquática
+    - potion{t=SLOW;d=40;lvl=2} @target ~onAttack 0.6
+
+
+
+MM_BESOURO_FOGO_GIGANTE:
+  Type: SILVERFISH
+  Display: "&c&lBesouro de Fogo Gigante"
+  Health: 6
+  Damage: 3
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 10
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  DamageModifiers:
+    - FIRE 0.0
+    - POISON 0.5
+
+  Skills:
+    # Mordida
+    - damage{a=3;type=PIERCING} @target ~onAttack
+    # Brilho ígneo
+    - effect:particles{p=flame;a=10;hS=0.2;vS=0.1} @self ~onTimer:40 1.0
+    - potion{t=GLOWING;d=100;lvl=0} @target ~onAttack 0.5
+
+
+
+MM_BICO_MACHADO:
+  Type: CHICKEN
+  Display: "&6&lBico de Machado"
+  Health: 20
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Bico cortante
+    - damage{a=7;type=SLASHING} @target ~onAttack
+
+
+
+MM_BODE:
+  Type: GOAT
+  Display: "&f&lBode"
+  Health: 6
+  Damage: 3
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 12
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Chifrada
+    - damage{a=3;type=BLUNT} @target ~onAttack
+    - knockback{strength=0.8} @target ~onAttack 0.6
+
+
+
+MM_BODE_GIGANTE:
+  Type: GOAT
+  Display: "&7&lBode Gigante"
+  Health: 20
+  Damage: 8
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.3
+
+  Skills:
+    # Investida brutal
+    - damage{a=8;type=BLUNT} @target ~onAttack
+    - knockback{strength=1.2} @target ~onAttack 0.9
+
+
+
+MM_CAO_DA_MORTE:
+  Type: WOLF
+  Display: "&8&lCão da Morte"
+  Health: 40
+  Damage: 6
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  DamageModifiers:
+    - POISON 0.5
+
+  Skills:
+    # Mordida infecciosa
+    - damage{a=6;type=PIERCING} @target ~onAttack
+    - potion{t=POISON;d=120;lvl=1} @target ~onAttack 0.7
+    - potion{t=BLINDNESS;d=40;lvl=0} @target ~onAttack 0.3
+
+
+
+MM_CAO_TELEPORTADOR:
+  Type: WOLF
+  Display: "&b&lCão Teleportador"
+  Health: 22
+  Damage: 5
+  Faction: fey
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=5;type=PIERCING} @target ~onAttack
+    # Piscar (teleporte curto aleatório)
+    - teleport{spread=6;radius=6} @self ~onTimer:100 0.8
+
+
+
+MM_CAMELO:
+  Type: CAMEL
+  Display: "&e&lCamelo"
+  Health: 16
+  Damage: 4
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=4;type=BLUNT} @target ~onAttack
+
+
+
+MM_CARANGUEJO:
+  Type: SILVERFISH
+  Display: "&3&lCaranguejo"
+  Health: 4
+  Damage: 2
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.20
+    FollowRange: 8
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  DamageModifiers:
+    - SLASHING 0.7
+
+  Skills:
+    # Pinça
+    - damage{a=2;type=BLUNT} @target ~onAttack
+
+
+
+MM_CARANGUEJO_GIGANTE:
+  Type: SPIDER
+  Display: "&9&lCaranguejo Gigante"
+  Health: 14
+  Damage: 5
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.24
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  DamageModifiers:
+    - SLASHING 0.6
+
+  Skills:
+    # Pinça esmagadora
+    - damage{a=5;type=BLUNT} @target ~onAttack
+    - knockback{strength=0.6} @target ~onAttack 0.5
+
+
+
+MM_CAVALO_MONTARIA:
+  Type: HORSE
+  Display: "&6&lCavalo de Montaria"
+  Health: 15
+  Damage: 5
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Coice
+    - damage{a=5;type=BLUNT} @target ~onAttack
+
+
+
+MM_CAVALO_GUERRA:
+  Type: HORSE
+  Display: "&c&lCavalo de Guerra"
+  Health: 22
+  Damage: 8
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.2
+
+  Skills:
+    # Ataque de cascos
+    - damage{a=8;type=BLUNT} @target ~onAttack
+    - knockback{strength=1.0} @target ~onAttack 0.8
+MM_CAVALO_MONTARIA:
+  Type: HORSE
+  Display: "&f&lCavalo de Montaria"
+  Health: 13
+  Damage: 8
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.38
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Cascos
+    - damage{a=8;type=BLUNT} @target ~onAttack
+
+
+
+MM_CAVALO_MARINHO:
+  Type: COD
+  Display: "&b&lCavalo Marinho"
+  Health: 1
+  Damage: 0
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    NoAI: false
+
+  Skills:
+    # Não possui ataque
+
+
+
+MM_CAVALO_MARINHO_GIGANTE:
+  Type: DOLPHIN
+  Display: "&b&lCavalo Marinho Gigante"
+  Health: 16
+  Damage: 4
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.22
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Cabeçada
+    - damage{a=4;type=BLUNT} @target ~onAttack
+
+    # Investida
+    - skill{s=INVESTIDA_CAVALO_MARINHO} @target ~onAttack 0.35
+
+
+
+MM_CENTOPEIA_GIGANTE:
+  Type: SILVERFISH
+  Display: "&2&lCentopeia Gigante"
+  Health: 4
+  Damage: 4
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.35
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  DamageModifiers:
+    - POISON 0.0
+
+  Skills:
+    # Mordida venenosa
+    - damage{a=4;type=PIERCING} @target ~onAttack
+    - potion{t=POISON;d=100;lvl=2} @target ~onAttack 0.8
+    - potion{t=SLOW;d=60;lvl=5} @target ~onAttack 0.6
+MM_CHACAL:
+  Type: WOLF
+  Display: "&6&lChacal"
+  Health: 3
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.35
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=1;type=PIERCING} @target ~onAttack
+
+
+
+MM_COBRA_CONSTRITORA:
+  Type: SNAKE
+  Display: "&2&lCobra Constritora"
+  Health: 13
+  Damage: 5
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=5;type=PIERCING} @target ~onAttack
+
+    # Constrição
+    - damage{a=6;type=BLUNT} @target ~onAttack 0.35
+    - skill{s=CONSTRICAO_COBRA} @target ~onAttack 0.35
+
+
+
+MM_COBRA_CONSTRITORA_GIGANTE:
+  Type: GIANT_SNAKE
+  Display: "&2&lCobra Constritora Gigante"
+  Health: 60
+  Damage: 11
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=11;type=PIERCING} @target ~onAttack
+
+    # Constrição
+    - damage{a=13;type=BLUNT} @target ~onAttack 0.45
+    - skill{s=CONSTRICAO_COBRA_GIGANTE} @target ~onAttack 0.45
+
+
+
+MM_COBRA_VOADORA:
+  Type: PHANTOM
+  Display: "&a&lCobra Voadora"
+  Health: 5
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.38
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    NoGravity: true
+
+  DamageModifiers:
+    - POISON 1.4
+
+  Skills:
+    # Mordida venenosa
+    - damage{a=1;type=PIERCING} @target ~onAttack
+    - potion{t=POISON;d=100;lvl=2} @target ~onAttack 1.0
+
+
+
+MM_CORUJA:
+  Type: PARROT
+  Display: "&f&lCoruja"
+  Health: 1
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Garras
+    - damage{a=1;type=SLASHING} @target ~onAttack
+MM_CORUJA_GIGANTE:
+  Type: PHANTOM
+  Display: "&f&lCoruja Gigante"
+  Health: 19
+  Damage: 8
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    NoGravity: true
+
+  Skills:
+    # Garras
+    - damage{a=8;type=SLASHING} @target ~onAttack
+
+
+
+MM_CORVO:
+  Type: BAT
+  Display: "&7&lCorvo"
+  Health: 1
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Bicada
+    - damage{a=1;type=PIERCING} @target ~onAttack
+
+
+
+MM_CROCODILO:
+  Type: CROCODILE
+  Display: "&2&lCrocodilo"
+  Health: 19
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.24
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida + agarrão
+    - damage{a=7;type=PIERCING} @target ~onAttack
+    - skill{s=AGARRAO_CROCODILO} @target ~onAttack 0.45
+
+
+
+MM_CROCODILO_GIGANTE:
+  Type: ELDER_GUARDIAN
+  Display: "&2&lCrocodilo Gigante"
+  Health: 85
+  Damage: 21
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida + agarrão
+    - damage{a=21;type=PIERCING} @target ~onAttack
+    - skill{s=AGARRAO_CROCODILO_GIGANTE} @target ~onAttack 0.5
+
+    # Cauda – chance de derrubar
+    - damage{a=14;type=BLUNT} @target ~onAttack 0.4
+    - throw{v=1.2;vy=0.4} @target ~onAttack 0.4
+
+
+
+MM_ELEFANTE:
+  Type: RAVAGER
+  Display: "&7&lElefante"
+  Health: 76
+  Damage: 16
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.33
+    FollowRange: 22
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.8
+
+  Skills:
+    # Presas (investida)
+    - damage{a=16;type=PIERCING} @target ~onAttack
+
+    # Investida esmagadora — derruba e pisa
+    - throw{v=1.5;vy=0.5} @target ~onAttack 0.35
+    - damage{a=18;type=BLUNT} @target ~onAttack 0.35
+MM_ENXAME_CORVOS:
+  Type: BAT
+  Display: "&8&lEnxame de Corvos"
+  Health: 24
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    NoGravity: true
+
+  DamageModifiers:
+    - BLUNT 0.5
+    - SLASHING 0.5
+    - PIERCING 0.5
+
+  Skills:
+    # Bicadas
+    - damage{a=7;type=PIERCING} @target ~onAttack
+
+
+
+MM_ENXAME_INSETOS:
+  Type: SILVERFISH
+  Display: "&7&lEnxame de Insetos"
+  Health: 22
+  Damage: 10
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  DamageModifiers:
+    - BLUNT 0.5
+    - SLASHING 0.5
+    - PIERCING 0.5
+
+  Skills:
+    # Mordidas
+    - damage{a=10;type=PIERCING} @target ~onAttack
+
+
+
+MM_ENXAME_MORCEGOS:
+  Type: BAT
+  Display: "&5&lEnxame de Morcegos"
+  Health: 22
+  Damage: 5
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    NoGravity: true
+
+  DamageModifiers:
+    - BLUNT 0.5
+    - SLASHING 0.5
+    - PIERCING 0.5
+
+  Skills:
+    # Mordidas
+    - damage{a=5;type=PIERCING} @target ~onAttack
+
+
+
+MM_ENXAME_PIRANHAS:
+  Type: PUFFERFISH
+  Display: "&3&lEnxame de Piranhas"
+  Health: 28
+  Damage: 14
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  DamageModifiers:
+    - BLUNT 0.5
+    - SLASHING 0.5
+    - PIERCING 0.5
+
+  Skills:
+    # Mordidas + Frenesi
+    - damage{a=14;type=PIERCING} @target ~onAttack
+    - skill{s=FRENESI_PIRANHAS} @target ~onTimer:40 0.4
+
+
+
+MM_ENXAME_RATOS:
+  Type: SILVERFISH
+  Display: "&6&lEnxame de Ratos"
+  Health: 24
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  DamageModifiers:
+    - BLUNT 0.5
+    - SLASHING 0.5
+    - PIERCING 0.5
+
+  Skills:
+    # Mordidas
+    - damage{a=7;type=PIERCING} @target ~onAttack
+
+
+
+MM_ENXAME_SERPENTES:
+  Type: CAVE_SPIDER
+  Display: "&2&lEnxame de Serpentes"
+  Health: 36
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  DamageModifiers:
+    - BLUNT 0.5
+    - SLASHING 0.5
+    - PIERCING 0.5
+
+  Skills:
+    # Mordidas + Veneno
+    - damage{a=7;type=PIERCING} @target ~onAttack
+    - potion{type=POISON;duration=120;lvl=1} @target ~onAttack 0.4
+    - damage{a=14;type=POISON} @target ~onTimer:40 0.25
+
+
+
+MM_ESCORPIAO:
+  Type: SILVERFISH
+  Display: "&e&lEscorpião"
+  Health: 1
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 12
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Ferrão venenoso
+    - damage{a=1;type=PIERCING} @target ~onAttack
+    - potion{type=POISON;duration=60;lvl=0} @target ~onAttack 0.6
+
+MM_ESCORPIAO_GIGANTE:
+  Type: CAVE_SPIDER
+  Display: "&6&lEscorpião Gigante"
+  Health: 52
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.4
+
+  Skills:
+    # Garras (2 ataques)
+    - damage{a=6;type=BLUNT} @target ~onAttack 0.66
+
+    # Ferrão perfurante
+    - damage{a=7;type=PIERCING} @target ~onAttack 0.34
+
+    # Veneno forte
+    - damage{a=12;type=POISON} @target ~onAttack 0.35
+    - potion{type=POISON;duration=160;lvl=1} @target ~onAttack 0.35
+
+
+
+MM_FALCAO:
+  Type: PARROT
+  Display: "&e&lFalcão"
+  Health: 1
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    NoGravity: true
+
+  Skills:
+    # Garras
+    - damage{a=1;type=SLASHING} @target ~onAttack
+
+
+
+MM_FALCAO_SANGUE:
+  Type: PARROT
+  Display: "&c&lFalcão de Sangue"
+  Health: 7
+  Damage: 4
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    NoGravity: true
+
+  Skills:
+    # Bicada agressiva
+    - damage{a=4;type=PIERCING} @target ~onAttack
+
+    # Caçada em matilha (chance de buff de velocidade/força em grupo – opcional, se você criar a skill)
+    - skill{s=FALCAO_SANGUE_MATILHA} @self ~onTimer:80 0.25
+
+
+
+MM_GATO:
+  Type: CAT
+  Display: "&7&lGato"
+  Health: 2
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 12
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Garras
+    - damage{a=1;type=SLASHING} @target ~onAttack
+
+
+
+MM_GORILA:
+  Type: PANDA
+  Display: "&6&lGorila"
+  Health: 19
+  Damage: 6
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Punho (2 ataques no statblock – aqui simplificado em um golpe forte)
+    - damage{a=6;type=BLUNT} @target ~onAttack
+
+    # Arremessar rocha (simulado como skill à distância – crie a skill separada se quiser efeito visual)
+    - skill{s=GORILA_ROCHA} @target ~onTimer:80 0.30
+
+
+
+MM_GORILA_GIGANTE:
+  Type: RAVAGER
+  Display: "&8&lGorila Gigante"
+  Health: 157
+  Damage: 22
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 25
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.8
+
+  Skills:
+    # Punho devastador
+    - damage{a=22;type=BLUNT} @target ~onAttack
+
+    # Arremesso de rocha massivo
+    - damage{a=30;type=BLUNT} @target ~onTimer:100 0.40
+    - skill{s=GORILA_GIGANTE_ROCHA} @target ~onTimer:100 0.40
+
+
+
+MM_HIENA:
+  Type: WOLF
+  Display: "&6&lHiena"
+  Health: 5
+  Damage: 3
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=3;type=PIERCING} @target ~onAttack
+
+    # Táticas de Matilha (buff se estiver em grupo – opcional)
+    - skill{s=HIENA_MATILHA} @self ~onTimer:80 0.30
+
+
+
+MM_HIENA_GIGANTE:
+  Type: WOLF
+  Display: "&c&lHiena Gigante"
+  Health: 45
+  Damage: 10
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 22
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida poderosa
+    - damage{a=10;type=PIERCING} @target ~onAttack
+
+    # Frenesi – simula a habilidade de avançar e atacar de novo (crie a skill se quiser algo mais complexo)
+    - skill{s=HIENA_FRENESI} @self ~onKill 0.75
+
+MM_JAVALI:
+  Type: PIG
+  Display: "&6&lJavali"
+  Health: 11
+  Damage: 4
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Presas
+    - damage{a=4;type=SLASHING} @target ~onAttack
+
+    # Investida (bônus de dano e knockback – implemente a skill separada se quiser algo mais fiel)
+    - skill{s=JAVALI_INVESTIDA} @target ~onTimer:80 0.35
+
+    # Implacável (simulado via skill passiva)
+    - skill{s=JAVALI_IMPLACAVEL} @self ~onDamaged 0.25
+
+
+
+MM_JAVALI_GIGANTE:
+  Type: ZOGLIN
+  Display: "&c&lJavali Gigante"
+  Health: 42
+  Damage: 10
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.6
+
+  Skills:
+    # Presas brutais
+    - damage{a=10;type=SLASHING} @target ~onAttack
+
+    # Investida poderosa
+    - skill{s=JAVALI_GIGANTE_INVESTIDA} @target ~onTimer:80 0.40
+
+    # Implacável (não cai a 0 PV facilmente)
+    - skill{s=JAVALI_GIGANTE_IMPLACAVEL} @self ~onDamaged 0.30
+
+
+
+MM_LAGARTO:
+  Type: SILVERFISH
+  Display: "&2&lLagarto"
+  Health: 2
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 10
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=1;type=PIERCING} @target ~onAttack
+
+
+
+MM_LAGARTO_GIGANTE:
+  Type: STRIDER
+  Display: "&a&lLagarto Gigante"
+  Health: 19
+  Damage: 6
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida forte
+    - damage{a=6;type=PIERCING} @target ~onAttack
+
+    # VARIAÇÃO – Prender a Respiração (caso use em água)
+    - skill{s=LAGARTO_G_PRENDER_RESPIRACAO} @self ~onSpawn 0.20
+
+    # VARIAÇÃO – Escalada Aracnídea (andar em paredes/teto)
+    - skill{s=LAGARTO_G_ESCALADA_ARACNIDEA} @self ~onSpawn 0.20
+
+
+
+MM_LEAO:
+  Type: OCELOT
+  Display: "&e&lLeão"
+  Health: 26
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 22
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=7;type=PIERCING} @target ~onAttack 0.5
+
+    # Garras
+    - damage{a=6;type=SLASHING} @target ~onAttack 0.5
+
+    # Bote (pounce – derruba alvo)
+    - skill{s=LEAO_BOTE} @target ~onTimer:80 0.35
+
+    # Táticas de Matilha (sinergia em grupo)
+    - skill{s=LEAO_MATILHA} @self ~onTimer:100 0.30
+
+
+
+MM_LOBO:
+  Type: WOLF
+  Display: "&7&lLobo"
+  Health: 11
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=7;type=PIERCING} @target ~onAttack
+
+    # Audição e Faro Aguçados (buff de percepção/movimento – opcional)
+    - skill{s=LOBO_SENTIDOS_AGUCADOS} @self ~onTimer:120 0.30
+
+    # Táticas de Matilha
+    - skill{s=LOBO_MATILHA} @self ~onTimer:80 0.35
+
+
+
+MM_LOBO_ATROZ:
+  Type: WOLF
+  Display: "&8&lLobo Atroz"
+  Health: 37
+  Damage: 10
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.4
+
+  Skills:
+    # Mordida brutal
+    - damage{a=10;type=PIERCING} @target ~onAttack
+
+    # Audição e Faro Aguçados
+    - skill{s=LOBO_ATROZ_SENTIDOS} @self ~onTimer:120 0.30
+
+    # Táticas de Matilha
+    - skill{s=LOBO_ATROZ_MATILHA} @self ~onTimer:80 0.35
+
+
+
+MM_LOBO_INVERNAL:
+  Type: WOLF
+  Display: "&b&lLobo Invernal"
+  Health: 75
+  Damage: 11
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 26
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  DamageModifiers:
+    - FIRE 1.2
+    - ICE 0.0
+    - FREEZE 0.0
+
+  Skills:
+    # Mordida gélida
+    - damage{a=11;type=PIERCING} @target ~onAttack
+    - damage{a=4;type=FROST} @target ~onAttack 0.5
+
+    # Camuflagem na Neve (furtividade/velocidade em biomas frios)
+    - skill{s=LOBO_INVERNAL_CAMUFLAGEM} @self ~onTimer:120 0.30
+
+    # Táticas de Matilha
+    - skill{s=LOBO_INVERNAL_MATILHA} @self ~onTimer:80 0.35
+
+    # Sopro Congelante (cone gelado)
+    - skill{s=LOBO_INVERNAL_SOPRO} @ConeAround{r=6;a=60} ~onTimer:140 0.40
+
+
+
+MM_MAMUTE:
+  Type: CAMEL
+  Display: "&6&lMamute"
+  Health: 126
+  Damage: 25
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.9
+
+  Skills:
+    # Presas
+    - damage{a=25;type=PIERCING} @target ~onAttack
+
+    # Pisotear (somente em alvos caídos – gerencie lógica na skill)
+    - skill{s=MAMUTE_PISOTEAR} @target ~onTimer:80 0.45
+
+    # Investida Esmagadora
+    - skill{s=MAMUTE_INVESTIDA} @target ~onTimer:120 0.40
+
+
+
+MM_MASTIM:
+  Type: WOLF
+  Display: "&e&lMastim"
+  Health: 5
+  Damage: 4
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 14
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=4;type=PIERCING} @target ~onAttack
+
+    # Audição e Olfato Aguçados
+    - skill{s=MASTIM_SENTIDOS} @self ~onTimer:120 0.30
+
+
+
+MM_MORCEGO:
+  Type: BAT
+  Display: "&7&lMorcego"
+  Health: 1
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.20
+    FollowRange: 10
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    NoGravity: true
+
+  Skills:
+    # Mordida
+    - damage{a=1;type=PIERCING} @target ~onAttack
+
+    # Eco Localização (buff de visão/percepção – opcional)
+    - skill{s=MORCEGO_ECOLOCALIZACAO} @self ~onTimer:100 0.35
+
+
+
+MM_MORCEGO_GIGANTE:
+  Type: PHANTOM
+  Display: "&5&lMorcego Gigante"
+  Health: 22
+  Damage: 5
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    NoGravity: true
+
+  Skills:
+    # Mordida poderosa
+    - damage{a=5;type=PIERCING} @target ~onAttack
+
+    # Eco Localização
+    - skill{s=MORCEGO_G_ECOLOCALIZACAO} @self ~onTimer:100 0.35
+
+
+
+MM_MULA:
+  Type: MULE
+  Display: "&6&lMula"
+  Health: 11
+  Damage: 4
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Cascos
+    - damage{a=4;type=BLUNT} @target ~onAttack
+
+    # Estável / Besta de Carga (resistência a knockback – opcional)
+    - skill{s=MULA_ESTAVEL} @self ~onSpawn 0.40
+
+
+
+MM_PANTERA:
+  Type: OCELOT
+  Display: "&8&lPantera"
+  Health: 13
+  Damage: 6
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 22
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Garras
+    - damage{a=6;type=SLASHING} @target ~onAttack 0.6
+
+    # Mordida
+    - damage{a=7;type=PIERCING} @target ~onAttack 0.4
+
+    # Bote (pounce com derrubada)
+    - skill{s=PANTERA_BOTE} @target ~onTimer:80 0.35
+
+    # Faro Aguçado
+    - skill{s=PANTERA_SENTIDOS} @self ~onTimer:120 0.30
+MM_POLVO:
+  Type: SQUID
+  Display: "&3&lPolvo"
+  Health: 3
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.20
+    FollowRange: 12
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    Silent: false
+
+  Skills:
+    # Tentáculos (agarra alvo)
+    - damage{a=1;type=BLUNT} @target ~onAttack
+    - skill{s=POLVO_AGARRAR} @target ~onAttack 0.50
+
+    # Camuflagem Submersa
+    - skill{s=POLVO_CAMUFLAGEM} @self ~onTimer:120 0.35
+
+    # Nuvem de Tinta (curto raio)
+    - skill{s=POLVO_TINTA} @SelfLocation ~onDamaged 0.40
+
+
+
+MM_POLVO_GIGANTE:
+  Type: SQUID
+  Display: "&9&lPolvo Gigante"
+  Health: 52
+  Damage: 10
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.24
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Tentáculos esmagadores
+    - damage{a=10;type=BLUNT} @target ~onAttack
+    - skill{s=POLVO_G_TENTACULOS} @Ring{r=4.5} ~onTimer:80 0.45
+
+    # Camuflagem Submersa
+    - skill{s=POLVO_G_CAMUFLAGEM} @self ~onTimer:120 0.40
+
+    # Nuvem de Tinta (raio maior)
+    - skill{s=POLVO_G_TINTA} @SelfLocation ~onDamaged 0.50
+
+
+
+MM_PONEI:
+  Type: HORSE
+  Display: "&e&lPônei"
+  Health: 11
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Cascos
+    - damage{a=7;type=BLUNT} @target ~onAttack
+
+
+
+MM_Ra_GIGANTE:
+  Type: FROG
+  Display: "&2&lRã Gigante"
+  Health: 18
+  Damage: 4
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida (agarra)
+    - damage{a=4;type=PIERCING} @target ~onAttack
+    - skill{s=RA_G_AGARRAR} @target ~onAttack 0.60
+
+    # Anfíbio
+    - skill{s=RA_G_ANFIBIO} @self ~onSpawn 1.0
+
+    # Salto Parado (pulo longo)
+    - skill{s=RA_G_SALTO} @self ~onTimer:100 0.40
+
+    # Engolir alvo pequeno
+    - skill{s=RA_G_ENGOLIR} @NearestPlayer{r=3} ~onTimer:140 0.30
+
+
+
+MM_RATO:
+  Type: SILVERFISH
+  Display: "&7&lRato"
+  Health: 1
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.25
+    FollowRange: 10
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=1;type=PIERCING} @target ~onAttack
+
+    # Faro Aguçado
+    - skill{s=RATO_FARO} @self ~onTimer:120 0.30
+
+
+
+MM_RATO_GIGANTE:
+  Type: RABBIT
+  Display: "&8&lRato Gigante"
+  Health: 7
+  Damage: 4
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=4;type=PIERCING} @target ~onAttack
+
+    # Faro Aguçado
+    - skill{s=RATO_G_FARO} @self ~onTimer:120 0.30
+
+    # Táticas de Matilha
+    - skill{s=RATO_G_MATILHA} @self ~onTimer:100 0.35
+
+
+
+MM_RATO_GIGANTE_INFECTADO:
+  Type: RABBIT
+  Display: "&5&lRato Gigante Infectado"
+  Health: 7
+  Damage: 3
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida infecciosa
+    - damage{a=3;type=PIERCING} @target ~onAttack
+    - skill{s=RATO_G_DOENCA} @target ~onAttack 0.60
+
+    # Faro Aguçado
+    - skill{s=RATO_GI_FARO} @self ~onTimer:120 0.30
+
+
+
+MM_RINOCERONTE:
+  Type: RAVAGER
+  Display: "&6&lRinoceronte"
+  Health: 45
+  Damage: 14
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 22
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.8
+
+  Skills:
+    # Chifre
+    - damage{a=14;type=BLUNT} @target ~onAttack
+
+    # Investida (charge)
+    - skill{s=RINO_INVESTIDA} @target ~onTimer:120 0.40
+
+
+
+MM_SAPO:
+  Type: TADPOLE
+  Display: "&a&lSapo"
+  Health: 1
+  Damage: 0
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.20
+    FollowRange: 8
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Anfíbio – sem ataque (só comportamento)
+    - skill{s=SAPO_ANFIBIO} @self ~onSpawn 1.0
+    - skill{s=SAPO_SALTO_CURTO} @self ~onTimer:140 0.30
+
+
+
+MM_SAPO_GIGANTE:
+  Type: FROG
+  Display: "&2&lSapo Gigante"
+  Health: 39
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida venenosa (agarra)
+    - damage{a=7;type=PIERCING} @target ~onAttack
+    - damage{a=5;type=POISON} @target ~onAttack 0.75
+    - skill{s=SAPO_G_AGARRAR} @target ~onAttack 0.60
+
+    # Anfíbio
+    - skill{s=SAPO_G_ANFIBIO} @self ~onSpawn 1.0
+
+    # Salto longo
+    - skill{s=SAPO_G_SALTO} @self ~onTimer:100 0.40
+
+    # Engolir alvo médio
+    - skill{s=SAPO_G_ENGOLIR} @NearestPlayer{r=3} ~onTimer:140 0.35
+
+
+
+MM_SERPENTE_VENENOSA:
+  Type: SILVERFISH
+  Display: "&a&lSerpente Venenosa"
+  Health: 2
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 12
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida venenosa
+    - damage{a=1;type=PIERCING} @target ~onAttack
+    - damage{a=5;type=POISON} @target ~onAttack 0.75
+
+
+
+MM_SERPENTE_VENENOSA_GIGANTE:
+  Type: STRIDER
+  Display: "&2&lSerpente Venenosa Gigante"
+  Health: 11
+  Damage: 6
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida venenosa
+    - damage{a=6;type=PIERCING} @target ~onAttack
+    - damage{a=10;type=POISON} @target ~onAttack 0.80
+
+
+
+MM_TEXUGO:
+  Type: FOX
+  Display: "&f&lTexugo"
+  Health: 3
+  Damage: 1
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 12
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=1;type=PIERCING} @target ~onAttack
+
+    # Faro Aguçado
+    - skill{s=TEXUGO_FARO} @self ~onTimer:120 0.30
+
+
+
+MM_TEXUGO_GIGANTE:
+  Type: POLAR_BEAR
+  Display: "&7&lTexugo Gigante"
+  Health: 13
+  Damage: 6
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=4;type=PIERCING} @target ~onAttack 0.5
+
+    # Garras
+    - damage{a=6;type=SLASHING} @target ~onAttack 0.5
+
+    # Ataques Múltiplos (simulado com skill)
+    - skill{s=TEXUGO_G_MULTIATAQUE} @target ~onTimer:80 0.40
+
+    # Faro Aguçado
+    - skill{s=TEXUGO_G_FARO} @self ~onTimer:120 0.30
+
+MM_TIGRE:
+  Type: OCELOT
+  Display: "&6&lTigre"
+  Health: 37
+  Damage: 8
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=8;type=PIERCING} @target ~onAttack 0.45
+
+    # Garras
+    - damage{a=7;type=SLASHING} @target ~onAttack 0.55
+
+    # Bote (pounce: derruba e permite mordida extra)
+    - skill{s=TIGRE_BOTE} @target ~onTimer:100 0.40
+
+    # Faro Aguçado
+    - skill{s=TIGRE_FARO_AGUCADO} @self ~onTimer:120 0.40
+
+
+
+MM_TIGRE_DENTES_DE_SABRE:
+  Type: OCELOT
+  Display: "&6&lTigre Dentes-de-Sabre"
+  Health: 57
+  Damage: 11
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.36
+    FollowRange: 28
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida poderosa
+    - damage{a=10;type=PIERCING} @target ~onAttack 0.45
+
+    # Garras brutais
+    - damage{a=11;type=SLASHING} @target ~onAttack 0.55
+
+    # Bote melhorado (derruba com mais chance)
+    - skill{s=TIGRE_SABRE_BOTE} @target ~onTimer:90 0.45
+
+    # Faro Aguçado
+    - skill{s=TIGRE_SABRE_FARO} @self ~onTimer:120 0.40
+
+
+
+MM_TUBARAO_CACADOR:
+  Type: GUARDIAN
+  Display: "&3&lTubarão Caçador"
+  Health: 45
+  Damage: 13
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=13;type=PIERCING} @target ~onAttack
+
+    # Frenesi de Sangue (mais dano em alvos feridos)
+    - skill{s=TUBARAO_CACADOR_FRENESI} @NearestPlayer{r=8} ~onTimer:80 0.55
+
+    # Respira apenas na água
+    - skill{s=TUBARAO_RESPIRA_AGUA} @self ~onSpawn 1.0
+
+
+
+MM_TUBARAO_ARRECIFES:
+  Type: DOLPHIN
+  Display: "&b&lTubarão dos Arrecifes"
+  Health: 22
+  Damage: 6
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=6;type=PIERCING} @target ~onAttack
+
+    # Táticas de Matilha (mais forte em grupo)
+    - skill{s=TUBARAO_ARRECIFES_MATILHA} @self ~onTimer:90 0.50
+
+    # Respira apenas na água
+    - skill{s=TUBARAO_RESPIRA_AGUA} @self ~onSpawn 1.0
+
+
+
+MM_TUBARAO_GIGANTE:
+  Type: ELDER_GUARDIAN
+  Display: "&1&lTubarão Gigante"
+  Health: 126
+  Damage: 22
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 32
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    KnockbackResistance: 0.9
+
+  Skills:
+    # Mordida devastadora
+    - damage{a=22;type=PIERCING} @target ~onAttack
+
+    # Frenesi de Sangue
+    - skill{s=TUBARAO_G_FRENESI} @NearestPlayer{r=10} ~onTimer:70 0.60
+
+    # Respira apenas na água
+    - skill{s=TUBARAO_G_RESPIRA_AGUA} @self ~onSpawn 1.0
+
+
+
+MM_URSO_MARROM:
+  Type: POLAR_BEAR
+  Display: "&6&lUrso Marrom"
+  Health: 34
+  Damage: 11
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Ataques Múltiplos – simulado via skill
+    - skill{s=URSO_MARROM_MULTIATAQUE} @target ~onTimer:80 0.55
+
+    # Mordida
+    - damage{a=8;type=PIERCING} @target ~onAttack 0.45
+
+    # Garras
+    - damage{a=11;type=SLASHING} @target ~onAttack 0.55
+
+    # Faro Aguçado
+    - skill{s=URSO_MARROM_FARO} @self ~onTimer:120 0.40
+
+
+
+MM_URSO_NEGRO:
+  Type: PANDA
+  Display: "&0&lUrso Negro"
+  Health: 19
+  Damage: 7
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Ataques Múltiplos – simulado via skill
+    - skill{s=URSO_NEGRO_MULTIATAQUE} @target ~onTimer:90 0.50
+
+    # Mordida
+    - damage{a=5;type=PIERCING} @target ~onAttack 0.45
+
+    # Garras
+    - damage{a=7;type=SLASHING} @target ~onAttack 0.55
+
+    # Faro Aguçado
+    - skill{s=URSO_NEGRO_FARO} @self ~onTimer:120 0.40
+
+
+
+MM_URSO_POLAR:
+  Type: POLAR_BEAR
+  Display: "&f&lUrso Polar"
+  Health: 42
+  Damage: 12
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 22
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Ataques Múltiplos – simulado via skill
+    - skill{s=URSO_POLAR_MULTIATAQUE} @target ~onTimer:80 0.55
+
+    # Mordida
+    - damage{a=8;type=PIERCING} @target ~onAttack 0.45
+
+    # Garras
+    - damage{a=12;type=SLASHING} @target ~onAttack 0.55
+
+    # Faro Aguçado
+    - skill{s=URSO_POLAR_FARO} @self ~onTimer:120 0.40
+
+    # Variação Urso das Cavernas (pode ser aplicada via skill extra)
+    - skill{s=URSO_CAVERNAS_VARIANTE} @self ~onSpawn 0.20
+
+
+
+MM_VEADO:
+  Type: GOAT
+  Display: "&a&lVeado"
+  Health: 4
+  Damage: 2
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Chifrada leve (usa o ataque básico de cabra)
+    - damage{a=2;type=PIERCING} @target ~onAttack
+
+
+
+MM_VESPA_GIGANTE:
+  Type: BEE
+  Display: "&e&lVespa Gigante"
+  Health: 13
+  Damage: 5
+  Faction: beast
+
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    Silent: false
+
+  Skills:
+    # Ferrão com veneno
+    - damage{a=5;type=PIERCING} @target ~onAttack
+    - damage{a=10;type=POISON} @target ~onAttack 0.80
+    - skill{s=VESPA_G_PARALISIA} @target ~onAttack 0.40
+
+
+
+MM_WORG:
+  Type: WOLF
+  Display: "&4&lWorg"
+  Health: 26
+  Damage: 10
+  Faction: monstrosity
+
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+
+  Skills:
+    # Mordida
+    - damage{a=10;type=PIERCING} @target ~onAttack
+
+    # Audição e Faro Aguçados
+    - skill{s=WORG_SENTIDOS_AGUCADOS} @self ~onTimer:120 0.40
+
+    # Táticas de Matilha (sinergia com goblins / outros worgs)
+    - skill{s=WORG_MATILHA} @self ~onTimer:90 0.50
+
+MM_ACOLITO:
+  Type: VILLAGER
+  Display: "&f&lAcólito"
+  Health: 9
+  Damage: 2
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.24
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Clava
+    - damage{a=2;type=BLUDGEON} @target ~onAttack 0.80
+
+    # Chama Sagrada (truque ofensivo)
+    - skill{s=ACOLITO_CHAMA_SAGRADA} @target ~onTimer:80 0.50
+
+    # Curar Ferimentos (cura aliada)
+    - skill{s=ACOLITO_CURAR_FERIMENTOS} @NearestPlayer{r=12} ~onTimer:120 0.45
+
+    # Santuário (defensivo)
+    - skill{s=ACOLITO_SANTUARIO} @self ~onDamaged 0.35
+
+
+
+MM_ARCANO:
+  Type: WITCH
+  Display: "&9&lArcano"
+  Health: 40
+  Damage: 4
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.25
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Adaga (corpo a corpo / básico)
+    - damage{a=4;type=PIERCING} @target ~onAttack 0.60
+
+    # Armadura Arcana (buff defensivo inicial)
+    - skill{s=ARCANO_ARMADURA_ARCANA} @self ~onSpawn 1.0
+
+    # Escudo Arcano (reação defensiva)
+    - skill{s=ARCANO_ESCUDO} @self ~onDamaged 0.35
+
+    # Raio de Fogo (truque ofensivo)
+    - skill{s=ARCANO_RAIO_FOGO} @target ~onTimer:60 0.70
+
+    # Mísseis Mágicos
+    - skill{s=ARCANO_MISSEIS_MAGICOS} @target ~onTimer:80 0.60
+
+    # Bola de Fogo
+    - skill{s=ARCANO_BOLA_FOGO} @NearestPlayer{r=18} ~onTimer:160 0.45
+
+    # Voo (mobilidade)
+    - skill{s=ARCANO_VOO} @self ~onTimer:200 0.30
+
+    # Névoa Obscurecente (escape / controle)
+    - skill{s=ARCANO_NEVOA_OBSCURECENTE} @self ~onDamaged 0.30
+
+    # Sugestão (controle mental leve)
+    - skill{s=ARCANO_SUGESTAO} @NearestPlayer{r=12} ~onTimer:200 0.25
+
+
+
+MM_ARQUIMAGO:
+  Type: WITCH
+  Display: "&d&lArquimago"
+  Health: 99
+  Damage: 4
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 30
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    KnockbackResistance: 0.4
+
+  DamageModifiers:
+    # Resistência a dano de magias (parcial)
+    - MAGIC 0.7
+    # Resistência a concussão/cortante/perfurante não-mágico (pele de pedra)
+    - PROJECTILE 0.6
+    - PHYSICAL 0.6
+
+  Skills:
+    # Adaga (básico, pouco usado)
+    - damage{a=4;type=PIERCING} @target ~onAttack 0.40
+
+    # Pré-buffs: Armadura Arcana + Pele de Pedra
+    - skill{s=ARQUIMAGO_PREBUFFS} @self ~onSpawn 1.0
+
+    # Resistência à Magia (pode ser tratada como redução de dano mágico / vantagem)
+    - skill{s=ARQUIMAGO_RESISTENCIA_MAGIA} @self ~onSpawn 1.0
+
+    # Raio de Fogo / Toque Chocante (truques ofensivos)
+    - skill{s=ARQUIMAGO_RAIO_FOGO} @target ~onTimer:50 0.75
+    - skill{s=ARQUIMAGO_TOQUE_CHOCANTE} @target ~onAttack 0.35
+
+    # Relâmpago
+    - skill{s=ARQUIMAGO_RELAMPAGO} @line{r=18} ~onTimer:120 0.50
+
+    # Cone de Frio
+    - skill{s=ARQUIMAGO_CONE_FRIO} @Cone{r=10;angle=60} ~onTimer:160 0.55
+
+    # Escudo de Fogo
+    - skill{s=ARQUIMAGO_ESCUDO_FOGO} @self ~onDamaged 0.40
+
+    # Globo de Invulnerabilidade (defensivo forte)
+    - skill{s=ARQUIMAGO_GLOBO_INVULNERABILIDADE} @self ~onDamaged 0.25
+
+    # Parar o Tempo (fase de burst pesada)
+    - skill{s=ARQUIMAGO_PARAR_TEMPO} @self ~onTimer:300 0.25
+
+    # Teletransporte (escape / reposicionamento)
+    - skill{s=ARQUIMAGO_TELETRANSPORTE} @self ~onDamaged 0.30
+
+
+
+MM_ASSASSINO:
+  Type: PLAYER
+  Display: "&8&lAssassino"
+  Health: 78
+  Damage: 6
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  DamageModifiers:
+    # Resistência a veneno (meio dano)
+    - POISON 0.5
+
+  Skills:
+    # Espada Curta (ataque básico corpo a corpo)
+    - damage{a=6;type=PIERCING} @target ~onAttack 0.90
+
+    # Veneno na lâmina (dano extra, CD 15)
+    - skill{s=ASSASSINO_VENENO_ESPADA} @target ~onAttack 0.75
+
+    # Besta leve (ataque à distância envenenado)
+    - skill{s=ASSASSINO_BESTA_ENVENENADA} @target ~onTimer:70 0.55
+
+    # Ataque Furtivo (1/turno – grande burst se tiver vantagem)
+    - skill{s=ASSASSINO_ATAQUE_FURTIVO} @target ~onAttack 0.35
+
+    # Assassinar (crítico contra alvo surpreendido / primeiro turno)
+    - skill{s=ASSASSINO_ASSASSINAR} @target ~onSpawn 1.0
+
+    # Evasão (reduz muito dano de efeitos em área)
+    - skill{s=ASSASSINO_EVSAO} @self ~onDamaged 0.40
+
+    # Fuga da cena (smoke bomb / vanish)
+    - skill{s=ASSASSINO_FUGA} @self ~onDamaged 0.25
+
+MM_BANDIDO:
+  Type: PLAYER
+  Display: "&7&lBandido"
+  Health: 11
+  Damage: 4
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Cimitarra (ataque corpo a corpo básico)
+    - damage{a=4;type=SLASHING} @target ~onAttack 0.75
+
+    # Besta leve (ataque à distância ocasional)
+    - skill{s=BANDIDO_BESTA_LEVE} @target ~onTimer:80 0.45
+
+
+
+MM_BATEDOR:
+  Type: PLAYER
+  Display: "&2&lBatedor"
+  Health: 16
+  Damage: 5
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Ataque múltiplo corpo a corpo (2x espada curta)
+    - skill{s=BATEDOR_MULTI_ESPADA_CURTA} @target ~onAttack 0.55
+
+    # Ataque múltiplo à distância (2x arco longo)
+    - skill{s=BATEDOR_MULTI_ARCO_LONGO} @NearestPlayer{r=30} ~onTimer:60 0.65
+
+    # Espada curta simples (fallback)
+    - damage{a=5;type=PIERCING} @target ~onAttack 0.70
+
+    # Arco longo simples
+    - skill{s=BATEDOR_ARCO_LONGO} @NearestPlayer{r=30} ~onTimer:80 0.50
+
+    # Sentidos aguçados (pequeno buff de percepção/furtividade)
+    - skill{s=BATEDOR_SENTIDOS_AGUCADOS} @self ~onSpawn 1.0
+
+
+
+MM_CAPITAO_BANDIDOS:
+  Type: PLAYER
+  Display: "&6&lCapitão dos Bandidos"
+  Health: 65
+  Damage: 6
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.28
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Ataques Múltiplos: 2x cimitarra + 1x adaga
+    - skill{s=CAPITAO_MULTI_CIMITARRA_ADAGA} @target ~onAttack 0.85
+
+    # Cimitarra (golpe individual)
+    - damage{a=6;type=SLASHING} @target ~onAttack 0.70
+
+    # Adaga corpo a corpo / arremessada
+    - skill{s=CAPITAO_ADAGA_ARREMESSO} @NearestPlayer{r=16} ~onTimer:60 0.55
+
+    # Aparar (reação defensiva: aumenta CA / reduz dano)
+    - skill{s=CAPITAO_APARAR} @self ~onDamaged 0.40
+
+
+
+MM_CAVALEIRO:
+  Type: PLAYER
+  Display: "&b&lCavaleiro"
+  Health: 52
+  Damage: 10
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.25
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    KnockbackResistance: 0.6
+
+  Skills:
+    # Ataques múltiplos de espada grande (2 golpes)
+    - skill{s=CAVALEIRO_MULTI_ESPADA_GRANDE} @target ~onAttack 0.80
+
+    # Espada grande simples
+    - damage{a=10;type=SLASHING} @target ~onAttack 0.75
+
+    # Besta pesada
+    - skill{s=CAVALEIRO_BESTA_PESADA} @NearestPlayer{r=24} ~onTimer:80 0.45
+
+    # Liderança – buff de aliados próximos (tipo Bênção/Liderança)
+    - skill{s=CAVALEIRO_LIDERANCA} @PlayersInRadius{r=12} ~onTimer:200 0.40
+
+    # Bravura – resistência contra medo (pode ser buff defensivo)
+    - skill{s=CAVALEIRO_BRAVURA} @self ~onSpawn 1.0
+
+    # Aparar (reação para reduzir dano corpo a corpo)
+    - skill{s=CAVALEIRO_APARAR} @self ~onDamaged 0.35
+
+
+
+MM_CULTISTA:
+  Type: PLAYER
+  Display: "&5&lCultista"
+  Health: 9
+  Damage: 4
+  Faction: cultist
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  DamageModifiers:
+    # Devoção Sombria – pequena resistência a efeitos mentais
+    - MAGIC 0.9
+
+  Skills:
+    # Cimitarra (ataque básico)
+    - damage{a=4;type=SLASHING} @target ~onAttack 0.90
+
+    # Devoção Sombria – buff de resistência a medo/encantamento
+    - skill{s=CULTISTA_DEVICAO_SOMBRIA} @self ~onSpawn 1.0
+
+    # Explosão sombria / pequena magia ofensiva temática
+    - skill{s=CULTISTA_EXPLOSAO_SOMBRIA} @target ~onTimer:90 0.40
+
+
+
+MM_DRUIDA:
+  Type: PLAYER
+  Display: "&2&lDruida"
+  Health: 27
+  Damage: 3
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 22
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Bordão (ataque básico)
+    - damage{a=3;type=BLUDGEON} @target ~onAttack 0.80
+
+    # Bordão místico (buff que aumenta dano do bordão)
+    - skill{s=DRUIDA_BORDAO_MISTICO} @self ~onSpawn 1.0
+
+    # Criar chamas (ataque à distância)
+    - skill{s=DRUIDA_CRIAR_CHAMAS} @NearestPlayer{r=16} ~onTimer:70 0.55
+
+    # Constrição (controle – raízes/prisão)
+    - skill{s=DRUIDA_CONSTRICAO} @target ~onTimer:100 0.40
+
+    # Onda trovejante (dano em área / empurrão)
+    - skill{s=DRUIDA_ONDA_TROVEJANTE} @PIR{r=5} ~onDamaged 0.35
+
+    # Passos longos (buff de velocidade)
+    - skill{s=DRUIDA_PASSOS_LONGOS} @self ~onSpawn 1.0
+
+    # Pele de árvore (buff de armadura, CA 16)
+    - skill{s=DRUIDA_PELE_ARVORE} @self ~onSpawn 1.0
+
+    # Falar com animais / mensageiro animal – efeito mais narrativo
+    - skill{s=DRUIDA_MENSAGEIRO_ANIMAL} @self ~onTimer:240 0.20
+
+
+
+MM_ESPIAO:
+  Type: PLAYER
+  Display: "&9&lEspião"
+  Health: 27
+  Damage: 5
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.30
+    FollowRange: 22
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Ataques múltiplos corpo a corpo (2x espada curta)
+    - skill{s=ESPIAO_MULTI_ESPADA_CURTA} @target ~onAttack 0.80
+
+    # Espada curta simples
+    - damage{a=5;type=PIERCING} @target ~onAttack 0.80
+
+    # Besta de mão
+    - skill{s=ESPIAO_BESTA_MAO} @NearestPlayer{r=18} ~onTimer:70 0.55
+
+    # Ataque furtivo (burst quando tem vantagem / alvo distraído)
+    - skill{s=ESPIAO_ATAQUE_FURTIVO} @target ~onAttack 0.40
+
+    # Ação ardilosa – movimento extra / desengajar / esconder
+    - skill{s=ESPIAO_ACAO_ARDILOSA} @self ~onTimer:60 0.50
+
+    # Fuga de emergência (smoke / invisibilidade curta)
+    - skill{s=ESPIAO_FUGA_EMERGENCIA} @self ~onDamaged 0.35
+MM_FANATICO_CULTO:
+  Type: PLAYER
+  Display: "&5&lFanático do Culto"
+  Health: 33
+  Damage: 4
+  Faction: cultist
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  DamageModifiers:
+    # Devoção Sombria – pequena resistência a efeitos mentais
+    - MAGIC 0.9
+
+  Skills:
+    # Ataques múltiplos com adaga (2x)
+    - skill{s=FANATICO_MULTI_ADAGA} @target ~onAttack 0.80
+
+    # Adaga simples
+    - damage{a=4;type=PIERCING} @target ~onAttack 0.80
+
+    # Truques: chama sagrada (ataque à distância radiante)
+    - skill{s=FANATICO_CHAMA_SAGRADA} @NearestPlayer{r=16} ~onTimer:70 0.50
+
+    # Infligir ferimentos (burst corpo a corpo)
+    - skill{s=FANATICO_INFLIGIR_FERIMENTOS} @target ~onAttack 0.40
+
+    # Arma espiritual (ataque extra autônomo perto dele)
+    - skill{s=FANATICO_ARMA_ESPIRITUAL} @NearestPlayer{r=10} ~onTimer:120 0.35
+
+    # Imobilizar pessoa (controle forte, ocasional)
+    - skill{s=FANATICO_IMOBILIZAR_PESSOA} @NearestPlayer{r=15} ~onTimer:160 0.25
+
+    # Escudo da fé (buff defensivo)
+    - skill{s=FANATICO_ESCUDO_DA_FE} @self ~onSpawn 1.0
+
+    # Devoção Sombria – buff anti-medo/encantamento
+    - skill{s=FANATICO_DEVOCao_SOMBRIA} @self ~onSpawn 1.0
+
+
+
+MM_FURIOSO:
+  Type: PLAYER
+  Display: "&4&lFurioso"
+  Health: 67
+  Damage: 9
+  Faction: barbarian
+
+  Options:
+    MovementSpeed: 0.29
+    FollowRange: 22
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Machado grande (dano base)
+    - damage{a=9;type=SLASHING} @target ~onAttack 0.90
+
+    # Modo Descuidado – ganha vantagem (simulado com buff de dano/velocidade, mas fica vulnerável)
+    - skill{s=FURIOSO_DESCUIDADO_ON} @self ~onTimer:80 0.50
+
+    # Podem usar um grito de fúria quando entra em combate
+    - skill{s=FURIOSO_GRITO_FURIA} @PIR{r=6} ~onCombatStart 1.0
+
+
+
+MM_GLADIADOR:
+  Type: PLAYER
+  Display: "&c&lGladiador"
+  Health: 112
+  Damage: 11
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.27
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    KnockbackResistance: 0.6
+
+  Skills:
+    # Ataques múltiplos corpo a corpo (3 ataques: lança + escudo, ou só lança)
+    - skill{s=GLADIADOR_MULTI_CORPO} @target ~onAttack 0.85
+
+    # Dois ataques à distância (lança arremessada)
+    - skill{s=GLADIADOR_MULTI_LANCA_DIST} @NearestPlayer{r=20} ~onTimer:80 0.55
+
+    # Lança simples
+    - damage{a=11;type=PIERCING} @target ~onAttack 0.75
+
+    # Pancada com escudo – dano + knockdown
+    - skill{s=GLADIADOR_ESCUDO_GOLPE} @target ~onAttack 0.40
+
+    # Bravura – resistência a medo
+    - skill{s=GLADIADOR_BRAVURA} @self ~onSpawn 1.0
+
+    # Aparar – reação defensiva
+    - skill{s=GLADIADOR_APARAR} @self ~onDamaged 0.35
+
+
+
+MM_GUARDA:
+  Type: PLAYER
+  Display: "&7&lGuarda"
+  Health: 11
+  Damage: 4
+  Faction: guard
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 18
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Lança corpo a corpo
+    - damage{a=4;type=PIERCING} @target ~onAttack 0.85
+
+    # Lança à distância ocasional
+    - skill{s=GUARDA_LANCA_ARREMESSO} @NearestPlayer{r=16} ~onTimer:80 0.45
+
+
+
+MM_GUERREIRO_TRIBAL:
+  Type: PLAYER
+  Display: "&2&lGuerreiro Tribal"
+  Health: 11
+  Damage: 4
+  Faction: tribal
+
+  Options:
+    MovementSpeed: 0.27
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Lança corpo a corpo
+    - damage{a=4;type=PIERCING} @target ~onAttack 0.85
+
+    # Lança à distância (arremesso)
+    - skill{s=TRIBAL_LANCA_ARREMESSO} @NearestPlayer{r=18} ~onTimer:80 0.50
+
+    # Táticas de Matilha – buff quando tem aliados por perto
+    - skill{s=TRIBAL_TATICAS_MATILHA} @self ~onTimer:100 0.40
+
+
+
+MM_NOBRE:
+  Type: PLAYER
+  Display: "&d&lNobre"
+  Health: 9
+  Damage: 5
+  Faction: noble
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 16
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Rapieira
+    - damage{a=5;type=PIERCING} @target ~onAttack 0.90
+
+    # Aparar – reação para aumentar CA / reduzir dano
+    - skill{s=NOBRE_APARAR} @self ~onDamaged 0.35
+
+    # Grito de ordem – pode chamar guardas próximos (opcional)
+    - skill{s=NOBRE_CHAMAR_GUARDAS} @MobsInRadius{r=16;types=MM_GUARDA} ~onDamaged 0.25
+
+
+
+MM_PLEBEU:
+  Type: PLAYER
+  Display: "&7Plebeu"
+  Health: 4
+  Damage: 2
+  Faction: civilian
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 10
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    PreventCombat: false
+
+  Skills:
+    # Clava fraca
+    - damage{a=2;type=BLUDGEON} @target ~onAttack 0.70
+
+    # Tenta fugir quando entra em combate
+    - skill{s=PLEBEU_FUGIR} @self ~onCombatStart 1.0
+
+
+
+MM_RUFIAO:
+  Type: PLAYER
+  Display: "&6&lRufião"
+  Health: 32
+  Damage: 5
+  Faction: thug
+
+  Options:
+    MovementSpeed: 0.27
+    FollowRange: 20
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Ataques múltiplos com maça (2 golpes)
+    - skill{s=RUFIAO_MULTI_MACA} @target ~onAttack 0.85
+
+    # Maça simples
+    - damage{a=5;type=BLUDGEON} @target ~onAttack 0.80
+
+    # Besta pesada
+    - skill{s=RUFIAO_BESTA_PESADA} @NearestPlayer{r=22} ~onTimer:90 0.45
+
+    # Táticas de Matilha – mais perigoso em grupo
+    - skill{s=RUFIAO_TATICAS_MATILHA} @self ~onTimer:100 0.40
+
+
+
+MM_SACERDOTE:
+  Type: PLAYER
+  Display: "&e&lSacerdote"
+  Health: 27
+  Damage: 3
+  Faction: priest
+
+  Options:
+    MovementSpeed: 0.26
+    FollowRange: 22
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Maça (ataque básico)
+    - damage{a=3;type=BLUDGEON} @target ~onAttack 0.75
+
+    # Chama sagrada (ataque à distância radiante)
+    - skill{s=SACERDOTE_CHAMA_SAGRADA} @NearestPlayer{r=18} ~onTimer:70 0.60
+
+    # Raio teleguiado (burst de dano, dá "marcação")
+    - skill{s=SACERDOTE_RAIO_TELEGUIADO} @NearestPlayer{r=24} ~onTimer:120 0.40
+
+    # Curar ferimentos (cura alvo aliado ou a si)
+    - skill{s=SACERDOTE_CURAR_FERIMENTOS} @LowestThreat{r=15} ~onTimer:140 0.40
+
+    # Espírito guardião (aura de dano em volta)
+    - skill{s=SACERDOTE_ESPIRITOS_GUARDIOES} @self ~onTimer:180 0.35
+
+    # Arma espiritual (arma flutuante)
+    - skill{s=SACERDOTE_ARMA_ESPIRITUAL} @NearestPlayer{r=10} ~onTimer:130 0.35
+
+    # Santuário / proteção situacional
+    - skill{s=SACERDOTE_SANTUARIO} @self ~onDamaged 0.25
+
+    # Eminência Divina – buff para causar dano radiante extra
+    - skill{s=SACERDOTE_EMINENCIA_DIVINA} @self ~onTimer:160 0.30
+
+
+
+MM_VETERANO:
+  Type: PLAYER
+  Display: "&8&lVeterano"
+  Health: 58
+  Damage: 7
+  Faction: humanoid
+
+  Options:
+    MovementSpeed: 0.27
+    FollowRange: 24
+    AlwaysShowName: true
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+
+  Skills:
+    # Ataques múltiplos com espada longa (2) + opcional espada curta
+    - skill{s=VETERANO_MULTI_ESPADAS} @target ~onAttack 0.85
+
+    # Espada longa simples
+    - damage{a=7;type=SLASHING} @target ~onAttack 0.80
+
+    # Espada curta (golpe extra ou quando perto demais)
+    - skill{s=VETERANO_ESPADA_CURTA} @target ~onAttack 0.45
+
+    # Besta pesada
+    - skill{s=VETERANO_BESTA_PESADA} @NearestPlayer{r=26} ~onTimer:90 0.50
+
+    # Postura defensiva – pequeno buff de resistência
+    - skill{s=VETERANO_POSTURA_DEFENSIVA} @self ~onDamaged 0.30
