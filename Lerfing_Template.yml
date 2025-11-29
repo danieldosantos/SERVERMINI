@@ -6932,46 +6932,85 @@ MM_NAGAGUARDIA:
   - teleport{spread=0;radius=15} @target ~onTimer:320 0.3  # banimento breve
 
 
+MM_NOTICO:
+  Type: ZOMBIE
+  Display: 'Nótico'
+  Health: 45
+  Damage: 6
+  Faction: aberration
+  Options:
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 20
+    PreventOtherDrops: true
+    Silent: true
+  Skills:
+  # Ataques múltiplos de garra
+  - damage{a=6;type=SLASHING} @target ~onAttack 1
+  - damage{a=6;type=SLASHING} @target ~onAttack 0.85
+  # Olhar pútrido: necrose curta
+  - damage{a=10;type=NECROTIC} @PlayersInRadius{r=9} ~onTimer:180 0.5
+  - potion{t=WEAKNESS;d=100;lvl=1} @PlayersInRadius{r=9} ~onTimer:180 0.5
+  # Intuição estranha: revelar segredos/alvos
+  - potion{t=GLOWING;d=100;lvl=0} @PlayersInRadius{r=12} ~onTimer:260 0.35
+  - potion{t=SLOW;d=60;lvl=1} @PlayersInRadius{r=12} ~onTimer:260 0.3
+
+
 MM_ARMADURAANIMADA:
   Type: IRON_GOLEM
   Display: 'Armadura Animada'
   Health: 33
-  Damage: 6
+  Damage: 5
   Faction: construct
   Options:
-    MovementSpeed: 0.28
+    MovementSpeed: 0.25
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
+  - WITHER 0
   Skills:
-  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+  # Ataques múltiplos com pancadas pesadas
+  - damage{a=5;type=BLUDGEONING} @target ~onAttack 1
+  - damage{a=5;type=BLUDGEONING} @target ~onAttack 0.75
+  # Ligeira resistência profana
+  - potion{t=DAMAGE_RESISTANCE;d=60;lvl=1} @self ~onTimer:200 0.25
 
 
 MM_ESPADAVOADORA:
   Type: IRON_GOLEM
   Display: 'Espada Voadora'
   Health: 17
-  Damage: 3
+  Damage: 5
   Faction: construct
   Options:
-    MovementSpeed: 0.0
+    MovementSpeed: 0.45
     FollowRange: 18
     PreventOtherDrops: true
+    NoGravity: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Golpe cortante em voo
+  - damage{a=5;type=SLASHING} @target ~onAttack 1
+  - knockback{strength=0.6} @target ~onAttack 0.4
 
 
 MM_TAPETESUFOCADOR:
   Type: IRON_GOLEM
   Display: 'Tapete Sufocador'
   Health: 33
-  Damage: 6
+  Damage: 10
   Faction: construct
   Options:
     MovementSpeed: 0.12
     FollowRange: 18
     PreventOtherDrops: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+  # Sufocar e imobilizar
+  - damage{a=10;type=BLUDGEONING} @target ~onAttack 1
+  - root{d=100} @target ~onAttack 0.75
+  - potion{t=BLINDNESS;d=80;lvl=0} @target ~onAttack 0.6
+  - potion{t=SLOW;d=80;lvl=2} @target ~onAttack 0.6
 
 
 MM_TIRANODAMORTE:
