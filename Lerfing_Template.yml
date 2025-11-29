@@ -7251,11 +7251,23 @@ MM_PERYTON:
   Damage: 6
   Faction: monster
   Options:
-    MovementSpeed: 0.24
-    FollowRange: 18
+    MovementSpeed: 0.3  # 6 m em terra, mergulhos rápidos em voo
+    FollowRange: 20
     PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - BLUNT 0.7
+  - SLASH 0.7
+  - PIERCE 0.7
   Skills:
-  - damage{a=6;type=PHYSICAL} @target ~onAttack 0.8
+  # Investida de mergulho a partir do voo
+  - leap{velocity=1.1;velocityY=1.1} @self ~onTimer:160 0.55
+  - damage{a=15;type=PIERCE} @target ~onAttack{conditions=[inair{}]} 0.6
+  # Multiataque: chifres e garras serrilhadas
+  - repeat{amount=1;delay=4;skills=[damage{a=7;type=PIERCE} @target;damage{a=8;type=SLASH} @target]} @self ~onAttack 0.85
+  # Visão e faro aguçados em caçadas longas
+  - potion{t=NIGHT_VISION;d=200;lvl=0;overwrite=true} @self ~onSpawn
+  - effect:particles{particle=cloud;amount=8;hS=0.5;vS=0.2;speed=0.05} @self ~onTimer:80 0.4
 
 MM_PEGASO:
   Type: HORSE
@@ -7283,10 +7295,22 @@ MM_PESADELO:
   Faction: fiend
   Options:
     MovementSpeed: 0.72
-    FollowRange: 18
+    FollowRange: 20
     PreventOtherDrops: true
+    NoGravity: true
+  DamageModifiers:
+  - FIRE 0
   Skills:
-  - damage{a=11;type=PHYSICAL} @target ~onAttack 0.8
+  # Cascos flamejantes
+  - damage{a=13;type=BLUNT} @target ~onAttack 0.85
+  - damage{a=7;type=FIRE} @target ~onAttack 0.85
+  - ignite{ticks=80} @target ~onAttack 0.5
+  # Aura de fogo que protege cavaleiros
+  - potion{t=FIRE_RESISTANCE;d=120;lvl=0;overwrite=true} @PlayersInRadius{r=2;limit=3} ~onTimer:100 0.75
+  - effect:particles{particle=flame;amount=10;hS=0.4;vS=0.2;speed=0.03} @self ~onTimer:20
+  # Trilha de fumaça e passos entre planos
+  - effect:particles{particle=smoke;amount=6;hS=0.6;vS=0.3;speed=0.05} @self ~onTimer:40 0.6
+  - teleport{spread=2;radius=8} @self ~onTimer:260 0.35
 
 MM_PIXIE:
   Type: ALLAY
@@ -7295,11 +7319,20 @@ MM_PIXIE:
   Damage: 3
   Faction: fey
   Options:
-    MovementSpeed: 0.12
+    MovementSpeed: 0.28
     FollowRange: 18
     PreventOtherDrops: true
+    NoGravity: true
+    Silent: true
   Skills:
-  - damage{a=3;type=PHYSICAL} @target ~onAttack 0.8
+  # Invisibilidade superior típica das fadas
+  - potion{t=INVISIBILITY;d=160;lvl=0;overwrite=true} @self ~onTimer:140 0.75
+  # Pó cintilante que embriaga ou desacelera intrusos
+  - potion{t=SLOW;d=100;lvl=1} @PlayersInRadius{r=5;limit=1;sort=random} ~onTimer:160 0.35
+  - potion{t=CONFUSION;d=80;lvl=0} @PlayersInRadius{r=5;limit=1;sort=random} ~onTimer:200 0.3
+  # Truques de voo rápido e quedas suaves
+  - potion{t=SLOW_FALLING;d=140;lvl=0;overwrite=true} @self ~onTimer:200 0.5
+  - effect:particles{particle=happy_villager;amount=8;hS=0.4;vS=0.2;speed=0.02} @self ~onTimer:40
 
 
 MM_POVODOMAR:
