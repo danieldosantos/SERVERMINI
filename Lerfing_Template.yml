@@ -6848,17 +6848,30 @@ MM_235:
 
 
 MM_NAGADOSOSSOS:
-  Type: ZOMBIE
+  Type: SKELETON
   Display: 'Naga Dos Ossos'
   Health: 58
   Damage: 10
   Faction: undead
   Options:
-    MovementSpeed: 0.36
-    FollowRange: 18
+    MovementSpeed: 0.3  # 9 m
+    FollowRange: 22
     PreventOtherDrops: true
+    Silent: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=10;type=PHYSICAL} @target ~onAttack 0.8
+  # Mordida perfurante com veneno
+  - damage{a=10;type=PIERCING} @target ~onAttack 0.85
+  - damage{a=10;type=POISON} @target ~onAttack 0.65
+  # Magias profanas (escolhendo memórias de guardiã ou espiritual)
+  - root{d=100} @PlayersInRadius{r=10} ~onTimer:200 0.45   # imobilizar pessoa
+  - potion{t=WEAKNESS;d=160;lvl=1} @PlayersInRadius{r=10} ~onTimer:200 0.45  # comando/acalmar emoções
+  - effect:lightning @target ~onTimer:260 0.35  # relâmpago
+  - damage{a=12;type=NECROTIC} @PlayersInRadius{r=8} ~onTimer:220 0.35  # rogar maldição
+  # Aura necromântica discreta
+  - potion{t=SLOW;d=80;lvl=1} @PlayersInRadius{r=6;ignore=undead} ~onTimer:160 0.35
+  - effect:particles{particle=soul;amount=10;hS=0.8;vS=0.5;speed=0.02} @self ~onTimer:120 0.5
 
 
 MM_NAGAESPIRITUAL:
@@ -6868,11 +6881,55 @@ MM_NAGAESPIRITUAL:
   Damage: 12
   Faction: monster
   Options:
-    MovementSpeed: 0.48
-    FollowRange: 18
+    MovementSpeed: 0.36  # 12 m
+    FollowRange: 26
     PreventOtherDrops: true
+    Silent: true
+  DamageModifiers:
+  - POISON 0
   Skills:
-  - damage{a=12;type=PHYSICAL} @target ~onAttack 0.8
+  # Mordida venenosa intensa
+  - damage{a=7;type=PIERCING} @target ~onAttack 0.85
+  - damage{a=26;type=POISON} @target ~onAttack 0.7
+  # Encantos e dominação
+  - potion{t=CONFUSION;d=160;lvl=1} @PlayersInRadius{r=10} ~onTimer:200 0.45  # enfeitiçar/sono
+  - root{d=80} @PlayersInRadius{r=10} ~onTimer:200 0.35  # imobilizar pessoa
+  - potion{t=GLOWING;d=140;lvl=0} @target ~onTimer:240 0.25  # detectar magia/pensamentos
+  # Magias ofensivas
+  - effect:lightning @target ~onTimer:220 0.4  # relâmpago
+  - teleport{spread=2;radius=10} @self ~onTimer:280 0.4  # porta dimensional
+  # Rejuvenescimento simbólico
+  - heal{amount=6} @self ~onTimer:160 0.4
+
+
+MM_NAGAGUARDIA:
+  Type: SPIDER
+  Display: 'Naga Guardiã'
+  Health: 127
+  Damage: 14
+  Faction: celestial
+  Options:
+    MovementSpeed: 0.36  # 12 m
+    FollowRange: 28
+    PreventOtherDrops: true
+    Silent: true
+  DamageModifiers:
+  - POISON 0
+  Skills:
+  # Mordida sagrada e veneno potente
+  - damage{a=8;type=PIERCING} @target ~onAttack 0.85
+  - damage{a=45;type=POISON} @target ~onAttack 0.65
+  # Cuspir veneno
+  - damage{a=30;type=POISON} @PlayersInRadius{r=9} ~onTimer:200 0.55
+  - potion{t=POISON;d=100;lvl=1} @PlayersInRadius{r=9} ~onTimer:200 0.55
+  # Bençãos e curas de guardiã
+  - heal{amount=10} @SelfFactionPlayers{r=12} ~onTimer:240 0.45  # curar ferimentos
+  - potion{t=DAMAGE_RESISTANCE;d=160;lvl=1} @SelfFactionPlayers{r=12} ~onTimer:240 0.45  # escudo da fé/movimentação livre
+  - potion{t=GLOWING;d=140;lvl=0} @PlayersInRadius{r=12} ~onTimer:260 0.3  # visão da verdade
+  # Magias ofensivas
+  - lightning{d=0} @PlayersInRadius{r=12} ~onTimer:260 0.35  # coluna de chamas estilizada
+  - damage{a=18;type=HOLY} @PlayersInRadius{r=10} ~onTimer:260 0.35
+  - teleport{spread=0;radius=15} @target ~onTimer:320 0.3  # banimento breve
 
 
 MM_ARMADURAANIMADA:
