@@ -1,119 +1,65 @@
-# --- dnd_mobs.yml corrigido para MythicMobs ---
-
-GiantEagle:
-  Type: PHANTOM
-  Display: 'Águia Gigante'
-  Health: 26
-  Damage: 10
-  Faction: beast
+MM_GOBLIN:
+  Type: ZOMBIE
+  Display: '&2Goblin'
+  Health: 14        # PV 7 do D&D, ligeiro buff pra MC
+  Damage: 5
+  Faction: goblin
   Options:
-    MovementSpeed: 0.42
-    FollowRange: 32
+    MovementSpeed: 0.30        # ~9 m de deslocamento
+    FollowRange: 18
     PreventOtherDrops: true
+    Despawn: true
+  Equipment:
+    # Armadura de couro completa
+    - leather_helmet:4
+    - leather_chestplate:3
+    - leather_leggings:2
+    - leather_boots:1
+    # Arma de pedra (cimitarra/espada/machado representado por stone_sword)
+    - stone_sword:0
   Skills:
-    - damage{amount=7;type=PHYSICAL} @Target ~onAttack 0.8
+    # Cimitarra – ataque corpo a corpo
+    - skill{s=MM_GOBLIN_SCIMITAR} @Target ~onAttack 1
+    # Arco curto – disparo ocasional à distância
+    - skill{s=MM_GOBLIN_ARCO_CURTO} @Target ~onTimer:80 0.5
+    # Escapada Ágil – desengajar/fugir quando apanha
+    - skill{s=MM_GOBLIN_ESCAPADA_AGIL} @Self ~onDamaged 0.5
+  Drops:
+    # Fiel ao ND 1/4 (50 XP)
+    - exp 50
 
-GiantSpider:
-  Type: SPIDER
-  Display: 'Aranha Gigante'
-  Health: 26
-  Damage: 7
-  Faction: beast
+
+MM_CHEFE_GOBLIN:
+  Type: ZOMBIE
+  Display: '&6Chefe Goblin'
+  Health: 21
+  Damage: 6
+  Faction: goblin
   Options:
-    MovementSpeed: 0.3
+    MovementSpeed: 0.32
     FollowRange: 22
     PreventOtherDrops: true
+    Despawn: true
+  Equipment:
+    # Armadura de couro com peitoral de ferro
+    - leather_helmet:4
+    - iron_chestplate:3
+    - leather_leggings:2
+    - leather_boots:1
+    # Armas principais – espada e machado de ferro (uma delas na mão principal)
+    - iron_sword:0
+    # Arco encantado com Infinidade + 1 flecha no inventário
+    - bow{enchants=ARROW_INFINITE:1}:5
+    - arrow:9
   Skills:
-    - potion{t=POISON;d=100;lvl=1} @Target ~onAttack 0.6
-
-Warhorse:
-  Type: HORSE
-  Display: 'Cavalo de Guerra'
-  Health: 19
-  Damage: 11
-  Faction: beast
-  Options:
-    MovementSpeed: 0.36
-    FollowRange: 20
-    PreventOtherDrops: true
-  Skills:
-    - damage{amount=11;type=PHYSICAL} @Target ~onAttack 0.5
-
-RidingHorse:
-  Type: HORSE
-  Display: 'Cavalo de Montaria'
-  Health: 13
-  Damage: 9
-  Faction: beast
-  Options:
-    MovementSpeed: 0.34
-    FollowRange: 16
-    PreventOtherDrops: true
-  Skills:
-    - damage{amount=9;type=PHYSICAL} @Target ~onAttack 0.8
-
-ConstrictorSnake:
-  Type: SILVERFISH
-  Display: 'Cobra Constritora'
-  Health: 13
-  Damage: 7
-  Faction: beast
-  Options:
-    MovementSpeed: 0.18
-    FollowRange: 14
-    PreventOtherDrops: true
-  Skills:
-    - potion{t=SLOW;d=60;lvl=1} @Target ~onAttack 0.5
-
-Owl:
-  Type: PARROT
-  Display: 'Coruja'
-  Health: 1
-  Damage: 1
-  Faction: beast
-  Options:
-    MovementSpeed: 0.35
-    FollowRange: 14
-    PreventOtherDrops: true
-  Skills:
-    - damage{amount=1;type=PHYSICAL} @Target ~onAttack 0.8
-
-Raven:
-  Type: PARROT
-  Display: 'Corvo'
-  Health: 1
-  Damage: 1
-  Faction: beast
-  Options:
-    MovementSpeed: 0.35
-    FollowRange: 14
-    PreventOtherDrops: true
-  Skills:
-    - damage{amount=1;type=PHYSICAL} @Target ~onAttack 0.8
-
-Crocodile:
-  Type: TURTLE
-  Display: 'Crocodilo'
-  Health: 19
-  Damage: 7
-  Faction: beast
-  Options:
-    MovementSpeed: 0.2
-    FollowRange: 16
-    PreventOtherDrops: true
-  Skills:
-    - damage{amount=7;type=PHYSICAL} @Target ~onAttack 0.8
-    - potion{t=SLOW;d=40;lvl=1} @Target ~onAttack 0.6
-
-Imp:
-  Type: VEX
-  Display: 'Diabrete'
-  Health: 10
-  Damage: 6
-  Faction: fiend
-  Options:
-    MovementSpeed: 0.34
-    FollowRange: 24
-    PreventOtherDrops: true
-  Skills:
-    - potion{t=POISON;d=80;lvl=1} @Target ~onAttack 0.4
+    # Ataques múltiplos de cimitarra (espada de ferro)
+    - skill{s=MM_CHEFE_GOBLIN_SCIMITAR_MULTI} @Target ~onAttack 1
+    # Azagaia simulada como ataque perfurante à distância
+    - skill{s=MM_CHEFE_GOBLIN_AZAGAIA} @Target ~onTimer:100 0.4
+    # Escapada ágil do chefe (bonus defensivo)
+    - skill{s=MM_GOBLIN_ESCAPADA_AGIL} @Self ~onDamaged 0.6
+    # Redirecionar Ataque – “joga” o alvo pra outro lugar (simulação)
+    - skill{s=MM_CHEFE_GOBLIN_REDIRECIONAR} @Self ~onDamaged 0.4
+  Drops:
+    # Fiel ao ND 1 (200 XP)
+    - exp 200
