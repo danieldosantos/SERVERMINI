@@ -1,65 +1,337 @@
 MM_GOBLIN:
-  Type: ZOMBIE
-  Display: '&2Goblin'
-  Health: 14        # PV 7 do D&D, ligeiro buff pra MC
+  Type: PILLAGER
+  Display: 'Goblin'
+  Health: 7
   Damage: 5
   Faction: goblin
   Options:
-    MovementSpeed: 0.30        # ~9 m de deslocamento
+    MovementSpeed: 0.36
     FollowRange: 18
     PreventOtherDrops: true
-    Despawn: true
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+
   Equipment:
-    # Armadura de couro completa
-    - leather_helmet:4
-    - leather_chestplate:3
-    - leather_leggings:2
-    - leather_boots:1
-    # Arma de pedra (cimitarra/espada/machado representado por stone_sword)
-    - stone_sword:0
+    - leather_helmet HEAD
+    - leather_chestplate CHEST
+    - leather_leggings LEGS
+    - leather_boots FEET
+    - stone_sword HAND
+
   Skills:
-    # Cimitarra – ataque corpo a corpo
-    - skill{s=MM_GOBLIN_SCIMITAR} @Target ~onAttack 1
-    # Arco curto – disparo ocasional à distância
-    - skill{s=MM_GOBLIN_ARCO_CURTO} @Target ~onTimer:80 0.5
-    # Escapada Ágil – desengajar/fugir quando apanha
-    - skill{s=MM_GOBLIN_ESCAPADA_AGIL} @Self ~onDamaged 0.5
+    # Cimitarra / espada de pedra
+    - skill{s=GOBLIN_SCIMITAR_SLASH} ~onAttack 1
+    # Arco curto “improvisado” – chance menor
+    - skill{s=GOBLIN_SHORTBOW_SHOT} ~onAttack 0.35
+    # Escapada Ágil da raça goblin
+    - skill{s=GOBLIN_NIMBLE_ESCAPE} ~onTimer:200 0.5
+
   Drops:
-    # Fiel ao ND 1/4 (50 XP)
-    - exp 50
+    - exp 50-50
+    - stone_sword 1 0.15
+    - stone_axe 1 0.15
 
 
 MM_CHEFE_GOBLIN:
-  Type: ZOMBIE
-  Display: '&6Chefe Goblin'
+  Type: PILLAGER
+  Display: 'Chefe Goblin'
   Health: 21
-  Damage: 6
+  Damage: 5
   Faction: goblin
   Options:
-    MovementSpeed: 0.32
-    FollowRange: 22
+    MovementSpeed: 0.36
+    FollowRange: 20
     PreventOtherDrops: true
-    Despawn: true
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+
   Equipment:
-    # Armadura de couro com peitoral de ferro
-    - leather_helmet:4
-    - iron_chestplate:3
-    - leather_leggings:2
-    - leather_boots:1
-    # Armas principais – espada e machado de ferro (uma delas na mão principal)
-    - iron_sword:0
-    # Arco encantado com Infinidade + 1 flecha no inventário
-    - bow{enchants=ARROW_INFINITE:1}:5
-    - arrow:9
+    - leather_helmet HEAD
+    - iron_chestplate CHEST
+    - leather_leggings LEGS
+    - leather_boots FEET
+    - iron_sword HAND
+    - GOBLIN_BOW_INFINITY OFFHAND
+
   Skills:
-    # Ataques múltiplos de cimitarra (espada de ferro)
-    - skill{s=MM_CHEFE_GOBLIN_SCIMITAR_MULTI} @Target ~onAttack 1
-    # Azagaia simulada como ataque perfurante à distância
-    - skill{s=MM_CHEFE_GOBLIN_AZAGAIA} @Target ~onTimer:100 0.4
-    # Escapada ágil do chefe (bonus defensivo)
-    - skill{s=MM_GOBLIN_ESCAPADA_AGIL} @Self ~onDamaged 0.6
-    # Redirecionar Ataque – “joga” o alvo pra outro lugar (simulação)
-    - skill{s=MM_CHEFE_GOBLIN_REDIRECIONAR} @Self ~onDamaged 0.4
+    # Ataques múltiplos de cimitarra (Ação: Ataques Múltiplos)
+    - skill{s=GOBLIN_BOSS_MULTIATTACK} ~onAttack 1
+    # Azagaia – ataque corpo-a-corpo/curto alcance
+    - skill{s=GOBLIN_BOSS_JAVELIN} ~onAttack 0.45
+    # Escapada Ágil melhorada
+    - skill{s=GOBLIN_BOSS_ESCAPE} ~onTimer:160 0.5
+    # Redirecionar Ataque (reação)
+    - skill{s=GOBLIN_REDIRECT} ~onDamaged 0.4
+
   Drops:
-    # Fiel ao ND 1 (200 XP)
-    - exp 200
+    - exp 200-200
+    - GOBLIN_BOW_INFINITY 1 0.3
+    - iron_sword 1 0.25
+    - iron_axe 1 0.25
+
+
+MM_GNOLL:
+  Type: WITHER_SKELETON
+  Display: 'Gnoll'
+  Health: 22
+  Damage: 6
+  Faction: gnoll
+  Options:
+    MovementSpeed: 0.3
+    FollowRange: 20
+    PreventOtherDrops: true
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+
+  Equipment:
+    # Gibão de peles + escudo, lança e arco longo (visual simples)
+    - leather_helmet HEAD
+    - leather_chestplate CHEST
+    - leather_leggings LEGS
+    - leather_boots FEET
+    - stone_sword HAND           # representa lança/cimitarra
+    - shield OFFHAND             # escudo
+
+  Skills:
+    # Mordida
+    - damage{amount=4;type=PIERCING} @Target ~onAttack 0.8
+    # Lança (ataque perfurante)
+    - damage{amount=5;type=PIERCING} @Target ~onAttack 0.6
+    # Arco longo (abstrato – só dano)
+    - damage{amount=5;type=PIERCING} @Target ~onAttack 0.4
+
+    # Frenesi básico (mordida extra às vezes)
+    - skill{s=GNOLL_FRENZY_BITE} @Target ~onAttack 0.3
+
+  Drops:
+    # ND 1/2 ≈ 100 XP
+    - exp 100-100
+    # Carne podre / ossos como “carne e restos”
+    - rotten_flesh 0-2 0.8
+    - bone 0-2 0.6
+    # Um pouco de couro, às vezes
+    - leather 0-1 0.3
+
+
+MM_GNOLL_LIDER_MATILHA:
+  Type: SKELETON
+  Display: 'Gnoll Líder de Matilha'
+  Health: 49
+  Damage: 8
+  Faction: gnoll
+  Options:
+    MovementSpeed: 0.32
+    FollowRange: 24
+    PreventOtherDrops: true
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+
+  Equipment:
+    # Camisão de malha + líder mais parrudo
+    - iron_helmet HEAD
+    - chainmail_chestplate CHEST
+    - leather_leggings LEGS
+    - leather_boots FEET
+    - iron_sword HAND            # representa a glaive
+    - shield OFFHAND
+
+  Skills:
+    # Ataques múltiplos (glaive ou arco)
+    - damage{amount=8;type=SLASHING} @Target ~onAttack 0.9
+    - damage{amount=6;type=SLASHING} @Target ~onAttack 0.7
+    - damage{amount=6;type=PIERCING} @Target ~onAttack 0.5
+
+    # Frenesi na mordida
+    - skill{s=GNOLL_FRENZY_BITE} @Target ~onAttack 0.4
+
+    # Chamar a matilha quando apanha
+    - skill{s=GNOLL_PACK_HOWL} @Self ~onDamaged 0.5
+
+  Drops:
+    # ND 2 ≈ 450 XP
+    - exp 450-450
+    # Mais couro e sucata de ferro
+    - leather 1-2 0.8
+    - iron_nugget 2-6 0.7
+    # Chance de dropar a espada do líder
+    - iron_sword 1 0.2
+
+
+MM_GNOLL_PRESA_YEENOGHU:
+  Type: WITHER_SKELETON
+  Display: 'Gnoll Presa de Yeenoghu'
+  Health: 65
+  Damage: 9
+  Faction: gnoll
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 26
+    PreventOtherDrops: true
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+
+  Equipment:
+    # Mais "corrupto"/bestial, com ferro pesado
+    - iron_helmet HEAD
+    - iron_chestplate CHEST
+    - iron_leggings LEGS
+    - iron_boots FEET
+    - iron_axe HAND              # garras/ataques mais brutais
+
+  Skills:
+    # Mordida e garras fortes
+    - damage{amount=6;type=PIERCING} @Target ~onAttack 0.9
+    - damage{amount=7;type=SLASHING} @Target ~onAttack 0.8
+    - skill{s=GNOLL_VILLAGE_DEN_SPAWN} @Self ~onSpawn 1
+
+    # Frenesi mais agressivo
+    - skill{s=GNOLL_FRENZY_BITE} @Target ~onAttack 0.6
+
+    # Chamado alfa – ondas de matilha (reforços grandes)
+    - skill{s=GNOLL_ALPHA_CALL} @Self ~onDamaged 0.6
+
+  Drops:
+    # ND 4 ≈ 1100 XP
+    - exp 1100-1100
+    # Loot melhor pra parecer mini-boss
+    - iron_ingot 1-3 0.6
+    - iron_axe 1 0.25
+    - rotten_flesh 1-3 0.9
+
+############################
+#        BUGBEARS          #
+############################
+
+MM_BUGBEAR:
+  Type: VINDICATOR
+  Display: 'Bugbear'
+  Health: 32
+  Damage: 6
+  Faction: bugbear
+  Options:
+    MovementSpeed: 0.33
+    FollowRange: 24
+    PreventOtherDrops: true
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+
+  Equipment:
+    # Gibão de peles + escudo + maça estrela
+    - leather_helmet HEAD
+    - leather_chestplate CHEST
+    - leather_leggings LEGS
+    - leather_boots FEET
+    - iron_axe HAND        # representa a maça estrela
+    - shield OFFHAND
+
+  Skills:
+    # Maça estrela (ataque principal)
+    - skill{s=BUGBEAR_MORNINGSTAR} ~onAttack 1
+    # Azagaia – corpo-a-corpo/curto alcance (dano extra às vezes)
+    - skill{s=BUGBEAR_JAVELIN} ~onAttack 0.35
+    # Brutamontes – às vezes bate MUITO forte
+    - skill{s=BUGBEAR_BRUTE_HIT} ~onAttack 0.25
+
+  Drops:
+    # ~200 XP (ND 1)
+    - exp 200-200
+    # Coisas simples de guerreiro goblinoide
+    - rotten_flesh 0-2 0.7
+    - bone 0-2 0.6
+    - iron_nugget 1-3 0.4
+    - iron_axe 1 0.15
+
+
+MM_BUGBEAR_COMMANDER:
+  Type: VINDICATOR
+  Display: 'Bugbear Comandante'
+  Health: 60
+  Damage: 8
+  Faction: bugbear
+  Options:
+    MovementSpeed: 0.34
+    FollowRange: 28
+    PreventOtherDrops: true
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+
+  Equipment:
+    # Camisão de malha, escudo e maça estrela mais pesada
+    - iron_helmet HEAD
+    - chainmail_chestplate CHEST
+    - leather_leggings LEGS
+    - leather_boots FEET
+    - iron_axe HAND
+    - shield OFFHAND
+
+  Skills:
+    # Ataques múltiplos de maça estrela
+    - skill{s=BUGBEAR_COMMANDER_MULTI} ~onAttack 1
+    # Azagaia melhorada
+    - skill{s=BUGBEAR_COMMANDER_JAVELIN} ~onAttack 0.35
+    # Coração de Hruggek – se fortalece quando apanha
+    - skill{s=BUGBEAR_HRUGGEK_HEART} ~onDamaged 0.35
+
+  Drops:
+    # ~700 XP (ND 3)
+    - exp 700-700
+    - iron_ingot 1-3 0.6
+    - shield 1 0.3
+    - iron_axe 1 0.25
+    - chainmail_chestplate 1 0.15

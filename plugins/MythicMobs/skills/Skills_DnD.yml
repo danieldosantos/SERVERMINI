@@ -1,56 +1,202 @@
-#######################################################
-# GOBLINS - Skills baseadas no Livro do Jogador (D&D 5e)
-#######################################################
+########################################
+# GOBLINS - SKILLS COM ANIMAÇÃO
+########################################
 
-# Cimitarra do Goblin (ataque único)
-MM_GOBLIN_SCIMITAR:
+# Cimitarra / espada – golpe rápido
+GOBLIN_SCIMITAR_SLASH:
   Skills:
-    - damage{amount=5;type=SLASHING} @Target
+    - effect:particles{p=crit;amount=8;speed=0.25;hS=0.25;vS=0.25} @target
+    - effect:sound{s=entity.player.attack.sweep;v=0.9;p=1.4} @self
+    - damage{a=5;type=SLASHING} @target
 
-# Arco curto do Goblin – disparo simples
-MM_GOBLIN_ARCO_CURTO:
+# Arco curto – flecha com trilha de partículas
+GOBLIN_SHORTBOW_SHOT:
   Skills:
-    - projectile{
-        bulletType=ARROW;
-        velocity=1.6;
-        damage=5;
-        hnp=true
-      } @Target
+    - effect:sound{s=entity.arrow.shoot;v=1;p=1.3} @self
+    - projectile{bulletType=ARROW;velocity=2;onHit=GOBLIN_SHORTBOW_HIT}
 
-# Escapada Ágil (tanto goblin comum quanto chefe usam)
-# Representa Desengajar/Esconder como ação bônus:
-# speed + pequena "sumida" rápida.
-MM_GOBLIN_ESCAPADA_AGIL:
+GOBLIN_SHORTBOW_HIT:
   Skills:
-    - potion{t=SPEED;d=40;lvl=1} @Self
-    - potion{t=INVISIBILITY;d=20;lvl=0} @Self
-    - leap{v=0.7} @Self
-    - message{m="&7O goblin some nas sombras!";cooldown=40} @PlayersInRadius{r=12}
+    - effect:particles{p=crit;amount=10;speed=0.15;hS=0.3;vS=0.3} @target
+    - damage{a=5;type=PIERCING} @target
 
-#######################################################
-# Chefe Goblin
-#######################################################
-
-# Ataques múltiplos de cimitarra (como na ficha)
-MM_CHEFE_GOBLIN_SCIMITAR_MULTI:
+# Escapada Ágil (para goblin comum) – fumacinha e pulo
+GOBLIN_NIMBLE_ESCAPE:
   Skills:
-    - damage{amount=5;type=SLASHING} @Target
+    - effect:particles{p=cloud;amount=18;speed=0.1;hS=0.5;vS=0.15} @self
+    - effect:particles{p=smoke;amount=10;speed=0.05;hS=0.4;vS=0.1} @self
+    - effect:sound{s=entity.enderman.teleport;v=0.7;p=1.5} @self
+    - leap{v=0.9} @self
+
+# Ataque múltiplo do Chefe Goblin (2 golpes de cimitarra)
+GOBLIN_BOSS_MULTIATTACK:
+  Skills:
+    - effect:particles{p=crit;amount=12;speed=0.3;hS=0.3;vS=0.3} @target
+    - effect:sound{s=entity.player.attack.sweep;v=1;p=1.3} @self
+    - damage{a=5;type=SLASHING} @target
+    - delay 4
+    - effect:particles{p=crit;amount=6;speed=0.2;hS=0.25;vS=0.25} @target
+    - damage{a=3;type=SLASHING} @target
+
+# Azagaia do chefe (curto alcance / média distância)
+GOBLIN_BOSS_JAVELIN:
+  Skills:
+    - effect:sound{s=entity.arrow.shoot;v=0.9;p=0.9} @self
+    - projectile{bulletType=ARROW;velocity=1.7;onHit=GOBLIN_BOSS_JAVELIN_HIT}
+
+GOBLIN_BOSS_JAVELIN_HIT:
+  Skills:
+    - effect:particles{p=crit;amount=10;speed=0.2;hS=0.3;vS=0.3} @target
+    - damage{a=5;type=PIERCING} @target
+
+# Escapada Ágil “melhorada” do chefe (mais dramática)
+GOBLIN_BOSS_ESCAPE:
+  Skills:
+    - effect:particles{p=cloud;amount=24;speed=0.15;hS=0.7;vS=0.2} @self
+    - effect:particles{p=smoke;amount=14;speed=0.08;hS=0.6;vS=0.2} @self
+    - effect:sound{s=entity.enderman.teleport;v=1;p=1.4} @self
+    - leap{v=1.1} @self
+
+# Redirecionar Ataque – troca de lugar “ninja”
+GOBLIN_REDIRECT:
+  Skills:
+    - effect:particles{p=poof;amount=20;speed=0.1;hS=0.5;vS=0.3} @self
+    - effect:sound{s=entity.enderman.teleport;v=1;p=1.6} @self
+    # mecanicamente só teleporta um pouco, mas visualmente parece troca de lugar
+    - teleport{radius=3} @self
+
+# ========================================
+#  SKILLS D&D - GOBLINS + GNOLLS
+#  Arquivo: plugins/MythicMobs/Skills/dnd_dnd_skills.yml
+# ========================================
+
+#########################
+#        GNOLLS         #
+#########################
+
+# ------------------------------------------------
+# Mordida de Frenesi — habilidade comum a todos
+# ------------------------------------------------
+GNOLL_FRENZY_BITE:
+  Cooldown: 80
+  Skills:
+    - effect:particles{p=crit;amount=20;hS=0.4;vS=0.4;speed=0.15} @Target
+    - effect:sound{s=entity.wolf.growl;v=1;p=0.9} @Self
+    - effect:particles{p=reddust;color=255,50,50;size=1.2;amount=12} @Target
+    - damage{amount=5;type=PIERCING} @Target
+
+
+
+# ------------------------------------------------
+# Uivo de Matilha — usado SOMENTE pelo LÍDER
+# Chama reforços de gnolls comuns
+# ------------------------------------------------
+GNOLL_PACK_HOWL:
+  Cooldown: 220
+  Skills:
+    # Efeito visual de grito
+    - effect:particles{p=angry_villager;amount=30;hS=1.1;vS=0.6;speed=0.1} @Self
+    - effect:particles{p=smoke;amount=18;hS=1;vS=0.5;speed=0.04} @Self
+
+    # Som de uivo
+    - effect:sound{s=entity.wolf.howl;v=1;p=0.9} @Self
+
+    # Reforços
+    - summon{mob=MM_GNOLL;amount=2;radius=4} @Self
+    - delay 10
+    - summon{mob=MM_GNOLL;amount=1;radius=6} @Self
+
+
+
+# ------------------------------------------------
+# Chamado do Alfa — usado SOMENTE pela
+# PRESA DE YEENOGHU
+# Chama vários gnolls + chance de invocar 1 líder
+# ------------------------------------------------
+GNOLL_ALPHA_CALL:
+  Cooldown: 260
+  Skills:
+    # Aura demoníaca do chamado
+    - effect:particles{p=smoke;amount=40;hS=1.5;vS=0.6;speed=0.03} @Self
+    - effect:particles{p=crit;amount=45;hS=1.2;vS=0.8;speed=0.2} @Self
+    - effect:particles{p=reddust;color=180,0,0;size=1.3;amount=20} @Self
+
+    # Uivo demoníaco
+    - effect:sound{s=entity.wolf.howl;v=1.2;p=0.7} @Self
+
+    # Reforços principais — gnolls comuns
+    - summon{mob=MM_GNOLL;amount=3;radius=5} @Self
+    - delay 10
+    - summon{mob=MM_GNOLL;amount=2;radius=7} @Self
+
+    # Chance de invocar UM líder
+    - summon{mob=MM_GNOLL_LIDER_MATILHA;amount=1;radius=5} @Self 0.35
+GNOLL_VILLAGE_DEN_SPAWN:
+  Cooldown: 9999
+  Skills:
+    - summon{mob=MM_GNOLL;amount=7;radius=6} @Self
+    - summon{mob=MM_GNOLL_LIDER_MATILHA;amount=2;radius=4} @Self
+
+############################
+#      BUGBEAR SKILLS      #
+############################
+
+# Maça estrela do bugbear padrão
+BUGBEAR_MORNINGSTAR:
+  Cooldown: 0
+  Skills:
+    - effect:particles{p=crit;amount=10;hS=0.3;vS=0.3;speed=0.1} @Target
+    - effect:sound{s=entity.zombie.attack_iron_door;v=1;p=0.8} @Self
+    - damage{amount=8;type=BLUDGEONING} @Target
+
+# Azagaia (dano perfurante)
+BUGBEAR_JAVELIN:
+  Cooldown: 0
+  Skills:
+    - effect:particles{p=crit;amount=8;hS=0.2;vS=0.2;speed=0.15} @Target
+    - effect:sound{s=entity.arrow.shoot;v=1;p=1} @Self
+    - damage{amount=6;type=PIERCING} @Target
+
+# Brutamontes – batida mais forte ocasional
+BUGBEAR_BRUTE_HIT:
+  Cooldown: 40
+  Skills:
+    - effect:particles{p=explosion;amount=6;hS=0.4;vS=0.2;speed=0.05} @Target
+    - effect:sound{s=entity.iron_golem.attack;v=1.1;p=0.8} @Self
+    - damage{amount=5;type=BLUDGEONING} @Target
+
+
+# =========================
+#  COMANDANTE BUGBEAR
+# =========================
+
+# Ataques múltiplos (2 pancadas)
+BUGBEAR_COMMANDER_MULTI:
+  Cooldown: 0
+  Skills:
+    - effect:particles{p=crit;amount=14;hS=0.4;vS=0.3;speed=0.15} @Target
+    - effect:sound{s=entity.iron_golem.attack;v=1.2;p=0.8} @Self
+    - damage{amount=10;type=BLUDGEONING} @Target
     - delay 5
-    - damage{amount=3;type=SLASHING} @Target
+    - effect:particles{p=crit;amount=10;hS=0.3;vS=0.3;speed=0.1} @Target
+    - damage{amount=8;type=BLUDGEONING} @Target
 
-# Azagaia – ataque perfurante à distância
-MM_CHEFE_GOBLIN_AZAGAIA:
+# Azagaia melhorada do comandante
+BUGBEAR_COMMANDER_JAVELIN:
+  Cooldown: 0
   Skills:
-    - projectile{
-        bulletType=TRIDENT;
-        velocity=1.4;
-        damage=5;
-        hnp=true
-      } @Target
+    - effect:particles{p=crit;amount=10;hS=0.3;vS=0.3;speed=0.2} @Target
+    - effect:sound{s=entity.arrow.shoot;v=1.1;p=1} @Self
+    - damage{amount=7;type=PIERCING} @Target
 
-# Redirecionar Ataque (versão simplificada):
-# ele "salta" para o lado, simulando trocar de lugar com outro goblin.
-MM_CHEFE_GOBLIN_REDIRECIONAR:
+# Coração de Hruggek – quando apanha, ganha resistência e fica mais perigoso
+BUGBEAR_HRUGGEK_HEART:
+  Cooldown: 120
   Skills:
-    - teleport{spread=2;radius=3} @Self
-    - message{m="&8O chefe goblin se esconde atrás de outro goblin!";cooldown=40} @PlayersInRadius{r=12}
+    - effect:particles{p=smoke;amount=15;hS=0.5;vS=0.4;speed=0.02} @Self
+    - effect:particles{p=angry_villager;amount=10;hS=0.4;vS=0.6;speed=0.1} @Self
+    - effect:sound{s=entity.evoker.prepare_attack;v=1.2;p=0.6} @Self
+    # Resistência temporária a dano
+    - potion{type=DAMAGE_RESISTANCE;d=140;level=1} @Self
+    # Pequeno buff de força
+    - potion{type=INCREASE_DAMAGE;d=140;level=0} @Self

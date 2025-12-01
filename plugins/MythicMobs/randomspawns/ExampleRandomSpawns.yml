@@ -1,14 +1,230 @@
-RandomSkeletonKing:
-  Type: SkeletonKing
+############################
+#      GOBLINS SPAWNS     #
+############################
+
+# =========================
+#  SUPERFÍCIE
+# =========================
+
+DND_GOBLIN_COMMON_SURFACE:
+  MobType: MM_GOBLIN
   Worlds: world
-  Chance: 0.001
-  Priority: 1
+  Chance: 0.30        # 30% de tentativa
+  Priority: 10
   Action: REPLACE
   Conditions:
-  - outside true
-RandomSkeletalKnight:
-  Type: SkeletalKnight
+    - outside true
+    - onblock grass_block,dirt,coarse_dirt,stone,andesite,diorite,granite
+
+DND_GOBLIN_BOSS_SURFACE:
+  MobType: MM_CHEFE_GOBLIN
   Worlds: world
-  Chance: 0.008
-  Priority: 1
+  Chance: 0.05        # 5% de tentativa
+  Priority: 11        # ligeiramente acima do comum
   Action: REPLACE
+  Conditions:
+    - outside true
+    - onblock grass_block,dirt,coarse_dirt,stone,andesite,diorite,granite
+
+
+# =========================
+#  CAVERNAS / PROFUNDAS
+# =========================
+# Usa: air/cave_air acima + pedra no chão
+
+DND_GOBLIN_COMMON_CAVE:
+  MobType: MM_GOBLIN
+  Worlds: world
+  Chance: 0.25        # 25%
+  Priority: 10
+  Action: ADD
+  Conditions:
+    - inblock air,cave_air
+    - onblock stone,deepslate,andesite,diorite,granite
+
+DND_GOBLIN_BOSS_CAVE:
+  MobType: MM_CHEFE_GOBLIN
+  Worlds: world
+  Chance: 0.04        # 4%
+  Priority: 11
+  Action: ADD
+  Conditions:
+    - inblock air,cave_air
+    - onblock stone,deepslate,andesite,diorite,granite
+
+
+# =========================
+#  "CÂMARAS DO JULGAMENTO"
+# =========================
+
+DND_GOBLIN_COMMON_TRIAL:
+  MobType: MM_GOBLIN
+  Worlds: world
+  Chance: 0.30        # 30%
+  Priority: 10
+  Action: ADD
+  Conditions:
+    - inblock air,cave_air
+    - onblock tuff,calcite,chiseled_tuff,tuff_bricks,polished_tuff
+
+DND_GOBLIN_BOSS_TRIAL:
+  MobType: MM_CHEFE_GOBLIN
+  Worlds: world
+  Chance: 0.06        # 6%
+  Priority: 11
+  Action: ADD
+  Conditions:
+    - inblock air,cave_air
+    - onblock tuff,calcite,chiseled_tuff,tuff_bricks,polished_tuff
+
+
+############################
+#       GNOLLS SPAWNS      #
+############################
+
+# ============================
+#  GNOLLS - SPAWN POR BIOMA
+# ============================
+
+DND_GNOLL_SAVANNA_COMMON:
+  MobType: MM_GNOLL
+  Worlds: world
+  Biomes: savanna,savanna_plateau,windswept_savanna,badlands,eroded_badlands,wooded_badlands
+  Chance: 0.30        # 30%
+  Priority: 10
+  Action: REPLACE
+  Conditions:
+    - outside true
+    - onblock grass_block,dirt,coarse_dirt,sand,red_sand
+
+DND_GNOLL_SAVANNA_LEADER:
+  MobType: MM_GNOLL_LIDER_MATILHA
+  Worlds: world
+  Biomes: savanna,savanna_plateau,windswept_savanna,badlands,eroded_badlands,wooded_badlands
+  Chance: 0.05        # 5%
+  Priority: 11
+  Action: REPLACE
+  Conditions:
+    - outside true
+    - onblock grass_block,dirt,coarse_dirt,sand,red_sand
+
+
+# ============================
+#  GNOLLS - "COVIL" EM CAVERNA
+# ============================
+
+DND_GNOLL_DEN_COMMON:
+  MobType: MM_GNOLL
+  Worlds: world
+  Chance: 0.25        # 25%
+  Priority: 10
+  Action: ADD
+  Conditions:
+    - inblock air,cave_air
+    - onblock stone,deepslate,andesite,diorite,granite
+
+DND_GNOLL_DEN_PACK:
+  MobType: MM_GNOLL_LIDER_MATILHA
+  Worlds: world
+  Chance: 0.04        # 4%
+  Priority: 11
+  Action: ADD
+  Conditions:
+    - inblock air,cave_air
+    - onblock stone,deepslate,andesite,diorite,granite
+
+
+# ========================================
+#  GNOLLS - "COVIL" EM VILAS (ESTILO RP)
+# ========================================
+
+DND_GNOLL_VILLAGE_COMMON:
+  MobType: MM_GNOLL
+  Worlds: world
+  Biomes: plains,desert,savanna,taiga,snowy_taiga
+  Chance: 0.30        # 30%
+  Priority: 10
+  Action: ADD
+  Conditions:
+    - outside true
+    - onblock grass_block,dirt,coarse_dirt,path,sand
+
+DND_GNOLL_VILLAGE_LEADER:
+  MobType: MM_GNOLL_LIDER_MATILHA
+  Worlds: world
+  Biomes: plains,desert,savanna,taiga,snowy_taiga
+  Chance: 0.06        # 6%
+  Priority: 11
+  Action: ADD
+  Conditions:
+    - outside true
+    - onblock grass_block,dirt,coarse_dirt,path,sand
+
+DND_GNOLL_VILLAGE_ALPHA:
+  MobType: MM_GNOLL_PRESA_YEENOGHU
+  Worlds: world
+  Biomes: plains,desert,savanna,taiga,snowy_taiga
+  Chance: 0.03        # 3%
+  Priority: 12        # acima dos outros, é o mini-boss
+  Action: ADD
+  Conditions:
+    - outside true
+    - onblock grass_block,dirt,coarse_dirt,path,sand
+
+
+############################
+#     BUGBEARS SPAWNS      #
+############################
+
+# =========================
+#  FLORESTAS / TAIGA
+# =========================
+
+BUGBEAR_FOREST_COMMON:
+  MobType: MM_BUGBEAR
+  Worlds: world
+  Biomes: forest,flower_forest,taiga,old_growth_spruce_taiga,old_growth_pine_taiga,dark_forest,wooded_badlands
+  Chance: 0.12
+  Priority: 20
+  Action: ADD
+  Conditions:
+    - outside true
+    - onblock grass_block,dirt,coarse_dirt,podzol,rooted_dirt
+
+BUGBEAR_FOREST_COMMANDER:
+  MobType: MM_BUGBEAR_COMMANDER
+  Worlds: world
+  Biomes: forest,flower_forest,taiga,old_growth_spruce_taiga,old_growth_pine_taiga,dark_forest,wooded_badlands
+  Chance: 0.04
+  Priority: 21
+  Action: ADD
+  Conditions:
+    - outside true
+    - onblock grass_block,dirt,coarse_dirt,podzol,rooted_dirt
+
+
+# =========================
+#  COVIS EM CAVERNAS
+# =========================
+
+BUGBEAR_DEN_COMMON:
+  MobType: MM_BUGBEAR
+  Worlds: world
+  Chance: 0.10
+  Priority: 22
+  Action: ADD
+  Conditions:
+    - outside false
+    - inblock air,cave_air
+    - onblock stone,deepslate,andesite,diorite,granite
+
+BUGBEAR_DEN_COMMANDER:
+  MobType: MM_BUGBEAR_COMMANDER
+  Worlds: world
+  Chance: 0.03
+  Priority: 23
+  Action: ADD
+  Conditions:
+    - outside false
+    - inblock air,cave_air
+    - onblock stone,deepslate,andesite,diorite,granite

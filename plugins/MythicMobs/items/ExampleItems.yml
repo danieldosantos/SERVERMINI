@@ -38,3 +38,13 @@ BanditTunic:
   - '&6the corpse of a bandit.'
   Options:
     Color: 255,40,40
+
+
+GOBLIN_BOW_INFINITY:
+  Id: BOW
+  Display: '&aArco do Chefe Goblin'
+  Enchantments:
+    - ARROW_INFINITE:1
+  Options:
+    Unbreakable: true
+
