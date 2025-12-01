@@ -200,3 +200,211 @@ BUGBEAR_HRUGGEK_HEART:
     - potion{type=DAMAGE_RESISTANCE;d=140;level=1} @Self
     # Pequeno buff de força
     - potion{type=INCREASE_DAMAGE;d=140;level=0} @Self
+
+
+############################
+#      KENKU SKILLS        #
+############################
+
+# Ataque de espada curta (1d6+DES ≈ 6 de dano)
+KENKU_SHORTSWORD_STAB:
+  Skills:
+    - damage{amount=6;type=PIERCING} @Target
+    - effect:particles{p=crit;amount=10;hS=0.3;vS=0.3;speed=0.1} @Target
+    - effect:sound{s=entity.player.attack.sweep;v=1;p=1.2} @Self
+
+# Arco curto – ataque à distância
+KENKU_SHORTBOW_SHOT:
+  Cooldown: 20
+  Skills:
+    - shoot{type=ARROW;velocity=1.7;damage=6;spread=0.1} @Target
+    - effect:sound{s=entity.arrow.shoot;v=1;p=1.2} @Self
+
+# Ataque Surpresa – dano extra quando pega a criatura “de surpresa”.
+KENKU_AMBUSH_STRIKE:
+  Cooldown: 80
+  Conditions:
+    # Só tenta usar se o alvo NÃO estiver em combate há muito tempo.
+    - targetnotincombat true
+  Skills:
+    - damage{amount=7;type=PIERCING} @Target
+    - effect:particles{p=crit;amount=22;hS=0.4;vS=0.4;speed=0.15} @Target
+    - effect:sound{s=entity.player.attack.crit;v=1;p=1.3} @Self
+
+
+############################
+#       KOBOLD SKILLS      #
+############################
+
+# Ataque de adaga (1d4+2 → ~4 de dano)
+KOBOLD_DAGGER_STAB:
+  Skills:
+    - damage{amount=4;type=PIERCING} @Target
+    - effect:sound{s=entity.player.attack.sweep;v=1;p=1.2}
+
+# Funda – ataque à distância
+KOBOLD_SLING_SHOT:
+  Cooldown: 30
+  Skills:
+    - shoot{type=SNOWBALL;velocity=1.6;damage=4;spread=0.12} @Target
+    - effect:sound{s=entity.snowball.throw;v=1;p=1.2}
+
+# Táticas de Matilha
+# Dano bônus quando inimigo está em meio a kobolds
+KOBOLD_PACK_TACTIC:
+  Conditions:
+    - nearbyentities{types=MM_KOBOLD,MM_KOBOLD_ALADO;radius=4;min=1}
+  Skills:
+    - damage{amount=3;type=PIERCING} @Target
+    - effect:particles{p=crit;amount=10}
+
+# Pedra jogada pelo kobold alado
+KOBOLD_DROP_STONE:
+  Cooldown: 25
+  Skills:
+    - shoot{type=SNOWBALL;velocity=2;damage=6;spread=0.1} @Target
+    - effect:sound{s=entity.arrow.shoot;v=1;p=0.9}
+
+# Ataque aéreo com adaga
+KOBOLD_AERIAL_DAGGER:
+  Skills:
+    - damage{amount=5;type=PIERCING} @Target
+
+# Sensibilidade à luz solar
+KOBOLD_SUNLIGHT_SENS:
+  Conditions:
+    - daytime true
+  Skills:
+    - potion{type=SLOW;duration=60;level=0} @Self
+
+############################
+#      KUO-TOA SKILLS      #
+############################
+
+# ========= BASE KUO-TOA =========
+
+KT_BITE:
+  Skills:
+    - damage{amount=4;type=PIERCING} @Target
+    - effect:sound{s=entity.panda.bite;v=1;p=1.2}
+
+KT_SPEAR_STAB:
+  Skills:
+    - damage{amount=5;type=PIERCING} @Target
+    - effect:sound{s=entity.player.attack.strong;v=1;p=1.0}
+
+KT_THROW_NET:
+  Cooldown: 80
+  Skills:
+    - projectile{onTick=KT_NET_TRAIL;onHit=KT_NET_HIT;v=1.3;i=1;hR=0.3;vR=0.3} @Target
+
+KT_NET_TRAIL:
+  Skills:
+    - effect:particles{p=cloud;amount=5;speed=0.01}
+
+KT_NET_HIT:
+  Skills:
+    - potion{type=SLOW;duration=100;level=1} @Hit
+    - potion{type=WEAKNESS;duration=100;level=0} @Hit
+    - effect:sound{s=block.slime_block.place;v=1;p=1.2}
+
+
+# Sensibilidade à luz solar – ficam mais lentos no sol
+KT_SUNLIGHT_WEAKNESS:
+  Conditions:
+    - daytime true
+    - outside true
+  Skills:
+    - potion{type=SLOW;duration=80;level=0} @Self
+    - potion{type=WEAKNESS;duration=80;level=0} @Self
+
+
+# ========= AÇOITADOR =========
+
+KT_WHIP_BITE:
+  Skills:
+    - damage{amount=5;type=PIERCING} @Target
+    - effect:particles{p=crit;amount=8}
+
+KT_PINCER_STAFF:
+  Cooldown: 60
+  Skills:
+    - damage{amount=5;type=PIERCING} @Target
+    - potion{type=SLOW;duration=80;level=1} @Target
+    - effect:sound{s=entity.player.attack.knockback;v=1;p=0.8}
+
+KT_WHIP_SACRED_FLAME:
+  TargetConditions:
+    - incombat true
+  Skills:
+    - damage{amount=6;type=HOLY} @NearestPlayer{r=16}
+    - effect:particles{p=flame;amount=10} @NearestPlayer{r=16}
+    - effect:sound{s=entity.blaze.shoot;v=1;p=1.4}
+
+KT_WHIP_BANE:
+  TargetConditions:
+    - incombat true
+  Skills:
+    - potion{type=WEAKNESS;duration=160;level=0} @NearestPlayer{r=16}
+    - effect:particles{p=smoke;amount=10} @NearestPlayer{r=16}
+
+KT_WHIP_SHIELD_OF_FAITH:
+  Skills:
+    - potion{type=ABSORPTION;duration=200;level=1} @Self
+    - potion{type=RESISTANCE;duration=200;level=0} @Self
+    - effect:sound{s=entity.evoker.prepare_summon;v=1;p=1.2}
+
+
+# ========= MONITOR =========
+
+KT_MONITOR_MULTI:
+  Skills:
+    # Mordida
+    - damage{amount=4;type=PIERCING} @Target
+    # Dois golpes desarmados
+    - delay 2
+    - damage{amount=5;type=BLUDGEONING} @Target
+    - potion{type=SLOW;duration=40;level=0} @Target
+    - delay 2
+    - damage{amount=5;type=BLUDGEONING} @Target
+    - effect:particles{p=crit;amount=10} @Target
+
+
+# ========= ARCEBISPO =========
+
+KT_ARCH_STAFF_STRIKE:
+  Skills:
+    - damage{amount=6;type=BLUDGEONING} @Target
+    - damage{amount=10;type=LIGHTNING} @Target
+    - effect:sound{s=entity.zombie_villager.converted;v=1;p=1.1}
+
+KT_ARCH_SPIRIT_GUARDIANS:
+  Skills:
+    - aura{auraName=KTAGuard;duration=200;interval=20;onTick=KT_ARCH_SPIRIT_TICK} @Self
+
+KT_ARCH_SPIRIT_TICK:
+  Skills:
+    - damage{amount=5;type=HOLY} @EntitiesInRadius{r=4;ignore=self;targetplayers=true}
+    - effect:particles{p=soul;amount=12} @Self
+
+KT_ARCH_CONTROL_WATER:
+  Skills:
+    - potion{type=SLOW;duration=100;level=1} @EntitiesInRadius{r=6;ignore=self;targetplayers=true}
+    - effect:particles{p=bubble;amount=25} @Self
+
+KT_ARCH_MASS_HEAL:
+  Skills:
+    - heal{amount=12} @MobsInRadius{r=8;faction=kuo_toa}
+    - effect:particles{p=heart;amount=8} @Self
+
+KT_ARCH_STUN_SMITE:
+  Cooldown: 120
+  Skills:
+    - damage{amount=8;type=HOLY} @Target
+    - potion{type=SLOW;duration=60;level=2} @Target
+    - effect:sound{s=entity.lightning_bolt.thunder;v=1;p=1.0}
+
+KT_ARCH_SHIELD_OF_FAITH:
+  Skills:
+    - potion{type=RESISTANCE;duration=300;level=1} @Self
+    - potion{type=ABSORPTION;duration=300;level=2} @Self
