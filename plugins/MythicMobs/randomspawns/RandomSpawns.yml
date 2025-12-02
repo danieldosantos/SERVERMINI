@@ -1,188 +1,187 @@
-RandomSpawns:
-  GoblinSurfaceRoamers:
-    Type: MM_GOBLIN
-    Worlds: world
-    Biomes:
-      - FOREST
-      - PLAINS
-      - DARK_FOREST
-      - TAIGA
-    Chance: 0.25
-    Priority: 10
-    Action: REPLACE
-    Conditions:
-      - height{min=64;max=120}
-      - inblock air
-      - onblock grass_block,dirt,stone
+GoblinSurfaceRoamers:
+  Type: MM_GOBLIN
+  Worlds: world
+  Biomes:
+    - FOREST
+    - PLAINS
+    - DARK_FOREST
+    - TAIGA
+  Chance: 0.25
+  Priority: 10
+  Action: REPLACE
+  Conditions:
+    - height{min=64;max=120}
+    - inblock air
+    - onblock grass_block,dirt,stone
 
-  GoblinBossAmbush:
-    Type: MM_CHEFE_GOBLIN
-    Worlds: world
-    Biomes:
-      - FOREST
-      - DARK_FOREST
-      - BIRCH_FOREST
-      - PLAINS
-    Chance: 0.05
-    Priority: 18
-    Action: ADD
-    Conditions:
-      - height{min=64;max=120}
-      - inblock air
-      - onblock grass_block,dirt
+GoblinBossAmbush:
+  Type: MM_CHEFE_GOBLIN
+  Worlds: world
+  Biomes:
+    - FOREST
+    - DARK_FOREST
+    - BIRCH_FOREST
+    - PLAINS
+  Chance: 0.05
+  Priority: 18
+  Action: ADD
+  Conditions:
+    - height{min=64;max=120}
+    - inblock air
+    - onblock grass_block,dirt
 
-  GnollHuntingParty:
-    Type: MM_GNOLL
-    Worlds: world
-    Biomes:
-      - SAVANNA
-      - SAVANNA_PLATEAU
-      - PLAINS
-    Chance: 0.28
-    Priority: 16
-    Action: REPLACE
-    Conditions:
-      - height{min=60;max=120}
-      - inblock air
-      - onblock grass_block,coarse_dirt,sand
+GnollHuntingParty:
+  Type: MM_GNOLL
+  Worlds: world
+  Biomes:
+    - SAVANNA
+    - SAVANNA_PLATEAU
+    - PLAINS
+  Chance: 0.28
+  Priority: 16
+  Action: REPLACE
+  Conditions:
+    - height{min=60;max=120}
+    - inblock air
+    - onblock grass_block,coarse_dirt,sand
 
-  GnollPackLeader:
-    Type: MM_GNOLL_LIDER_MATILHA
-    Worlds: world
-    Biomes:
-      - SAVANNA
-      - PLAINS
-    Chance: 0.12
-    Priority: 18
-    Action: ADD
-    Conditions:
-      - height{min=64;max=140}
-      - inblock air
-      - onblock grass_block,coarse_dirt
+GnollPackLeader:
+  Type: MM_GNOLL_LIDER_MATILHA
+  Worlds: world
+  Biomes:
+    - SAVANNA
+    - PLAINS
+  Chance: 0.12
+  Priority: 18
+  Action: ADD
+  Conditions:
+    - height{min=64;max=140}
+    - inblock air
+    - onblock grass_block,coarse_dirt
 
-  BugbearForestWarband:
-    Type: MM_BUGBEAR
-    Worlds: world
-    Biomes:
-      - FOREST
-      - DARK_FOREST
-      - OLD_GROWTH_SPRUCE_TAIGA
-    Chance: 0.18
-    Priority: 20
-    Action: ADD
-    Conditions:
-      - height{min=64;max=140}
-      - inblock air
-      - onblock grass_block,podzol,stone
+BugbearForestWarband:
+  Type: MM_BUGBEAR
+  Worlds: world
+  Biomes:
+    - FOREST
+    - DARK_FOREST
+    - OLD_GROWTH_SPRUCE_TAIGA
+  Chance: 0.18
+  Priority: 20
+  Action: ADD
+  Conditions:
+    - height{min=64;max=140}
+    - inblock air
+    - onblock grass_block,podzol,stone
 
-  BugbearCommander:
-    Type: MM_BUGBEAR_COMMANDER
-    Worlds: world
-    Biomes:
-      - DARK_FOREST
-      - OLD_GROWTH_SPRUCE_TAIGA
-    Chance: 0.07
-    Priority: 22
-    Action: ADD
-    Conditions:
-      - height{min=64;max=150}
-      - inblock air
-      - onblock moss_block,stone
+BugbearCommander:
+  Type: MM_BUGBEAR_COMMANDER
+  Worlds: world
+  Biomes:
+    - DARK_FOREST
+    - OLD_GROWTH_SPRUCE_TAIGA
+  Chance: 0.07
+  Priority: 22
+  Action: ADD
+  Conditions:
+    - height{min=64;max=150}
+    - inblock air
+    - onblock moss_block,stone
 
-  KenkuRoadWatchers:
-    Type: MM_KENKU_ROGUE
-    Worlds: world
-    Biomes:
-      - PLAINS
-      - DESERT
-      - SAVANNA
-    Chance: 0.22
-    Priority: 14
-    Action: REPLACE
-    Conditions:
-      - height{min=60;max=128}
-      - inblock air
-      - onblock grass_block,dirt_path,sand
+KenkuRoadWatchers:
+  Type: MM_KENKU_ROGUE
+  Worlds: world
+  Biomes:
+    - PLAINS
+    - DESERT
+    - SAVANNA
+  Chance: 0.22
+  Priority: 14
+  Action: REPLACE
+  Conditions:
+    - height{min=60;max=128}
+    - inblock air
+    - onblock grass_block,dirt_path,sand
 
-  KoboldCaveSwarm:
-    Type: MM_KOBOLD
-    Worlds: world
-    Biomes:
-      - DRIPSTONE_CAVES
-      - LUSH_CAVES
-      - DEEP_DARK
-    Chance: 0.75
-    Priority: 30
-    Action: REPLACE
-    Conditions:
-      - height{min=-60;max=20}
-      - inblock air,cave_air
-      - onblock stone,deepslate
+KoboldCaveSwarm:
+  Type: MM_KOBOLD
+  Worlds: world
+  Biomes:
+    - DRIPSTONE_CAVES
+    - LUSH_CAVES
+    - DEEP_DARK
+  Chance: 0.75
+  Priority: 30
+  Action: REPLACE
+  Conditions:
+    - height{min=-60;max=20}
+    - inblock air,cave_air
+    - onblock stone,deepslate
 
-  KoboldWingedScout:
-    Type: MM_KOBOLD_ALADO
-    Worlds: world
-    Biomes:
-      - WINDSWEPT_HILLS
-      - JAGGED_PEAKS
-    Chance: 0.06
-    Priority: 26
-    Action: ADD
-    Conditions:
-      - height{min=90;max=180}
-      - inblock air
-      - onblock stone,gravel
+KoboldWingedScout:
+  Type: MM_KOBOLD_ALADO
+  Worlds: world
+  Biomes:
+    - WINDSWEPT_HILLS
+    - JAGGED_PEAKS
+  Chance: 0.06
+  Priority: 26
+  Action: ADD
+  Conditions:
+    - height{min=90;max=180}
+    - inblock air
+    - onblock stone,gravel
 
-  KuotoaRiverParty:
-    Type: MM_KUOTOA
-    Worlds: world
-    Biomes:
-      - SWAMP
-      - MANGROVE_SWAMP
-    Chance: 0.35
-    Priority: 18
-    Action: ADD
-    Conditions:
-      - height{min=50;max=80}
-      - inblock air,water
-      - onblock water
+KuotoaRiverParty:
+  Type: MM_KUOTOA
+  Worlds: world
+  Biomes:
+    - SWAMP
+    - MANGROVE_SWAMP
+  Chance: 0.35
+  Priority: 18
+  Action: ADD
+  Conditions:
+    - height{min=50;max=80}
+    - inblock air,water
+    - onblock water
 
-  KuotoaStriker:
-    Type: MM_KUOTOA_ACOITADOR
-    Worlds: world
-    Biomes:
-      - SWAMP
-    Chance: 0.18
-    Priority: 20
-    Action: ADD
-    Conditions:
-      - height{min=60;max=90}
-      - inblock water
-      - onblock water
+KuotoaStriker:
+  Type: MM_KUOTOA_ACOITADOR
+  Worlds: world
+  Biomes:
+    - SWAMP
+  Chance: 0.18
+  Priority: 20
+  Action: ADD
+  Conditions:
+    - height{min=60;max=90}
+    - inblock water
+    - onblock water
 
-  OozeDepths:
-    Type: MM_CUBO_GELATINOSO
-    Worlds: world
-    Biomes:
-      - DEEP_DARK
-      - LUSH_CAVES
-    Chance: 0.45
-    Priority: 32
-    Action: REPLACE
-    Conditions:
-      - height{min=-64;max=-10}
-      - inblock air,cave_air
-      - onblock deepslate,tuff
+OozeDepths:
+  Type: MM_CUBO_GELATINOSO
+  Worlds: world
+  Biomes:
+    - DEEP_DARK
+    - LUSH_CAVES
+  Chance: 0.45
+  Priority: 32
+  Action: REPLACE
+  Conditions:
+    - height{min=-64;max=-10}
+    - inblock air,cave_air
+    - onblock deepslate,tuff
 
-  BlackPudding:
-    Type: MM_PUDIM_NEGRO
-    Worlds: world
-    Biomes:
-      - DEEP_DARK
-    Chance: 0.22
-    Priority: 34
-    Action: ADD
-    Conditions:
-      - height{min=-64;max=-20}
-      - inblock air,cave_air
-      - onblock deepslate,blackstone
+BlackPudding:
+  Type: MM_PUDIM_NEGRO
+  Worlds: world
+  Biomes:
+    - DEEP_DARK
+  Chance: 0.22
+  Priority: 34
+  Action: ADD
+  Conditions:
+    - height{min=-64;max=-20}
+    - inblock air,cave_air
+    - onblock deepslate,blackstone
