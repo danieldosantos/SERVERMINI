@@ -6,7 +6,7 @@ GoblinSurfaceRoamers:
     - PLAINS
     - DARK_FOREST
     - TAIGA
-  Chance: 0.25
+  Chance: 0.99
   Priority: 10
   Action: REPLACE
   Conditions:
@@ -22,8 +22,8 @@ GoblinBossAmbush:
     - DARK_FOREST
     - BIRCH_FOREST
     - PLAINS
-  Chance: 0.05
-  Priority: 18
+  Chance: 0.99
+  Priority: 10
   Action: ADD
   Conditions:
     - height{min=64;max=120}
@@ -37,8 +37,8 @@ GnollHuntingParty:
     - SAVANNA
     - SAVANNA_PLATEAU
     - PLAINS
-  Chance: 0.28
-  Priority: 16
+  Chance: 0.99
+  Priority: 10
   Action: REPLACE
   Conditions:
     - height{min=60;max=120}
@@ -51,8 +51,8 @@ GnollPackLeader:
   Biomes:
     - SAVANNA
     - PLAINS
-  Chance: 0.12
-  Priority: 18
+  Chance: 0.99
+  Priority: 10
   Action: ADD
   Conditions:
     - height{min=64;max=140}
@@ -66,8 +66,8 @@ BugbearForestWarband:
     - FOREST
     - DARK_FOREST
     - OLD_GROWTH_SPRUCE_TAIGA
-  Chance: 0.18
-  Priority: 20
+  Chance: 0.99
+  Priority: 10
   Action: ADD
   Conditions:
     - height{min=64;max=140}
@@ -80,8 +80,8 @@ BugbearCommander:
   Biomes:
     - DARK_FOREST
     - OLD_GROWTH_SPRUCE_TAIGA
-  Chance: 0.07
-  Priority: 22
+  Chance: 0.99
+  Priority: 10
   Action: ADD
   Conditions:
     - height{min=64;max=150}
@@ -95,8 +95,8 @@ KenkuRoadWatchers:
     - PLAINS
     - DESERT
     - SAVANNA
-  Chance: 0.22
-  Priority: 14
+  Chance: 0.99
+  Priority: 10
   Action: REPLACE
   Conditions:
     - height{min=60;max=128}
@@ -110,8 +110,8 @@ KoboldCaveSwarm:
     - DRIPSTONE_CAVES
     - LUSH_CAVES
     - DEEP_DARK
-  Chance: 0.75
-  Priority: 30
+  Chance: 0.99
+  Priority: 10
   Action: REPLACE
   Conditions:
     - height{min=-60;max=20}
@@ -124,8 +124,8 @@ KoboldWingedScout:
   Biomes:
     - WINDSWEPT_HILLS
     - JAGGED_PEAKS
-  Chance: 0.06
-  Priority: 26
+  Chance: 0.99
+  Priority: 10
   Action: ADD
   Conditions:
     - height{min=90;max=180}
@@ -138,8 +138,8 @@ KuotoaRiverParty:
   Biomes:
     - SWAMP
     - MANGROVE_SWAMP
-  Chance: 0.35
-  Priority: 18
+  Chance: 0.99
+  Priority: 10
   Action: ADD
   Conditions:
     - height{min=50;max=80}
@@ -151,8 +151,8 @@ KuotoaStriker:
   Worlds: world
   Biomes:
     - SWAMP
-  Chance: 0.18
-  Priority: 20
+  Chance: 0.99
+  Priority: 10
   Action: ADD
   Conditions:
     - height{min=60;max=90}
@@ -165,8 +165,8 @@ OozeDepths:
   Biomes:
     - DEEP_DARK
     - LUSH_CAVES
-  Chance: 0.45
-  Priority: 32
+  Chance: 0.99
+  Priority: 10
   Action: REPLACE
   Conditions:
     - height{min=-64;max=-10}
@@ -178,8 +178,8 @@ BlackPudding:
   Worlds: world
   Biomes:
     - DEEP_DARK
-  Chance: 0.22
-  Priority: 34
+  Chance: 0.99
+  Priority: 10
   Action: ADD
   Conditions:
     - height{min=-64;max=-20}
