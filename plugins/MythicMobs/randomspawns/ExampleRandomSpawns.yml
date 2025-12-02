@@ -6,6 +6,14 @@
 DND_GOBLIN_COMMON_SURFACE:
   MobType: MM_GOBLIN
   Worlds: world
+  Biomes:
+    - FOREST
+    - DARK_FOREST
+    - BIRCH_FOREST
+    - PLAINS
+    - TAIGA
+    - SWAMP
+    - JUNGLE
   Chance: 0.20               # menor que antes
   Priority: 10               # prioridade baixa
   Action: REPLACE
@@ -17,6 +25,14 @@ DND_GOBLIN_COMMON_SURFACE:
 DND_GOBLIN_BOSS_SURFACE:
   MobType: MM_CHEFE_GOBLIN
   Worlds: world
+  Biomes:
+    - FOREST
+    - DARK_FOREST
+    - BIRCH_FOREST
+    - PLAINS
+    - TAIGA
+    - SWAMP
+    - JUNGLE
   Chance: 0.05
   Priority: 12
   Action: REPLACE
@@ -29,6 +45,10 @@ DND_GOBLIN_BOSS_SURFACE:
 DND_GOBLIN_COMMON_CAVE:
   MobType: MM_GOBLIN
   Worlds: world
+  Biomes:
+    - DRIPSTONE_CAVES
+    - LUSH_CAVES
+    - DEEP_DARK
   Chance: 0.85               # MUITO alto
   Priority: 30               # bem acima da superfície
   Action: REPLACE
@@ -40,6 +60,10 @@ DND_GOBLIN_COMMON_CAVE:
 DND_GOBLIN_BOSS_CAVE:
   MobType: MM_CHEFE_GOBLIN
   Worlds: world
+  Biomes:
+    - DRIPSTONE_CAVES
+    - LUSH_CAVES
+    - DEEP_DARK
   Chance: 0.15
   Priority: 32
   Action: REPLACE
@@ -58,6 +82,10 @@ DND_GOBLIN_BOSS_CAVE:
 DND_GNOLL_SAVANNA_COMMON:
   MobType: MM_GNOLL
   Worlds: world
+  Biomes:
+    - SAVANNA
+    - SAVANNA_PLATEAU
+    - PLAINS
   Chance: 0.30
   Priority: 14
   Action: REPLACE
@@ -69,6 +97,10 @@ DND_GNOLL_SAVANNA_COMMON:
 DND_GNOLL_SAVANNA_LEADER:
   MobType: MM_GNOLL_LIDER_MATILHA
   Worlds: world
+  Biomes:
+    - SAVANNA
+    - SAVANNA_PLATEAU
+    - PLAINS
   Chance: 0.08
   Priority: 16
   Action: REPLACE
@@ -81,6 +113,10 @@ DND_GNOLL_SAVANNA_LEADER:
 DND_GNOLL_DEN_COMMON:
   MobType: MM_GNOLL
   Worlds: world
+  Biomes:
+    - DRIPSTONE_CAVES
+    - LUSH_CAVES
+    - DEEP_DARK
   Chance: 0.75
   Priority: 28
   Action: REPLACE
@@ -92,6 +128,10 @@ DND_GNOLL_DEN_COMMON:
 DND_GNOLL_DEN_PACK:
   MobType: MM_GNOLL_LIDER_MATILHA
   Worlds: world
+  Biomes:
+    - DRIPSTONE_CAVES
+    - LUSH_CAVES
+    - DEEP_DARK
   Chance: 0.18
   Priority: 30
   Action: ADD
@@ -110,6 +150,13 @@ DND_GNOLL_DEN_PACK:
 BUGBEAR_FOREST_COMMON:
   MobType: MM_BUGBEAR
   Worlds: world
+  Biomes:
+    - FOREST
+    - DARK_FOREST
+    - BIRCH_FOREST
+    - OLD_GROWTH_BIRCH_FOREST
+    - TAIGA
+    - OLD_GROWTH_SPRUCE_TAIGA
   Chance: 0.25
   Priority: 14
   Action: REPLACE
@@ -121,6 +168,13 @@ BUGBEAR_FOREST_COMMON:
 BUGBEAR_FOREST_COMMANDER:
   MobType: MM_BUGBEAR_COMMANDER
   Worlds: world
+  Biomes:
+    - FOREST
+    - DARK_FOREST
+    - BIRCH_FOREST
+    - OLD_GROWTH_BIRCH_FOREST
+    - TAIGA
+    - OLD_GROWTH_SPRUCE_TAIGA
   Chance: 0.06
   Priority: 18
   Action: ADD
@@ -133,6 +187,10 @@ BUGBEAR_FOREST_COMMANDER:
 BUGBEAR_DEN_COMMON:
   MobType: MM_BUGBEAR
   Worlds: world
+  Biomes:
+    - DRIPSTONE_CAVES
+    - LUSH_CAVES
+    - DEEP_DARK
   Chance: 0.65
   Priority: 28
   Action: REPLACE
@@ -151,6 +209,13 @@ BUGBEAR_DEN_COMMON:
 DND_KENKU_ROAMERS:
   MobType: MM_KENKU_ROGUE
   Worlds: world
+  Biomes:
+    - PLAINS
+    - DESERT
+    - SAVANNA
+    - SAVANNA_PLATEAU
+    - SNOWY_PLAINS
+    - MEADOW
   Chance: 0.30
   Priority: 14
   Action: REPLACE
@@ -163,6 +228,9 @@ DND_KENKU_ROAMERS:
 DND_KENKU_CAVE_SNEAK:
   MobType: MM_KENKU_ROGUE
   Worlds: world
+  Biomes:
+    - DRIPSTONE_CAVES
+    - LUSH_CAVES
   Chance: 0.35
   Priority: 20
   Action: ADD
@@ -181,6 +249,10 @@ DND_KENKU_CAVE_SNEAK:
 DND_KOBOLD_CAVE_SWARM:
   MobType: MM_KOBOLD
   Worlds: world
+  Biomes:
+    - DRIPSTONE_CAVES
+    - LUSH_CAVES
+    - DEEP_DARK
   Chance: 0.85
   Priority: 32
   Action: REPLACE
@@ -193,6 +265,9 @@ DND_KOBOLD_CAVE_SWARM:
 DND_KOBOLD_DEEPSLATE_DENS:
   MobType: MM_KOBOLD
   Worlds: world
+  Biomes:
+    - DEEP_DARK
+    - DRIPSTONE_CAVES
   Chance: 0.90
   Priority: 34
   Action: REPLACE
@@ -205,6 +280,12 @@ DND_KOBOLD_DEEPSLATE_DENS:
 DND_KOBOLD_SURFACE_PATROL:
   MobType: MM_KOBOLD
   Worlds: world
+  Biomes:
+    - WINDSWEPT_HILLS
+    - WINDSWEPT_FOREST
+    - STONY_PEAKS
+    - JAGGED_PEAKS
+    - FROZEN_PEAKS
   Chance: 0.06
   Priority: 8
   Action: ADD
@@ -222,6 +303,10 @@ DND_KOBOLD_SURFACE_PATROL:
 LIMO_CUBE_CAVE:
   MobType: MM_CUBO_GELATINOSO
   Worlds: world
+  Biomes:
+    - SWAMP
+    - MANGROVE_SWAMP
+    - LUSH_CAVES
   Chance: 0.70
   Priority: 30
   Action: REPLACE
@@ -233,6 +318,9 @@ LIMO_CUBE_CAVE:
 LIMO_BLACK_DEEP:
   MobType: MM_PUDIM_NEGRO
   Worlds: world
+  Biomes:
+    - DEEP_DARK
+    - DRIPSTONE_CAVES
   Chance: 0.25
   Priority: 36
   Action: REPLACE
