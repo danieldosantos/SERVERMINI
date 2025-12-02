@@ -28,3 +28,420 @@ AngrySludgePoison:
     @Self
 
 
+########################################
+# GOBLINS - SKILLS COM ANIMAÇÃO
+########################################
+
+# Cimitarra / espada – golpe rápido
+GOBLIN_SCIMITAR_SLASH:
+  Skills:
+    - effect:particles{p=crit;amount=8;speed=0.25;hS=0.25;vS=0.25} @Target
+    - effect:sound{s=entity.player.attack.sweep;v=0.9;p=1.4} @Self
+    - damage{amount=5;type=SLASHING} @Target
+
+# Arco curto – flecha simples (vanilla)
+GOBLIN_SHORTBOW_SHOT:
+  Skills:
+    - effect:sound{s=entity.arrow.shoot;v=1;p=1.3} @Self
+    - shoot{type=ARROW;velocity=2;damage=5;spread=0.1} @Target
+
+# Escapada Ágil (para goblin comum) – fumacinha e pulo
+GOBLIN_NIMBLE_ESCAPE:
+  Skills:
+    - effect:particles{p=cloud;amount=18;speed=0.1;hS=0.5;vS=0.15} @Self
+    - effect:particles{p=smoke;amount=10;speed=0.05;hS=0.4;vS=0.1} @Self
+    - effect:sound{s=entity.enderman.teleport;v=0.7;p=1.5} @Self
+    - leap{v=0.9} @Self
+
+# Ataque múltiplo do Chefe Goblin (2 golpes de cimitarra)
+GOBLIN_BOSS_MULTIATTACK:
+  Skills:
+    - effect:particles{p=crit;amount=12;speed=0.3;hS=0.3;vS=0.3} @Target
+    - effect:sound{s=entity.player.attack.sweep;v=1;p=1.3} @Self
+    - damage{amount=5;type=SLASHING} @Target
+    - delay 4
+    - effect:particles{p=crit;amount=6;speed=0.2;hS=0.25;vS=0.25} @Target
+    - damage{amount=3;type=SLASHING} @Target
+
+# Azagaia do chefe (tiro simples)
+GOBLIN_BOSS_JAVELIN:
+  Skills:
+    - effect:sound{s=entity.arrow.shoot;v=0.9;p=0.9} @Self
+    - shoot{type=ARROW;velocity=1.8;damage=5;spread=0.12} @Target
+
+# Escapada Ágil “melhorada” do chefe (mais dramática)
+GOBLIN_BOSS_ESCAPE:
+  Skills:
+    - effect:particles{p=cloud;amount=24;speed=0.15;hS=0.7;vS=0.2} @Self
+    - effect:particles{p=smoke;amount=14;speed=0.08;hS=0.6;vS=0.2} @Self
+    - effect:sound{s=entity.enderman.teleport;v=1;p=1.4} @Self
+    - leap{v=1.1} @Self
+
+# Redirecionar Ataque – teleporta um pouco
+GOBLIN_REDIRECT:
+  Skills:
+    - effect:particles{p=poof;amount=20;speed=0.1;hS=0.5;vS=0.3} @Self
+    - effect:sound{s=entity.enderman.teleport;v=1;p=1.6} @Self
+    - teleport{radius=3} @Self
+
+
+########################################
+# GNOLLS
+########################################
+
+# Mordida de Frenesi — usada por vários gnolls
+GNOLL_FRENZY_BITE:
+  Cooldown: 80
+  Skills:
+    - effect:particles{p=crit;amount=20;hS=0.4;vS=0.4;speed=0.15} @Target
+    - effect:sound{s=entity.wolf.growl;v=1;p=0.9} @Self
+    - effect:particles{p=reddust;color=255,50,50;size=1.2;amount=12} @Target
+    - damage{amount=5;type=PIERCING} @Target
+
+# Uivo de Matilha — chama reforços
+GNOLL_PACK_HOWL:
+  Cooldown: 220
+  Skills:
+    - effect:particles{p=angry_villager;amount=30;hS=1.1;vS=0.6;speed=0.1} @Self
+    - effect:particles{p=smoke;amount=18;hS=1;vS=0.5;speed=0.04} @Self
+    - effect:sound{s=entity.wolf.howl;v=1;p=0.9} @Self
+    - summon{mob=MM_GNOLL;amount=2;radius=4} @Self
+    - delay 10
+    - summon{mob=MM_GNOLL;amount=1;radius=6} @Self
+
+# Chamado do Alfa — mini-evento de ataque
+GNOLL_ALPHA_CALL:
+  Cooldown: 260
+  Skills:
+    - effect:particles{p=smoke;amount=40;hS=1.5;vS=0.6;speed=0.03} @Self
+    - effect:particles{p=crit;amount=45;hS=1.2;vS=0.8;speed=0.2} @Self
+    - effect:particles{p=reddust;color=180,0,0;size=1.3;amount=20} @Self
+    - effect:sound{s=entity.wolf.howl;v=1.2;p=0.7} @Self
+    - summon{mob=MM_GNOLL;amount=3;radius=5} @Self
+    - delay 10
+    - summon{mob=MM_GNOLL;amount=2;radius=7} @Self
+    - summon{mob=MM_GNOLL_LIDER_MATILHA;amount=1;radius=5} @Self 0.35
+
+# Spawn especial de covil de gnolls (apenas scriptado)
+GNOLL_VILLAGE_DEN_SPAWN:
+  Cooldown: 9999
+  Skills:
+    - summon{mob=MM_GNOLL;amount=7;radius=6} @Self
+    - summon{mob=MM_GNOLL_LIDER_MATILHA;amount=2;radius=4} @Self
+
+
+########################################
+# BUGBEARS
+########################################
+
+BUGBEAR_MORNINGSTAR:
+  Cooldown: 0
+  Skills:
+    - effect:particles{p=crit;amount=10;hS=0.3;vS=0.3;speed=0.1} @Target
+    - effect:sound{s=entity.zombie.attack_iron_door;v=1;p=0.8} @Self
+    - damage{amount=8;type=BLUDGEONING} @Target
+
+BUGBEAR_JAVELIN:
+  Cooldown: 0
+  Skills:
+    - effect:particles{p=crit;amount=8;hS=0.2;vS=0.2;speed=0.15} @Target
+    - effect:sound{s=entity.arrow.shoot;v=1;p=1} @Self
+    - damage{amount=6;type=PIERCING} @Target
+
+BUGBEAR_BRUTE_HIT:
+  Cooldown: 40
+  Skills:
+    - effect:particles{p=explosion;amount=6;hS=0.4;vS=0.2;speed=0.05} @Target
+    - effect:sound{s=entity.iron_golem.attack;v=1.1;p=0.8} @Self
+    - damage{amount=5;type=BLUDGEONING} @Target
+
+BUGBEAR_COMMANDER_MULTI:
+  Cooldown: 0
+  Skills:
+    - effect:particles{p=crit;amount=14;hS=0.4;vS=0.3;speed=0.15} @Target
+    - effect:sound{s=entity.iron_golem.attack;v=1.2;p=0.8} @Self
+    - damage{amount=10;type=BLUDGEONING} @Target
+    - delay 5
+    - effect:particles{p=crit;amount=10;hS=0.3;vS=0.3;speed=0.1} @Target
+    - damage{amount=8;type=BLUDGEONING} @Target
+
+BUGBEAR_COMMANDER_JAVELIN:
+  Cooldown: 0
+  Skills:
+    - effect:particles{p=crit;amount=10;hS=0.3;vS=0.3;speed=0.2} @Target
+    - effect:sound{s=entity.arrow.shoot;v=1.1;p=1} @Self
+    - damage{amount=7;type=PIERCING} @Target
+
+BUGBEAR_HRUGGEK_HEART:
+  Cooldown: 120
+  Skills:
+    - effect:particles{p=smoke;amount=15;hS=0.5;vS=0.4;speed=0.02} @Self
+    - effect:particles{p=angry_villager;amount=10;hS=0.4;vS=0.6;speed=0.1} @Self
+    - effect:sound{s=entity.evoker.prepare_attack;v=1.2;p=0.6} @Self
+    - potion{type=DAMAGE_RESISTANCE;duration=140;level=1} @Self
+    - potion{type=INCREASE_DAMAGE;duration=140;level=0} @Self
+
+
+########################################
+# KENKU
+########################################
+
+KENKU_SHORTSWORD_STAB:
+  Skills:
+    - damage{amount=6;type=PIERCING} @Target
+    - effect:particles{p=crit;amount=10;hS=0.3;vS=0.3;speed=0.1} @Target
+    - effect:sound{s=entity.player.attack.sweep;v=1;p=1.2} @Self
+
+KENKU_SHORTBOW_SHOT:
+  Cooldown: 20
+  Skills:
+    - shoot{type=ARROW;velocity=1.7;damage=6;spread=0.1} @Target
+    - effect:sound{s=entity.arrow.shoot;v=1;p=1.2} @Self
+
+# Removi targetnotincombat (não existe nessa build) pra evitar warning
+KENKU_AMBUSH_STRIKE:
+  Cooldown: 80
+  Skills:
+    - damage{amount=7;type=PIERCING} @Target
+    - effect:particles{p=crit;amount=22;hS=0.4;vS=0.4;speed=0.15} @Target
+    - effect:sound{s=entity.player.attack.crit;v=1;p=1.3} @Self
+
+
+########################################
+# KOBOLDS
+########################################
+
+KOBOLD_DAGGER_STAB:
+  Skills:
+    - damage{amount=4;type=PIERCING} @Target
+    - effect:sound{s=entity.player.attack.sweep;v=1;p=1.2} @Self
+
+KOBOLD_SLING_SHOT:
+  Cooldown: 30
+  Skills:
+    - shoot{type=SNOWBALL;velocity=1.6;damage=4;spread=0.12} @Target
+    - effect:sound{s=entity.snowball.throw;v=1;p=1.2} @Self
+
+# Bônus de matilha – usa MobsInRadius (válido) no lugar de sequenceinradius
+KOBOLD_PACK_TACTIC:
+  Conditions:
+    - mobsInRadius{types=MM_KOBOLD,MM_KOBOLD_ALADO;radius=4;min=1} true
+  Skills:
+    - damage{amount=3;type=PIERCING} @Target
+    - effect:particles{p=crit;amount=10} @Target
+
+KOBOLD_DROP_STONE:
+  Cooldown: 25
+  Skills:
+    - shoot{type=SNOWBALL;velocity=2;damage=6;spread=0.1} @Target
+    - effect:sound{s=entity.arrow.shoot;v=1;p=0.9} @Self
+
+KOBOLD_AERIAL_DAGGER:
+  Skills:
+    - damage{amount=5;type=PIERCING} @Target
+
+# Removi time{t=DAY} porque vira CustomCondition e dá warning
+KOBOLD_SUNLIGHT_SENS:
+  Skills:
+    - potion{type=SLOW;duration=60;level=0} @Self
+
+
+########################################
+# KUO-TOA – BASE
+########################################
+
+KT_BITE:
+  Skills:
+    - damage{amount=4;type=PIERCING} @Target
+    - effect:sound{s=entity.panda.bite;v=1;p=1.2} @Self
+
+KT_SPEAR_STAB:
+  Skills:
+    - damage{amount=5;type=PIERCING} @Target
+    - effect:sound{s=entity.player.attack.strong;v=1;p=1.0} @Self
+
+KT_THROW_NET:
+  Cooldown: 80
+  Skills:
+    - shoot{type=SNOWBALL;velocity=1.3;damage=0;spread=0.1} @Target
+    - effect:particles{p=cloud;amount=5;speed=0.01} @Target
+    - skill{s=KT_NET_HIT} @Target
+
+KT_NET_HIT:
+  Skills:
+    - potion{type=SLOW;duration=100;level=1} @Target
+    - potion{type=WEAKNESS;duration=100;level=0} @Target
+    - effect:sound{s=block.slime_block.place;v=1;p=1.2} @Target
+
+# Removi time{t=DAY} pra não gerar CustomCondition, mantive só outside
+KT_SUNLIGHT_WEAKNESS:
+  Conditions:
+    - outside true
+  Skills:
+    - potion{type=SLOW;duration=80;level=0} @Self
+    - potion{type=WEAKNESS;duration=80;level=0} @Self
+
+
+########################################
+# KUO-TOA – AÇOITADOR
+########################################
+
+KT_WHIP_BITE:
+  Skills:
+    - damage{amount=5;type=PIERCING} @Target
+    - effect:particles{p=crit;amount=8} @Target
+
+KT_PINCER_STAFF:
+  Cooldown: 60
+  Skills:
+    - damage{amount=5;type=PIERCING} @Target
+    - potion{type=SLOW;duration=80;level=1} @Target
+    - effect:sound{s=entity.player.attack.knockback;v=1;p=0.8} @Self
+
+KT_WHIP_SACRED_FLAME:
+  Skills:
+    - damage{amount=6;type=HOLY} @NearestPlayer{r=16}
+    - effect:particles{p=flame;amount=10} @NearestPlayer{r=16}
+    - effect:sound{s=entity.blaze.shoot;v=1;p=1.4} @Self
+
+KT_WHIP_BANE:
+  Skills:
+    - potion{type=WEAKNESS;duration=160;level=0} @NearestPlayer{r=16}
+    - effect:particles{p=smoke;amount=10} @NearestPlayer{r=16}
+
+KT_WHIP_SHIELD_OF_FAITH:
+  Skills:
+    - potion{type=ABSORPTION;duration=200;level=1} @Self
+    - potion{type=RESISTANCE;duration=200;level=0} @Self
+    - effect:sound{s=entity.evoker.prepare_summon;v=1;p=1.2} @Self
+
+
+########################################
+# KUO-TOA – MONITOR
+########################################
+
+KT_MONITOR_MULTI:
+  Skills:
+    - damage{amount=4;type=PIERCING} @Target
+    - delay 2
+    - damage{amount=5;type=BLUDGEONING} @Target
+    - potion{type=SLOW;duration=40;level=0} @Target
+    - delay 2
+    - damage{amount=5;type=BLUDGEONING} @Target
+    - effect:particles{p=crit;amount=10} @Target
+
+
+########################################
+# KUO-TOA – ARCEBISPO
+########################################
+
+KT_ARCH_STAFF_STRIKE:
+  Skills:
+    - damage{amount=6;type=BLUDGEONING} @Target
+    - damage{amount=10;type=LIGHTNING} @Target
+    - effect:sound{s=entity.zombie_villager.converted;v=1;p=1.1} @Self
+
+KT_ARCH_SPIRIT_GUARDIANS:
+  Skills:
+    - aura{auraName=KTAGuard;duration=200;interval=20;onTick=KT_ARCH_SPIRIT_TICK} @Self
+
+KT_ARCH_SPIRIT_TICK:
+  Skills:
+    - damage{amount=5;type=HOLY} @EntitiesInRadius{r=4;ignore=self;targetplayers=true}
+    - effect:particles{p=soul;amount=12} @Self
+
+KT_ARCH_CONTROL_WATER:
+  Skills:
+    - potion{type=SLOW;duration=100;level=1} @EntitiesInRadius{r=6;ignore=self;targetplayers=true}
+    - effect:particles{p=bubble;amount=25} @Self
+
+KT_ARCH_MASS_HEAL:
+  Skills:
+    - heal{amount=12} @MobsInRadius{r=8;types=MM_KUOTOA,MM_KUOTOA_ACOITADOR,MM_KUOTOA_MONITOR,MM_KUOTOA_ARCEBISPO}
+    - effect:particles{p=heart;amount=8} @Self
+
+KT_ARCH_STUN_SMITE:
+  Cooldown: 120
+  Skills:
+    - damage{amount=8;type=HOLY} @Target
+    - potion{type=SLOW;duration=60;level=2} @Target
+    - effect:sound{s=entity.lightning_bolt.thunder;v=1;p=1.0} @Self
+
+KT_ARCH_SHIELD_OF_FAITH:
+  Skills:
+    - potion{type=RESISTANCE;duration=300;level=1} @Self
+    - potion{type=ABSORPTION;duration=300;level=2} @Self
+
+
+########################################
+# LIMOS – CUBO / OCRE / CINZENTO / PUDIM
+########################################
+
+LIMO_CUBE_PSEUDOPOD:
+  Skills:
+    - damage{amount=10;type=ACID} @Target
+    - effect:particles{p=falling_honey;amount=10;speed=0.01} @Target
+    - effect:sound{s=block.slime_block.hit;v=1;p=0.6} @Self
+
+LIMO_CUBE_ENGULF:
+  Cooldown: 80
+  Conditions:
+    - distance{d<=2} true
+  Skills:
+    - pull{v=1.2} @Target
+    - potion{type=SLOW;duration=80;level=3} @Target
+    - potion{type=BLINDNESS;duration=80;level=0} @Target
+    - potion{type=WEAKNESS;duration=80;level=1} @Target
+    - effect:particles{p=slime;amount=30;speed=0.05} @Target
+    - damage{amount=6;type=ACID} @Target
+    - delay 20
+    - damage{amount=6;type=ACID} @Target
+
+LIMO_OCRE_PSEUDOPOD:
+  Skills:
+    - damage{amount=6;type=BLUDGEONING} @Target
+    - damage{amount=4;type=ACID} @Target
+    - effect:particles{p=dripping_honey;amount=8;speed=0.02} @Target
+
+LIMO_OCRE_SPLIT:
+  Cooldown: 60
+  Conditions:
+    - health{h>=10} true
+  Skills:
+    - summon{mob=MM_GOSMA_OCRE;amount=1;radius=1} @SelfLocation
+    - heal{amount=10} @Self
+    - effect:particles{p=slime;amount=20;speed=0.1} @Self
+    - effect:sound{s=block.slime_block.place;v=1;p=1.2} @Self
+
+LIMO_GRAY_PSEUDOPOD:
+  Skills:
+    - damage{amount=4;type=BLUDGEONING} @Target
+    - damage{amount=7;type=ACID} @Target
+    - potion{type=WEAKNESS;duration=160;level=1} @Target
+    - potion{type=SLOW_DIGGING;duration=160;level=1} @Target
+    - effect:particles{p=ash;amount=10;speed=0.02} @Target
+    - effect:sound{s=block.brewing_stand.brew;v=1;p=1.2} @Self
+
+LIMO_BLACK_CONTACT:
+  Skills:
+    - damage{amount=4;type=ACID} @Trigger
+    - effect:particles{p=smoke;amount=8;speed=0.02} @Trigger
+    - effect:sound{s=block.lava.extinguish;v=1;p=0.6} @Self
+
+LIMO_BLACK_PSEUDOPOD:
+  Skills:
+    - damage{amount=6;type=BLUDGEONING} @Target
+    - damage{amount=18;type=ACID} @Target
+    - potion{type=WEAKNESS;duration=200;level=1} @Target
+    - potion{type=SLOW;duration=120;level=1} @Target
+    - effect:particles{p=falling_obsidian_tear;amount=15;speed=0.03} @Target
+
+LIMO_BLACK_SPLIT:
+  Cooldown: 80
+  Conditions:
+    - health{h>=15} true
+  Skills:
+    - summon{mob=MM_PUDIM_NEGRO;amount=1;radius=1} @SelfLocation
+    - heal{amount=15} @Self
+    - effect:particles{p=slime;amount=25;speed=0.1} @Self
+    - effect:sound{s=block.slime_block.place;v=1;p=0.8} @Self
