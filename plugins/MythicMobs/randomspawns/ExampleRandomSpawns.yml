@@ -1,330 +1,331 @@
-############################
-#      GOBLINS SPAWNS      #
-############################
-
-# ===== SUPERFÍCIE (NERFADO, MAS QUALQUER BIOMA) =====
-DND_GOBLIN_COMMON_SURFACE:
-  MobType: MM_GOBLIN
-  Worlds: world
-  Biomes:
-    - FOREST
-    - DARK_FOREST
-    - BIRCH_FOREST
-    - PLAINS
-    - TAIGA
-    - SWAMP
-    - JUNGLE
-  Chance: 0.20               # menor que antes
-  Priority: 10               # prioridade baixa
-  Action: REPLACE
-  Conditions:
-    - height{min=60;max=320} # só acima do nível do mar
-    - inblock air,water
-    - onblock grass_block,dirt,coarse_dirt,stone,andesite,diorite,granite,sand,red_sand,gravel
-
-DND_GOBLIN_BOSS_SURFACE:
-  MobType: MM_CHEFE_GOBLIN
-  Worlds: world
-  Biomes:
-    - FOREST
-    - DARK_FOREST
-    - BIRCH_FOREST
-    - PLAINS
-    - TAIGA
-    - SWAMP
-    - JUNGLE
-  Chance: 0.05
-  Priority: 12
-  Action: REPLACE
-  Conditions:
-    - height{min=60;max=320}
-    - inblock air,water
-    - onblock grass_block,dirt,coarse_dirt,stone,andesite,diorite,granite,sand,red_sand,gravel
-
-# ===== CAVERNAS / CAMADAS NEGATIVAS (BUFFADO, QUALQUER BIOMA) =====
-DND_GOBLIN_COMMON_CAVE:
-  MobType: MM_GOBLIN
-  Worlds: world
-  Biomes:
-    - DRIPSTONE_CAVES
-    - LUSH_CAVES
-    - DEEP_DARK
-  Chance: 0.85               # MUITO alto
-  Priority: 30               # bem acima da superfície
-  Action: REPLACE
-  Conditions:
-    - height{min=-64;max=50}
-    - inblock air,cave_air,water
-    - onblock stone,deepslate,andesite,diorite,granite,sand,gravel
-
-DND_GOBLIN_BOSS_CAVE:
-  MobType: MM_CHEFE_GOBLIN
-  Worlds: world
-  Biomes:
-    - DRIPSTONE_CAVES
-    - LUSH_CAVES
-    - DEEP_DARK
-  Chance: 0.15
-  Priority: 32
-  Action: REPLACE
-  Conditions:
-    - height{min=-64;max=50}
-    - inblock air,cave_air,water
-    - onblock stone,deepslate,andesite,diorite,granite,sand,gravel
-
-
-
-############################
-#         GNOLLS           #
-############################
-
-# SUPERFÍCIE – QUALQUER BIOMA (um pouco nerfado)
-DND_GNOLL_SAVANNA_COMMON:
-  MobType: MM_GNOLL
-  Worlds: world
-  Biomes:
-    - SAVANNA
-    - SAVANNA_PLATEAU
-    - PLAINS
-  Chance: 0.30
-  Priority: 14
-  Action: REPLACE
-  Conditions:
-    - height{min=60;max=320}
-    - inblock air,water
-    - onblock grass_block,dirt,coarse_dirt,sand,red_sand,stone,gravel
-
-DND_GNOLL_SAVANNA_LEADER:
-  MobType: MM_GNOLL_LIDER_MATILHA
-  Worlds: world
-  Biomes:
-    - SAVANNA
-    - SAVANNA_PLATEAU
-    - PLAINS
-  Chance: 0.08
-  Priority: 16
-  Action: REPLACE
-  Conditions:
-    - height{min=60;max=320}
-    - inblock air,water
-    - onblock grass_block,dirt,coarse_dirt,sand,red_sand,stone,gravel
-
-# COVIL EM CAVERNA – GNOLL (buffado, qualquer bioma)
-DND_GNOLL_DEN_COMMON:
-  MobType: MM_GNOLL
-  Worlds: world
-  Biomes:
-    - DRIPSTONE_CAVES
-    - LUSH_CAVES
-    - DEEP_DARK
-  Chance: 0.75
-  Priority: 28
-  Action: REPLACE
-  Conditions:
-    - height{min=-64;max=40}
-    - inblock air,cave_air,water
-    - onblock stone,deepslate,andesite,diorite,granite,sand,gravel
-
-DND_GNOLL_DEN_PACK:
-  MobType: MM_GNOLL_LIDER_MATILHA
-  Worlds: world
-  Biomes:
-    - DRIPSTONE_CAVES
-    - LUSH_CAVES
-    - DEEP_DARK
-  Chance: 0.18
-  Priority: 30
-  Action: ADD
-  Conditions:
-    - height{min=-64;max=40}
-    - inblock air,cave_air,water
-    - onblock stone,deepslate,andesite,diorite,granite,sand,gravel
-
-
-
-############################
-#         BUGBEARS         #
-############################
-
-# SUPERFÍCIE – QUALQUER FLORESTA / REGIÃO VERDE (sem travar por bioma exato)
-BUGBEAR_FOREST_COMMON:
-  MobType: MM_BUGBEAR
-  Worlds: world
-  Biomes:
-    - FOREST
-    - DARK_FOREST
-    - BIRCH_FOREST
-    - OLD_GROWTH_BIRCH_FOREST
-    - TAIGA
-    - OLD_GROWTH_SPRUCE_TAIGA
-  Chance: 0.25
-  Priority: 14
-  Action: REPLACE
-  Conditions:
-    - height{min=60;max=320}
-    - inblock air,water
-    - onblock grass_block,dirt,coarse_dirt,podzol,rooted_dirt,stone,sand,gravel
-
-BUGBEAR_FOREST_COMMANDER:
-  MobType: MM_BUGBEAR_COMMANDER
-  Worlds: world
-  Biomes:
-    - FOREST
-    - DARK_FOREST
-    - BIRCH_FOREST
-    - OLD_GROWTH_BIRCH_FOREST
-    - TAIGA
-    - OLD_GROWTH_SPRUCE_TAIGA
-  Chance: 0.06
-  Priority: 18
-  Action: ADD
-  Conditions:
-    - height{min=60;max=320}
-    - inblock air,water
-    - onblock grass_block,dirt,coarse_dirt,podzol,rooted_dirt,stone,sand,gravel
-
-# COVIL EM CAVERNA – BUGBEAR (buffado)
-BUGBEAR_DEN_COMMON:
-  MobType: MM_BUGBEAR
-  Worlds: world
-  Biomes:
-    - DRIPSTONE_CAVES
-    - LUSH_CAVES
-    - DEEP_DARK
-  Chance: 0.65
-  Priority: 28
-  Action: REPLACE
-  Conditions:
-    - height{min=-64;max=40}
-    - inblock air,cave_air,water
-    - onblock stone,deepslate,andesite,diorite,granite,sand,gravel
-
-
-
-############################
-#          KENKU           #
-############################
-
-# SUPERFÍCIE – CIVILIZADO (AGORA QUALQUER BIOMA)
-DND_KENKU_ROAMERS:
-  MobType: MM_KENKU_ROGUE
-  Worlds: world
-  Biomes:
-    - PLAINS
-    - DESERT
-    - SAVANNA
-    - SAVANNA_PLATEAU
-    - SNOWY_PLAINS
-    - MEADOW
-  Chance: 0.30
-  Priority: 14
-  Action: REPLACE
-  Conditions:
-    - height{min=60;max=320}
-    - inblock air,water
-    - onblock grass_block,dirt,coarse_dirt,stone,dirt_path,sand,gravel
-
-# CAVERNAS RASAS – QUALQUER REGIÃO
-DND_KENKU_CAVE_SNEAK:
-  MobType: MM_KENKU_ROGUE
-  Worlds: world
-  Biomes:
-    - DRIPSTONE_CAVES
-    - LUSH_CAVES
-  Chance: 0.35
-  Priority: 20
-  Action: ADD
-  Conditions:
-    - height{min=0;max=40}
-    - inblock air,cave_air,water
-    # sem onblock pra permitir túneis variados
-
-
-
-############################
-#          KOBOLDS         #
-############################
-
-# CAVERNAS / TÚNEIS (principal inimigo subterrâneo)
-DND_KOBOLD_CAVE_SWARM:
-  MobType: MM_KOBOLD
-  Worlds: world
-  Biomes:
-    - DRIPSTONE_CAVES
-    - LUSH_CAVES
-    - DEEP_DARK
-  Chance: 0.85
-  Priority: 32
-  Action: REPLACE
-  Conditions:
-    - height{min=-64;max=20}
-    - inblock air,cave_air,water
-    - onblock stone,deepslate,granite,andesite,diorite,sand,gravel
-
-# DEEPSLATE / SUBSOLO PROFUNDO
-DND_KOBOLD_DEEPSLATE_DENS:
-  MobType: MM_KOBOLD
-  Worlds: world
-  Biomes:
-    - DEEP_DARK
-    - DRIPSTONE_CAVES
-  Chance: 0.90
-  Priority: 34
-  Action: REPLACE
-  Conditions:
-    - height{min=-64;max=0}
-    - inblock air,cave_air,water
-    - onblock deepslate,sand,gravel
-
-# SUPERFÍCIE (RARO, SÓ PRA APARECER)
-DND_KOBOLD_SURFACE_PATROL:
-  MobType: MM_KOBOLD
-  Worlds: world
-  Biomes:
-    - WINDSWEPT_HILLS
-    - WINDSWEPT_FOREST
-    - STONY_PEAKS
-    - JAGGED_PEAKS
-    - FROZEN_PEAKS
-  Chance: 0.06
-  Priority: 8
-  Action: ADD
-  Conditions:
-    - height{min=60;max=320}
-    - inblock air,water
-    - onblock dirt,grass_block,dirt_path,sand,gravel
-
-
-
-############################
-#          LIMOS           #
-############################
-
-LIMO_CUBE_CAVE:
-  MobType: MM_CUBO_GELATINOSO
-  Worlds: world
-  Biomes:
-    - SWAMP
-    - MANGROVE_SWAMP
-    - LUSH_CAVES
-  Chance: 0.70
-  Priority: 30
-  Action: REPLACE
-  Conditions:
-    - height{min=-64;max=40}
-    - inblock air,cave_air,water
-    - onblock stone,deepslate,andesite,diorite,granite,tuff,sand,gravel
-
-LIMO_BLACK_DEEP:
-  MobType: MM_PUDIM_NEGRO
-  Worlds: world
-  Biomes:
-    - DEEP_DARK
-    - DRIPSTONE_CAVES
-  Chance: 0.25
-  Priority: 36
-  Action: REPLACE
-  Conditions:
-    - height{min=-64;max=-16}
-    - inblock air,cave_air,water
-    - onblock deepslate,tuff,blackstone,basalt,sand,gravel
+RandomSpawns:
+  ############################
+  #      GOBLINS SPAWNS      #
+  ############################
+  
+  # ===== SUPERFÍCIE (NERFADO, MAS QUALQUER BIOMA) =====
+  DND_GOBLIN_COMMON_SURFACE:
+    MobType: MM_GOBLIN
+    Worlds: world
+    Biomes:
+      - FOREST
+      - DARK_FOREST
+      - BIRCH_FOREST
+      - PLAINS
+      - TAIGA
+      - SWAMP
+      - JUNGLE
+    Chance: 0.20               # menor que antes
+    Priority: 10               # prioridade baixa
+    Action: REPLACE
+    Conditions:
+      - height{min=60;max=320} # só acima do nível do mar
+      - inblock air,water
+      - onblock grass_block,dirt,coarse_dirt,stone,andesite,diorite,granite,sand,red_sand,gravel
+  
+  DND_GOBLIN_BOSS_SURFACE:
+    MobType: MM_CHEFE_GOBLIN
+    Worlds: world
+    Biomes:
+      - FOREST
+      - DARK_FOREST
+      - BIRCH_FOREST
+      - PLAINS
+      - TAIGA
+      - SWAMP
+      - JUNGLE
+    Chance: 0.05
+    Priority: 12
+    Action: REPLACE
+    Conditions:
+      - height{min=60;max=320}
+      - inblock air,water
+      - onblock grass_block,dirt,coarse_dirt,stone,andesite,diorite,granite,sand,red_sand,gravel
+  
+  # ===== CAVERNAS / CAMADAS NEGATIVAS (BUFFADO, QUALQUER BIOMA) =====
+  DND_GOBLIN_COMMON_CAVE:
+    MobType: MM_GOBLIN
+    Worlds: world
+    Biomes:
+      - DRIPSTONE_CAVES
+      - LUSH_CAVES
+      - DEEP_DARK
+    Chance: 0.85               # MUITO alto
+    Priority: 30               # bem acima da superfície
+    Action: REPLACE
+    Conditions:
+      - height{min=-64;max=50}
+      - inblock air,cave_air,water
+      - onblock stone,deepslate,andesite,diorite,granite,sand,gravel
+  
+  DND_GOBLIN_BOSS_CAVE:
+    MobType: MM_CHEFE_GOBLIN
+    Worlds: world
+    Biomes:
+      - DRIPSTONE_CAVES
+      - LUSH_CAVES
+      - DEEP_DARK
+    Chance: 0.15
+    Priority: 32
+    Action: REPLACE
+    Conditions:
+      - height{min=-64;max=50}
+      - inblock air,cave_air,water
+      - onblock stone,deepslate,andesite,diorite,granite,sand,gravel
+  
+  
+  
+  ############################
+  #         GNOLLS           #
+  ############################
+  
+  # SUPERFÍCIE – QUALQUER BIOMA (um pouco nerfado)
+  DND_GNOLL_SAVANNA_COMMON:
+    MobType: MM_GNOLL
+    Worlds: world
+    Biomes:
+      - SAVANNA
+      - SAVANNA_PLATEAU
+      - PLAINS
+    Chance: 0.30
+    Priority: 14
+    Action: REPLACE
+    Conditions:
+      - height{min=60;max=320}
+      - inblock air,water
+      - onblock grass_block,dirt,coarse_dirt,sand,red_sand,stone,gravel
+  
+  DND_GNOLL_SAVANNA_LEADER:
+    MobType: MM_GNOLL_LIDER_MATILHA
+    Worlds: world
+    Biomes:
+      - SAVANNA
+      - SAVANNA_PLATEAU
+      - PLAINS
+    Chance: 0.08
+    Priority: 16
+    Action: REPLACE
+    Conditions:
+      - height{min=60;max=320}
+      - inblock air,water
+      - onblock grass_block,dirt,coarse_dirt,sand,red_sand,stone,gravel
+  
+  # COVIL EM CAVERNA – GNOLL (buffado, qualquer bioma)
+  DND_GNOLL_DEN_COMMON:
+    MobType: MM_GNOLL
+    Worlds: world
+    Biomes:
+      - DRIPSTONE_CAVES
+      - LUSH_CAVES
+      - DEEP_DARK
+    Chance: 0.75
+    Priority: 28
+    Action: REPLACE
+    Conditions:
+      - height{min=-64;max=40}
+      - inblock air,cave_air,water
+      - onblock stone,deepslate,andesite,diorite,granite,sand,gravel
+  
+  DND_GNOLL_DEN_PACK:
+    MobType: MM_GNOLL_LIDER_MATILHA
+    Worlds: world
+    Biomes:
+      - DRIPSTONE_CAVES
+      - LUSH_CAVES
+      - DEEP_DARK
+    Chance: 0.18
+    Priority: 30
+    Action: ADD
+    Conditions:
+      - height{min=-64;max=40}
+      - inblock air,cave_air,water
+      - onblock stone,deepslate,andesite,diorite,granite,sand,gravel
+  
+  
+  
+  ############################
+  #         BUGBEARS         #
+  ############################
+  
+  # SUPERFÍCIE – QUALQUER FLORESTA / REGIÃO VERDE (sem travar por bioma exato)
+  BUGBEAR_FOREST_COMMON:
+    MobType: MM_BUGBEAR
+    Worlds: world
+    Biomes:
+      - FOREST
+      - DARK_FOREST
+      - BIRCH_FOREST
+      - OLD_GROWTH_BIRCH_FOREST
+      - TAIGA
+      - OLD_GROWTH_SPRUCE_TAIGA
+    Chance: 0.25
+    Priority: 14
+    Action: REPLACE
+    Conditions:
+      - height{min=60;max=320}
+      - inblock air,water
+      - onblock grass_block,dirt,coarse_dirt,podzol,rooted_dirt,stone,sand,gravel
+  
+  BUGBEAR_FOREST_COMMANDER:
+    MobType: MM_BUGBEAR_COMMANDER
+    Worlds: world
+    Biomes:
+      - FOREST
+      - DARK_FOREST
+      - BIRCH_FOREST
+      - OLD_GROWTH_BIRCH_FOREST
+      - TAIGA
+      - OLD_GROWTH_SPRUCE_TAIGA
+    Chance: 0.06
+    Priority: 18
+    Action: ADD
+    Conditions:
+      - height{min=60;max=320}
+      - inblock air,water
+      - onblock grass_block,dirt,coarse_dirt,podzol,rooted_dirt,stone,sand,gravel
+  
+  # COVIL EM CAVERNA – BUGBEAR (buffado)
+  BUGBEAR_DEN_COMMON:
+    MobType: MM_BUGBEAR
+    Worlds: world
+    Biomes:
+      - DRIPSTONE_CAVES
+      - LUSH_CAVES
+      - DEEP_DARK
+    Chance: 0.65
+    Priority: 28
+    Action: REPLACE
+    Conditions:
+      - height{min=-64;max=40}
+      - inblock air,cave_air,water
+      - onblock stone,deepslate,andesite,diorite,granite,sand,gravel
+  
+  
+  
+  ############################
+  #          KENKU           #
+  ############################
+  
+  # SUPERFÍCIE – CIVILIZADO (AGORA QUALQUER BIOMA)
+  DND_KENKU_ROAMERS:
+    MobType: MM_KENKU_ROGUE
+    Worlds: world
+    Biomes:
+      - PLAINS
+      - DESERT
+      - SAVANNA
+      - SAVANNA_PLATEAU
+      - SNOWY_PLAINS
+      - MEADOW
+    Chance: 0.30
+    Priority: 14
+    Action: REPLACE
+    Conditions:
+      - height{min=60;max=320}
+      - inblock air,water
+      - onblock grass_block,dirt,coarse_dirt,stone,dirt_path,sand,gravel
+  
+  # CAVERNAS RASAS – QUALQUER REGIÃO
+  DND_KENKU_CAVE_SNEAK:
+    MobType: MM_KENKU_ROGUE
+    Worlds: world
+    Biomes:
+      - DRIPSTONE_CAVES
+      - LUSH_CAVES
+    Chance: 0.35
+    Priority: 20
+    Action: ADD
+    Conditions:
+      - height{min=0;max=40}
+      - inblock air,cave_air,water
+      # sem onblock pra permitir túneis variados
+  
+  
+  
+  ############################
+  #          KOBOLDS         #
+  ############################
+  
+  # CAVERNAS / TÚNEIS (principal inimigo subterrâneo)
+  DND_KOBOLD_CAVE_SWARM:
+    MobType: MM_KOBOLD
+    Worlds: world
+    Biomes:
+      - DRIPSTONE_CAVES
+      - LUSH_CAVES
+      - DEEP_DARK
+    Chance: 0.85
+    Priority: 32
+    Action: REPLACE
+    Conditions:
+      - height{min=-64;max=20}
+      - inblock air,cave_air,water
+      - onblock stone,deepslate,granite,andesite,diorite,sand,gravel
+  
+  # DEEPSLATE / SUBSOLO PROFUNDO
+  DND_KOBOLD_DEEPSLATE_DENS:
+    MobType: MM_KOBOLD
+    Worlds: world
+    Biomes:
+      - DEEP_DARK
+      - DRIPSTONE_CAVES
+    Chance: 0.90
+    Priority: 34
+    Action: REPLACE
+    Conditions:
+      - height{min=-64;max=0}
+      - inblock air,cave_air,water
+      - onblock deepslate,sand,gravel
+  
+  # SUPERFÍCIE (RARO, SÓ PRA APARECER)
+  DND_KOBOLD_SURFACE_PATROL:
+    MobType: MM_KOBOLD
+    Worlds: world
+    Biomes:
+      - WINDSWEPT_HILLS
+      - WINDSWEPT_FOREST
+      - STONY_PEAKS
+      - JAGGED_PEAKS
+      - FROZEN_PEAKS
+    Chance: 0.06
+    Priority: 8
+    Action: ADD
+    Conditions:
+      - height{min=60;max=320}
+      - inblock air,water
+      - onblock dirt,grass_block,dirt_path,sand,gravel
+  
+  
+  
+  ############################
+  #          LIMOS           #
+  ############################
+  
+  LIMO_CUBE_CAVE:
+    MobType: MM_CUBO_GELATINOSO
+    Worlds: world
+    Biomes:
+      - SWAMP
+      - MANGROVE_SWAMP
+      - LUSH_CAVES
+    Chance: 0.70
+    Priority: 30
+    Action: REPLACE
+    Conditions:
+      - height{min=-64;max=40}
+      - inblock air,cave_air,water
+      - onblock stone,deepslate,andesite,diorite,granite,tuff,sand,gravel
+  
+  LIMO_BLACK_DEEP:
+    MobType: MM_PUDIM_NEGRO
+    Worlds: world
+    Biomes:
+      - DEEP_DARK
+      - DRIPSTONE_CAVES
+    Chance: 0.25
+    Priority: 36
+    Action: REPLACE
+    Conditions:
+      - height{min=-64;max=-16}
+      - inblock air,cave_air,water
+      - onblock deepslate,tuff,blackstone,basalt,sand,gravel
