@@ -113,8 +113,8 @@ MM_GNOLL:
     - leather_chestplate CHEST
     - leather_leggings LEGS
     - leather_boots FEET
-    - stone_sword HAND           # representa lança/cimitarra
-    - shield OFFHAND             # escudo
+    - stone_sword HAND
+    - shield OFFHAND
 
   Skills:
     # Mordida
@@ -164,7 +164,7 @@ MM_GNOLL_LIDER_MATILHA:
     - chainmail_chestplate CHEST
     - leather_leggings LEGS
     - leather_boots FEET
-    - iron_sword HAND            # representa a glaive
+    - iron_sword HAND
     - shield OFFHAND
 
   Skills:
@@ -216,7 +216,7 @@ MM_GNOLL_PRESA_YEENOGHU:
     - iron_chestplate CHEST
     - iron_leggings LEGS
     - iron_boots FEET
-    - iron_axe HAND              # garras/ataques mais brutais
+    - iron_axe HAND
 
   Skills:
     # Mordida e garras fortes
@@ -237,6 +237,7 @@ MM_GNOLL_PRESA_YEENOGHU:
     - iron_ingot 1-3 0.6
     - iron_axe 1 0.25
     - rotten_flesh 1-3 0.9
+
 
 ############################
 #        BUGBEARS          #
@@ -269,7 +270,7 @@ MM_BUGBEAR:
     - leather_chestplate CHEST
     - leather_leggings LEGS
     - leather_boots FEET
-    - iron_axe HAND        # representa a maça estrela
+    - iron_axe HAND
     - shield OFFHAND
 
   Skills:
@@ -336,6 +337,7 @@ MM_BUGBEAR_COMMANDER:
     - iron_axe 1 0.25
     - chainmail_chestplate 1 0.15
 
+
 ############################
 #        KENKU MOBS        #
 ############################
@@ -351,6 +353,17 @@ MM_KENKU_ROGUE:
     FollowRange: 20
     PreventOtherDrops: true
     AlwaysShowName: false
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+
   Equipment:
     # Roupa simples, focado em furtividade
     - leather_helmet HEAD
@@ -359,6 +372,7 @@ MM_KENKU_ROGUE:
     - leather_boots FEET
     # Espada curta (representada por sword)
     - iron_sword HAND
+
   Skills:
     # Espada curta – ataque corpo a corpo
     - skill{s=KENKU_SHORTSWORD_STAB} ~onAttack 1
@@ -376,7 +390,6 @@ MM_KENKU_ROGUE:
     - emerald 0-1 0.1
 
 
-
 ############################
 #        KOBOLD MOBS       #
 ############################
@@ -392,6 +405,16 @@ MM_KOBOLD:
     FollowRange: 18
     PreventOtherDrops: true
 
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+
   Equipment:
     - leather_helmet HEAD
     - leather_chestplate CHEST
@@ -402,13 +425,10 @@ MM_KOBOLD:
   Skills:
     # Ataque base (adaga)
     - skill{s=KOBOLD_DAGGER_STAB} ~onAttack 1
-
     # Ataque à distância – funda
     - skill{s=KOBOLD_SLING_SHOT} ~onAttack 0.35
-
     # Táticas de Matilha – dano extra quando aliados estão perto
     - skill{s=KOBOLD_PACK_TACTIC} ~onAttack 0.35
-
     # Sensibilidade Solar – debuff fraco durante o dia
     - skill{s=KOBOLD_SUNLIGHT_SENS} ~onTimer:120 1
 
@@ -416,7 +436,6 @@ MM_KOBOLD:
     - exp 25-25
     - bone 0-2 0.35
     - rotten_flesh 0-1 0.60
-
 
 
 ###############################
@@ -434,19 +453,26 @@ MM_KOBOLD_ALADO:
     FollowRange: 20
     PreventOtherDrops: true
 
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+
   Equipment:
     - leather_helmet HEAD
 
   Skills:
     # Derrubar pedra
     - skill{s=KOBOLD_DROP_STONE} ~onAttack 0.75
-
     # Bote rápido quando chega perto
     - skill{s=KOBOLD_AERIAL_DAGGER} ~onAttack 0.4
-
     # Bônus em combate de matilha
     - skill{s=KOBOLD_PACK_TACTIC} ~onAttack 0.35
-
     # Sensibilidade solar
     - skill{s=KOBOLD_SUNLIGHT_SENS} ~onTimer:120 1
 
@@ -470,18 +496,20 @@ MM_KUOTOA:
     MovementSpeed: 0.30
     FollowRange: 18
     PreventOtherDrops: true
-    AggroRadius: 0         # Só reage quando for atacado
+    AggroRadius: 0
     Silent: false
     AlwaysShowName: false
+
   AIGoalSelectors:
-    - clear
-    - meleeattack
-    - randomstroll
-    - lookatplayers
-    - float
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+    - 4 float
+
   AITargetSelectors:
-    - clear
-    - attackers           # Só quem bate nele entra na mira
+    - 0 clear
+    - 1 attackers
 
   Equipment:
     - shield OFFHAND
@@ -491,10 +519,8 @@ MM_KUOTOA:
     # Ataques básicos
     - skill{s=KT_BITE} ~onAttack 0.5
     - skill{s=KT_SPEAR_STAB} ~onAttack 1.0
-
     # Rede – chance baixa
     - skill{s=KT_THROW_NET} ~onAttack 0.25
-
     # Sensibilidade à luz solar
     - skill{s=KT_SUNLIGHT_WEAKNESS} ~onTimer:120 1
 
@@ -508,7 +534,7 @@ MM_KUOTOA:
 #     KUO-TOA AÇOITADOR       #
 ###############################
 
-MM_KUOTOA_AÇOITADOR:
+MM_KUOTOA_ACOITADOR:
   Type: DROWNED
   Display: 'Kuo-toa Açoitador'
   Health: 65
@@ -519,15 +545,17 @@ MM_KUOTOA_AÇOITADOR:
     FollowRange: 22
     PreventOtherDrops: true
     AggroRadius: 0
+
   AIGoalSelectors:
-    - clear
-    - meleeattack
-    - randomstroll
-    - lookatplayers
-    - float
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+    - 4 float
+
   AITargetSelectors:
-    - clear
-    - attackers
+    - 0 clear
+    - 1 attackers
 
   Equipment:
     - shield OFFHAND
@@ -537,12 +565,10 @@ MM_KUOTOA_AÇOITADOR:
     # Mordida + bastão pinçado (agarra)
     - skill{s=KT_WHIP_BITE} ~onAttack 0.6
     - skill{s=KT_PINCER_STAFF} ~onAttack 0.9
-
-    # Magias simples de clérigo: chama sagrada / perdição / escudo de fé
+    # Magias simples de clérigo
     - skill{s=KT_WHIP_SACRED_FLAME} ~onTimer:160 0.5
     - skill{s=KT_WHIP_BANE} ~onTimer:200 0.4
     - skill{s=KT_WHIP_SHIELD_OF_FAITH} ~onSpawn 1
-
     # Sensibilidade solar
     - skill{s=KT_SUNLIGHT_WEAKNESS} ~onTimer:120 1
 
@@ -567,15 +593,17 @@ MM_KUOTOA_MONITOR:
     FollowRange: 24
     PreventOtherDrops: true
     AggroRadius: 0
+
   AIGoalSelectors:
-    - clear
-    - meleeattack
-    - randomstroll
-    - lookatplayers
-    - float
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+    - 4 float
+
   AITargetSelectors:
-    - clear
-    - attackers
+    - 0 clear
+    - 1 attackers
 
   Equipment:
     - shield OFFHAND
@@ -583,7 +611,6 @@ MM_KUOTOA_MONITOR:
   Skills:
     # Ataques múltiplos: mordida + 2 golpes desarmados
     - skill{s=KT_MONITOR_MULTI} ~onAttack 1.0
-
     # Sensibilidade solar
     - skill{s=KT_SUNLIGHT_WEAKNESS} ~onTimer:120 1
 
@@ -609,33 +636,32 @@ MM_KUOTOA_ARCEBISPO:
     PreventOtherDrops: true
     AggroRadius: 0
     Silent: false
+
   AIGoalSelectors:
-    - clear
-    - meleeattack
-    - randomstroll
-    - lookatplayers
-    - float
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+    - 4 float
+
   AITargetSelectors:
-    - clear
-    - attackers
+    - 0 clear
+    - 1 attackers
 
   Equipment:
-    - trident HAND           # Cetro
+    - trident HAND
     - shield OFFHAND
 
   Skills:
     # Cetro: concussão + elétrico
     - skill{s=KT_ARCH_STAFF_STRIKE} ~onAttack 1.0
-
     # Truques / magias de suporte e controle
     - skill{s=KT_ARCH_SPIRIT_GUARDIANS} ~onTimer:200 0.6
     - skill{s=KT_ARCH_CONTROL_WATER} ~onTimer:260 0.4
     - skill{s=KT_ARCH_MASS_HEAL} ~onDamaged 0.4
     - skill{s=KT_ARCH_STUN_SMITE} ~onAttack 0.5
-
     # Buff espiritual
     - skill{s=KT_ARCH_SHIELD_OF_FAITH} ~onSpawn 1
-
     # Sensibilidade solar
     - skill{s=KT_SUNLIGHT_WEAKNESS} ~onTimer:120 1
 
@@ -644,3 +670,173 @@ MM_KUOTOA_ARCEBISPO:
     - heart_of_the_sea 1 0.5
     - trident 1 0.3
     - prismarine_crystals 2-6 0.8
+
+
+############################
+#        LIMOS MOBS        #
+############################
+
+# =========================
+#  CUBO GELATINOSO
+# =========================
+
+MM_CUBO_GELATINOSO:
+  Type: SLIME
+  Display: 'Cubo Gelatinoso'
+  Health: 84
+  Damage: 6
+  Faction: limo
+  Options:
+    Size: 4
+    MovementSpeed: 0.20
+    FollowRange: 20
+    PreventOtherDrops: true
+    Silent: true
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+    - 2 monsters
+
+  Skills:
+    # Pseudópode ácido (ataque básico)
+    - skill{s=LIMO_CUBE_PSEUDOPOD} ~onAttack 1.0
+    # Engolfar – prende e derrete
+    - skill{s=LIMO_CUBE_ENGULF} ~onAttack 0.35
+
+  Drops:
+    - exp 450-450
+    - iron_ingot 0-2 0.4
+    - gold_nugget 0-4 0.5
+    - bone 0-4 0.5
+    - slime_ball 2-6 1.0
+
+
+# =========================
+#  GOSMA OCRE
+# =========================
+
+MM_GOSMA_OCRE:
+  Type: SLIME
+  Display: 'Gosma Ocre'
+  Health: 45
+  Damage: 5
+  Faction: limo
+  Options:
+    Size: 3
+    MovementSpeed: 0.25
+    FollowRange: 18
+    PreventOtherDrops: true
+    Silent: true
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+    - 4 float
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+    - 2 monsters
+
+  Skills:
+    # Pseudópode com concussão + ácido
+    - skill{s=LIMO_OCRE_PSEUDOPOD} ~onAttack 1.0
+    # Dividir ao tomar dano cortante/raio
+    - skill{s=LIMO_OCRE_SPLIT} ~onDamaged 1.0
+
+  Drops:
+    - exp 450-450
+    - bone 0-3 0.4
+    - rotten_flesh 0-3 0.5
+
+
+# =========================
+#  LIMO CINZENTO
+# =========================
+
+MM_LIMO_CINZENTO:
+  Type: SLIME
+  Display: 'Limo Cinzento'
+  Health: 22
+  Damage: 4
+  Faction: limo
+  Options:
+    Size: 2
+    MovementSpeed: 0.23
+    FollowRange: 16
+    PreventOtherDrops: true
+    Silent: true
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+    - 4 float
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+    - 2 monsters
+
+  Skills:
+    # Pseudópode que corrói armadura/armas
+    - skill{s=LIMO_GRAY_PSEUDOPOD} ~onAttack 1.0
+
+  Drops:
+    - exp 100-100
+    - iron_nugget 0-4 0.5
+    - stone 0-4 0.6
+
+
+# =========================
+#  PUDIM NEGRO
+# =========================
+
+MM_PUDIM_NEGRO:
+  Type: MAGMA_CUBE
+  Display: 'Pudim Negro'
+  Health: 85
+  Damage: 7
+  Faction: limo
+  Options:
+    Size: 4
+    MovementSpeed: 0.24
+    FollowRange: 22
+    PreventOtherDrops: true
+    Silent: true
+
+  AIGoalSelectors:
+    - 0 clear
+    - 1 meleeattack
+    - 2 randomstroll
+    - 3 lookatplayers
+    - 4 float
+
+  AITargetSelectors:
+    - 0 clear
+    - 1 players
+    - 2 monsters
+
+  Skills:
+    # Forma corrosiva: quem bate toma ácido
+    - skill{s=LIMO_BLACK_CONTACT} ~onDamaged 1.0
+    # Pseudópode ultra ácido
+    - skill{s=LIMO_BLACK_PSEUDOPOD} ~onAttack 1.0
+    # Divisão como ocre
+    - skill{s=LIMO_BLACK_SPLIT} ~onDamaged 1.0
+
+  Drops:
+    - exp 1100-1100
+    - iron_ingot 1-3 0.6
+    - gold_ingot 0-2 0.4
+    - slime_ball 2-6 1.0
