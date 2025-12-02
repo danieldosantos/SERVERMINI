@@ -6,7 +6,7 @@ GoblinSurfaceRoamers:
     - PLAINS
     - DARK_FOREST
     - TAIGA
-  Chance: 0.25
+  Chance: 0.99
   Priority: 10
   Action: REPLACE
   Conditions:
@@ -22,7 +22,7 @@ GoblinBossAmbush:
     - DARK_FOREST
     - BIRCH_FOREST
     - PLAINS
-  Chance: 0.05
+  Chance: 0.79
   Priority: 18
   Action: ADD
   Conditions:
@@ -51,7 +51,7 @@ GnollPackLeader:
   Biomes:
     - SAVANNA
     - PLAINS
-  Chance: 0.12
+  Chance: 0.79
   Priority: 18
   Action: ADD
   Conditions:
